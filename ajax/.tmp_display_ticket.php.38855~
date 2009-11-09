@@ -1,0 +1,73 @@
+<?Php
+/**
+ * Ticket display script.  Very simple just returns the ticket info, and responses if needed
+ * @author Joseph Harry
+ * @version 1.0
+ * @copyright March 16, 2009
+ */
+include_once("../small_header.php");
+header('Content-type: application/json');
+$usr = unserialize($_SESSION['user']);
+$_GET = $db->Clean($_GET);
+
+function recentTickets($user_id,$ticket_id,$subject,$display=false){
+	$db = db::getInstance();
+	$res1 = array();
+	if($display){
+		$db->QUERY("SELECT ticket_id,ticket_name,DATE_FORMAT(dt	, '%M %e, %Y %H:%i') AS dt FROM recent_tickets WHERE user_id=".$user_id." ORDER BY dt DESC LIMIT 10;");
+		$res1 = $db->Fetch("assoc_array");
+	}else{
+		$db->Query("DELETE FROM recent_tickets WHERE user_id=".$user_id." AND ticket_id=".$ticket_id." AND ticket_name='".$subject."' LIMIT 1");
+		$db->Query("INSERT INTO recent_tickets (user_id,ticket_id,ticket_name,dt) VALUES (".$user_id.",".$ticket_id.",'".$subject."',NOW());");
+		if(count($db->Error)==2){return $db->Error;}
+		$db->QUERY("SELECT ticket_id,ticket_name,DATE_FORMAT(dt	, '%M %e, %Y %H:%i') AS dt FROM recent_tickets WHERE user_id=".$user_id." ORDER BY dt DESC LIMIT 10;");
+		$res1 = $db->Fetch("assoc_array");
+	}
+	return $res1;
+}
+if(isset($_GET['ticket_id'])){
+	/*This is a valid ticket request*/
+	$res = $db->Query("SELECT tcv.*, 
+	TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
+	TIMESTAMPDIFF(SECOND ,tcv.closed_on, now( ) ) AS dagoc,
+	DATE_FORMAT(tcv.created_on	, '%M %e, %Y %H:%i') AS created_on,
+	DATE_FORMAT(tcv.closed_on	, '%M %e, %Y %H:%i') AS closed_on,
+	DATE_FORMAT(tcv.due_on	, '%M %e, %Y %H:%i') AS due_on,
+	TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,
+	f.ticket_id AS favorite,
+	lhu.username,
+	lhu.firstname,
+	lhu.lastname, 
+	lhu2.username as username2,
+	lhu2.firstname AS firstname2,
+	lhu2.lastname AS lastname2,
+	tcv.assigned_by_id,
+	tcv.status,
+	tcv.subject,
+	tcv.attachment
+	FROM tcview AS tcv 
+	LEFT JOIN favorite AS f ON (tcv.id=f.ticket_id AND f.user_id=".$usr->User_id.") 
+	JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
+	JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
+	WHERE tcv.id=".$_GET['ticket_id']); 
+	$response = $db->Fetch("assoc");
+	if(count($db->Error)==2){$response['error']==$db->Error;}
+	if(@unserialize($return['status'])){
+		$response['status'] = unserialize($return['status']);}
+	$response['dbDescription']=$response['description'];
+	$response['description']=Tcode($response['description']);
+	if(@unserialize($response['attachment'])){
+		$response['attachment'] = unserialize($response['attachment']);}		
+	//lets remove the old entry before adding the new
+}
+/**
+ * Insert the newest ticket, then get the recent tickets
+ */
+if(isset($_GET['recentOnly'])){
+	$response['recentTickets']=recentTickets($usr->User_id,"","",true);
+	echo json_encode($response['recentTickets']); 
+}else{
+	$response['recentTickets']=recentTickets($usr->User_id,$_GET['ticket_id'],$response['subject'],false);
+	echo json_encode($response);	
+}
+?>  

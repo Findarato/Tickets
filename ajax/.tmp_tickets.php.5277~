@@ -1,0 +1,327 @@
+<?Php
+header('Content-type: application/json');
+header("Cache-Control: max-age=60, must-revalidate");
+  $offset = 3600 * 24;	
+// calc the string in GMT not localtime and add the offset
+  $expire = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
+//output the HTTP header
+  Header($expire);
+  
+/**
+ * Returns JSON version of the tickets to be displayed in either the center or the side area.
+ * 
+ * @author Joseph Harry  
+ * @version 3.0  
+ * @copyright December 24, 2007
+ * @todo need to look at the 4 functions and find a way to make them into one
+ */
+include_once "../header.php";  
+ 
+$smallDisplay = array(); 
+
+
+/**
+ * Basically just some time saving, and to reduce some duplication of code
+ * 
+ * @return str the where clause to be put into any sql
+ * @param int $user_id
+ * @param str $type
+ */
+function getWhereClause($user_id,$type){
+	$sqlw = "";
+	if($user_id!=0){
+		switch($type){
+			case "open":
+				$sqlw = "open=1 AND assigned_id=$user_id";
+			break;
+			case "closed":
+				$sqlw = "open=0 AND (assigned_id=$user_id OR created_by_id=".$user_id.")"; 
+			break;
+			case "assigned":
+				$sqlw = "open=1 AND assigned_by_id=$user_id";
+			break;
+			case "favorite":
+				$sqlw = "open=1 AND assigned_by_id=$user_id";
+			break;
+			case "Odepartment":
+				//print_r(getDepartmentMembers_by_userid($user_id));
+				$sqlw = "open=1 AND assigned_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
+			break;
+			case "Adepartment":
+				$sqlw = "open=1 AND assigned_by_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
+			break;
+			default:break;
+		}
+	}
+	return $sqlw;
+}
+/**
+ * Gets the amount of tickets for the category.  
+ * @return int Count of results for the specified type
+ * @param int $user_id id of the person who needs the tickets
+ * @param str $type[optional] defaults to open tickets, should always be passed though
+ */
+function countTickets($user_id,$type="open"){
+	$db = db::getInstance();
+	if($type=="favorite"){$sql = "SELECT count(ticket_id) FROM favorite WHERE user_id=".$user_id.";";}
+	if(!isset($sql)){$sql = "SELECT COUNT(id) FROM tcview WHERE ".getWhereClause($user_id,$type)." ;";}	
+	$db->Query($sql);
+	$res = $db->Fetch("row");
+	return $res;
+}
+/**
+ * Atempt to create the one function that does the work of the old multi functions
+ * @return 
+ * @param int $user_id
+ * @param str $type type of tickets to get data for
+ * @param int $amount[optional]
+ * @param int $style[optional]
+ * 
+ * @todo Figure out a way to search by user name 
+ */
+function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
+	$db = db::getInstance();
+	$sql = "";
+	$wc = array();
+	$usr = unserialize($_SESSION['user']);
+	switch ($type) {
+		case "favorite":
+			$sql = "SELECT t.id,t.subject,t.created_on, t.due_on,
+			TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago,
+			TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,			
+			t.due_on,TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining 
+			FROM tcview AS t JOIN favorite AS f ON (t.id=f.ticket_id) WHERE f.user_id=".$user_id." ORDER BY  created_on  LIMIT 0,$amount";
+		break;
+		case "search":
+			$wc[] = "TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) )<2592000";
+			foreach ($search as $k=>$s){
+				switch($k){
+					default:break;
+					case "sFavorite": 
+						//@todo add in favorite search
+						//$sql = "SELECT t.id,t.subject,t.created_on, TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago FROM tcview AS t JOIN favorite AS f ON (t.id=f.ticket_id) WHERE f.user_id=".$user_id." ORDER BY  created_on  LIMIT 0,$amount";
+				
+					break;
+					case "title":
+						if($s!=""){$wc[]="tcv.subject LIKE \"%".$s."%\"";}
+					break;
+					case "assigned":
+						if($s>0){$wc[]="tcv.assigned_id=\"".$s."\"";}
+					break;
+					case "created_by":
+						if($s>0){$wc[]="tcv.created_by_id=\"".$s."\"";}
+					break;					
+					case "category":
+						if($s>0){$wc[]="tcv.category_id=\"".$s."\"";}else{$wc[]="tcv.category=\"".$s."\"";}
+					break;
+					case "closed":
+						$wc[]="tcv.open=\"".$s."\"";
+					break;
+					case "open":
+						$wc[]="tcv.open=\"".$s."\"";
+					break;
+					case "location":
+						$wc[]="tcv.locationId=\"".$s."\"";
+					break;
+					case "Odepartment": //Department Assigned
+							$idList = getDepartmentMembers_by_userid($usr -> User_id);
+							$wc[]="(tcv.assigned_id IN (".join(",",$idList).")) ";
+					break; 
+					case "Adepartment": //Department Created
+							$idList = getDepartmentMembers_by_userid($usr -> User_id);
+							$wc[]="(created_by_id IN (".join(",",$idList).") ) ";
+							print_r($wc);die();
+					break;
+					case "department":
+						if($s>0){
+							$db->Query("SELECT user_id FROM department_members WHERE department_id =$s");
+							$res = $db->Fetch("row_array");
+							$wc[]="(tcv.assigned_id IN (".join(",",$res).") OR created_by_id IN (".join(",",$res).") ) ";
+						}
+					break;
+				//New right pannel list. 
+					case "sOdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.assigned_id IN (".join(",",$idList)."))";break;
+					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.created_by_id IN (".join(",",$idList)."))";break;
+					case "sAssigned":$wc[]="tcv.created_by_id=".$usr->User_id;break;
+					case "sClosed":$wc[]="tcv.open=0";break;
+					case "sOpen":$wc[]="tcv.open=1"; break;					
+				}				
+			}
+
+			$sql = 'SELECT tcv.open,tcv.id,tcv.assigned_id,tcv.subject,tcv.description,tcv.created_on,tcv.closed_on,tcv.category,tcv.category_id,tcv.created_by_id, TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,lhu.username,lhu.firstname,lhu.lastname, lhu2.firstname AS firstname2,lhu2.lastname AS lastname2,lhu2.username AS username2,tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.due_on ) AS timeAllowed,
+					tcv.locationId,tcv.locationName  
+					FROM tcview AS tcv 
+					JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
+					JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
+					WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC;';
+		break;
+		default:
+			switch ($style){
+				case 1:	$sql = "SELECT tcv.id,tcv.subject,tcv.created_on,tcv.assigned_id,tcv.created_by_id,tcv.closed_on, 
+								TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
+								TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,			
+								tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining, 
+								tcv.locationId,tcv.locationName 
+								FROM tcview AS tcv 
+								JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
+								JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
+								WHERE ".getWhereClause($user_id,$type)." GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC LIMIT 0,$amount";break;
+			}
+		break;
+	}
+	$db->Query($sql);
+	//print_r($db->Error);
+	$return = $db->Fetch("assoc_array");
+	//$return['']
+	return $return;
+}
+if(isset($_SESSION["user"])){ //the session is set
+	$usr = unserialize($_SESSION['user']);
+	
+	//print_r($usr);
+	if(isset($_GET["style"])){$style = $_GET["style"];}else{$style=0;}
+	if(isset($_GET['type'])){
+		switch($_GET['type']){
+			case "small":
+				if(isset($_GET['index'])){
+					   	switch($_GET['index']){
+							case "all": //merged all ticket requests into one large return to reduce requests
+								if(!isset($_GET['area'])){$_GET['area']="none";}
+					   			switch($_GET['index']){
+					   				case "o":$response['ticket']['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));break;
+									case "c":$response['ticket']['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));break;
+					   				case "a":$response['ticket']['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));break;
+									case "od":$response['ticket']['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));break;
+									case "ad":$response['ticket']['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));break;
+									case "f":$response['ticket']['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));break;									
+									default:
+										$response['ticket']['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));
+										$response['ticket']['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));
+										$response['ticket']['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));
+										$response['ticket']['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));
+										$response['ticket']['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));								
+										$response['ticket']['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));								
+									break;
+								}
+								$response['message']="All Ticket lists generated Successfully";
+							break;
+							default:
+								$response['error']="The wrong type index is being passed!";
+							break;								
+						}
+				} 
+			break;
+			case "search":
+				$response['tickets'] = getTickets($usr->User_id,"search",10,'',$_GET);
+				$response['tickets'] = aTcode($response['tickets']);
+				
+			break;
+			case "open":
+				$db->Query("UPDATE tickets SET  closed_on = '' , open = '1' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");
+				addReply($_GET['ticket_id'], 256, "Ticket Re-Opened", "This ticket was re-opened on ".date("D M j, Y G:i:s ")." by <span class=\"gold\"> ".$usr->A_U['first-name']." ".$usr->A_U['last-name']."<span>" );
+			break;
+			case "close":
+				$db->Query("UPDATE tickets SET  closed_on = NOW( ) , open = '0' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");
+				
+				$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category,status FROM tcview WHERE id=".$_GET['ticket_id']);
+				$res1 = $db->Fetch("assoc");
+				//Put in the close variable and store it in the table
+				if(@unserialize($res1['status'])){//checks to see if there is already a serialized value stored in the table.
+					$res1['status'] = unserialize($res1['status']);
+					$res1['status']['closed']=1;
+					$res1['status'] = serialize($res1['status']);
+				}else{//This is 
+					if(strlen($res1['status'])==1 && $res1['status']==2){
+						//This is a reassigned ticket
+						$res1['status']=array("reassigned"=>1,"closed"=>1);
+						$res1['status'] = serialize($res1['status']);
+					}else{
+						$res1['status']=array("closed"=>1);
+						$res1['status'] = serialize($res1['status']);
+					}
+				}
+				$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");//put in the new status
+				//end status area
+				
+				$db->Query("SELECT r.subject,r.body,r.created_on,r.user_id FROM responses AS r WHERE r.ticket_id=".$_GET['ticket_id']);
+				$res2 = $db->Fetch("assoc");
+				//get the location email
+				$db->Query("SELECT t.location,ln.email,ln.name FROM tickets AS t JOIN library_names AS ln ON (ln.id=t.location) WHERE t.id=".$_GET['ticket_id']);
+				$res3 = $db->Fetch("assoc");
+				
+				addReply($_GET['ticket_id'], 256, "Ticket Closed", "This ticket was closed on ".date("D M j, Y G:i:s ")." by <span class=\"gold\">".$usr->A_U['first-name']." ".$usr->A_U['last-name']."<span>" ,true);
+/*
+				$users = getUsers();
+				$userName = ucwords($users[$res1['created_by_id']]['firstname'])." ".ucwords($users[$res1['created_by_id']]['lastname']);
+				$body = $res1['description'];
+				$smarty -> assign('email_ticket_id',$_GET['ticket_id']);
+				$smarty -> assign('email_created_on',$res1['created_on']);
+				$smarty -> assign('email_created_by',$userName);
+				$smarty -> assign('email_category',$res1['category']);
+				$smarty -> assign('email_title',$res1['subject']);
+				$smarty -> assign('email_priority',$res1['priority']);
+				$smarty -> assign('email_location',$res3['name']);					
+				$smarty -> assign('email_description',nl2br($res1['description']));
+				$smarty -> assign('showRes',"1");
+				$respon = array();
+				echo count($res2);
+				if(count($res2)>1){
+					foreach($res2 as $r){
+						$respon[] = array(
+						"firstname"=>ucwords($users[$r['user_id']]['firstname']),
+						"lastname"=>ucwords($users[$r['user_id']]['lastname']),
+						"subject"=>$r['subject'],
+						"date"=>$r['created_on'],					
+						"body"=>nl2br(Tcode($r['body'])));
+					}
+				}
+				$smarty -> assign('respon',$respon);
+				$body = $smarty->fetch('email.tpl');
+			//	generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail[1],true);
+			*/
+				$response["message"]="This ticket is now closed";
+			break;
+			case "favorite":
+				if($_GET['favorite']==0){$db->Query("DELETE FROM favorite WHERE user_id=".$usr->User_id." AND ticket_id=".$_GET['ticket_id']." LIMIT 1;");
+				$response["message"]="This is no longer a bookmark";}
+				else{$db->Query("INSERT INTO favorite VALUES (".$_GET['ticket_id'].",".$usr->User_id.");");
+				$response["message"]="You have successfully bookmarked this ticket";
+				}
+			break;
+			case "reassign":
+				if(isset($_GET['ticket_id']) && isset($_GET['user_id'])){
+					$assigned_id = id2Username($_GET['user_id']);
+					$db->Query("UPDATE tickets SET assigned_by_id=".$usr->User_id.", assigned_id=".$_GET['user_id']." WHERE id=".$_GET['ticket_id']);
+					if(count($db->Error)==2){
+						$response['error']=$db->Error['Error'];
+					}else{$response['message']="The ticket was Successfully reassigned";
+					addReply($_GET['ticket_id'],256,"Ticket Reassigned","This ticket was reassigned to <span class=\"gold\">".$assigned_id['firstname']." ".$assigned_id['lastname']."</span> on ".date("D M j, Y G:i:s ")." by <span class=\"gold\">".$usr->A_U['first-name']." ".$usr->A_U['last-name']."</span>");
+					}
+					//Put in the reassign variable and store it in the table
+					$db->Query("SELECT status FROM tcview WHERE id=".$_GET['ticket_id']);
+					$res1 = $db->Fetch("assoc");
+					if(@unserialize($res1['status'])){
+						$res1['status'] = unserialize($res1['status']);
+						$res1['status']['reassigned']=1;
+						$res1['status'] = serialize($res1['status']);
+					}else{
+						$res1['status']=array("reassigned"=>1);
+						$res1['status'] = serialize($res1['status']);
+					}
+					$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");//put in the new status
+					//end status area
+				}else{
+					$response['error']="The wrong data is being passed!";
+				}
+
+			break;
+
+				
+			default:$response['error']="There was some kind of error!";break;		
+		}
+		echo json_encode($response);
+		#echo indentJson(json_encode($response));
+	}
+	
+}
+?>

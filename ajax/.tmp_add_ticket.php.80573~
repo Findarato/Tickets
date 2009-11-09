@@ -1,0 +1,83 @@
+<?php
+/**
+ * New ticket ajax script
+ * @author Joseph Harry
+ * @version 2.0
+ * @copyright March 28, 2009
+ */
+	$_SESSION['uploadCnt']=0;
+	include_once("../header.php");
+	$_GET = $db->Clean($_GET);
+	$usr = unserialize($_SESSION["user"]);
+	if($usr->User_id==$_GET["newTicketUser_id"]){
+		if($_GET['newTicketType']=="new"){
+			$attachments = explode("|",$_GET["newTicketfiles"]);
+			array_pop($attachments);
+			$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
+			$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,attachment) 
+			VALUES(
+					"'.$_GET["newTicketUser_id"].'",
+					"'.$_GET["newTicketUser_id"].'",
+					"'.$_GET["newTicketAssign"].'",
+					"'.$_GET["newTicketCategory"].'",
+					"'.$_GET["newTicketTitle"].'",				
+					"'.nl2br($_GET["newTicketDescription"]).'",
+					NOW(),1,
+					"'.(intval($_GET["newTicketPriority"])+1).'",
+					"'.$dueOn.'","'.addSlashes(serialize($attachments)).'"
+						)');
+				$ticketId = $db->Lastid;
+				if(count($attachments)>=1){//there is an attachment
+					$res1['status']['attachment']=1;
+					$res1['status'] = serialize($res1['status']);
+					$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$ticketId. " LIMIT 1;");//put in the new status
+				}
+			
+				
+				$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category FROM tcview WHERE id=".$ticketId);
+				$res1 = $db->Fetch("assoc");
+				$users = getUsers();
+				$userName = ucwords($users[$res1['created_by_id']]['firstname'])." ".ucwords($users[$res1['created_by_id']]['lastname']);
+				$body = $res1['description'];
+				$smarty -> assign('email_ticket_id',$ticketId);
+				$smarty -> assign('email_created_on',$res1['created_on']);
+				$smarty -> assign('email_created_by',$userName);
+				$smarty -> assign('email_category',$res1['category']);
+				$smarty -> assign('email_title',$res1['subject']);
+				$smarty -> assign('email_priority',$res1['priority']);				
+				$smarty -> assign('email_description',nl2br($res1['description']));
+				$smarty -> assign('showRes',"0");
+				if(isset($respon)){	$smarty -> assign('respon',$respon);}
+				$body = $smarty->fetch('email.tpl');
+				generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false);				
+		}else{
+			$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
+			$db->Query('UPDATE tickets SET
+					assigned_id="'.$_GET["newTicketAssign"].'",
+					category_id="'.$_GET["newTicketCategory"].'",
+					subject="'.$_GET["newTicketTitle"].'",				
+					description="'.nl2br($_GET["newTicketDescription"]).'",
+					modified_on=NOW(),
+					priority="'.(intval($_GET["newTicketPriority"])+1).'",
+					due_on="'.$dueOn.'"
+					WHERE id='.$_GET['newTicketTicket_id'].'
+					');
+			addReply($_GET['newTicketTicket_id'],256,"Ticket Edited","This ticket was Edited on ".date("D M j, Y G:i:s ")." by <span class=\"gold\">".$usr->A_U['first-name']." ".$usr->A_U['last-name']."</span>");
+			//Put in the reassign variable and store it in the table
+			$db->Query("SELECT status FROM tcview WHERE id=".$_GET['newTicketTicket_id']);
+			$res1 = $db->Fetch("assoc");
+			if(@unserialize($res1['status'])){
+				$res1['status'] = unserialize($res1['status']);
+				$res1['status']['edit']=1;
+				$res1['status'] = serialize($res1['status']);
+			}else{
+				$response['error']=$res1['status'];
+				$res1['status']=array("edit"=>1);
+				$res1['status'] = serialize($res1['status']);
+			}
+			$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$_GET['newTicketTicket_id']. " LIMIT 1;");//put in the new status
+			//end status area
+		}
+	}
+echo json_encode($response);
+?> 
