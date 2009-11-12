@@ -498,7 +498,6 @@ function displayStatus(jsonData,Selector){
 		}
 	});
 }
-
 /**
  * Simple function to build and display the recent tickets data
  * @param {Object} jsonData
@@ -888,31 +887,8 @@ jQuery(document).ready(function(){
 		position.right = position.left+$(this).outerWidth();
 		var bodyHeight = $('body').height();
 		var bodyWidth = $('body').width();
-		var cookie = eval($.cookie('ticketlist'));
 		var RecTick = $("<div/>").css({overflow:"hidden",width:"150px"});
-		//$.each(cookie,function(r,rt){RecTick.append(rt.ticket_name);});
-
-		if (cookie === null) {//there is no cookie, aka there are no recent tickets
-			 $.getJSON(uri + "ajax/display_ticket.php", {recentOnly: true}, function(data){cookie=data;});
-		}
-		$.each(cookie, function(t, tl){
-			RecTick.append($("<div/>").css({
-				overflow: "hidden",
-				width: "150px",
-				height: "15px"
-			}).html($("<a/>").attr("href", "#ticket/" + tl.ticket_id).addClass("ticket_link ticket_sprite").css({
-				fontSize: "135%"
-			}).html(tl.ticket_name.replace(/\+/g, " "))));
-		
-			RecTick.append($("<div/>").css({
-				overflow: "hidden",
-				width: "150px",
-				height: "15px",
-				paddingBottom: "5px"
-			}).html($("<span/>").css({
-				fontSize: "9px"
-			}).html(tl.dt.replace(/\+/g, " "))));
-		});
+		$.getJSON(uri + "ajax/display_ticket.php", {recentOnly: true}, function(data){loadRecentTickets(data,$("#recentTickets"));});
 		Shadow = $("<div style=\" z-index:49;\" id=\"Shadow\"/>")
 		.click(function(){
 				$("#recentTickets").fadeOut(Params.FadeTime);
