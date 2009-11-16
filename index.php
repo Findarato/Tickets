@@ -28,9 +28,6 @@
 				$depart = getDepartment_by_userid($usr->User_id);
 				$db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id);
 				$altE = $db->Fetch("row");
-				$db->QUERY("SELECT ticket_id,ticket_name,DATE_FORMAT(dt	, '%M %e, %Y %H:%i') AS dt FROM recent_tickets WHERE user_id=".$usr->User_id." ORDER BY dt DESC LIMIT 10;");
-				$res1 = $db->Fetch("assoc_array");
-				setcookie("ticketlist",json_encode($res1));
 			}
 		}else{$smarty -> assign('content','login.tpl');	}
 	}else{$smarty-> assign("content","empty.tpl"); 	
@@ -43,9 +40,6 @@
 		$depart = getDepartment_by_userid($usr->User_id);
 		$db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id);
 		$altE = $db->Fetch("row");
-		$db->QUERY("SELECT ticket_id,ticket_name,DATE_FORMAT(dt	, '%M %e, %Y %H:%i') AS dt FROM recent_tickets WHERE user_id=".$usr->User_id." ORDER BY dt DESC LIMIT 10;");
-		$res1 = $db->Fetch("assoc_array");
-		setcookie("ticketlist",json_encode($res1));
 	}
 
 	$db->Query("SELECT * FROM category");
