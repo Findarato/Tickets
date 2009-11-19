@@ -8,4 +8,5 @@
 		<a href="#largestats" class="stats_link nolink ticket_sprite">Large Stats</a>
 		</div>
 		<div class="ui-corner-bottom color-hex border-main-1" style="border-top:0px;height:4px;margin-bottom:3px;"></div>
-	</li> 
+	</li>
+</ol>
