@@ -1,29 +1,30 @@
-<div id="newTicketdialog" class="color-off" style="padding:5px;">
+<div id="newTicketdialog" class="" style="background-color:#FFF">
+<div class="color-background" style="padding:5px;">
 	<form name="newTicketForm" action="#" method="post" id="newTicketForm">
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
-			<td style="text-align:left;"><font class="opposite">Title of Ticket:</font><input type="text" name="newTicketTitle" id="newTicketTitle"  class="dropdown Ticketform " maxlength="35" /></td>
+			<td style="text-align:left;"><font class="">Title of Ticket:</font><input type="text" name="newTicketTitle" id="newTicketTitle"  class="dropdown Ticketform " maxlength="35" /></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="opposite">Category:</font><select class="dropdown Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate }</select></td>
+			<td style="text-align:left;"><font class="">Category:</font><select class="dropdown Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate }</select></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="opposite">Assign:</font><select class="dropdown Ticketform " id="newTicketAssign" name="newTicketAssign">{html_options options=$assign }</select></td>
+			<td style="text-align:left;"><font class="">Assign:</font><select class="dropdown Ticketform " id="newTicketAssign" name="newTicketAssign">{html_options options=$assign }</select></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="opposite">Priority:</font><select class="dropdown Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
+			<td style="text-align:left;"><font class="">Priority:</font><select class="dropdown Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="opposite">Due Date:</font><input type="text" name="newTicketDueDate" id="newTicketDueDate" class="dropdown Ticketform" maxlength="50" style="width:8em" value="test data" /><img src="http://cdn1.lapcat.org/famfamfam/silk/calendar.png" title="calendar" id="newTicketCalendar"></td>
+			<td style="text-align:left;"><font class="">Due Date:</font><input type="text" name="newTicketDueDate" id="newTicketDueDate" class="dropdown Ticketform" maxlength="50" style="width:8em" value="test data" /><img src="http://cdn1.lapcat.org/famfamfam/silk/calendar.png" title="calendar" id="newTicketCalendar"></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="opposite">Problem Location:</font><select name="newTicketLocation" id="newTicketLocation" class="dropdown Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location }</select></td>
+			<td style="text-align:left;"><font class="">Problem Location:</font><select name="newTicketLocation" id="newTicketLocation" class="dropdown Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location }</select></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="opposite">Ticket Description</font><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class="dropdown Ticketform "></textarea></td>
+			<td style="text-align:left;"><font class="">Ticket Description</font><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class="dropdown Ticketform "></textarea></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="opposite" id="newTicketAttachmentNumber">Attachments:</font>
+			<td style="text-align:left;"><font class="" id="newTicketAttachmentNumber">Attachments:</font>
 				<div><input class="dropdown Ticketform " type="file" name="newTicketBrowse" id="newTicketBrowse"></div>
 				<div id="newTicketFileList" style="height:32px;overflow:hidden"></div>
 			</td>
@@ -44,5 +45,5 @@
 		<div class="td"><a class="option-theme fg-button ui-corner-all white lapcatButton Cancel" id="ticketCancelBtn">Cancel</a></div>
 		<div class="td"><a class="option-theme fg-button ui-corner-all white lapcatButton" id="ticketAddBtn" style="width:auto;">Add Ticket</a></div>
 	</div>
-
+</div>
 </div>
