@@ -580,7 +580,7 @@ function loadTicketBody(ticketId,container){
 		var pri = parseInt(container.find("#ticketPriority").text()-1,10);
 		$("#replyareaTitle").text("Replies ("+data.responseCount+")");//display the total response count
 
-		$('#editlink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newTicketdialog",title:"<font class=\"\">Edit Ticket</font>"},function(){
+		$('#editlink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newTicketdialog",title:"<font class=\"white\">Edit Ticket</font>"},function(){
 			$("#newTicketDescription").val(Params.TicketJSON.dbDescription);
 			$("#newTicketTitle").val(Params.TicketJSON.subject);
 			$("#newTicketLocation").val(Params.TicketJSON.locationName);
@@ -627,12 +627,12 @@ function loadTicketBody(ticketId,container){
 			}
 			});
 		});
-		$('#replylink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newReplydialog",title:"<font class=\"\">Reply to Ticket</font>"},function(){
+		$('#replylink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newReplydialog",title:"<font class=\"white\">Reply to Ticket</font>"},function(){
 			$("#replyTitle").val("Re:"+Params.TicketJSON.subject);
 			$("#replyticketid").val(Params.Ticket_id);
 			$("#replyuserid").val(User_id);
 		});
-		$('#ReAssignlink').colorbox({transition:"none",open:false,inline:true,href:"#reassignTicketdialog",title:"<font class=\"\">Reassign Ticket</font>"},function(){});
+		$('#ReAssignlink').colorbox({transition:"none",open:false,inline:true,href:"#reassignTicketdialog",title:"<font class=\"white\">Reassign Ticket</font>"},function(){});
 	
 	//Run some functions to deal with the data.	
 		pageAnator(container.find("#pageAnator").empty(),data.responseCount,20); //add Page numbers
@@ -837,7 +837,7 @@ jQuery(document).ready(function(){
 	$("#replyToggle").click(function(){ $("#replyarea").toggle();
 	if($("#storage").html()=="1"){$("#storage").html("0");}else{$("#storage").html("1");}});
    
-	$('#topperNew').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newTicketdialog",title:"<font>Create a new Ticket</font>"},function(){
+	$('#topperNew').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newTicketdialog",title:"<font class=\"white\">Create a new Ticket</font>"},function(){
 	 	$("#newTicketType").val("new");
 		$("#newTicketTitle,#newTicketDescription").val("");
 		$("#ticketAddBtn").text("Add Ticket");
@@ -878,7 +878,7 @@ jQuery(document).ready(function(){
 			}
 		});
 	});
-	$('#topperSearch').colorbox({transition:"none",open:false,inline:true,href:"#newSearchdialog",title:"<font>Search for a Ticket</font>"},function(){
+	$('#topperSearch').colorbox({transition:"none",open:false,inline:true,href:"#newSearchdialog",title:"<font class=\"white\">Search for a Ticket</font>"},function(){
 		$("#newSearchdialog").find(".Ticketform").val('');
 	});
 	$("#topperRecent").click(function(){
