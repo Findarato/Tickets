@@ -91,7 +91,7 @@ function uploadDisplay(key,value,filebox){
 		.css({height:"16px",width:"64px",overflow:"hidden",padding:"5px",marginRight:"2px",position:"relative"
 		,background:"url(/tickets/Attachments/thumbs/"+value+")"
 		})
-		.addClass("opposite border-main-1 ui-corner-all left")
+		.addClass(" border-main-1 ui-corner-all left")
 		.append(
 			$("<div/>")
 			.css({height:"10px",width:"10px",position:"absolute",top:"0px",right:"0px",textIndent:"-9999px"})
@@ -247,7 +247,7 @@ function loadLargeStats(){
 			title=item.title;
 			//Add it to the page
 			holder
-				.append($("<div/>").html($("<h2/>").html(title).css({margin:"5px"})).addClass("opposite"))
+				.append($("<div/>").html($("<h2/>").html(title).css({margin:"5px"})).addClass(""))
 				.append(table)
 				.append("<br><br>");
 			$.each(item.stats,function(b,item2){
@@ -370,7 +370,7 @@ function uploadDisplay(key,value,filebox){
 	$('<div/>')
 		.attr({title:value})
 		.css({height:"16px",width:"64px",overflow:"hidden",padding:"5px",marginRight:"2px",position:"relative",background:"url(/tickets/Attachments/thumbs/"+value+")"})
-		.addClass("opposite border-main-1 ui-corner-all left")
+		.addClass(" border-main-1 ui-corner-all left")
 		.append(
 			$("<div/>")
 			.css({height:"10px",width:"10px",position:"absolute",top:"0px",right:"0px",textIndent:"-9999px"})
@@ -538,11 +538,11 @@ function loadTicketBody(ticketId,container){
 			container.find("#ticketDueDate").html(data.due_on);
 		}
 		container.find("#ticketBody").html(data.description);
-		container.find("#ticketCategory").html($("<a/>").attr("href","#ticketlist/category/"+data.category).addClass("nolink ticket_sprite category_link opposite").html(data.category));
-		container.find("#ticketCreatedBy").html($("<a/>").attr("href","#ticketlist/created_by/"+data.created_by_id).addClass("nolink ticket_sprite user opposite").html(data.firstname2+" "+data.lastname2));
-		container.find("#ticketAssignedTo").html($("<a/>").attr("href","#ticketlist/assigned/"+data.assigned_id).addClass("nolink ticket_sprite user opposite").html(data.firstname+" "+data.lastname));
+		container.find("#ticketCategory").html($("<a/>").attr("href","#ticketlist/category/"+data.category).addClass("nolink ticket_sprite category_link ").html(data.category));
+		container.find("#ticketCreatedBy").html($("<a/>").attr("href","#ticketlist/created_by/"+data.created_by_id).addClass("nolink ticket_sprite user ").html(data.firstname2+" "+data.lastname2));
+		container.find("#ticketAssignedTo").html($("<a/>").attr("href","#ticketlist/assigned/"+data.assigned_id).addClass("nolink ticket_sprite user ").html(data.firstname+" "+data.lastname));
 		container.find("#replyticketid").val(ticketId);
-		container.find("#ticketLocation").html($("<a/>").attr("href","#ticketlist/location/"+data.locationId).addClass("nolink library-link opposite").html(data.locationName));
+		container.find("#ticketLocation").html($("<a/>").attr("href","#ticketlist/location/"+data.locationId).addClass("nolink library-link ").html(data.locationName));
 		container.find("#ticketId").html(data.id);
 		container.find("#ticketPriority").html(data.priority);
 		if(data.favorite!==null){container.find("#imgBookmark").show();}
@@ -569,7 +569,7 @@ function loadTicketBody(ticketId,container){
 				padding:"5px",width:"100px",marginBottom:"1px",marginRight:"2px"}).html(
 				$("<div/>").addClass("ui-corner-all").css({padding:"0px",margin:"0px",width:"100px",height:"100px",overflow:"hidden"}).html(
 					$("<img/>").attr("src","/tickets/Attachments/thumbs/"+item).css({width:"100px"})
-					.colorbox({href:"/tickets/Attachments/"+item,transition:"none",open:false,title:"<font class=\"opposite\">Attachment</font>"})
+					.colorbox({href:"/tickets/Attachments/"+item,transition:"none",open:false,title:"<font class=\"\">Attachment</font>"})
 				).append()
 			)
 			);
@@ -580,7 +580,7 @@ function loadTicketBody(ticketId,container){
 		var pri = parseInt(container.find("#ticketPriority").text()-1,10);
 		$("#replyareaTitle").text("Replies ("+data.responseCount+")");//display the total response count
 
-		$('#editlink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newTicketdialog",title:"<font class=\"opposite\">Edit Ticket</font>"},function(){
+		$('#editlink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newTicketdialog",title:"<font class=\"\">Edit Ticket</font>"},function(){
 			$("#newTicketDescription").val(Params.TicketJSON.dbDescription);
 			$("#newTicketTitle").val(Params.TicketJSON.subject);
 			$("#newTicketLocation").val(Params.TicketJSON.locationName);
@@ -627,12 +627,12 @@ function loadTicketBody(ticketId,container){
 			}
 			});
 		});
-		$('#replylink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newReplydialog",title:"<font class=\"opposite\">Reply to Ticket</font>"},function(){
+		$('#replylink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newReplydialog",title:"<font class=\"\">Reply to Ticket</font>"},function(){
 			$("#replyTitle").val("Re:"+Params.TicketJSON.subject);
 			$("#replyticketid").val(Params.Ticket_id);
 			$("#replyuserid").val(User_id);
 		});
-		$('#ReAssignlink').colorbox({transition:"none",open:false,inline:true,href:"#reassignTicketdialog",title:"<font class=\"opposite\">Reassign Ticket</font>"},function(){});
+		$('#ReAssignlink').colorbox({transition:"none",open:false,inline:true,href:"#reassignTicketdialog",title:"<font class=\"\">Reassign Ticket</font>"},function(){});
 	
 	//Run some functions to deal with the data.	
 		pageAnator(container.find("#pageAnator").empty(),data.responseCount,20); //add Page numbers

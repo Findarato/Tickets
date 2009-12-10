@@ -16,40 +16,40 @@
 					<div class="color-heavy" id="ticket" style="height:430px;padding:4px">
 					<div style="width:100%;text-align:top;" class="">
 				        <div style="clear:both">
-					       	<div class="left " style="font-weight:bold; padding-right:3px" ><font class="opposite">Ticket ID:</font></div>
-					       	<div class="left "><font class="opposite" id="ticketId"></font></div>
+					       	<div class="left " style="font-weight:bold; padding-right:3px" ><font class="">Ticket ID:</font></div>
+					       	<div class="left "><font class="" id="ticketId"></font></div>
 				        </div>
 				        <div style="clear:both">
-					       	<div class="left " style="font-weight:bold; padding-right:3px" ><font class="opposite">Opened On</font></div>
-					       	<div class="left "><font class="opposite" id="ticketDate"></font></div>
+					       	<div class="left " style="font-weight:bold; padding-right:3px" ><font class="">Opened On</font></div>
+					       	<div class="left "><font class="" id="ticketDate"></font></div>
 				        </div>
 				        <div style="clear:both">
-					       	<div class="left " style="font-weight:bold; padding-right:3px" ><font class="opposite">Due On</font></div>
-					       	<div class="left "><font class="opposite" id="ticketDueDate"></font></div>
+					       	<div class="left " style="font-weight:bold; padding-right:3px" ><font class="">Due On</font></div>
+					       	<div class="left "><font class="" id="ticketDueDate"></font></div>
 				        </div>
 				        <div style="clear:both;display:none" id="ticketClosedOn">
-					       	<div class="left " style="font-weight:bold; padding-right:3px" ><font class="opposite">Closed On</font></div>
-					       	<div class="left "><font class="opposite" id="ticketClosedOnDate"></font></div>
+					       	<div class="left " style="font-weight:bold; padding-right:3px" ><font class="">Closed On</font></div>
+					       	<div class="left "><font class="" id="ticketClosedOnDate"></font></div>
 				        </div>
 				        <div style="clear:both">
-					       	<div class="left " style="font-weight:bold; padding-right:3px"><font class="opposite">Category</font></div>
-					       	<div class="left "><font class="opposite" id="ticketCategory"></font></div>
+					       	<div class="left " style="font-weight:bold; padding-right:3px"><font class="">Category</font></div>
+					       	<div class="left "><font class="" id="ticketCategory"></font></div>
 				        </div>
 				        <div style="clear:both">
-					       	<div class="left " style="font-weight:bold; padding-right:3px"><font class="opposite">Created By</font></div>
-					       	<div class="left "><font class="opposite" id="ticketCreatedBy"></font></div>
+					       	<div class="left " style="font-weight:bold; padding-right:3px"><font class="">Created By</font></div>
+					       	<div class="left "><font class="" id="ticketCreatedBy"></font></div>
 				       </div>
 						<div style="clear:both">
-					       	<div class="left" style="font-weight:bold; padding-right:3px"><font class="opposite">Assigned To</font></div>
-					       	<div class="left" ><font class="opposite" id="ticketAssignedTo"></font></div>
+					       	<div class="left" style="font-weight:bold; padding-right:3px"><font class="">Assigned To</font></div>
+					       	<div class="left" ><font class="" id="ticketAssignedTo"></font></div>
 				       </div> 
 						<div style="clear:both">
-					       	<div class="left" style="font-weight:bold; padding-right:3px"><font class="opposite">Priority</font></div>
-					       	<div class="left" ><font class="opposite" id="ticketPriority"></font></div>
+					       	<div class="left" style="font-weight:bold; padding-right:3px"><font class="">Priority</font></div>
+					       	<div class="left" ><font class="" id="ticketPriority"></font></div>
 						</div>
 						<div style="clear:both">
-					       	<div class="left" style="font-weight:bold; padding-right:3px"><font class="opposite">Location</font></div>
-					       	<div class="left" ><font class="opposite" id="ticketLocation"></font></div>
+					       	<div class="left" style="font-weight:bold; padding-right:3px"><font class="">Location</font></div>
+					       	<div class="left" ><font class="" id="ticketLocation"></font></div>
 						</div>
 						<div style="clear:both">
 							<div class="option-theme fg-button ui-corner-all white lapcatButton left" id="Holdlink" style="width:auto;"><span class="ticket_sprite lock">Lock</span></div>
@@ -57,7 +57,7 @@
 							<div class="option-purple fg-button ui-corner-all white lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_sprite brick">Block</span></div>
 						</div>
 					</div>
-					<div id="ticketDataBox" style="margin-bottom:5px;width:100%;height:auto;max-height:300px;overflow:auto;vertical-align:top; clear:both"><font class="opposite" id="ticketBody"></font></div>
+					<div id="ticketDataBox" style="margin-bottom:5px;width:100%;height:auto;max-height:300px;overflow:auto;vertical-align:top; clear:both"><font class="" id="ticketBody"></font></div>
 					<div id="ticketAttachmentsBox" style="width:100%;height:113px;overflow:hidden;vertical-align:top; clear:both;display:none" ><font id="ticketAttachments"></font></div>
 				</div>
 				<div style="height:30px;position:relative;padding-top:4px;padding-left:4px;overflow:hidden;" class="color-heavy light-down ui-corner-bottom">
@@ -74,7 +74,7 @@
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 								
-				<div style="width:100%;vertical-align:top;" class="color-off">
+				<div style="width:100%;vertical-align:top;" class="dark">
 					<div style="overflow:auto;height:430px;padding:4px;" >
 						<div class=" border-main-1 color-heavy " style="width:100%">
 							<font ><div id="replyareabody"></div></font>
