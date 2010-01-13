@@ -1,5 +1,5 @@
-<div id="newReplydialog" class="" style="background-color:#FFF">
-<div class="color-background" style="padding:5px;">
+<div id="newReplydialog">
+<div class="border-all-B-1 color-D-1" style="padding:5px;">
 	<form name="newReplyForm" id="newReplyForm">
 		<div id="">
 			<div class="textLeft"><font class="">Reply Subject:</font><input type="text" name="title" autocomplete="off" maxlength="100" id="replyTitle" class="dropdown Ticketform"/><br>

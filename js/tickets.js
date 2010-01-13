@@ -219,10 +219,10 @@ function loadLargeStats(){
 		.html(
 			$("<div/>")
 				.css({Width:"100%",textAlign:"left",margin:"4px",padding:"2px",height:"20px",position:"relative"})
-				.addClass("ui-corner-all dark border-main-1")
+				.addClass("ui-corner-all dark border-all-B-1")
 				.append($("<font/>").css({margin:"5px"}).html("Large Stats for tickets"))
 		)
-		.append(holder = $("<div/>").addClass("color-off ui-corner-all border-main-1").css({height:"500px",overflow:"auto",margin:"4px",padding:"2px"}));
+		.append(holder = $("<div/>").addClass("color-E-2 ui-corner-all border-all-B-1").css({height:"500px",overflow:"auto",margin:"4px",padding:"2px"}));
 	
 	Params.LastArea="largeStats";
 	var title="";
@@ -230,15 +230,15 @@ function loadLargeStats(){
 		var row = "";
 		var cnt = 0;
 		$.each(data.Largestats,function(a,item){
-			var table = $("<table/>").css({width:"99%"}).addClass("border-main-1 white");
-			table.append(depNames = $("<tr/>").addClass("color-heavy").html($("<td/>").html("&nbsp;")));
+			var table = $("<table/>").css({width:"99%"}).addClass("border-all-B-1 color-D-2 white");
+			table.append(depNames = $("<tr/>").addClass("color-D-1").html($("<td/>").html("&nbsp;")));
 			$.each(data.departments,function(d,dep){
 			//	if(cnt%2==1){var color="color-hex";}else{var color="";}
-				color="color-heavy";
+				color="color-E-2";
 				depNames.append($("<td/>")
 				.css({textAlign:"center",width:"7%"})
 				.html(
-				$("<div/>").css({textAlign:"center",overflow:"hidden",width:"90%",height:"16px",paddingLeft:"1px",paddingRight:"1px"}).html(dep.name))
+					$("<div/>").css({textAlign:"center",overflow:"hidden",width:"90%",height:"16px",paddingLeft:"1px",paddingRight:"1px"}).html(dep.name))
 				);
 				cnt++	
 			}); // display the headers
@@ -247,14 +247,14 @@ function loadLargeStats(){
 			title=item.title;
 			//Add it to the page
 			holder
-				.append($("<div/>").html($("<h2/>").html(title).css({margin:"5px"})).addClass(""))
+				.append($("<div/>").html($("<h2/>").html(title).addClass("font-A").css({margin:"5px"})))
 				.append(table)
 				.append("<br><br>");
 			$.each(item.stats,function(b,item2){
-				table.append(row = $("<tr/>").addClass("border-main-1"));
-				row.append($("<td/>").html(item2.username.firstname+" "+item2.username.lastname).addClass("color-heavy").css({width:"100px"}));
+				table.append(row = $("<tr/>").addClass("border-all-B-1"));
+				row.append($("<td/>").html(item2.username.firstname+" "+item2.username.lastname).addClass("color-D-2").css({width:"100px"}));
 				$.each(item2,function(c,item3){
-				if(cnt%2==1){var color="color-hex";}else{var color="";}
+				if(cnt%2==1){var color="color-C-2";}else{var color="";}
 					row.append($("<td/>")
 					.css({textAlign:"center",width:"7%"})
 					.addClass(color).css({textAlign:"center"}).html(item3.count));
@@ -427,7 +427,7 @@ function pageAnator(container,count,perPage){
 		);
 		
 	if (count == 0) {
-		container.append($("<a/>").addClass("ui-corner-all dark border-main-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
+		container.append($("<a/>").addClass("ui-corner-all dark border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
 			width: "20px",
 			padding: "1px",
 			textAlign: "center",
@@ -438,7 +438,7 @@ function pageAnator(container,count,perPage){
 		var pages = count/perPage;
 		for (var a = 1; a < pages + 1; a++) {
 			var b = parseInt(a - 1);
-			container.append($("<a/>").addClass("ui-corner-all dark border-main-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + b).css({
+			container.append($("<a/>").addClass("ui-corner-all dark border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + b).css({
 				width: "20px",
 				padding: "1px",
 				textAlign: "center",
@@ -909,7 +909,7 @@ jQuery(document).ready(function(){
 				zIndex:"50",
 				textAlign:"left",
 				overflow:"hidden"
-			}).addClass("color-background border-main-1 ui-corner-all")
+			}).addClass("border-all-B-1 color-D-1 ui-corner-all")
 			.html(RecTick)
 			.attr({id: "recentTickets"});
 			$('body').append(recentTickets);

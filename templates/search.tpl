@@ -1,5 +1,5 @@
-<div id="newSearchdialog" class="" style="background-color:#FFF">
-<div class="color-background" style="padding:5px;text-align:left">
+<div id="newSearchdialog">
+<div class="border-all-B-1 color-D-1" style="padding:5px;text-align:left">
 	<div><font class="">Title of Ticket:</font><input type="text" name="searchTitle" id="searchTitle"  class="dropdown Ticketform " maxlength="35" /></div>
 	<div><font class="">Category:</font><select class="dropdown Ticketform " id="searchCategory" name="searchCategory"><option value=""></option>{html_options  options=$cate }</select></div>
 	<div><font class="">Assign:</font><select class="dropdown Ticketform " id="searchAssign" name="searchAssign"><option value=""></option>{html_options options=$assign }</select></div>

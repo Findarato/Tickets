@@ -1,5 +1,5 @@
-<div id="newTicketdialog" class="" style="background-color:#FFF">
-<div class="color-background" style="padding:5px;">
+<div id="newTicketdialog">
+<div class="border-all-B-1 color-D-1" style="padding:5px;">
 	<form name="newTicketForm" action="#" method="post" id="newTicketForm">
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tr>

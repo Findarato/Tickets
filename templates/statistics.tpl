@@ -1,4 +1,4 @@
-<div class="dark border-main-1" style="min-height:300px;text-align:left;padding:3px;">
+<div class="dark border-all-B-1 " style="min-height:300px;text-align:left;padding:3px;">
 	<div style="display:table; width:100%;overflow:hidden;" id="">
 		<div style="display:table-cell; padding:6px; width:210px;position:relative;">
 			<div style="position:absolute;top:10px;width:210px">
@@ -19,8 +19,8 @@
 		</div>
 		<div style="display:table-cell;" class="">
 			<!--<div id="LargeGraph1Legend" class="border-main-1 color-main" style="width:600px;;position:relative;">This should be the legend</div>-->
-			<div id="LargeGraph1" class="border-main-1 color-darker" style="width:600px;height:250px;position:relative;"></div>
-			<div id="LargeGraph2" class="border-main-1" style="width:600px;height:250px;position:relative;display:none"></div>
+			<div id="LargeGraph1" class="border-all-B-1 color-D-1" style="width:600px;height:250px;position:relative;"></div>
+			<div id="LargeGraph2" class="border-all-B-1" style="width:600px;height:250px;position:relative;display:none"></div>
 		</div>
 	</div>
 </div>
