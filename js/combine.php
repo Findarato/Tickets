@@ -15,7 +15,6 @@ $files = array(
 'jquery.purr.js',
 'date.js',
 'dateter.js',
-'ajaxupload.js',
 'tickets.js'
 );
 $allScript = "";
