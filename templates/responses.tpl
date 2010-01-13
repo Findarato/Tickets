@@ -2,7 +2,7 @@
 <div style="display:table-row;width:100%">
 		<div style="display:table-cell; padding:6px; width:100px;">
 			<div id="changemeUserid"></div>
-			<div id="changemeDay" class="gold"></div>
+			<div id="changemeDay" class="font-L font-bold"></div>
 			<div id="changemeAssignedid"></div>
 		</div>
 		<div style="display:table-cell;">

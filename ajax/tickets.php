@@ -241,7 +241,7 @@ if(isset($_SESSION["user"])){ //the session is set
 				//get the location email
 				$db->Query("SELECT t.location,ln.email,ln.name FROM tickets AS t JOIN library_names AS ln ON (ln.id=t.location) WHERE t.id=".$_GET['ticket_id']);
 				$res3 = $db->Fetch("assoc");
-				addReply($_GET['ticket_id'], 256, "Ticket Closed", "This ticket was closed on ".date("D M j, Y G:i:s ")." by <span class=\"gold\">".$usr->A_U['first-name']." ".$usr->A_U['last-name']."<span>" ,true,true);
+				addReply($_GET['ticket_id'], 256, "Ticket Closed", "This ticket was closed on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]" ,true,true);
 				$response["message"]="This ticket is now closed";
 			break;			
 			case "favorite":
@@ -260,7 +260,7 @@ if(isset($_SESSION["user"])){ //the session is set
 					unset($res['lock']);
 					$db->Query("UPDATE tickets SET status='".serialize($res)."',due_on=NOW() + INTERVAL 7 DAY WHERE id=".$_GET['ticket_id']." LIMIT 1;");
 					if(count($db->Error)<2){$response["message"]="The ticket has successfully been unlocked.";
-						addReply($_GET['ticket_id'], 256, "Ticket Removed from Locked Status", "This ticket was Removed from locked status on ".date("D M j, Y G:i:s ")." by <span class=\"gold\">".$usr->A_U['first-name']." ".$usr->A_U['last-name']."<span>");
+						addReply($_GET['ticket_id'], 256, "Ticket Removed from Locked Status", "This ticket was Removed from locked status on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]");
 					}else{$response['error']=$db->Error;}
 				}elseif($_GET['value']==1){ //this is adding the hold on the ticket
 					$db->Query("INSERT INTO tickets_hold (ticket_id,user_id,dt) VALUES(".$_GET['ticket_id'].",".$usr->User_id.",NOW());");
@@ -270,13 +270,13 @@ if(isset($_SESSION["user"])){ //the session is set
 					$res['lock']=1;
 					$db->Query("UPDATE tickets SET status='".serialize($res)."' WHERE id=".$_GET['ticket_id']." LIMIT 1;");
 					if(count($db->Error)<2){$response["message"]="The ticket has successfully been locked.";
-						addReply($_GET['ticket_id'], 256, "Ticket Locked", "This ticket was locked on ".date("D M j, Y G:i:s ")." by <span class=\"gold\">".$usr->A_U['first-name']." ".$usr->A_U['last-name']."<span>" );
+						addReply($_GET['ticket_id'], 256, "Ticket Locked", "This ticket was locked on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]" );
 					}else{$response['error']=$db->Error;}									
 				}else{/* This should never happen*/$response["error"]="You passed the wrong set of data";}
 			break;
 			case "open":
 				$db->Query("UPDATE tickets SET  closed_on = '' , open = '1' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");
-				addReply($_GET['ticket_id'], 256, "Ticket Re-Opened", "This ticket was re-opened on ".date("D M j, Y G:i:s ")." by <span class=\"gold\"> ".$usr->A_U['first-name']." ".$usr->A_U['last-name']."<span>" );
+				addReply($_GET['ticket_id'], 256, "Ticket Re-Opened", "This ticket was re-opened on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]" );
 			break;
 			case "reassign":
 				if(isset($_GET['ticket_id']) && isset($_GET['user_id'])){
@@ -285,7 +285,7 @@ if(isset($_SESSION["user"])){ //the session is set
 					if(count($db->Error)==2){
 						$response['error']=$db->Error['Error'];
 					}else{$response['message']="The ticket was Successfully reassigned";
-					addReply($_GET['ticket_id'],256,"Ticket Reassigned","This ticket was reassigned to <span class=\"gold\">".$assigned_id['firstname']." ".$assigned_id['lastname']."</span> on ".date("D M j, Y G:i:s ")." by <span class=\"gold\">".$usr->A_U['first-name']." ".$usr->A_U['last-name']."</span>");
+					addReply($_GET['ticket_id'],256,"Ticket Reassigned","This ticket was reassigned to [user=".$_GET['user_id']."] on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]");
 					}
 					//Put in the reassign variable and store it in the table
 					$db->Query("SELECT status FROM tcview WHERE id=".$_GET['ticket_id']);

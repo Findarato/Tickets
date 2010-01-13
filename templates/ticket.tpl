@@ -58,7 +58,6 @@
 						</div>
 					</div>
 					<div id="ticketDataBox" style="margin-bottom:5px;width:100%;height:auto;max-height:300px;overflow:auto;vertical-align:top; clear:both"><font class="" id="ticketBody"></font></div>
-					<div id="ticketAttachmentsBox" style="width:100%;height:113px;overflow:hidden;vertical-align:top; clear:both;display:none" ><font id="ticketAttachments"></font></div>
 				</div>
 				<div style="height:30px;position:relative;padding-top:4px;padding-left:4px;overflow:hidden;" class="color-E-2 light-down ui-corner-bottom">
 					<div class="option-purple fg-button ui-corner-all white lapcatButton" id="editlink" style="width:45px;">Edit</div>
@@ -74,7 +73,7 @@
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 								
-				<div style="width:100%;vertical-align:top;" class="dark">	
+				<div style="width:100%;vertical-align:top;" class="color-E-2">	
 					<div style="overflow:auto;height:430px;padding:4px;" >
 						<div class=" border-all-B-1 color-E-2 " style="width:100%">
 							<font ><div id="replyareabody"></div></font>

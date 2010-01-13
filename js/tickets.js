@@ -32,10 +32,10 @@ function notice(title,body,sticky,ticketid){
 		case "Error":noticeClass = "option-red";break;
 		case "Debug":noticeClass = "option-purple";break;
 		case "Notice":noticeClass = "option-theme";break;
-		case "Achievement":noticeClass = "color-hex";image = "";break;
-		default:noticeClass = "color-background ol-fred";break;
+		case "Achievement":noticeClass = "color-D-2";image = "";break;
+		default:noticeClass = "color-D-2 ";break;
 	}
-	var noticeBox = '<div class="notice fakelink ticketlink ui-corner-all">'
+	var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all">'
 				  + '<div class="notice-body '+noticeClass +' ui-corner-all">' 
 					  + '<div style="float:left;width:50px;padding-right:5px;"><img src="'+image+'" alt="" /></div>'
 					  + '<div style="float:left;width:200px;"><h3><font class="'+fontClass+'">'+title+'</font></h3>'
@@ -332,7 +332,7 @@ function populateAllTickets(Area){
 			});
 			cnt++;
 			html += '<div style="clear:both; height:12px;" id="CallTickets">';
-			html += "<a class=\"smallTicketL ticket_link ticket_sprite ticket_sprite gold\" href=\"#ticketlist/"+Ttype+"\">Show All Tickets</a>";
+			html += "<a class=\"smallTicketL ticket_link ticket_sprite ticket_sprite font-L font-bold\" href=\"#ticketlist/"+Ttype+"\">Show All Tickets</a>";
 			html += "</div>";
 	        $("#"+Ttype).empty().css({
 	            height: (cnt + 1) + "em"
@@ -340,55 +340,6 @@ function populateAllTickets(Area){
 		});
     });
 } 
-/**
- * a quick clean up of the hidden upload file boxes
- */
-function adjustUploadboxes(){
-	var adj0=$("#newTicketfiles0");
-	var adj1=$("#newTicketfiles1");
-	var adj2=$("#newTicketfiles2");
-	if(adj0.val()===""){
-		adj0.val(adj1.val());
-		adj1.val(adj2.val());
-		adj2.val("0");
-	}else if(adj1.val()=="0"){
-		adj1.val(adj2.val());
-		adj2.val("0");
-	}else{clearUploads();}
-}
-/**
- * Displays the uploaded files and allows for deleting of them.  
- * @param {int} key must be between 1 and 3
- * @param {str} value text to be displayed in the box
- */
-function uploadDisplay(key,value,filebox){
-	var ntfl = $('#newTicketFileList');
-	if(key === 0){ntfl.empty();}//lets clear the box to make sure we are not adding stuff forever
-	if (key == 2) {filebox.css({visibility: "hidden"}).val("");}
-	$("#newTicketAttachmentNumber").html("Attachments ("+parseInt(key+1,10)+"):");
-	ntfl.addClass("uploadContainer").append(
-	$('<div/>')
-		.attr({title:value})
-		.css({height:"16px",width:"64px",overflow:"hidden",padding:"5px",marginRight:"2px",position:"relative",background:"url(/tickets/Attachments/thumbs/"+value+")"})
-		.addClass(" border-main-1 ui-corner-all left")
-		.append(
-			$("<div/>")
-			.css({height:"10px",width:"10px",position:"absolute",top:"0px",right:"0px",textIndent:"-9999px"})
-			.addClass("fakelink ui-corner-tr option-black")
-			.text(key)
-			.click(function(){
-				$(this).parent().remove();
-				UploadCnt--;
-				if (key < 2) {filebox.css({visibility: "visible"}).val("");}
-				$("#newTicketAttachmentNumber").html("Attachments ("+key+"):");
-				$("newTicketfiles"+$(this).text()).val("");
-				adjustUploadboxes();
-				$.get(uri+"ajax/upload.php",{type: "delete",filename: value,ticket_id:Params.Params.Ticket_id},
-				function(data){	if (data.error.length > 0) {notice("Error", data.error, false);}},"json");
-			})
-		)
-	);
-}
 function checkNotify(dt){
 	var display = "";
 	var disp = false;
@@ -562,20 +513,6 @@ function loadTicketBody(ticketId,container){
 			container.find("#openlink").hide();
 		}
 		var attCnt=0;
-		$.each(data.attachment,function(key,item){
-			attCnt++;
-			$("#ticketAttachments").css({}).append(
-			$("<div/>").addClass("border-main-1 ui-corner-all left dark").css({
-				padding:"5px",width:"100px",marginBottom:"1px",marginRight:"2px"}).html(
-				$("<div/>").addClass("ui-corner-all").css({padding:"0px",margin:"0px",width:"100px",height:"100px",overflow:"hidden"}).html(
-					$("<img/>").attr("src","/tickets/Attachments/thumbs/"+item).css({width:"100px"})
-					.colorbox({href:"/tickets/Attachments/"+item,transition:"none",open:false,title:"<font class=\"\">Attachment</font>"})
-				).append()
-			)
-			);
-			container.find("#imgAttachment").attr({alt:attCnt+" Attachments",title:attCnt+" Attachments"});	
-		});
-	
 		if($("#storage").html()==1){$("#replyarea").hide();}
 		var pri = parseInt(container.find("#ticketPriority").text()-1,10);
 		$("#replyareaTitle").text("Replies ("+data.responseCount+")");//display the total response count
@@ -591,7 +528,6 @@ function loadTicketBody(ticketId,container){
 			$("#newTicketCategory").val(Params.TicketJSON.category);
 			$("#newTicketDueDate").val(Params.TicketJSON.due_on);
 			$("#ticketAddBtn").text("Commit Changes");
-			
 			$("#newTicketDueDate").val(Date.today().add({days: 3}).toString("M/d/yyyy")).blur(function(){
 				var cleanDate = Date.parse($(this).val(), "M/d/yyyy");
 				if (cleanDate === null) {
@@ -602,29 +538,6 @@ function loadTicketBody(ticketId,container){
 					$(this).val(cleanDate.toString("M/d/yyyy"));
 					$("#ticketAddBtn").show();
 				}
-			});
-			$.each(Params.TicketJSON.attachment,function(key,val){ 
-				UploadCnt++;
-				uploadDisplay(key,val,$("#newTicketBrowse"));
-				$("#newTicketfiles"+key).val(val);
-			});
-			new AjaxUpload('#newTicketBrowse', {
-				action: '/tickets/ajax/upload.php',
-				name: 'attachment',
-				responseType: "json",
-				onSubmit : function(file , ext){
-	                if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
-		                // extension is not allowed
-						notice("Error","invalid file extension",false);
-		                // cancel upload
-		                return false;
-	                }
-		        },
-				onComplete : function(file,response){
-				uploadDisplay(UploadCnt,response.newFilename,$("#newTicketBrowse"));
-				$("#newTicketfiles"+UploadCnt).val(response.newFilename);
-				UploadCnt++;
-			}
 			});
 		});
 		$('#replylink').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newReplydialog",title:"<font class=\"white\">Reply to Ticket</font>"},function(){
@@ -692,7 +605,7 @@ function loadTicketList(pageNumber){
 			var OC = false;
 			if(i%2==1){var color="dark";}else{var color="darker";}
 			if(item.timeRemaining===null){}else{}
-			if(item.open === 0){s_ocd = $("<span/>").html("Closed").addClass("gold").css({paddingLeft:"3px",fontSize:"9px"});}else{OC = true;s_ocd= $("<span/>").html("");}
+			if(item.open === 0){s_ocd = $("<span/>").html("Closed").addClass("font-L font-bold").css({paddingLeft:"3px",fontSize:"9px"});}else{OC = true;s_ocd= $("<span/>").html("");}
 			if(item.timeRemaining===null){s_tr= $("<span/>").html("");}else{s_tr=$("<span/>").html("Due On: "+Date.parse(item.due_on).toString("M/d/yyyy HH:mm")).css({paddingLeft:"3px",fontSize:"9px"});}
 			
 			tlistHolder.append($("#responsestpl").html());
@@ -858,25 +771,6 @@ jQuery(document).ready(function(){
 		$("#newTicketFileList").empty();
 		$("#newTicketfiles").empty();
 		$("#newTicketAttachmentNumber").html("Attachments ("+UploadCnt+"):");
-		new AjaxUpload('#newTicketBrowse', {
-			action: '/tickets/ajax/upload.php',
-			name: 'attachment',
-			responseType: "json",
-			onSubmit : function(file , ext){
-                if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){
-	                // extension is not allowed
-					notice("Error","invalid file extension",false);
-	                // cancel upload
-	                return false;
-                }
-	        },
-			onComplete : function(file,response){
-				uploadDisplay(UploadCnt,response.newFilename,$("#newTicketBrowse"));
-				$("#newTicketfiles"+UploadCnt).val(response.newFilename);
-				UploadCnt++;
-				$("#newTicketBrowse").addClass("fakelink");						
-			}
-		});
 	});
 	$('#topperSearch').colorbox({transition:"none",open:false,inline:true,href:"#newSearchdialog",title:"<font class=\"white\">Search for a Ticket</font>"},function(){
 		$("#newSearchdialog").find(".Ticketform").val('');

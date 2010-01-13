@@ -24,16 +24,7 @@
 			<td style="text-align:left;"><font class="">Ticket Description</font><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class="dropdown Ticketform "></textarea></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="" id="newTicketAttachmentNumber">Attachments:</font>
-				<div><input class="dropdown Ticketform " type="file" name="newTicketBrowse" id="newTicketBrowse"></div>
-				<div id="newTicketFileList" style="height:32px;overflow:hidden"></div>
-			</td>
-		</tr>
-		<tr>
 			<td>
-				<INPUT type="hidden" id="newTicketfiles0" name="newTicketfiles0" value="0" >
-				<INPUT type="hidden" id="newTicketfiles1" name="newTicketfiles1" value="0" >
-				<INPUT type="hidden" id="newTicketfiles2" name="newTicketfiles2" value="0" >
 				<INPUT type="hidden" id="newTicketUser_id" name="newTicketUser_id" value="{$user_id}" >
 				<INPUT type="hidden" id="newTicketTicket_id" name="newTicketTicket_id"  value="{$ticket_id}" >
 				<INPUT type="hidden" id="newTicketType" name="newTicketType" value="{$type}">
