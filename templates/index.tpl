@@ -19,7 +19,7 @@
 
 
 </head>
-<body onResize="javascript:resize();"  style="width:100%;background-position:-9px -21px;" class="image-background color-background">
+<body onResize="javascript:resize();"  style="width:100%;background-position:-9px -21px;" class="image-background color-B-1">
 <div class="header1" style="">{include file="topper.tpl"}</div>
 <div style="height:50px;"></div>
 <div id="wrap" style="width:99%; padding:4px;position:relative;" class="">
