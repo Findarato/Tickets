@@ -137,7 +137,7 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	.clip {background-position: 0px -32px;}
 	.closed {background-position: 0px -240px;}
 	.database_table {background-position: 0px -80px;}
-	.department {background-position: 0px -256px;}
+	.department {background-position: 0px -256px;} 
 	.edit {background-position: 0px -560px;}
 	.email {background-position: 0px -320px;padding: 0 0 0px 19px;}
 	.eye {background-position: 0px -528px;}

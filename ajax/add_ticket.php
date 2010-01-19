@@ -23,8 +23,10 @@ if($usr->User_id==$_GET["newTicketUser_id"]){
 				"'.nl2br($_GET["newTicketDescription"]).'",
 				NOW(),1,
 				"'.(intval($_GET["newTicketPriority"])+1).'",
+				"'.$dueOn.'",
 				"'.$_GET["newTicketLocation"].'"
 					)');
+			//echo $db->Lastsql;
 			$ticketId = $db->Lastid;
 			$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);
 			$locationEmail= $db->Fetch("row");
