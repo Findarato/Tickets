@@ -356,7 +356,7 @@ function loadRecentTickets(jsonData,selector){
 }
 
 function loadTicketBody(ticketId,container){
-	container.find(".statusImage ").hide();
+	//container.find(".statusImage ").hide();
 	Params.Ticket_id = ticketId; //set the global
     $.getJSON(uri + "ajax/display_ticket.php", {ticket_id: ticketId}, 
 	function(data){
