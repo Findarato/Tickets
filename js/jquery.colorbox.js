@@ -316,7 +316,7 @@
 		.css({width:getWidth()})
 		.css({height:getHeight()})//sets the height independently from the width in case the new width influences the value of height.
 		.prependTo($modalContent);
-		
+		$("#cboxTitle").css("width",getWidth()-2);
 		if ($.browser.msie && $.browser.version < 7) {
 			$('select').not($('#colorbox select')).css({'visibility':'hidden'});
 		}

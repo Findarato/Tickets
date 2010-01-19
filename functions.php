@@ -62,7 +62,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				if($email){
 					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
 				}else{
-					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
 				break;
@@ -71,7 +71,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				if($email){
 					$formated1 = "<a href=\"http://dev.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
 				}else{
-					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user fakelink ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
+					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user fakelink ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
 					
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			

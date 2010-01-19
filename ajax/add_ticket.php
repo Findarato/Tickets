@@ -6,31 +6,14 @@
  * @copyright March 28, 2009
  */
 	include_once("../header.php");
-$attachments = array();
 $_GET = $db->Clean($_GET);
 $usr = unserialize($_SESSION["user"]);
 
-function fixuploads(){
-	$tempAttach = array();
-	if($_GET["newTicketfiles0"]!="" && $_GET["newTicketfiles0"]!=0){$tempAttach[] = $_GET["newTicketfiles0"];echo "1";
-		if($_GET["newTicketfiles1"]!="" && $_GET["newTicketfiles1"]!=0){$tempAttach[] = $_GET["newTicketfiles1"];echo "2";
-			if($_GET["newTicketfiles2"]!="" && $_GET["newTicketfiles2"]!=0){$tempAttach[] = $_GET["newTicketfiles2"];echo "3";}
-		}
-	}
-	return $tempAttach;
-}
 if($usr->User_id==$_GET["newTicketUser_id"]){
 	if($_GET['newTicketType']=="new"){
-		//Lets make sure there are not any extra attachments
-		$attachments = fixuploads();
-		$attachtobeAdded = "";
-		if(count($attachments)==0){//there is no attachments
-			$attachtobeAdded = "";
-		}else{
-			$attachtobeAdded = addSlashes(serialize($attachments));
-		}
+
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
-		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,attachment,location) 
+		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location) 
 		VALUES(
 				"'.$_GET["newTicketUser_id"].'",
 				"'.$_GET["newTicketUser_id"].'",
@@ -40,15 +23,9 @@ if($usr->User_id==$_GET["newTicketUser_id"]){
 				"'.nl2br($_GET["newTicketDescription"]).'",
 				NOW(),1,
 				"'.(intval($_GET["newTicketPriority"])+1).'",
-				"'.$dueOn.'","'.$attachtobeAdded.'",
 				"'.$_GET["newTicketLocation"].'"
 					)');
 			$ticketId = $db->Lastid;
-			if(count($attachments)>=1){//there is an attachment
-				$res1['status']['attachment']=1;
-				$res1['status'] = serialize($res1['status']);
-				$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$ticketId. " LIMIT 1;");//put in the new status
-			}
 			$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);
 			$locationEmail= $db->Fetch("row");
 			$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category FROM tcview WHERE id=".$ticketId);
@@ -76,13 +53,6 @@ if($usr->User_id==$_GET["newTicketUser_id"]){
 		
 	}else{ //this should be edit
 		//Lets make sure there are not any extra attachments
-		$attachments = fixuploads();
-		$attachtobeAdded = "";
-		if(count($attachments)==0){//there is no attachments
-			$attachtobeAdded = "";
-		}else{
-			$attachtobeAdded = addSlashes(serialize($attachments));
-		}
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		$db->Query('UPDATE tickets SET
 				assigned_id="'.$_GET["newTicketAssign"].'",
@@ -92,11 +62,10 @@ if($usr->User_id==$_GET["newTicketUser_id"]){
 				modified_on=NOW(),
 				priority="'.(intval($_GET["newTicketPriority"])+1).'",
 				due_on="'.$dueOn.'",
-				attachment="'.$attachtobeAdded.'",
 				location = '.$_GET['newTicketLocation'].'				
 				WHERE id='.$_GET['newTicketTicket_id'].'
 				');
-		addReply($_GET['newTicketTicket_id'],256,"Ticket Edited","This ticket was Edited on ".date("D M j, Y G:i:s ")." by <span class=\"gold\">".$usr->A_U['first-name']." ".$usr->A_U['last-name']."</span>");
+		addReply($_GET['newTicketTicket_id'],256,"Ticket Edited","This ticket was Edited on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]");
 		//Put in the reassign variable and store it in the table
 		$db->Query("SELECT status FROM tcview WHERE id=".$_GET['newTicketTicket_id']);
 		$res1 = $db->Fetch("assoc");

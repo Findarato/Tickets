@@ -2,7 +2,7 @@
 	<tr>
 		<td style="width:300px;vertical-align:top;height:500px;padding-right:1px;" class="">
 			<div id="ticketarea" style="height:500px;" class="ui-corner-top ui-corner-bottom">
-			    <div class="ui-corner-all dark border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font style="margin-left:10px;margin:5px;" id="ticketTitle"></font>
+			    <div class="ui-corner-all dark color-E-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font style="margin-left:10px;margin:5px;" id="ticketTitle"></font>
 				<div id="ticketStatusImage" style="position:absolute ;right: 10px;top: 2px;height:13px;">
 					<div class="statusImage left ticket_sprite edit" style="display:none" id="imgEdited" title="Edited"></div>
 					<div class="statusImage left ticket_sprite user_edit" style="display:none" id="imgReassigned" title="Reassigned"></div>
@@ -52,9 +52,9 @@
 					       	<div class="left" ><font class="" id="ticketLocation"></font></div>
 						</div>
 						<div style="clear:both">
-							<div class="option-theme fg-button ui-corner-all white lapcatButton left" id="Holdlink" style="width:auto;"><span class="ticket_sprite lock">Lock</span></div>
-							<div class="option-theme fg-button ui-corner-all white lapcatButton left" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_sprite unlock">unLock</span></div>
-							<div class="option-purple fg-button ui-corner-all white lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_sprite brick">Block</span></div>
+							<div class="option-theme fg-button ui-corner-all white lapcatButton left" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
+							<div class="option-theme fg-button ui-corner-all white lapcatButton left" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unLock</span></div>
+							<div class="option-purple fg-button ui-corner-all white lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>
 						</div>
 					</div>
 					<div id="ticketDataBox" style="margin-bottom:5px;width:100%;height:auto;max-height:300px;overflow:auto;vertical-align:top; clear:both"><font class="" id="ticketBody"></font></div>
@@ -63,7 +63,7 @@
 					<div class="option-purple fg-button ui-corner-all white lapcatButton" id="editlink" style="width:45px;">Edit</div>
 					<div class="option-theme fg-button ui-corner-all white lapcatButton" id="closelink" style="width:45px;">Close</div>
 					<div class="option-black fg-button ui-corner-all white lapcatButton" id="openlink" style="width:45px;display:none">Reopen</div>
-					<div class="option-purple fg-button ui-corner-all white lapcatButton" id="ReAssignlink" style="width:auto;"><span class="ticket_sprite user_edit">Reassign</span></div>
+					<div class="option-purple fg-button ui-corner-all white lapcatButton" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user_edit">Reassign</span></div>
 				</div>
 			</div>
 		</td>

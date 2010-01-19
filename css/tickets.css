@@ -126,7 +126,10 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	width: 70px;
 }
 /* New ticket image sprites*/
-.ticket_sprite{background: url(/tickets/images/ticket.icon.sprite.16.768.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+.ticket_button{
+	padding: 0 0 1px 19px;height:16px;
+}
+.ticket_sprite{background: url(/tickets/images/ticket.icon.sprite.16.768.png) no-repeat;}
 	.add {background-position: 0px 0px;}
 	.brick {background-position: 0px -64px;}
 	.bug {background-position: 0px -80px;}

@@ -217,9 +217,9 @@ function populateAllTickets(Area){
 				var statusClass = "";
 				
 				if(tick.status.lock==1){
-					statusClass = "lock ticket_sprite";
+					statusClass = "lock ticket_button ticket_sprite";
 				}else{
-					if(tick.status.blocked==1){statusClass = "brick ticket_sprite ";
+					if(tick.status.blocked==1){statusClass = "brick ticket_button ticket_sprite ";
 					}else{var statusClass = "";}
 				}
 				
@@ -246,7 +246,7 @@ function populateAllTickets(Area){
 			});
 			cnt++;
 			html += '<div style="clear:both; height:12px;" id="CallTickets">';
-			html += "<a class=\"smallTicketL ticket_link ticket_sprite ticket_sprite font-L font-bold\" href=\"#ticketlist/"+Ttype+"\">Show All Tickets</a>";
+			html += "<a class=\"smallTicketL ticket_link ticket_button ticket_sprite ticket_button ticket_sprite font-L font-bold\" href=\"#ticketlist/"+Ttype+"\">Show All Tickets</a>";
 			html += "</div>";
 	        $("#"+Ttype).empty().css({
 	            height: (cnt + 1) + "em"
@@ -344,7 +344,7 @@ function loadRecentTickets(jsonData,selector){
 			.css({overflow:"hidden",width:"150px",height:"15px"})
 			.html(
 				$("<a/>").attr("href","#ticket/"+tl.ticket_id)
-				.addClass("ticket_link ticket_sprite").css({fontSize:"135%"})
+				.addClass("ticket_link ticket_button ticket_sprite").css({fontSize:"135%"})
 				.html(tl.ticket_name.replace(/\+/g," ")))
 		);
 		selector.append(
@@ -371,9 +371,9 @@ function loadTicketBody(ticketId,container){
 			container.find("#ticketDueDate").html(data.due_on);
 		}
 		container.find("#ticketBody").html(data.description);
-		container.find("#ticketCategory").html($("<a/>").attr("href","#ticketlist/category/"+data.category).addClass("nolink ticket_sprite category_link ").html(data.category));
-		container.find("#ticketCreatedBy").html($("<a/>").attr("href","#ticketlist/created_by/"+data.created_by_id).addClass("nolink ticket_sprite user ").html(data.firstname2+" "+data.lastname2));
-		container.find("#ticketAssignedTo").html($("<a/>").attr("href","#ticketlist/assigned/"+data.assigned_id).addClass("nolink ticket_sprite user ").html(data.firstname+" "+data.lastname));
+		container.find("#ticketCategory").html($("<a/>").attr("href","#ticketlist/category/"+data.category).addClass("nolink ticket_button ticket_sprite category_link ").html(data.category));
+		container.find("#ticketCreatedBy").html($("<a/>").attr("href","#ticketlist/created_by/"+data.created_by_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname2+" "+data.lastname2));
+		container.find("#ticketAssignedTo").html($("<a/>").attr("href","#ticketlist/assigned/"+data.assigned_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname+" "+data.lastname));
 		container.find("#replyticketid").val(ticketId);
 		container.find("#ticketLocation").html($("<a/>").attr("href","#ticketlist/location/"+data.locationId).addClass("nolink library-link ").html(data.locationName));
 		container.find("#ticketId").html(data.id);
@@ -583,6 +583,8 @@ function loadStats(){
 	,"json");
 }
 jQuery(document).ready(function(){
+	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
+	$("#cboxClose").addClass("ticket_sprite bug");
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
 	Params.Working = $("#Working");
 	$("#userSecondaryEmail").blur(function(){
@@ -653,6 +655,7 @@ jQuery(document).ready(function(){
 		$("#newTicketFileList").empty();
 		$("#newTicketfiles").empty();
 		$("#newTicketAttachmentNumber").html("Attachments ("+UploadCnt+"):");
+		
 	});
 	$('#topperSearch').colorbox({transition:"none",open:false,inline:true,href:"#newSearchdialog",title:"<font class=\"white\">Search for a Ticket</font>"},function(){
 		$("#newSearchdialog").find(".Ticketform").val('');
@@ -707,8 +710,7 @@ jQuery(document).ready(function(){
 		.css({display:"block",top:0,left:0,height:bodyHeight,width:bodyWidth,position:"absolute"});
 		$('body').append(Shadow);
 	});
-	$("#t_fT").click(
-		function(){
+	$("#t_fT").click(function(){
 			var hash = jQuery.makeArray(window.location.hash.split("\/"));
 			var display = $("#imgBookmark");
 			if (hash[0] == "#ticket") {
@@ -718,8 +720,7 @@ jQuery(document).ready(function(){
 					$.get(uri+"ajax/tickets.php", {	type: "favorite",ticket_id: Params.Ticket_id,favorite: 1}, function(data){	populateAllTickets("f");display.toggle();notice("Notice",data.message,false);},"json");
 				}
 			}else{notice("Notice!","You must first select a ticket!",false);} 
-		}
-	);
+		});
 	/*
 	$(".fg-button:not(.ui-state-disabled)")
 		.mousedown(function(){
@@ -734,108 +735,110 @@ jQuery(document).ready(function(){
 
 		});
 	*/
-		$("#btn_login").click(function(){ 
-			jQuery.post(uri+"ajax/login.php",$("#frm_login").serialize(),function(data){
-				if(data.error.length>0){
-					checkResponse(data);
-				}else{
-					Lastcheck = data.lastlogon;
-					$("#t_uI").html($("<span/>").addClass("user").html(data.firstname + " "+ data.lastname +" (" + data.username + ")") );
-					checkResponse(data);
-					User_id = data.userid;
-					$("#newTicketUser_id").val(User_id);
-					if(data.opt==2){$("#userDepartmentNotify").val(2).attr('checked', 'checked');}
-					$("#userDepartmentName").html(data.departmentname);
-					if(data.departmentname===""){notice("Error","No Department");}
-					loadStats();
-					$("#rss1").attr("href","ticketsrss.php?id="+User_id);
-					$("#rss2").attr("href","ticketsrss.php?id="+User_id+"&bookmark=1");
-					if (window.location.hash.length > 1) {updateTickets();checkHash();}
-					else {loadBlank();updateTickets();}
-					$("#userSecondaryEmail").val(data.altEmail);
-					$("#depOk").show();
-					$("#depError").hide();
-				}
-			},"json");
-		}); 
-		//Just a catch for hitten enter on the form
-		$("#loginpassword").keydown(function(event){switch (event.keyCode) {case 13:$("#btn_login").trigger('click');break;}	});
-		$("#userDepartmentSelect").change(function(){
-			jQuery.post(uri+"ajax/login.php",{department_id:$("#userDepartmentSelect option:selected").val(),user_id:User_id},function(){
-				$("#userDepartmentName").empty().html($("#userDepartmentSelect option:selected").text());
-				notice("Notice","Welcome to the "+$("#userDepartmentSelect option:selected").text()+" Department",false);
-			});
-		});
-		$("#closeNotify").click(function(){	$("#notifyTpl").fadeOut(Params.FadeTime);});
-		$("#userDepartmentNotify").click(function(){
-			if($(this).val()==1){$(this).val(2);}else{$(this).val(1);}
-			jQuery.post(uri+"ajax/login.php",{user_id:User_id,opt:$(this).val()},function(data){
+	$("#btn_login").click(function(){ 
+		jQuery.post(uri+"ajax/login.php",$("#frm_login").serialize(),function(data){
+			if(data.error.length>0){
 				checkResponse(data);
-			},"json");
-		});
-		$('#ReAssignBtn').click(function(){
-			var reassignVal = $("#reassignTicketdialog").find("#TicketAssign").val();
-			$.fn.colorbox.close();
-			$.getJSON(uri + "ajax/tickets.php", {
-		        type:"reassign",
-				ticket_id: Params.Ticket_id,
-				user_id:reassignVal
-			    }, function(data){
-					checkResponse(data);
-					if(data.error.length>1){}else{$("#imgReassigned").show();loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);loadTicket(Params.Ticket_id);}
-			});
-		});
-		$("#replyAddBtn").click(function(){
-			$.post(uri+"/ajax/add_reply.php", $("#newReplyForm").serialize());
-			$(".Ticketform").attr({value: ""});
-			$.fn.colorbox.close();
-			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
-		});
-		$("#ticketSearchBtn").click(function(){
-			var hash = "ticketlist";
-			var s_Title = $("#searchTitle").val();
-			var s_Category = $("#searchCategory").val();
-			var s_Assign = $("#searchAssign").val();
-			var s_Priority = $("#searchPriority").val();
-			var s_Department = $("#searchDepartment").val();
-			if(s_Title!==""){hash += "/title/"+s_Title;}
-			if(s_Category!==""){hash += "/category/"+s_Category;}
-			if(s_Assign!==""){hash += "/assigned/"+s_Assign;}
-			if(s_Priority!==""){hash += "/priority/"+s_Priority;}
-			if(s_Department!==""){hash += "/department/"+s_Department;}
-			setHash(hash);loadTicketList();
-			$.fn.colorbox.close();
-		});
-		$("#ticketAddBtn").click(function(){
-			var ticketTitle = $("#newTicketTitle");
-			var ticketDesc = $("#newTicketDescription");
-			if (ticketTitle.val() === "") {
-				ticketTitle.focus();
-				notice("Error","You must enter a title",false);
-				return false;
 			}else{
-				if (ticketDesc.val() === "") {
-					ticketDesc.focus();
-					notice("Error","You must enter a description",false);
+				Lastcheck = data.lastlogon;
+				$("#t_uI").html($("<span/>").addClass("user").html(data.firstname + " "+ data.lastname +" (" + data.username + ")") );
+				checkResponse(data);
+				User_id = data.userid;
+				$("#newTicketUser_id").val(User_id);
+				if(data.opt==2){$("#userDepartmentNotify").val(2).attr('checked', 'checked');}
+				$("#userDepartmentName").html(data.departmentname);
+				if(data.departmentname===""){notice("Error","No Department");}
+				loadStats();
+				$("#rss1").attr("href","ticketsrss.php?id="+User_id);
+				$("#rss2").attr("href","ticketsrss.php?id="+User_id+"&bookmark=1");
+				if (window.location.hash.length > 1) {updateTickets();checkHash();}
+				else {loadBlank();updateTickets();}
+				$("#userSecondaryEmail").val(data.altEmail);
+				$("#depOk").show();
+				$("#depError").hide();
+			}
+		},"json");
+	}); 
+		//Just a catch for hitten enter on the form
+	$("#loginpassword").keydown(function(event){switch (event.keyCode) {case 13:$("#btn_login").trigger('click');break;}	});
+	$("#userDepartmentSelect").change(function(){
+		jQuery.post(uri+"ajax/login.php",{department_id:$("#userDepartmentSelect option:selected").val(),user_id:User_id},function(){
+			$("#userDepartmentName").empty().html($("#userDepartmentSelect option:selected").text());
+			notice("Notice","Welcome to the "+$("#userDepartmentSelect option:selected").text()+" Department",false);
+		});
+	});
+	$("#closeNotify").click(function(){	$("#notifyTpl").fadeOut(Params.FadeTime);});
+	$("#userDepartmentNotify").click(function(){
+		if($(this).val()==1){$(this).val(2);}else{$(this).val(1);}
+		jQuery.post(uri+"ajax/login.php",{user_id:User_id,opt:$(this).val()},function(data){
+			checkResponse(data);
+		},"json");
+	});
+	$('#ReAssignBtn').click(function(){
+		var reassignVal = $("#reassignTicketdialog").find("#TicketAssign").val();
+		$.fn.colorbox.close();
+		$.getJSON(uri + "ajax/tickets.php", {
+	        type:"reassign",
+			ticket_id: Params.Ticket_id,
+			user_id:reassignVal
+		    }, function(data){
+				checkResponse(data);
+				if(data.error.length>1){}else{$("#imgReassigned").show();loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);loadTicket(Params.Ticket_id);}
+		});
+	});
+	$("#replyAddBtn").click(function(){
+		$.post(uri+"/ajax/add_reply.php", $("#newReplyForm").serialize());
+		$(".Ticketform").attr({value: ""});
+		$.fn.colorbox.close();
+		loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
+	});
+	$("#ticketSearchBtn").click(function(){
+		var hash = "ticketlist";
+		var s_Title = $("#searchTitle").val();
+		var s_Category = $("#searchCategory").val();
+		var s_Assign = $("#searchAssign").val();
+		var s_Priority = $("#searchPriority").val();
+		var s_Department = $("#searchDepartment").val();
+		if(s_Title!==""){hash += "/title/"+s_Title;}
+		if(s_Category!==""){hash += "/category/"+s_Category;}
+		if(s_Assign!==""){hash += "/assigned/"+s_Assign;}
+		if(s_Priority!==""){hash += "/priority/"+s_Priority;}
+		if(s_Department!==""){hash += "/department/"+s_Department;}
+		setHash(hash);loadTicketList();
+		$.fn.colorbox.close();
+	});
+	$("#ticketAddBtn").click(function(){
+		var ticketTitle = $("#newTicketTitle");
+		var ticketDesc = $("#newTicketDescription");
+		if (ticketTitle.val() === "") {
+			ticketTitle.focus();
+			notice("Error","You must enter a title",false);
+			return false;
+		}else{
+			if (ticketDesc.val() === "") {
+				ticketDesc.focus();
+				notice("Error","You must enter a description",false);
+				return false;
+			}else {
+				if ($("#newTicketLocation").val() === "") {
+					notice("Error","You must select a Location",false);
 					return false;
 				}else {
-					if ($("#newTicketLocation").val() === "") {
-						notice("Error","You must select a Location",false);
-						return false;
-					}else {
-						jQuery.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(),function(data){
-							$.each(data.achievements,function(a,ach){
-								notice("Achievement",ach,false);
-							});
+					jQuery.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(),function(data){
+						/*
+						$.each(data.achievements,function(a,ach){
+							notice("Achievement",ach,false);
 						});
-						$(".Ticketform").attr({value: ""});
-						$.fn.colorbox.close();
-						loadTicket(Params.Ticket_id);
-					}
+						*/
+					});
+					$(".Ticketform").attr({value: ""});
+					$.fn.colorbox.close();
+					loadTicket(Params.Ticket_id);
 				}
 			}
-			populateAllTickets();
-		});
+		}
+		populateAllTickets();
+	});
 
 	$("#cboxTitle").addClass("color-off");
 	$().bind('cbox_closed', function(){UploadCnt=0;$("#newTicketfiles").val("");});
@@ -852,7 +855,6 @@ jQuery(document).ready(function(){
 		});
 	});
 	$("#unHoldlink").live("click",function(){
-		
 		$.getJSON(uri+"ajax/tickets.php",{type:"hold",value:0,ticket_id:Params.TicketJSON.id},function(data){
 			$("#Holdlink").show();
 			$("#unHoldlink").hide();
