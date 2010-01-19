@@ -2,9 +2,9 @@
 	<div class="fg-buttonset ui-helper-clearfix"> 
 		<div class="option-theme fg-button ui-corner-all lapcatButton white" style="width:auto;min-width:16px;min-height:16px;" id="t_uI"><span class="ticket_sprite user" style="width:auto;min-width:16px;min-height:16px;">{if ($firstname)}
 		{$firstname} {$lastname} ({$username})	
-	{else}   
-{/if}
-</span></div>
+		{else}   
+		{/if}
+		</span></div>
 		<div class="option-purple fg-button ui-corner-all lapcatButton white" id="topperNew" style="width:auto"><span class="ticket_sprite add">New Ticket</span></div>
 		<div class="option-purple fg-button ui-corner-all lapcatButton white" id="topperSearch" style="width:auto"><span class="ticket_sprite search">Search</span></div>
 		<div class="option-theme fg-button ui-corner-all lapcatButton white" id="topperRecent" style="width:auto" title="Toggle Recent"><span class="ticket_sprite bug">Recent Tickets</span></div>

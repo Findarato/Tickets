@@ -720,18 +720,20 @@ jQuery(document).ready(function(){
 			}else{notice("Notice!","You must first select a ticket!",false);} 
 		}
 	);
+	/*
 	$(".fg-button:not(.ui-state-disabled)")
 		.mousedown(function(){
 				$(this).parents('.fg-buttonset-single:first').find(".fg-button.option-red").removeClass("option-red").addClass("option-black");
-				if( $(this).is('.option-red.fg-button-toggleable, .fg-buttonset-multi .option-red') ){ $(this).removeClass("option-red").addClass("option-black"); }
+				if( $(this).is('.option-red .fg-button-toggleable, .fg-buttonset-multi .option-red') ){ $(this).removeClass("option-red").addClass("option-black"); }
 				else { $(this).addClass("option-red").removeClass("option-black"); }	
 		})
 		.mouseup(function(){
-			if(! $(this).is('.fg-button-toggleable, .fg-buttonset-single .fg-button,  .fg-buttonset-multi .fg-button') ){
+			if(! $(this).is('.fg-button-toggleable, option-red, .fg-buttonset-single .fg-button,  .fg-buttonset-multi .fg-button') ){
 				$(this).removeClass("option-red").addClass("option-black");
 			}
 
 		});
+	*/
 		$("#btn_login").click(function(){ 
 			jQuery.post(uri+"ajax/login.php",$("#frm_login").serialize(),function(data){
 				if(data.error.length>0){
@@ -842,7 +844,6 @@ jQuery(document).ready(function(){
 	//Ticket display live items
 	$("#Holdlink").live("click",function(){
 		$.getJSON(uri+"ajax/tickets.php",{type:"hold",value:1,ticket_id:Params.TicketJSON.id},function(data){
-			notice("hold","this is a held ticket",true);
 			$("#Holdlink").hide();
 			$("#unHoldlink").show();
 			checkResponse(data);
@@ -853,7 +854,6 @@ jQuery(document).ready(function(){
 	$("#unHoldlink").live("click",function(){
 		
 		$.getJSON(uri+"ajax/tickets.php",{type:"hold",value:0,ticket_id:Params.TicketJSON.id},function(data){
-		notice("unhold","this is a unheld ticket",true);
 			$("#Holdlink").show();
 			$("#unHoldlink").hide();
 			checkResponse(data);
