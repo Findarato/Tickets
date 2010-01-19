@@ -321,10 +321,11 @@ function displayStatus(jsonData,Selector){
 			case "edit":Selector.find("#imgEdited").fadeIn(Params.FadeTime);break;
 			case "reassigned":Selector.find("#imgReassigned").fadeIn(Params.FadeTime);break;
 			case "blocked":Selector.find("#imgBlocked").fadeIn(Params.FadeTime);break;				
-			case "lock":Selector.find("#imgLock").fadeIn(Params.FadeTime);Selector.find("#Holdlink").hide();Selector.find("#unHoldlink").fadeIn(Params.FadeTime);break;
-			case "attachment":Selector.find("#imgAttachment").fadeIn(Params.FadeTime);
-			Selector.find("#ticketAttachmentsBox").fadeIn(Params.FadeTime);
-			Selector.find("#ticketDataBox").css({height:"200px"});
+			case "lock":
+				Selector.find("#imgLock").fadeIn(Params.FadeTime);
+				Params.Content.find("#Holdlink").hide();
+				Params.Content.find("#unHoldlink").fadeIn(Params.FadeTime);break;
+
 			break;
 			default:break;				
 		}
@@ -841,17 +842,20 @@ jQuery(document).ready(function(){
 	//Ticket display live items
 	$("#Holdlink").live("click",function(){
 		$.getJSON(uri+"ajax/tickets.php",{type:"hold",value:1,ticket_id:Params.TicketJSON.id},function(data){
-			Params.Content.find("#Holdlink").hide();
-			Params.Content.find("#unHoldlink").show();
+			notice("hold","this is a held ticket",true);
+			$("#Holdlink").hide();
+			$("#unHoldlink").show();
 			checkResponse(data);
 			Params.Content.find("#imgLock").show();
 			loadResponsesBody(Params.Ticket_id, $("#replyareabody"),0);//reload the first response page
 		});
 	});
 	$("#unHoldlink").live("click",function(){
+		
 		$.getJSON(uri+"ajax/tickets.php",{type:"hold",value:0,ticket_id:Params.TicketJSON.id},function(data){
-			Params.Content.find("#Holdlink").show();
-			Params.Content.find("#unHoldlink").hide();
+		notice("unhold","this is a unheld ticket",true);
+			$("#Holdlink").show();
+			$("#unHoldlink").hide();
 			checkResponse(data);
 			Params.Content.find("#imgLock").hide();
 			loadResponsesBody(Params.Ticket_id, $("#replyareabody"),0);//reload the first response page

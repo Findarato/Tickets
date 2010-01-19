@@ -137,26 +137,22 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 }
 function id2Email($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
 	$db = db::getInstance();
-	if($storedResults = $db->Get_results("users")){/*This query has already been run */
-		$Userinfo = $storedResults[$user_id];
-	}else{
-		//Get the email address from the user table
-		$db -> Query("SELECT id,email_address FROM $userDatabase.$userTable",true);
-		$res = $db->Format("assoc_array");
-		$formatedArray = array(); //Create the storage array
-		foreach ($res as $r){
-			$formatedArray[$r['id']]=$r['email_address'];
-		}
-		//Get the email address from the alt email table
-		$db -> Query("SELECT user_id,email FROM tickets.alt_email",true);
-		$res = $db->Format("assoc_array");
-		foreach ($res as $r){
-			//replace the user table email with the alt email
-			$formatedArray[$r['user_id']]=$r['email'];
-		}
-		$db -> Store_results($formatedArray,"users");	
-		$Userinfo = $formatedArray[$user_id];
+	//Get the email address from the user table
+	$db -> Query("SELECT id,email_address FROM $userDatabase.$userTable",true);
+	$res = $db->Format("assoc_array");
+	$formatedArray = array(); //Create the storage array
+	foreach ($res as $r){
+		$formatedArray[$r['id']]=$r['email_address'];
 	}
+	//Get the email address from the alt email table
+	$db -> Query("SELECT user_id,email FROM tickets.alt_email",true);
+	$res = $db->Format("assoc_array");
+	foreach ($res as $r){
+		//replace the user table email with the alt email
+		$formatedArray[$r['user_id']]=$r['email'];
+	}
+	$db -> Store_results($formatedArray,"users");	
+	$Userinfo = $formatedArray[$user_id];
 	return $Userinfo;
 }
 function getDepartmentMembers($dep_id,$notify=0){
@@ -296,22 +292,20 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 	}
 	foreach ($idsToEmail as $key=>$ite){
 		$email = id2Email($ite); 
-		//echo $email."=>".$location."<br>";
-			if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets",$body,$headers);
-			}else{
-				switch($key){
-					case "created":
-						mail($email,$createdMessage,$body,$headers);							
-					break;
-					case "assigned":
-						mail($email,$assignedMessage,$body,$headers);							
-					break;
-					default:
-						mail($email,$assignedMessage,$body,$headers);
-					break;
-				}
+		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets",$body,$headers);
+		}else{
+			switch($key){
+				case "created":
+					mail($email,$createdMessage,$body,$headers);							
+				break;
+				case "assigned":
+					mail($email,$assignedMessage,$body,$headers);							
+				break;
+				default:
+					mail($email,$assignedMessage,$body,$headers);
+				break;
 			}
-		
+		}
 	}
 }
 /**
