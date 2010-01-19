@@ -133,7 +133,7 @@ function loadLargeStats(){
 		.html(
 			$("<div/>")
 				.css({Width:"100%",textAlign:"left",margin:"4px",padding:"2px",height:"20px",position:"relative"})
-				.addClass("ui-corner-all dark border-all-B-1")
+				.addClass("ui-corner-all background-alpha-2 border-all-B-1")
 				.append($("<font/>").css({margin:"5px"}).html("Large Stats for tickets"))
 		)
 		.append(holder = $("<div/>").addClass("color-E-2 ui-corner-all border-all-B-1").css({height:"500px",overflow:"auto",margin:"4px",padding:"2px"}));
@@ -235,7 +235,7 @@ function populateAllTickets(Area){
 				}else {
 					if (tick.timeRemaining > 0) { //ticket is over due.
 						html += "<div style=\"width:150px\" class=\"smallTicketL "+lft+" darkred\"><a class=\"nolink "+statusClass+"\" href=\"#ticket/"+tick.id+"\">" + tick.subject + "</a></div>";
-						html += "<div class=\"smallTicketR dark-red td\">" + ((tick.status.lock!=1)?sec2readable(tick.timeRemaining):"") + "</div>";
+						html += "<div class=\"smallTicketR darkred td\">" + ((tick.status.lock!=1)?sec2readable(tick.timeRemaining):"") + "</div>";
 					}
 					else { //ticket is not over due
 						html += "<div style=\"width:150px\" class=\"smallTicketL "+rght+"\"><a class=\"nolink "+statusClass+"\" href=\"#ticket/"+tick.id+"\">" + tick.subject + "</a></div>";
@@ -295,7 +295,7 @@ function loadResponsesBody(ticketId,container,page){
 		var cnt = 0;
 		var resCont = $("<div/>");
 		$.each(data.reply, function(i, item){
-			if(i%2==1){var color="dark";}else{var color="darker";}
+			if(i%2==1){var color="background-alpha-2";}else{var color="background-alpha-1";}
 			resCont.append($("#responsestpl").html());
 			resCont.find("#ticketListDueDate").hide();
 	        resCont.find("#changemeColor").addClass(color).attr({id: "userid"+item.id});
@@ -485,7 +485,7 @@ function loadTicketList(pageNumber){
 		var tlistHolder = $("<div/>");
 		$.each(data.tickets, function(i, item){
 			var OC = false;
-			if(i%2==1){var color="dark";}else{var color="darker";}
+			if(i%2==1){var color="background-alpha-2";}else{var color="background-alpha-1";}
 			if(item.timeRemaining===null){}else{}
 			if(item.open === 0){s_ocd = $("<span/>").html("Closed").addClass("font-L font-bold").css({paddingLeft:"3px",fontSize:"9px"});}else{OC = true;s_ocd= $("<span/>").html("");}
 			if(item.timeRemaining===null){s_tr= $("<span/>").html("");}else{s_tr=$("<span/>").html("Due On: "+Date.parse(item.due_on).toString("M/d/yyyy HH:mm")).css({paddingLeft:"3px",fontSize:"9px"});}
