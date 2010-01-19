@@ -22,97 +22,11 @@ var uri = window.location.toString();
 uri = uri.replace(window.location.hash,""); 
 if(uri.match('dev')=='dev'){path = "http://dev.lapcat.org/"+$("#themegencss").attr("href")+"&json";}else{path = "http://www.lapcat.org/"+$("#themegencss").attr("href")+"&json";}
 
-function stripslashes(str) {str=str.replace(/\\'/g,'\'');str=str.replace(/\\"/g,'"');str=str.replace(/\\0/g,'\0');str=str.replace(/\\\\/g,'\\');return str;}
-function addBr(obj){if(typeof obj != "object"){obj = this;}obj.append("<br>");}
-function notice(title,body,sticky,ticketid){
-	var noticeClass = "";
-	var fontClass = "white";
-	var image = "http://www.lapcat.org/lapcat/images/101-58-1.png";
-	switch(title){
-		case "Error":noticeClass = "option-red";break;
-		case "Debug":noticeClass = "option-purple";break;
-		case "Notice":noticeClass = "option-theme";break;
-		case "Achievement":noticeClass = "color-D-2";image = "";break;
-		default:noticeClass = "color-D-2 ";break;
-	}
-	var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all">'
-				  + '<div class="notice-body '+noticeClass +' ui-corner-all">' 
-					  + '<div style="float:left;width:50px;padding-right:5px;"><img src="'+image+'" alt="" /></div>'
-					  + '<div style="float:left;width:200px;"><h3><font class="'+fontClass+'">'+title+'</font></h3>'
-					  + '<font class="'+fontClass+'">'+body+'</font></div>'
-				  + '</div>'
-			  + '</div>';
-		if(sticky){
-			if(parseInt(ticketid,10) > 0) {
-				$(noticeBox).click(function(){loadTicket(ticketid);}).purr({isSticky: true});
-			}else{$(noticeBox).removeClass("fakelink").purr({isSticky: true});}
-		}else{if(parseInt(ticketid,10)>0){$( notice ).click(function(){loadTicket(ticketid);}).purr({isSticky: false});				
-			}else{$(noticeBox).removeClass("fakelink").purr({isSticky: false});}
-		}
-}
 function checkResponse(json){
 	if(json.error !==null && json.error.length >2){notice("Error",json.error,false);}
 	if(json.message !==null && json.message.length >2){notice("Notice",json.message,false);}
 }
-function clearUploads(){
-	$("#newTicketfiles0").val("0");
-	$("#newTicketfiles1").val("0");
-	$("#newTicketfiles2").val("0");
-}
-/**
- * a quick clean up of the hidden upload file boxes
- */
-function adjustUploadboxes(){
-	var adj0=$("#newTicketfiles0");
-	var adj1=$("#newTicketfiles1");
-	var adj2=$("#newTicketfiles2");
-	if(adj0.val()===""){
-		adj0.val(adj1.val());
-		adj1.val(adj2.val());
-		adj2.val("0");
-	}else if(adj1.val()=="0"){
-		adj1.val(adj2.val());
-		adj2.val("0");
-	}else{clearUploads();}
-}
-/**
- * Displays the uploaded files and allows for deleting of them.  
- * @param {int} key must be between 1 and 3
- * @param {str} value text to be displayed in the box
- */
-function uploadDisplay(key,value,filebox){
-	var ntfl = $('#newTicketFileList');
-	if(key === 0){ntfl.empty();}//lets clear the box to make sure we are not adding stuff forever
-	if (key == 2) {filebox.css({visibility: "hidden"}).val("");}
-	$("#newTicketAttachmentNumber").html("Attachments ("+parseInt(key+1,10)+"):");
-	ntfl.addClass("uploadContainer").append(
-	$('<div/>')
-		.attr({title:value})
-		.css({height:"16px",width:"64px",overflow:"hidden",padding:"5px",marginRight:"2px",position:"relative"
-		,background:"url(/tickets/Attachments/thumbs/"+value+")"
-		})
-		.addClass(" border-main-1 ui-corner-all left")
-		.append(
-			$("<div/>")
-			.css({height:"10px",width:"10px",position:"absolute",top:"0px",right:"0px",textIndent:"-9999px"})
-			.addClass("fakelink ui-corner-tr option-black")
-			.text(key)
-			.click(function(){
-				$(this).parent().remove();
-				UploadCnt--;
-				if (key < 2) {filebox.css({visibility: "visible"}).val("");}
-				$("#newTicketAttachmentNumber").html("Attachments ("+key+"):");
-				$("newTicketfiles"+$(this).text()).val("");
-				adjustUploadboxes();
-				$.get(uri+"ajax/upload.php",{type: "delete",filename: value,ticket_id:Params.Params.Ticket_id},
-				function(data){	if (data.error.length > 0) {notice("Error", data.error, false);}},"json");
-			})
-		)
-	);
-}
-function getHash(){return window.location.hash;}
-function getHashArray(){var hash = jQuery.makeArray(getHash().split("\/"));return hash;}
-function setHash(htbs){if(getHash()!=htbs){window.location.hash=htbs;}}
+
 function loadBlank(){Params.Content.html($("#blankTpl").html());}
 /**
  * Checks the hash of the page, then decides what to do with it.  This is the brains behind the page.
@@ -364,39 +278,6 @@ function updateTickets(){
 	checkNotify(Lastcheck); //Use the last login time
 	loadStats();
 	populateAllTickets();
-}
-function pageAnator(container,count,perPage){
-	hash = getHashArray();
-	//Content.find("#pageAnator")
-	container
-		.empty()
-		.html(
-			$("<span/>")
-				.addClass("ui-corner-all lapcatButton")
-				.css({width:"auto",padding:"1px",textAlign:"center",textDecoration:"none"})
-				.html($("<font/>").html("Pages:"))
-		);
-		
-	if (count == 0) {
-		container.append($("<a/>").addClass("ui-corner-all dark border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
-			width: "20px",
-			padding: "1px",
-			textAlign: "center",
-			textDecoration: "none"
-		}).html(1));
-	}
-	else {
-		var pages = count/perPage;
-		for (var a = 1; a < pages + 1; a++) {
-			var b = parseInt(a - 1);
-			container.append($("<a/>").addClass("ui-corner-all dark border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + b).css({
-				width: "20px",
-				padding: "1px",
-				textAlign: "center",
-				textDecoration: "none"
-			}).html(a));
-		}
-	}
 }
 function loadResponsesBody(ticketId,container,page){
 	var params = {ticket_id: ticketId};
