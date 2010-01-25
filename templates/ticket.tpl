@@ -2,7 +2,7 @@
 	<tr>
 		<td style="width:300px;vertical-align:top;height:500px;padding-right:1px;" class="">
 			<div id="ticketarea" style="height:500px;" class="ui-corner-top ui-corner-bottom">
-			    <div class="ui-corner-all dark color-E-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font style="margin-left:10px;margin:5px;" id="ticketTitle"></font>
+			    <div class="ui-corner-all color-E-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font style="margin-left:10px;margin:5px;" id="ticketTitle"></font>
 				<div id="ticketStatusImage" style="position:absolute ;right: 10px;top: 2px;height:13px;">
 					<div class="statusImage left ticket_button ticket_sprite edit" style="display:none" id="imgEdited" title="Edited"></div>
 					<div class="statusImage left ticket_button ticket_sprite user_edit" style="display:none" id="imgReassigned" title="Reassigned"></div>
@@ -73,14 +73,14 @@
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 								
-				<div style="width:100%;vertical-align:top;" class="color-E-2">	
+				<div style="width:100%;vertical-align:top;" class="background-special-1 color-E-2">	
 					<div style="overflow:auto;height:430px;padding:4px;" >
 						<div class=" border-all-B-1 color-E-2 " style="width:100%">
 							<font ><div id="replyareabody"></div></font>
 						</div>
 					</div>	
 				</div>
-				<div style="height:30px;position:relative;padding-top:4px;padding-left:4px" class="color-E-2 light-down ui-corner-bottom">
+				<div style="height:30px;position:relative;padding-top:4px;padding-left:4px" class="color-E-2 ui-corner-bottom">
 					<div class="option-purple fg-button ui-corner-all white lapcatButton" id="replylink" style="width: 80px;">Add Reply</div>
 				</div> 
 			</div>
