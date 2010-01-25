@@ -1,7 +1,7 @@
 <table cellpadding="0" cellspacing="0" style="width:99%;height:500px;">
 	<tr style="width:100%">
 		<td id="ticketListarea" style="padding-left:1px;vertical-align:top;height:500px;" class="">
-			<div class="ui-corner-all color-E-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative">
+			<div class="ui-corner-all color-B-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative">
 				<font style="margin:5px;">Tickets</font>
 				<div id="pageAnator" style="right:0;position:absolute;top:2px;">
 					<!--<a class="ui-corner-all option-theme border-main-1 lapcatButton" href="#" style="width:20px;padding:1px;text-align:center;text-decoration:none;">4</a>-->

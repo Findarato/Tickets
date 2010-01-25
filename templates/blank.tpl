@@ -1,14 +1,13 @@
-<div class="dark border-main-1" style="min-height:300px;text-align:left;padding-left:3px;">
+<div class="ui-corner-all color-B-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font>Update Notes</font></div>
+
+<div class="color-E-2 border-B-1 ui-corner-bottom" style="min-height:300px;text-align:left;padding-left:3px;padding-bottom:3px;">
     <font>
         Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above. {$junk}
-   
-    <br>
-    <font style="font-size: 200%; line-height: normal;">Update Notes</font>
     <br>
 	<font> More detailed update notes can be found <a href= "http://forum.lapcat.org/viewforum.php?f=66">On the forums</a></font>
     <br>
     <br>
-    <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "color-dark border-main-1">
+    <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
 		<font style="font-size: 175%; line-height: normal;">Oct 5, 2009</font>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed an issue with new tickets not having who they are assigned to on the email.
