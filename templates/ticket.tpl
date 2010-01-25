@@ -59,7 +59,7 @@
 					</div>
 					<div id="ticketDataBox" style="margin-bottom:5px;width:100%;height:auto;max-height:300px;overflow:auto;vertical-align:top; clear:both"><font class="" id="ticketBody"></font></div>
 				</div>
-				<div style="height:30px;position:relative;padding-top:4px;padding-left:4px;overflow:hidden;" class="color-E-2 light-down ui-corner-bottom">
+				<div style="height:30px;position:relative;padding-top:4px;padding-left:4px;overflow:hidden;" class="color-E-2 ui-corner-bottom">
 					<div class="option-purple fg-button ui-corner-all white lapcatButton" id="editlink" style="width:45px;">Edit</div>
 					<div class="option-theme fg-button ui-corner-all white lapcatButton" id="closelink" style="width:45px;">Close</div>
 					<div class="option-black fg-button ui-corner-all white lapcatButton" id="openlink" style="width:45px;display:none">Reopen</div>
@@ -80,7 +80,7 @@
 						</div>
 					</div>	
 				</div>
-				<div style="height:30px;position:relative;padding-top:4px;padding-left:4px" class="color-E-2 ui-corner-bottom">
+				<div style="height:30px;position:relative;padding-top:4px;padding-left:4px" class="background-special-1 color-E-2 ui-corner-bottom">
 					<div class="option-purple fg-button ui-corner-all white lapcatButton" id="replylink" style="width: 80px;">Add Reply</div>
 				</div> 
 			</div>

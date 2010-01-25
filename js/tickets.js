@@ -69,9 +69,13 @@ function checkHash(){
 			break;
 			case "#search":loadSearch();break;
 			case "#largestats":loadLargeStats();break;
+			case "#largegraphs":loadLargeGraphs();break;
 			default:loadBlank();break;
 		}
 	}else{loadBlank();}
+}
+function loadLargeGraphs(){
+	
 }
 function checkNotify(dt){
 	var display = "";
@@ -492,7 +496,7 @@ function loadTicketList(pageNumber){
 			
 			tlistHolder.append($("#responsestpl").html());
 	        tlistHolder.find("#changemeColor").addClass(color).attr({id: "Color"+item.id});
-	        tlistHolder.find("#changemeUserid").html($("<a/>").attr({href:"#ticketlist/category/"+item.created_by_id}).addClass("nolink user").html(item.firstname+" "+item.lastname)).attr({id: "User"+item.id});
+	        tlistHolder.find("#changemeUserid").html($("<a/>").attr({href:"#ticketlist/assigned/"+item.assigned_id}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname+" "+item.lastname)).attr({id: "User"+item.id});
 	        tlistHolder.find("#changemeSubject").html($("<a/>").attr({href:"#ticket/"+item.id}).addClass("nolink").html(item.subject)).append(s_ocd).css({fontWeight:"bold"}).attr({id: "subject"+item.id});
 			if (!OC) {//closed Ticket
 				if(item.timeRemaining !== null){//Ticket with due date
@@ -541,7 +545,7 @@ function loadTicketList(pageNumber){
 			tlistHolder.find("#changemeBody").html(item.description).attr({id: "body"+item.id});
 	        tlistHolder.find("#changemeDay").html(sec2readable(item.dago)).attr({id: "created"+item.id});
 	        tlistHolder.find("#changemeCategory").html("Category: ").append($("<a/>").attr({href:"#ticketlist/category/"+item.category}).addClass("nolink category_link").html(item.category)).css({fontSize:"9px"}).attr({id: "category"+item.id});
-			tlistHolder.find("#changemeAssignedid").html("Created By: <br>").append($("<a/>").attr({href:"#ticketlist/category/"+item.created_by_id}).addClass("nolink user").html(item.firstname2+" "+item.lastname2)).css({fontSize:"9px"}).attr({id: "AssignedId"+item.id});
+			tlistHolder.find("#changemeAssignedid").html("Created By: <br>").append($("<a/>").attr({href:"#ticketlist/created_by/"+item.created_by_id}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname2+" "+item.lastname2)).css({fontSize:"9px"}).attr({id: "CreatedBy"+item.id});
 		});
 		Tlb.html(tlistHolder);
 		$("#working").hide();
