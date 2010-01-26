@@ -137,7 +137,7 @@ function loadLargeStats(){
 		.html(
 			$("<div/>")
 				.css({Width:"100%",textAlign:"left",margin:"4px",padding:"2px",height:"20px",position:"relative"})
-				.addClass("ui-corner-all background-alpha-2 border-all-B-1")
+				.addClass("ui-corner-all color-B-2 border-all-B-1")
 				.append($("<font/>").css({margin:"5px"}).html("Large Stats for tickets"))
 		)
 		.append(holder = $("<div/>").addClass("color-E-2 ui-corner-all border-all-B-1").css({height:"500px",overflow:"auto",margin:"4px",padding:"2px"}));
