@@ -8,6 +8,19 @@
     <br>
     <br>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
+		<font style="font-size: 175%; line-height: normal;">January 27,2010</font>
+		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+		<br>1. Fixed some bugs relating to the new theme definitions.
+		<br>2. Removed uploads as they were not being used and caused lots of bugs.
+		<br>3. Fixed some email issues that crept up.
+		<br>4. Fixed some small graphical issues relating to the sprite.
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">New Features</span>
+		<br>1. User links.  You can now link to a search of all tickets created by a user with [user=1234]
+		<br>2. Tickets now uses the newest version of <a href="http://www.jquery.com">Jquery</a>!
+		<br>
+		<br>
 		<font style="font-size: 175%; line-height: normal;">Oct 5, 2009</font>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed an issue with new tickets not having who they are assigned to on the email.
