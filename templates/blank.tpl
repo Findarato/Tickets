@@ -21,7 +21,7 @@
 		<br>2. Tickets now uses the newest version of <a href="http://www.jquery.com">Jquery</a>!
 		<br>
 		<br>
-		<font style="font-size: 175%; line-height: normal;">Oct 5, 2009</font>
+		<fot style="font-size: 175%; line-height: normal;">Oct 5, 2009</font>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed an issue with new tickets not having who they are assigned to on the email.
 		<br>2. Updated the look of the email to aid in read-ability.
