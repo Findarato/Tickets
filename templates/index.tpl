@@ -11,7 +11,7 @@
 <link rel="icon" type="image/png" href="/tickets/bug.png" /> 
 
 <script type="text/javascript" src="http://cdn1.lapcat.org/js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="http://cdn1.lapcat.org/js/jquery-ui-1.7.2.justeffects.min.js"></script>
+<script type="text/javascript" src="http://dev.lapcat.org/rooms/js/dateter.js"></script>
 <script type="text/javascript" src="js/combine.php"></script>
 <!--[if IE]><script language="javascript" type="text/javascript" src="/js/excanvas.min.js"></script><![endif]-->
 <link id="rss1" href="ticketsrss.php?id={$user_id}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
