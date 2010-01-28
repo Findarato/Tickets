@@ -641,25 +641,30 @@ jQuery(document).ready(function(){
 	$('#topperNew').colorbox({iframe:false,transition:"none",open:false,inline:true,href:"#newTicketdialog",title:"<font class=\"white\">Create a new Ticket</font>"},function(){
 	 	$("#newTicketType").val("new");
 		$("#newTicketTitle,#newTicketDescription").val("");
-		$("#ticketAddBtn").text("Add Ticket");
 		$("#newTicketFileList").empty();
 	 	$(".Ticketform").css("background-color", "");
-		$("#newTicketDueDate").val(Date.today().add({days: 7}).toString("M/d/yyyy")).blur(function(){
-			var cleanDate = Date.parse($(this).val(), "M/d/yyyy");
-			if (cleanDate === null) {
-				notice("Error","bad date",false);
-				$("#ticketAddBtn").hide();
-			}
-			else {
-				$(this).val(cleanDate.toString("M/d/yyyy"));
-				$("#ticketAddBtn").show();
-			}
-		});
-		$("#newTicketBrowse").css({visibility: "visible"}).val("");
-		$("#newTicketFileList").empty();
-		$("#newTicketfiles").empty();
-		$("#newTicketAttachmentNumber").html("Attachments ("+UploadCnt+"):");
 		
+		$("#newTicketDueDate")
+			.dateter(
+				{
+					pastDayShades:true,
+					backgroundClass:"color-D-2",
+					borderClass:"border-all-B-1",
+					borderRoundClass:"ui-corner-all",
+					shadeClass:"background-alpha-3",
+					highLightToday:true,
+					highLightTodayClass:Params.HighlightClass,
+					height:'114px',
+					width:'200px',
+					uniqueName:"smallPickStart",
+					offsetX:0,
+					offsetY:0
+				},
+				function(v_Month,v_Day,v_Year){
+					$("#newTicketDueDate").val(v_Month+"/"+v_Day+"/"+v_Year)
+				}
+	
+			);
 	});
 	$('#topperSearch').colorbox({transition:"none",open:false,inline:true,href:"#newSearchdialog",title:"<font class=\"white\">Search for a Ticket</font>"},function(){
 		$("#newSearchdialog").find(".Ticketform").val('');
