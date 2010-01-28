@@ -299,7 +299,7 @@ function loadResponsesBody(ticketId,container,page){
 		var cnt = 0;
 		var resCont = $("<div/>");
 		$.each(data.reply, function(i, item){
-			if(i%2==1){var color="background-alpha-2";}else{var color="background-alpha-1";}
+			if(i%2==1){var color="background-alpha-4";}else{var color="background-alpha-3";}
 			resCont.append($("#responsestpl").html());
 			resCont.find("#ticketListDueDate").hide();
 	        resCont.find("#changemeColor").addClass(color).attr({id: "userid"+item.id});
