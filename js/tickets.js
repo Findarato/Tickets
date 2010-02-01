@@ -2,7 +2,7 @@
 /**
  * Simple global variables that are needed everywhere
  */
-var User_id=0; 
+var User_id = 0; 
 var Lastcheck = 0;
 var OuterHeight = 0;
 var OuterWidth = 0;
@@ -20,13 +20,12 @@ var Params = {
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash,""); 
-if(uri.match('dev')=='dev'){path = "http://dev.lapcat.org/"+$("#themegencss").attr("href")+"&json";}else{path = "http://www.lapcat.org/"+$("#themegencss").attr("href")+"&json";}
+if (uri.match('dev') == 'dev'){path = "http://dev.lapcat.org/"+$("#themegencss").attr("href")+"&json";}else{path = "http://www.lapcat.org/"+$("#themegencss").attr("href")+"&json";}
 
 function checkResponse(json){
 	if(json.error !==null && json.error.length >2){notice("Error",json.error,false);}
 	if(json.message !==null && json.message.length >2){notice("Notice",json.message,false);}
 }
-
 function loadBlank(){Params.Content.html($("#blankTpl").html());}
 /**
  * Checks the hash of the page, then decides what to do with it.  This is the brains behind the page.
@@ -38,31 +37,31 @@ function checkHash(){
 		switch(hash[0]){
 			case "#ticket":
 				switch(hash[2]){
+					case "page":
+						if ($("#ticketId").html().length < 1) {
+							//This should fix the directly accessing a response page bug
+							if (Params.LastArea == "ticket") {
+								loadTicketBody(hash[1],Params.Content);
+								loadResponsesBody(hash[1], $("#replyareabody"),0);
+							}else{loadTicket(hash[1]);}
+						}else {
+							loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
+						}
+					break;
 					default:
 						if (Params.LastArea == "ticket") {
 							loadTicketBody(hash[1],Params.Content);
 							loadResponsesBody(hash[1], $("#replyareabody"),0);
 						}else{loadTicket(hash[1]);}
-					break;
-					case "page":
-					if ($("#ticketId").html().length < 1) {
-						//This should fix the directly accessing a response page bug
-						if (Params.LastArea == "ticket") {
-							loadTicketBody(hash[1],Params.Content);
-							loadResponsesBody(hash[1], $("#replyareabody"),0);
-						}else{loadTicket(hash[1]);}
-					}
-					else {
-						loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
-					}break;				
+					break;				
 				}
 			break;
-			case "#ticketlist":;
+			case "#ticketlist":
 				$.each(hash,function(key,value){
-					if(key%2==0){
+					if(key%2===0){
 						switch(value){
-							default:loadTicketList(0);return;break;
-							case "page":loadTicketList(hash[key+1]);break;				
+							case "page":loadTicketList(hash[key+1]);break;
+							default:loadTicketList(0);break;				
 						}
 					}
 				});
@@ -97,13 +96,7 @@ function checkNotify(dt){
 	var dat = new Date();
 	Lastcheck = Math.round(dat.getTime() / 1000.0); //set the global variable to now
 }
-function updateTickets(){
-	Params.Working.show()
-	checkNotify(Lastcheck); //Use the last login time
-	loadStats();
-	populateAllTickets();
-	Params.Working.hide();
-}
+
 function resize(){ 
 	OuterHeight = $("body").outerHeight()-50;
 	OuterWidth = $("body").outerWidth()-5;
@@ -158,7 +151,7 @@ function loadLargeStats(){
 				.html(
 					$("<div/>").css({textAlign:"center",overflow:"hidden",width:"90%",height:"16px",paddingLeft:"1px",paddingRight:"1px"}).html(dep.name))
 				);
-				cnt++	
+				cnt++;
 			}); // display the headers
 			cnt=0;//reset the color counter
 			
@@ -176,7 +169,7 @@ function loadLargeStats(){
 					row.append($("<td/>")
 					.css({textAlign:"center",width:"7%"})
 					.addClass(color).css({textAlign:"center"}).html(item3.count));
-				cnt++
+				cnt++;
 				});
 				cnt=0;	
 			});
@@ -292,8 +285,6 @@ function loadResponsesBody(ticketId,container,page){
 			$(this).dequeue();
 	});
 	$("#working").show(Params.FadeTime);
-	
-
 	$.getJSON(uri+"ajax/display_reply.php", params, 
 	function(data){
 		var cnt = 0;
@@ -383,6 +374,13 @@ function loadTicketBody(ticketId,container){
 		container.find("#ticketId").html(data.id);
 		container.find("#ticketPriority").html(data.priority);
 		if(data.favorite!==null){container.find("#imgBookmark").show();}
+		if(data.status.lock==1){
+			$("#Holdlink").hide();
+			$("#unHoldlink").show();
+		}else{
+			$("#Holdlink").show();
+			$("#unHoldlink").hide();
+		}
 		if(data.closed_on!==null){
 	        container.find("#ticketClosedOnDate").html(data.closed_on);
 	        container.find("#ticketClosedOn").show();
@@ -573,6 +571,14 @@ function loadStats(){
 	}
 	,"json");
 }
+
+function updateTickets(){
+	Params.Working.show();
+	checkNotify(Lastcheck); //Use the last login time
+	loadStats();
+	populateAllTickets();
+	Params.Working.hide();
+}
 jQuery(document).ready(function(){
 
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
@@ -649,7 +655,7 @@ jQuery(document).ready(function(){
 					"offsetY":0
 				},
 				function(v_Month,v_Day,v_Year){
-					$("#newTicketDueDate").val(v_Month+"/"+v_Day+"/"+v_Year)
+					$("#newTicketDueDate").val(v_Month+"/"+v_Day+"/"+v_Year);
 				}
 	
 			);
@@ -734,10 +740,10 @@ jQuery(document).ready(function(){
 		});
 	*/
 	$("#btn_login").click(function(){
-		if ($("#un").val() == "" || $("#un").val() == null) {
+		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error","Please enter a username",false);
 			return;
-		}else if ($("#loginpassword").val() == "" || $("#loginpassword").val() == null) {
+		}else if ($("#loginpassword").val() === "" || $("#loginpassword").val() === null) {
 			notice("Error","Please enter a password",false);
 			return;
 		}else {
@@ -766,7 +772,7 @@ jQuery(document).ready(function(){
 		}
 	}); 
 		//Just a catch for hitten enter on the form
-	$("#loginpassword").keydown(function(event){switch (event.keyCode) {case 13:$("#btn_login").trigger('click');break;}	});
+	$("#loginpassword").keydown(function(event){if (event.keyCode == 13) {$("#btn_login").trigger('click')}});
 	$("#userDepartmentSelect").change(function(){
 		jQuery.post(uri+"ajax/login.php",{department_id:$("#userDepartmentSelect option:selected").val(),user_id:User_id},function(){
 			$("#userDepartmentName").empty().html($("#userDepartmentSelect option:selected").text());
