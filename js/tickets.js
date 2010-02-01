@@ -262,7 +262,7 @@ function checkNotify(dt){
 	var display = "";
 	var disp = false;
 	$.getJSON(uri + "ajax/notify.php", {
-        dateTime:dt
+        "dateTime":dt
     }, function(data){
 		$.each(data.tickets, function(i, item){
 			if(item.id>1){
@@ -284,7 +284,7 @@ function updateTickets(){
 	populateAllTickets();
 }
 function loadResponsesBody(ticketId,container,page){
-	var params = {ticket_id: ticketId};
+	var params = {"ticket_id": ticketId};
 	if(page.length!==0){params["page"]=page;} // adds the page number to the request
 	//var resCont = $("<div/>");
 	container.queue(function(){
@@ -362,7 +362,7 @@ function loadRecentTickets(jsonData,selector){
 function loadTicketBody(ticketId,container){
 	container.find(".statusImage ").hide();
 	Params.Ticket_id = ticketId; //set the global
-    $.getJSON(uri + "ajax/display_ticket.php", {ticket_id: ticketId}, 
+    $.getJSON(uri + "ajax/display_ticket.php", {"ticket_id": ticketId}, 
 	function(data){
 		Params.TicketJSON = data;
         container.find("#ticketTitle").empty().html(data.subject).fadeIn(Params.FadeTime);
@@ -492,60 +492,51 @@ function loadTicketList(pageNumber){
 			if(i%2==1){var color="background-alpha-2";}else{var color="background-alpha-1";}
 			if(item.timeRemaining===null){}else{}
 			if(item.open === 0){s_ocd = $("<span/>").html("Closed").addClass("font-L font-bold").css({paddingLeft:"3px",fontSize:"9px"});}else{OC = true;s_ocd= $("<span/>").html("");}
-			if(item.timeRemaining===null){s_tr= $("<span/>").html("");}else{s_tr=$("<span/>").html("Due On: "+Date.parse(item.due_on).toString("M/d/yyyy HH:mm")).css({paddingLeft:"3px",fontSize:"9px"});}
+			if(item.timeRemaining===null){s_tr= $("<span/>").html("");}else{s_tr=$("<span/>").html("Due On: "+Date.parse(item.due_on).toString("M/d/yyyy HH:mm")).css({"paddingLeft":"3px","fontSize":"9px"});}
 			
 			tlistHolder.append($("#responsestpl").html());
-	        tlistHolder.find("#changemeColor").addClass(color).attr({id: "Color"+item.id});
-	        tlistHolder.find("#changemeUserid").html($("<a/>").attr({href:"#ticketlist/assigned/"+item.assigned_id}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname+" "+item.lastname)).attr({id: "User"+item.id});
-	        tlistHolder.find("#changemeSubject").html($("<a/>").attr({href:"#ticket/"+item.id}).addClass("nolink").html(item.subject)).append(s_ocd).css({fontWeight:"bold"}).attr({id: "subject"+item.id});
+	        tlistHolder.find("#changemeColor").addClass(color).attr({"id": "Color"+item.id});
+	        tlistHolder.find("#changemeUserid").html($("<a/>").attr({"href":"#ticketlist/assigned/"+item.assigned_id}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname+" "+item.lastname)).attr({"id": "User"+item.id});
+	        tlistHolder.find("#changemeSubject").html($("<a/>").attr({"href":"#ticket/"+item.id}).addClass("nolink").html(item.subject)).append(s_ocd).css({"fontWeight":"bold"}).attr({"id": "subject"+item.id});
 			if (!OC) {//closed Ticket
 				if(item.timeRemaining !== null){//Ticket with due date
 					if(item.timeTaken>item.timeAllowed){//over due ticket
 						tlistHolder.find("#changemeDueDate").html(s_tr.addClass("dark-red")).attr({
-							id: "duedate" + item.id
+							"id": "duedate" + item.id
 						});
 						tlistHolder.find("#changemeTr").html($("<span/>").html("Time Allowed:"+sec2readable(item.timeAllowed))).attr({
-							id: "duedatetr" + item.id
+							"id": "duedatetr" + item.id
 						});
 						tlistHolder.find("#subject" + item.id).append($("<img/>").attr("src", "http://cdn1.lapcat.org/famfamfam/silk/exclamation.png"));
-						tlistHolder.find("#changemeTT").html("Time Taken:"+sec2readable(item.timeTaken)).attr({id: "timeTaken" + item.id});				
+						tlistHolder.find("#changemeTT").html("Time Taken:"+sec2readable(item.timeTaken)).attr({"id": "timeTaken" + item.id});				
 					}else{//Completed on time or ahead of time
 						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-							id: "duedate" + item.id
+							"id": "duedate" + item.id
 						});
 						tlistHolder.find("#changemeTr").html(sec2readable(item.timeAllowed)).attr({
-							id: "duedatetr" + item.id
+							"id": "duedatetr" + item.id
 						});						
 					}
 				}else{//old ticket
-					tlistHolder.find("#changemeTT").html("Time Taken: "+sec2readable(item.timeTaken)).attr({id: "timeTaken" + item.id});
+					tlistHolder.find("#changemeTT").html("Time Taken: "+sec2readable(item.timeTaken)).attr({"id": "timeTaken" + item.id});
 				}
 				
 			}else {//Open ticket
 				if (item.timeRemaining !== null) {
 					if (item.timeRemaining > 0) {
-						tlistHolder.find("#changemeDueDate").html(s_tr.addClass("dark-red")).attr({
-							id: "duedate" + item.id
-						});
-						tlistHolder.find("#changemeTr").html($("<span/>").html(sec2readable(item.timeRemaining))).attr({
-							id: "duedatetr" + item.id
-						});
+						tlistHolder.find("#changemeDueDate").html(s_tr.addClass("dark-red")).attr({"id": "duedate" + item.id});
+						tlistHolder.find("#changemeTr").html($("<span/>").html(sec2readable(item.timeRemaining))).attr({"id": "duedatetr" + item.id});
 						tlistHolder.find("#subject" + item.id).append($("<img/>").attr("src", "http://cdn1.lapcat.org/famfamfam/silk/exclamation.png"));
-					}
-					else {
-						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-							id: "duedate" + item.id
-						});
-						tlistHolder.find("#changemeTr").html(sec2readable(item.timeRemaining)).attr({
-							id: "duedatetr" + item.id
-						});
+					}else {
+						tlistHolder.find("#changemeDueDate").html(s_tr).attr({"id": "duedate" + item.id});
+						tlistHolder.find("#changemeTr").html(sec2readable(item.timeRemaining)).attr({"id": "duedatetr" + item.id});
 					}
 				}
 			}
-			tlistHolder.find("#changemeBody").html(item.description).attr({id: "body"+item.id});
-	        tlistHolder.find("#changemeDay").html(sec2readable(item.dago)).attr({id: "created"+item.id});
-	        tlistHolder.find("#changemeCategory").html("Category: ").append($("<a/>").attr({href:"#ticketlist/category/"+item.category}).addClass("nolink category_link").html(item.category)).css({fontSize:"9px"}).attr({id: "category"+item.id});
-			tlistHolder.find("#changemeAssignedid").html("Created By: <br>").append($("<a/>").attr({href:"#ticketlist/created_by/"+item.created_by_id}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname2+" "+item.lastname2)).css({fontSize:"9px"}).attr({id: "CreatedBy"+item.id});
+			tlistHolder.find("#changemeBody").html(item.description).attr({"id": "body"+item.id});
+	        tlistHolder.find("#changemeDay").html(sec2readable(item.dago)).attr({"id": "created"+item.id});
+	        tlistHolder.find("#changemeCategory").html("Category: ").append($("<a/>").attr({"href":"#ticketlist/category/"+item.category}).addClass("nolink category_link").html(item.category)).css({"fontSize":"9px"}).attr({"id": "category"+item.id});
+			tlistHolder.find("#changemeAssignedid").html("Created By: <br>").append($("<a/>").attr({"href":"#ticketlist/created_by/"+item.created_by_id}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname2+" "+item.lastname2)).css({"fontSize":"9px"}).attr({"id": "CreatedBy"+item.id});
 		});
 		Tlb.html(tlistHolder);
 		$("#working").hide();
@@ -553,19 +544,15 @@ function loadTicketList(pageNumber){
 } 
 function loadStats(){
 		$.getJSON(uri+"ajax/stats.php", {
-        type: "1,2,3,4,5",
-        style: "1"
+        "type": "1,2,3,4,5",
+        "style": "1"
     }, 
 	function(data){
 		var dom_stats = $("#statistics");
 /*		if (null == data.error) { notice("Notice", "You suck", false);}*/
-/**
- * @deprecated Put in a more friendly and descriptive error message
- */
 		if (null === data.error) { notice("Debug", "There was a strange error loading statistics", false);}
-		if (data.error.length > 0 ) {notice("Debug", data.error, false);}
-
-		else {
+		if (data.error.length > 0 ) {notice("Debug", data.error, false);
+		}else {
 			if (data.stats.general.cntId.length > 0) {
 				dom_stats.html("Total Tickets: " + data.stats.general.cntId);
 				addBr(dom_stats);
@@ -594,7 +581,7 @@ jQuery(document).ready(function(){
 	Params.Working = $("#Working");
 	$("#userSecondaryEmail").blur(function(){
 		jQuery.post(uri+"ajax/login.php",{
-			altEmail:$(this).val()
+			"altEmail":$(this).val()
 		},function(data){
 				checkResponse(data);
 				if(data.error.length===0){
@@ -608,8 +595,8 @@ jQuery(document).ready(function(){
 	});
 	$("#depCancel").click(function(){
 		jQuery.post(uri+"ajax/login.php",{
-			altEmail:"clear",
-			oldAltEmail:$("#userSecondaryEmail").val()
+			"altEmail":"clear",
+			"oldAltEmail":$("#userSecondaryEmail").val()
 		},function(data){
 				checkResponse(data);
 				if(data.error.length===0){
@@ -648,18 +635,18 @@ jQuery(document).ready(function(){
 		$("#newTicketDueDate")
 			.dateter(
 				{
-					pastDayShades:true,
-					backgroundClass:"color-D-2",
-					borderClass:"border-all-B-1",
-					borderRoundClass:"ui-corner-all",
-					shadeClass:"background-alpha-3",
-					highLightToday:true,
-					highLightTodayClass:Params.HighlightClass,
-					height:'114px',
-					width:'200px',
-					uniqueName:"smallPickStart",
-					offsetX:0,
-					offsetY:0
+					"pastDayShades":true,
+					"backgroundClass":"color-D-2",
+					"borderClass":"border-all-B-1",
+					"borderRoundClass":"ui-corner-all",
+					"shadeClass":"background-alpha-3",
+					"highLightToday":true,
+					"highLightTodayClass":Params.HighlightClass,
+					"height":"114px",
+					"width":"200px",
+					"uniqueName":"smallPickStart",
+					"offsetX":0,
+					"offsetY":0
 				},
 				function(v_Month,v_Day,v_Year){
 					$("#newTicketDueDate").val(v_Month+"/"+v_Day+"/"+v_Year)
@@ -667,7 +654,8 @@ jQuery(document).ready(function(){
 	
 			);
 	});
-	$('#topperSearch').colorbox({transition:"none",open:false,inline:true,href:"#newSearchdialog",title:"<font class=\"white\">Search for a Ticket</font>"},function(){
+	$('#topperSearch')
+		.colorbox({"transition":"none","open":false,"inline":true,"href":"#newSearchdialog","title":"<font class=\"white\">Search for a Ticket</font>"},function(){
 		$("#newSearchdialog").find(".Ticketform").val('');
 	});
 	$("#topperRecent").click(function(){
@@ -687,20 +675,20 @@ jQuery(document).ready(function(){
 		
 		if ($("#recentTickets").html()) {
 			$("#recentTickets")
-				.css({left: position.left})
+				.css({"left": position.left})
 				.fadeIn(Params.FadeTime);
 		}else {//no reason to make the box twice
 			var recentTickets = $("<div/>").css({
-				top: position.top + 22,
-				left: position.left,
-				position: "absolute",
-				width: "150px",
-				zIndex:"50",
-				textAlign:"left",
-				overflow:"hidden"
+				"top": position.top + 22,
+				"left": position.left,
+				"position": "absolute",
+				"width": "150px",
+				"zIndex":"50",
+				"textAlign":"left",
+				"overflow":"hidden"
 			}).addClass("border-all-B-1 color-D-1 ui-corner-all")
 			.html(RecTick)
-			.attr({id: "recentTickets"});
+			.attr({"id": "recentTickets"});
 			$('body').append(recentTickets);
 			$("#recentTickets").fadeIn(Params.FadeTime);
 		}
@@ -709,7 +697,7 @@ jQuery(document).ready(function(){
 	
 	$("#t_uI").click(function(){
 		position = $(this).position();
-		$("#departmentTpl").css({top:position.top+22,left:position.left,position:"absolute",width:"350px"}).fadeIn(Params.FadeTime);
+		$("#departmentTpl").css({"top":position.top+22,"left":position.left,"position":"absolute","width":"350px"}).fadeIn(Params.FadeTime);
 		bodyHeight = $('body').height();
 		bodyWidth = $('body').width();
 		Shadow = $("<div style=\" z-index:49;\" id=\"Shadow\"/>")
@@ -717,7 +705,7 @@ jQuery(document).ready(function(){
 			$("#departmentTpl").fadeOut(Params.FadeTime);
 			$("#Shadow").remove();
 		})
-		.css({display:"block",top:0,left:0,height:bodyHeight,width:bodyWidth,position:"absolute"});
+		.css({display:"block","top":0,"left":0,"height":bodyHeight,"width":bodyWidth,"position":"absolute"});
 		$('body').append(Shadow);
 	});
 	$("#t_fT").click(function(){
@@ -796,9 +784,9 @@ jQuery(document).ready(function(){
 		var reassignVal = $("#reassignTicketdialog").find("#TicketAssign").val();
 		$.fn.colorbox.close();
 		$.getJSON(uri + "ajax/tickets.php", {
-	        type:"reassign",
-			ticket_id: Params.Ticket_id,
-			user_id:reassignVal
+	        "type":"reassign",
+			"ticket_id": Params.Ticket_id,
+			"user_id":reassignVal
 		    }, function(data){
 				checkResponse(data);
 				if(data.error.length>1){}else{$("#imgReassigned").show();loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);loadTicket(Params.Ticket_id);}
