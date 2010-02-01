@@ -58,6 +58,7 @@ function checkHash(){
 			break;
 			case "#ticketlist":
 				$.each(hash,function(key,value){
+					//alert(key+"=>"+value);
 					if(key%2===0){
 						switch(value){
 							case "page":loadTicketList(hash[key+1]);break;
@@ -454,10 +455,6 @@ function loadTicket(ticketId){
 		loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
-/**
- * Not even close to being done.
- * @todo Work on this area tomorrow. Just make the ticket list look like the responses, shouldn't be very hard
- */
 function loadTicketList(pageNumber){
 	Params.LastArea = "ticketlist";
 	Params.Working.show();
@@ -465,14 +462,12 @@ function loadTicketList(pageNumber){
 	if(pageNumber<0){pageNumber=0;}
     $("#ticketListbody").empty();
 		hash = getHashArray();
-		O_search={type:"search",page:pageNumber};
-		
+		O_search = {"type":"search","page":pageNumber,"search":{}};
 		if (hash[1]) {
 			for (a = 1; a <= hash.length;a++ ) {
 				if (a==hash.length) {
-				}
-				else {
-					O_search[hash[a]]=hash[a+1];
+				}else {
+					O_search[hash[a]] = hash[a];
 					a++;
 				}
 			}
