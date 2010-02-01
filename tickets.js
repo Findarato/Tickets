@@ -200,7 +200,9 @@ function populateAllTickets(Area){
 			if(item.Count==0){$("#my"+item.type).hide();}
 			else{$("#my"+item.type).fadeIn(Params.FadeTime);}
 			Ttype = item.type;
+			//alert(item.tickets.F.type);
 			$.each(item.tickets,function(t,tick){
+				//alert(tick.type);
 				cnt++;
 	            html += '<div style="clear:both;height:12px;width:100%" id="T'+Ttype+tick.id+'" class="table">';
 				var lft = "";
@@ -213,11 +215,11 @@ function populateAllTickets(Area){
 					rght = "td";					
 				}
 				var statusClass = "";
-				
-				if(tick.status.lock==1){
+				if(!tick.status){tick.status = {};}
+				if(tick.status && tick.status.lock==1){
 					statusClass = "lock ticket_button ticket_sprite";
 				}else{
-					if(tick.status.blocked==1){statusClass = "brick ticket_button ticket_sprite ";
+					if(tick.status && tick.status.blocked==1){statusClass = "brick ticket_button ticket_sprite ";
 					}else{var statusClass = "";}
 				}
 				
@@ -246,9 +248,11 @@ function populateAllTickets(Area){
 			html += '<div style="clear:both; height:12px;" id="CallTickets">';
 			html += "<a class=\"smallTicketL ticket_link ticket_button ticket_sprite ticket_button ticket_sprite font-L font-bold\" href=\"#ticketlist/"+Ttype+"\">Show All Tickets</a>";
 			html += "</div>";
-	        $("#"+Ttype).empty().css({
+			//alert("#"+Ttype);
+	        $("#"+item.type).empty().css({
 	            height: (cnt + 1) + "em"
 	        }).append(html);
+			//alert(item.type+"=>"+html);
 		});
     });
 } 
