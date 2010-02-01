@@ -1,7 +1,6 @@
 <?php
 	include_once "../small_header.php";
 	$_POST = $db->Clean($_POST);//clean out the post before it can be used
-	//$response = array("message"=>"","error"=>"","username"=>"","firstname"=>"","lastname"=>"");
 	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ||unserialize($_SESSION['user'])->A_U['type']<4) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$usr = new user(true);
@@ -44,8 +43,7 @@
 		$db->Query("INSERT INTO department_members (department_id,user_id) VALUES(".$db->Clean($_POST["department_id"]).",".$db->Clean($_POST["user_id"]).");");
 		if(count($db->Error)==2){$db->Query("UPDATE department_members SET department_id=".$db->Clean($_POST["department_id"])." WHERE user_id=".$db->Clean($_POST["user_id"]).";");}
 		$response['message']="Update Successful";
-	}
-	elseif(isset($_POST["getDepartment"])){
+	}elseif(isset($_POST["getDepartment"])){
 		$response["departmentname"] = getDepartment_by_userid($db->Clean($_POST["getDepartment"]));
 	}elseif(isset($_POST["opt"])){
 		$db->Query("UPDATE department_members SET notify=".$_POST["opt"]." WHERE user_id=".$_POST["user_id"]);
@@ -64,6 +62,10 @@
 			$response['message']="Update Successful";
 		}
 		$response["altEmail"] = $_POST["altEmail"];
+	}else{
+		$response["error"]=="Invalid Username or passwordd";
+		echo json_encode($response);
+		die();
 	}
 echo json_encode($response);	
 ?>

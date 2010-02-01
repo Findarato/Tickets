@@ -587,6 +587,7 @@ function loadStats(){
 	,"json");
 }
 jQuery(document).ready(function(){
+
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
@@ -634,7 +635,7 @@ jQuery(document).ready(function(){
     if($("#t_uI").text().length>10){updateTickets();checkHash(); setInterval("updateTickets()", 30000);} //disables running with out being logged in
 
    
-	$("button").bind("focus",function(){$(this).blur();});
+	$("button,a").bind("focus",function(){$(this).blur();});
 	$("#replyToggle").click(function(){ $("#replyarea").toggle();
 	if($("#storage").html()=="1"){$("#storage").html("0");}else{$("#storage").html("1");}});
    
@@ -744,29 +745,37 @@ jQuery(document).ready(function(){
 
 		});
 	*/
-	$("#btn_login").click(function(){ 
-		jQuery.post(uri+"ajax/login.php",$("#frm_login").serialize(),function(data){
-			if(data.error.length>0){
-				checkResponse(data);
-			}else{
-				Lastcheck = data.lastlogon;
-				$("#t_uI").html($("<span/>").addClass("user").html(data.firstname + " "+ data.lastname +" (" + data.username + ")") );
-				checkResponse(data);
-				User_id = data.userid;
-				$("#newTicketUser_id").val(User_id);
-				if(data.opt==2){$("#userDepartmentNotify").val(2).attr('checked', 'checked');}
-				$("#userDepartmentName").html(data.departmentname);
-				if(data.departmentname===""){notice("Error","No Department");}
-				loadStats();
-				$("#rss1").attr("href","ticketsrss.php?id="+User_id);
-				$("#rss2").attr("href","ticketsrss.php?id="+User_id+"&bookmark=1");
-				if (window.location.hash.length > 1) {updateTickets();checkHash();}
-				else {loadBlank();updateTickets();}
-				$("#userSecondaryEmail").val(data.altEmail);
-				$("#depOk").show();
-				$("#depError").hide();
-			}
-		},"json");
+	$("#btn_login").click(function(){
+		if ($("#un").val() == "" || $("#un").val() == null) {
+			notice("Error","Please enter a username",false);
+			return;
+		}else if ($("#loginpassword").val() == "" || $("#loginpassword").val() == null) {
+			notice("Error","Please enter a password",false);
+			return;
+		}else {
+			jQuery.post(uri + "ajax/login.php", $("#frm_login").serialize(), function(data){
+				if (data.error.length > 0) {
+					checkResponse(data);
+				}else {
+					Lastcheck = data.lastlogon;
+					$("#t_uI").html($("<span/>").addClass("user ticket_sprite ticket_button").html(data.firstname + " " + data.lastname + " (" + data.username + ")"));
+					checkResponse(data);
+					User_id = data.userid;
+					$("#newTicketUser_id").val(User_id);
+					if (data.opt == 2) {$("#userDepartmentNotify").val(2).attr('checked', 'checked');}
+					$("#userDepartmentName").html(data.departmentname);
+					if (data.departmentname === "") {notice("Error", "No Department");}
+					loadStats();
+					$("#rss1").attr("href", "ticketsrss.php?id=" + User_id);
+					$("#rss2").attr("href", "ticketsrss.php?id=" + User_id + "&bookmark=1");
+					if (window.location.hash.length > 1) {updateTickets();checkHash();
+					}else {loadBlank();updateTickets();}
+					$("#userSecondaryEmail").val(data.altEmail);
+					$("#depOk").show();
+					$("#depError").hide();
+				}
+			}, "json");
+		}
 	}); 
 		//Just a catch for hitten enter on the form
 	$("#loginpassword").keydown(function(event){switch (event.keyCode) {case 13:$("#btn_login").trigger('click');break;}	});
@@ -848,9 +857,6 @@ jQuery(document).ready(function(){
 		}
 		populateAllTickets();
 	});
-
-	$("#cboxTitle").addClass("color-off");
-	$().bind('cbox_closed', function(){UploadCnt=0;$("#newTicketfiles").val("");});
 
 //Live items
 	//Ticket display live items
