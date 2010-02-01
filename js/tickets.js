@@ -467,7 +467,9 @@ function loadTicketList(pageNumber){
 			for (a = 1; a <= hash.length;a++ ) {
 				if (a==hash.length) {
 				}else {
-					O_search[hash[a]] = hash[a];
+					var holder = a+1;
+					if(!hash[holder]){hash[holder]="1";}
+					O_search[hash[a]] = hash[holder];
 					a++;
 				}
 			}
@@ -494,21 +496,13 @@ function loadTicketList(pageNumber){
 			if (!OC) {//closed Ticket
 				if(item.timeRemaining !== null){//Ticket with due date
 					if(item.timeTaken>item.timeAllowed){//over due ticket
-						tlistHolder.find("#changemeDueDate").html(s_tr.addClass("dark-red")).attr({
-							"id": "duedate" + item.id
-						});
-						tlistHolder.find("#changemeTr").html($("<span/>").html("Time Allowed:"+sec2readable(item.timeAllowed))).attr({
-							"id": "duedatetr" + item.id
-						});
+						tlistHolder.find("#changemeDueDate").html(s_tr.addClass("dark-red")).attr({"id": "duedate" + item.id});
+						tlistHolder.find("#changemeTr").html($("<span/>").html("Time Allowed:"+sec2readable(item.timeAllowed))).attr({"id": "duedatetr" + item.id});
 						tlistHolder.find("#subject" + item.id).append($("<img/>").attr("src", "http://cdn1.lapcat.org/famfamfam/silk/exclamation.png"));
 						tlistHolder.find("#changemeTT").html("Time Taken:"+sec2readable(item.timeTaken)).attr({"id": "timeTaken" + item.id});				
 					}else{//Completed on time or ahead of time
-						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-							"id": "duedate" + item.id
-						});
-						tlistHolder.find("#changemeTr").html(sec2readable(item.timeAllowed)).attr({
-							"id": "duedatetr" + item.id
-						});						
+						tlistHolder.find("#changemeDueDate").html(s_tr).attr({"id": "duedate" + item.id});
+						tlistHolder.find("#changemeTr").html(sec2readable(item.timeAllowed)).attr({"id": "duedatetr" + item.id});						
 					}
 				}else{//old ticket
 					tlistHolder.find("#changemeTT").html("Time Taken: "+sec2readable(item.timeTaken)).attr({"id": "timeTaken" + item.id});
