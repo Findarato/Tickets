@@ -203,7 +203,7 @@ function populateAllTickets(Area){
 	        html = "";
 			Ttype = "";
 			$("#c"+item.type).html(item.Count);
-			if(item.Count==0){$("#my"+item.type).fadeOut(Params.FadeTime);}
+			if(item.Count==0){$("#my"+item.type).hide();}
 			else{$("#my"+item.type).fadeIn(Params.FadeTime);}
 			Ttype = item.type;
 			$.each(item.tickets,function(t,tick){
