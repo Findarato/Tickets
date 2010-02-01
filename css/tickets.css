@@ -189,7 +189,7 @@ button.fg-button { width:auto; overflow:visible; }
 	top:12px;right:12px;
 }
 	.notice 
-	.close	{position: absolute; top: 1px; right: 1px; display: block; width: 18px; height: 17px; text-indent: -9999px;}
+	.close	{position: absolute; top: 1px; right: 1px; display: block; width: 18px; height: 17px; }
 
 .notice-body {
 	text-align:left;
