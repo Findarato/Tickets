@@ -10,14 +10,14 @@ var UploadCnt = 0;
 //Setup the global variables for selectors
 var Tlb = "";
 //End global selectors
-var Params = eval({
-	FadeTime : 0,
-	Ticket_id : 0,
-	Working : "",
-	Content : "",
-	TicketJSON : "",
-	LastArea : ""
-});
+var Params = {
+	"FadeTime" : 0,
+	"Ticket_id" : 0,
+	"Working" : "",
+	"Content" : "",
+	"TicketJSON" : "",
+	"LastArea" : ""
+};
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash,""); 
 if(uri.match('dev')=='dev'){path = "http://dev.lapcat.org/"+$("#themegencss").attr("href")+"&json";}else{path = "http://www.lapcat.org/"+$("#themegencss").attr("href")+"&json";}
@@ -193,11 +193,11 @@ function populateAllTickets(Area){
 	var html = "";
 	var Ttype = "";
 	$.getJSON(uri + "ajax/tickets.php", {
-        type: "small",
-        index: "all",
-		area: Area,
-        style: 1
-    }, function(data){
+        "type": "small",
+        "index": "all",
+		"area": Area,
+        "style": 1
+    }, function(data,text){
         $.each(data.ticket, function(i, item){
 			cnt = 0;
 	        html = "";

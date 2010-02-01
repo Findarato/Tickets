@@ -168,29 +168,28 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 		break;
 		default: case "small":
 			switch ($style){
-				case 1:
+				default:case 1:
 				$sc[]="tcv.id";
-				$sc[]="tcv.description AS description";
 				$sc[]="tcv.status";
-				$sql = "SELECT ".join(",",$sc).",tcv.subject,tcv.created_on,tcv.assigned_id,tcv.created_by_id,tcv.closed_on, 
+				$sql = "SELECT ".join(",",$sc).",tcv.subject, 
 								TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
 								TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,			
-								tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining, 
-								tcv.locationId,tcv.locationName
+								tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining 
 								FROM tcview AS tcv 
 								JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 								JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
-								WHERE ".getWhereClause($user_id,$type)." GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC LIMIT 20;";
-								break;
+								WHERE ".getWhereClause($user_id,$type)." GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC LIMIT 20;";								
+
+				break;
 			}
 		break;
 	}
 	$db->Query($sql);
-	$count = $db->Count_res();
+	//$count = $db->Count_res();
 	if($type=="search"){$db->Query($sql." LIMIT ".$start.",".$end.";");}
 	$return = $db->Fetch("assoc_array");
 	
-	$GLOBALS['response']['ticketCount']=$count;
+	//$GLOBALS['response']['ticketCount']=$count;
 	//$GLOBALS['response']['sql']=$sql;
 	/*
 	 * 
@@ -261,7 +260,7 @@ if(isset($_SESSION["user"])){ //the session is set
 					$db->Query("UPDATE tickets SET status='".serialize($res)."',due_on=NOW() + INTERVAL 7 DAY WHERE id=".$_GET['ticket_id']." LIMIT 1;");
 					if(count($db->Error)<2){$response["message"]="The ticket has successfully been unlocked.";
 						addReply($_GET['ticket_id'], 256, "Ticket Removed from Locked Status", "This ticket was Removed from locked status on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]");
-					}else{$response['error']=$db->Error;}
+					}else{$response["error"]=$db->Error;}
 				}elseif($_GET['value']==1){ //this is adding the hold on the ticket
 					$db->Query("INSERT INTO tickets_hold (ticket_id,user_id,dt) VALUES(".$_GET['ticket_id'].",".$usr->User_id.",NOW());");
 					//Update the status.
@@ -271,7 +270,7 @@ if(isset($_SESSION["user"])){ //the session is set
 					$db->Query("UPDATE tickets SET status='".serialize($res)."' WHERE id=".$_GET['ticket_id']." LIMIT 1;");
 					if(count($db->Error)<2){$response["message"]="The ticket has successfully been locked.";
 						addReply($_GET['ticket_id'], 256, "Ticket Locked", "This ticket was locked on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]" );
-					}else{$response['error']=$db->Error;}									
+					}else{$response["error"]=$db->Error;}									
 				}else{/* This should never happen*/$response["error"]="You passed the wrong set of data";}
 			break;
 			case "open":
@@ -283,8 +282,8 @@ if(isset($_SESSION["user"])){ //the session is set
 					$assigned_id = id2Username($_GET['user_id']);
 					$db->Query("UPDATE tickets SET assigned_by_id=".$usr->User_id.", assigned_id=".$_GET['user_id']." WHERE id=".$_GET['ticket_id']);
 					if(count($db->Error)==2){
-						$response['error']=$db->Error['Error'];
-					}else{$response['message']="The ticket was Successfully reassigned";
+						$response["error"]=$db->Error["error"];
+					}else{$response["message"]="The ticket was Successfully reassigned";
 					addReply($_GET['ticket_id'],256,"Ticket Reassigned","This ticket was reassigned to [user=".$_GET['user_id']."] on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]");
 					}
 					//Put in the reassign variable and store it in the table
@@ -301,13 +300,13 @@ if(isset($_SESSION["user"])){ //the session is set
 					$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");//put in the new status
 					//end status area
 				}else{
-					$response['error']="The wrong data is being passed!";
+					$response["error"]="The wrong data is being passed!";
 				}
 
 			break;
 			case "search":
-				$response['tickets'] = getTickets($usr->User_id,"search",10,'',$_GET);
-				$response['tickets'] = aTcode($response['tickets']);
+				$response["tickets"] = getTickets($usr->User_id,"search",10,'',$_GET);
+				$response["tickets"] = aTcode($response["tickets"]);
 			break;
 			case "small":
 				if(isset($_GET['index'])){
@@ -315,33 +314,33 @@ if(isset($_SESSION["user"])){ //the session is set
 							case "all": //merged all ticket requests into one large return to reduce requests
 								if(!isset($_GET['area'])){$_GET['area']="none";}
 					   			switch($_GET['index']){
-					   				case "o":$response['ticket']['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));break;
-									case "c":$response['ticket']['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));break;
-					   				case "a":$response['ticket']['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));break;
-									case "od":$response['ticket']['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));break;
-									case "ad":$response['ticket']['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));break;
-									case "f":$response['ticket']['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));break;									
+					   				case "o":$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));break;
+									case "c":$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));break;
+					   				case "a":$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));break;
+									case "od":$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));break;
+									case "ad":$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));break;
+									case "f":$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));break;									
 									default:
-										$response['ticket']['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));
-										$response['ticket']['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));
-										$response['ticket']['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));
-										$response['ticket']['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));
-										$response['ticket']['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));								
-										$response['ticket']['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));								
+										$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));
+										$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));
+										$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));
+										$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));
+										$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));								
+										$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));								
 									break;
 								}
-								$response['message']="All Ticket lists generated Successfully";
+								$response["message"]="All Ticket lists generated Successfully";
 							break;
 							default:
-								$response['error']="The wrong type index is being passed!";
+								$response["error"]="The wrong type index is being passed!";
 							break;								
 						}
 				} 
 			break;
 				
-			default:$response['error']="There was some kind of error!";break;		
+			default:$response["error"]="There was some kind of error!";break;		
 		}
-		echo json_encode($response);
+		echo json_encode($response,JSON_FORCE_OBJECT);
 		#echo indentJson(json_encode($response));
 	}
 	
