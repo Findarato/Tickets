@@ -41,7 +41,6 @@ function getWhereClause($user_id,$type){
 				$sqlw = "open=1 AND assigned_by_id=$user_id";
 			break;
 			case "Odepartment":
-				//print_r(getDepartmentMembers_by_userid($user_id));
 				$sqlw = "open=1 AND assigned_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
 			break;
 			case "Adepartment":
@@ -153,18 +152,21 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 									
 				}				
 			}
-			$sc[]="tcv.description AS description";
-			$sc[]="tcv.status";	
-			$sql = 'SELECT '.join(",",$sc).',tcv.open,tcv.id,tcv.assigned_id,tcv.subject,tcv.created_on,
-					tcv.closed_on,tcv.category,tcv.category_id,tcv.created_by_id, TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
-					lhu.username,lhu.firstname,lhu.lastname, lhu2.firstname AS firstname2,lhu2.lastname AS lastname2,lhu2.username AS username2,
-					tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,
-					TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.due_on ) AS timeAllowed,
-					tcv.locationId,tcv.locationName  
-					FROM tcview AS tcv 
-					JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
-					JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
-					WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC ';
+			if($type!="favorite"){
+				$sc[]="tcv.description AS description";
+				$sc[]="tcv.status";	
+				$sql = 'SELECT '.join(",",$sc).',tcv.open,tcv.id,tcv.assigned_id,tcv.subject,tcv.created_on,
+						tcv.closed_on,tcv.category,tcv.category_id,tcv.created_by_id, TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
+						lhu.username,lhu.firstname,lhu.lastname, lhu2.firstname AS firstname2,lhu2.lastname AS lastname2,lhu2.username AS username2,
+						tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,
+						TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.due_on ) AS timeAllowed,
+						tcv.locationId,tcv.locationName  
+						FROM tcview AS tcv 
+						JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
+						JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
+						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC ';	
+			}
+			
 		break;
 		default: case "small":
 			switch ($style){
@@ -172,8 +174,6 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 				$sc[]="tcv.id";
 				$sc[]="tcv.status";
 				$sql = "SELECT ".join(",",$sc).",tcv.subject, 
-								TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
-								TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,			
 								tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining 
 								FROM tcview AS tcv 
 								JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
@@ -188,13 +188,6 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 	//$count = $db->Count_res();
 	if($type=="search"){$db->Query($sql." LIMIT ".$start.",".$end.";");}
 	$return = $db->Fetch("assoc_array");
-	
-	//$GLOBALS['response']['ticketCount']=$count;
-	//$GLOBALS['response']['sql']=$sql;
-	/*
-	 * 
-	 */
-	//print_r($return);
 	if(is_array($return)){
 		foreach($return as $ke =>$re){
 			if(@unserialize($return[$ke]["status"])){
@@ -202,7 +195,6 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 		}
 	}
 	return $return;
-	
 }
 
 /**
