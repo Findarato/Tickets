@@ -15,6 +15,7 @@
 		<br>3. Fixed some email issues that crept up.
 		<br>4. Fixed some small graphical issues relating to the sprite.
 		<br>5. Fixed a javascript mistake that was preventing favorites from working properly.
+		<br>6. Fixed a bug that was causing the buttons to disapear on a ticket.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
