@@ -156,9 +156,12 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 				$sc[]="tcv.description AS description";
 				$sc[]="tcv.status";	
 				$sql = 'SELECT '.join(",",$sc).',tcv.open,tcv.id,tcv.assigned_id,tcv.subject,tcv.created_on,
-						tcv.closed_on,tcv.category,tcv.category_id,tcv.created_by_id, TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
+						tcv.closed_on,tcv.category,tcv.category_id,tcv.created_by_id, 
+						TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
 						lhu.username,lhu.firstname,lhu.lastname, lhu2.firstname AS firstname2,lhu2.lastname AS lastname2,lhu2.username AS username2,
-						tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,
+						tcv.due_on,
+						TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,
+						TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,
 						TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.due_on ) AS timeAllowed,
 						tcv.locationId,tcv.locationName  
 						FROM tcview AS tcv 
@@ -174,7 +177,8 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 				$sc[]="tcv.id";
 				$sc[]="tcv.status";
 				$sql = "SELECT ".join(",",$sc).",tcv.subject, 
-								tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining 
+								tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,
+								TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken 
 								FROM tcview AS tcv 
 								JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 								JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
