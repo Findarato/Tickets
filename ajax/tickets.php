@@ -332,8 +332,8 @@ if(isset($_SESSION["user"])){ //the session is set
 				
 			default:$response["error"]="There was some kind of error!";break;		
 		}
-		echo json_encode($response,JSON_FORCE_OBJECT);
-		#echo indentJson(json_encode($response));
+		echo json_encode($response);
+		//echo indentJson(json_encode($response));
 	}
 	
 }

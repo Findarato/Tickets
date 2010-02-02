@@ -1,5 +1,5 @@
 <div class="ui-corner-all color-B-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font>Update Notes</font></div>
-
+<font>
 <div class="color-E-2 border-B-1 ui-corner-bottom" style="min-height:300px;text-align:left;padding-left:3px;padding-bottom:3px;">
     <font>
         Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above. {$junk}
@@ -14,6 +14,7 @@
 		<br>2. Removed uploads as they were not being used and caused lots of bugs.
 		<br>3. Fixed some email issues that crept up.
 		<br>4. Fixed some small graphical issues relating to the sprite.
+		<br>5. Fixed a javascript mistake that was preventing favorites from working properly.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
