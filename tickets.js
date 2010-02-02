@@ -390,16 +390,20 @@ function loadTicketBody(ticketId,container){
 	        container.find("#ticketClosedOnDate").html(data.closed_on);
 	        container.find("#ticketClosedOn").show();
 			container.find("#closelink").hide();
-			if (data.dagoc < 604800) {
+			if (data.dagoc < 604800 || data.open==1) {
 				container.find("#openlink").show();
 				container.find("#editlink").show();
+				container.find("#ReAssignlink").show();
 			}else{container.find("#openlink").hide();
 				container.find("#editlink").hide();
 				container.find("#ReAssignlink").hide();
 			}
-		}else{container.find("#ticketClosedOn").empty().hide();
+		}else{
+			container.find("#ticketClosedOn").empty().hide();
 			container.find("#closelink").show();
 			container.find("#openlink").hide();
+			container.find("#editlink").show();
+			container.find("#ReAssignlink").show();
 		}
 		var attCnt=0;
 		if($("#storage").html()==1){$("#replyarea").hide();}
