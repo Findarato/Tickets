@@ -3,12 +3,14 @@
 <html style:"width:100%">
 <head>
 <title>Tickets - The tracking system</title>
-<!--<link type="text/css" href="css/black-tie/jquery-ui-1.7.1.custom.css" rel="stylesheet" /> -->
 <link id="nebulacss" type="text/css" href="/lapcat/css/nebula.css" rel="stylesheet" />
 <link id="themegencss" type="text/css" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}" rel="stylesheet" />  
 <link type="text/css" media="screen" rel="stylesheet" href="css/colorbox.css" />
 <link type="text/css" href="css/tickets.css" rel="stylesheet"  />
 <link rel="icon" type="image/png" href="/tickets/bug.png" /> 
+
+
+<!--<script type="text/javascript" src="http://cdn1.lapcat.org/js/jquery-1.3.2.min.js"></script>-->
 
 <script type="text/javascript" src="http://cdn1.lapcat.org/js/jquery-1.4.1.min.js"></script>
 <script type="text/javascript" src="http://dev.lapcat.org/rooms/js/dateter.js"></script>
