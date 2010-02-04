@@ -220,7 +220,7 @@ function populateAllTickets(Area){
 					statusClass = "lock ticket_button ticket_sprite";
 				}else{
 					if(tick.status && tick.status.blocked==1){statusClass = "brick ticket_button ticket_sprite ";
-					}else{var statusClass = "ticket_button ticket_sprite tag_green";}
+					}else{var statusClass = "ticket_button ticket_sprite error";}
 				}
 				
 				if (tick.timeRemaining === null) { //there is no due date
