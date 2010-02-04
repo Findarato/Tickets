@@ -220,7 +220,7 @@ function populateAllTickets(Area){
 					statusClass = "lock ticket_button ticket_sprite";
 				}else{
 					if(tick.status && tick.status.blocked==1){statusClass = "brick ticket_button ticket_sprite ";
-					}else{var statusClass = "";}
+					}else{var statusClass = "ticket_button ticket_sprite tag_green";}
 				}
 				
 				if (tick.timeRemaining === null) { //there is no due date
@@ -246,7 +246,7 @@ function populateAllTickets(Area){
 			});
 			cnt++;
 			html += '<div style="clear:both; height:12px;" id="CallTickets">';
-			html += "<a class=\"smallTicketL ticket_link ticket_button ticket_sprite ticket_button ticket_sprite font-L font-bold\" href=\"#ticketlist/"+Ttype+"\">Show All Tickets</a>";
+			html += "<a class=\"smallTicketL ticket_link ticket_button ticket_sprite font-L font-bold\" href=\"#ticketlist/"+Ttype+"\">Show All Tickets</a>";
 			html += "</div>";
 			//alert("#"+Ttype);
 	        $("#"+item.type).empty().css({
