@@ -5,14 +5,14 @@
 			    <div class="ui-corner-all color-B-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font style="margin-left:10px;margin:5px;" id="ticketTitle"></font>
 				<div id="ticketStatusImage" style="position:absolute ;right: 5px;top: 2px;height:13px;">
 					<div class="ui-corner-all background-alpha-4 border-all-B-1 lapcatButton" style="width:auto;padding:1px;">
-						<div class="statusImage left ticket_button ticket_sprite edit" style="display:none" id="imgEdited" title="Edited"></div>
-						<div class="statusImage left ticket_button ticket_sprite user_edit" style="display:none" id="imgReassigned" title="Reassigned"></div>
-						<div class="statusImage left ticket_button ticket_sprite closed" style="display:none" id="imgClosed" title="Closed"></div>
-						<div class="statusImage left ticket_button ticket_sprite tick" style="display:none" id="imgBookmark" title="Bookmarked"></div>
-						<div class="statusImage left ticket_button ticket_sprite brick" style="display:none" id="imgBlocked" title="Blocked"></div>
-						<div class="statusImage left ticket_button ticket_sprite clip" style="display:none" id="imgAttachment" title="Attachment"></div>
-						<div class="statusImage left ticket_button ticket_sprite lock" style="display:none" id="imgLock" title="Locked"></div>
-						<div class="left ticket_button ticket_sprite bug" id="imgTicket" title="Trouble Ticket"></div>
+						<div class="statusImage left ticket_button ticket_sprite edit" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
+						<div class="statusImage left ticket_button ticket_sprite user_edit" style="display:none;height:15px;" id="imgReassigned" title="Reassigned"></div>
+						<div class="statusImage left ticket_button ticket_sprite closed" style="display:none;height:15px;" id="imgClosed" title="Closed"></div>
+						<div class="statusImage left ticket_button ticket_sprite tick" style="display:none;height:15px;" id="imgBookmark" title="Bookmarked"></div>
+						<div class="statusImage left ticket_button ticket_sprite brick" style="display:none;height:15px;" id="imgBlocked" title="Blocked"></div>
+						<div class="statusImage left ticket_button ticket_sprite clip" style="display:none;height:15px;" id="imgAttachment" title="Attachment"></div>
+						<div class="statusImage left ticket_button ticket_sprite lock" style="display:none;height:15px;" id="imgLock" title="Locked"></div>
+						<div class="left ticket_button ticket_sprite tag_green" id="imgTicket" style="height:15px;" title="Trouble Ticket"></div>
 					</div>
 				</div>
 				</div>

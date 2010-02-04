@@ -133,19 +133,21 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	.add {background-position: 0px 0px;}
 	.brick {background-position: 0px -64px;}
 	.bug {background-position: 0px -80px;}
+	.bug_error {background-position: 0px -591px;}
 	.category_link {background-position: 0px -176px;}
 	.clip {background-position: 0px -32px;}
 	.closed {background-position: 0px -240px;}
 	.database_table {background-position: 0px -80px;}
 	.department {background-position: 0px -256px;} 
 	.edit {background-position: 0px -560px;}
-	.email {background-position: 0px -320px;padding: 0 0 0px 19px;}
+	.email {background-position: 0px -320px; padding: 0 0 0px 19px;}
 	.eye {background-position: 0px -528px;}
 	.feed {background-position: 0px -368px;}
 	.graph_link { background-position: 0px -160px;}
 	.lock {background-position: 0px -480px;}
 	.search {background-position: 0px -512px; }
 	.stats_link { background-position: 0px -208px;}
+	.tag_green {background-position: 0px -576px;}
 	.tick {background-position: 0px -400px;}
 	.ticket_link {background-position: 0px -129px;}
 	.unlock {background-position: 0px -496px;}
