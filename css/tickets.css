@@ -141,6 +141,7 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	.department {background-position: 0px -256px;} 
 	.edit {background-position: 0px -560px;}
 	.email {background-position: 0px -320px; padding: 0 0 0px 19px;}
+	.error {background-position: 0px -608px;}
 	.eye {background-position: 0px -528px;}
 	.feed {background-position: 0px -368px;}
 	.graph_link { background-position: 0px -160px;}
