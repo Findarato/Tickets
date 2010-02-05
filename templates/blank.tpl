@@ -8,7 +8,7 @@
     <br>
     <br>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
-		<span style="font-size: 175%; line-height: normal;">February 2,2010</span>
+		<span style="font-size: 175%; line-height: normal;">Live Ticket Update I</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some bugs relating to the new theme definitions.
 		<br>2. Removed uploads as they were not being used and caused lots of bugs.
@@ -25,6 +25,7 @@
 		<br>3. Dater is now part of tickets!
 		<br>3.1 Enjoy selecting due dates with a new popup date selector.
 		<br>4. Url links are now in.  [url=http://www.google.com] would create a URL link looking like <a class="ticket_sprite world_link ticket_button" href="http://www.google.com">http://www.google.com</a>
+		<br>5. Moving to a new naming convention for ticket updates. They will be numbered instead of just putting in the date
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
