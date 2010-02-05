@@ -16,6 +16,7 @@
 		<br>4. Fixed some small graphical issues relating to the sprite.
 		<br>5. Fixed a javascript mistake that was preventing favorites from working properly.
 		<br>6. Fixed a bug that was causing the buttons to disapear on a ticket.
+		<br>7. Fixed the javascript error relating to tick.status.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
@@ -23,6 +24,7 @@
 		<br>2. Tickets now uses the newest version of <a href="http://www.jquery.com">Jquery</a>!
 		<br>3. Dater is now part of tickets!
 		<br>3.1 Enjoy selecting due dates with a new popup date selector.
+		<br>4. Url links are now in.  [url=http://www.google.com] would create a URL link looking like <a class="ticket_sprite world_link ticket_button" href="http://www.google.com">http://www.google.com</a>
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
