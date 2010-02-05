@@ -8,7 +8,7 @@
     <br>
     <br>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
-		<span style="font-size: 175%; line-height: normal;">Live Ticket Update I</span>
+		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XII</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some bugs relating to the new theme definitions.
 		<br>2. Removed uploads as they were not being used and caused lots of bugs.
