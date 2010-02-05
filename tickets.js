@@ -25,7 +25,7 @@ function checkResponse(json){
 	if(json.error !==null && json.error.length >2){notice("Error",json.error,false);}
 	if(json.message !==null && json.message.length >2){notice("Notice",json.message,false);}
 }
-function loadBlank(){Params.Content.html($("#blankTpl").html());}
+function loadBlank(){Params.LastArea = "UpdateNotes";Params.Content.html($("#blankTpl").html());}
 /**
  * Checks the hash of the page, then decides what to do with it.  This is the brains behind the page.
  */
@@ -69,6 +69,7 @@ function checkHash(){
 			case "#search":loadSearch();break;
 			case "#largestats":loadLargeStats();break;
 			case "#largegraphs":loadLargeGraphs();break;
+			case "#updateNotes":loadBlank();break;
 			default:loadBlank();break;
 		}
 	}else{loadBlank();}
@@ -173,7 +174,7 @@ function loadLargeStats(){
 				});
 				cnt=0;	
 			});
-			Params.Working.hide();
+			
 		});
 	});
 }
@@ -571,7 +572,7 @@ function updateTickets(){
 	checkNotify(Lastcheck); //Use the last login time
 	loadStats();
 	populateAllTickets();
-	Params.Working.hide();
+	
 }
 jQuery(document).ready(function(){
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
