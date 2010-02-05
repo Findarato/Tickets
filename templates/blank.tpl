@@ -4,7 +4,7 @@
     <font>
         Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above. {$junk}
     <br>
-	<font> More detailed update notes can be found <a class="catalog-link" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="catalog-link" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></font>
+	<font> More detailed update notes can be found <a class="ticket_sprite world_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite world_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></font>
     <br>
     <br>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
