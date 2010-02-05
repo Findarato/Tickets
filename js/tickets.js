@@ -13,7 +13,6 @@ var Tlb = "";
 var Params = {
 	"FadeTime" : 0,
 	"Ticket_id" : 0,
-	"Working" : "",
 	"Content" : "",
 	"TicketJSON" : "",
 	"LastArea" : ""
@@ -465,7 +464,6 @@ function loadTicket(ticketId){
 }
 function loadTicketList(pageNumber){
 	Params.LastArea = "ticketlist";
-	Params.Working.show();
 	var html = "";
 	if(pageNumber<0){pageNumber=0;}
     $("#ticketListbody").empty();
@@ -570,18 +568,15 @@ function loadStats(){
 }
 
 function updateTickets(){
-	Params.Working.show();
 	checkNotify(Lastcheck); //Use the last login time
 	loadStats();
 	populateAllTickets();
 	Params.Working.hide();
 }
 jQuery(document).ready(function(){
-
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
-	Params.Working = $("#Working");
 	$("#userSecondaryEmail").blur(function(){
 		jQuery.post(uri+"ajax/login.php",{
 			"altEmail":$(this).val()
@@ -885,7 +880,6 @@ jQuery(document).ready(function(){
 	$(":text").live("click",function(){$(this).select();$(this).focus();});
 	$(".Cancel").live("click",function(){$.fn.colorbox.close();});
 	$(".ticket_link,.nolink").live("click",function(){
-		Params.Working.show();
 		setHash($(this).attr("href"));
 		checkHash();//this should load the correct ticket
 		return false; //to make sure the a isnt clicked

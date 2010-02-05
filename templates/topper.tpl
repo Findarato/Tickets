@@ -19,5 +19,4 @@
 
 </div>
 <div class="ui-helper-hidden" id="t_userid">{$user_id}</div>
-
-<div class="opposite" id="working" style="margin:5px;padding:2px;position:absolute;right:0;top:0;">Loading...</div>
+<a class="font-X ui-corner-all background-alpha-4 border-all-B-1 lapcatButton" id="Version" href="/tickets/" style="margin:5px;padding:2px;position:absolute;width:auto;right:0px;top:0;">Live Tickets Update XII</a>
