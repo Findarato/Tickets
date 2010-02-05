@@ -65,7 +65,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
-				break;
+			break;
 			case "user":
 				$userinfo = id2Username($match[1]);
 				if($email){
@@ -75,11 +75,17 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 					
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
-				
-				break;
-			default:
-				
 			break;
+			case "url":
+				if($email){
+					$formated1 = "<a href=\"".$match[1]."\" class=\"ticket_sprite world_link ticket_button\">".$match[1]."</a>";
+				}else{
+					$formated1 = "<a href=\"".$match[1]."\" class=\"ticket_sprite world_link ticket_button\">".$match[1]."</a>";
+				}
+				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
+			break;
+			
+			default:break;
 		}
 	}
 	if($escape){return mysql_escape_string($formated);
@@ -130,7 +136,7 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	$smarty -> assign('email_title',$res1['subject']);
 	$smarty -> assign('email_priority',$res1['priority']);				
 	$smarty -> assign('email_location',$locationEmail[2]);
-	$smarty -> assign('email_description',nl2br($res1['description']));
+	$smarty -> assign('email_description',nl2br(Tcode($res1['description'],false,false,true)));
 	$smarty -> assign('respon',$respon);
 	$body = $smarty->fetch('email.tpl');
 	if($email){generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],$closed,$locationEmail[1],true);}
