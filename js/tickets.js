@@ -19,7 +19,6 @@ var Params = {
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash,""); 
-if (uri.match('dev') == 'dev'){path = "http://dev.lapcat.org/"+$("#themegencss").attr("href")+"&json";}else{path = "http://www.lapcat.org/"+$("#themegencss").attr("href")+"&json";}
 
 function checkResponse(json){
 	if(json.error !==null && json.error.length >2){notice("Error",json.error,false);}
@@ -575,6 +574,15 @@ function updateTickets(){
 	
 }
 jQuery(document).ready(function(){
+	if (uri.match('dev') == 'dev'){
+		path = "http://dev.lapcat.org/"+$("#themegencss").attr("href");
+		$("#themegencss").attr("href",path);
+	}else{
+		path = "http://dev.lapcat.org/"+$("#themegencss").attr("href");
+		$("#themegencss").attr("href",path);
+	}
+	
+	
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
@@ -606,7 +614,6 @@ jQuery(document).ready(function(){
 				}
 		},"json");
 	});
-					
 	if(User_id>0){$("#rss1").attr("href","ticketsrss.php?id="+User_id);
 	$("#rss2").attr("href","ticketsrss.php?id="+User_id+"&bookmark=1");}
 	
