@@ -8,6 +8,22 @@
     <br>
     <br>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
+		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XIII</span>
+		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+		<br>1. Fixed a bug that was preventing any favorite tickets from showing the proper icon.
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">New Features</span>
+		<br>1. Ticket types are now in.  They are <span class="bug ticket_sprite ticket_button">bug tickets</span> and <span class="error ticket_sprite ticket_button">trouble tickets</span>.
+		<br>2. Recent tickets should now be working properly.
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
+		<br>1. Tickets is currently having issues in Opera
+		<br>2. Large Graphs are still not working properly
+		<br>3. Some themes do not work 100%
+		<br>
+		<br>
 		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XII</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some bugs relating to the new theme definitions.

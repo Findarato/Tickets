@@ -19,4 +19,4 @@
 
 </div>
 <div class="ui-helper-hidden" id="t_userid">{$user_id}</div>
-<a class="font-X ticket_link" id="Version" href="#updateNotes" style="margin:5px;padding:2px;position:absolute;width:auto;right:0px;top:0;">Live Tickets Update XII</a>
+<a class="font-X ticket_link" id="Version" href="#updateNotes" style="margin:5px;padding:2px;position:absolute;width:auto;right:0px;top:0;">Live Tickets Update XIII</a>
