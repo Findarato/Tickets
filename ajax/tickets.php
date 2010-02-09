@@ -86,7 +86,10 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 	$usr = unserialize($_SESSION['user']);
 	switch ($type) {
 		case "favorite":
-			$sql = "SELECT t.id,t.subject,t.created_on, t.due_on,
+			$sc[]="t.description AS description";
+			$sc[]="t.status";
+			$sc[]="t.tickettype_id";
+			$sql = "SELECT ".join(",",$sc).",t.id,t.subject,t.created_on, t.due_on,
 			TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago,
 			TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,			
 			t.due_on,TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining 
@@ -154,7 +157,8 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 			}
 			if($type!="favorite"){
 				$sc[]="tcv.description AS description";
-				$sc[]="tcv.status";	
+				$sc[]="tcv.status";
+				$sc[]="tcv.tickettype_id";
 				$sql = 'SELECT '.join(",",$sc).',tcv.open,tcv.id,tcv.assigned_id,tcv.subject,tcv.created_on,
 						tcv.closed_on,tcv.category,tcv.category_id,tcv.created_by_id, 
 						TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
@@ -176,6 +180,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 				default:case 1:
 				$sc[]="tcv.id";
 				$sc[]="tcv.status";
+				$sc[]="tcv.tickettype_id";
 				$sql = "SELECT ".join(",",$sc).",tcv.subject, 
 								tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,
 								TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken 

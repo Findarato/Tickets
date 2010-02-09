@@ -15,6 +15,9 @@
 			<td style="text-align:left;"><font class="">Priority:</font><select class="dropdown Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
 		</tr>
 		<tr>
+			<td style="text-align:left;"><font class="">Bug</font><input type="radio" class="dropdown" id="newTicketBugTrouble" name="newTicketBugTrouble" value="2"> <font class="">Problem</font><input type="radio" class="dropdown" id="newTicketBugTrouble" name="newTicketBugTrouble" value="1"></td>
+		</tr>
+		<tr>
 			<td style="text-align:left;"><font class="">Due Date:</font><input type="text" name="newTicketDueDate" id="newTicketDueDate" class="dropdown Ticketform" maxlength="50" style="width:8em" value="" /><img src="http://cdn1.lapcat.org/famfamfam/silk/calendar.png" title="calendar" id="newTicketCalendar"></td>
 		</tr>
 		<tr>
