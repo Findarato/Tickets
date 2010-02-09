@@ -1,4 +1,5 @@
 <?Php
+include_once("../small_header.php");
 header('Content-type: application/json');
 header("Cache-Control: max-age=60, must-revalidate");
   $offset = 3600 * 24;	
@@ -6,7 +7,6 @@ header("Cache-Control: max-age=60, must-revalidate");
   $expire = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
 //output the HTTP header
   Header($expire);
-  
 /**
  * Returns JSON version of the tickets to be displayed in either the center or the side area.
  * 
@@ -15,7 +15,7 @@ header("Cache-Control: max-age=60, must-revalidate");
  * @copyright December 24, 2007
  * @todo need to look at the 4 functions and find a way to make them into one
  */
-include_once "../header.php";  
+//include_once "../header.php";  
 $smallDisplay = array(); 
 /**
  * Basically just some time saving, and to reduce some duplication of code
@@ -205,7 +205,6 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 	}
 	return $return;
 }
-
 /**
  * This is where the real code happens.
  */
@@ -323,11 +322,11 @@ if(isset($_SESSION["user"])){ //the session is set
 									case "f":$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));break;									
 									default:
 										$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));
-										$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));
-										$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));
-										$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));
-										$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));								
-										$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));								
+								//		$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));
+								//		$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));
+								//		$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));
+								//		$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));								
+								//		$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));								
 									break;
 								}
 								$response["message"]="All Ticket lists generated Successfully";
@@ -342,8 +341,6 @@ if(isset($_SESSION["user"])){ //the session is set
 			default:$response["error"]="There was some kind of error!";break;		
 		}
 		echo json_encode($response);
-		//echo indentJson(json_encode($response));
 	}
-	
 }
 ?>
