@@ -15,6 +15,7 @@
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
 		<br>1. Ticket types are now in.  They are <span class="bug ticket_sprite ticket_button">bug tickets</span> and <span class="error ticket_sprite ticket_button">trouble tickets</span>.
+		<br><blockquote>be sure to choose the proper type of ticket.  Bug reports should be fixed for web code and things that can be fixed, but probably not related to computers.  While trouble tickets are for everything that is not a bug.</blockquote>	
 		<br>2. Recent tickets should now be working properly.
 		<br>
 		<br>
