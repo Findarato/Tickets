@@ -219,7 +219,10 @@ function populateAllTickets(Area){
 					statusClass = "lock ticket_button ticket_sprite";
 				}else{
 					if(tick.status && tick.status.blocked==1){statusClass = "brick ticket_button ticket_sprite ";
-					}else{var statusClass = "ticket_button ticket_sprite error";}
+					}else{
+						if (tick.tickettype_id == 1) {var statusClass = "ticket_button ticket_sprite error";}
+						else {var statusClass = "ticket_button ticket_sprite bug";}
+					}
 				}
 				
 				if (tick.timeRemaining === null) { //there is no due date
@@ -438,7 +441,9 @@ function loadTicketBody(ticketId,container){
 			$("#replyuserid").val(User_id);
 		});
 		$('#ReAssignlink').colorbox({transition:"none",open:false,inline:true,href:"#reassignTicketdialog",title:"<font class=\"white\">Reassign Ticket</font>"},function(){});
-	
+	//Set the ticket type icon
+		if (data.tickettype_id == 1) {$("#imgTicketTrouble").show();$("#imgTicketBug").hide();}
+		else {$("#imgTicketBug").show();$("#imgTicketTrouble").hide();}
 	//Run some functions to deal with the data.	
 		pageAnator(container.find("#pageAnator").empty(),data.responseCount,20); //add Page numbers
 		loadRecentTickets(data.recentTickets,$("#recentTickets")); //Recent ticket list

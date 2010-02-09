@@ -13,7 +13,7 @@ if($usr->User_id==$_GET["newTicketUser_id"]){
 	if($_GET['newTicketType']=="new"){
 
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
-		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location) 
+		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
 		VALUES(
 				"'.$_GET["newTicketUser_id"].'",
 				"'.$_GET["newTicketUser_id"].'",
@@ -24,7 +24,8 @@ if($usr->User_id==$_GET["newTicketUser_id"]){
 				NOW(),1,
 				"'.(intval($_GET["newTicketPriority"])+1).'",
 				"'.$dueOn.'",
-				"'.$_GET["newTicketLocation"].'"
+				"'.$_GET["newTicketLocation"].'",
+				"'.$_GET["newTicketBugTrouble"].'"
 					)');
 			//echo $db->Lastsql;
 			$ticketId = $db->Lastid;

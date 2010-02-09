@@ -12,7 +12,8 @@
 						<div class="statusImage left ticket_button ticket_sprite brick" style="display:none;height:15px;" id="imgBlocked" title="Blocked"></div>
 						<div class="statusImage left ticket_button ticket_sprite clip" style="display:none;height:15px;" id="imgAttachment" title="Attachment"></div>
 						<div class="statusImage left ticket_button ticket_sprite lock" style="display:none;height:15px;" id="imgLock" title="Locked"></div>
-						<div class="left ticket_button ticket_sprite error" id="imgTicket" style="height:15px;" title="Trouble Ticket"></div>
+						<div class="left ticket_button ticket_sprite error" id="imgTicketTrouble" style="height:15px;display:none;" title="Trouble Ticket"></div>
+						<div class="left ticket_button ticket_sprite bug" id="imgTicketBug" style="height:15px;display:none;" title="Bug Report"></div>
 					</div>
 				</div>
 				</div>

@@ -21,6 +21,6 @@ $allScript = "";
 foreach($files as $f){
 	$allScript .= file_get_contents($f);
 }
-echo JSMin::minify($allScript);
- 
+//echo JSMin::minify($allScript);
+echo $allScript;
 ?>
