@@ -579,6 +579,8 @@ function updateTickets(){
 	
 }
 jQuery(document).ready(function(){
+	//jQuery.each(jQuery.browser, function(i, val) {notice("Debug",i+"=>"+val,false);});
+	
 	if (uri.match('dev') == 'dev'){
 		path = "http://dev.lapcat.org/"+$("#themegencss").attr("href");
 		$("#themegencss").attr("href",path);
