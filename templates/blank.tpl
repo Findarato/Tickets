@@ -20,7 +20,7 @@
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
-		<br>1. Tickets is currently having issues in Opera
+		<br>1. Tickets is currently having issues in Opera, as well as versions of Firefox prior to 3.1.
 		<br>2. Large Graphs are still not working properly
 		<br>3. Some themes do not work 100%
 		<br>
