@@ -18,6 +18,12 @@ function recentTickets($user_id,$ticket_id,$subject,$display=false){
 		$db->QUERY("SELECT ticket_id,ticket_name,DATE_FORMAT(dt	, '%M %e, %Y %H:%i') AS dt FROM recent_tickets WHERE user_id=".$user_id." ORDER BY dt DESC LIMIT 10;");
 		$res1 = $db->Fetch("assoc_array");
 	}else{
+		$db->Query("SELECT COUNT(ticket_id) FROM recent_tickets WHERE user_id=".$user_id.";");
+		$cnt = $db->Fetch("row");
+		if($cnt>10){
+			$lim = $cnt-10;
+			$db->Query("DELETE FROM recent_tickets WHERE user_id=".$user_id." ORDER BY dt DESC LIMIT ".$lim);
+		}
 		$db->Query("DELETE FROM recent_tickets WHERE user_id=".$user_id." AND ticket_id=".$ticket_id." AND ticket_name='".$subject."' LIMIT 1");
 		$db->Query("INSERT INTO recent_tickets (user_id,ticket_id,ticket_name,dt) VALUES (".$user_id.",".$ticket_id.",'".$subject."',NOW());");
 		if(count($db->Error)==2){return $db->Error;}
