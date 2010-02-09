@@ -185,12 +185,10 @@ function populateAllTickets(Area){
 	var cnt = 0;
 	var html = "";
 	var Ttype = "";
-	$.getJSON(uri + "ajax/tickets.php", {
-        "type": "small",
-        "index": "all",
-		"area": Area,
-        "style": 1
-    }, function(data,text){
+	$.getJSON(uri + "ajax/tickets.php", 
+	{"type": "small","index": "all","area": Area,"style": 1 },
+	function(data,text){
+		//alert(text);
         $.each(data.ticket, function(i, item){
 			cnt = 0;
 	        html = "";
@@ -580,7 +578,6 @@ function updateTickets(){
 }
 jQuery(document).ready(function(){
 	//jQuery.each(jQuery.browser, function(i, val) {notice("Debug",i+"=>"+val,false);});
-	
 	if (uri.match('dev') == 'dev'){
 		path = "http://dev.lapcat.org/"+$("#themegencss").attr("href");
 		$("#themegencss").attr("href",path);
