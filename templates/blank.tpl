@@ -11,6 +11,7 @@
 		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XIII</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was preventing any favorite tickets from showing the proper icon.
+		<br>1. Tickets is now working in Opera, as well as versions of Firefox prior to 3.1.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
@@ -20,9 +21,8 @@
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
-		<br>1. Tickets is currently having issues in Opera, as well as versions of Firefox prior to 3.1.
-		<br>2. Large Graphs are still not working properly
-		<br>3. Some themes do not work 100%
+		<br>1. Large Graphs are still not working properly
+		<br>2. Some themes do not work 100%
 		<br>
 		<br>
 		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XII</span>
