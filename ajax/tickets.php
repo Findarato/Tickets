@@ -1,5 +1,6 @@
 <?Php
 include_once("../small_header.php");
+include_once("../smarty.inc.php");
 header('Content-type: application/json');
 header("Cache-Control: max-age=60, must-revalidate");
   $offset = 3600 * 24;	
