@@ -55,7 +55,11 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 		$match=str_replace(" ","",$match);
 		$match=str_replace("[","",$match);
 		$match=str_replace("]","",$match);
+		$matchOld = $match;
 		$match = explode("=",$match);
+		//echo $match[0];
+		$matchOld = str_replace($match[0]."=", "", $matchOld);
+		//echo $matchOld;
 		//print_r($match);
 		switch($match[0]){
 			case "ticket":
@@ -78,11 +82,11 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			break;
 			case "url":
 				if($email){
-					$formated1 = "<a href=\"".$match[1]."\" class=\"ticket_sprite world_link ticket_button\">".$match[1]."</a>";
+					$formated1 = "<a href=\"".$matchOld."\" class=\"ticket_sprite world_link ticket_button\">".$matchOld."</a>";
 				}else{
-					$formated1 = "<a href=\"".$match[1]."\" class=\"ticket_sprite world_link ticket_button\">".$match[1]."</a>";
+					$formated1 = "<a href=\"".$matchOld."\" class=\"ticket_sprite world_link ticket_button\">".$matchOld."</a>";
 				}
-				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
+				$formated = str_replace("[".$match[0]."=".$matchOld."]", $formated1,$formated);			
 			break;
 			
 			default:break;
