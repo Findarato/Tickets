@@ -1070,6 +1070,12 @@ jQuery(document).ready(function () {
 				if (data.error.length > 0) {
 					checkResponse(data);
 				} else {
+					if (uri.match('dev') == 'dev') {
+						$("#themegencss").attr("href","http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme="+data.theme);
+					} else {
+						$("#themegencss").attr("href","http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme="+data.theme);
+					}
+					
 					Lastcheck = data.lastlogon;
 					$("#t_uI").html($("<span/>").addClass("user ticket_sprite ticket_button").html(data.firstname + " " + data.lastname + " (" + data.username + ")"));
 					checkResponse(data);
