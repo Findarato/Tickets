@@ -13,7 +13,7 @@
 				$response["firstname"]=$usr->A_U['first-name'];
 				$response["lastname"]=$usr->A_U['last-name'];
 				$response["userid"]=$usr->User_id;
-				$response["theme"]=$usr->V_TS;
+				$response["theme"]=$usr->a_User["theme"];
 				$dep = getDepartment_by_userid($usr->User_id);
 				$dep = array_implode($dep);
 				if(count($dep)!=2 || $dep===false){
