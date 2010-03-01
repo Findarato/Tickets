@@ -1067,6 +1067,7 @@ jQuery(document).ready(function () {
 			return;
 		} else {
 			jQuery.post(uri + "ajax/login.php", $("#frm_login").serialize(), function (data) {
+				
 				if (data.error.length > 0) {
 					checkResponse(data);
 				} else {
@@ -1202,7 +1203,11 @@ jQuery(document).ready(function () {
 				if ($("#newTicketLocation").val() === "") {
 					notice("Error", "You must select a Location", false);
 					return false;
-				} else {
+				
+				}else if(($("#newTicketDueDate").val() === "")){
+					notice("Error", "You must enter a Due date", false);
+					return false;
+				 }else {
 					jQuery.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
 						/*
 						$.each(data.achievements,function(a,ach){
