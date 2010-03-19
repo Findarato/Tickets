@@ -28,6 +28,10 @@ function checkResponse(json) {
 	}
 }
 
+function loadNew(){
+	
+}
+
 function loadBlank() {
 	Params.LastArea = "UpdateNotes";
 	Params.Content.html($("#blankTpl").html());
@@ -94,7 +98,7 @@ function checkHash() {
 			loadBlank();
 			break;
 		default:
-			loadBlank();
+			loadNew();
 			break;
 		}
 	} else {

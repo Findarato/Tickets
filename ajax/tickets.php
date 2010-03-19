@@ -100,6 +100,63 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 			foreach ($search as $k=>$s){
 				switch($k){
 					default:break;
+					case "Adepartment": //Department Created
+							$idList = getDepartmentMembers_by_userid($usr -> User_id);
+							$wc[]="(created_by_id IN (".join(",",$idList).") ) ";
+							//print_r($wc);die();
+					break;
+					case "assigned":
+						if($s>0){$wc[]="tcv.assigned_id=\"".$s."\"";}
+					break;
+					case "category":
+						if($s>0){$wc[]="tcv.category_id=\"".$s."\"";}else{$wc[]="tcv.category=\"".$s."\"";}
+					break;
+					case "closed":
+						$wc[]="tcv.open=\"".$s."\"";
+					break;
+					case "created_by":
+						if($s>0){$wc[]="tcv.created_by_id=\"".$s."\"";}
+					break;
+					case "department":
+						if($s>0){
+							$db->Query("SELECT user_id FROM department_members WHERE department_id =$s");
+							$res = $db->Fetch("row_array");
+							$wc[]="(tcv.assigned_id IN (".join(",",$res).") OR created_by_id IN (".join(",",$res).") ) ";
+						}
+					break;
+					case "location":
+						$wc[]="tcv.locationId=\"".$s."\"";
+					break;
+					case "Odepartment": //Department Assigned
+							$idList = getDepartmentMembers_by_userid($usr -> User_id);
+							$wc[]="(tcv.assigned_id IN (".join(",",$idList).")) ";
+					break;
+					case "new":
+						$dt = $db->Clean($_GET["dateTime"]);
+						$dt = date("Y-m-d H:m:s",$dt-60);
+
+						$sql = "SELECT tcv.id FROM tcview AS tcv WHERE 
+						TIMESTAMPDIFF(SECOND ,tcv.created_on, NOW() )>29
+						 AND assigned_id=".$usr->User_id;
+						$db->Query($sql);
+						$response["tickets"] = $db->Fetch("assoc_array");
+						
+						/*
+						$sql = "SELECT ticket_id,TIMESTAMPDIFF(SECOND ,r.created_on, NOW() ) AS tsd
+						 FROM responses AS r WHERE 
+						TIMESTAMPDIFF(SECOND ,r.created_on, NOW() )<29
+						 AND ticket_id IN (".join(",",$ids).")";
+						$db->Query($sql);
+						$response["replies"] = $db->Fetch("assoc_array");
+						*/
+		
+						$wc[]="tcv.id in(".join(",",$ticketIds).")";
+						$wc[]="tcv.open=\"".$s."\"";
+					break;
+					
+					case "open":
+						$wc[]="tcv.open=\"".$s."\"";
+					break;
 					case "page":
 						$end = 20;
 						$start = ($k*$end);
@@ -113,40 +170,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 					case "title":
 						if($s!=""){$wc[]="tcv.subject LIKE \"%".$s."%\"";}
 					break;
-					case "assigned":
-						if($s>0){$wc[]="tcv.assigned_id=\"".$s."\"";}
-					break;
-					case "created_by":
-						if($s>0){$wc[]="tcv.created_by_id=\"".$s."\"";}
-					break;					
-					case "category":
-						if($s>0){$wc[]="tcv.category_id=\"".$s."\"";}else{$wc[]="tcv.category=\"".$s."\"";}
-					break;
-					case "closed":
-						$wc[]="tcv.open=\"".$s."\"";
-					break;
-					case "open":
-						$wc[]="tcv.open=\"".$s."\"";
-					break;
-					case "location":
-						$wc[]="tcv.locationId=\"".$s."\"";
-					break;
-					case "Odepartment": //Department Assigned
-							$idList = getDepartmentMembers_by_userid($usr -> User_id);
-							$wc[]="(tcv.assigned_id IN (".join(",",$idList).")) ";
-					break; 
-					case "Adepartment": //Department Created
-							$idList = getDepartmentMembers_by_userid($usr -> User_id);
-							$wc[]="(created_by_id IN (".join(",",$idList).") ) ";
-							print_r($wc);die();
-					break;
-					case "department":
-						if($s>0){
-							$db->Query("SELECT user_id FROM department_members WHERE department_id =$s");
-							$res = $db->Fetch("row_array");
-							$wc[]="(tcv.assigned_id IN (".join(",",$res).") OR created_by_id IN (".join(",",$res).") ) ";
-						}
-					break;
+
 				//New right pannel list. 
 					case "sOdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.assigned_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";break;
 					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.created_by_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";break;

@@ -8,6 +8,21 @@
     <br>
     <br>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
+		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
+		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XIV</span>
+		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+		<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">New Features</span>
+		<br>1. 
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
+		<br>1. Large Graphs are still not working properly
+		<br>2. Some themes do not work 100%
+		<br>
+		<br>
 		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XIII</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was preventing any favorite tickets from showing the proper icon.
