@@ -36,7 +36,7 @@ function getWhereClause($user_id,$type){
 				$sqlw = "open=0 AND (assigned_id=$user_id OR created_by_id=".$user_id.")"; 
 			break;
 			case "assigned":
-				$sqlw = "open=1 AND assigned_by_id=$user_id";
+				$sqlw = "open=1 AND created_by_id=$user_id";
 			break;
 			case "favorite":
 				$sqlw = "open=1 AND assigned_by_id=$user_id";
@@ -45,7 +45,7 @@ function getWhereClause($user_id,$type){
 				$sqlw = "open=1 AND assigned_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
 			break;
 			case "Adepartment":
-				$sqlw = "open=1 AND assigned_by_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
+				$sqlw = "open=1 AND created_by_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
 			break;
 			default:break;
 		}
