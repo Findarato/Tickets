@@ -3,7 +3,7 @@ include_once "../small_header.php";
 header('Content-type: application/json');
 $response = array("tickets"=>"","replies"=>"");
 $usr = unserialize($_SESSION['user']);
-$dt = $db->Clean($_GET["dateTime"]);
+	$dt = $db->Clean($_GET["dateTime"]);
 	$dt = date("Y-m-d H:m:s",$dt-60);
 	$sql = "SELECT tcv.subject,tcv.id,TIMESTAMPDIFF(SECOND ,tcv.created_on, NOW() ) AS tsd
 	 FROM tcview AS tcv WHERE 
