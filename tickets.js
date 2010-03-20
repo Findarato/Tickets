@@ -2,7 +2,6 @@
  * Simple global variables that are needed everywhere
  */
 var User_id = 0;
-var Lastcheck = 0;
 var OuterHeight = 0;
 var OuterWidth = 0;
 var UploadCnt = 0;
@@ -14,7 +13,8 @@ var Params = {
 	"Ticket_id": 0,
 	"Content": "",
 	"TicketJSON": "",
-	"LastArea": ""
+	"LastArea": "",
+	"LastLogon":0
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
@@ -28,8 +28,9 @@ function checkResponse(json) {
 	}
 }
 
-function loadNew(){
-	
+function loadNew(timestamp){
+	loadTicketList(0,{"new":"1","dateTime":timestamp});
+	$("#ticketListtitle").html("Tickets with activity since your last visit");
 }
 
 function loadBlank() {
@@ -98,11 +99,11 @@ function checkHash() {
 			loadBlank();
 			break;
 		default:
-			loadNew();
+			loadNew(Params.LastLogon);
 			break;
 		}
 	} else {
-		loadBlank();
+		loadNew(Params.LastLogon);
 	}
 }
 
@@ -358,30 +359,8 @@ function populateAllTickets(Area) {
 		});
 	});
 }
-
-function checkNotify(dt) {
-	var display = "";
-	var disp = false;
-	$.getJSON(uri + "ajax/notify.php", {
-		"dateTime": dt
-	}, function (data) {
-		$.each(data.tickets, function (i, item) {
-			if (item.id > 1) {
-				notice("New Ticket!", item.subject, true, item.id);
-			}
-		});
-		$.each(data.replies, function (i, item) {
-			if (item.ticket_id > 1) {
-				notice("New Response!", item.subject, true, item.ticket_id);
-			}
-		});
-	});
-	var dt = new Date();
-	Lastcheck = Math.round(dt.getTime() / 1000.0); //set the global variable to now
-}
-
 function updateTickets() {
-	checkNotify(Lastcheck); //Use the last login time
+	checkNotify(Params.LastLogon); //Use the last login time
 	loadStats();
 	populateAllTickets();
 }
@@ -637,31 +616,38 @@ function loadTicket(ticketId) {
 	} //load the responses page 0
 }
 
-function loadTicketList(pageNumber) {
+function loadTicketList(pageNumber,queryObj) {
 	Params.LastArea = "ticketlist";
 	var html = "";
 	if (pageNumber < 0) {
 		pageNumber = 0;
 	}
 	$("#ticketListbody").empty();
-	hash = getHashArray();
-	O_search = {
-		"type": "search",
-		"page": pageNumber,
-		"search": {}
-	};
-	if (hash[1]) {
-		for (a = 1; a <= hash.length; a++) {
-			if (a == hash.length) {} else {
-				var holder = a + 1;
-				if (!hash[holder]) {
-					hash[holder] = "1";
+	if(queryObj){
+		O_search = queryObj;
+		O_search.type = "search";
+		O_search.page = pageNumber;			
+	}else{
+		hash = getHashArray();
+		O_search = {
+			"type": "search",
+			"page": pageNumber,
+			"search": {}
+		};
+		if (hash[1]) {
+			for (a = 1; a <= hash.length; a++) {
+				if (a == hash.length) {} else {
+					var holder = a + 1;
+					if (!hash[holder]) {
+						hash[holder] = "1";
+					}
+					O_search[hash[a]] = hash[holder];
+					a++;
 				}
-				O_search[hash[a]] = hash[holder];
-				a++;
 			}
-		}
+		}	
 	}
+	
 	$.getJSON(uri + "ajax/tickets.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
@@ -669,6 +655,10 @@ function loadTicketList(pageNumber) {
 		Tlb = Params.Content.find("#ticketListbody");
 		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
 		var tlistHolder = $("<div/>");
+		if(!data.tickets){ //there are no tickets to display
+			Tlb.html("There are no tickets that match this search")
+			return;
+		}
 		$.each(data.tickets, function (i, item) {
 			var OC = false;
 			if (i % 2 == 1) {
@@ -818,12 +808,6 @@ function loadStats() {
 	}, "json");
 }
 
-function updateTickets() {
-	checkNotify(Lastcheck); //Use the last login time
-	loadStats();
-	populateAllTickets();
-
-}
 jQuery(document).ready(function () {
 	//jQuery.each(jQuery.browser, function(i, val) {notice("Debug",i+"=>"+val,false);});
 	if (uri.match('dev') == 'dev') {
@@ -847,7 +831,6 @@ jQuery(document).ready(function () {
 				$("#depOk").show();
 				$("#depError").hide();
 			} else {
-
 				$("#depOk").hide();
 				$("#depError").show();
 			}
@@ -1081,7 +1064,7 @@ jQuery(document).ready(function () {
 						$("#themegencss").attr("href","http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme="+data.theme);
 					}
 					
-					Lastcheck = data.lastlogon;
+					Params.LastLogon = data.lastlogon;
 					$("#t_uI").html($("<span/>").addClass("user ticket_sprite ticket_button").html(data.firstname + " " + data.lastname + " (" + data.username + ")"));
 					checkResponse(data);
 					User_id = data.userid;
@@ -1100,7 +1083,7 @@ jQuery(document).ready(function () {
 						updateTickets();
 						checkHash();
 					} else {
-						loadBlank();
+						loadNew(data.lastlogon); //show the new tickets
 						updateTickets();
 					}
 					$("#userSecondaryEmail").val(data.altEmail);
