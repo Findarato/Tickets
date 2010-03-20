@@ -142,20 +142,21 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND assigned_id=".$usr->User_id;
 						$db->Query($sql);
                         $ticketIds = $db->Fetch("row");
-						$return["info"][]=$sql;
+						
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
-						$return["info"][]=$sql;
+						
 						$db->Query($sql);
                         $replyTicketids = $db->Fetch("row");
 						$replyTicketids = array_implode($replyTicketids);
 						
 						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
-                        $return["info"][]=$sql;
+                        
 						$db->Query($sql);
                         $response = $db->Fetch("assoc_array");
 
 						
 						$ticketIds = array_implode(array_merge($ticketIds,$response));
+						print_r($ticketIds);die();
                         if($ticketIds){
                         	$wc[]="tcv.id in(".join(",",$ticketIds).")";
                         }else{
