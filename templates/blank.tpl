@@ -1,21 +1,27 @@
-<div class="ui-corner-all color-B-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font>Update Notes</font></div>
+<div class="corners-bottom-2 corners-top-2 color-B-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;margin-top:0;padding:2px;height:20px;position:relative"><font>Update Notes</font></div>
 <font>
-<div class="color-E-2 border-B-1 ui-corner-bottom" style="min-height:300px;text-align:left;padding-left:3px;padding-bottom:3px;">
+<div class="corners-bottom-2 corners-top-2 background-special-1 border-all-B-1" style="min-height:300px;text-align:left;padding:3px;">
     <font>
-        Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above. {$junk}
-    <br>
-	<font> More detailed update notes can be found <a class="ticket_sprite world_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite world_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></font>
-    <br>
-    <br>
-    <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
-		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XIV</span>
+    	<div class="corners-bottom-2 corners-top-2 color-A-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">
+			<font>
+				Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above. {$junk}
+	    		<br>
+				<font> More detailed update notes can be found <a class="ticket_sprite world_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite world_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></font>		
+			</font>
+		</div>
+    <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
-		<br>2. New start page.
-		<br>2.1 Tickets that have been worked on since your last visit are now shown instead of the update notes.  Update notes are still accessable though the link in the top right corner.
+		<br>2. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
+		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
-		<br>1. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
+		<br>1. New start page.
+		<br>1.1 Tickets that have been worked on since your last visit are now shown instead of the update notes.  Update notes are still accessable though the link in the top right corner.
+		<br>1.2 Ticket lists have been reworked along side the crusade to banish the table tag.
+		<br>2. Tickets is using the rounded corner CSS from the theme generator now. This will insure that the corners look correct.
+		<br>3. New look to tickets and replies.  More table tags squashed!
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
@@ -23,7 +29,7 @@
 		<br>2. Some themes do not work 100%
 		<br>
 		<br>
-		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XIII</span>
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIII</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was preventing any favorite tickets from showing the proper icon.
 		<br>1. Tickets is now working in Opera, as well as versions of Firefox prior to 3.1.
@@ -40,7 +46,7 @@
 		<br>2. Some themes do not work 100%
 		<br>
 		<br>
-		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XII</span>
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XII</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some bugs relating to the new theme definitions.
 		<br>2. Removed uploads as they were not being used and caused lots of bugs.

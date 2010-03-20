@@ -36,8 +36,8 @@
 	</table>
 	</form>
 	<div class="table textLeft">
-		<div class="td"><a class="option-theme fg-button ui-corner-all white lapcatButton Cancel" id="ticketCancelBtn">Cancel</a></div>
-		<div class="td"><a class="option-theme fg-button ui-corner-all white lapcatButton" id="ticketAddBtn" style="width:auto;">Add Ticket</a></div>
+		<div class="td"><a class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton Cancel" id="ticketCancelBtn">Cancel</a></div>
+		<div class="td"><a class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="ticketAddBtn" style="width:auto;">Add Ticket</a></div>
 	</div>
 </div>
 </div>
