@@ -1,7 +1,7 @@
 <div style="display:table;width:100%;height:500px">
 	<div style="display:table-cell;width:300px;vertical-align:top;height:500px;padding-right:1px;"> <!--Ticket Area -->
 		<div style="width:100%"> <!-- Ticket Title -->
-			<div class="corners-bottom-2 corners-top-2 color-B-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative">
+			<div class="corners-bottom-2 corners-top-2 color-B-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;margin-top:0;padding:2px;height:20px;position:relative">
 				<font style="margin-left:10px;margin:5px;" id="ticketTitle"></font>
 				<div id="ticketStatusImage" style="position:absolute ;right: 5px;top: 2px;height:13px;">
 					<div class="corners-bottom-2 corners-top-2 background-alpha-4 border-all-B-1 lapcatButton" style="width:auto;padding:2px;">
@@ -77,7 +77,7 @@
 	</div>
 	<div id="replyArea" style="display:table-cell;width:auto;"><!-- Reply Title -->
 		<div style="width:100%">
-			<div class="corners-bottom-2 corners-top-2 dark color-B-2 border-all-B-1" style="position:relative;text-align:left;margin:4px;padding:2px;height:20px" >
+			<div class="corners-bottom-2 corners-top-2 dark color-B-2 border-all-B-1" style="position:relative;text-align:left;margin:4px;margin-top:0px;padding:2px;height:20px" >
 				<font id="replyareaTitle" style="margin-left:10px;margin:5px;">Replies (0)</font>
 				<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 			</div>
