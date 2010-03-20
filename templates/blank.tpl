@@ -27,6 +27,7 @@
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
 		<br>1. Large Graphs are still not working properly
 		<br>2. Some themes do not work 100%
+		<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
 		<br>
 		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIII</span>
@@ -44,6 +45,7 @@
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
 		<br>1. Large Graphs are still not working properly
 		<br>2. Some themes do not work 100%
+		<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
 		<br>
 		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XII</span>
@@ -71,6 +73,7 @@
 		<br>2. Large Graphs are still not working properly
 		<br>3. Recent Tickets are not updating like they should
 		<br>4. Some themes do not work 100%
+		<br>5. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.		
 		<br>
 		<br>
     </div>
