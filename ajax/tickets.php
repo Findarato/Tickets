@@ -135,26 +135,25 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
                         if($s==0){//catch the 0 dateTime that happens on a reload
                         	if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
 								$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
-                        	}else{
+                        	}else{ 
 								$dt = date("Y-m-d H:m:s");
                         	}
                         }else{$dt = date("Y-m-d H:m:s",$s-60);}
-					//	$dt = date("Y-m-d H:m:s",strtotime("3/1/2010")); //Development hard coded date
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND assigned_id=".$usr->User_id;
-                      //  die($sql);
 						$db->Query($sql);
                         $ticketIds = $db->Fetch("row");
-					/*	
-						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND assigned_id=".$usr->User_id;
-                        $sql = "SELECT ticket_id,TIMESTAMPDIFF(SECOND ,r.created_on, NOW() ) AS tsd
-                         FROM responses AS r WHERE 
-                        TIMESTAMPDIFF(SECOND ,r.created_on, NOW() )<29
-                         AND ticket_id IN (".join(",",$ids).")";
-                        $db->Query($sql);
-                        $response["replies"] = $db->Fetch("assoc_array");
-                      */  
+					
+                        $sql = "SELECT tcv.id FROM tcview AS tcv WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
+						$db->Query($sql);
+                        $replyTicketids = $db->Fetch("row");
+						$replyTicketids = array_implode($replyTicketids);
 						
-						$ticketIds = array_implode($ticketIds);
+						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
+                        $db->Query($sql);
+                        $response = $db->Fetch("assoc_array");
+
+						
+						$ticketIds = array_implode(array_merge($ticketIds,$response));
                         if($ticketIds){
                         	$wc[]="tcv.id in(".join(",",$ticketIds).")";
                         }else{
