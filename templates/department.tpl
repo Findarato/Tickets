@@ -1,4 +1,4 @@
-<div class="color-D-1 border-B-1 ui-corner-all" style="text-align:left;padding-left:3px;">
+<div class="color-D-1 border-B-1 corners-bottom-2 corners-top-2" style="text-align:left;padding-left:3px;">
 	<table width="100%">
 		<tr>
 			<td style="padding-right:5px;"><div class="font-X ticket_button ticket_sprite user">Current Department is:</div></td>
