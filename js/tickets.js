@@ -142,53 +142,6 @@ function resize() {
  * @param int seconds
  */
 
-function sec2readable(seconds) {
-	var wt;
-	var week;
-	//var mabs = new Math;
-	seconds = Math.abs(seconds);
-	if (seconds < 31536000) { //Year
-		if (seconds < 2419200) { //Month
-			if (seconds < 604800) { //week
-				if (seconds < 86400) { //day
-					if (seconds < 3600) { //hour
-						if (seconds < 60) { //miniutes
-							return seconds + " Seconds";
-						} else {
-							return parseInt(seconds / 60, 10) + " Minutes";
-						}
-					} else {
-						return parseInt(seconds / 3600, 10) + " Hours";
-					}
-				} else {
-					return parseInt(seconds / 86400, 10) + " Days";
-				}
-			} else {
-				week = parseInt(seconds / 604800, 10);
-				wt = "";
-				if (week > 1) {
-					wt = "s";
-				}
-				return week + " Week" + wt;
-			}
-		} else {
-			week = parseInt(seconds / 2419200, 10);
-			wt = "";
-			if (week > 1) {
-				wt = "s";
-			}
-			return week + " Month" + wt;
-		}
-	} else {
-		week = parseInt(seconds / 31536000, 10);
-		wt = "";
-		if (week > 1) {
-			wt = "s";
-		}
-		return week + " Year" + wt;
-	}
-}
-
 function loadLargeStats() {
 	Params.Content.empty();
 	Params.Content.html(
