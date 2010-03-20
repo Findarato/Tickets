@@ -14,6 +14,7 @@
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
 		<br>2. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
+		<br>3. Fixed a bug with the start page not showing tickets if they were old and got a new response since your last visit.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
