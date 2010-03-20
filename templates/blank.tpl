@@ -8,14 +8,14 @@
     <br>
     <br>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
-		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class= "background-special-1 border-E-1">
 		<span style="font-size: 175%; line-height: normal;">Live Ticket Update XIV</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
-		<br>
+		<br>2. New start page.
+		<br>2.1 Tickets that have been worked on since your last visit are now shown instead of the update notes.  Update notes are still accessable though the link in the top right corner.
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
-		<br>1. 
+		<br>1. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
