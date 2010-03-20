@@ -10,8 +10,8 @@
 			</div>
 	</form>
 			<div class="table textLeft" style="width:100px">
-				<div class="td"><a class="option-theme fg-button ui-corner-all white lapcatButton Cancel" id="replyCancelBtn">Cancel</a></div>
-				<div class="td"><a class="option-theme fg-button ui-corner-all white lapcatButton" id="replyAddBtn">Add</a></div>
+				<div class="td"><a class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton Cancel" id="replyCancelBtn">Cancel</a></div>
+				<div class="td"><a class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="replyAddBtn">Add</a></div>
 			</div>
 		</div>		
 </div>

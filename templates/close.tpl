@@ -1,1 +1,0 @@
-Are you sure you want to close this ticket?
