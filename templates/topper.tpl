@@ -5,6 +5,7 @@
 		{else}   
 		{/if}
 		</span></div>
+		<div class="option-theme fg-button corners-bottom-2 corners-top-2 lapcatButton white" id="topperStart" style="width:auto" title="Show Start Page"><span class="ticket_button ticket_sprite tux">Start</span></div>
 		<div class="option-purple fg-button corners-bottom-2 corners-top-2 lapcatButton white" id="topperNew" style="width:auto"><span class="ticket_button ticket_sprite add">New Ticket</span></div>
 		<div class="option-purple fg-button corners-bottom-2 corners-top-2 lapcatButton white" id="topperSearch" style="width:auto"><span class="ticket_button ticket_sprite search">Search</span></div>
 		<div class="option-theme fg-button corners-bottom-2 corners-top-2 lapcatButton white" id="topperRecent" style="width:auto" title="Toggle Recent"><span class="ticket_button ticket_sprite bug">Recent Tickets</span></div>

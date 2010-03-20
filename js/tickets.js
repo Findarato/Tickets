@@ -98,7 +98,7 @@ function checkHash() {
 		case "#updateNotes":
 			loadBlank();
 			break;
-		default:
+		default: case "#start":
 			loadNew(Params.LastLogon);
 			break;
 		}
@@ -1164,7 +1164,7 @@ jQuery(document).ready(function () {
 		}
 		populateAllTickets();
 	});
-
+	$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	//Live items
 	//Ticket display live items
 	$("#Holdlink").live("click", function () {

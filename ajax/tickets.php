@@ -139,6 +139,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 								$dt = date("Y-m-d H:m:s");
                         	}
                         }else{$dt = date("Y-m-d H:m:s",$s-60);}
+						//$dt = date("Y-m-d H:m:s",strtotime("3/1/2010"));
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND assigned_id=".$usr->User_id;
 						$db->Query($sql);
                         $ticketIds = $db->Fetch("row");
