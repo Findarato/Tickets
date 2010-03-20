@@ -199,9 +199,9 @@ function loadLargeStats() {
 		padding: "2px",
 		height: "20px",
 		position: "relative"
-	}).addClass("ui-corner-all color-B-2 border-all-B-1").append($("<font/>").css({
+	}).addClass("corners-bottom-2 corners-top-2 color-B-2 border-all-B-1").append($("<font/>").css({
 		margin: "5px"
-	}).html("Large Stats for tickets"))).append(holder = $("<div/>").addClass("color-E-2 ui-corner-all border-all-B-1").css({
+	}).html("Large Stats for tickets"))).append(holder = $("<div/>").addClass("color-E-2 corners-bottom-2 corners-top-2 border-all-B-1").css({
 		height: "500px",
 		overflow: "auto",
 		margin: "4px",
@@ -413,9 +413,6 @@ function loadResponsesBody(ticketId, container, page) {
 
 		container.fadeIn(Params.FadeTime);
 	});
-
-	$("#working").hide();
-
 }
 
 function displayStatus(jsonData, Selector) {
@@ -809,7 +806,9 @@ function loadStats() {
 }
 
 jQuery(document).ready(function () {
-	//jQuery.each(jQuery.browser, function(i, val) {notice("Debug",i+"=>"+val,false);});
+	
+	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
+	
 	if (uri.match('dev') == 'dev') {
 		path = "http://dev.lapcat.org/" + $("#themegencss").attr("href");
 		$("#themegencss").attr("href", path);
@@ -881,7 +880,7 @@ jQuery(document).ready(function () {
 		$(this).blur();
 	});
 	$("#replyToggle").click(function () {
-		$("#replyarea").toggle();
+		$("#replyArea").toggle();
 		if ($("#storage").html() == "1") {
 			$("#storage").html("0");
 		} else {
@@ -906,7 +905,7 @@ jQuery(document).ready(function () {
 			"pastDayShades": true,
 			"backgroundClass": "color-D-2",
 			"borderClass": "border-all-B-1",
-			"borderRoundClass": "ui-corner-all",
+			"borderRoundClass": "corners-bottom-2 corners-top-2",
 			"shadeClass": "background-alpha-3",
 			"highLightToday": true,
 			"highLightTodayClass": Params.HighlightClass,
@@ -970,7 +969,7 @@ jQuery(document).ready(function () {
 				"zIndex": "50",
 				"textAlign": "left",
 				"overflow": "hidden"
-			}).addClass("border-all-B-1 color-D-1 ui-corner-all").html(RecTick).attr({
+			}).addClass("border-all-B-1 color-D-1 corners-bottom-2 corners-top-2").html(RecTick).attr({
 				"id": "recentTickets"
 			});
 			$('body').append(recentTickets);
