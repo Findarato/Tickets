@@ -18,20 +18,21 @@
 				$dep = array_implode($dep);
 				if(count($dep)!=2 || $dep===false){
 					$response["departmentid"]=-1; 
-					$response["departmentname"]="None!";
+					$response["departmentname"] = "None!";
 				}else{
-					$response["departmentid"]=$dep[0];
-					$response["departmentname"]=$dep[1];
+					$response["departmentid"] = $dep[0];
+					$response["departmentname"] = $dep[1];
 				}
 				$db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
 				$res = $db->Fetch("row");
 				$response["opt"] = $res;
 				//$dt = date("U");
 				$dt =date("U");
-				$response['message']="Login Successful";
+				$response['message'] = "Login Successful";
 				$db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
 				$llo = $db->Fetch("row");
-				$response['lastlogon']=$llo;
+				$response['lastlogon'] = $llo;
+				$_SESSION["lastlogon"] = $llo;
 				$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
 				if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
 				$db->Query("SELECT email FROM alt_email WHERE user_id=".$response["userid"]);

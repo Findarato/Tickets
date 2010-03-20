@@ -131,31 +131,41 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 							$idList = getDepartmentMembers_by_userid($usr -> User_id);
 							$wc[]="(tcv.assigned_id IN (".join(",",$idList).")) ";
 					break;
-					case "new":
-						$dt = $db->Clean($_GET["dateTime"]);
-						$dt = date("Y-m-d H:m:s",$dt-60);
-
-						$sql = "SELECT tcv.id FROM tcview AS tcv WHERE 
-						TIMESTAMPDIFF(SECOND ,tcv.created_on, NOW() )>29
-						 AND assigned_id=".$usr->User_id;
-						$db->Query($sql);
-						$response["tickets"] = $db->Fetch("assoc_array");
+					case "dateTime":
+                        if($s==0){//catch the 0 dateTime that happens on a reload
+                        	if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
+								$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
+                        	}else{
+								$dt = date("Y-m-d H:m:s");
+                        	}
+                        }else{$dt = date("Y-m-d H:m:s",$s-60);}
+					//	$dt = date("Y-m-d H:m:s",strtotime("3/1/2010")); //Development hard coded date
 						
-						/*
-						$sql = "SELECT ticket_id,TIMESTAMPDIFF(SECOND ,r.created_on, NOW() ) AS tsd
-						 FROM responses AS r WHERE 
-						TIMESTAMPDIFF(SECOND ,r.created_on, NOW() )<29
-						 AND ticket_id IN (".join(",",$ids).")";
+                        $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND assigned_id=".$usr->User_id;
+                      //  die($sql);
 						$db->Query($sql);
-						$response["replies"] = $db->Fetch("assoc_array");
-						*/
-		
-						$wc[]="tcv.id in(".join(",",$ticketIds).")";
-						$wc[]="tcv.open=\"".$s."\"";
+                        $ticketIds = $db->Fetch("row");
+						
+						
+                        /*
+                        $sql = "SELECT ticket_id,TIMESTAMPDIFF(SECOND ,r.created_on, NOW() ) AS tsd
+                         FROM responses AS r WHERE 
+                        TIMESTAMPDIFF(SECOND ,r.created_on, NOW() )<29
+                         AND ticket_id IN (".join(",",$ids).")";
+                        $db->Query($sql);
+                        $response["replies"] = $db->Fetch("assoc_array");
+                        */
+						$ticketIds = array_implode($ticketIds);
+                        if($ticketIds){
+                        	$wc[]="tcv.id in(".join(",",$ticketIds).")";
+                        }else{
+                        	$wc[]="tcv.id in(0,0)";
+                        }
 					break;
-					
 					case "open":
 						$wc[]="tcv.open=\"".$s."\"";
+					case "new":
+						$wc[]="tcv.assigned_id=".$usr->User_id;
 					break;
 					case "page":
 						$end = 20;
@@ -175,8 +185,8 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 					case "sOdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.assigned_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";break;
 					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.created_by_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";break;
 					case "sAssigned":$wc[]="tcv.created_by_id=".$usr->User_id;$wc[]="tcv.open=1";break;
-					case "sClosed":$wc[]="tcv.open=0";break;
-					case "sOpen":$wc[]="tcv.open=1"; break;	
+					case "sClosed":$wc[]="tcv.open=0";$wc[]="tcv.assigned_id=".$usr->User_id;break;
+					case "sOpen":$wc[]="tcv.open=1";$wc[]="tcv.assigned_id=".$usr->User_id; break;	
 									
 				}				
 			}
@@ -212,14 +222,14 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 								FROM tcview AS tcv 
 								JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 								JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
-								WHERE ".getWhereClause($user_id,$type)." GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC LIMIT 20;";								
-
+								WHERE ".getWhereClause($user_id,$type)." GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC LIMIT 20;";
 				break;
 			}
 		break;
 	}
 	$db->Query($sql);
-	//$count = $db->Count_res();
+	//die($sql);
+	$count = $db->Count_res();
 	if($type=="search"){$db->Query($sql." LIMIT ".$start.",".$end.";");}
 	$return = $db->Fetch("assoc_array");
 	if(is_array($return)){
@@ -228,6 +238,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 				$return[$ke]["status"]=unserialize($return[$ke]["status"]);}
 		}
 	}
+	if($count == 0){return false;}
 	return $return;
 }
 /**
@@ -331,7 +342,9 @@ if(isset($_SESSION["user"])){ //the session is set
 			break;
 			case "search":
 				$response["tickets"] = getTickets($usr->User_id,"search",10,'',$_GET);
-				$response["tickets"] = aTcode($response["tickets"]);
+				if($response["tickets"]){
+					$response["tickets"] = aTcode($response["tickets"]);	
+				}
 			break;
 			case "small":
 				if(isset($_GET['index'])){
