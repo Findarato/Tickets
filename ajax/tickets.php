@@ -155,9 +155,10 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
                         $response = $db->Fetch("row");
 						$response = array_implode($response); 
 
-						
+						if(!is_array($ticketIds)){
+							$ticketIds = array(0=>$ticketIds);
+						}
 						$ticketIds = array_merge($ticketIds,$response);
-						//print_r($ticketIds);die();
                         if($ticketIds){
                         	$wc[]="tcv.id in(".join(",",$ticketIds).")";
                         }else{
@@ -176,6 +177,14 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						$amount = $limit+$amount;
 						break;
 					case "sFavorite": 
+						$db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id);
+						$favIds = $db->Fetch("row");
+						if(is_array($favIds)){
+							$favIds = array_implode($favIds);
+						}else{//This is only one result
+							$favIds = array(0=>$favIds);
+						}
+						$wc[]="tcv.id in(".join(",",$favIds).")";
 						//@todo add in favorite search
 						//$sql = "SELECT t.id,t.subject,t.created_on, TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago FROM tcview AS t JOIN favorite AS f ON (t.id=f.ticket_id) WHERE f.user_id=".$user_id." ORDER BY  created_on  LIMIT 0,$amount";
 					break;
@@ -231,7 +240,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 	}
 	$db->Query($sql);
 	//die($sql);
-	$count = $db->Count_res();
+	//$count = @$db->Count_res();
 	if($type=="search"){$db->Query($sql." LIMIT ".$start.",".$end.";");}
 	$return = $db->Fetch("assoc_array");
 	if(is_array($return)){
@@ -240,7 +249,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 				$return[$ke]["status"]=unserialize($return[$ke]["status"]);}
 		}
 	}
-	if($count == 0){return false;}
+	if(count($db->Error)==2){return false;}
 	return $return;
 }
 /**
