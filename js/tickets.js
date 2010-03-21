@@ -578,6 +578,7 @@ function loadTicketList(pageNumber,queryObj) {
 		O_search.type = "search";
 		O_search.page = pageNumber;			
 	}else{
+		$("#ticketListtitle").html("Tickets search Result");
 		hash = getHashArray();
 		O_search = {
 			"type": "search",
