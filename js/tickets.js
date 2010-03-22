@@ -718,7 +718,10 @@ function loadTicketList(pageNumber,queryObj) {
 			}).attr({
 				"id": "CreatedBy" + item.id
 			});
+			tlistHolder.find("#changemeTicketListIcons").attr("id",item.id+"-ticketListIcons")
+			displayStatus(item.status, tlistHolder.find("#"+item.id+"-ticketListIcons")); //status icons
 		});
+		
 		Tlb.html(tlistHolder);
 		$("#working").hide();
 	});

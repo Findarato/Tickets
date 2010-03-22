@@ -10,6 +10,21 @@
 			</font>
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
+	<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV beta</span>
+		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+		<br>1. 
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">New Features</span>
+		<br>1. Ticket lists now show the same icons as the normal ticket view.
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
+		<br>1. Large Graphs are still not working properly
+		<br>2. Some themes do not work 100%
+		<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+		<br>
+		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
@@ -17,12 +32,14 @@
 		<br>3. Fixed a bug with the start page not showing tickets if they were old and got a new response since your last visit.
 		<br>4. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/434">ticket 434</a>.
 		<br>
+		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
 		<br>1. New start page.
 		<br>1.1 Tickets that have been worked on since your last visit are now shown instead of the update notes.  Update notes are still accessable though the link in the top right corner.
 		<br>1.2 Ticket lists have been reworked along side the crusade to banish the table tag.
 		<br>2. Tickets is using the rounded corner CSS from the theme generator now. This will insure that the corners look correct.
 		<br>3. New look to tickets and replies.  More table tags squashed!
+		<br>4. Ticket lists now show the same icons as the normal ticket view.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
