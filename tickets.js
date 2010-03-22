@@ -711,7 +711,7 @@ function loadTicketList(pageNumber,queryObj) {
 			}).attr({
 				"id": "category" + item.id
 			});
-			tlistHolder.find("#changemeAssignedid").html("Created By: <br>").append($("<a/>").attr({
+			tlistHolder.find("#changemeAssignedid").html("Created By:").append($("<a/>").attr({
 				"href": "#ticketlist/created_by/" + item.created_by_id
 			}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname2 + " " + item.lastname2)).css({
 				"fontSize": "9px"
