@@ -10,13 +10,14 @@
 			</font>
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
-	<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV beta</span>
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. 
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
 		<br>1. Ticket lists now show the same icons as the normal ticket view.
+		<br>1. Ticket lists have been reorganized a bit.  The created by link is now on the right instead of the left.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>

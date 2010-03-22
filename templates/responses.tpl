@@ -3,7 +3,6 @@
 		<div style="display:table-cell; padding:6px; width:100px;">
 			<div id="changemeUserid"></div>
 			<div id="changemeDay" class="font-L font-bold"></div>
-			<div id="changemeAssignedid"></div>
 		</div>
 		<div style="display:table-cell;">
 			<div style="display:table-row">
@@ -23,10 +22,11 @@
 			<div class="font-X" id="changemeBody"></div>
 			<div id="changemeCategory"></div>
 		</div>
-		<div id="ticketListDueDate" style="display:table-cell;width:150px;right:0px;">
+		<div id="ticketListDueDate" style="display:table-cell;width:200px;right:0px;">
 			<div id="changemeDueDate"></div>
 			<div class="font-X" id="changemeTr"></div>
 			<div class="font-X" id="changemeTT"></div>
+			<div id="changemeAssignedid"></div>
 		</div>
 	</div>
 </div>
