@@ -150,7 +150,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						
 						//$dt = date("Y-m-d H:m:s",strtotime("3/19/2010"));
 						//new tickets
-                        $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND assigned_id=".$usr->User_id;
+                        $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
 						$db->Query($sql);
                         $ticketIds = $db->Fetch("row");
 						//new replies
