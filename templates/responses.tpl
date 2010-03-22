@@ -7,13 +7,13 @@
 		</div>
 		<div style="display:table-cell;">
 			<div id="changemeSubject"></div>
-			<div id="changemeBody"></div>
+			<div class="font-X" id="changemeBody"></div>
 			<div id="changemeCategory"></div>
 		</div>
 		<div id="ticketListDueDate" style="display:table-cell;width:150px;right:0px;">
 			<div id="changemeDueDate"></div>
-			<div id="changemeTr"></div>
-			<div id="changemeTT"></div>
+			<div class="font-X" id="changemeTr"></div>
+			<div class="font-X" id="changemeTT"></div>
 		</div>
 	</div>
 </div>

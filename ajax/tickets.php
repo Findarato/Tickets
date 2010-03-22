@@ -132,19 +132,25 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 							$wc[]="(tcv.assigned_id IN (".join(",",$idList).")) ";
 					break;
 					case "dateTime":
-                        if($s==0){//catch the 0 dateTime that happens on a reload
-                        	if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
-								$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
-                        	}else{ 
-								$dt = date("Y-m-d H:m:s");
-                        	}
-                        }else{$dt = date("Y-m-d H:m:s",$s-60);}
-						//$dt = date("Y-m-d H:m:s",strtotime("3/1/2010"));
+						switch($s){
+							case "0":
+		                      	if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
+									$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
+	                        	}else{ 
+									$dt = date("Y-m-d H:m:s");
+	                        	}
+							break;
+							default:
+								$dt = date("Y-m-d H:m:s",$s-60);
+							break;
+						}
+						
+						//$dt = date("Y-m-d H:m:s",strtotime("3/19/2010"));
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND assigned_id=".$usr->User_id;
+						
 						$db->Query($sql);
                         $ticketIds = $db->Fetch("row");
-						$ticketIds = array_implode($ticketIds);
-
+						
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
 						$db->Query($sql);
                         $replyTicketids = $db->Fetch("row");
@@ -153,11 +159,11 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
 						$db->Query($sql);
                         $response = $db->Fetch("row");
-						$response = array_implode($response); 
 
-						if(!is_array($ticketIds)){
-							$ticketIds = array(0=>$ticketIds);
-						}
+						//some simple error checking.
+						if(!is_array($ticketIds)){$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
+						if(!is_array($response)){$response = array(0=>$response);}else{$response = array_implode($response);}
+						
 						$ticketIds = array_merge($ticketIds,$response);
                         if($ticketIds){
                         	$wc[]="tcv.id in(".join(",",$ticketIds).")";
@@ -185,8 +191,6 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 							$favIds = array(0=>$favIds);
 						}
 						$wc[]="tcv.id in(".join(",",$favIds).")";
-						//@todo add in favorite search
-						//$sql = "SELECT t.id,t.subject,t.created_on, TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago FROM tcview AS t JOIN favorite AS f ON (t.id=f.ticket_id) WHERE f.user_id=".$user_id." ORDER BY  created_on  LIMIT 0,$amount";
 					break;
 					case "title":
 						if($s!=""){$wc[]="tcv.subject LIKE \"%".$s."%\"";}
