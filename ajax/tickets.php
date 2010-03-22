@@ -151,6 +151,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						//$dt = date("Y-m-d H:m:s",strtotime("3/19/2010"));
 						//new tickets
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
+						//die($sql);
 						$db->Query($sql);
                         $ticketIds = $db->Fetch("row");
 						//new replies
@@ -158,21 +159,22 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						$db->Query($sql);
                         $replyTicketids = $db->Fetch("row");
 						if(!is_array($replyTicketids)){$replyTicketids = array(0=>$replyTicketids);}else{$replyTicketids = array_implode($replyTicketids);}
-					
+						
 						
 						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
 						$db->Query($sql);
                         $response = $db->Fetch("row");
-
+						
+						
 
 						//some simple error checking.
-						if(!is_array($ticketIds)){$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
-						if(!is_array($response)){$response = array(0=>$response);}else{$response = array_implode($response);}
+						if(!is_array($ticketIds)){if($ticketIds == ""){$ticketIds = 0;}$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
+						
+						if(!is_array($response)){if($response == ""){$response = 0;}$response = array(0=>$response);}else{$response = array_implode($response);}
 						
 						$ticketIds = array_merge($ticketIds,$response);
-						
                         if($ticketIds){
-                        	$wc[]="tcv.id in(".join(",",$ticketIds).")";
+                        	$wc[]="tcv.id IN(".join(",",$ticketIds).")";
                         }else{
                         	$wc[]="tcv.id in(0,0)";
                         }
@@ -180,7 +182,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 					case "open":
 						$wc[]="tcv.open=\"".$s."\"";
 					case "new":
-						$wc[]="tcv.assigned_id=".$usr->User_id;
+						//$wc[]="tcv.assigned_id=".$usr->User_id;
 					break;
 					case "page":
 						$end = 20;
@@ -228,6 +230,8 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 						JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
 						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC ';	
+						
+						//die($sql);
 			}
 			
 		break;
