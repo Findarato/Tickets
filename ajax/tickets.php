@@ -143,28 +143,34 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 							default:
 								$dt = date("Y-m-d H:m:s",$s-60);
 							break;
+							case "today":
+								$dt = date("Y-m-d H:m:s",strtotime("today"));
+							break;
 						}
 						
 						//$dt = date("Y-m-d H:m:s",strtotime("3/19/2010"));
+						//new tickets
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND assigned_id=".$usr->User_id;
-						
 						$db->Query($sql);
                         $ticketIds = $db->Fetch("row");
-						
+						//new replies
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
 						$db->Query($sql);
                         $replyTicketids = $db->Fetch("row");
-						$replyTicketids = array_implode($replyTicketids);
+						if(!is_array($replyTicketids)){$replyTicketids = array(0=>$replyTicketids);}else{$replyTicketids = array_implode($replyTicketids);}
+					
 						
 						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
 						$db->Query($sql);
                         $response = $db->Fetch("row");
+
 
 						//some simple error checking.
 						if(!is_array($ticketIds)){$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
 						if(!is_array($response)){$response = array(0=>$response);}else{$response = array_implode($response);}
 						
 						$ticketIds = array_merge($ticketIds,$response);
+						
                         if($ticketIds){
                         	$wc[]="tcv.id in(".join(",",$ticketIds).")";
                         }else{
