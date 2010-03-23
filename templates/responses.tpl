@@ -20,13 +20,13 @@
 				</div>
 			</div>
 			<div class="font-X" id="changemeBody"></div>
-			<div id="changemeCategory"></div>
+			<div class="font-X" id="changemeCategory"></div>
 		</div>
 		<div id="ticketListDueDate" style="display:table-cell;width:200px;right:0px;">
-			<div id="changemeDueDate"></div>
+			<div class="font-X" id="changemeDueDate"></div>
 			<div class="font-X" id="changemeTr"></div>
 			<div class="font-X" id="changemeTT"></div>
-			<div id="changemeAssignedid"></div>
+			<div class="font-X" id="changemeAssignedid"></div>
 		</div>
 	</div>
 </div>
