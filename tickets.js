@@ -526,7 +526,7 @@ function loadTicketBody(ticketId, container) {
 			inline: true,
 			href: "#reassignTicketdialog",
 			title: "<font class=\"white\">Reassign Ticket</font>"
-		}, function () {});
+		});
 		//Set the ticket type icon
 		if (data.tickettype_id == 1) {
 			$("#imgTicketTrouble").show();
@@ -1164,12 +1164,24 @@ jQuery(document).ready(function () {
 	$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	//Live items
 	//Ticket display live items
+	
+	$(".actionButtons").live("click", function () {
+		var queryObj = {};
+		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
+		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
+		if($(this).hasClass("closeLink")){queryObj = {type:"close",ticket_id: Params.Ticket_id};}
+		if($(this).hasClass("openLink")){queryObj = {type:"open",ticket_id: Params.Ticket_id};}
+		$.getJSON(uri + "ajax/tickets.php", queryObj,
+		function (data) {
+			checkResponse(data);
+			loadTicketBody(Params.Ticket_id, Params.Content);
+			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
+		});
+	});
+	/*
 	$("#Holdlink").live("click", function () {
-		$.getJSON(uri + "ajax/tickets.php", {
-			type: "hold",
-			value: 1,
-			ticket_id: Params.TicketJSON.id
-		}, function (data) {
+		$.getJSON(uri + "ajax/tickets.php", {type: "hold",value: 1,ticket_id: Params.TicketJSON.id},
+		function (data) {
 			checkResponse(data);
 			loadTicketBody(Params.Ticket_id, Params.Content);
 			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
@@ -1195,15 +1207,15 @@ jQuery(document).ready(function () {
 		});
 	});
 	$("#openlink").live("click", function () {
-		$.get(uri + "/ajax/tickets.php", {
-			type: "open",
-			ticket_id: Params.Ticket_id
-		}, function () {
+		$.get(uri + "/ajax/tickets.php", {type: "open",	ticket_id: Params.Ticket_id	}, 
+		function () {
 			populateAllTickets();
 			loadTicketBody(Params.Ticket_id, Params.Content);
 			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
 		});
 	});
+	
+	*/
 	//Global page live 
 	$(":text").live("click", function () {
 		$(this).select();
