@@ -12,18 +12,21 @@
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
-		<br>1. 
+		<br>1. Fixed some spelling problems. 
+		<br>2. Closing and reopening of tickets should be a lot faster.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
 		<br>1. Ticket lists now show the same icons as the normal ticket view.
-		<br>1. Ticket lists have been reorganized a bit.  The created by link is now on the right instead of the left.
+		<br>2. Ticket lists have been reorganized a bit.  The created by link is now on the right instead of the left.
+		<br>3. 	
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
 		<br>1. Large Graphs are still not working properly
 		<br>2. Some themes do not work 100%
 		<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+		<br>4. You can lock a closed ticket.
 		<br>
 		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV</span>

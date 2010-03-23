@@ -33,7 +33,7 @@
 				       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Due On</font></div>
 				       	<div class="left "><font id="ticketDueDate"></font></div>
 			        </div>
-			        <div style="clear:both;display:none" id="ticketClosedOn">
+			        <div style="clear:both;display:none" class="closedTicket" id="ticketClosedOn">
 				       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Closed On</font></div>
 				       	<div class="left "><font id="ticketClosedOnDate"></font></div>
 			        </div>
@@ -58,8 +58,8 @@
 				       	<div class="left" ><font id="ticketLocation"></font></div>
 					</div>
 					<div style="position:absolute;top:1px;right:0px;clear:both;">
-						<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
-						<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unLock</span></div>
+						<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left openTicket hold" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
+						<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left openTicket hold" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
 						<!--<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
 					</div>
 					<div id="ticketDataBox" style="padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:285px;overflow:auto;vertical-align:top; clear:both">
@@ -68,10 +68,10 @@
 				</div>
 			</div>
 			<div style="border-top:none;height:30px;position:relative;padding-top:4px;padding-left:4px;margin-left:4px;margin-right:4px;overflow:hidden;" class="background-special-1 color-E-2 corners-bottom-2">
-				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="editlink" style="width:45px;">Edit</div>
-				<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="closelink" style="width:45px;">Close</div>
-				<div class="option-black fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="openlink" style="width:45px;display:none">Reopen</div>
-				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user_edit">Reassign</span></div>
+				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket" id="editlink" style="width:45px;">Edit</div>
+				<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket" id="closelink" style="width:45px;">Close</div>
+				<div class="option-black fg-button corners-bottom-2 corners-top-2 white lapcatButton closedTicket" id="openlink" style="width:45px;display:none">Reopen</div>
+				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user_edit">Reassign</span></div>
 			</div>
 		</div>
 	</div>

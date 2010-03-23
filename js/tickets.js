@@ -458,25 +458,18 @@ function loadTicketBody(ticketId, container) {
 			$("#Holdlink").show();
 			$("#unHoldlink").hide();
 		}
-		if (data.closed_on !== null) {
+		if (data.closed_on !== null) { //All closed tickets
 			container.find("#ticketClosedOnDate").html(data.closed_on);
-			container.find("#ticketClosedOn").show();
-			container.find("#closelink").hide();
-			if (data.dagoc < 604800 || data.open == 1) {
-				container.find("#openlink").show();
-				container.find("#editlink").show();
-				container.find("#ReAssignlink").show();
-			} else {
-				container.find("#openlink").hide();
-				container.find("#editlink").hide();
-				container.find("#ReAssignlink").hide();
+			if (data.dagoc < 604800 || data.open == 1) { //newly closed
+				container.find(".openTicket").hide();
+				container.find(".closedTicket").show();
+			} else { //very old closed
+				container.find(".openTicket").hide();
+				container.find(".closedTicket").hide();
 			}
-		} else {
-			container.find("#ticketClosedOn").empty().hide();
-			container.find("#closelink").show();
-			container.find("#openlink").hide();
-			container.find("#editlink").show();
-			container.find("#ReAssignlink").show();
+		} else { //open tickets
+			container.find(".openTicket:not(.hold)").show();
+			container.find(".closedTicket").hide();
 		}
 		var attCnt = 0;
 		if ($("#storage").html() == 1) {
@@ -1177,23 +1170,16 @@ jQuery(document).ready(function () {
 			value: 1,
 			ticket_id: Params.TicketJSON.id
 		}, function (data) {
-			$("#Holdlink").hide();
-			$("#unHoldlink").show();
 			checkResponse(data);
-			Params.Content.find("#imgLock").show();
-			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0); //reload the first response page
+			loadTicketBody(Params.Ticket_id, Params.Content);
+			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
 		});
 	});
 	$("#unHoldlink").live("click", function () {
-		$.getJSON(uri + "ajax/tickets.php", {
-			type: "hold",
-			value: 0,
-			ticket_id: Params.TicketJSON.id
-		}, function (data) {
-			$("#Holdlink").show();
-			$("#unHoldlink").hide();
+		$.getJSON(uri + "ajax/tickets.php", {type: "hold",value: 0,ticket_id: Params.TicketJSON.id},
+		function (data) {
 			checkResponse(data);
-			Params.Content.find("#imgLock").hide();
+			loadTicketBody(Params.Ticket_id, Params.Content);
 			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0); //reload the first response page
 		});
 	});
@@ -1204,9 +1190,8 @@ jQuery(document).ready(function () {
 		}, function () {
 			populateAllTickets("o");
 			populateAllTickets("c");
+			loadTicketBody(Params.Ticket_id, Params.Content);
 			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
-			$("#closelink").hide();
-			$("#openlink").show();
 		});
 	});
 	$("#openlink").live("click", function () {
@@ -1215,9 +1200,8 @@ jQuery(document).ready(function () {
 			ticket_id: Params.Ticket_id
 		}, function () {
 			populateAllTickets();
+			loadTicketBody(Params.Ticket_id, Params.Content);
 			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
-			$("#closelink").show();
-			$("#openlink").hide();
 		});
 	});
 	//Global page live 
