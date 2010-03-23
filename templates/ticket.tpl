@@ -58,8 +58,8 @@
 				       	<div class="left" ><font id="ticketLocation"></font></div>
 					</div>
 					<div style="position:absolute;top:1px;right:0px;clear:both;">
-						<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left openTicket hold" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
-						<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left openTicket hold" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
+						<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left openTicket hold actionButtons holdLink" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
+						<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left openTicket hold actionButtons unholdLink" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
 						<!--<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
 					</div>
 					<div id="ticketDataBox" style="padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:285px;overflow:auto;vertical-align:top; clear:both">
@@ -68,9 +68,9 @@
 				</div>
 			</div>
 			<div style="border-top:none;height:30px;position:relative;padding-top:4px;padding-left:4px;margin-left:4px;margin-right:4px;overflow:hidden;" class="background-special-1 color-E-2 corners-bottom-2">
-				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket" id="editlink" style="width:45px;">Edit</div>
-				<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket" id="closelink" style="width:45px;">Close</div>
-				<div class="option-black fg-button corners-bottom-2 corners-top-2 white lapcatButton closedTicket" id="openlink" style="width:45px;display:none">Reopen</div>
+				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket actionButtons editLink" id="editlink" style="width:45px;">Edit</div>
+				<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>
+				<div class="option-black fg-button corners-bottom-2 corners-top-2 white lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:45px;display:none">Reopen</div>
 				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user_edit">Reassign</span></div>
 			</div>
 		</div>

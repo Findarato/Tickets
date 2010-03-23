@@ -1,12 +1,12 @@
 <div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" id="changemeColor" class="corners-bottom-2 corners-top-2 border-all-B-1">
 	<div style="display:table-row;width:100%">
 		<div style="display:table-cell; padding:6px; width:100px;">
-			<div id="changemeUserid"></div>
+			<div class="font-X" id="changemeUserid"></div>
 			<div id="changemeDay" class="font-L font-bold"></div>
 		</div>
 		<div style="display:table-cell;">
 			<div style="display:table-row">
-				<div style="display:table-cell" id="changemeSubject"></div>
+				<div class="font-X" style="display:table-cell" id="changemeSubject"></div>
 				<div id="changemeTicketListIcons" style="display:table-cell">
 					<div class="statusImage left ticket_button ticket_sprite edit" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
 					<div class="statusImage left ticket_button ticket_sprite user_edit" style="display:none;height:15px;" id="imgReassigned" title="Reassigned"></div>

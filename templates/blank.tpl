@@ -14,6 +14,7 @@
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some spelling problems. 
 		<br>2. Closing and reopening of tickets should be a lot faster.
+		<br>3. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/450">ticket 450</a>.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
@@ -26,7 +27,6 @@
 		<br>1. Large Graphs are still not working properly
 		<br>2. Some themes do not work 100%
 		<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
-		<br>4. You can lock a closed ticket.
 		<br>
 		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV</span>
