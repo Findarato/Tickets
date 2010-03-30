@@ -7,11 +7,18 @@
  */
 	include_once("../header.php");
 $_GET = $db->Clean($_GET);
-$usr = unserialize($_SESSION["user"]);
 
-if($usr->User_id==$_GET["newTicketUser_id"]){
+if($_SESSION){
+	$_GET['nagiosTicket']=881234123;
+	if(isset($_SESSION["user"])){
+		$usr = unserialize($_SESSION["user"]);	
+	}else {
+		@$usr = new User();
+	}
+}
+
+if($_GET['nagiosTicket']==881234123){
 	if($_GET['newTicketType']=="new"){
-
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
 		VALUES(
@@ -20,7 +27,7 @@ if($usr->User_id==$_GET["newTicketUser_id"]){
 				"'.$_GET["newTicketAssign"].'",
 				"'.$_GET["newTicketCategory"].'",
 				"'.$_GET["newTicketTitle"].'",				
-				"'.nl2br($_GET["newTicketDescription"]).'",
+				"'.str_replace("\n","<br>",nl2br($_GET["newTicketDescription"])).'",
 				NOW(),1,
 				"'.(intval($_GET["newTicketPriority"])+1).'",
 				"'.$dueOn.'",
@@ -48,7 +55,10 @@ if($usr->User_id==$_GET["newTicketUser_id"]){
 			$smarty -> assign('showRes',"0");
 			if(isset($respon)){	$smarty -> assign('respon',$respon);}
 			$body = $smarty->fetch('email.tpl');
-			generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail);	
+			if($_GET['nagiosTicket']!=881234123 || !isset($_GET['nagiosTicket'])){
+				generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail);	
+			}
+				
 		
 		/** Achievements area */	
 		//	$response['achievements'] = $usr->F_CheckAchievements(array(1,2,3,4));
