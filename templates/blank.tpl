@@ -10,11 +10,13 @@
 			</font>
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
-		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV</span>
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV v.2.3.0</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some spelling problems. 
 		<br>2. Closing and reopening of tickets should be a lot faster.
 		<br>3. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/450">ticket 450</a>.
+		<br>4. The ticket list is now the same height as the ticket area.
+		<br>5. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/451">ticket 451</a>.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
@@ -29,7 +31,7 @@
 		<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
 		<br>
 		<br>
-		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV</span>
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV v.2.2.4</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
 		<br>2. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user

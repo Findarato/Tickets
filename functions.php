@@ -148,20 +148,22 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 function id2Email($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
 	$db = db::getInstance();
 	//Get the email address from the user table
-	$db -> Query("SELECT id,email_address FROM $userDatabase.$userTable",true);
+	$db -> Query("SELECT id,email_address FROM $userDatabase.$userTable");
 	$res = $db->Format("assoc_array");
 	$formatedArray = array(); //Create the storage array
 	foreach ($res as $r){
 		$formatedArray[$r['id']]=$r['email_address'];
 	}
+
 	//Get the email address from the alt email table
-	$db -> Query("SELECT user_id,email FROM tickets.alt_email",true);
+	$db -> Query("SELECT user_id,email FROM tickets.alt_email");
 	$res = $db->Format("assoc_array");
 	foreach ($res as $r){
 		//replace the user table email with the alt email
 		$formatedArray[$r['user_id']]=$r['email'];
 	}
-	$db -> Store_results($formatedArray,"users");	
+	//$db -> Store_results($formatedArray,"users");	
+		
 	$Userinfo = $formatedArray[$user_id];
 	return $Userinfo;
 }
@@ -276,10 +278,11 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 	$headers = "From: $from". "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-	$emailIds['created'] = getDepartmentMembers_by_userid($user_id,1);//created by
+	if($user_id!=128){
+		$emailIds['created'] = getDepartmentMembers_by_userid($user_id,1);//created by
+	}
 	$emailIds['assigned'] = getDepartmentMembers_by_userid($assigned_id,1); //assigned to
-	$emailIds[] = $assigned_id;
+	$emailIds[] = $assigned_id;	
 	$idsToEmail = uniqueArray(array_implode($emailIds));
 	$email = array();
 	$replyMessageLocation = "There is a new reply to ($ticketTitle)";
