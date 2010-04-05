@@ -3,28 +3,28 @@
 	<form name="newTicketForm" action="#" method="post" id="newTicketForm">
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
-			<td style="text-align:left;"><font class="">Title of Ticket:</font><input type="text" name="newTicketTitle" id="newTicketTitle"  class="dropdown Ticketform " maxlength="35" /></td>
+			<td style="text-align:left;"><font class="font-Y">Title of Ticket:</font><input type="text" name="newTicketTitle" id="newTicketTitle"  class="dropdown Ticketform " maxlength="35" /></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="">Category:</font><select class="dropdown Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate }</select></td>
+			<td style="text-align:left;"><font class="font-Y">Category:</font><select class="dropdown Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate }</select></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="">Assign:</font><select class="dropdown Ticketform " id="newTicketAssign" name="newTicketAssign">{html_options options=$assign }</select></td>
+			<td style="text-align:left;"><font class="font-Y">Assign:</font><select class="dropdown Ticketform " id="newTicketAssign" name="newTicketAssign">{html_options options=$assign }</select></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="">Priority:</font><select class="dropdown Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
+			<td style="text-align:left;"><font class="font-Y">Priority:</font><select class="dropdown Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="">Bug</font><input type="radio" class="dropdown" id="newTicketBugTrouble" name="newTicketBugTrouble" value="2"> <font class="">Problem</font><input type="radio" class="dropdown" id="newTicketBugTrouble" name="newTicketBugTrouble" value="1"></td>
+			<td style="text-align:left;"><font class="font-Y">Bug</font><input type="radio" class="dropdown" id="newTicketBugTrouble" name="newTicketBugTrouble" value="2"> <font class="font-Y">Problem</font><input type="radio" class="dropdown" id="newTicketBugTrouble" name="newTicketBugTrouble" value="1"><font class="font-Y"> Project</font><input type="radio" class="dropdown" id="newTicketBugTrouble" name="newTicketBugTrouble" value="2"></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="">Due Date:</font><input type="text" name="newTicketDueDate" id="newTicketDueDate" class="dropdown Ticketform" maxlength="50" style="width:8em" value="" /><img src="http://cdn1.lapcat.org/famfamfam/silk/calendar.png" title="calendar" id="newTicketCalendar"></td>
+			<td style="text-align:left;"><font class="font-Y">Due Date:</font><input type="text" name="newTicketDueDate" id="newTicketDueDate" class="dropdown Ticketform" maxlength="50" style="width:8em" value="" /><img src="http://cdn1.lapcat.org/famfamfam/silk/calendar.png" title="calendar" id="newTicketCalendar"></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="">Problem Location:</font><select name="newTicketLocation" id="newTicketLocation" class="dropdown Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location }</select></td>
+			<td style="text-align:left;"><font class="font-Y">Problem Location:</font><select name="newTicketLocation" id="newTicketLocation" class="dropdown Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location }</select></td>
 		</tr>
 		<tr>
-			<td style="text-align:left;"><font class="">Ticket Description</font><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class="dropdown Ticketform "></textarea></td>
+			<td style="text-align:left;"><font class="font-Y">Ticket Description</font><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class="dropdown Ticketform "></textarea></td>
 		</tr>
 		<tr>
 			<td>
