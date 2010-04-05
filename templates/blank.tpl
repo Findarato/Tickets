@@ -10,6 +10,22 @@
 			</font>
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVI</span>
+		<span style="font-size: 70%; line-height: normal;" id="version">v.2.4.12</span>
+		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+		<br>1. 
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">New Features</span>
+		<br>1. 
+		<br>
+		<br>
+		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
+		<br>1. Large Graphs are still not working properly
+		<br>2. Some themes do not work 100%
+		<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+		<br>
+		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV</span>
 		<span style="font-size: 70%; line-height: normal;" id="version">v.2.4.12</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
