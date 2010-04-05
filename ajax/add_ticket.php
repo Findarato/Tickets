@@ -27,7 +27,7 @@ if($_GET['nagiosTicket']==881234123){
 				"'.$_GET["newTicketAssign"].'",
 				"'.$_GET["newTicketCategory"].'",
 				"'.$_GET["newTicketTitle"].'",				
-				"'.str_replace("\n","<br>",nl2br($_GET["newTicketDescription"])).'",
+				"'.str_replace("\\n","<br>",nl2br($_GET["newTicketDescription"])).'",
 				NOW(),1,
 				"'.(intval($_GET["newTicketPriority"])+1).'",
 				"'.$dueOn.'",
