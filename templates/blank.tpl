@@ -10,13 +10,16 @@
 			</font>
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
-		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV v.2.3.0</span>
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV</span>
+		<span style="font-size: 70%; line-height: normal;" id="Version">v.2.4.11</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some spelling problems. 
 		<br>2. Closing and reopening of tickets should be a lot faster.
 		<br>3. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/450">ticket 450</a>.
 		<br>4. The ticket list is now the same height as the ticket area.
 		<br>5. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/451">ticket 451</a>.
+		<br>6. Fixed some theme issues relating to fonts.
+		<br>7. Ticket lists now fit inside the default window height.  There is a scroll bar inside the page to see tickets that can not be seen.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
@@ -31,7 +34,8 @@
 		<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
 		<br>
 		<br>
-		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV v.2.2.4</span>
+		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV</span>
+		<span style="font-size: 70%; line-height: normal;" id="Version">v.2.2.4</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
 		<br>2. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
@@ -55,6 +59,7 @@
 		<br>
 		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIII</span>
+		<span style="font-size: 70%; line-height: normal;" id="Version">v.2.1.0</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was preventing any favorite tickets from showing the proper icon.
 		<br>1. Tickets is now working in Opera, as well as versions of Firefox prior to 3.1.
