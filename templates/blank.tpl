@@ -11,7 +11,7 @@
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV</span>
-		<span style="font-size: 70%; line-height: normal;" id="Version">v.2.4.12</span>
+		<span style="font-size: 70%; line-height: normal;" id="version">v.2.4.12</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some spelling problems. 
 		<br>2. Closing and reopening of tickets should be a lot faster.
@@ -35,7 +35,7 @@
 		<br>
 		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV</span>
-		<span style="font-size: 70%; line-height: normal;" id="Version">v.2.2.4</span>
+		<span style="font-size: 70%; line-height: normal;" id="version">v.2.2.4</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
 		<br>2. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
@@ -59,7 +59,7 @@
 		<br>
 		<br>
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIII</span>
-		<span style="font-size: 70%; line-height: normal;" id="Version">v.2.1.0</span>
+		<span style="font-size: 70%; line-height: normal;" id="version">v.2.1.0</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed a bug that was preventing any favorite tickets from showing the proper icon.
 		<br>1. Tickets is now working in Opera, as well as versions of Firefox prior to 3.1.
