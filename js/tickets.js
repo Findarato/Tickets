@@ -606,9 +606,9 @@ function loadTicketList(pageNumber,queryObj) {
 		$.each(data.tickets, function (i, item) {
 			var OC = false;
 			if (i % 2 == 1) {
-				var color = "background-alpha-2";
+				var color = "background-alpha-4";
 			} else {
-				var color = "background-alpha-1";
+				var color = "background-alpha-3";
 			}
 			if (item.timeRemaining === null) {} else {} if (item.open === 0) {
 				s_ocd = $("<span/>").html("Closed").addClass("font-L font-bold").css({
@@ -622,10 +622,17 @@ function loadTicketList(pageNumber,queryObj) {
 			if (item.timeRemaining === null) {
 				s_tr = $("<span/>").html("");
 			} else {
-				s_tr = $("<span/>").html("Due On: " + Date.parse(item.due_on).toString("M/d/yyyy HH:mm")).css({
-					"paddingLeft": "3px",
-					"fontSize": "9px"
-				});
+				if (item.open == 0) { //closed_on
+					s_tr = $("<span/>").html("Closed On: " + Date.parse(item.closed_on).toString("M/d/yyyy HH:mm")).css({
+						"paddingLeft": "3px",
+						"fontSize": "9px"
+					});
+				}else {
+					s_tr = $("<span/>").html("Due On: " + Date.parse(item.due_on).toString("M/d/yyyy HH:mm")).css({
+						"paddingLeft": "3px",
+						"fontSize": "9px"
+					});
+				}
 			}
 
 			tlistHolder.append($("#responsestpl").html());
@@ -647,13 +654,12 @@ function loadTicketList(pageNumber,queryObj) {
 			if (!OC) { //closed Ticket
 				if (item.timeRemaining !== null) { //Ticket with due date
 					if (item.timeTaken > item.timeAllowed) { //over due ticket
-						tlistHolder.find("#changemeDueDate").html(s_tr.addClass("dark-red")).attr({
+						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
 							"id": "duedate" + item.id
 						});
 						tlistHolder.find("#changemeTr").html($("<span/>").html("Time Allowed:" + sec2readable(item.timeAllowed))).attr({
 							"id": "duedatetr" + item.id
 						});
-						tlistHolder.find("#subject" + item.id).append($("<img/>").attr("src", "http://cdn1.lapcat.org/famfamfam/silk/exclamation.png"));
 						tlistHolder.find("#changemeTT").html("Time Taken:" + sec2readable(item.timeTaken)).attr({
 							"id": "timeTaken" + item.id
 						});
@@ -674,18 +680,17 @@ function loadTicketList(pageNumber,queryObj) {
 			} else { //Open ticket
 				if (item.timeRemaining !== null) {
 					if (item.timeRemaining > 0) {
-						tlistHolder.find("#changemeDueDate").html(s_tr.addClass("dark-red")).attr({
+						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
 							"id": "duedate" + item.id
 						});
-						tlistHolder.find("#changemeTr").html($("<span/>").html(sec2readable(item.timeRemaining))).attr({
+						tlistHolder.find("#changemeTr").html($("<span/>").html("Over due by: "+sec2readable(item.timeRemaining))).attr({
 							"id": "duedatetr" + item.id
 						});
-						tlistHolder.find("#subject" + item.id).append($("<img/>").attr("src", "http://cdn1.lapcat.org/famfamfam/silk/exclamation.png"));
 					} else {
 						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
 							"id": "duedate" + item.id
 						});
-						tlistHolder.find("#changemeTr").html(sec2readable(item.timeRemaining)).attr({
+						tlistHolder.find("#changemeTr").html("Time Remaining: "+sec2readable(item.timeRemaining)).attr({
 							"id": "duedatetr" + item.id
 						});
 					}

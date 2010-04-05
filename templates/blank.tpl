@@ -11,7 +11,7 @@
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV</span>
-		<span style="font-size: 70%; line-height: normal;" id="Version">v.2.4.11</span>
+		<span style="font-size: 70%; line-height: normal;" id="Version">v.2.4.12</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>1. Fixed some spelling problems. 
 		<br>2. Closing and reopening of tickets should be a lot faster.
@@ -20,12 +20,12 @@
 		<br>5. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/451">ticket 451</a>.
 		<br>6. Fixed some theme issues relating to fonts.
 		<br>7. Ticket lists now fit inside the default window height.  There is a scroll bar inside the page to see tickets that can not be seen.
+		<br>8. Ticket list now shows more relavant information about each of the tickets.  Including due on, completed on, and over dy by.  This was always intended and was not working properly.		
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
 		<br>1. Ticket lists now show the same icons as the normal ticket view.
 		<br>2. Ticket lists have been reorganized a bit.  The created by link is now on the right instead of the left.
-		<br>3. 	
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
