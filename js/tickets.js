@@ -769,7 +769,7 @@ jQuery(document).ready(function () {
 		path = "http://dev.lapcat.org/" + $("#themegencss").attr("href");
 		$("#themegencss").attr("href", path);
 	} else {
-		path = "http://dev.lapcat.org/" + $("#themegencss").attr("href");
+		path = "http://www.lapcat.org/" + $("#themegencss").attr("href");
 		$("#themegencss").attr("href", path);
 	}
 
