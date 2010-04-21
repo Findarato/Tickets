@@ -762,6 +762,10 @@ function loadStats() {
 
 jQuery(document).ready(function () {
 	
+	window.onpopstate = function(event) {
+		checkHash();
+	};
+	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
 	
