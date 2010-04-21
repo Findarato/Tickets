@@ -11,7 +11,7 @@
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVI</span>
-		<span style="font-size: 70%; line-height: normal;" id="version">v.2.5.12</span>
+		<span style="font-size: 70%; line-height: normal;" id="version">v.2.5.0</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 		<br>
 		<br>
