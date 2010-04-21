@@ -12,6 +12,8 @@
 <script type="text/javascript" src="http://cdn1.lapcat.org/js/jquery-1.4.1.min.js"></script>
 <script type="text/javascript" src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
 <script type="text/javascript" src="js/combine.php"></script>
+<script type="text/javascript" src="http://github.com/cowboy/jquery-hashchange/raw/v1.2/jquery.ba-hashchange.min.js"></script>
+
 <link id="rss1" href="ticketsrss.php?id={$user_id}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
 <link id="rss2" href="ticketsrss.php?id={$user_id}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
 

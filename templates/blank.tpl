@@ -11,13 +11,13 @@
 		</div>
     <div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
 		<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVI</span>
-		<span style="font-size: 70%; line-height: normal;" id="version">v.2.4.12</span>
+		<span style="font-size: 70%; line-height: normal;" id="version">v.2.5.12</span>
 		<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
-		<br>1. 
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
-		<br>1. 
+		<br>1. If your browser supports The popstate event you can now move forward and backward in tickets with the Forward and Back buttons of your browser.
+		<br>1.1 Should now support all browsers.  If your browser does not support onpopchange then it defaults back to normal checking, and the back and forward buttons will not work.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
