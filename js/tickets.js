@@ -14,6 +14,7 @@ var Params = {
 	"Content": "",
 	"TicketJSON": "",
 	"LastArea": "",
+	"popChange":false,
 	"LastLogon":0
 };
 var uri = window.location.toString();
@@ -759,12 +760,9 @@ function loadStats() {
 		}
 	}, "json");
 }
-
-jQuery(document).ready(function () {
 	
-	window.onpopstate = function(event) {
-		checkHash();
-	};
+jQuery(document).ready(function () {
+	$(window).bind( 'hashchange', function(){checkHash();});
 	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
@@ -832,7 +830,7 @@ jQuery(document).ready(function () {
 	}
 	if ($("#t_uI").text().length > 10) {
 		updateTickets();
-		checkHash();
+		if(!Params.popChange){checkHash();}
 		setInterval("updateTickets()", 30000);
 	} //disables running with out being logged in
 
@@ -990,20 +988,6 @@ jQuery(document).ready(function () {
 			notice("Notice!", "You must first select a ticket!", false);
 		}
 	});
-	/*
-	$(".fg-button:not(.ui-state-disabled)")
-		.mousedown(function(){
-				$(this).parents('.fg-buttonset-single:first').find(".fg-button.option-red").removeClass("option-red").addClass("option-black");
-				if( $(this).is('.option-red .fg-button-toggleable, .fg-buttonset-multi .option-red') ){ $(this).removeClass("option-red").addClass("option-black"); }
-				else { $(this).addClass("option-red").removeClass("option-black"); }	
-		})
-		.mouseup(function(){
-			if(! $(this).is('.fg-button-toggleable, option-red, .fg-buttonset-single .fg-button,  .fg-buttonset-multi .fg-button') ){
-				$(this).removeClass("option-red").addClass("option-black");
-			}
-
-		});
-	*/
 	$("#btn_login").click(function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error", "Please enter a username", false);
@@ -1040,7 +1024,8 @@ jQuery(document).ready(function () {
 					$("#rss2").attr("href", "ticketsrss.php?id=" + User_id + "&bookmark=1");
 					if (window.location.hash.length > 1) {
 						updateTickets();
-						checkHash();
+						//window.onpopstate = function(event) {checkHash();Params.popChange = true;}; //Building in support for browsers that do not support it
+						if(!Params.popChange){checkHash();}
 					} else {
 						loadNew(data.lastlogon); //show the new tickets
 						updateTickets();
@@ -1235,8 +1220,10 @@ jQuery(document).ready(function () {
 		$.fn.colorbox.close();
 	});
 	$(".ticket_link,.nolink").live("click", function () {
+		
 		setHash($(this).attr("href"));
-		checkHash(); //this should load the correct ticket
+		if(!Params.popChange){checkHash();} //Need to force a check if the browser is not already doing it.
+		 
 		return false; //to make sure the a isnt clicked
 	});
 });
