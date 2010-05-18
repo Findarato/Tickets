@@ -1223,7 +1223,7 @@ jQuery(document).ready(function () {
 		
 		setHash($(this).attr("href"));
 		if(!Params.popChange){checkHash();} //Need to force a check if the browser is not already doing it.
-		 
+		pageTracker._trackPageview($(this).attr("href"));
 		return false; //to make sure the a isnt clicked
 	});
 });
