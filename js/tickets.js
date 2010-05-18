@@ -762,7 +762,7 @@ function loadStats() {
 }
 	
 jQuery(document).ready(function () {
-	$(window).bind( 'hashchange', function(){checkHash();});
+	//$(window).bind( 'hashchange', function(){checkHash();});
 	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
@@ -1220,10 +1220,11 @@ jQuery(document).ready(function () {
 		$.fn.colorbox.close();
 	});
 	$(".ticket_link,.nolink").live("click", function () {
-		
+		var pageTracker = _gat._getTracker('UA-8067208-4');
+		pageTracker._trackPageview($(this).attr("href"));
 		setHash($(this).attr("href"));
 		if(!Params.popChange){checkHash();} //Need to force a check if the browser is not already doing it.
-		pageTracker._trackPageview($(this).attr("href"));
+		
 		return false; //to make sure the a isnt clicked
 	});
 });

@@ -8,7 +8,19 @@
 <link type="text/css" media="screen" rel="stylesheet" href="css/colorbox.css" />
 <link type="text/css" href="css/tickets.css" rel="stylesheet"  />
 <link rel="icon" type="image/png" href="/tickets/bug.png" /> 
+{literal}
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-8067208-4']);
+  _gaq.push(['_trackPageview']);
 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+</script>
+{/literal}
 <script type="text/javascript" src="http://cdn1.lapcat.org/js/jquery-1.4.1.min.js"></script>
 <script type="text/javascript" src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
 <script type="text/javascript" src="js/combine.php"></script>
@@ -45,18 +57,5 @@
 <div id="storage" class="ui-helper-hidden"></div>
 <div id="notifyArea" style="width:0px;" class=""></div>
 <div id="statusBar" style="position:absolute;bottom:0;left:0;width:100%">{include file="status_bar.tpl"}</div>
-{literal}
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8067208-4']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-  })();
-</script>
-{/literal}
 </body>
 </html>
