@@ -7,6 +7,8 @@
 <link id="themegencss" type="text/css" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}" rel="stylesheet" />  
 <link type="text/css" media="screen" rel="stylesheet" href="css/colorbox.css" />
 <link type="text/css" href="css/tickets.css" rel="stylesheet"  />
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+
 <link rel="icon" type="image/png" href="/tickets/bug.png" /> 
 {literal}
 <script type="text/javascript">

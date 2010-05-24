@@ -1,8 +1,14 @@
-* { margin: 0; padding: 0; }
-a{text-decoration:none;}
+* { 
+	margin: 0; 
+	padding: 0;
+}
+a, font {
+	text-decoration:none;
+	font-family:'Droid Serif', Verdana, Tahoma, arial, sans-serif;
+}
 a:hover{ text-decoration:underline;}
 body {
-	font: 70%/1.5em Verdana, Tahoma, arial, sans-serif;
+	font: 70%/1.5em 'Droid Serif',Verdana, Tahoma, arial, sans-serif;
 	text-align: center;
 	height:100%;
 }
