@@ -16,8 +16,7 @@
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
-		<br>1. If your browser supports The popstate event you can now move forward and backward in tickets with the Forward and Back buttons of your browser.
-		<br>1.1 Should now support all browsers.  If your browser does not support onpopchange then it defaults back to normal checking, and the back and forward buttons will not work.
+		<br>1. Tickets now uses the Droid-serif font.  If your browser supports the new css3 font face it will automaticlly switch to that font. 
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>
