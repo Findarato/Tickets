@@ -8,19 +8,18 @@
 <link type="text/css" media="screen" rel="stylesheet" href="css/colorbox.css" />
 <link type="text/css" href="css/tickets.css" rel="stylesheet"  />
 <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+	<meta http-equiv="X-UA-Compatible" content="IE=100" >
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 
 <link rel="icon" type="image/png" href="/tickets/bug.png" /> 
 {literal}
 <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8067208-4']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-  })();
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-8067208-4");
+	pageTracker._trackPageview();
 </script>
 {/literal}
 <script type="text/javascript" src="http://cdn1.lapcat.org/js/jquery-1.4.1.min.js"></script>
