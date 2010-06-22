@@ -164,6 +164,12 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	.world_link {background-position: 0px -624px;}
 
 
+.box_transition {
+     -moz-transition: all 0.3s ease-out;  /* FF3.7+ */
+       -o-transition: all 0.3s ease-out;  /* Opera 10.5 */
+  -webkit-transition: all 0.3s ease-out;  /* Saf3.2+, Chrome */
+}
+  
 
 
 /*Filament Group CSS
