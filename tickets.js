@@ -817,14 +817,14 @@ jQuery(document).ready(function () {
 
 	OuterHeight = $("body").outerHeight() - 50;
 	OuterWidth = $("body").outerWidth() - 5;
-
-	$(".message_list .message_body:gt(0)").hide(Params.FadeTime);
+/*
+	$(".message_list .message_body:gt(0)").hide();
 	$(".message_list .message_body:gt(4)").fadeIn(Params.FadeTime);
 	$(".message_head").click(function () {
 		$(this).next(".message_body").slideToggle(500);
 		return false;
 	});
-
+*/
 	if ($("#t_userid").html === "") {} else {
 		User_id = $("#t_userid").text();
 	}
