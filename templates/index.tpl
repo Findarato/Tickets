@@ -38,7 +38,7 @@
 	<div style="min-height:300px;position:absolute;top:3px;left:2px;width:200px;"  class="corners-bottom-2 corners-top-2">
 		{include file="status.tpl"} <br> {include file="stats.tpl"}
 	</div>
-  	<div style="margin-left:250px;" class=" corners-bottom-2 corners-top-2">
+  	<div style="margin-left:210px;" class=" corners-bottom-2 corners-top-2">
 	    <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">{include file="$content"}</div>
 	</div>
 </div>
