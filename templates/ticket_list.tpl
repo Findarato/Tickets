@@ -3,6 +3,6 @@
 	<div id="pageAnator" style="right:0;position:absolute;top:2px;"></div>
 </div>
 <div class="corners-bottom-2 corners-top-2 background-special-1 color-E-2 " style="border-bottom:none;height:465px;overflow:auto;padding:4px;margin:4px;">
-	<div id="ticketListbody" style="position:relative;width:100%;text-align:top;" class="">
+	<div id="ticketListbody" style="position:relative;width:100%;text-align:top;" class="box_transition">
 	</div>
 </div>
