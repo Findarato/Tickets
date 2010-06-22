@@ -14,7 +14,7 @@ $files = array(
 'jquery.colorbox.js',
 'jquery.purr.js',
 'date.js',
-'http://dev.lapcat.org/rooms/js/globalFunctions.js',
+'globalFunctions.js',
 'tickets.js'
 );
 $allScript = "";
