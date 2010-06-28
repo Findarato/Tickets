@@ -649,9 +649,7 @@ function loadTicketList(pageNumber,queryObj) {
 			tlistHolder.find("#changemeTicketListIcons").attr("id",item.id+"-ticketListIcons")
 			displayStatus(item.status, tlistHolder.find("#"+item.id+"-ticketListIcons")); //status icons
 		});
-		
 		Tlb.html(tlistHolder);
-		$("#working").hide();
 	});
 }
 
