@@ -80,40 +80,14 @@ p {
 	padding: 0;
 	width: 210px;
 }
-.message_list li {
-	padding: 0;
-	margin: 0;
-
-/*	background: url(/images/message-bar.gif) no-repeat;*/
-}
 .message_head {
 	padding: 5px 10px;
 	height:16px;
-	cursor: pointer;
 	position: relative;
-}
-.message_head .reload {
-	/*color: #666666;*/
-	font-size: 95%;
-	position: absolute;
-	right: 30px;
-	top: 5px;
 }
 .tr{display:table-row;}
 .table{display:table;}
 .td{display:table-cell;}
-.message_head .timestamp {
-	/*color: #666666;*/
-	font-size: 95%;
-	position: absolute;
-	right: 10px;
-	top: 5px;
-}
-.message_head cite { 
-	font-size: 100%;
-	font-weight: bold;
-	font-style: normal;
-}
 .message_body {
 	padding: 5px 10px 15px;
 	font-size:1em;
@@ -168,6 +142,16 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
      -moz-transition: all 0.3s ease-out;  /* FF3.7+ */
        -o-transition: all 0.3s ease-out;  /* Opera 10.5 */
   -webkit-transition: all 0.3s ease-out;  /* Saf3.2+, Chrome */
+}
+
+/* fugue icons */
+.user {background: url(http://cdn1.lapcat.org/fugue/icons/user.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+.search {background: url(http://cdn1.lapcat.org/fugue/icons/magnifier.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+
+.small-shadow-black-1{
+	box-shadow: 2px 2px 5px rgba(0,0,0,.60); 
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
 }
   
 

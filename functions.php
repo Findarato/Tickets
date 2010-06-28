@@ -174,7 +174,7 @@ function getDepartmentMembers($dep_id,$notify=0){
 	$db->Query($sql);
 	return $db->Fetch("row_array");
 }
-function getUsers(){
+function getUsers(){ 
 	$return = array();
 	$db = db::getInstance();
 	$sql = "SELECT id,firstname,lastname FROM lapcat.hex_users";

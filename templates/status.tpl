@@ -1,5 +1,5 @@
-<ol class="message_list ">
 <!--
+<ol class="message_list ">
 	<li id="mysOpen">
 		<p class="head message_head corners-top-2 color-B-2 border-all-B-1" style="text-align:left;border-bottom:0px;" ><cite class="">My Assigned:</cite> <span id="csOpen" class="timestamp "></span></p>
 		<div class="message_body color-B-2 background-alpha-3 " style="margin-left:3px;margin-right:3px;"><font id="sOpen"></font></div>
@@ -35,14 +35,11 @@
 	</li>   
 </ol>
 -->
-<ol class="message_list">
-	<li class="">
-		<p class="head message_head corners-top-2 color-B-2 border-all-B-1" style="text-align:left;border-bottom:0px;" >
-			<cite>
-				<span class="">Navigation:</span>
-			</cite>
-		</p>
-		<div style="position:relative;margin-left:3px;margin-right:3px;" class="message_body color-B-2 background-alpha-3 ">
+
+<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:205px;margin-left:5px;">
+	<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1 " style="">Navigation</div>
+	<div class="color-B-2 background-alpha-3 corners-bottom-2 " >
+		<div style="position:relative;" class="message_body color-B-2 background-alpha-3 ">
 			<a class="smallTicketL nolink ticket_button ticket_sprite user font-bold" href="#ticketlist/sOpen">To Me</a>
 			<span id="csOpen" class="timestamp" style="position:absolute;right:25px"></span>
 			<br>
@@ -60,8 +57,6 @@
 			><br>
 			<a class="smallTicketL nolink ticket_button ticket_sprite tick font-bold" href="#ticketlist/sFavorite">Bookmarks</a>
 			<span id="csFavorite" class="timestamp " style="position:absolute;right:25px"></span>
-		
 		</div>
-		<div class="corners-bottom-2 color-B-2 border-all-B-1" style="border-top:0px;height:4px;margin-bottom:3px;"></div>
-	</li>
-</ol>
+	</div>	
+</div>
