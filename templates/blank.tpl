@@ -17,6 +17,8 @@
 		<br>
 		<span style="font-size: 150%; line-height: normal;">New Features</span>
 		<br>1. Navagation has been made dramatically easier, and more to the point.  All tickets are selected though the ticket list.  This will reducde the amount of CSS needed, as well as allow for the reduction in a lot of the javascript as well. 
+		<br>2. Look and feak of tickets has changed.  No longer are the areas separated from their headers.  
+		<br>3. CSS3 has attacked tickets.  There are now lots of cool new CSS3 tags running rampant around tickets.  If you see square corners and no drop shadows you are using an old browser.
 		<br>
 		<br>
 		<span style="font-size: 150%; line-height: normal;">Known Issues</span>

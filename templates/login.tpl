@@ -3,9 +3,22 @@
 	<div class="droidSerif message_body color-X-1 corners-bottom-2" id="" style="height:451px;">
 		<font>{$error}</font>
 		<form id="frm_login" action="javascript:void(none);" name="login">
-		<font>Username:</font><input class="dropdown" type="text" id="un" name="un"/><br />
-		<font>Password:</font><input class="dropdown" id="loginpassword" type="password" name="pw" />
-		<!--<input class="next-button option-black border-dark-1 fg-button ui-corner-all white" type="submit" /> -->
+		<div style="display:table;margin-bottom:10px;">
+			<div style="display:table-cell">
+				<div class="font-X">Username:</div>
+				<div class="left color-B-2 fg-button white corners-top-2 corners-bottom-2" id="" style="width:auto;padding:3px;">
+					<input class="droidSerif color-B-2 font-X" type="text" id="un" name="un" style="border:0px;"/>
+				</div>
+			</div>
+			<div style="display:table-cell">
+				<div class="font-X droidSerif">Password:</div>
+				<div class="left color-B-2 fg-button corners-top-2 corners-bottom-2 white" id="" style="width:auto;padding:3px;">
+					<input class="droidSerif color-B-2 font-X" id="loginpassword" type="password" name="pw" style="border:0px;"/>
+				</div>
+			</div>
+		</div>
+		
+
 		</form>
 		<button class="next-button option-black border-dark-1 fg-button corners-bottom-2 corners-top-2 white" id="btn_login" >Login</button>
 		
