@@ -301,27 +301,25 @@ function loadResponsesBody(ticketId, container, page) {
 function displayStatus(jsonData, Selector) {
 	$.each(jsonData, function (key, item) {
 		switch (key) {
-		case "closed":
-			Selector.find("#imgClosed").show();
-			break;
-		case "edit":
-			Selector.find("#imgEdited").show();
-			break;
-		case "reassigned":
-			Selector.find("#imgReassigned").show();
-			break;
-		case "blocked":
-			Selector.find("#imgBlocked").show();
-			break;
-		case "lock":
-			Selector.find("#imgLock").show();
-			Params.Content.find("#Holdlink").hide();
-			Params.Content.find("#unHoldlink").show();
-			break;
-
-			break;
-		default:
-			break;
+			case "closed":
+				Selector.find("#imgClosed").show();
+				break;
+			case "edit":
+				Selector.find("#imgEdited").show();
+				break;
+			case "reassigned":
+				Selector.find("#imgReassigned").show();
+				break;
+			case "blocked":
+				Selector.find("#imgBlocked").show();
+				break;
+			case "lock":
+				Selector.find("#imgLock").show();
+				Params.Content.find("#Holdlink").hide();
+				Params.Content.find("#unHoldlink").show();
+				break;
+			default:
+				break;
 		}
 	});
 }
