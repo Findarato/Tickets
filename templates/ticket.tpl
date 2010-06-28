@@ -1,7 +1,7 @@
 <div style="display:table;width:100%;height:500px">
 	<div style="display:table-cell;width:300px;height:500px">
 		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:3px;">
-			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="position:relative;">
+			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="position:relative;height:16px;">
 				<div class="font-X" id="ticketTitle"></div>
 				<div class="color-X" id="ticketStatusImage" style="position:absolute;right:5px;top:2px;height:13px;">
 					<div class="corners-bottom-2 corners-top-2 background-alpha-4 border-all-B-1 lapcatButton" style="width:auto;padding:2px;">
@@ -17,7 +17,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="droidSerif color-X-1 " id="ticket" style="position:relative;height:475px;width:auto;padding:3px" ><!-- Ticket Body -->
+			<div class="droidSerif color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
 		        <div style="position:absolute;:1px;right:0px;clear:both;">
 					<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left openTicket hold actionButtons holdLink" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
 					<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton left openTicket hold actionButtons unholdLink" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
@@ -63,7 +63,7 @@
 					<span id="ticketBody"></span>
 				</div>
 			</div>
-			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:25px">
+			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
 				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket actionButtons editLink" id="editlink" style="width:45px;">Edit</div>
 				<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>
 				<div class="option-black fg-button corners-bottom-2 corners-top-2 white lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:45px;display:none">Reopen</div>
@@ -71,18 +71,16 @@
 			</div>
 		</div>
 	</div>
-	<div id="replyArea" style="display:table-cell;width:auto;height:500px;vertical-align:top;">
+	<div id="replyArea" class="" style="display:table-cell;width:auto;height:500px;vertical-align:top;">
 		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
-			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="">
+			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="height:16px;">
 				<div style="width:100%">
 					<font id="replyareaTitle" style="margin-left:10px;margin:5px;">Replies (0)</font>
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 			</div>
-			<div class="droidSerif color-X-1 corners-bottom-2" id="" style="overflow:auto;height:475px;padding:3px;">
-				<div id="replyareabody" style="padding:3px;"></div>
-			</div>
-			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:25px">
+			<div class="droidSerif color-X-1 corners-bottom-2" id="replyareabody" style="overflow:auto;height:430px;padding:3px;">	</div>
+			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
 				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="replylink" style="width: 80px;">Add Reply</div>
 			</div>
 		</div>
