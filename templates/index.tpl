@@ -31,14 +31,14 @@
 <link id="rss2" href="ticketsrss.php?id={$user_id}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
 
 </head>
-<body onResize="javascript:resize();"  style="width:100%;background-position:-9px -21px;" class="image-background color-B-1">
+<body onResize="javascript:resize();"  style="width:100%;" class="image-background color-B-1">
 <div class="header1" style="">{include file="topper.tpl"}</div>
 <div style="height:50px;"></div>
 <div id="wrap" style="width:99%; padding:4px;position:relative;" class="">
 	<div style="min-height:300px;position:absolute;top:3px;left:2px;width:200px;"  class="corners-bottom-2 corners-top-2">
 		{include file="status.tpl"} <br> {include file="stats.tpl"}
 	</div>
-  	<div style="margin-left:210px;" class=" corners-bottom-2 corners-top-2">
+  	<div style="margin-left:220px;" class=" corners-bottom-2 corners-top-2">
 	    <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">{include file="$content"}</div>
 	</div>
 </div>

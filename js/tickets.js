@@ -244,72 +244,7 @@ function populateAllTickets(Area) {
 			html = "";
 			Ttype = "";
 			$("#c" + item.type).html(item.Count);
-			if (item.Count == 0) {
-				$("#my" + item.type).hide();
-			} else {
-				$("#my" + item.type).fadeIn(Params.FadeTime);
-			}
 			Ttype = item.type;
-			//alert(item.tickets.F.type);
-			$.each(item.tickets, function (t, tick) {
-				//alert(tick.type);
-				cnt++;
-				html += '<div style="clear:both;height:12px;width:100%" id="T' + Ttype + tick.id + '" class="table">';
-				var lft = "";
-				var rght = "";
-				if (jQuery.browser.msie && parseInt(jQuery.browser.version, 10) > 7) { //code for older ie brosers
-					lft = "left";
-					rght = "right";
-				} else { //all browsers that support CSS2.1 aka display table
-					lft = "td";
-					rght = "td";
-				}
-				var statusClass = "";
-				if (!tick.status) {
-					tick.status = {};
-				}
-				if (tick.status && tick.status.lock == 1) {
-					statusClass = "lock ticket_button ticket_sprite";
-				} else {
-					if (tick.status && tick.status.blocked == 1) {
-						statusClass = "brick ticket_button ticket_sprite ";
-					} else {
-						if (tick.tickettype_id == 1) {
-							var statusClass = "ticket_button ticket_sprite error";
-						} else {
-							var statusClass = "ticket_button ticket_sprite bug";
-						}
-					}
-				}
-
-				if (tick.timeRemaining === null) { //there is no due date
-					if (tick.timeTaken === null) {
-						html += "<div style=\"width:150px\" class=\"smallTicketL " + lft + "\"><a class=\"nolink " + statusClass + "\" href=\"#ticket/" + tick.id + "\">" + tick.subject + "</a></div>";
-						html += "<div class=\"smallTicketR \">" + sec2readable(tick.timeTaken) + "</div>";
-					} else {
-						html += "<div style=\"width:150px\" class=\"smallTicketL " + rght + "\"><a class=\"nolink " + statusClass + "\" href=\"#ticket/" + tick.id + "\">" + tick.subject + "</a></div>";
-						html += "<div class=\"smallTicketR \">" + sec2readable(tick.timeTaken) + "</div>";
-					}
-				} else {
-					if (tick.timeRemaining > 0) { //ticket is over due.
-						html += "<div style=\"width:150px\" class=\"smallTicketL " + lft + " darkred\"><a class=\"nolink " + statusClass + "\" href=\"#ticket/" + tick.id + "\">" + tick.subject + "</a></div>";
-						html += "<div class=\"smallTicketR darkred td\">" + ((tick.status.lock != 1) ? sec2readable(tick.timeRemaining) : "") + "</div>";
-					} else { //ticket is not over due
-						html += "<div style=\"width:150px\" class=\"smallTicketL " + rght + "\"><a class=\"nolink " + statusClass + "\" href=\"#ticket/" + tick.id + "\">" + tick.subject + "</a></div>";
-						html += "<div class=\"smallTicketR  \">" + ((tick.status.lock != 1) ? sec2readable(tick.timeRemaining) : "") + "</div>";
-					}
-				}
-				html += "</div>";
-			});
-			cnt++;
-			html += '<div style="clear:both; height:12px;" id="CallTickets">';
-			html += "<a class=\"smallTicketL ticket_link ticket_button ticket_sprite font-L font-bold\" href=\"#ticketlist/" + Ttype + "\">Show All Tickets</a>";
-			html += "</div>";
-			//alert("#"+Ttype);
-			$("#" + item.type).empty().css({
-				height: (cnt + 1) + "em"
-			}).append(html);
-			//alert(item.type+"=>"+html);
 		});
 	});
 }
@@ -327,11 +262,6 @@ function loadResponsesBody(ticketId, container, page) {
 		params["page"] = page;
 	} // adds the page number to the request
 	//var resCont = $("<div/>");
-	container.queue(function () {
-		$(this).fadeOut(Params.FadeTime);
-		$(this).dequeue();
-	});
-	$("#working").show(Params.FadeTime);
 	$.getJSON(uri + "ajax/display_reply.php", params, function (data) {
 		var cnt = 0;
 		var resCont = $("<div/>");
@@ -363,31 +293,30 @@ function loadResponsesBody(ticketId, container, page) {
 			$("#replyticketid").val(ticketId);
 			cnt++;
 		});
-		container.html(resCont.html()).hide();
-
-		container.fadeIn(Params.FadeTime);
+		container.html(resCont.html());
 	});
+	container.show();
 }
 
 function displayStatus(jsonData, Selector) {
 	$.each(jsonData, function (key, item) {
 		switch (key) {
 		case "closed":
-			Selector.find("#imgClosed").fadeIn(Params.FadeTime);
+			Selector.find("#imgClosed").show();
 			break;
 		case "edit":
-			Selector.find("#imgEdited").fadeIn(Params.FadeTime);
+			Selector.find("#imgEdited").show();
 			break;
 		case "reassigned":
-			Selector.find("#imgReassigned").fadeIn(Params.FadeTime);
+			Selector.find("#imgReassigned").show();
 			break;
 		case "blocked":
-			Selector.find("#imgBlocked").fadeIn(Params.FadeTime);
+			Selector.find("#imgBlocked").show();
 			break;
 		case "lock":
-			Selector.find("#imgLock").fadeIn(Params.FadeTime);
+			Selector.find("#imgLock").show();
 			Params.Content.find("#Holdlink").hide();
-			Params.Content.find("#unHoldlink").fadeIn(Params.FadeTime);
+			Params.Content.find("#unHoldlink").show();
 			break;
 
 			break;
@@ -433,7 +362,7 @@ function loadTicketBody(ticketId, container) {
 		"ticket_id": ticketId
 	}, function (data) {
 		Params.TicketJSON = data;
-		container.find("#ticketTitle").empty().html(data.subject).fadeIn(Params.FadeTime);
+		container.find("#ticketTitle").html(data.subject).show();
 		container.find("#ticketDate").html(data.created_on);
 		if (data.timeRemaining > 0) { //ticket is over due.
 			container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
@@ -530,11 +459,11 @@ function loadTicketBody(ticketId, container) {
 		});
 		//Set the ticket type icon
 		if (data.tickettype_id == 1) {
-			$("#imgTicketTrouble").show();
-			$("#imgTicketBug").hide();
+			$("#ticketStatusImage").find("#imgTicketTrouble").show();
+			$("#ticketStatusImage").find("#imgTicketBug").hide();
 		} else {
-			$("#imgTicketBug").show();
-			$("#imgTicketTrouble").hide();
+			$("#ticketStatusImage").find("#imgTicketBug").show();
+			$("#ticketStatusImage").find("#imgTicketTrouble").hide();
 		}
 		//Run some functions to deal with the data.	
 		pageAnator(container.find("#pageAnator").empty(), data.responseCount, 20); //add Page numbers
@@ -817,14 +746,6 @@ jQuery(document).ready(function () {
 
 	OuterHeight = $("body").outerHeight() - 50;
 	OuterWidth = $("body").outerWidth() - 5;
-/*
-	$(".message_list .message_body:gt(0)").hide();
-	$(".message_list .message_body:gt(4)").fadeIn(Params.FadeTime);
-	$(".message_head").click(function () {
-		$(this).next(".message_body").slideToggle(500);
-		return false;
-	});
-*/
 	if ($("#t_userid").html === "") {} else {
 		User_id = $("#t_userid").text();
 	}
@@ -917,7 +838,7 @@ jQuery(document).ready(function () {
 		if ($("#recentTickets").html()) {
 			$("#recentTickets").css({
 				"left": position.left
-			}).fadeIn(Params.FadeTime);
+			});
 		} else { //no reason to make the box twice
 			var recentTickets = $("<div/>").css({
 				"top": position.top + 22,
@@ -931,7 +852,7 @@ jQuery(document).ready(function () {
 				"id": "recentTickets"
 			});
 			$('body').append(recentTickets);
-			$("#recentTickets").fadeIn(Params.FadeTime);
+			$("#recentTickets").show();
 		}
 		$('body').append(Shadow);
 	});
@@ -943,7 +864,7 @@ jQuery(document).ready(function () {
 			"left": position.left,
 			"position": "absolute",
 			"width": "350px"
-		}).fadeIn(Params.FadeTime);
+		}).show();
 		bodyHeight = $('body').height();
 		bodyWidth = $('body').width();
 		Shadow = $("<div style=\" z-index:49;\" id=\"Shadow\"/>").click(function () {
@@ -1173,44 +1094,6 @@ jQuery(document).ready(function () {
 			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
 		});
 	});
-	/*
-	$("#Holdlink").live("click", function () {
-		$.getJSON(uri + "ajax/tickets.php", {type: "hold",value: 1,ticket_id: Params.TicketJSON.id},
-		function (data) {
-			checkResponse(data);
-			loadTicketBody(Params.Ticket_id, Params.Content);
-			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
-		});
-	});
-	$("#unHoldlink").live("click", function () {
-		$.getJSON(uri + "ajax/tickets.php", {type: "hold",value: 0,ticket_id: Params.TicketJSON.id},
-		function (data) {
-			checkResponse(data);
-			loadTicketBody(Params.Ticket_id, Params.Content);
-			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0); //reload the first response page
-		});
-	});
-	$("#closelink").live("click", function () {
-		$.get(uri + "ajax/tickets.php", {
-			type: "close",
-			ticket_id: Params.Ticket_id
-		}, function () {
-			populateAllTickets("o");
-			populateAllTickets("c");
-			loadTicketBody(Params.Ticket_id, Params.Content);
-			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
-		});
-	});
-	$("#openlink").live("click", function () {
-		$.get(uri + "/ajax/tickets.php", {type: "open",	ticket_id: Params.Ticket_id	}, 
-		function () {
-			populateAllTickets();
-			loadTicketBody(Params.Ticket_id, Params.Content);
-			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
-		});
-	});
-	
-	*/
 	//Global page live 
 	$(":text").live("click", function () {
 		$(this).select();
