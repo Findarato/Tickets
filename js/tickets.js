@@ -468,7 +468,7 @@ function loadTicketBody(ticketId, container) {
 		//Run some functions to deal with the data.	
 		pageAnator(container.find("#pageAnator").empty(), data.responseCount, 20); //add Page numbers
 		loadRecentTickets(data.recentTickets, $("#recentTickets")); //Recent ticket list
-		displayStatus(data.status, $("#ticketStatusImage")); //status icons
+		displayStatus(data.status, container.find("#ticketStatusImage")); //status icons
 	});
 }
 /**
