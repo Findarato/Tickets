@@ -745,10 +745,14 @@ jQuery(document).ready(function () {
 	if ($("#t_userid").html === "") {} else {
 		User_id = $("#t_userid").text();
 	}
+	
+	
 	if ($("#t_uI").text().length > 10) {
-		updateTickets();
-		if(!Params.popChange){checkHash();}
-		setInterval("updateTickets()", 30000);
+		function ut(){
+			updateTickets();
+			setTimeout(function(){ut();},30000);
+		};ut();
+		checkHash();
 	} //disables running with out being logged in
 
 	$("button,a").bind("focus", function () {

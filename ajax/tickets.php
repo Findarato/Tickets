@@ -377,19 +377,27 @@ if(isset($_SESSION["user"])){ //the session is set
 							case "all": //merged all ticket requests into one large return to reduce requests
 								if(!isset($_GET['area'])){$_GET['area']="none";}
 					   			switch($_GET['index']){
-					   				case "o":$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));break;
-									case "c":$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));break;
-					   				case "a":$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));break;
-									case "od":$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));break;
-									case "ad":$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));break;
-									case "f":$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));break;									
+					   				case "o":$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));break;
+									case "c":$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));break;
+					   				case "a":$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));break;
+									case "od":$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));break;
+									case "ad":$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));break;
+									case "f":$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));break;									
 									default:
+										$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));
+										$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));
+										$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));
+										$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));
+										$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));								
+										$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));
+										/* old methods
 										$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));
 										$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));
 										$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));
 										$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));
 										$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));								
-										$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));								
+										$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));
+										*/								
 									break;
 								}
 								$response["message"]="All Ticket lists generated Successfully";
