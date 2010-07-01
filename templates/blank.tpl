@@ -8,7 +8,7 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVII</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.7.13.140</span>
+			<span style="font-size: 70%; line-height: normal;" id="version">v.2.8.13.r142</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>1. The Update notes page was using the old theme.  This has been fixed.
 			<br>2. Fixed a bug that was causing bookmarked checks to apear on replies.
@@ -18,6 +18,7 @@
 			<br>1. Navagation has been made dramatically easier, and more to the point.  All tickets are selected though the ticket list.  This will reducde the amount of CSS needed, as well as allow for the reduction in a lot of the javascript as well. 
 			<br>2. Look and feak of tickets has changed.  No longer are the areas separated from their headers.  
 			<br>3. CSS3 has attacked tickets.  There are now lots of cool new CSS3 tags running rampant around tickets.  If you see square corners and no drop shadows you are using an old browser.
+			<br>4. there is now an [ img ] tag.  it allows for linking to offsite images within tickets.  No matter what size it is, it will work. 
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">Known Issues</span>
