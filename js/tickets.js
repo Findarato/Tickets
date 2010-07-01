@@ -1006,12 +1006,14 @@ jQuery(document).ready(function () {
 		});
 	});
 	$("#replyAddBtn").click(function () {
-		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize());
+		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
+			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);	
+		});
 		$(".Ticketform").attr({
 			value: ""
 		});
 		$.fn.colorbox.close();
-		loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
+		
 	});
 	$("#ticketSearchBtn").click(function () {
 		var hash = "ticketlist";
@@ -1083,14 +1085,15 @@ jQuery(document).ready(function () {
 	
 	$(".popImageSmall").live("click",function(){
 		pis = $(this);
-		smallH = pis.height();
+		smallH = pis.outerHeight();
+		smallW = pis.outerWidth()
 		//if(!pis.hasClass("box_transition")){pis.addClass("box_transition");} // some quick assurance that it will transition
 		pis.toggleClass("popImageLarge");
 		if(pis.hasClass("popImageLarge")){
 			pis
 				.parent()
 					.append(
-						$("<div/>",{id:"placeholderpis","class":"",css:{"display":"block","visability":"hidden","height":smallH+4}})
+						$("<div/>",{id:"placeholderpis","class":"",css:{"position":"static","display":"block","visability":"hidden","height":smallH,"width":smallW}})
 					);
 		}else{
 			$("#placeholderpis").replaceWith();
