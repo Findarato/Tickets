@@ -1081,6 +1081,23 @@ jQuery(document).ready(function () {
 	//Live items
 	//Ticket display live items
 	
+	$(".popImageSmall").live("click",function(){
+		pis = $(this);
+		smallH = pis.height();
+		if(!pis.hasClass("box_transition")){pis.addClass("box_transition");} // some quick assurance that it will transition
+		pis.toggleClass("popImageLarge");
+		
+		if(pis.hasClass("popImageLarge")){
+			pis
+				.parent()
+					.append(
+						$("<div/>",{id:"placeholderpis","class":"",css:{"display":"block","visability":"hidden","height":smallH+4}})
+					);
+		}else{
+			$("#placeholderpis").replaceWith();
+				
+		}
+	});
 	$(".actionButtons").live("click", function () {
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
