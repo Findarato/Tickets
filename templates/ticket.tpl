@@ -72,14 +72,14 @@
 		</div>
 	</div>
 	<div id="replyArea" class="" style="display:table-cell;width:auto;height:500px;vertical-align:top;">
-		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
-			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="height:16px;">
+		<div class="corners-top-2 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
+			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="replyTitleArea" style="height:16px;">
 				<div style="width:100%">
 					<font id="replyareaTitle" style="margin-left:10px;margin:5px;">Replies (0)</font>
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 			</div>
-			<div class="droidSerif color-X-1 corners-bottom-2" id="replyareabody" style="overflow:auto;height:430px;padding:3px;">	</div>
+			<div class="droidSerif color-X-1" id="replyareabody" style="overflow:auto;height:430px;padding:3px;">	</div>
 			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
 				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="replylink" style="width: 80px;">Add Reply</div>
 			</div>
