@@ -1084,7 +1084,7 @@ jQuery(document).ready(function () {
 	$(".popImageSmall").live("click",function(){
 		pis = $(this);
 		smallH = pis.height();
-		if(!pis.hasClass("box_transition")){pis.addClass("box_transition");} // some quick assurance that it will transition
+		//if(!pis.hasClass("box_transition")){pis.addClass("box_transition");} // some quick assurance that it will transition
 		pis.toggleClass("popImageLarge");
 		
 		if(pis.hasClass("popImageLarge")){
