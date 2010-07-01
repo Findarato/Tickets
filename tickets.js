@@ -1086,7 +1086,6 @@ jQuery(document).ready(function () {
 		smallH = pis.height();
 		//if(!pis.hasClass("box_transition")){pis.addClass("box_transition");} // some quick assurance that it will transition
 		pis.toggleClass("popImageLarge");
-		
 		if(pis.hasClass("popImageLarge")){
 			pis
 				.parent()
@@ -1095,7 +1094,6 @@ jQuery(document).ready(function () {
 					);
 		}else{
 			$("#placeholderpis").replaceWith();
-				
 		}
 	});
 	$(".actionButtons").live("click", function () {
