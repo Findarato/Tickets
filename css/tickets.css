@@ -158,7 +158,7 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	height:100px;
 	width:100px;
 	position:static;
-	display:inline-block;
+	display:block;
 	float:left;
 }
 .popImageLarge{
