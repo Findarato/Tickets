@@ -139,9 +139,9 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 
 
 .box_transition {
-     -moz-transition: all 1s ease-in;  /* FF3.7+ */
+     -moz-transition: all 1s ease-out;  /* FF3.7+ */
        -o-transition: all 1s ease-in;  /* Opera 10.5 */
-  -webkit-transition: all 1s ease-in;  /* Saf3.2+, Chrome */
+  -webkit-transition: all 1s ease-out;  /* Saf3.2+, Chrome */
 }
 
 /* fugue icons */
@@ -158,7 +158,8 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	height:100px;
 	width:100px;
 	position:static;
-	display:block;
+	display:inline-block;
+	float:left;
 }
 .popImageLarge{
 	height:auto;
@@ -166,6 +167,9 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	position:fixed;
 	display:block;
 	z-index:10000;
+	box-shadow: 2px 2px 5px rgba(0,0,0,.60); 
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
 }
 
 /*Filament Group CSS
