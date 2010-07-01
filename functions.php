@@ -88,6 +88,15 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				}
 				$formated = str_replace("[".$match[0]."=".$matchOld."]", $formated1,$formated);			
 			break;
+			case "img":
+				if($email){
+					$formated1 = "<img src=\"".$matchOld."\" class=\" border-all-B-2\">";
+				}else{
+					$formated1 = "<img src=\"".$matchOld."\" class=\"border-all-B-2 popImageSmall\" style=\"\">";
+				}
+				$formated = str_replace("[".$match[0]."=".$matchOld."]", $formated1,$formated);			
+			break;
+
 			
 			default:break;
 		}
