@@ -16,9 +16,7 @@ if($_SESSION){
 		@$usr = new User();
 	}
 }
-
-if($_GET['nagiosTicket']==881234123){
-	if($_GET['newTicketType']=="new"){
+if($_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
 		VALUES(
@@ -55,7 +53,7 @@ if($_GET['nagiosTicket']==881234123){
 			$smarty -> assign('showRes',"0");
 			if(isset($respon)){	$smarty -> assign('respon',$respon);}
 			$body = $smarty->fetch('email.tpl');
-			if($_GET['nagiosTicket']!=881234123 || !isset($_GET['nagiosTicket'])){
+			if($_GET['nagiosTicket']!=881234123 || !isset($_GET['nagiosTicket']) || $_GET['newTicketType']=="new"){
 				generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail);	
 			}
 				
@@ -94,6 +92,5 @@ if($_GET['nagiosTicket']==881234123){
 		$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$_GET['newTicketTicket_id']. " LIMIT 1;");//put in the new status
 		//end status area
 	}
-}
 echo json_encode($response);
 ?> 
