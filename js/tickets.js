@@ -292,10 +292,17 @@ function loadResponsesBody(ticketId, container, page) {
 			});
 			$("#replyticketid").val(ticketId);
 			cnt++;
+			resCont.find(".popImageSmallLink").colorbox({
+			transition: "none",
+			open: false,
+			photo:true,
+			title: "<span class=\"white\">Zoomed Image</span>"
+	});
 		});
 		container.html(resCont.html());
 	});
 	container.show();
+
 }
 
 function displayStatus(jsonData, Selector) {
@@ -455,6 +462,13 @@ function loadTicketBody(ticketId, container) {
 			href: "#reassignTicketdialog",
 			title: "<font class=\"white\">Reassign Ticket</font>"
 		});
+		$(".popImageSmallLink").colorbox({
+			transition: "none",
+			open: false,
+			photo:true,
+			title: "<span class=\"white\">Zoomed Image</span>"
+		});
+		//pis = $(this);
 		//Set the ticket type icon
 		if (data.tickettype_id == 1) {
 			$("#ticketStatusImage").find("#imgTicketTrouble").show();
@@ -648,6 +662,13 @@ function loadTicketList(pageNumber,queryObj) {
 			displayStatus(item.status, tlistHolder.find("#"+item.id+"-ticketListIcons")); //status icons
 		});
 		Tlb.html(tlistHolder);
+		
+		$(".popImageSmallLink").colorbox({
+			transition: "none",
+			open: false,
+			photo:true,
+			title: "<font class=\"white\">Zoomed Image</font>"
+		});
 	});
 }
 
@@ -1082,7 +1103,7 @@ jQuery(document).ready(function () {
 	$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	//Live items
 	//Ticket display live items
-	
+	/*
 	$(".popImageSmall").live("click",function(){
 		pis = $(this);
 		smallH = pis.outerHeight();
@@ -1099,6 +1120,7 @@ jQuery(document).ready(function () {
 			$("#placeholderpis").replaceWith();
 		}
 	});
+	*/
 	$(".actionButtons").live("click", function () {
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}

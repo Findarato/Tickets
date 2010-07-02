@@ -1,7 +1,7 @@
-<div style="display:table;width:100%;height:500px">
-	<div style="display:table-cell;width:300px;height:500px">
-		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:3px;">
-			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="position:relative;height:16px;">
+<div style="display:table;width:100%;height:500px;margin-right:5px;">
+	<div id="ticketarea" style="display:table-cell;width:300px;height:500px">
+		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:5px;">
+			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="ticketTitlearea" style="position:relative;height:16px;">
 				<div class="font-X" id="ticketTitle"></div>
 				<div class="color-X" id="ticketStatusImage" style="position:absolute;right:5px;top:2px;height:13px;">
 					<div class="corners-bottom-2 corners-top-2 background-alpha-4 border-all-B-1 lapcatButton" style="width:auto;padding:2px;">
@@ -63,7 +63,7 @@
 					<span id="ticketBody"></span>
 				</div>
 			</div>
-			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
+			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-B-1" id="ticketFooterArea" style="height:24px">
 				<div class="option-purple fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket actionButtons editLink" id="editlink" style="width:45px;">Edit</div>
 				<div class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>
 				<div class="option-black fg-button corners-bottom-2 corners-top-2 white lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:45px;display:none">Reopen</div>
