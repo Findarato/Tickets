@@ -5,7 +5,7 @@
  * @author Joseph Harry  
  * @version 1.0  
  * @copyright May 27, 2009
- */ 
+ */  
 include "../small_header.php";
 $usr = unserialize($_SESSION['user']);
 $response = array("message"=>"","error"=>"");
