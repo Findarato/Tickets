@@ -6,7 +6,7 @@
  * @version 1.0  
  * @copyright May 27, 2009
  */
-include_once "../small_header.php";
+include "../small_header.php";
 $usr = unserialize($_SESSION['user']);
 $response = array("message"=>"","error"=>"");
 if(isset($_GET['type'])){/*This is a valid get request*/
