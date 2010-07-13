@@ -193,11 +193,7 @@
 			$loaded = $('<div id="cboxLoadedContent" style="width:0; height:0;" />'),
 			$loadingOverlay = $('<div id="cboxLoadingOverlay" />'),
 			$loadingGraphic = $('<div id="cboxLoadingGraphic" />'),
-			$title = $('<div id="cboxTitle" />'),
 			$current = $('<div id="cboxCurrent" />'),
-			$slideshow = $('<div id="cboxSlideshow" />'),
-			$next = $('<div id="cboxNext" />').click($.fn.colorbox.next),
-			$prev = $('<div id="cboxPrevious" />').click($.fn.colorbox.prev),
 			$close = $('<div id="cboxClose" />').click($.fn.colorbox.close)
 		);
 		
@@ -347,7 +343,7 @@
 				
 				$loadingOverlay.hide();
 				$loadingGraphic.hide();
-				$slideshow.hide();
+				//$slideshow.hide();
 				
 				if($related.length>1){
 					$current.html(settings.current.replace(/\{current\}/, index+1).replace(/\{total\}/, $related.length));
@@ -357,13 +353,13 @@
 					$().unbind('keydown', cbox_key).one('keydown', cbox_key);
 					
 					if(settings.slideshow){
-						$slideshow.show();
+						//$slideshow.show();
 					}
 				} else {
 					$current.add($next).add($prev).hide();
 				}
 				
-				$title.html(settings.title ? settings.title : element.title);
+				//$title.html(settings.title ? settings.title : element.title);
 				
 				$.event.trigger('cbox_complete');
 				
@@ -494,22 +490,17 @@
 		open = false;
 		clearTimeout(ssTimeout);
 		$window.unbind('resize.cbox_resize');
-		$slideshow.unbind('cbox_complete cbox_load click');
+		//$slideshow.unbind('cbox_complete cbox_load click');
 		clearInline();
-		$overlay.css({cursor:'auto'}).fadeOut('fast').unbind('click', $.fn.colorbox.close);
+		$overlay.css({cursor:'auto'}).hide().unbind('click', $.fn.colorbox.close);
 		$().unbind('keydown', cbox_key);
-		
-		if ($.browser.msie && $.browser.version < 7) {
-			$('select').css({'visibility':'inherit'});
-			$window.unbind('resize scroll', IE6Overlay);
-		}
 		
 		$modalContent.children().hide();
 		
 		$modal
 		.stop(true, false)
 		.removeClass()
-		.fadeOut('fast', function(){
+		.hide( function(){
 			element.focus();
 			$loaded.remove();
 			$modal.css({'opacity':1});
