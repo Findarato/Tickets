@@ -8,7 +8,7 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVII</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.8.13.r142</span>
+			<span style="font-size: 70%; line-height: normal;" id="version">v.2.8.13.r155</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>1. The Update notes page was using the old theme.  This has been fixed.
 			<br>2. Fixed a bug that was causing bookmarked checks to apear on replies.

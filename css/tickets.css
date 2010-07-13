@@ -153,6 +153,15 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
 	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
 }
+.fuzzyoutline{
+	box-shadow: 0 0 6px rgba(255,0,0,1); 
+	-webkit-box-shadow: 0 0 6px rgba(255,0,0,1);
+	-moz-box-shadow: 0 0 6px rgba(255,0,0,1);
+	-moz-transition: all 0.3s ;  /* FF3.7+ */
+	-o-transition: all 0.3s ;  /* Opera 10.5 */
+	-webkit-transition: all 0.3s;
+}
+
 
 .popImageSmall{
 	height:100px;
