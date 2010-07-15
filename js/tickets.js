@@ -360,14 +360,39 @@ function loadRecentTickets(jsonData, selector) {
 	});
 }
 
-function loadTicketBody(ticketId, container) {
+function loadTicketBody(inputData, container) {
+	var data = {};
+	if(typeof inputData == "string" || typeof inputData == "object"){
+		if(typeof inputData == "object"){
+			data = inputData;
+		}else{
+			data = $.parseJSON(inputData);	
+		}
+		
+		if (typeof data == "object" ) {
+			if (localStorage.tickets = "true" && !localStorage.getItem("TicketId" + data.id)) {//local storage Support
+				localStorage.setItem("TicketId" + data.id,JSON.stringify(inputData));
+			}
+		}else {
+			if (localStorage.tickets = "true" && localStorage.getItem("TicketId" + inputData)) {//local storage Support
+				data = localStorage.getItem("TicketId" + inputData);
+				data = $.parseJSON(data);
+			}else {
+				notice("Debug", "Something odd happend with the Code. Error: 100378A", true);
+			}
+		}
+	}else{
+		alert(data);
+		notice("Debug","Something odd happend with the Code. Error: 100381B",true);
+	}
+	
 	container.find(".statusImage ").hide();
-	Params.Ticket_id = ticketId; //set the global
-	$.getJSON(uri + "ajax/display_ticket.php", {
-		"ticket_id": ticketId
-	}, function (data) {
+	Params.Ticket_id = ticketId = data.id; //set the global
+	//ticketId = data.id;
 		Params.TicketJSON = data;
-		container.find("#ticketTitle").html(data.subject).show();
+		
+		//alert(container.find("#ticketTitle"));
+		container.find("#ticketTitle").html(data.subject);
 		container.find("#ticketDate").html(data.created_on);
 		if (data.timeRemaining > 0) { //ticket is over due.
 			container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
@@ -481,7 +506,6 @@ function loadTicketBody(ticketId, container) {
 		pageAnator(container.find("#pageAnator").empty(), data.responseCount, 20); //add Page numbers
 		loadRecentTickets(data.recentTickets, $("#recentTickets")); //Recent ticket list
 		displayStatus(data.status, container.find("#ticketStatusImage")); //status icons
-	});
 }
 /**
  * Loads the ticket value into the display
@@ -492,7 +516,15 @@ function loadTicketBody(ticketId, container) {
 function loadTicket(ticketId) {
 	Params.LastArea = "ticket";
 	Params.Content.html($("#ticketTpl").html());
-	loadTicketBody(ticketId, Params.Content);
+	//localStorage.clear()
+
+	if(data = localStorage.getItem("TicketId"+ticketId)){
+		loadTicketBody(data,Params.Content);
+	}else{
+		$.getJSON(uri + "ajax/display_ticket.php", {"ticket_id": ticketId}, function (data) {loadTicketBody(data,Params.Content);});	
+	}
+	
+	//loadTicketBody(ticketId, Params.Content);
 	var hash = getHashArray();
 	if (hash[2] == "page" && hash[3] > -1) {
 		loadResponsesBody(Params.Ticket_id, $("#replyareabody"), hash[3]); //load the selected response page
