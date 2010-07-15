@@ -19,11 +19,11 @@
 						        </div>
 						        <div style="clear:both">
 							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Opened On</font></div>
-							       	<div class="left "><font id="">{$email_created_on}</font></div>
+							       	<div class="left "><font id="">{$email_created_on|date_format:"%m/%d/%Y %H:%M"}</font></div>
 						        </div>
 						        <div style="clear:both">
 							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Due On</font></div>
-							       	<div class="left "><font id="">{$email_due_on}</font></div>
+							       	<div class="left "><font id="">{$email_due_on|date_format:"%m/%d/%Y %H:%M"}</font></div>
 						        </div>
 						        <div style="clear:both">
 							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><font class="">Category</font></div>
@@ -65,8 +65,8 @@
 							       	<div class="left "><font >{$respon.firstname} {$respon.lastname}</font></div>
 						        </div>
 						        <div style="clear:both">
-							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Due On</font></div>
-							       	<div class="left "><span class="" style="font-weight:bold;">Date:</span> {$respon.date|date_format:"%Y/%m/%d"}</span></div>
+							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Posted On</font></div>
+							       	<div class="left "><span class="" style="font-weight:bold;">Date:</span> {$respon.date|date_format:"%m/%d/%Y %H:%M"}</span></div>
 						        </div>
 								<div id="ticketDataBox" style="padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:285px;overflow:auto;vertical-align:top; clear:both">
 									<span class="" style="">{$respon.body}</span>
