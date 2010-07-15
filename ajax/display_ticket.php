@@ -35,7 +35,7 @@ function recentTickets($user_id,$ticket_id,$subject,$display=false){
 if(isset($_GET['ticket_id'])){
 	$ticket_id = $_GET['ticket_id'];
 	/*This is a valid ticket request*/
-	$res = $db->Query("SELECT tcv.*, 
+	$res = $db->Query(" SELECT
 	TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
 	TIMESTAMPDIFF(SECOND ,tcv.closed_on, now( ) ) AS dagoc,
 	DATE_FORMAT(tcv.created_on	, '%M %e, %Y %H:%i') AS created_on,
@@ -49,19 +49,25 @@ if(isset($_GET['ticket_id'])){
 	lhu2.username as username2,
 	lhu2.firstname AS firstname2,
 	lhu2.lastname AS lastname2,
+	tcv.description AS description,
 	tcv.assigned_by_id,
-	tcv.status,
+	tcv.status AS status,
 	tcv.subject,
-	tcv.attachment
+	tcv.id,
+	tcv.category,
+	tcv.priority,
+	tcv.locationid,
+	tcv.locationName
 	FROM tcview AS tcv 
 	LEFT JOIN favorite AS f ON (tcv.id=f.ticket_id AND f.user_id=".$usr->User_id.") 
 	JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 	JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
-	WHERE tcv.id=".$_GET['ticket_id']); 
+	WHERE tcv.id=".$_GET['ticket_id']." LIMIT 1");
+	 
 	$response = $db->Fetch("assoc");
 	if(count($db->Error)==2){$response['error']==$db->Error;}
 	if(@unserialize($response['status'])){$response['status'] = unserialize($response['status']);}
-	if(@unserialize($response['attachment'])){$response['attachment'] = unserialize($response['attachment']);}
+	//if(@unserialize($response['attachment'])){$response['attachment'] = unserialize($response['attachment']);}
 	
 	$response['dbDescription']=$response['description'];
 	$response['description']=Tcode($response['description']);
@@ -75,6 +81,7 @@ if(isset($_GET['ticket_id'])){
 /**
  * Insert the newest ticket, then get the recent tickets
  */
+
 if(isset($_GET['recentOnly'])){
 	$response['recentTickets']=recentTickets($usr->User_id,"","",true);
 	echo json_encode($response['recentTickets']); 
@@ -82,5 +89,4 @@ if(isset($_GET['recentOnly'])){
 	$response['recentTickets']=recentTickets($usr->User_id,$_GET['ticket_id'],$response['subject'],false);
 	echo json_encode($response);	
 }
-
 ?>  
