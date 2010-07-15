@@ -361,151 +361,141 @@ function loadRecentTickets(jsonData, selector) {
 }
 
 function loadTicketBody(inputData, container) {
+	//Basically figures out what kind of data is being send to the function and how to deal with it.
 	var data = {};
 	if(typeof inputData == "string" || typeof inputData == "object"){
 		if(typeof inputData == "object"){
 			data = inputData;
 		}else{
-			data = $.parseJSON(inputData);	
+			data = $.parseJSON(inputData);
 		}
-		
-		if (typeof data == "object" ) {
-			if (localStorage.tickets = "true" && !localStorage.getItem("TicketId" + data.id)) {//local storage Support
+		if (typeof data == "object" ) { //We now have an object and need to deal with it
+			if (!localStorage.getItem("TicketId" + data.id)) {//local storage Support
 				localStorage.setItem("TicketId" + data.id,JSON.stringify(inputData));
 			}
-		}else {
-			if (localStorage.tickets = "true" && localStorage.getItem("TicketId" + inputData)) {//local storage Support
-				data = localStorage.getItem("TicketId" + inputData);
-				data = $.parseJSON(data);
-			}else {
-				notice("Debug", "Something odd happend with the Code. Error: 100378A", true);
-			}
+		}else{ // received the string ID of a ticket to load
+			notice("Debug", "Something odd happend with the Code. Error: 100380A", true);
 		}
-	}else{
-		alert(data);
-		notice("Debug","Something odd happend with the Code. Error: 100381B",true);
-	}
+	}else{	notice("Debug","Something odd happend with the Code. Error: 100382B",true);}
 	
+	
+//Display code.	
 	container.find(".statusImage ").hide();
 	Params.Ticket_id = ticketId = data.id; //set the global
-	//ticketId = data.id;
-		Params.TicketJSON = data;
-		
-		//alert(container.find("#ticketTitle"));
-		container.find("#ticketTitle").html(data.subject);
-		container.find("#ticketDate").html(data.created_on);
-		if (data.timeRemaining > 0) { //ticket is over due.
-			container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
-			//container.find("#ticketStatusImage").append($("<img/>").attr("src","http://cdn1.lapcat.org/famfamfam/silk/exclamation.png"));
-		} else { //ticket is not over due
-			container.find("#ticketDueDate").html(data.due_on);
-		}
-		container.find("#ticketBody").html(data.description);
-		container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketlist/category/" + data.category).addClass("nolink ticket_button ticket_sprite category_link ").html(data.category));
-		container.find("#ticketCreatedBy").html($("<a/>").attr("href", "#ticketlist/created_by/" + data.created_by_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname2 + " " + data.lastname2));
-		container.find("#ticketAssignedTo").html($("<a/>").attr("href", "#ticketlist/assigned/" + data.assigned_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname + " " + data.lastname));
-		container.find("#replyticketid").val(ticketId);
-		container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketlist/location/" + data.locationId).addClass("nolink library-link ").html(data.locationName));
-		container.find("#ticketId").html(data.id);
-		container.find("#ticketPriority").html(data.priority);
-		if (data.favorite !== null) {
-			container.find("#imgBookmark").show();
-		}
-		if (data.status.lock == 1) {
-			$("#Holdlink").hide();
-			$("#unHoldlink").show();
-		} else {
-			$("#Holdlink").show();
-			$("#unHoldlink").hide();
-		}
-		if (data.closed_on !== null) { //All closed tickets
-			container.find("#ticketClosedOnDate").html(data.closed_on);
-			if (data.dagoc < 604800 || data.open == 1) { //newly closed
-				container.find(".openTicket").hide();
-				container.find(".closedTicket").show();
-			} else { //very old closed
-				container.find(".openTicket").hide();
-				container.find(".closedTicket").hide();
-			}
-		} else { //open tickets
-			container.find(".openTicket:not(.hold)").show();
+	Params.TicketJSON = data;
+	container.find("#ticketTitle").html(data.subject);
+	container.find("#ticketDate").html(data.created_on);
+	if (data.timeRemaining > 0) { //ticket is over due.
+		container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
+		//container.find("#ticketStatusImage").append($("<img/>").attr("src","http://cdn1.lapcat.org/famfamfam/silk/exclamation.png"));
+	} else { //ticket is not over due
+		container.find("#ticketDueDate").html(data.due_on);
+	}
+	container.find("#ticketBody").html(data.description);
+	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketlist/category/" + data.category).addClass("nolink ticket_button ticket_sprite category_link ").html(data.category));
+	container.find("#ticketCreatedBy").html($("<a/>").attr("href", "#ticketlist/created_by/" + data.created_by_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname2 + " " + data.lastname2));
+	container.find("#ticketAssignedTo").html($("<a/>").attr("href", "#ticketlist/assigned/" + data.assigned_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname + " " + data.lastname));
+	container.find("#replyticketid").val(ticketId);
+	container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketlist/location/" + data.locationId).addClass("nolink library-link ").html(data.locationName));
+	container.find("#ticketId").html(data.id);
+	container.find("#ticketPriority").html(data.priority);
+	if (data.favorite !== null && data.favorite!==0) {
+		container.find("#imgBookmark").show();
+	}
+	if (data.status.lock == 1) {
+		$("#Holdlink").hide();
+		$("#unHoldlink").show();
+	} else {
+		$("#Holdlink").show();
+		$("#unHoldlink").hide();
+	}
+	if (data.closed_on !== null) { //All closed tickets
+		container.find("#ticketClosedOnDate").html(data.closed_on);
+		if (data.dagoc < 604800 || data.open == 1) { //newly closed
+			container.find(".openTicket").hide();
+			container.find(".closedTicket").show();
+		} else { //very old closed
+			container.find(".openTicket").hide();
 			container.find(".closedTicket").hide();
 		}
-		var attCnt = 0;
-		if ($("#storage").html() == 1) {
-			$("#replyarea").hide();
-		}
-		var pri = parseInt(container.find("#ticketPriority").text() - 1, 10);
-		$("#replyareaTitle").text("Replies (" + data.responseCount + ")"); //display the total response count
-		$('#editlink').colorbox({
-			iframe: false,
-			transition: "none",
-			open: false,
-			inline: true,
-			href: "#newTicketdialog",
-			title: "<font class=\"white\">Edit Ticket</font>"
-		}, function () {
-			$("#newTicketDescription").val(Params.TicketJSON.dbDescription);
-			$("#newTicketTitle").val(Params.TicketJSON.subject);
-			$("#newTicketLocation").val(Params.TicketJSON.locationName);
-			$("#newTicketTicket_id").val(Params.TicketJSON.id);
-			$("#newTicketType").val("edit");
-			$("#newTicketPriority").val(Params.TicketJSON.priority - 1);
-			$("#newTicketAssign").val(Params.TicketJSON.firstname + " " + Params.TicketJSON.lastname);
-			$("#newTicketCategory").val(Params.TicketJSON.category);
-			$("#newTicketDueDate").val(Params.TicketJSON.due_on);
-			$("#ticketAddBtn").text("Commit Changes");
-			$("#newTicketDueDate").val(Date.today().add({
-				days: 3
-			}).toString("M/d/yyyy")).blur(function () {
-				var cleanDate = Date.parse($(this).val(), "M/d/yyyy");
-				if (cleanDate === null) {
-					notice("Error", "bad date", false);
-					$("#ticketAddBtn").hide();
-				} else {
-					$(this).val(cleanDate.toString("M/d/yyyy"));
-					$("#ticketAddBtn").show();
-				}
-			});
+	} else { //open tickets
+		container.find(".openTicket:not(.hold)").show();
+		container.find(".closedTicket").hide();
+	}
+	var attCnt = 0;
+	if ($("#storage").html() == 1) {
+		$("#replyarea").hide();
+	}
+	var pri = parseInt(container.find("#ticketPriority").text() - 1, 10);
+	$("#replyareaTitle").text("Replies (" + data.responseCount + ")"); //display the total response count
+	$('#editlink').colorbox({
+		iframe: false,
+		transition: "none",
+		open: false,
+		inline: true,
+		href: "#newTicketdialog",
+		title: "<font class=\"white\">Edit Ticket</font>"
+	}, function () {
+		$("#newTicketDescription").val(Params.TicketJSON.dbDescription);
+		$("#newTicketTitle").val(Params.TicketJSON.subject);
+		$("#newTicketLocation").val(Params.TicketJSON.locationName);
+		$("#newTicketTicket_id").val(Params.TicketJSON.id);
+		$("#newTicketType").val("edit");
+		$("#newTicketPriority").val(Params.TicketJSON.priority - 1);
+		$("#newTicketAssign").val(Params.TicketJSON.firstname + " " + Params.TicketJSON.lastname);
+		$("#newTicketCategory").val(Params.TicketJSON.category);
+		$("#newTicketDueDate").val(Params.TicketJSON.due_on);
+		$("#ticketAddBtn").text("Commit Changes");
+		$("#newTicketDueDate").val(Date.today().add({
+			days: 3
+		}).toString("M/d/yyyy")).blur(function () {
+			var cleanDate = Date.parse($(this).val(), "M/d/yyyy");
+			if (cleanDate === null) {
+				notice("Error", "bad date", false);
+				$("#ticketAddBtn").hide();
+			} else {
+				$(this).val(cleanDate.toString("M/d/yyyy"));
+				$("#ticketAddBtn").show();
+			}
 		});
-		$('#replylink').colorbox({
-			iframe: false,
-			transition: "none",
-			open: false,
-			inline: true,
-			href: "#newReplydialog",
-			title: "<font class=\"white\">Reply to Ticket</font>"
-		}, function () {
-			$("#replyTitle").val("Re:" + Params.TicketJSON.subject);
-			$("#replyticketid").val(Params.Ticket_id);
-			$("#replyuserid").val(User_id);
-		});
-		$('#ReAssignlink').colorbox({
-			transition: "none",
-			open: false,
-			inline: true,
-			href: "#reassignTicketdialog",
-			title: "<font class=\"white\">Reassign Ticket</font>"
-		});
-		$(".popImageSmallLink").colorbox({
-			transition: "none",
-			open: false,
-			photo:true,
-			title: "<span class=\"white\">Zoomed Image</span>"
-		});
-		//pis = $(this);
-		//Set the ticket type icon
-		if (data.tickettype_id == 1) {
-			$("#ticketStatusImage").find("#imgTicketTrouble").show();
-			$("#ticketStatusImage").find("#imgTicketBug").hide();
-		} else {
-			$("#ticketStatusImage").find("#imgTicketBug").show();
-			$("#ticketStatusImage").find("#imgTicketTrouble").hide();
-		}
-		//Run some functions to deal with the data.	
-		pageAnator(container.find("#pageAnator").empty(), data.responseCount, 20); //add Page numbers
-		loadRecentTickets(data.recentTickets, $("#recentTickets")); //Recent ticket list
-		displayStatus(data.status, container.find("#ticketStatusImage")); //status icons
+	});
+	$('#replylink').colorbox({
+		iframe: false,
+		transition: "none",
+		open: false,
+		inline: true,
+		href: "#newReplydialog",
+		title: "<font class=\"white\">Reply to Ticket</font>"
+	}, function () {
+		$("#replyTitle").val("Re:" + Params.TicketJSON.subject);
+		$("#replyticketid").val(Params.Ticket_id);
+		$("#replyuserid").val(User_id);
+	});
+	$('#ReAssignlink').colorbox({
+		transition: "none",
+		open: false,
+		inline: true,
+		href: "#reassignTicketdialog",
+		title: "<font class=\"white\">Reassign Ticket</font>"
+	});
+	$(".popImageSmallLink").colorbox({
+		transition: "none",
+		open: false,
+		photo:true,
+		title: "<span class=\"white\">Zoomed Image</span>"
+	});
+	//Set the ticket type icon
+	if (data.tickettype_id == 1) {
+		$("#ticketStatusImage").find("#imgTicketTrouble").show();
+		$("#ticketStatusImage").find("#imgTicketBug").hide();
+	} else {
+		$("#ticketStatusImage").find("#imgTicketBug").show();
+		$("#ticketStatusImage").find("#imgTicketTrouble").hide();
+	}
+	//Run some functions to deal with the data.	
+	pageAnator(container.find("#pageAnator").empty(), data.responseCount, 20); //add Page numbers
+	loadRecentTickets(data.recentTickets, $("#recentTickets")); //Recent ticket list
+	displayStatus(data.status, container.find("#ticketStatusImage")); //status icons
 }
 /**
  * Loads the ticket value into the display
@@ -516,8 +506,7 @@ function loadTicketBody(inputData, container) {
 function loadTicket(ticketId) {
 	Params.LastArea = "ticket";
 	Params.Content.html($("#ticketTpl").html());
-	//localStorage.clear()
-
+	
 	if(data = localStorage.getItem("TicketId"+ticketId)){
 		loadTicketBody(data,Params.Content);
 	}else{
@@ -740,7 +729,14 @@ function loadStats() {
 }
 	
 jQuery(document).ready(function () {
+	$("#clearLocalStorage").click(function(){
+		localStorage.clear();
+		if(!localStorage.tickets){notice("Debug","Local Storage is cleared!",true);}
+		localStorage.tickets = "true";
+		return false;
+	});
 	//$(window).bind( 'hashchange', function(){checkHash();});
+	localStorage.tickets = true; //localStorage works
 	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
@@ -937,7 +933,7 @@ jQuery(document).ready(function () {
 		var hash = jQuery.makeArray(window.location.hash.split("\/"));
 		var display = $("#imgBookmark");
 		if (hash[0] == "#ticket") {
-			if (display.css("display") == "block" || display.css("display") == "inline") {
+			if (display.css("display") == "block" || display.css("display") == "inline") { //Add bookmark
 				$.get(uri + "ajax/tickets.php", {
 					type: "favorite",
 					ticket_id: Params.Ticket_id,
@@ -946,8 +942,19 @@ jQuery(document).ready(function () {
 					populateAllTickets("f");
 					display.toggle();
 					notice("Notice", data.message, false);
+					/* work on me
+					if(localStorage.tickets == "true"){
+						//alert(localStorage.getItem("TicketId" + Params.Ticket_id));
+						data = $.parseJSON(localStorage.getItem("TicketId" + Params.Ticket_id));
+						alert(data.favorite);
+						if(data.favorite){	data.favorite = 0;	}
+						
+						localStorage.setItem("TicketId"+Params.Ticket_id,JSON.stringify(data));
+					}
+					*/
 				}, "json");
-			} else {
+				
+			} else { //remove bookmark
 				$.get(uri + "ajax/tickets.php", {
 					type: "favorite",
 					ticket_id: Params.Ticket_id,
@@ -956,6 +963,15 @@ jQuery(document).ready(function () {
 					populateAllTickets("f");
 					display.toggle();
 					notice("Notice", data.message, false);
+					/* work on me
+					if(localStorage.tickets == "true"){
+						alert(localStorage.getItem("TicketId" + Params.Ticket_id));
+						data = $.parseJSON(localStorage.getItem("TicketId" + Params.Ticket_id));
+						if(data.favorite){	data.favorite = 1;	}
+						localStorage.setItem("TicketId"+Params.Ticket_id,JSON.stringify(data));
+					}
+					*/
+
 				}, "json");
 			}
 		} else {
