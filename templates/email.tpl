@@ -1,74 +1,81 @@
 <html>
 	<head>
-		<link id="nebulacss" type="text/css" href="http://www.lapcat.org/lapcat/css/nebula.css" rel="stylesheet" />
-		<link id="themegencss" type="text/css" href="http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=9" rel="stylesheet" /> 
+		<link id="themegencss" type="text/css" href="http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=22&hsl" rel="stylesheet" /> 
 		<link id="ticketcss" type="text/css" href="http://www.lapcat.org/tickets/css/tickets.css" rel="stylesheet" />
 	</head>
-
-<body class="image-background color-background">
-<table cellpadding="0" cellspacing="0" style="width:100%" border="0">
-	<tr>
-		<td style="width:300px;vertical-align:top;padding-right:1px;" class="">
-			<div id="ticketarea" class="ui-corner-top ui-corner-bottom">
-			    <div class="corners-bottom-2 corners-top-2 dark border-main-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font style="margin-left:10px;margin:5px;" id="ticketTitle"><a class="ticket_link" href="http://www.lapcat.org/tickets/#ticket/{$email_ticket_id}">{$email_title}</a></font>
-				<div id="ticketStatusImage" style="position:absolute ;right: 10px;top: 2px;height:13px;">
-					<img class="smallimage" src="http://cdn1.lapcat.org/famfamfam/silk/pencil.png" style="display:none" id="imgEdited" title="Edited"><img class="smallimage" src="http://cdn1.lapcat.org/famfamfam/silk/user_edit.png" style="display:none" id="imgReassigned" title="Reassigned"><img class="smallimage" src="http://cdn1.lapcat.org/famfamfam/silk/door.png" style="display:none" id="imgClosed" title="Closed"><img class="smallimage" src="http://cdn1.lapcat.org/famfamfam/silk/tick.png" style="display:none" id="imgBookmark" title="Bookmarked"><img class="smallimage" src="http://cdn1.lapcat.org/famfamfam/silk/brick.png" style="display:none" id="imgBlocked" title="Blocked"><img class="smallimage" src="http://cdn1.lapcat.org/famfamfam/silk/attach.png" style="display:none" id="imgAttachment" title="Attachment">
-				</div>
-				</div>
-					<div class="color-heavy dark corners-bottom-2 corners-top-2 border-main-1" id="ticket" style="padding:2px;margin:4px">
-						<div style="width:100%;text-align:top;" class="">
-							<table>
-								<tr>
-									<td ><font class="" style="font-weight:bold;">Ticket ID: </font><a class="ticket_link" href="http://www.lapcat.org/tickets/#ticket/{$email_ticket_id}">{$email_ticket_id}</a></td>
-								</tr>
-								<tr>
-									<td ><font class="" style="font-weight:bold;">Opened On: </font><font class="" id="ticketDate">{$email_created_on}</font></td>
-								</tr>
-								<tr>
-									<td ><font class="" style="font-weight:bold;">Due On:</font><font class="" id="ticketDueDate">{$email_due_on}</font</td>
-								</tr>
-								<tr>
-									<td ><font class="" style="font-weight:bold;">Category: </font><font class="category_link " id="ticketCategory">{$email_category}</font></td>
-								</tr>
-								<tr>
-									<td ><font class="" style="font-weight:bold;">Created By: </font><font class=" user" id="ticketCreatedBy">{$email_created_by}</font></td>
-								</tr>
-								<tr>
-									<td ><font class="" style="font-weight:bold;">Assigned To: </font><font class=" user" id="ticketCreatedBy">{$email_assigned_to}</font></td>
-								</tr>
-								<tr>
-									<td ><font class="" style="font-weight:bold;">Priority: </font><font class="" id="ticketPriority">{$email_priority}</font></td>
-								</tr>
-								<tr>
-									<td ><font class="" style="font-weight:bold;">Location: </font<font class=" library-link" id="ticketLocation">{$email_location}</font></td>
-								</tr>
-								<tr>
-									<td ><font class="" style="">{$email_description}</font></td>
-								</tr>
-							</table>
-					    </div>
-				    </div> 
-				</div>
-				<div class="corners-bottom-2 corners-top-2 dark border-main-1" style="text-align:left;margin:4px;padding:2px;height:20px;position:relative"><font style="margin-left:10px;margin:5px;" id="ticketTitle">Latest Reply</font></div>
-				<div class="color-heavy corners-bottom-2 corners-top-2 dark border-main-1" style="overflow:hidden;text-align:left;padding:2px;margin:4px;" id="changemeColor">
-				<table style="width:100%">
-					<tr>
-						<td class="" style="text-align:left;vertical-align:top;"><font class="" style="font-weight:bold;">Name:</font> {$respon.firstname} {$respon.lastname}</td>
-					</tr>
-					<tr>
-						<td class="" style="text-align:left;vertical-align:top;"><font class="" style="font-weight:bold;">Title:</font> {$respon.subject}</td>
-					</tr>
-					<tr>
-						<td class="" style="text-align:left;vertical-align:top"><font class="" style="font-weight:bold;">Date:</font> {$respon.date|date_format:"%Y/%m/%d"}</td>
-					</tr>					
-					<tr>
-						<td class="" style="text-align:left;vertical-align:top;">{$respon.body}</td>
-					</tr>
-				</table>
-				</div>
-			</div>
-		</td>
-	</tr>
-</table>
+	<body class="image-background color-background">
+		<table cellpadding="0" cellspacing="0" style="width:100%" border="0">
+			<tr>
+				<td style="width:50%;vertical-align:top;padding-right:1px;" class=""><!--Ticket -->
+					<div id="ticketarea" style="width:100%;">
+						<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;margin-right:5px;">
+							<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="ticketTitlearea" style="position:relative;height:16px;">
+								<div class="font-X" id="ticketTitle"><a class="ticket_link" href="http://www.lapcat.org/tickets/#ticket/{$email_ticket_id}">{$email_title}</a></div>
+							</div>
+							<div class="droidSerif color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
+								<div style="clear:both">
+							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Ticket ID:</font></div>
+							       	<div class="left "><a class="" href="http://www.lapcat.org/tickets/#ticket/{$email_ticket_id}">{$email_ticket_id}</a></div>
+						        </div>
+						        <div style="clear:both">
+							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Opened On</font></div>
+							       	<div class="left "><font id="">{$email_created_on}</font></div>
+						        </div>
+						        <div style="clear:both">
+							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Due On</font></div>
+							       	<div class="left "><font id="">{$email_due_on}</font></div>
+						        </div>
+						        <div style="clear:both">
+							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><font class="">Category</font></div>
+							       	<div class="left "><span class="category_link " id="">{$email_category}</span></div>
+						        </div>
+						        <div style="clear:both">
+							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><font class="">Created By</font></div>
+							       	<div class="left "><span class=" user" id="">{$email_created_by}</span></div>
+						       </div>
+								<div style="clear:both">
+							       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><font class="">Assigned To</font></div>
+							       	<div class="left" ><span class=" user" id="">{$email_assigned_to}</span></div>
+						       </div> 
+								<div style="clear:both">
+							       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><font class="">Priority</font></div>
+							       	<div class="left" ><span class="" id="">{$email_priority}</span></div>
+								</div>
+								<div style="clear:both">
+							       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><font class="">Location</font></div>
+							       	<div class="left" ><span class=" library-link" id="">{$email_location}</span></div>
+								</div>
+								<div id="" style="padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:285px;overflow:auto;vertical-align:top; clear:both">
+									<span class="" style="">{$email_description}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td>
+					<td style="width:50%;vertical-align:top;padding-right:1px;" class=""> <!--Response -->
+					<div id="ticketarea" style="width:100%;">
+						<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;margin-right:5px;">
+							<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="ticketTitlearea" style="position:relative;height:16px;">
+								<div class="font-X" id="ticketTitle"><span class="" style="font-weight:bold;">Title:</span> {$respon.subject}</span></div>
+							</div>
+							<div class="droidSerif color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Response Body -->
+						        <div style="clear:both">
+							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Name:</font></div>
+							       	<div class="left "><font >{$respon.firstname} {$respon.lastname}</font></div>
+						        </div>
+						        <div style="clear:both">
+							       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><font class="">Due On</font></div>
+							       	<div class="left "><span class="" style="font-weight:bold;">Date:</span> {$respon.date|date_format:"%Y/%m/%d"}</span></div>
+						        </div>
+								<div id="ticketDataBox" style="padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:285px;overflow:auto;vertical-align:top; clear:both">
+									<span class="" style="">{$respon.body}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</body>
-	</html>
+</html>
