@@ -12,6 +12,7 @@ var Params = {
 	"FadeTime": 0,
 	"Ticket_id": 0,
 	"Content": "",
+	"Debug":true,
 	"TicketJSON": "",
 	"LastArea": "",
 	"popChange":false,
@@ -366,8 +367,14 @@ function loadTicketBody(inputData, container) {
 	if(typeof inputData == "string" || typeof inputData == "object"){
 		if(typeof inputData == "object"){
 			data = inputData;
+			if (Params.Debug) {
+				$("#DebugLog").append("Pulled from Database<br>");
+			}
 		}else{
 			data = $.parseJSON(inputData);
+			if (Params.Debug) {
+				$("#DebugLog").append("Pulled from localstorage<br>");
+			}
 		}
 		if (typeof data == "object" ) { //We now have an object and need to deal with it
 			if (!localStorage.getItem("TicketId" + data.id)) {//local storage Support
@@ -503,10 +510,11 @@ function loadTicketBody(inputData, container) {
  * @param {int} ticketId
  */
 
-function loadTicket(ticketId) {
+function loadTicket(ticketId,display) {
 	Params.LastArea = "ticket";
-	Params.Content.html($("#ticketTpl").html());
-	
+	if(!display){
+		Params.Content.html($("#ticketTpl").html());	
+	}
 	if(data = localStorage.getItem("TicketId"+ticketId)){
 		loadTicketBody(data,Params.Content);
 	}else{
@@ -516,8 +524,14 @@ function loadTicket(ticketId) {
 	//loadTicketBody(ticketId, Params.Content);
 	var hash = getHashArray();
 	if (hash[2] == "page" && hash[3] > -1) {
+		if (Params.Debug) {
+			$("#DebugLog").append("Loaded Responses #" + hash[3] + "<br>");
+		}
 		loadResponsesBody(Params.Ticket_id, $("#replyareabody"), hash[3]); //load the selected response page
 	} else {
+		if (Params.Debug) {
+			$("#DebugLog").append("Loaded Responses<br>");
+		}
 		loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
@@ -692,7 +706,6 @@ function loadTicketList(pageNumber,queryObj) {
 		});
 	});
 }
-
 function loadStats() {
 	$.getJSON(uri + "ajax/stats.php", {
 		"type": "1,2,3,4,5",
@@ -729,8 +742,10 @@ function loadStats() {
 }
 	
 jQuery(document).ready(function () {
+	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
 		localStorage.clear();
+		if (Params.Debug) {	$("#DebugLog").append("Cleared Local Storage<br>");}
 		if(!localStorage.tickets){notice("Debug","Local Storage is cleared!",true);}
 		localStorage.tickets = "true";
 		return false;
@@ -1173,13 +1188,15 @@ jQuery(document).ready(function () {
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
 		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
-		if($(this).hasClass("closeLink")){queryObj = {type:"close",ticket_id: Params.Ticket_id};}
+		if($(this).hasClass("closeLink")){	queryObj = {type:"close",ticket_id: Params.Ticket_id};	}
 		if($(this).hasClass("openLink")){queryObj = {type:"open",ticket_id: Params.Ticket_id};}
 		$.getJSON(uri + "ajax/tickets.php", queryObj,
 		function (data) {
 			checkResponse(data);
-			loadTicketBody(Params.Ticket_id, Params.Content);
-			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
+			localStorage.removeItem("TicketId"+Params.Ticket_id);
+
+			loadTicket(Params.Ticket_id, true);
+			//loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
 		});
 	});
 	//Global page live 
