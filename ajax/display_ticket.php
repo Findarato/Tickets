@@ -51,6 +51,8 @@ if(isset($_GET['ticket_id'])){
 	lhu2.lastname AS lastname2,
 	tcv.description AS description,
 	tcv.assigned_by_id,
+	tcv.assigned_id,
+	tcv.created_by_id,
 	tcv.status AS status,
 	tcv.subject,
 	tcv.id,

@@ -36,7 +36,7 @@
 <div style="height:50px;"></div>
 <div id="wrap" style="width:99%; padding:4px;position:relative;" class="">
 	<div style="min-height:300px;position:absolute;top:3px;left:2px;width:200px;"  class="corners-bottom-2 corners-top-2">
-		{include file="status.tpl"} <br> {include file="stats.tpl"}
+		{include file="status.tpl"} <br> {include file="stats.tpl"} <br> {include file="log.tpl"}
 	</div>
   	<div style="margin-left:220px;" class=" corners-bottom-2 corners-top-2">
 	    <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">{include file="$content"}</div>
