@@ -7,6 +7,23 @@
 			<span> More detailed update notes can be found <a class="ticket_sprite world_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite world_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
+			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVIII</span>
+			<span style="font-size: 70%; line-height: normal;" id="version">v.2.9.13.r161</span>
+			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+			<br>1. 
+			<br>
+			<br>
+			<span style="font-size: 150%; line-height: normal;">New Features</span>
+			<br>1. Tickets now uses localStorage.  If your browser supports it tickets that you have recently viewed will load up much faster. 
+			<br>
+			<br>
+			<span style="font-size: 150%; line-height: normal;">Known Issues</span>
+			<br>1. Large Graphs are still not working properly
+			<br>2. Some themes do not work 100%
+			<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+			<br>4. Problem or bug icons do not show up in the ticket list.
+			<br>
+			<br>
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVII</span>
 			<span style="font-size: 70%; line-height: normal;" id="version">v.2.8.13.r161</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
