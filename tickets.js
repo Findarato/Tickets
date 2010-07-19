@@ -367,14 +367,8 @@ function loadTicketBody(inputData, container) {
 	if(typeof inputData == "string" || typeof inputData == "object"){
 		if(typeof inputData == "object"){
 			data = inputData;
-			if (Params.Debug) {
-				$("#DebugLog").append("Pulled from Database<br>");
-			}
 		}else{
 			data = $.parseJSON(inputData);
-			if (Params.Debug) {
-				$("#DebugLog").append("Pulled from localstorage<br>");
-			}
 		}
 		if (typeof data == "object" ) { //We now have an object and need to deal with it
 			if (!localStorage.getItem("TicketId" + data.id)) {//local storage Support
@@ -516,8 +510,10 @@ function loadTicket(ticketId,display) {
 		Params.Content.html($("#ticketTpl").html());	
 	}
 	if(data = localStorage.getItem("TicketId"+ticketId)){
+		if (Params.Debug) {	$("#DebugLog").append("Pulled from localStorage<br>");	}
 		loadTicketBody(data,Params.Content);
 	}else{
+		if (Params.Debug) {	$("#DebugLog").append("Pulled from Database<br>");}
 		$.getJSON(uri + "ajax/display_ticket.php", {"ticket_id": ticketId}, function (data) {loadTicketBody(data,Params.Content);});	
 	}
 	
