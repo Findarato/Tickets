@@ -7,12 +7,12 @@
 			<div class="droidSerif color-X-1" id="replyareabody" style="overflow:auto;height:auto;padding:3px;">
 				<div class="textLeft">
 					<span>Assign:</span>
-					<select style="width:150px" class="" id="TicketAssign" name="TicketAssign">{html_options options=$assign }</select>
+					<select style="width:150px" id="TicketAssign" name="TicketAssign">{html_options options=$assign }</select>
 				</div>
 			</div>
 			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
-				<a class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton Cancel" id="replyCancelBtn">Cancel</a>
-				<a class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="ReAssignBtn"><span>Reassign</span></a>
+				<a class="button-theme fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton Cancel" id="replyCancelBtn">Cancel</a>
+				<a class="button-theme fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton" id="ReAssignBtn"><span>Reassign</span></a>
 			</div>
 		</div>
 	</div>

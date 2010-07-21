@@ -483,7 +483,6 @@ function loadTicketBody(inputData, container) {
 		title: "<span class=\"white\">Zoomed Image</span>"
 	});
 	//Set the ticket type icon
-	notice("Debug",data.tickettype_id,false);
 	if (data.tickettype_id == 1) {
 		$("#ticketStatusImage").find("#imgTicketTrouble").show();
 		$("#ticketStatusImage").find("#imgTicketBug").hide();

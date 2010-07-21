@@ -8,15 +8,18 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVIII</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.9.13.r161</span>
+			<span style="font-size: 70%; line-height: normal;" id="version">v.2.12.15.r161</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>1. Fixed a bug that was causing tickets to show the wrong replies.
+			<br>2. Fixed many bugs relating to the theme generator.
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">New Features</span>
 			<br>1. Tickets now uses localStorage.  If your browser supports it tickets that you have recently viewed will load up much faster. 
 			<br>2. Bug reports are now separated out into their own section.  This will make it easier to file a bug report and see the progress associated with it.
 			<br>2.1 Bug reports do not have a due date, nor do they have a department.  Bug reports will have a Priority level and a product.  They will look a lot like a ticket, but will be missing some of the components that are not needed in a bug report.
+			<br>3. All of the notifications now have their own icon.  The icons are more descriptive of what the notification is actually telling you.
+			<br>4. Along with the new notification icons comes new icons for tickets.  Tickets should look more like the website again.
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">Known Issues</span>
