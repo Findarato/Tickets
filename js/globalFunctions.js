@@ -121,12 +121,15 @@ function notice(title, body, sticky, ticketid) {
     switch (title) {
     case "Error":
         noticeClass = "button-red";
+		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
         break;
     case "Debug":
         noticeClass = "button-purple";
+		image = "http://cdn1.lapcat.org/fugue/bonus/icons-24/fire.png";
         break;
     case "Notice":
         noticeClass = "color-D-1";
+		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
         break;
     case "Achievement":
         noticeClass = "color-D-1";
@@ -136,7 +139,10 @@ function notice(title, body, sticky, ticketid) {
         noticeClass = "color-D-1 ";
         break;
     }
-    var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all box_transition ">' + '<div class="notice-body ' + noticeClass + ' ui-corner-all">' + '<div style="float:left;width:50px;padding-right:5px;"><img src="' + image + '" alt="" /></div>' + '<div style="float:left;width:200px;"><h3><font class="' + fontClass + '">' + title + '</font></h3>' + '<font class="' + fontClass + '">' + body + '</font></div>' + '</div>' + '</div>';
+    var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all box_transition ">' 
+			+ '<div class="notice-body ' + noticeClass + ' ui-corner-all">' 
+				+ '<div style="float:left;width:50px;padding-right:5px;">'
+					+ '<img src="' + image + '" alt="" /></div>' + '<div style="float:left;width:200px;"><h3><font class="' + fontClass + '">' + title + '</font></h3>' + '<font class="' + fontClass + '">' + body + '</font></div>' + '</div>' + '</div>';
     if (sticky) {
         if (parseInt(ticketid, 10) > 0) {
             $(noticeBox).click(function () {
