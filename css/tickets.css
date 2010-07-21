@@ -109,6 +109,7 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 .ticket_button{
 	padding: 0 0 1px 19px;height:16px;
 }
+/*
 .ticket_sprite{background: url(/tickets/images/ticket.icon.sprite.16.768.png) no-repeat;}
 	.add {background-position: 0px 0px;}
 	.brick {background-position: 0px -64px;}
@@ -136,7 +137,7 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	.user {background-position: 0px -288px;}
 	.user_edit {background-position: 0px -544px;}
 	.world_link {background-position: 0px -624px;}
-
+*/
 
 .box_transition {
      -moz-transition: all 1s ease-out;  /* FF3.7+ */
@@ -145,20 +146,30 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 }
 
 /* fugue icons */
-.bug {background: url(http://cdn1.lapcat.org/fugue/icons/bug.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.bug_minus {background: url(http://cdn1.lapcat.org/fugue/icons/bug--minus.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.closed {background: url(http://cdn1.lapcat.org/fugue/icons/door.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.department {background: url(http://cdn1.lapcat.org/fugue/icons/users.png) no-repeat;padding: 0 0 1px 19px;height:16px;} 
-.edit {background: url(http://cdn1.lapcat.org/fugue/icons/lock.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.email {background: url(http://cdn1.lapcat.org/fugue/icons/mail.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.lock {background: url(http://cdn1.lapcat.org/fugue/icons/lock.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.tick {background: url(http://cdn1.lapcat.org/fugue/icons/tick.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.ticket {background: url(http://cdn1.lapcat.org/fugue/icons/ticket.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.ticket_plus {background: url(http://cdn1.lapcat.org/fugue/icons/ticket--plus.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.search {background: url(http://cdn1.lapcat.org/fugue/icons/magnifier.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.unlock {background: url(http://cdn1.lapcat.org/fugue/icons/lock-unlock.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.user {background: url(http://cdn1.lapcat.org/fugue/icons/user.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
-.user_edit {background: url(http://cdn1.lapcat.org/fugue/icons/pencil.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+.bookmark {background: url(http://cdn1.lapcat.org/fugue/icons/bookmark.png) no-repeat;}
+.bookmark_plus {background: url(http://cdn1.lapcat.org/fugue/icons/bookmark--plus.png) no-repeat;}
+.bug {background: url(http://cdn1.lapcat.org/fugue/icons/bug.png) no-repeat;}
+.bug_minus {background: url(http://cdn1.lapcat.org/fugue/icons/bug--minus.png) no-repeat;}
+.category_link {background: url(http://cdn1.lapcat.org/fugue/icons/gear.png) no-repeat;}
+.closed {background: url(http://cdn1.lapcat.org/fugue/icons/door.png) no-repeat;}
+.cross {background: url(http://cdn1.lapcat.org/fugue/icons/cross.png) no-repeat;}
+.department {background: url(http://cdn1.lapcat.org/fugue/icons/users.png) no-repeat;} 
+.edit {background: url(http://cdn1.lapcat.org/fugue/icons/pencil.png) no-repeat;}
+.email {background: url(http://cdn1.lapcat.org/fugue/icons/mail.png) no-repeat;}
+.error {background: url(http://cdn1.lapcat.org/fugue/icons/exclamation-red-frame.png) no-repeat;}
+.eye {background: url(http://cdn1.lapcat.org/fugue/icons/eye.png) no-repeat;}
+.feed {background: url(http://cdn1.lapcat.org/fugue/icons/feed.png) no-repeat;}
+.graph_link {background: url(http://cdn1.lapcat.org/fugue/icons/chart.png) no-repeat;}
+.lock {background: url(http://cdn1.lapcat.org/fugue/icons/lock.png) no-repeat;}
+.tick {background: url(http://cdn1.lapcat.org/fugue/icons/tick.png) no-repeat;}
+.ticket {background: url(http://cdn1.lapcat.org/fugue/icons/ticket.png) no-repeat;}
+.ticket_plus {background: url(http://cdn1.lapcat.org/fugue/icons/ticket--plus.png) no-repeat;}
+.search {background: url(http://cdn1.lapcat.org/fugue/icons/magnifier.png) no-repeat;}
+.stats_link { background: url(http://cdn1.lapcat.org/fugue/icons/table.png) no-repeat;}
+.tux {background: url(http://cdn1.lapcat.org/fugue/icons/lightning.png) no-repeat;}
+.unlock {background: url(http://cdn1.lapcat.org/fugue/icons/lock-unlock.png) no-repeat;}
+.user {background: url(http://cdn1.lapcat.org/fugue/icons/user.png) no-repeat;}
+.user_edit {background: url(http://cdn1.lapcat.org/fugue/icons/user--pencil.png) no-repeat;}
 
 
 
