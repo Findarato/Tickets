@@ -10,11 +10,13 @@
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVIII</span>
 			<span style="font-size: 70%; line-height: normal;" id="version">v.2.9.13.r161</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
-			<br>1. 
+			<br>1. Fixed a bug that was causing tickets to show the wrong replies.
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">New Features</span>
 			<br>1. Tickets now uses localStorage.  If your browser supports it tickets that you have recently viewed will load up much faster. 
+			<br>2. Bug reports are now separated out into their own section.  This will make it easier to file a bug report and see the progress associated with it.
+			<br>2.1 Bug reports do not have a due date, nor do they have a department.  Bug reports will have a Priority level and a product.  They will look a lot like a ticket, but will be missing some of the components that are not needed in a bug report.
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">Known Issues</span>

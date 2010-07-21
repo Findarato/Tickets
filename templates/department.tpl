@@ -1,8 +1,8 @@
-<div class="color-D-1 border-B-1 corners-bottom-2 corners-top-2" style="text-align:left;padding-left:3px;">
+<div class="color-A-1 border-B-1 corners-bottom-2 corners-top-2" style="text-align:left;padding-left:3px;">
 	<table width="100%">
 		<tr>
 			<td style="padding-right:5px;"><div class="font-X ticket_button ticket_sprite user">Current Department is:</div></td>
-			<td><div><span id="userDepartmentName" class="font-L font-bold">{$departmentName}</span></div></td>
+			<td><div><span id="userDepartmentName" class="font-D font-bold">{$departmentName}</span></div></td>
 		</tr>
 		<tr>
 			<td style="padding-right:5px;"><div class="font-X ticket_button ticket_sprite department">Select your Department</div></td>
