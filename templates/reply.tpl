@@ -15,8 +15,8 @@
 				</form>
 			</div>
 			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
-				<a class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton Cancel" id="replyCancelBtn">Cancel</a>
-				<a class="option-theme fg-button corners-bottom-2 corners-top-2 white lapcatButton" id="replyAddBtn">Add</a>
+				<a class="button-theme fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton Cancel" id="replyCancelBtn">Cancel</a>
+				<a class="button-theme fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton" id="replyAddBtn">Add</a>
 			</div>
 		</div>
 	</div>
