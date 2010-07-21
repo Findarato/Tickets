@@ -82,9 +82,9 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			break;
 			case "url":
 				if($email){
-					$formated1 = "<a href=\"".$matchOld."\" class=\"ticket_sprite world_link ticket_button\">".$matchOld."</a>";
+					$formated1 = "<a href=\"".$matchOld."\" class=\"ticket_sprite global_link ticket_button\">".$matchOld."</a>";
 				}else{
-					$formated1 = "<a href=\"".$matchOld."\" class=\"ticket_sprite world_link ticket_button\">".$matchOld."</a>";
+					$formated1 = "<a href=\"".$matchOld."\" class=\"ticket_sprite global_link ticket_button\">".$matchOld."</a>";
 				}
 				$formated = str_replace("[".$match[0]."=".$matchOld."]", $formated1,$formated);			
 			break;

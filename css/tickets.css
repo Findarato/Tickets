@@ -86,7 +86,7 @@ p {
 	position: relative;
 }
 .tr{display:table-row;}
-.table{display:table;}
+.t{display:table;}
 .td{display:table-cell;}
 .message_body {
 	padding: 5px 10px 15px;
@@ -109,67 +109,120 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 .ticket_button{
 	padding: 0 0 1px 19px;height:16px;
 }
-/*
-.ticket_sprite{background: url(/tickets/images/ticket.icon.sprite.16.768.png) no-repeat;}
-	.add {background-position: 0px 0px;}
-	.brick {background-position: 0px -64px;}
-	.bug {background-position: 0px -80px;}
-	.bug_error {background-position: 0px -591px;}
-	.category_link {background-position: 0px -176px;}
-	.clip {background-position: 0px -32px;}
-	.closed {background-position: 0px -240px;}
-	.database_table {background-position: 0px -80px;}
-	.department {background-position: 0px -256px;} 
-	.edit {background-position: 0px -560px;}
-	.email {background-position: 0px -320px; padding: 0 0 0px 19px;}
-	.error {background-position: 0px -608px;}
-	.eye {background-position: 0px -528px;}
-	.feed {background-position: 0px -368px;}
-	.graph_link { background-position: 0px -160px;}
-	.lock {background-position: 0px -480px;}
-	.search {background-position: 0px -512px; }
-	.stats_link { background-position: 0px -208px;}
-	.tag_green {background-position: 0px -576px;}
-	.tick {background-position: 0px -400px;}
-	.tux {background-position: 0px -304px;}
-	.ticket_link {background-position: 0px -129px;}
-	.unlock {background-position: 0px -496px;}
-	.user {background-position: 0px -288px;}
-	.user_edit {background-position: 0px -544px;}
-	.world_link {background-position: 0px -624px;}
-*/
-
 .box_transition {
      -moz-transition: all 1s ease-out;  /* FF3.7+ */
        -o-transition: all 1s ease-in;  /* Opera 10.5 */
   -webkit-transition: all 1s ease-out;  /* Saf3.2+, Chrome */
 }
-
+/**
+ * Ticket Sprite Code 
+ * 
+ */
 /* fugue icons */
-.bookmark {background: url(http://cdn1.lapcat.org/fugue/icons/bookmark.png) no-repeat;}
-.bookmark_plus {background: url(http://cdn1.lapcat.org/fugue/icons/bookmark--plus.png) no-repeat;}
-.bug {background: url(http://cdn1.lapcat.org/fugue/icons/bug.png) no-repeat;}
-.bug_minus {background: url(http://cdn1.lapcat.org/fugue/icons/bug--minus.png) no-repeat;}
-.category_link {background: url(http://cdn1.lapcat.org/fugue/icons/gear.png) no-repeat;}
-.closed {background: url(http://cdn1.lapcat.org/fugue/icons/door.png) no-repeat;}
-.cross {background: url(http://cdn1.lapcat.org/fugue/icons/cross.png) no-repeat;}
-.department {background: url(http://cdn1.lapcat.org/fugue/icons/users.png) no-repeat;} 
-.edit {background: url(http://cdn1.lapcat.org/fugue/icons/pencil.png) no-repeat;}
-.email {background: url(http://cdn1.lapcat.org/fugue/icons/mail.png) no-repeat;}
-.error {background: url(http://cdn1.lapcat.org/fugue/icons/exclamation-red-frame.png) no-repeat;}
-.eye {background: url(http://cdn1.lapcat.org/fugue/icons/eye.png) no-repeat;}
-.feed {background: url(http://cdn1.lapcat.org/fugue/icons/feed.png) no-repeat;}
-.graph_link {background: url(http://cdn1.lapcat.org/fugue/icons/chart.png) no-repeat;}
-.lock {background: url(http://cdn1.lapcat.org/fugue/icons/lock.png) no-repeat;}
-.tick {background: url(http://cdn1.lapcat.org/fugue/icons/tick.png) no-repeat;}
-.ticket {background: url(http://cdn1.lapcat.org/fugue/icons/ticket.png) no-repeat;}
-.ticket_plus {background: url(http://cdn1.lapcat.org/fugue/icons/ticket--plus.png) no-repeat;}
-.search {background: url(http://cdn1.lapcat.org/fugue/icons/magnifier.png) no-repeat;}
-.stats_link { background: url(http://cdn1.lapcat.org/fugue/icons/table.png) no-repeat;}
-.tux {background: url(http://cdn1.lapcat.org/fugue/icons/lightning.png) no-repeat;}
-.unlock {background: url(http://cdn1.lapcat.org/fugue/icons/lock-unlock.png) no-repeat;}
-.user {background: url(http://cdn1.lapcat.org/fugue/icons/user.png) no-repeat;}
-.user_edit {background: url(http://cdn1.lapcat.org/fugue/icons/user--pencil.png) no-repeat;}
+.ticket_sprite{background: url(http://cdn1.lapcat.org/fugue/ticketSprite-Fugue.png) no-repeat; }
+.balloon { background-position: 0 0; width: 16px; height: 16px; } 
+.bookmark-plus { background-position: 0 -18px; width: 16px; height: 16px; } 
+.bookmark { background-position: 0 -36px; width: 16px; height: 16px; } 
+.bug-arrow { background-position: 0 -54px; width: 16px; height: 16px; } 
+.bug-exclamation { background-position: 0 -72px; width: 16px; height: 16px; } 
+.bug-minus { background-position: 0 -90px; width: 16px; height: 16px; } 
+.bug-pencil { background-position: 0 -108px; width: 16px; height: 16px; } 
+.bug-plus { background-position: 0 -126px; width: 16px; height: 16px; } 
+.bug { background-position: 0 -144px; width: 16px; height: 16px; } 
+.building { background-position: 0 -162px; width: 16px; height: 16px; } 
+.chain-arrow { background-position: 0 -180px; width: 16px; height: 16px; } 
+.chain { background-position: 0 -198px; width: 16px; height: 16px; } 
+.chart-arrow { background-position: 0 -216px; width: 16px; height: 16px; } 
+.chart-exclamation { background-position: 0 -234px; width: 16px; height: 16px; } 
+.chart-minus { background-position: 0 -252px; width: 16px; height: 16px; } 
+.chart-pencil { background-position: 0 -270px; width: 16px; height: 16px; } 
+.chart-plus { background-position: 0 -288px; width: 16px; height: 16px; } 
+.chart-down-color { background-position: 0 -306px; width: 16px; height: 16px; } 
+.chart-down { background-position: 0 -324px; width: 16px; height: 16px; } 
+.chart-pie-separate { background-position: 0 -342px; width: 16px; height: 16px; } 
+.chart-pie { background-position: 0 -360px; width: 16px; height: 16px; } 
+.chart-up-color { background-position: 0 -378px; width: 16px; height: 16px; } 
+.chart-up { background-position: 0 -396px; width: 16px; height: 16px; } 
+.chart { background-position: 0 -414px; width: 16px; height: 16px; } 
+.cross { background-position: 0 -432px; width: 16px; height: 16px; } 
+.door { background-position: 0 -450px; width: 16px; height: 16px; } 
+.exclamation-red-frame { background-position: 0 -468px; width: 16px; height: 16px; } 
+.exclamation { background-position: 0 -486px; width: 16px; height: 16px; } 
+.eye { background-position: 0 -504px; width: 16px; height: 16px; } 
+.feed { background-position: 0 -522px; width: 16px; height: 16px; } 
+.fire { background-position: 0 -540px; width: 16px; height: 16px; } 
+.gear { background-position: 0 -558px; width: 16px; height: 16px; } 
+.globe-arrow,.global_link { background-position: 0 -576px; width: 16px; height: 16px; } 
+.globe { background-position: 0 -594px; width: 16px; height: 16px; } 
+.home { background-position: 0 -612px; width: 16px; height: 16px; } 
+.image { background-position: 0 -630px; width: 16px; height: 16px; } 
+.inbox { background-position: 0 -648px; width: 16px; height: 16px; } 
+.information { background-position: 0 -666px; width: 16px; height: 16px; } 
+.lightning { background-position: 0 -684px; width: 16px; height: 16px; } 
+.lock-unlock { background-position: 0 -702px; width: 16px; height: 16px; } 
+.lock { background-position: 0 -720px; width: 16px; height: 16px; } 
+.magnifier { background-position: 0 -738px; width: 16px; height: 16px; } 
+.mail { background-position: 0 -756px; width: 16px; height: 16px; } 
+.minus-circle-frame { background-position: 0 -774px; width: 16px; height: 16px; } 
+.minus { background-position: 0 -792px; width: 16px; height: 16px; } 
+.pencil { background-position: 0 -810px; width: 16px; height: 16px; } 
+.picture { background-position: 0 -828px; width: 16px; height: 16px; } 
+.plus-circle-frame { background-position: 0 -846px; width: 16px; height: 16px; } 
+.plus { background-position: 0 -864px; width: 16px; height: 16px; } 
+.question-octagon-frame { background-position: 0 -882px; width: 16px; height: 16px; } 
+.question { background-position: 0 -900px; width: 16px; height: 16px; } 
+.slash { background-position: 0 -918px; width: 16px; height: 16px; } 
+.star { background-position: 0 -936px; width: 16px; height: 16px; } 
+.status-away { background-position: 0 -954px; width: 16px; height: 16px; } 
+.status-busy { background-position: 0 -972px; width: 16px; height: 16px; } 
+.status-offline { background-position: 0 -990px; width: 16px; height: 16px; } 
+.status { background-position: 0 -1008px; width: 16px; height: 16px; } 
+.table { background-position: 0 -1026px; width: 16px; height: 16px; } 
+.tag-minus { background-position: 0 -1044px; width: 16px; height: 16px; } 
+.tag-pencil { background-position: 0 -1062px; width: 16px; height: 16px; } 
+.tag-plus { background-position: 0 -1080px; width: 16px; height: 16px; } 
+.tag-label-black { background-position: 0 -1098px; width: 16px; height: 16px; } 
+.tag-label-gray { background-position: 0 -1116px; width: 16px; height: 16px; } 
+.tag-label-green { background-position: 0 -1134px; width: 16px; height: 16px; } 
+.tag-label-pink { background-position: 0 -1152px; width: 16px; height: 16px; } 
+.tag-label-purple { background-position: 0 -1170px; width: 16px; height: 16px; } 
+.tag-label-red { background-position: 0 -1188px; width: 16px; height: 16px; } 
+.tag-label-yellow { background-position: 0 -1206px; width: 16px; height: 16px; } 
+.tag-label { background-position: 0 -1224px; width: 16px; height: 16px; } 
+.tag-medium { background-position: 0 -1242px; width: 16px; height: 16px; } 
+.tags { background-position: 0 -1260px; width: 16px; height: 16px; } 
+.task-arrow { background-position: 0 -1278px; width: 16px; height: 16px; } 
+.task-exclamation { background-position: 0 -1296px; width: 16px; height: 16px; } 
+.task-minus { background-position: 0 -1314px; width: 16px; height: 16px; } 
+.task-pencil { background-position: 0 -1332px; width: 16px; height: 16px; } 
+.task-plus { background-position: 0 -1350px; width: 16px; height: 16px; } 
+.task-select-first { background-position: 0 -1368px; width: 16px; height: 16px; } 
+.task-select-last { background-position: 0 -1386px; width: 16px; height: 16px; } 
+.task-select { background-position: 0 -1404px; width: 16px; height: 16px; } 
+.task { background-position: 0 -1422px; width: 16px; height: 16px; } 
+.tick-circle-frame { background-position: 0 -1440px; width: 16px; height: 16px; } 
+.tick-red { background-position: 0 -1458px; width: 16px; height: 16px; } 
+.tick { background-position: 0 -1476px; width: 16px; height: 16px; } 
+.ticket-arrow,.ticket_link { background-position: 0 -1494px; width: 16px; height: 16px; } 
+.ticket-exclamation { background-position: 0 -1512px; width: 16px; height: 16px; } 
+.ticket-minus { background-position: 0 -1530px; width: 16px; height: 16px; } 
+.ticket-pencil { background-position: 0 -1548px; width: 16px; height: 16px; } 
+.ticket-plus { background-position: 0 -1566px; width: 16px; height: 16px; } 
+.ticket { background-position: 0 -1584px; width: 16px; height: 16px; } 
+.trophy { background-position: 0 -1602px; width: 16px; height: 16px; } 
+.user-pencil { background-position: 0 -1620px; width: 16px; height: 16px; } 
+.user { background-position: 0 -1638px; width: 16px; height: 16px; } 
+.users { background-position: 0 -1656px; width: 16px; height: 16px; } 
+.wall-arrow { background-position: 0 -1674px; width: 16px; height: 16px; } 
+.wall-break { background-position: 0 -1692px; width: 16px; height: 16px; } 
+.wall-brick { background-position: 0 -1710px; width: 16px; height: 16px; } 
+.wall { background-position: 0 -1728px; width: 16px; height: 16px; } 
+
+
+
+
+
+
 
 
 
@@ -262,3 +315,6 @@ button.fg-button { width:auto; overflow:visible; }
 .ui-helper-clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 .ui-helper-clearfix { display: inline-block; }
 .ui-helper-clearfix { display:block; }
+ul,ol{padding-left:20px}
+ul li,ol li {padding-left:5px;}
+

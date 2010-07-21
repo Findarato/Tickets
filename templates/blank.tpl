@@ -1,36 +1,47 @@
 <div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:auto;margin-left:5px;">
 	<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="">Update Notes</div>
 	<div class="droidSerif message_body color-X-1 corners-bottom-2" id="" >
-		<div class="corners-bottom-2 corners-top-2 color-A-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">
+		<div class="corners-bottom-2 corners-top-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">
 			Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above. {$junk}
     		<br>
-			<span> More detailed update notes can be found <a class="ticket_sprite world_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite world_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
+			<span> More detailed update notes can be found <a class="ticket_sprite global_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite global_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
 		</div>
-		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 color-A-2 border-all-A-1">
+		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVIII</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.12.15.r161</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.12.15.r161</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
-			<br>1. Fixed a bug that was causing tickets to show the wrong replies.
-			<br>2. Fixed many bugs relating to the theme generator.
+			<ol>
+				<li>Fixed a bug that was causing tickets to show the wrong replies.</li>
+				<li>Fixed many bugs relating to the theme generator.</li>
+			</ol>
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">New Features</span>
-			<br>1. Tickets now uses localStorage.  If your browser supports it tickets that you have recently viewed will load up much faster. 
-			<br>2. Bug reports are now separated out into their own section.  This will make it easier to file a bug report and see the progress associated with it.
-			<br>2.1 Bug reports do not have a due date, nor do they have a department.  Bug reports will have a Priority level and a product.  They will look a lot like a ticket, but will be missing some of the components that are not needed in a bug report.
-			<br>3. All of the notifications now have their own icon.  The icons are more descriptive of what the notification is actually telling you.
-			<br>4. Along with the new notification icons comes new icons for tickets.  Tickets should look more like the website again.
+			<ol>
+				<li>Tickets now uses localStorage.  If your browser supports it tickets that you have recently viewed will load up much faster.</li>
+				<li>Bug reports are now separated out into their own section.  This will make it easier to file a bug report and see the progress associated with it.
+					<ol>
+						<li>Bug reports do not have a due date, nor do they have a department.  Bug reports will have a Priority level and a product.  They will look a lot like a ticket, but will be missing some of the components that are not needed in a bug report.</li>
+						<li>This is just a framework release.  The bug tickets are not out yet, and the button does not currently do anything.</li>	
+					</ol>
+				</li>
+				<li>All of the notifications now have their own icon.  The icons are more descriptive of what the notification is actually telling you.</li>
+				<li>Along with the new notification icons comes new icons for tickets.  Tickets should look more like the website again.</li>
+			</ol>
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">Known Issues</span>
-			<br>1. Large Graphs are still not working properly
-			<br>2. Some themes do not work 100%
-			<br>3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
-			<br>4. Problem or bug icons do not show up in the ticket list.
+			<ol>
+				<li>Large Graphs are still not working properly</li>
+				<li>Some themes do not work 100%</li>
+				<li>There are no page numbers, nor any way to show more then the default amount of tickets in the list view.</li>
+				<li>Problem or bug icons do not show up in the ticket list.</li>
+				<li>Going directly to a ticketlist search result can lead to a broken page.</li>
+			</ol>
 			<br>
 			<br>
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVII</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.8.13.r161</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.8.13.r161</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>1. The Update notes page was using the old theme.  This has been fixed.
 			<br>2. Fixed a bug that was causing bookmarked checks to apear on replies.
@@ -51,7 +62,7 @@
 			<br>
 			<br>
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVI</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.5.12</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.5.12</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>
 			<br>
@@ -66,7 +77,7 @@
 			<br>
 			<br>
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XV</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.4.12</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.4.12</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>1. Fixed some spelling problems. 
 			<br>2. Closing and reopening of tickets should be a lot faster.
@@ -90,7 +101,7 @@
 			<br>
 			<br>
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIV</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.2.4</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.2.4</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
 			<br>2. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
@@ -114,7 +125,7 @@
 			<br>
 			<br>
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIII</span>
-			<span style="font-size: 70%; line-height: normal;" id="version">v.2.1.0</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.1.0</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>1. Fixed a bug that was preventing any favorite tickets from showing the proper icon.
 			<br>1. Tickets is now working in Opera, as well as versions of Firefox prior to 3.1.
@@ -148,7 +159,7 @@
 			<br>2. Tickets now uses the newest version of <a href="http://www.jquery.com">Jquery</a>!
 			<br>3. Dater is now part of tickets!
 			<br>3.1 Enjoy selecting due dates with a new popup date selector.
-			<br>4. Url links are now in.  [url=http://www.google.com] would create a URL link looking like <a class="ticket_sprite world_link ticket_button" href="http://www.google.com">http://www.google.com</a>
+			<br>4. Url links are now in.  [url=http://www.google.com] would create a URL link looking like <a class="ticket_sprite global_link ticket_button" href="http://www.google.com">http://www.google.com</a>
 			<br>5. Moving to a new naming convention for ticket updates. They will be numbered instead of just putting in the date
 			<br>
 			<br>
