@@ -12,7 +12,7 @@ var Params = {
 	"FadeTime": 0,
 	"Ticket_id": 0,
 	"Content": "",
-	"Debug":true,
+	"Debug":false,
 	"TicketJSON": "",
 	"LastArea": "",
 	"popChange":false,
