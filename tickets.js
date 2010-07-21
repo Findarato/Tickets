@@ -390,7 +390,7 @@ function loadTicketBody(inputData, container) {
 		container.find("#ticketDueDate").html(data.due_on);
 	}
 	container.find("#ticketBody").html(data.description);
-	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketlist/category/" + data.category).addClass("nolink ticket_button ticket_sprite category_link ").html(data.category));
+	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketlist/category/" + data.category).addClass("nolink ticket_button ticket_sprite gear ").html(data.category));
 	container.find("#ticketCreatedBy").html($("<a/>").attr("href", "#ticketlist/created_by/" + data.created_by_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname2 + " " + data.lastname2));
 	container.find("#ticketAssignedTo").html($("<a/>").attr("href", "#ticketlist/assigned/" + data.assigned_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname + " " + data.lastname));
 	container.find("#replyticketid").val(ticketId);
