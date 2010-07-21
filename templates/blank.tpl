@@ -8,7 +8,7 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVIII</span>
-			<span style="font-size: 90%; line-height: normal;" id="version">v.2.12.15.r161</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.12.15.r175</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<ol>
 				<li>Fixed a bug that was causing tickets to show the wrong replies.</li>
