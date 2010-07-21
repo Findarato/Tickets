@@ -114,27 +114,41 @@ function addBr(obj) {
     obj.append("<br>");
 }
 
-function notice(title, body, sticky, ticketid) {
-    var noticeClass = "";
+function notice(title, body, sticky, ticketid,icon) {
+    var noticeClass,image;
+	if(icon){
+		image = icon;
+	}else{//we set a default icon
+		//image = "http://www.lapcat.org/lapcat/images/101-58-1.png";
+		image = "http://cdn1.lapcat.org/fugue/icons/bug.png";
+	}
     var fontClass = "white";
-    var image = "http://www.lapcat.org/lapcat/images/101-58-1.png";
+    
     switch (title) {
     case "Error":
         noticeClass = "button-red";
 		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
-        break;
+    break;
     case "Debug":
         noticeClass = "button-purple";
 		image = "http://cdn1.lapcat.org/fugue/bonus/icons-24/fire.png";
-        break;
+    break;
     case "Notice":
         noticeClass = "color-D-1";
 		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
-        break;
+    break;
     case "Achievement":
         noticeClass = "color-D-1";
         image = "";
-        break;
+    break;
+	case "New Response!":
+        noticeClass = "color-D-1";
+        image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/document-text.png";
+    break;
+	case "New Ticket!":
+        noticeClass = "color-D-1";
+        image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/balloon.png";
+    break;
     default:
         noticeClass = "color-D-1 ";
         break;

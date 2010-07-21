@@ -58,6 +58,7 @@ if(isset($_GET['ticket_id'])){
 	tcv.id,
 	tcv.category,
 	tcv.priority,
+	tcv.tickettype_id,
 	tcv.locationid,
 	tcv.locationName
 	FROM tcview AS tcv 

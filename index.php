@@ -84,7 +84,7 @@
 	$smarty -> assign('cate',$cate);
 	$smarty -> assign('assign',$dep);
 	$smarty -> assign('type',"new");
-	$smarty -> assign('priority',array(1=>"Very Low",2=>"Low",3=>"Tolerable",4=>"Important",5=>"Mission Critical"));
+	$smarty -> assign('priority',array(0=>"Very Low",1=>"Low",2=>"Tolerable",3=>"Important",4=>"Mission Critical"));
 	$smarty -> display('index.tpl');
 
 

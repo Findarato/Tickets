@@ -145,8 +145,12 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 }
 
 /* fugue icons */
-.user {background: url(http://cdn1.lapcat.org/fugue/icons/user.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+.bug {background: url(http://cdn1.lapcat.org/fugue/icons/bug.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+.bug_minus {background: url(http://cdn1.lapcat.org/fugue/icons/bug--minus.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+.tick {background: url(http://cdn1.lapcat.org/fugue/icons/tick.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
 .search {background: url(http://cdn1.lapcat.org/fugue/icons/magnifier.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+.user {background: url(http://cdn1.lapcat.org/fugue/icons/user.png) no-repeat;padding: 0 0 1px 19px;height:16px;}
+
 
 .small-shadow-black-1{
 	box-shadow: 2px 2px 5px rgba(0,0,0,.60); 
@@ -222,7 +226,7 @@ button.fg-button { width:auto; overflow:visible; }
 	min-height: 50px;
 	padding: 12px 12px 0 12px;
 }
-.notice-body img{width: 50px; margin: 0 10px 0 0; }
+.notice-body img{width: 32px; height:32px; margin: 0 10px 0 0; }
 .notice-body h3	{margin: 0; font-size: 1.1em;}
 
 

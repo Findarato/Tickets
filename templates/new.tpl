@@ -20,9 +20,6 @@
 							<td style="text-align:left;"><span class="font-X">Priority:</span><select class=" Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
 						</tr>
 						<tr>
-							<td style="text-align:left;"><span class="font-X">Bug</span><input type="radio" class="" id="newTicketBugTrouble" name="newTicketBugTrouble" value="2"> <span class="font-X">Problem</span><input type="radio" class="" id="newTicketBugTrouble" name="newTicketBugTrouble" value="1"><span class="font-X"> Project</span><input type="radio" class="" id="newTicketBugTrouble" name="newTicketBugTrouble" value="2"></td>
-						</tr>
-						<tr>
 							<td style="text-align:left;"><span class="font-X">Due Date:</span><input type="text" name="newTicketDueDate" id="newTicketDueDate" class=" Ticketform" maxlength="50" style="width:8em" value="" /><img src="http://cdn1.lapcat.org/famfamfam/silk/calendar.png" title="calendar" id="newTicketCalendar"></td>
 						</tr>
 						<tr>
@@ -33,6 +30,7 @@
 						</tr>
 						<tr>
 							<td>
+								<INPUT type="hidden" id="newTicketBugTrouble" name="newTicketBugTrouble" value="1" >
 								<INPUT type="hidden" id="newTicketUser_id" name="newTicketUser_id" value="{$user_id}" >
 								<INPUT type="hidden" id="newTicketTicket_id" name="newTicketTicket_id"  value="{$ticket_id}" >
 								<INPUT type="hidden" id="newTicketType" name="newTicketType" value="{$type}">

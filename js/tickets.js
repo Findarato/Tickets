@@ -16,7 +16,8 @@ var Params = {
 	"TicketJSON": "",
 	"LastArea": "",
 	"popChange":false,
-	"LastLogon":0
+	"LastLogon":0,
+	"Priority_string":{1:"Very Low",2:"Low",3:"Tolerable",4:"Important",5:"Mission Critical"}
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
@@ -293,12 +294,7 @@ function loadResponsesBody(ticketId, container, page) {
 			});
 			$("#replyticketid").val(ticketId);
 			cnt++;
-			resCont.find(".popImageSmallLink").colorbox({
-			transition: "none",
-			open: false,
-			photo:true,
-			title: "<span class=\"white\">Zoomed Image</span>"
-	});
+			$(".popImageSmallLink").colorbox({transition: "none",open: false,photo:true,title: "<span class=\"white\">Zoomed Image</span>"});
 		});
 		container.html(resCont.html());
 	});
@@ -381,6 +377,7 @@ function loadTicketBody(inputData, container) {
 	
 	
 //Display code.	
+	if(data.priority>5){data.priority = data.priority -5;} //normalize old data with new numbering scheme
 	container.find(".statusImage ").hide();
 	Params.Ticket_id = ticketId = data.id; //set the global
 	Params.TicketJSON = data;
@@ -399,7 +396,7 @@ function loadTicketBody(inputData, container) {
 	container.find("#replyticketid").val(ticketId);
 	container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketlist/location/" + data.locationId).addClass("nolink library-link ").html(data.locationName));
 	container.find("#ticketId").html(data.id);
-	container.find("#ticketPriority").html(data.priority);
+	container.find("#ticketPriority").html(Params.Priority_string[data.priority]);
 	if (data.favorite !== null && data.favorite!==0) {
 		container.find("#imgBookmark").show();
 	}
@@ -427,7 +424,7 @@ function loadTicketBody(inputData, container) {
 	if ($("#storage").html() == 1) {
 		$("#replyarea").hide();
 	}
-	var pri = parseInt(container.find("#ticketPriority").text() - 1, 10);
+	var pri = parseInt(container.find("#ticketPriority").text() - 2, 10);
 	$("#replyareaTitle").text("Replies (" + data.responseCount + ")"); //display the total response count
 	$('#editlink').colorbox({
 		iframe: false,
@@ -486,6 +483,7 @@ function loadTicketBody(inputData, container) {
 		title: "<span class=\"white\">Zoomed Image</span>"
 	});
 	//Set the ticket type icon
+	notice("Debug",data.tickettype_id,false);
 	if (data.tickettype_id == 1) {
 		$("#ticketStatusImage").find("#imgTicketTrouble").show();
 		$("#ticketStatusImage").find("#imgTicketBug").hide();
@@ -506,9 +504,7 @@ function loadTicketBody(inputData, container) {
 
 function loadTicket(ticketId,display) {
 	Params.LastArea = "ticket";
-	if(!display){
-		Params.Content.html($("#ticketTpl").html());	
-	}
+	if(!display){Params.Content.html($("#ticketTpl").html());}
 	if(data = localStorage.getItem("TicketId"+ticketId)){
 		if (Params.Debug) {	$("#DebugLog").append("Pulled from localStorage<br>");	}
 		loadTicketBody(data,Params.Content);
@@ -516,19 +512,17 @@ function loadTicket(ticketId,display) {
 		if (Params.Debug) {	$("#DebugLog").append("Pulled from Database<br>");}
 		$.getJSON(uri + "ajax/display_ticket.php", {"ticket_id": ticketId}, function (data) {loadTicketBody(data,Params.Content);});	
 	}
-	
-	//loadTicketBody(ticketId, Params.Content);
 	var hash = getHashArray();
 	if (hash[2] == "page" && hash[3] > -1) {
 		if (Params.Debug) {
 			$("#DebugLog").append("Loaded Responses #" + hash[3] + "<br>");
 		}
-		loadResponsesBody(Params.Ticket_id, $("#replyareabody"), hash[3]); //load the selected response page
+		loadResponsesBody(ticketId, $("#replyareabody"), hash[3]); //load the selected response page
 	} else {
 		if (Params.Debug) {
 			$("#DebugLog").append("Loaded Responses<br>");
 		}
-		loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
+		loadResponsesBody(ticketId, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
 
