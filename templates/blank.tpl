@@ -8,11 +8,13 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVIII</span>
-			<span style="font-size: 90%; line-height: normal;" id="version">v.2.12.15.r175</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.12.16.r175</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<ol>
 				<li>Fixed a bug that was causing tickets to show the wrong replies.</li>
 				<li>Fixed many bugs relating to the theme generator.</li>
+				<li>Making a new ticket will once again take you to the ticket you just created</li>
+				<li>Notice text was too hard to read as a result of this update.  This has been fixed.</li>
 			</ol>
 			<br>
 			<br>
