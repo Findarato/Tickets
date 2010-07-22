@@ -745,14 +745,15 @@ jQuery(document).ready(function () {
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
 	
+	/*
 	if (uri.match('dev') == 'dev') {
 		path = "http://dev.lapcat.org/" + $("#themegencss").attr("href");
 		$("#themegencss").attr("href", path);
 	} else {
-		path = "http://www.lapcat.org/" + $("#themegencss").attr("href");
-		$("#themegencss").attr("href", path);
+		$("#themegencss").attr("href", "http://www.lapcat.org/" + $("#themegencss").attr("href"));	
 	}
-
+*/
+	$("#themegencss").attr("href", "http://www.lapcat.org/" + $("#themegencss").attr("href"));
 
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
