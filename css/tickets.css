@@ -2,13 +2,13 @@
 	margin: 0; 
 	padding: 0;
 }
-a, font {
+a, font span {
 	text-decoration:none;
-	font-family:'Droid Serif', Verdana, Tahoma, arial, sans-serif;
+	font-family:'Droid Sans', arial, sans-serif;
 }
 a:hover{ text-decoration:underline;}
 body {
-	font: 70%/1.5em 'Droid Serif',Verdana, Tahoma, arial, sans-serif;
+	font: 70%/1.5em 'Droid Sans',arial, sans-serif;
 	text-align: center;
 	height:100%;
 }
@@ -219,13 +219,6 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 .wall { background-position: 0 -1728px; width: 16px; height: 16px; } 
 
 
-
-
-
-
-
-
-
 .small-shadow-black-1{
 	box-shadow: 2px 2px 5px rgba(0,0,0,.60); 
 	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
@@ -239,7 +232,6 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	-o-transition: all 0.3s ;  /* Opera 10.5 */
 	-webkit-transition: all 0.3s;
 }
-
 
 .popImageSmall{
 	height:100px;

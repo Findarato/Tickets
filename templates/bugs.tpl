@@ -5,7 +5,7 @@
 			<a class="smallTicketL nolink ticket_sprite ticket_button bug font-bold" href="#ticketlist/bugs_open">Open Bugs</a>
 			<span id="cbugsOpen" class="timestamp" style="position:absolute;right:25px">0</span>
 			<br>
-			<a class="smallTicketL nolink ticket_sprite ticket_button bug-minus font-bold" href="#ticketlist/bugs_open">Closed Bugs</a>
+			<a class="smallTicketL nolink ticket_sprite ticket_button bug-minus font-bold" href="#ticketlist/bugs_closed">Closed Bugs</a>
 			<span id="cBugsClosed" class="timestamp" style="position:absolute;right:25px">0</span>
 			<br>
 		</div>
