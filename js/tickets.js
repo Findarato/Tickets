@@ -709,9 +709,9 @@ function loadStats() {
 			notice("Debug", data.error, false);
 		} else {
 			if (data.stats.general.cntId.length > 0) {
-				dom_stats.html("Total Tickets: " + data.stats.general.cntId);
+				dom_stats.html("Tickets: " + data.stats.general.cntId);
 				addBr(dom_stats);
-				dom_stats.append("Total Responses: " + data.stats.totalResponses.cntId);
+				dom_stats.append("Responses: " + data.stats.totalResponses.cntId);
 				addBr(dom_stats);
 				dom_stats.append("Average Priority: " + data.stats.general.avgPriority);
 				addBr(dom_stats);
@@ -722,9 +722,9 @@ function loadStats() {
 				stats.append("Total Open Tickets: " + data.stats.open.cntId);
 				addBr(dom_stats);
 			}
-			dom_stats.append("Average Ticket Duration: " + sec2readable(data.stats.closed.dago));
+			dom_stats.append("Ave Ticket Duration: " + sec2readable(data.stats.closed.dago));
 			addBr(dom_stats);
-			dom_stats.append("My Average Ticket Duration: " + sec2readable(data.stats.myclosed.dago));
+			dom_stats.append("My Ave Ticket Duration: " + sec2readable(data.stats.myclosed.dago));
 			addBr(dom_stats);
 		}
 	}, "json");
