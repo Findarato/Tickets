@@ -7,7 +7,7 @@
 <link type="text/css" media="screen" rel="stylesheet" href="css/colorbox.css" />
 <link type="text/css" media="screen" rel="stylesheet" href="css/input.css" />
 <link type="text/css" href="css/tickets.css" rel="stylesheet"  />
-<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+<link href=' http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 	<meta http-equiv="X-UA-Compatible" content="IE=100" >
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 

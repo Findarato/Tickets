@@ -122,31 +122,37 @@ function notice(title, body, sticky, ticketid,icon) {
 		//image = "http://www.lapcat.org/lapcat/images/101-58-1.png";
 		image = "http://cdn1.lapcat.org/fugue/icons/bug.png";
 	}
-    var fontClass = "white";
+    var fontClass = "font-X";
     
     switch (title) {
     case "Error":
         noticeClass = "button-red";
 		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
+		fontClass = "font-Y";
     break;
     case "Debug":
         noticeClass = "button-purple";
 		image = "http://cdn1.lapcat.org/fugue/bonus/icons-24/fire.png";
+		fontClass = "font-Y";
     break;
     case "Notice":
         noticeClass = "color-D-1";
 		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
+		fontClass = "font-Y";
     break;
     case "Achievement":
         noticeClass = "color-D-1";
+		fontClass = "font-Y";
         image = "";
     break;
 	case "New Response!":
         noticeClass = "color-D-1";
         image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/document-text.png";
+		fontClass = "font-Y";
     break;
 	case "New Ticket!":
         noticeClass = "color-D-1";
+		fontClass = "font-Y";
         image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/balloon.png";
     break;
     default:
@@ -154,7 +160,7 @@ function notice(title, body, sticky, ticketid,icon) {
         break;
     }
     var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all box_transition ">' 
-			+ '<div class="notice-body ' + noticeClass + ' ui-corner-all">' 
+			+ '<div class="notice-body ' + noticeClass + ' corners-top-2 corners-bottom-2">' 
 				+ '<div style="float:left;width:50px;padding-right:5px;">'
 					+ '<img src="' + image + '" alt="" /></div>' + '<div style="float:left;width:200px;"><h3><font class="' + fontClass + '">' + title + '</font></h3>' + '<font class="' + fontClass + '">' + body + '</font></div>' + '</div>' + '</div>';
     if (sticky) {

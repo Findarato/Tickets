@@ -745,15 +745,14 @@ jQuery(document).ready(function () {
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
 	
-	/*
+	
 	if (uri.match('dev') == 'dev') {
-		path = "http://dev.lapcat.org/" + $("#themegencss").attr("href");
-		$("#themegencss").attr("href", path);
+		$("#themegencss").attr("href", "http://dev.lapcat.org/" + $("#themegencss").attr("href"));	
 	} else {
 		$("#themegencss").attr("href", "http://www.lapcat.org/" + $("#themegencss").attr("href"));	
 	}
-*/
-	$("#themegencss").attr("href", "http://www.lapcat.org/" + $("#themegencss").attr("href"));
+
+	//$("#themegencss").attr("href", "http://www.lapcat.org/" + $("#themegencss").attr("href"));
 
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
@@ -1127,7 +1126,7 @@ jQuery(document).ready(function () {
 				ticketDesc.focus();
 				notice("Error", "You must enter a description", false);
 				return false;
-			} else {
+			} else { 
 				if ($("#newTicketLocation").val() === "") {
 					notice("Error", "You must select a Location", false);
 					return false;
@@ -1136,12 +1135,14 @@ jQuery(document).ready(function () {
 					notice("Error", "You must enter a Due date", false);
 					return false;
 				 }else {
-					jQuery.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
+					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
 						/*
 						$.each(data.achievements,function(a,ach){
 							notice("Achievement",ach,false);
 						});
 						*/
+						if(data.error==""){	setHash("#ticket/"+data.newTicketId); loadTicket(data.newTicketId);}
+						
 					});
 					$(".Ticketform").attr({
 						value: ""

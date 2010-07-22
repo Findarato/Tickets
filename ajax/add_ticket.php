@@ -33,7 +33,8 @@ if($_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
 				"'.$_GET["newTicketBugTrouble"].'"
 					)');
 			//echo $db->Lastsql;
-			$ticketId = $db->Lastid;
+			
+			$response["newTicketId"] = $ticketId = $db->Lastid;
 			$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);
 			$locationEmail= $db->Fetch("row");
 			$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category FROM tcview WHERE id=".$ticketId);
