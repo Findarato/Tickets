@@ -6,21 +6,15 @@
 		<div style="display:table;margin-bottom:10px;">
 			<div style="display:table-cell">
 				<div class="font-X">Username:</div>
-				<div class="left color-B-2 fg-button white corners-top-2 corners-bottom-2" id="" style="width:auto;padding:3px;">
-					<input class="droidSerif color-B-2 font-X" type="text" id="un" name="un" style="border:0px;"/>
+					<input class="corners-top-2 corners-bottom-2 color-B-2 font-X" id="un" name="un" placeholder="username" style="border:0px; padding:5px;" type="text"/>
 				</div>
-			</div>
 			<div style="display:table-cell">
 				<div class="font-X droidSerif">Password:</div>
-				<div class="left color-B-2 fg-button corners-top-2 corners-bottom-2 white" id="" style="width:auto;padding:3px;">
-					<input class="droidSerif color-B-2 font-X" id="loginpassword" type="password" name="pw" style="border:0px;"/>
-				</div>
+				<input class="corners-top-2 corners-bottom-2 color-B-2 font-X" id="loginpassword" name="pw" placeholder="password" style="border:0px; padding:5px; margin-left:10px" type="password"/>
 			</div>
 		</div>
-		
-
 		</form>
-		<button class="next-button option-black border-dark-1 fg-button corners-bottom-2 corners-top-2 white" id="btn_login" >Login</button>
+		<div class="button-purple awesome droidSans font-bold" id="btn_login" style="width:auto;" >Login</div>
 		
 	</div>	
 </div>

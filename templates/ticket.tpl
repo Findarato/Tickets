@@ -18,8 +18,8 @@
 			</div>
 			<div class="droidSerif color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
 		        <div style="position:absolute;:1px;right:0px;clear:both;">
-					<div class="button-theme fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton left openTicket hold actionButtons holdLink" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
-					<div class="button-theme fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton left openTicket hold actionButtons unholdLink" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
+					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons holdLink" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
+					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons unholdLink" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
 					<!--<div class="button-purple fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
 				</div>
 				<div style="clear:both">
@@ -63,10 +63,10 @@
 				</div>
 			</div>
 			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-B-1" id="ticketFooterArea" style="height:24px">
-				<div class="button-purple fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton openTicket actionButtons editLink" id="editlink" style="width:45px;">Edit</div>
-				<div class="button-theme fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>
-				<div class="button-black fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:45px;display:none">Reopen</div>
-				<div class="button-purple fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
+				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket actionButtons editLink" id="editlink" style="width:45px;">Edit</div>
+				<div class="button-theme fg-button ticketButton font-Y lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>
+				<div class="button-black fg-button ticketButton font-Y lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:45px;display:none">Reopen</div>
+				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
 			</div>
 		</div>
 	</div>
@@ -80,7 +80,7 @@
 			</div>
 			<div class="droidSerif color-X-1" id="replyareabody" style="overflow:auto;height:430px;padding:3px;">	</div>
 			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
-				<div class="button-purple fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton" id="replylink" style="width: 80px;"><span class="ticket_button ticket_sprite balloon">Add Reply</span></div>
+				<div class="button-purple fg-button ticketButton font-Y lapcatButton" id="replylink" style="width: 80px;"><span class="ticket_button ticket_sprite balloon">Add Reply</span></div>
 			</div>
 		</div>
 	</div>
