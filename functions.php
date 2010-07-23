@@ -75,11 +75,11 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				if($email){
 					$formated1 = "
 						<a href=\"http://dev.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>"
-						."<a href=\"\#user_page/\"><div class=\"ticket_sprite information\" style=\"display:inline-block;\"></div></a>
+						."<a href=\"\#userPage/\"><div class=\"ticket_sprite information\" style=\"display:inline-block;\"></div></a>
 						";
 				}else{
 					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user ticket_link ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>"
-					."<a class=\"nolink\" href=\"#user_page/".$match[1]."\"><div class=\"ticket_sprite information\" style=\"display:inline-block;\"></div></a>
+					."<a class=\"nolink\" href=\"#userPage/".$match[1]."\"><div class=\"ticket_sprite information\" style=\"display:inline-block;\"></div></a>
 					";
 					
 				}

@@ -48,7 +48,7 @@
 <div id="reassignTpl" class="ui-helper-hidden" title="Reassign Ticket">{include file="reassign.tpl"}</div>
 <div id="responsestpl" class="ui-helper-hidden">{include file="responses.tpl"}</div>
 <div id="ticketTpl" class="ui-helper-hidden">{include file="ticket.tpl"}</div>
-<div id="ticket_listTpl" class="ui-helper-hidden">{include file="ticket_list.tpl"}</div>
+<div id="generic" class="ui-helper-hidden">{include file="generic.tpl"}</div>
 
 <div id="blankTpl" class="ui-helper-hidden">{include file="blank.tpl"}</div>
 <div id="departmentTpl" class="ui-helper-hidden" style="z-index:50;">{include file="department.tpl"}</div>

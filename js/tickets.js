@@ -44,72 +44,6 @@ function loadBlank() {
  * Checks the hash of the page, then decides what to do with it.  This is the brains behind the page.
  */
 
-function checkHash() {
-	var hash = getHashArray();
-	if (window.location.hash.length > 1) {
-		//This checks for a url passed hash, otherwise its just going to go in there.
-		switch (hash[0]) {
-		case "#ticket":
-			switch (hash[2]) {
-			case "page":
-				if ($("#ticketId").html().length < 1) {
-					//This should fix the directly accessing a response page bug
-					if (Params.LastArea == "ticket") {
-						loadTicketBody(hash[1], Params.Content);
-						loadResponsesBody(hash[1], $("#replyareabody"), 0);
-					} else {
-						loadTicket(hash[1]);
-					}
-				} else {
-					loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
-				}
-				break;
-			default:
-				if (Params.LastArea == "ticket") {
-					loadTicketBody(hash[1], Params.Content);
-					loadResponsesBody(hash[1], $("#replyareabody"), 0);
-				} else {
-					loadTicket(hash[1]);
-				}
-				break;
-			}
-			break;
-		case "#ticketlist":
-			$.each(hash, function (key, value) {
-				//alert(key+"=>"+value);
-				if (key % 2 === 0) {
-					switch (value) {
-					case "page":
-						loadTicketList(hash[key + 1]);
-						break;
-					default:
-						loadTicketList(0);
-						break;
-					}
-				}
-			});
-			break;
-		case "#search":
-			loadSearch();
-			break;
-		case "#largestats":
-			loadLargeStats();
-			break;
-		case "#largegraphs":
-			loadLargeGraphs();
-			break;
-		case "#updateNotes":
-			loadBlank();
-			break;
-		default: case "#start":
-			loadNew(Params.LastLogon);
-			break;
-		}
-	} else {
-		loadNew(Params.LastLogon);
-	}
-}
-
 function loadLargeGraphs() {
 
 }
@@ -231,23 +165,15 @@ function loadLargeStats() {
  */
 
 function populateAllTickets(Area) {
-	var cnt = 0;
-	var html = "";
-	var Ttype = "";
-	$.getJSON(uri + "ajax/tickets.php", {
-		"type": "small",
-		"index": "all",
-		"area": Area,
-		"style": 1
-	}, function (data, text) {
-		//alert(text);
-		$.each(data.ticket, function (i, item) {
-			cnt = 0;
-			html = "";
-			Ttype = "";
-			$("#c" + item.type).html(item.Count);
-			Ttype = item.type;
-		});
+	var cnt,html,Ttype;
+	$.getJSON(uri + "ajax/tickets.php", {"type": "small","index": "all","area": Area,"style": 1},function (data, text) {
+		$.each(data.ticket,	function (i, item) {
+				cnt = 0;html = "";Ttype = "";
+				$("#c" + item.type)
+					.html(item.Count);
+					Ttype = item.type;
+			}
+		);
 	});
 }
 function updateTickets() {
@@ -255,7 +181,6 @@ function updateTickets() {
 	loadStats();
 	populateAllTickets();
 }
-
 function loadResponsesBody(ticketId, container, page) {
 	var params = {
 		"ticket_id": ticketId
@@ -299,7 +224,6 @@ function loadResponsesBody(ticketId, container, page) {
 		container.html(resCont.html());
 	});
 	container.show();
-
 }
 
 function displayStatus(jsonData, Selector) {
@@ -390,11 +314,29 @@ function loadTicketBody(inputData, container) {
 		container.find("#ticketDueDate").html(data.due_on);
 	}
 	container.find("#ticketBody").html(data.description);
-	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketlist/category/" + data.category).addClass("nolink ticket_button ticket_sprite gear ").html(data.category));
-	container.find("#ticketCreatedBy").html($("<a/>").attr("href", "#ticketlist/created_by/" + data.created_by_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname2 + " " + data.lastname2));
-	container.find("#ticketAssignedTo").html($("<a/>").attr("href", "#ticketlist/assigned/" + data.assigned_id).addClass("nolink ticket_button ticket_sprite user ").html(data.firstname + " " + data.lastname));
+	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketList/category/" + data.category).addClass("nolink ticket_button ticket_sprite gear ").html(data.category));
+	container
+		.find("#ticketCreatedBy")
+			.html(
+				$("<a/>",{"class":"nolink ticket_button ticket_sprite user ",html:data.firstname2 + " " + data.lastname2})
+					.attr("href", "#ticketList/created_by/" + data.created_by_id)
+			)
+			.append(
+				$("<a/>",{"class":"nolink ",html:$("<div/>",{css:{"display":"inline-block"},"class":"ticket_sprite information"})})
+					.attr("href", "#userPage/" + data.created_by_id)
+			);
+	container
+		.find("#ticketAssignedTo")
+			.html(
+				$("<a/>",{"class":"nolink ticket_button ticket_sprite user ",html:data.firstname + " " + data.lastname})
+					.attr("href", "#ticketList/assigned/" + data.assigned_id)
+			)
+			.append(
+				$("<a/>",{"class":"nolink ",html:$("<div/>",{css:{"display":"inline-block"},"class":"ticket_sprite information"})})
+					.attr("href", "#userPage/" + data.assigned_id)
+			);
 	container.find("#replyticketid").val(ticketId);
-	container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketlist/location/" + data.locationId).addClass("nolink library-link ").html(data.locationName));
+	container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketList/location/" + data.locationId).addClass("nolink library-link ").html(data.locationName));
 	container.find("#ticketId").html(data.id);
 	container.find("#ticketPriority").html(Params.Priority_string[data.priority]);
 	if (data.favorite !== null && data.favorite!==0) {
@@ -509,7 +451,7 @@ function loadTicket(ticketId,display) {
 		loadTicketBody(data,Params.Content);
 	}else{
 		if (Params.Debug) {	$("#DebugLog").append("Pulled from Database<br>");}
-		$.getJSON(uri + "ajax/display_ticket.php", {"ticket_id": ticketId}, function (data) {loadTicketBody(data,Params.Content);});	
+		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {loadTicketBody(data,Params.Content);});	
 	}
 	var hash = getHashArray();
 	if (hash[2] == "page" && hash[3] > -1) {
@@ -526,7 +468,7 @@ function loadTicket(ticketId,display) {
 }
 
 function loadTicketList(pageNumber,queryObj) {
-	Params.LastArea = "ticketlist";
+	Params.LastArea = "ticketList";
 	var html = "";
 	if (pageNumber < 0) {
 		pageNumber = 0;
@@ -561,7 +503,7 @@ function loadTicketList(pageNumber,queryObj) {
 	$.getJSON(uri + "ajax/tickets.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
-		Params.Content.empty().html($("#ticket_listTpl").html());
+		Params.Content.html($("#generic").html());
 		Tlb = Params.Content.find("#ticketListbody");
 		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
 		var tlistHolder = $("<div/>");
@@ -606,7 +548,7 @@ function loadTicketList(pageNumber,queryObj) {
 				"id": "Color" + item.id
 			});
 			tlistHolder.find("#changemeUserid").html($("<a/>").attr({
-				"href": "#ticketlist/assigned/" + item.assigned_id
+				"href": "#ticketList/assigned/" + item.assigned_id
 			}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname + " " + item.lastname)).attr({
 				"id": "User" + item.id
 			});
@@ -669,14 +611,14 @@ function loadTicketList(pageNumber,queryObj) {
 				"id": "created" + item.id
 			});
 			tlistHolder.find("#changemeCategory").html("Category: ").append($("<a/>").attr({
-				"href": "#ticketlist/category/" + item.category
+				"href": "#ticketList/category/" + item.category
 			}).addClass("nolink category_link").html(item.category)).css({
 				"fontSize": "9px"
 			}).attr({
 				"id": "category" + item.id
 			});
 			tlistHolder.find("#changemeAssignedid").html("Created By:").append($("<a/>").attr({
-				"href": "#ticketlist/created_by/" + item.created_by_id
+				"href": "#ticketList/created_by/" + item.created_by_id
 			}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname2 + " " + item.lastname2)).css({
 				"fontSize": "9px"
 			}).attr({
@@ -729,7 +671,128 @@ function loadStats() {
 		}
 	}, "json");
 }
-	
+function loadUserPage(userId){
+	Params.Content.html($("#generic").html());
+	Tlb = Params.Content.find("#ticketListbody");
+	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
+
+	$("<div/>",{id:"computerInfoBox","class":"",css:{"width":"100%","height":"auto","display":"table","margin-bottom":"3px"}})
+		.append(
+			$("<div>",{css:{"display":"table-cell","width":"110px"}})
+				.append(
+					$("<div>",
+						{
+							id:"osIconBox",
+							"class":"small-shadow-black-1 color-B-2 border-all-B-1 corners-bottom-2 corners-top-2",
+							css:{
+								"overflow":"hidden","display":"block","height":"100px","width":"100px","margin":"5px","position":"relative"
+							}
+						}
+					)
+						.append(
+							$("<div/>",{
+								html:"ID:"+userId,
+								css:{
+									"font":"22px 'Droid Sans', Arial, sans-serif","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "22px"
+								},
+								"class":"font-bold font-X rotate90 transformTL"
+							})
+						)
+				)
+		)
+		.append(
+			$("<div>",{css:{"display":"table-cell","vertical-align":"top"}})
+				.append( $("<div>",{id:"userName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Username: "})	)
+				.append( $("<div>",{id:"realName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Real Name: "})	)
+				.append( $("<div>",{id:"joinedOn","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Joined On: "})	)
+				.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Type: "})	)
+				.append( $("<div>",{id:"totalTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Tickets: "})	)
+				.append( $("<div>",{id:"totalResponses","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Responses: "})	)
+		)
+		.appendTo(Tlb);
+
+
+	$.getJSON("ajax/get_userinfo.php",{"userId":userId},function(data){
+		Tlb.find("#userName").append(data.userInfo.username);
+		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
+		Tlb.find("#joinedOn").append(data.userInfo.joined);
+		Tlb.find("#userType").append(data.userInfo.type);
+		Tlb.find("#totalTickets").append();
+		Tlb.find("#totalResponses").append();
+
+
+		
+	});
+}
+function checkHash() {
+	var hash = getHashArray();
+	if (window.location.hash.length > 1) {
+		//This checks for a url passed hash, otherwise its just going to go in there.
+		switch (hash[0]) {
+		case "#ticket":
+			switch (hash[2]) {
+			case "page":
+				if ($("#ticketId").html().length < 1) {
+					//This should fix the directly accessing a response page bug
+					if (Params.LastArea == "ticket") {
+						loadTicketBody(hash[1], Params.Content);
+						loadResponsesBody(hash[1], $("#replyareabody"), 0);
+					} else {
+						loadTicket(hash[1]);
+					}
+				} else {
+					loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
+				}
+				break;
+			default:
+				if (Params.LastArea == "ticket") {
+					loadTicketBody(hash[1], Params.Content);
+					loadResponsesBody(hash[1], $("#replyareabody"), 0);
+				} else {
+					loadTicket(hash[1]);
+				}
+				break;
+			}
+			break;
+		case "#ticketList":
+			$.each(hash, function (key, value) {
+				//alert(key+"=>"+value);
+				if (key % 2 === 0) {
+					switch (value) {
+					case "page":
+						loadTicketList(hash[key + 1]);
+						break;
+					default:
+						loadTicketList(0);
+						break;
+					}
+				}
+			});
+			break;
+		case "#search":
+			loadSearch();
+			break;
+		case "#largestats":
+			loadLargeStats();
+			break;
+		case "#largegraphs":
+			loadLargeGraphs();
+			break;
+		case "#updateNotes":
+			loadBlank();
+			break;
+		default: case "#start":
+			loadNew(Params.LastLogon);
+			break;
+		case "#userPage":
+			loadUserPage(hash[1]);
+		break;
+		}
+	} else {
+		loadNew(Params.LastLogon);
+	}
+}
+
 jQuery(document).ready(function () {
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
@@ -869,7 +932,7 @@ jQuery(document).ready(function () {
 			overflow: "hidden",
 			width: "150px"
 		});
-		$.getJSON(uri + "ajax/display_ticket.php", {
+		$.getJSON(uri + "ajax/get_ticket.php", {
 			recentOnly: true
 		}, function (data) {
 			loadRecentTickets(data, $("#recentTickets"));
@@ -1087,7 +1150,7 @@ jQuery(document).ready(function () {
 		
 	});
 	$("#ticketSearchBtn").click(function () {
-		var hash = "ticketlist";
+		var hash = "ticketList";
 		var s_Title = $("#searchTitle").val();
 		var s_Category = $("#searchCategory").val();
 		var s_Assign = $("#searchAssign").val();
