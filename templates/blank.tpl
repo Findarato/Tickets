@@ -7,6 +7,30 @@
 			<span> More detailed update notes can be found <a class="ticket_sprite global_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite global_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
+			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIX</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.12.16.r175</span>
+			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+			<ol>
+				<li></li>
+			</ol>
+			<br>
+			<br>
+			<span style="font-size: 150%; line-height: normal;">New Features</span>
+			<ol>
+				<li></li>
+			</ol>
+			<br>
+			<br>
+			<span style="font-size: 150%; line-height: normal;">Known Issues</span>
+			<ol>
+				<li>Large Graphs are still not working properly</li>
+				<li>Some themes do not work 100%</li>
+				<li>There are no page numbers, nor any way to show more then the default amount of tickets in the list view.</li>
+				<li>Problem or bug icons do not show up in the ticket list.</li>
+				<li>Going directly to a ticketlist search result can lead to a broken page.</li>
+			</ol>
+			<br>
+			<br>
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XVIII</span>
 			<span style="font-size: 90%; line-height: normal;" id="version">v.2.12.16.r175</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>

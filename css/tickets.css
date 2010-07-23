@@ -340,4 +340,29 @@ ul li,ol li {padding-left:5px;}
 input:focus{
 	
 }
+.transformTL{
+	transform-origin: 0 0;
+	-moz-transform-origin:top left;
+	-o-transform-origin: 0 0;
+	-webkit-transform-origin:0 0;	
+}
+
+.rotate90{
+	transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+}
+.rotate45{
+	transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+.rotate180{
+	transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+}
 

@@ -83,8 +83,11 @@
 		 * @return int|string|bool (You should never get back true, its just a catch all)
 		 * @param string $sql[optional] not really optional.  Will just run a blank query.  Useful for testing
 		 * @param bool $cache[optional] defaults to false
+		 * @param bool $fetch[optional] if passed will call format with the value.
+		 * @param bool $force[optional] see format for definition
+		 * @param string $fetchId [optional] the id field to set as each key of a multidementional array
 		 */
-		public function Query($sql = "",$cache = false){
+		public function Query($sql = "",$cache = false,$fetch=false,$force=false,$fetchId=false){
 			if($this -> linkid != 0){
 				//mysql_ping($this -> linkid);
 				$sql = $this->prefixParse($sql); //Lets check to see if the prefix string is being used
@@ -105,7 +108,12 @@
 					if(strpos(strtolower($sql),"insert") == 0){//this was an insert
 						$this -> Lastid = mysql_insert_id($this -> linkid);	}
 				}
-				return true; //Something always has to be returned
+				if(!$fetch){
+					return true; //Something always has to be returned	
+				}else{
+					return $this->Fetch($fetch,$force,$fetchId);
+				}
+				
 			}
 		}
 		/**
@@ -117,7 +125,7 @@
 		 * @param string $type
 		 * @param bool $force[optional]
 		 */
-		public function Fetch($type,$force = FALSE){ return $this->Format($type,$force);} // to be more like mysql
+		public function Fetch($type,$force = FALSE,$idField="id"){ return $this->Format($type,$force,$idField);} // to be more like mysql
 		/**
 		 * Used to save stored resluts.  Can be dangerous and should be used with caution.
 		 * @return int|string
@@ -152,7 +160,7 @@
 		 * @param string $type
 		 * @param bool $force[optional]
 		 */
-		public function Format($type,$force = false){
+		public function Format($type,$force = false,$idField = "id"){
 			$return = "";
 			if(count($this -> Error) == 2){//there is an error
 				return "There was an error with the query"; 
@@ -174,7 +182,14 @@
 							}
 					break;
 					case "assoc_array":
-						while($line = mysql_fetch_assoc($this -> Resid)){ $return[] = $line; }
+						while($line = mysql_fetch_assoc($this -> Resid)){ 
+							if(isset($line[$idField])){
+								$return[$line[$idField]] = $line;	
+							}else{
+								$return[] = $line;	
+							}
+						 
+						}
 					break;
 					case "row_array":
 						while($line = mysql_fetch_row($this -> Resid)){ $return[] = $line; }
