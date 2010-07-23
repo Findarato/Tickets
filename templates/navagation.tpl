@@ -1,7 +1,7 @@
 <div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:205px;margin-left:5px;">
-	<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1 " style="">Tickets</div>
+	<div class="droidSans font-X head message_head corners-top-2 color-B-2 border-all-D-1 " style="">Tickets</div>
 	<div class="color-B-2 background-alpha-3 corners-bottom-2 " >
-		<div style="position:relative;" class="message_body color-B-2 background-alpha-3 ">
+		<div style="position:relative;" class="message_body color-X-1 ">
 			<a class="smallTicketL nolink ticket_button ticket_sprite user font-bold" href="#ticketlist/sOpen">To Me</a>
 			<span id="csOpen" class="timestamp" style="position:absolute;right:25px"></span>
 			<br>

@@ -283,9 +283,8 @@ button.fg-button { width:auto; overflow:visible; }
 	/*background-color: #222;
 	background-image: url(images/alert-overlay.png);
 	*/ 
-	display: inline-block; 
+	display: block; 
 	padding: 2px; 
-	color: #fff; 
 	-moz-border-radius: 5px; 
 	-webkit-border-radius: 5px;
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
