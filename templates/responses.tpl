@@ -1,7 +1,7 @@
 <div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" id="changemeColor" class="corners-bottom-2 corners-top-2 border-all-B-1">
 	<div style="display:table-row;width:100%">
 		<div style="display:table-cell; padding:6px; width:100px;">
-			<div class="font-X" id="changemeUserid"></div>
+			<div class="font-X" id="changemeUserid" style="width:100px;"></div>
 			<div id="changemeDay" class="font-L font-bold"></div>
 		</div>
 		<div style="display:table-cell;">
@@ -18,7 +18,7 @@
 					<div class="left ticket_sprite bug" id="imgTicketBug" style="height:15px;display:none;" title="Bug Report"></div>
 				</div>
 			</div>
-			<div class="font-X" id="changemeBody"></div>
+			<div class="font-X" style="word-wrap:break-word;white-space: normal;" id="changemeBody"></div>
 			<div class="font-X" id="changemeCategory"></div>
 		</div>
 		<div id="ticketListDueDate" style="display:table-cell;width:200px;right:0px;">
