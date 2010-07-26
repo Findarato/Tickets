@@ -706,8 +706,12 @@ function loadUserPage(userId){
 				.append( $("<div>",{id:"realName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Real Name: "})	)
 				.append( $("<div>",{id:"joinedOn","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Joined On: "})	)
 				.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Type: "})	)
-				.append( $("<div>",{id:"totalTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Tickets: "})	)
+				.append( $("<div>",{id:"totalTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Tickets Created: "})	)
+				.append( $("<div>",{id:"openTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Tickets: "})	)
+				.append( $("<div>",{id:"avgTicketsTime","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Average Ticket Duration: "})	)
 				.append( $("<div>",{id:"totalResponses","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Responses: "})	)
+				.append( $("<div>",{id:"totalBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Bugs Filed: "})	)
+				.append( $("<div>",{id:"openBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Bugs: "})	)
 		)
 		.appendTo(Tlb);
 
@@ -717,12 +721,17 @@ function loadUserPage(userId){
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
 		Tlb.find("#userType").append(data.userInfo.type);
-		Tlb.find("#totalTickets").append();
-		Tlb.find("#totalResponses").append();
-
-
-		
+		Tlb.find("#totalTickets").append(data.tickets.byMe).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
+		Tlb.find("#openTickets").append(data.tickets.toMe);
+		Tlb.find("#totalResponses").append(data.responses.created).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
+		Tlb.find("#totalBugs").append(data.bugs.byMe).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
+		Tlb.find("#openBugs").append(data.bugs.byMeOpen).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
 	});
+	infoBox = $("<div/>",{"class": "message_body",id:"infoBox"}).html($("#generic").html()).appendTo(Tlb);
+	infoBox.find("#ticketListtitle").attr({id:"infoBoxTitle"}).html("Tickets Created");
+	infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"600px\" height=\"300px\" id=\"graphDisplay\"/>"));
+	
+	
 }
 function checkHash() {
 	var hash = getHashArray();
