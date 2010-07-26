@@ -17,6 +17,7 @@ if($_SESSION){
 	}
 }
 if($_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
+	if($_GET['nagiosTicket']==881234123){$_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";}
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
 		VALUES(
