@@ -8,7 +8,7 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIX</span>
-			<span style="font-size: 90%; line-height: normal;" id="version">v.2.12.16.r175</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.13.16.r175</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<ol>
 				<li></li>
@@ -17,7 +17,13 @@
 			<br>
 			<span style="font-size: 150%; line-height: normal;">New Features</span>
 			<ol>
-				<li></li>
+				<li>User Pages are in place.
+					<ol>
+						<li>This is a very early version. More features to this page will be added with time.</li>
+						<li>The prime goal of user pages is to allow other people to see basic stats on tickets, based on the user they have selected.</li>	
+						<li>user pages will eventualy take user name,user id, as well as real name as a paramater.  Currently they only support user id. </li>
+					</ol>
+				</li>
 			</ol>
 			<br>
 			<br>
