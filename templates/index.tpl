@@ -3,7 +3,7 @@
 <html style:"width:100%">
 <head>
 <title>Tickets - The tracking system</title>
-<link id="themegencss" type="text/css" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&update&hsl" rel="stylesheet" />  
+<link id="themegencss" type="text/css" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl" rel="stylesheet" />  
 <link type="text/css" media="screen" rel="stylesheet" href="css/colorbox.css" />
 <link type="text/css" media="screen" rel="stylesheet" href="css/input.css" />
 <link type="text/css" href="css/tickets.css" rel="stylesheet"  />
