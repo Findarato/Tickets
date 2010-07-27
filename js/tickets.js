@@ -40,12 +40,24 @@ function loadBlank() {
 	Params.LastArea = "UpdateNotes";
 	Params.Content.html($("#blankTpl").html());
 }
-/**
- * Checks the hash of the page, then decides what to do with it.  This is the brains behind the page.
- */
 
-function loadLargeGraphs() {
-
+function loadLargeBarGraph(selectorId,data,lables) {
+	var graphData = [];
+	$.each(data,function(i,item){
+		graphData.push(parseInt(Math.abs(item.RunningTotal)));
+	});
+    //var data = [280,45,133,166,84,259,266,960,219,311];
+    var line = new RGraph.Line(selectorId, data);
+    line.Set('chart.labels', lables);
+    line.Set('chart.gutter',45);
+    line.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
+    line.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
+	line.Set('chart.linewidth', 2);
+	line.Set('chart.ylabels.count', 3);
+    line.Set('chart.filled', true);
+    line.Set('chart.background.grid', true);
+    line.Set('chart.colors', ['rgba(0,0,0,.60)']);
+    line.Draw();
 }
 
 function checkNotify(dt) {
@@ -714,6 +726,9 @@ function loadUserPage(userId){
 				.append( $("<div>",{id:"openBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Bugs: "})	)
 		)
 		.appendTo(Tlb);
+		infoBox = $("<div/>",{"class": "message_body",id:"infoBox"}).html($("#generic").html()).appendTo(Tlb);
+		infoBox.find("#ticketListtitle").attr({id:"infoBoxTitle"}).html("Tickets Created");
+		infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"730px\" height=\"300px\" id=\"graphDisplay\">Please use a browser that supports canvas</canvas>"));
 
 
 	$.getJSON("ajax/get_userinfo.php",{"userId":userId},function(data){
@@ -726,12 +741,17 @@ function loadUserPage(userId){
 		Tlb.find("#totalResponses").append(data.responses.created).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
 		Tlb.find("#totalBugs").append(data.bugs.byMe).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
 		Tlb.find("#openBugs").append(data.bugs.byMeOpen).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
+		graphData = [];
+		lables = [];
+		
+		$.each(data.tickets.graph.byMe.data,function(i,item){
+			graphData.push(parseInt(item.total));
+			lables.push(data.tickets.graph.monthLables[item.month-1]);
+		});
+		
+		loadLargeBarGraph("graphDisplay",graphData,lables);
+		
 	});
-	infoBox = $("<div/>",{"class": "message_body",id:"infoBox"}).html($("#generic").html()).appendTo(Tlb);
-	infoBox.find("#ticketListtitle").attr({id:"infoBoxTitle"}).html("Tickets Created");
-	infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"600px\" height=\"300px\" id=\"graphDisplay\"/>"));
-	
-	
 }
 function checkHash() {
 	var hash = getHashArray();

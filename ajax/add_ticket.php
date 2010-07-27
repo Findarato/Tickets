@@ -9,7 +9,7 @@
 $_GET = $db->Clean($_GET);
 
 if($_SESSION){
-	$_GET['nagiosTicket']=881234123;
+	//$_GET['nagiosTicket']=881234123;
 	if(isset($_SESSION["user"])){
 		$usr = unserialize($_SESSION["user"]);	
 	}else {
