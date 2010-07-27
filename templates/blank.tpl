@@ -22,6 +22,7 @@
 						<li>This is a very early version. More features to this page will be added with time.</li>
 						<li>The prime goal of user pages is to allow other people to see basic stats on tickets, based on the user they have selected.</li>	
 						<li>user pages will eventualy take user name,user id, as well as real name as a paramater.  Currently they only support user id. </li>
+						<li>User pages are the first location of the new graphs. </li>
 					</ol>
 				</li>
 			</ol>
