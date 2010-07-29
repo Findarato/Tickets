@@ -1,4 +1,4 @@
-<div class="background-alpha-2 border-all-B-1 " style="min-height:300px;text-align:left;padding:3px;">
+<div class="background-alpha-2 corners-top-2 corners-bottom-2 " style="min-height:300px;text-align:left;padding:3px;">
 	<div style="display:table; width:100%;overflow:hidden;" id="">
 		<div style="display:table-cell; padding:6px; width:210px;position:relative;">
 			<div style="position:absolute;top:10px;width:210px">

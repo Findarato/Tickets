@@ -33,7 +33,7 @@
 				<li>Large Graphs are still not working properly</li>
 				<li>Some themes do not work 100%</li>
 				<li>There are no page numbers, nor any way to show more then the default amount of tickets in the list view.</li>
-				<li>Problem or bug icons do not show up in the ticket list.</li>
+				<li><strike>Problem or bug icons do not show up in the ticket list.</strike> No longer relative</li> 
 				<li>Going directly to a ticketlist search result can lead to a broken page.</li>
 			</ol>
 			<br>
