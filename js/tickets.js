@@ -42,11 +42,22 @@ function loadBlank() {
 }
 
 function loadLargeBarGraph(selectorId,data,lables) {
-	var graphData = [];
-	$.each(data,function(i,item){
-		graphData.push(parseInt(Math.abs(item.RunningTotal)));
-	});
-    //var data = [280,45,133,166,84,259,266,960,219,311];
+	var Bar = new RGraph.Bar(selectorId, data);
+	RGraph.Clear(Bar.canvas);
+    Bar.Set('chart.labels', lables);
+    Bar.Set('chart.gutter',45);
+    Bar.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
+    Bar.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
+	Bar.Set('chart.linewidth', 2);
+	Bar.Set('chart.ylabels.count', 3);
+    Bar.Set('chart.filled', true);
+    Bar.Set('chart.background.grid', true);
+    Bar.Set('chart.colors', ['rgba(0,0,0,.60)']);
+    Bar.Draw();
+}
+function loadLargeLineGraph(selectorId,data,lables) {
+	//RGraph.Clear(document.getElementById(selectorId));graphDisplay
+	RGraph.Clear(document.getElementById("graphDisplay"));
     var line = new RGraph.Line(selectorId, data);
     line.Set('chart.labels', lables);
     line.Set('chart.gutter',45);
@@ -736,21 +747,39 @@ function loadUserPage(userId){
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
 		Tlb.find("#userType").append(data.userInfo.type);
-		Tlb.find("#totalTickets").append(data.tickets.byMe).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
+		Tlb
+			.find("#totalTickets")
+				.append(data.tickets.byMe)
+				.append(
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"})
+						.click(function(){
+							graphData = [];
+							lables = [];
+							$.each(data.tickets.graph.byMe.data,function(i,item){
+								graphData.push(parseInt(item.total));
+								lables.push(data.tickets.graph.monthLables[item.month-1]);
+							});
+							loadLargeBarGraph("graphDisplay",graphData,lables);
+						}).trigger("click")
+				);
 		Tlb.find("#openTickets").append(data.tickets.toMe);
-		Tlb.find("#totalResponses").append(data.responses.created).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
+		Tlb
+			.find("#totalResponses")
+				.append(data.responses.created)
+				.append(
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"})
+						.click(function(){
+							graphData = [];
+							lables = [];
+							$.each(data.responses.graph.byMe.data,function(i,item){
+								graphData.push(parseInt(item.total));
+								lables.push(data.tickets.graph.monthLables[item.month-1]);
+							});
+							loadLargeBarGraph("graphDisplay",graphData,lables);
+						})
+				);
 		Tlb.find("#totalBugs").append(data.bugs.byMe).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
 		Tlb.find("#openBugs").append(data.bugs.byMeOpen).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
-		graphData = [];
-		lables = [];
-		
-		$.each(data.tickets.graph.byMe.data,function(i,item){
-			graphData.push(parseInt(item.total));
-			lables.push(data.tickets.graph.monthLables[item.month-1]);
-		});
-		
-		loadLargeBarGraph("graphDisplay",graphData,lables);
-		
 	});
 }
 function checkHash() {
@@ -832,18 +861,21 @@ jQuery(document).ready(function () {
 		return false;
 	});
 	//$(window).bind( 'hashchange', function(){checkHash();});
-	localStorage.tickets = true; //localStorage works
+	if(localStorage.tickets = true){$("#featuresBoxDisplay").append($("<div/>",{"class":"table ticket_sprite",title:"Local Storage",css:{"display":"inline-block"}}));}
+	if (("WebSocket" in window)) {
+		$("#featuresBoxDisplay").append($("<div/>",{"class":"gear ticket_sprite",title:"Web Sockets",css:{"display":"inline-block"}}));
+	}
 	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
 	
-/*	
+
 	if (uri.match('dev') == 'dev') {
 		$("#themegencss").attr("href", "http://dev.lapcat.org/" + $("#themegencss").attr("href"));	
 	} else {
 		$("#themegencss").attr("href", "http://www.lapcat.org/" + $("#themegencss").attr("href"));	
 	}
-*/
+	
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
