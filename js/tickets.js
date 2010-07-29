@@ -751,8 +751,9 @@ function loadUserPage(userId){
 			.find("#totalTickets")
 				.append(data.tickets.byMe)
 				.append(
-					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"})
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticket_sprite chart"})
 						.click(function(){
+							$("#infoBoxTitle").html(data.tickets.graph.byMe.title);
 							graphData = [];
 							lables = [];
 							$.each(data.tickets.graph.byMe.data,function(i,item){
@@ -767,8 +768,9 @@ function loadUserPage(userId){
 			.find("#totalResponses")
 				.append(data.responses.created)
 				.append(
-					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"})
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticket_sprite chart"})
 						.click(function(){
+							$("#infoBoxTitle").html(data.responses.graph.byMe.title);
 							graphData = [];
 							lables = [];
 							$.each(data.responses.graph.byMe.data,function(i,item){
@@ -778,8 +780,24 @@ function loadUserPage(userId){
 							loadLargeBarGraph("graphDisplay",graphData,lables);
 						})
 				);
-		Tlb.find("#totalBugs").append(data.bugs.byMe).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
-		Tlb.find("#openBugs").append(data.bugs.byMeOpen).append($("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"ticket_sprite chart"}));
+		Tlb
+			.find("#totalBugs")
+				.append(data.bugs.byMe)
+				.append(
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticket_sprite chart"})
+						.click(function(){
+							$("#infoBoxTitle").html(data.bugs.graph.byMe.title);
+							graphData = [];
+							lables = [];
+							$.each(data.bugs.graph.byMe.data,function(i,item){
+								graphData.push(parseInt(item.total));
+								lables.push(data.tickets.graph.monthLables[item.month-1]);
+							});
+							loadLargeBarGraph("graphDisplay",graphData,lables);
+						})
+						
+				);
+		Tlb.find("#openBugs").append(data.bugs.byMeOpen);
 	});
 }
 function checkHash() {
