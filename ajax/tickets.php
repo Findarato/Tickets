@@ -63,7 +63,7 @@ function countTickets($user_id,$type="open"){
 	if($type=="favorite"){$sql = "SELECT count(ticket_id) FROM favorite WHERE user_id=".$user_id.";";}
 	if(!isset($sql)){$sql = "SELECT COUNT(id) FROM tcview WHERE ".getWhereClause($user_id,$type)." ;";}	
 	$db->Query($sql);
-	$res = $db->Fetch("row");
+	$res = $db->Fetch("row",false,false);
 	return $res;
 }
 /**
@@ -120,7 +120,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 					case "department":
 						if($s>0){
 							$db->Query("SELECT user_id FROM department_members WHERE department_id =$s");
-							$res = $db->Fetch("row_array");
+							$res = $db->Fetch("row_array",false,false);
 							$wc[]="(tcv.assigned_id IN (".join(",",$res).") OR created_by_id IN (".join(",",$res).") ) ";
 						}
 					break;
@@ -153,17 +153,17 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
 						//die($sql);
 						$db->Query($sql);
-                        $ticketIds = $db->Fetch("row");
+                        $ticketIds = $db->Fetch("row",false,false);
 						//new replies
                         $sql = "SELECT tcv.id FROM tcview AS tcv WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
 						$db->Query($sql);
-                        $replyTicketids = $db->Fetch("row");
+                        $replyTicketids = $db->Fetch("row",false,false);
 						if(!is_array($replyTicketids)){$replyTicketids = array(0=>$replyTicketids);}else{$replyTicketids = array_implode($replyTicketids);}
 						
 						
 						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
 						$db->Query($sql);
-                        $response = $db->Fetch("row");
+                        $response = $db->Fetch("row",false,false);
 						
 						
 
@@ -192,7 +192,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						break;
 					case "sFavorite": 
 						$db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id);
-						$favIds = $db->Fetch("row");
+						$favIds = $db->Fetch("row",false,false);
 						if(is_array($favIds)){
 							$favIds = array_implode($favIds);
 						}else{//This is only one result
@@ -256,7 +256,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 	//die($sql);
 	//$count = @$db->Count_res();
 	if($type=="search"){$db->Query($sql." LIMIT ".$start.",".$end.";");}
-	$return = $db->Fetch("assoc_array");
+	$return = $db->Fetch("assoc_array",false,false);
 	if(is_array($return)){
 		foreach($return as $ke =>$re){
 			if(@unserialize($return[$ke]["status"])){
@@ -278,7 +278,7 @@ if(isset($_SESSION["user"])){ //the session is set
 				$db->Query("UPDATE tickets SET  closed_on = NOW( ) , open = '0' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");
 				
 				$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category,status FROM tcview WHERE id=".$_GET['ticket_id']);
-				$res1 = $db->Fetch("assoc");
+				$res1 = $db->Fetch("assoc",false,false);
 				//Put in the close variable and store it in the table
 				if(@unserialize($res1['status'])){//checks to see if there is already a serialized value stored in the table.
 					$res1['status'] = unserialize($res1['status']);
@@ -297,10 +297,10 @@ if(isset($_SESSION["user"])){ //the session is set
 				$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");//put in the new status
 				//end status area
 				$db->Query("SELECT r.subject,r.body,r.created_on,r.user_id FROM responses AS r WHERE r.ticket_id=".$_GET['ticket_id']);
-				$res2 = $db->Fetch("assoc");
+				$res2 = $db->Fetch("assoc",false,false);
 				//get the location email
 				$db->Query("SELECT t.location,ln.email,ln.name FROM tickets AS t JOIN library_names AS ln ON (ln.id=t.location) WHERE t.id=".$_GET['ticket_id']);
-				$res3 = $db->Fetch("assoc");
+				$res3 = $db->Fetch("assoc",false,false);
 				addReply($_GET['ticket_id'], 256, "Ticket Closed", "This ticket was closed on ".date("D M j, Y G:i:s ")." by [user=".$usr->User_id."]" ,true,true);
 				$response["message"]="This ticket is now closed";
 			break;			
@@ -316,7 +316,7 @@ if(isset($_SESSION["user"])){ //the session is set
 					$db->Query("DELETE FROM tickets_hold WHERE ticket_id=".$_GET['ticket_id']." AND user_id=".$usr->User_id." LIMIT 1;");
 					//Update the status.
 					$db->Query("SELECT status FROM tickets WHERE id=".$_GET['ticket_id'].";");
-					$res = unserialize($db->Fetch("row"));
+					$res = unserialize($db->Fetch("row",false,false));
 					unset($res['lock']);
 					$db->Query("UPDATE tickets SET status='".serialize($res)."',due_on=NOW() + INTERVAL 7 DAY WHERE id=".$_GET['ticket_id']." LIMIT 1;");
 					if(count($db->Error)<2){$response["message"]="The ticket has successfully been unlocked.";
@@ -326,7 +326,7 @@ if(isset($_SESSION["user"])){ //the session is set
 					$db->Query("INSERT INTO tickets_hold (ticket_id,user_id,dt) VALUES(".$_GET['ticket_id'].",".$usr->User_id.",NOW());");
 					//Update the status.
 					$db->Query("SELECT status FROM tickets WHERE id=".$_GET['ticket_id'].";");
-					$res = unserialize($db->Fetch("row"));
+					$res = unserialize($db->Fetch("row",false,false));
 					$res['lock']=1;
 					$db->Query("UPDATE tickets SET status='".serialize($res)."' WHERE id=".$_GET['ticket_id']." LIMIT 1;");
 					if(count($db->Error)<2){$response["message"]="The ticket has successfully been locked.";
@@ -349,7 +349,7 @@ if(isset($_SESSION["user"])){ //the session is set
 					}
 					//Put in the reassign variable and store it in the table
 					$db->Query("SELECT status FROM tcview WHERE id=".$_GET['ticket_id']);
-					$res1 = $db->Fetch("assoc");
+					$res1 = $db->Fetch("assoc",false,false);
 					if(@unserialize($res1['status'])){
 						$res1['status'] = unserialize($res1['status']);
 						$res1['status']['reassigned']=1;
