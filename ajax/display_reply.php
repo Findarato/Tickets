@@ -21,12 +21,12 @@
 			$page = $_GET['page'];
 			$start = ($page*$end);
 			$db->Query($sql." LIMIT ".$start.",".$end.";");
-			$res = $db->Fetch('assoc_array');
+			$res = $db->Fetch('assoc_array',false,false);
 			if($db->Count_res()>0)
 			$res = aTcode($res,"body");
 			$reply["reply"]=$res;			 
 		}else{ //just keeping support for not passing the page number.  Page numbers should always be passed but it doesn't hurt to keep this clause in
-			$res = $db->Fetch('assoc_array');
+			$res = $db->Fetch('assoc_array',false,false);
 			$res = aTcode($res,"body");
 			$reply["reply"]=$res;
 		}
