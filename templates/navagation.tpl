@@ -1,11 +1,8 @@
-<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:205px;margin-left:5px;">
+<section class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:205px;margin-left:5px;">
 	<div class="droidSans font-X head message_head corners-top-2 color-B-2 border-all-D-1 " style="">Tickets</div>
 	<div style="position:relative;" class="message_body color-X-1 corners-bottom-2">
 		<a class="smallTicketL nolink ticket_button ticket_sprite user font-bold" href="#ticketList/sOpen">To Me</a>
 		<span id="csOpen" class="timestamp" style="position:absolute;right:25px"></span>
-		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite door font-bold" href="#ticketList/sClosed">Closed Tickets</a>
-		<span id="csClosed" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
 		<a class="smallTicketL nolink ticket_button ticket_sprite pencil font-bold" href="#ticketList/sAssigned">By Me</a>
 		<span id="csAssigned" class="timestamp " style="position:absolute;right:25px"></span>
@@ -18,5 +15,9 @@
 		><br>
 		<a class="smallTicketL nolink ticket_button ticket_sprite bookmark font-bold" href="#ticketList/sFavorite">Bookmarks</a>
 		<span id="csFavorite" class="timestamp " style="position:absolute;right:25px"></span>
+		<br>
+		<a class="smallTicketL nolink ticket_button ticket_sprite door font-bold" href="#ticketList/sClosed">Closed Tickets</a>
+		<span id="csClosed" class="timestamp " style="position:absolute;right:25px"></span>
+		<br>
 	</div>
-</div>
+</section>
