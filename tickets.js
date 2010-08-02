@@ -201,21 +201,16 @@ function populateAllTickets(Area) {
 }
 function populateAllBugs(Area) {
 	var cnt,html,Ttype;
-	$.getJSON(uri + "ajax/get_bugs.php", {"all": "","small":""},function (data, text) {
-		$.each(data.ticket,	function (i, item) {
-			cnt = 0;html = "";Ttype = "";
-			$("#c" + item.type)
-				.html(item.Count);
-				Ttype = item.type;
-			}
-		);
+	$.getJSON(uri + "ajax/get_bugs.php", {"all": "1","small":"1"},function (data, text) {
+		$("#cBugsOpen").html(data.bugs.open);
+		$("#cBugsClosed").html(data.bugs.closed);
 	});
 }
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 	loadStats();
 	populateAllTickets();
-///	populateAllBugs();
+	populateAllBugs();
 }
 function loadResponsesBody(ticketId, container, page) {
 	var params = {
@@ -883,7 +878,7 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
-	//populateAllBugs();
+	populateAllBugs();
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
 		localStorage.clear();
