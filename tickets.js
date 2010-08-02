@@ -315,6 +315,7 @@ function loadRecentTickets(jsonData, selector) {
 function loadTicketBody(inputData, container) {
 	//Basically figures out what kind of data is being send to the function and how to deal with it.
 	var data = {};
+	var bug = false;
 	if(typeof inputData == "string" || typeof inputData == "object"){
 		if(typeof inputData == "object"){
 			data = inputData;
@@ -326,11 +327,11 @@ function loadTicketBody(inputData, container) {
 				localStorage.setItem("TicketId" + data.id,JSON.stringify(inputData));
 			}
 		}else{ // received the string ID of a ticket to load
-			notice("Debug", "Something odd happend with the Code. Error: 100380A", true);
+			notice("Debug", inputData+"<br>Error: 100380A", true);
 		}
-	}else{	notice("Debug","Something odd happend with the Code. Error: 100382B",true);}
+	}else{	notice("Debug",inputData+"<br>Error: 100382B",true); }
 	
-	
+	if(data.tickettype_id==2){bug=true}
 //Display code.	
 	if(data.priority>5){data.priority = data.priority -5;} //normalize old data with new numbering scheme
 	container.find(".statusImage ").hide();
@@ -338,11 +339,30 @@ function loadTicketBody(inputData, container) {
 	Params.TicketJSON = data;
 	container.find("#ticketTitle").html(data.subject);
 	container.find("#ticketDate").html(data.created_on);
-	if (data.timeRemaining > 0) { //ticket is over due.
-		container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
-		//container.find("#ticketStatusImage").append($("<img/>").attr("src","http://cdn1.lapcat.org/famfamfam/silk/exclamation.png"));
-	} else { //ticket is not over due
-		container.find("#ticketDueDate").html(data.due_on);
+	container.find("#ticketBugId").html("Bug ID:");
+	if(!bug){
+		container.find("#ticketBugId").html("Ticket ID:");
+		container.find("#dueOnBox").show();
+		container.find("#assignedToBox").show();
+		container.find("#locationBox").show();
+		container.find("#lockBox").show();
+
+		if (data.timeRemaining > 0) { //ticket is over due.
+			container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
+		} else { //ticket is not over due
+			container.find("#ticketDueDate").html(data.due_on);
+		}
+		container
+			.find("#ticketAssignedTo")
+				.html(
+					$("<a/>",{"class":"nolink ticket_button ticket_sprite user ",html:data.firstname + " " + data.lastname})
+						.attr("href", "#ticketList/assigned/" + data.assigned_id)
+				)
+				.append(
+					$("<a/>",{"class":"nolink ",html:$("<div/>",{css:{"display":"inline-block"},"class":"ticket_sprite information"})})
+						.attr("href", "#userPage/" + data.assigned_id)
+				);
+		container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketList/location/" + data.locationId).addClass("nolink library-link ").html(data.locationName));
 	}
 	container.find("#ticketBody").html(data.description);
 	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketList/category/" + data.category).addClass("nolink ticket_button ticket_sprite gear ").html(data.category));
@@ -356,18 +376,9 @@ function loadTicketBody(inputData, container) {
 				$("<a/>",{"class":"nolink ",html:$("<div/>",{css:{"display":"inline-block"},"class":"ticket_sprite information"})})
 					.attr("href", "#userPage/" + data.created_by_id)
 			);
-	container
-		.find("#ticketAssignedTo")
-			.html(
-				$("<a/>",{"class":"nolink ticket_button ticket_sprite user ",html:data.firstname + " " + data.lastname})
-					.attr("href", "#ticketList/assigned/" + data.assigned_id)
-			)
-			.append(
-				$("<a/>",{"class":"nolink ",html:$("<div/>",{css:{"display":"inline-block"},"class":"ticket_sprite information"})})
-					.attr("href", "#userPage/" + data.assigned_id)
-			);
+
+
 	container.find("#replyticketid").val(ticketId);
-	container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketList/location/" + data.locationId).addClass("nolink library-link ").html(data.locationName));
 	container.find("#ticketId").html(data.id);
 	container.find("#ticketPriority").html(Params.Priority_string[data.priority]);
 	if (data.favorite !== null && data.favorite!==0) {
