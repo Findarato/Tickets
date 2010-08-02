@@ -164,8 +164,6 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
 						$db->Query($sql);
                         $response = $db->Fetch("row",false,false);
-						
-						
 
 						//some simple error checking.
 						if(!is_array($ticketIds)){if($ticketIds == ""){$ticketIds = 0;}$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
@@ -209,7 +207,9 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.created_by_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";break;
 					case "sAssigned":$wc[]="tcv.created_by_id=".$usr->User_id;$wc[]="tcv.open=1";break;
 					case "sClosed":$wc[]="tcv.open=0";$wc[]="tcv.assigned_id=".$usr->User_id;break;
-					case "sOpen":$wc[]="tcv.open=1";$wc[]="tcv.assigned_id=".$usr->User_id; break;	
+					case "sOpen":$wc[]="tcv.open=1";$wc[]="tcv.assigned_id=".$usr->User_id; break;
+					case "bugs_open": $wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=2";break;
+					case "bugs_closed": $wc[]="tcv.open=0";$wc[]="tcv.tickettype_id=2";break;
 									
 				}				
 			}
