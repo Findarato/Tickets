@@ -191,10 +191,22 @@ function populateAllTickets(Area) {
 	var cnt,html,Ttype;
 	$.getJSON(uri + "ajax/tickets.php", {"type": "small","index": "all","area": Area,"style": 1},function (data, text) {
 		$.each(data.ticket,	function (i, item) {
-				cnt = 0;html = "";Ttype = "";
-				$("#c" + item.type)
-					.html(item.Count);
-					Ttype = item.type;
+			cnt = 0;html = "";Ttype = "";
+			$("#c" + item.type)
+				.html(item.Count);
+				Ttype = item.type;
+			}
+		);
+	});
+}
+function populateAllBugs(Area) {
+	var cnt,html,Ttype;
+	$.getJSON(uri + "ajax/get_bugs.php", {"all": "","small":""},function (data, text) {
+		$.each(data.ticket,	function (i, item) {
+			cnt = 0;html = "";Ttype = "";
+			$("#c" + item.type)
+				.html(item.Count);
+				Ttype = item.type;
 			}
 		);
 	});
@@ -203,6 +215,7 @@ function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 	loadStats();
 	populateAllTickets();
+	populateAllBugs();
 }
 function loadResponsesBody(ticketId, container, page) {
 	var params = {
@@ -870,6 +883,7 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
+	populateAllBugs();
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
 		localStorage.clear();
