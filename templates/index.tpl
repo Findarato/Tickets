@@ -33,7 +33,7 @@
 
 </head>
 <body onResize="javascript:resize();"  class="image-background color-B-1">
-<div class="header1" style="">{include file="topper.tpl"}</div>
+<div class="header1" style="overflow:hidden;height:30px">{include file="topper.tpl"}</div>
 <div style="height:50px;"></div>
 <div id="wrap" style="width:98%; padding:4px;position:relative;" class="">
 	<div style="min-height:300px;position:absolute;top:3px;left:2px;width:200px;"  class="corners-bottom-2 corners-top-2">
@@ -53,7 +53,7 @@
 <div id="generic" class="ui-helper-hidden">{include file="generic.tpl"}</div>
 
 <div id="blankTpl" class="ui-helper-hidden">{include file="blank.tpl"}</div>
-<div id="departmentTpl" class="ui-helper-hidden" style="z-index:50;">{include file="department.tpl"}</div>
+<div id="departmentTpl" class="ui-helper-hidden" style="z-index:50;overflow:hidden;">{include file="department.tpl"}</div>
 <div id="notifyTpl" style="position:absolute" class="ui-helper-hidden">{include file="notify.tpl"}</div>
 <div id="statisticsTpl" style="position:absolute" class="ui-helper-hidden">{include file="statistics.tpl"}</div>
 <div id="storage" class="ui-helper-hidden"></div>

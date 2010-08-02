@@ -25,6 +25,7 @@
 						<li>user pages will eventualy take user name,user id, as well as real name as a paramater.  Currently they only support user id. </li>
 						<li>User pages are the first location of the new graphs. </li>
 					</ol>
+					<li>Bugs are now separated out into their own area. No longer will bugs show up in the ticket list.</li>
 				</li>
 			</ol>
 			<br>

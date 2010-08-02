@@ -1073,7 +1073,7 @@ jQuery(document).ready(function () {
 	$("#t_uI").click(function () {
 		position = $(this).position();
 		$("#departmentTpl").css({
-			"top": position.top + 22,
+			"top": position.top + 20,
 			"left": position.left,
 			"position": "absolute",
 			"width": "350px"
