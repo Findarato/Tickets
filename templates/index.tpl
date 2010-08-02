@@ -1,13 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 1.0 Strict//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
 <html style:"width:100%">
 <head>
 <title>Tickets - The tracking system</title>
-<link id="themegencss" type="text/css" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl" rel="stylesheet" />  
-<link type="text/css" media="screen" rel="stylesheet" href="css/colorbox.css" />
-<link type="text/css" media="screen" rel="stylesheet" href="css/input.css" />
-<link type="text/css" href="css/tickets.css" rel="stylesheet"  />
-<link href=' http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<link id="themegencss" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl" rel="stylesheet" />  
+<link media="screen" rel="stylesheet" href="css/colorbox.css" />
+<link href="css/tickets.css" rel="stylesheet"  />
+<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 	<meta http-equiv="X-UA-Compatible" content="IE=100" >
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 
@@ -22,12 +21,12 @@
 	pageTracker._trackPageview();
 </script>
 {/literal}
-<script type="text/javascript" src="http://cdn1.lapcat.org/js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
+<script src="http://cdn1.lapcat.org/js/jquery-1.4.1.min.js"></script>
+<script src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
 <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.js" ></script>
 <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
 <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.line.js" ></script>
-<script type="text/javascript" src="js/combine.php"></script>
+<script src="js/combine.php"></script>
 
 <link id="rss1" href="ticketsrss.php?id={$user_id}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
 <link id="rss2" href="ticketsrss.php?id={$user_id}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
