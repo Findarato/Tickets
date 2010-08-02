@@ -100,36 +100,9 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 			foreach ($search as $k=>$s){
 				switch($k){
 					default:break;
-					case "Adepartment": //Department Created
-							$idList = getDepartmentMembers_by_userid($usr -> User_id);
-							$wc[]="(created_by_id IN (".join(",",$idList).") ) ";
-							//print_r($wc);die();
-					break;
-					case "assigned":
-						if($s>0){$wc[]="tcv.assigned_id=\"".$s."\"";}
-					break;
-					case "category":
-						if($s>0){$wc[]="tcv.category_id=\"".$s."\"";}else{$wc[]="tcv.category=\"".$s."\"";}
-					break;
-					case "closed":
-						$wc[]="tcv.open=\"".$s."\"";
-					break;
-					case "created_by":
-						if($s>0){$wc[]="tcv.created_by_id=\"".$s."\"";}
-					break;
-					case "department":
-						if($s>0){
-							$db->Query("SELECT user_id FROM department_members WHERE department_id =$s");
-							$res = $db->Fetch("row_array",false,false);
-							$wc[]="(tcv.assigned_id IN (".join(",",$res).") OR created_by_id IN (".join(",",$res).") ) ";
-						}
-					break;
+
 					case "location":
 						$wc[]="tcv.locationId=\"".$s."\"";
-					break;
-					case "Odepartment": //Department Assigned
-							$idList = getDepartmentMembers_by_userid($usr -> User_id);
-							$wc[]="(tcv.assigned_id IN (".join(",",$idList).")) ";
 					break;
 					case "dateTime":
 						switch($s){
@@ -203,11 +176,11 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 					break;
 
 				//New right pannel list. 
-					case "sOdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.assigned_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";break;
-					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.created_by_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";break;
-					case "sAssigned":$wc[]="tcv.created_by_id=".$usr->User_id;$wc[]="tcv.open=1";break;
-					case "sClosed":$wc[]="tcv.open=0";$wc[]="tcv.assigned_id=".$usr->User_id;break;
-					case "sOpen":$wc[]="tcv.open=1";$wc[]="tcv.assigned_id=".$usr->User_id; break;
+					case "sOdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.assigned_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=1";break;
+					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.created_by_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=1";break;
+					case "sAssigned":$wc[]="tcv.created_by_id=".$usr->User_id;$wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=1";break;
+					case "sClosed":$wc[]="tcv.open=0";$wc[]="tcv.assigned_id=".$usr->User_id;$wc[]="tcv.tickettype_id=1";break;
+					case "sOpen":$wc[]="tcv.open=1";$wc[]="tcv.assigned_id=".$usr->User_id;$wc[]="tcv.tickettype_id=1";break;
 					case "bugs_open": $wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=2";break;
 					case "bugs_closed": $wc[]="tcv.open=0";$wc[]="tcv.tickettype_id=2";break;
 									
@@ -230,8 +203,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 						JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
 						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC ';	
-						
-						//die($sql);
+
 			}
 			
 		break;
@@ -390,14 +362,6 @@ if(isset($_SESSION["user"])){ //the session is set
 										$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));
 										$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));								
 										$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));
-										/* old methods
-										$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"),"tickets"=>getTickets($usr->User_id,"open",10,$style));
-										$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"),"tickets"=>getTickets($usr->User_id,"closed",10,$style));
-										$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"),"tickets"=>getTickets($usr->User_id,"assigned",10,$style));
-										$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"),"tickets"=>getTickets($usr->User_id,"Odepartment",10,$style));
-										$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"),"tickets"=>getTickets($usr->User_id,"Adepartment",10,$style));								
-										$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"),"tickets"=>getTickets($usr->User_id,"favorite",10,$style));
-										*/								
 									break;
 								}
 								$response["message"]="All Ticket lists generated Successfully";

@@ -17,20 +17,20 @@
 				</div>
 			</div>
 			<div class="color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
-		        <div style="position:absolute;:1px;right:0px;clear:both;">
+		        <div id="lockBox" style="position:absolute;:1px;right:0px;clear:both;display:none">
 					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons holdLink" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
 					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons unholdLink" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
 					<!--<div class="button-purple fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
 				</div>
 				<div style="clear:both">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Ticket ID:</font></div>
+			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span id="ticketBugId" class="font-X" >Ticket ID:</font></div>
 			       	<div class="left "><span class="font-X" id="ticketId"></font></div>
 		        </div>
 		        <div style="clear:both">
 			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Opened On</font></div>
 			       	<div class="left "><span class="font-X" id="ticketDate"></font></div>
 		        </div>
-		        <div style="clear:both">
+		        <div id="dueOnBox" style="clear:both;display:none;">
 			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Due On</font></div>
 			       	<div class="left "><span class="font-X" id="ticketDueDate"></font></div>
 		        </div>
@@ -46,7 +46,7 @@
 			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Created By</font></div>
 			       	<div class="left " style="height:16px;"><span class="font-X" id="ticketCreatedBy" style="height:16px;"></font></div>
 		       </div>
-				<div style="clear:both">
+				<div id="assignedToBox" style="clear:both;display:none;">
 			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Assigned To</font></div>
 			       	<div class="left" ><span class="font-X" id="ticketAssignedTo"></font></div>
 		       </div> 
@@ -54,7 +54,7 @@
 			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Priority</font></div>
 			       	<div class="left" ><span class="font-X" id="ticketPriority"></font></div>
 				</div>
-				<div style="clear:both">
+				<div id="locationBox" style="clear:both;display:none;">
 			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Location</font></div>
 			       	<div class="left" ><span class="font-X" id="ticketLocation"></font></div>
 				</div>
