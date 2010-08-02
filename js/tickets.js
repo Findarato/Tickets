@@ -215,7 +215,7 @@ function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 	loadStats();
 	populateAllTickets();
-	populateAllBugs();
+///	populateAllBugs();
 }
 function loadResponsesBody(ticketId, container, page) {
 	var params = {
@@ -883,7 +883,7 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
-	populateAllBugs();
+	//populateAllBugs();
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
 		localStorage.clear();
@@ -1345,6 +1345,12 @@ jQuery(document).ready(function () {
 		});
 	});
 	//Global page live 
+	/*
+	$("section [contenteditable|=true]").live("focus",function(){
+		offset = $(this).offset();
+		$("<div/>",{id:"saveEdit",css:{"top":offset.top+$(this).innerHeight(),"left":offset.left,"position":"absolute"},"class":"button-theme fg-button ticketButton font-Y lapcatButton openTicket actionButtons closeLink"}).html("save").appendTo("body");
+	});
+	*/
 	$(":text").live("click", function () {
 		$(this).select();
 		$(this).focus();

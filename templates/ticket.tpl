@@ -1,7 +1,7 @@
 <div style="display:table;width:100%;height:500px;margin-right:5px;">
 	<div id="ticketarea" style="display:table-cell;width:300px;height:500px;min-width:300px" >
 		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:5px;">
-			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
+			<div class="font-X head message_head corners-top-2 color-B-2 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
 				<div class="font-X" id="ticketTitle"></div>
 				<div class="color-X" id="ticketStatusImage" style="position:absolute;right:5px;top:2px;height:13px;">
 					<div class="corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" style="width:auto;padding:2px;">
@@ -16,7 +16,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="droidSerif color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
+			<div class="color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
 		        <div style="position:absolute;:1px;right:0px;clear:both;">
 					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons holdLink" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
 					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons unholdLink" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
@@ -58,9 +58,9 @@
 			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Location</font></div>
 			       	<div class="left" ><span class="font-X" id="ticketLocation"></font></div>
 				</div>
-				<div id="ticketDataBox" style="padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:285px;overflow:auto;vertical-align:top; clear:both">
-					<span id="ticketBody"></span>
-				</div>
+				<section id="ticketDataBox" style="display:block;padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:385px;overflow:auto;vertical-align:top; clear:both">
+					<article id="ticketBody" style="display:block;"></article>
+				</section>
 			</div>
 			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
 				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket actionButtons editLink" id="editlink" style="width:45px;">Edit</div>

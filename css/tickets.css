@@ -1,16 +1,19 @@
 * { 
 	margin: 0; 
 	padding: 0;
+	
 }
-a, font span,.droidSans {
+a, font span,.custom {
 	text-decoration:none;
-	font-family:'Droid Sans', arial, sans-serif;
+	font-family:'Cantarell', arial, sans-serif;
+	font-size:12px;
 }
 a:hover{ text-decoration:underline;}
 body {
-	font:12px 'Droid Sans',arial, sans-serif;
 	text-align: center;
 	height:100%;
+	font-family:'Cantarell', arial, sans-serif;
+	font-size:12px;
 }
 .whiteBackground{background-color:#FFF;}
 .right{float:right;}
