@@ -3,12 +3,13 @@
 <html style:"width:100%">
 <head>
 <title>Tickets - The tracking system</title>
+<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 <link id="themegencss" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl" rel="stylesheet" />  
 <link media="screen" rel="stylesheet" href="css/colorbox.css" />
 <link href="css/tickets.css" rel="stylesheet"  />
-<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
-	<meta http-equiv="X-UA-Compatible" content="IE=100" >
-	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+<meta http-equiv="X-UA-Compatible" content="IE=100" >
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
 
 <link rel="icon" type="image/png" href="/tickets/bug.png" /> 
 {literal}
