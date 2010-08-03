@@ -451,7 +451,7 @@ function loadTicketBody(inputData, container) {
 	}, function () {
 		$("#replyTitle").val("Re:" + Params.TicketJSON.subject);
 		$("#replyticketid").val(Params.Ticket_id);
-		$("#replyuserid").val(User_id);
+		$("#replyuserid").val(Params.UserId);
 	});
 	$('#ReAssignlink').colorbox({
 		transition: "none",
@@ -717,14 +717,16 @@ function loadUserPage(userId){
 	Params.Content.html($("#generic").html());
 	Tlb = Params.Content.find("#ticketListbody");
 	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
+	var localUser = false;
+	if (Params.UserId == userId){localUser = true;}
 
-	$("<div/>",{id:"computerInfoBox","class":"",css:{"width":"100%","height":"auto","display":"table","margin-bottom":"3px"}})
+	$("<div/>",{id:"userInfoBox","class":"",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
 		.append(
 			$("<div>",{css:{"display":"table-cell","width":"110px"}})
 				.append(
 					$("<div>",
 						{
-							id:"osIconBox",
+							id:"userIconBox",
 							"class":"small-shadow-black-1 color-B-2 border-all-B-1 corners-bottom-2 corners-top-2",
 							css:{
 								"overflow":"hidden","display":"block","height":"100px","width":"100px","margin":"5px","position":"relative"
@@ -734,16 +736,14 @@ function loadUserPage(userId){
 						.append(
 							$("<div/>",{
 								html:"ID:"+userId,
-								css:{
-									"font":"22px 'Droid Sans', Arial, sans-serif","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "22px"
-								},
+								css:{"font":"22px 'Droid Sans', Arial, sans-serif","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "22px"},
 								"class":"font-bold font-X rotate90 transformTL"
 							})
 						)
 				)
 		)
 		.append(
-			$("<div>",{css:{"display":"table-cell","vertical-align":"top"}})
+			$("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"250px","text-align":"left"}})
 				.append( $("<div>",{id:"userName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Username: "})	)
 				.append( $("<div>",{id:"realName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Real Name: "})	)
 				.append( $("<div>",{id:"joinedOn","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Joined On: "})	)
@@ -755,6 +755,30 @@ function loadUserPage(userId){
 				.append( $("<div>",{id:"totalBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Bugs Filed: "})	)
 				.append( $("<div>",{id:"openBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Bugs: "})	)
 		)
+		.append(
+			function(index,html){
+				if(!localUser){	return "";}
+				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"200px"}})
+					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
+					.append( $("<div>",{id:"followDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
+						.append(
+							$("<div/>",{"class":"corners-bottom-2 corners-top-2 border-all-B-1 color-B-1",css: {"display":"inline-block","width":"auto"}})
+								.append(
+									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"1px","margin":"2px","z-index":"3"},"class":"font-Y ",html:"Yes"})
+								)
+								.append(
+									$("<div>",{id:"unfollow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"1px","margin":"2px","z-index":"3"},"class":"font-Y",html:"No"})
+								)
+						)
+						.append(
+							$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","z-index":"0","width":"25px","padding":"1px","height":"14px"},"class":"font-Y corners-bottom-2 corners-top-2 border-all-K-1 fuzzyoutlineBlack"})
+						)
+					)
+					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
+					.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
+					.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
+			} 
+		)
 		.appendTo(Tlb);
 		infoBox = $("<div/>",{"class": "message_body",id:"infoBox"}).html($("#generic").html()).appendTo(Tlb);
 		infoBox.find("#ticketListtitle").attr({id:"infoBoxTitle"}).html("Tickets Created");
@@ -762,6 +786,7 @@ function loadUserPage(userId){
 
 
 	$.getJSON("ajax/get_userinfo.php",{"userId":userId},function(data){
+		Tlb.find("#userDepartment").append(data.userInfo.tickets.departmentName)
 		Tlb.find("#userName").append(data.userInfo.username);
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
@@ -817,7 +842,27 @@ function loadUserPage(userId){
 						
 				);
 		Tlb.find("#openBugs").append(data.bugs.byMeOpen);
+
+		if(data.userInfo.tickets.notify==2){ //1 = following. 0,2,nothing = not following
+			loc = Tlb.find("#follow").position();
+			Tlb.find("#followUnfollowHighlight").css({"top":loc.top+3,"left":loc.left+5}).show();
+		} else {
+			loc = Tlb.find("#unfollow").position();
+			Tlb.find("#followUnfollowHighlight").css({"top":loc.top+3,"left":loc.left+5}).show();
+		}
+
+		
 	});
+	
+	
+	Tlb.find("#follow").click(function () {	jQuery.post(uri + "ajax/login.php", {user_id: Params.UserId,opt: 2}, function (data) {checkResponse(data);
+		loc = Tlb.find("#follow").position();
+		Tlb.find("#followUnfollowHighlight").css({"top":loc.top+3,"left":loc.left+5});
+	}, "json");	});
+	Tlb.find("#unfollow").click(function () {	jQuery.post(uri + "ajax/login.php", {user_id: Params.UserId,opt: 1}, function (data) {checkResponse(data);
+		loc = Tlb.find("#unfollow").position();
+		Tlb.find("#followUnfollowHighlight").css({"top":loc.top+3,"left":loc.left+5});
+	}, "json");	});
 }
 function checkHash() {
 	var hash = getHashArray();
@@ -890,6 +935,7 @@ function checkHash() {
 
 jQuery(document).ready(function () {
 	populateAllBugs();
+	if(localStorage.userId){Params.UserId = localStorage.userId;}
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
 		localStorage.clear();
@@ -1071,27 +1117,8 @@ jQuery(document).ready(function () {
 	});
 
 	$("#t_uI").click(function () {
-		position = $(this).position();
-		$("#departmentTpl").css({
-			"top": position.top + 20,
-			"left": position.left,
-			"position": "absolute",
-			"width": "350px"
-		}).show();
-		bodyHeight = $('body').height();
-		bodyWidth = $('body').width();
-		Shadow = $("<div style=\" z-index:49;\" id=\"Shadow\"/>").click(function () {
-			$("#departmentTpl").fadeOut(Params.FadeTime);
-			$("#Shadow").remove();
-		}).css({
-			display: "block",
-			"top": 0,
-			"left": 0,
-			"height": bodyHeight,
-			"width": bodyWidth,
-			"position": "absolute"
-		});
-		$('body').append(Shadow);
+		setHash("#userPage/"+Params.UserId);
+		checkHash();
 	});
 	$("#t_fT").click(function () {
 		var hash = jQuery.makeArray(window.location.hash.split("\/"));
@@ -1160,22 +1187,20 @@ jQuery(document).ready(function () {
 					} else {
 						$("#themegencss").attr("href","http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme="+data.theme);
 					}
-					
 					Params.LastLogon = data.lastlogon;
 					$("#t_uI").html($("<span/>").addClass("user ticket_sprite ticket_button").html(data.firstname + " " + data.lastname + " (" + data.username + ")"));
 					checkResponse(data);
-					User_id = data.userid;
-					$("#newTicketUser_id").val(User_id);
-					if (data.opt == 2) {
-						$("#userDepartmentNotify").val(2).attr('checked', 'checked');
+					Params.UserId = data.userid;
+					if(localStorage.tickets = true){
+						localStorage.setItem("userId",data.userid);
 					}
-					$("#userDepartmentName").html(data.departmentname);
+					$("#newTicketUser_id").val(Params.UserId);
 					if (data.departmentname === "") {
 						notice("Error", "No Department");
 					}
 					loadStats();
-					$("#rss1").attr("href", "ticketsrss.php?id=" + User_id);
-					$("#rss2").attr("href", "ticketsrss.php?id=" + User_id + "&bookmark=1");
+					$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
+					$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
 					if (window.location.hash.length > 1) {
 						updateTickets();
 						//window.onpopstate = function(event) {checkHash();Params.popChange = true;}; //Building in support for browsers that do not support it
@@ -1200,7 +1225,7 @@ jQuery(document).ready(function () {
 	$("#userDepartmentSelect").change(function () {
 		jQuery.post(uri + "ajax/login.php", {
 			department_id: $("#userDepartmentSelect option:selected").val(),
-			user_id: User_id
+			user_id: Params.UserId
 		}, function () {
 			$("#userDepartmentName").empty().html($("#userDepartmentSelect option:selected").text());
 			notice("Notice", "Welcome to the " + $("#userDepartmentSelect option:selected").text() + " Department", false);
@@ -1209,19 +1234,7 @@ jQuery(document).ready(function () {
 	$("#closeNotify").click(function () {
 		$("#notifyTpl").fadeOut(Params.FadeTime);
 	});
-	$("#userDepartmentNotify").click(function () {
-		if ($(this).val() == 1) {
-			$(this).val(2);
-		} else {
-			$(this).val(1);
-		}
-		jQuery.post(uri + "ajax/login.php", {
-			user_id: User_id,
-			opt: $(this).val()
-		}, function (data) {
-			checkResponse(data);
-		}, "json");
-	});
+
 	$('#ReAssignBtn').click(function () {
 		var reassignVal = $("#reassignTicketdialog").find("#TicketAssign").val();
 		$.fn.colorbox.close();
