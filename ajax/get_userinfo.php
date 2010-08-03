@@ -41,6 +41,28 @@ FROM
 WHERE 
 	id=".$_GET["userId"]
 ,false,"assoc");
+$json["userInfo"]["tickets"] = $db->Query("
+SELECT
+	dm.department_id,
+	dm.notify,
+	d.name AS departmentName
+FROM 
+	tickets.department_members AS dm 
+JOIN
+	department AS d
+ON 
+	(d.id=dm.department_id) 
+WHERE 
+	user_id=".$_GET["userId"]
+,false,"assoc");
+$json["userInfo"]["tickets"]["altEmail"] = $db->Query("
+SELECT
+	email
+FROM 
+	tickets.alt_email 
+WHERE 
+	user_id=".$_GET["userId"]
+,false,"row");
 $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
 $monthLables = array();
 for($a=1;$a<13;$a++){

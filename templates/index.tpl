@@ -53,10 +53,8 @@
 <div id="generic" class="ui-helper-hidden">{include file="generic.tpl"}</div>
 
 <div id="blankTpl" class="ui-helper-hidden">{include file="blank.tpl"}</div>
-<div id="departmentTpl" class="ui-helper-hidden" style="z-index:50;overflow:hidden;">{include file="department.tpl"}</div>
 <div id="notifyTpl" style="position:absolute" class="ui-helper-hidden">{include file="notify.tpl"}</div>
 <div id="statisticsTpl" style="position:absolute" class="ui-helper-hidden">{include file="statistics.tpl"}</div>
-<div id="storage" class="ui-helper-hidden"></div>
 <div id="notifyArea" style="width:0px;" class=""></div>
 <div id="statusBar" style="position:absolute;bottom:0;left:0;width:100%">{include file="status_bar.tpl"}</div>
 </body>
