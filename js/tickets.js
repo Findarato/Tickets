@@ -764,14 +764,14 @@ function loadUserPage(userId){
 						.append(
 							$("<div/>",{"class":"corners-bottom-2 corners-top-2 border-all-B-1 color-B-1",css: {"display":"inline-block","width":"auto"}})
 								.append(
-									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"1px","margin":"2px","z-index":"3"},"class":"font-Y ",html:"Yes"})
+									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y ",html:"Yes"})
 								)
 								.append(
-									$("<div>",{id:"unfollow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"1px","margin":"2px","z-index":"3"},"class":"font-Y",html:"No"})
+									$("<div>",{id:"unfollow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y",html:"No"})
 								)
 						)
 						.append(
-							$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","z-index":"0","width":"25px","padding":"1px","height":"14px"},"class":"font-Y corners-bottom-2 corners-top-2 border-all-K-1 fuzzyoutlineBlack"})
+							$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","width":"25px","padding":"0","height":"20px","color":"rgba(0,0,0,0)"},"class":"font-Y corners-bottom-2 corners-top-2 border-all-K-1 fuzzyoutlineBlack"})
 						)
 					)
 					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
@@ -845,10 +845,10 @@ function loadUserPage(userId){
 
 		if(data.userInfo.tickets.notify==2){ //1 = following. 0,2,nothing = not following
 			loc = Tlb.find("#follow").position();
-			Tlb.find("#followUnfollowHighlight").css({"top":loc.top+3,"left":loc.left+5}).show();
+			Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5}).html("Yes").show();
 		} else {
 			loc = Tlb.find("#unfollow").position();
-			Tlb.find("#followUnfollowHighlight").css({"top":loc.top+3,"left":loc.left+5}).show();
+			Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5}).html("No").show();
 		}
 
 		
@@ -857,11 +857,11 @@ function loadUserPage(userId){
 	
 	Tlb.find("#follow").click(function () {	jQuery.post(uri + "ajax/login.php", {user_id: Params.UserId,opt: 2}, function (data) {checkResponse(data);
 		loc = Tlb.find("#follow").position();
-		Tlb.find("#followUnfollowHighlight").css({"top":loc.top+3,"left":loc.left+5});
+		Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5});
 	}, "json");	});
 	Tlb.find("#unfollow").click(function () {	jQuery.post(uri + "ajax/login.php", {user_id: Params.UserId,opt: 1}, function (data) {checkResponse(data);
 		loc = Tlb.find("#unfollow").position();
-		Tlb.find("#followUnfollowHighlight").css({"top":loc.top+3,"left":loc.left+5});
+		Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5});
 	}, "json");	});
 }
 function checkHash() {

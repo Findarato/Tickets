@@ -7,15 +7,13 @@ section,article{display:block;}
 
 a, font span,.custom {
 	text-decoration:none;
-	font-family:'Cantarell', arial, sans-serif;
 	font-size:12px;
 }
 a:hover{ text-decoration:underline;}
 body {
-	text-align: center;
 	height:100%;
-	font-family:'Cantarell', arial, sans-serif;
 	font-size:12px;
+	font-family:'Cantarell', arial, sans-serif;
 }
 .whiteBackground{background-color:#FFF;}
 .right{float:right;}
