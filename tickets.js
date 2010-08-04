@@ -746,7 +746,7 @@ function loadUserPage(userId){
 				.append( $("<div>",{id:"userName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Username: "})	)
 				.append( $("<div>",{id:"realName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Real Name: "})	)
 				.append( $("<div>",{id:"joinedOn","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Joined On: "})	)
-				.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Type: "})	)
+			//	.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Type: "})	)
 				.append( $("<div>",{id:"totalTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Tickets Created: "})	)
 				.append( $("<div>",{id:"openTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Tickets: "})	)
 				.append( $("<div>",{id:"avgTicketsTime","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Average Ticket Duration: "})	)
@@ -790,6 +790,7 @@ function loadUserPage(userId){
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
 		Tlb.find("#userType").append(data.userInfo.type);
+		Tlb.find("#userSecondaryEmail").val(data.userInfo.tickets.altEmail);
 		Tlb
 			.find("#totalTickets")
 				.append(data.tickets.byMe)
@@ -862,6 +863,22 @@ function loadUserPage(userId){
 		loc = Tlb.find("#unfollow").position();
 		Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5});
 	}, "json");	});
+	Tlb.find("#userSecondaryEmail").blur(function () {
+		jQuery.post(uri + "ajax/login.php", {
+			"altEmail": $(this).val()
+		}, function (data) {
+			checkResponse(data);
+			if (data.error.length === 0) {
+				$("#depOk").show();
+				$("#depError").hide();
+			} else {
+				$("#depOk").hide();
+				$("#depError").show();
+			}
+		}, "json");
+
+	});
+
 }
 function checkHash() {
 	var hash = getHashArray();
@@ -962,21 +979,7 @@ jQuery(document).ready(function () {
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
-	$("#userSecondaryEmail").blur(function () {
-		jQuery.post(uri + "ajax/login.php", {
-			"altEmail": $(this).val()
-		}, function (data) {
-			checkResponse(data);
-			if (data.error.length === 0) {
-				$("#depOk").show();
-				$("#depError").hide();
-			} else {
-				$("#depOk").hide();
-				$("#depError").show();
-			}
-		}, "json");
 
-	});
 	$("#depCancel").click(function () {
 		jQuery.post(uri + "ajax/login.php", {
 			"altEmail": "clear",
@@ -1057,6 +1060,21 @@ jQuery(document).ready(function () {
 
 		);
 	});
+	$('#topperNewBug').colorbox({
+		iframe: false,
+		transition: "none",
+		open: false,
+		inline: true,
+		href: "#newBugdialog",
+		title: "<font class=\"white\">Report a Bug</font>"
+	}, function () {
+		$("#newTicketType").val("new");
+		$("#newTicketTitle,#newTicketDescription").val("");
+		$("#newTicketFileList").empty();
+		$(".Ticketform").css("background-color", "");
+
+	});
+	
 	$('#topperSearch').colorbox({
 		"transition": "none",
 		"open": false,
