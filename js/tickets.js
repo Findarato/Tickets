@@ -369,9 +369,6 @@ function loadTicketBody(inputData, container) {
 				);
 		container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketList/location/" + data.location_id).addClass("nolink library-link ").html(data.locationName));
 	}
-	if(bug){
-
-	}
 	container.find("#ticketBody").html(data.description);
 	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketList/category/" + data.category).addClass("nolink ticket_button ticket_sprite gear ").html(data.category));
 	container
@@ -987,6 +984,7 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
+	localStorage.tickets = "true";
 	if(Params.UserId == 0 || !localStorage.userId){
 		Params.UserId = $("#userIdHolder").text();
 		localStorage.userId = Params.UserId;
@@ -1182,6 +1180,7 @@ jQuery(document).ready(function () {
 		var hash = jQuery.makeArray(window.location.hash.split("\/"));
 		var display = $("#imgBookmark");
 		if (hash[0] == "#ticket") {
+			localStorage.removeItem("TicketId"+Params.Ticket_id);
 			if (display.css("display") == "block" || display.css("display") == "inline") { //Add bookmark
 				$.get(uri + "ajax/tickets.php", {
 					type: "favorite",
@@ -1191,16 +1190,6 @@ jQuery(document).ready(function () {
 					populateAllTickets("f");
 					display.toggle();
 					notice("Notice", data.message, false);
-					/* work on me
-					if(localStorage.tickets == "true"){
-						//alert(localStorage.getItem("TicketId" + Params.Ticket_id));
-						data = $.parseJSON(localStorage.getItem("TicketId" + Params.Ticket_id));
-						alert(data.favorite);
-						if(data.favorite){	data.favorite = 0;	}
-						
-						localStorage.setItem("TicketId"+Params.Ticket_id,JSON.stringify(data));
-					}
-					*/
 				}, "json");
 				
 			} else { //remove bookmark
@@ -1212,15 +1201,6 @@ jQuery(document).ready(function () {
 					populateAllTickets("f");
 					display.toggle();
 					notice("Notice", data.message, false);
-					/* work on me
-					if(localStorage.tickets == "true"){
-						alert(localStorage.getItem("TicketId" + Params.Ticket_id));
-						data = $.parseJSON(localStorage.getItem("TicketId" + Params.Ticket_id));
-						if(data.favorite){	data.favorite = 1;	}
-						localStorage.setItem("TicketId"+Params.Ticket_id,JSON.stringify(data));
-					}
-					*/
-
 				}, "json");
 			}
 		} else {
