@@ -38,7 +38,11 @@
 			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Closed On</span></div>
 			       	<div class="left "><span class="font-X" id="ticketClosedOnDate"></span></div>
 		        </div>
-		        <div style="clear:both">
+		        <div id="projectBox" style="clear:both">
+			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Project</span></div>
+			       	<div class="left "><span class="font-X" id="ticketProject"></span></div>
+		        </div>
+		        <div id="categoryBox" style="clear:both">
 			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Category</span></div>
 			       	<div class="left "><span class="font-X" id="ticketCategory"></span></div>
 		        </div>
