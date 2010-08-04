@@ -76,6 +76,10 @@
 	}
 	//$a_res = $o_db->Query("SELECT id,name,serial,model,ram_id,os_id,location_id,manufacturer FROM inventory.hardware WHERE os_id='".$_GET["paramater"]."'  ORDER BY name;",false,"assoc");
 	$projects = $db -> Query("SELECT id,name FROM tickets.projects",false,"assoc");
+	$projTemp = array();
+	foreach($projects as $proj){
+		$projTemp[$proj["id"]]=$proj["name"];
+	}
 	if(count($depart)<2){$depart[1]="None!";}
 	$smarty -> assign('altEmail',$altE);
 	$smarty -> assign('notifyCheck',$checkN);
@@ -85,7 +89,7 @@
 	$smarty -> assign('department',$department);
 	$smarty -> assign('cate',$cate);
 	$smarty -> assign('assign',$dep);
-	$smarty -> assign('projects',$projects);
+	$smarty -> assign('projects',$projTemp);
 	$smarty -> assign('type',"new");
 	$smarty -> assign('priority',array(0=>"Very Low",1=>"Low",2=>"Tolerable",3=>"Important",4=>"Mission Critical"));
 	$smarty -> display('index.tpl');
