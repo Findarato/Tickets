@@ -34,7 +34,8 @@
 			<span style="font-size: 150%; line-height: normal;">Known Issues</span>
 			<ol>
 				<li><strike>Large Graphs are still not working properly</strike></li>
-				<li>Some themes do not work 100%</li>
+				<li>Searching By project does not work</li>
+				<li><strike>Some themes do not work 100%</strike></li>
 				<li>Going directly to the user Page in Firefox can result in odd placement of the yes/no selector.  This is a result of how Firefox renders report @font-face fonts.</li>
 				<li>There are no page numbers, nor any way to show more then the default amount of tickets in the list view.</li>
 				<li><strike>Problem or bug icons do not show up in the ticket list.</strike> No longer relative</li> 
