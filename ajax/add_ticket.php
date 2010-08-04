@@ -16,23 +16,10 @@ if($_SESSION){
 		@$usr = new User();
 	}
 }
-/**
- * 
- * newTicketAssign	1
-newTicketBugTrouble	2
-newTicketCategory	1
-newTicketDescription	asdfasdf
-newTicketPriority	0
-newTicketTicket_id	
-newTicketTitle	test
-newTicketType	new
-newTicketUser_id	1321
- * 
- */
 if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
 	if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123){$_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";}
-		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		if($_GET["newTicketBugTrouble"] == 1){
+			$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 			$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
 			VALUES(
 					"'.$_GET["newTicketUser_id"].'",
@@ -64,8 +51,8 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 		}	
 			//echo $db->Lastsql;
 		$response["newTicketId"] = $ticketId = $db->Lastid;
-		$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);
-		$locationEmail= $db->Fetch("row");
+	//	$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);
+		//$locationEmail= $db->Fetch("row");
 		$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category FROM tcview WHERE id=".$ticketId);
 		$res1 = $db->Fetch("assoc");
 		$users = getUsers();
@@ -83,7 +70,7 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 		$smarty -> assign('showRes',"0");
 		$body = $smarty->fetch($tempName);
 		if(isset($respon)){	$smarty -> assign('respon',$respon);}
-		if($_GET['nagiosTicket']!=881234123 || !isset($_GET['nagiosTicket']) || $_GET['newTicketType']=="new"){
+		if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']!=881234123 || !isset($_GET['nagiosTicket']) || $_GET['newTicketType']=="new"){
 			if($_GET["newTicketBugTrouble"]==2){
 			//	generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail,false,true);	
 			}else{
