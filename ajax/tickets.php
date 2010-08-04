@@ -30,22 +30,22 @@ function getWhereClause($user_id,$type){
 	if($user_id!=0){
 		switch($type){
 			case "open":
-				$sqlw = "open=1 AND assigned_id=$user_id";
+				$sqlw = "open=1 AND tickettype_id=1 AND assigned_id=$user_id";
 			break;
 			case "closed":
-				$sqlw = "open=0 AND (assigned_id=$user_id OR created_by_id=".$user_id.")"; 
+				$sqlw = "open=0 AND tickettype_id=1 AND (assigned_id=$user_id OR created_by_id=".$user_id.")"; 
 			break;
 			case "assigned":
-				$sqlw = "open=1 AND created_by_id=$user_id";
+				$sqlw = "open=1 AND tickettype_id=1 AND created_by_id=$user_id";
 			break;
 			case "favorite":
-				$sqlw = "open=1 AND assigned_by_id=$user_id";
+				$sqlw = "open=1 AND tickettype_id=1 AND assigned_by_id=$user_id";
 			break;
 			case "Odepartment":
-				$sqlw = "open=1 AND assigned_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
+				$sqlw = "open=1 AND tickettype_id=1 AND assigned_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
 			break;
 			case "Adepartment":
-				$sqlw = "open=1 AND created_by_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
+				$sqlw = "open=1 AND tickettype_id=1 AND created_by_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
 			break;
 			default:break;
 		}
