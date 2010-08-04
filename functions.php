@@ -287,7 +287,7 @@ function rekeyArray($array){
 	}
 	return $tempArray;
 }
-function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$closed=false,$location=false,$reply=false){
+function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$closed=false,$location=false,$reply=false,$bug=false){
 	$from = "Tickets@lapcat.org";
 	$headers = "From: $from". "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
@@ -305,11 +305,21 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 		$createdMessageLocation = "The Location ticket(".$ticketTitle.") is now Closed";
 		$assignedMessage = "$ticketTitle is now Closed";
 		$defaultMessage = "Ticket ".$ticketTitle. " is now Closed";
+		if($bug){
+			$createdMessage = "The Department Bug Report (".$ticketTitle.") is now Closed";
+			$createdMessageLocation = "The Location Bug Report (".$ticketTitle.") is now Closed";
+			$assignedMessage = "$ticketTitle is now Closed";
+		}
 	}else{
 		$createdMessage = "There is a new ticket ($ticketTitle) in your Department";
 		$createdMessageLocation = "There is a new ticket ($ticketTitle) for this Location";
 		$assignedMessage = "There is a new ticket ($ticketTitle) assigned to you";
 		$defaultMessage = "$ticketTitle is now assigned to you";
+		if($bug){
+			$createdMessage = "There is a new Bug Report ($ticketTitle) in your Department";
+			$createdMessageLocation = "There is a new Bug Report ($ticketTitle) for this Location";
+			$assignedMessage = "There is a new Bug Report ($ticketTitle) assigned to you";
+		}
 	}
 	if($location){
 		if($reply){
@@ -319,7 +329,8 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 	}
 	foreach ($idsToEmail as $key=>$ite){
 		$email = id2Email($ite); 
-		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets",$body,$headers);
+		if($reply){
+			mail($email,"There has been a reply to a one of your tickets",$body,$headers);
 		}else{
 			switch($key){
 				case "created":

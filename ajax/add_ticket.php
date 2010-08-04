@@ -30,7 +30,7 @@ newTicketUser_id	1321
  * 
  */
 if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
-	if($_GET['nagiosTicket']==881234123){$_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";}
+	if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123){$_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";}
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		if($_GET["newTicketBugTrouble"] == 1){
 			$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
@@ -62,32 +62,34 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 		}else{
 			$response["error"] = "There was an error on line 61 of add_ticket";
 		}	
-			echo $db->Lastsql;
-			
-			$response["newTicketId"] = $ticketId = $db->Lastid;
-			$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);
-			$locationEmail= $db->Fetch("row");
-			$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category FROM tcview WHERE id=".$ticketId);
-			$res1 = $db->Fetch("assoc");
-			$users = getUsers();
-			$userName = ucwords($users[$res1['created_by_id']]['firstname'])." ".ucwords($users[$res1['created_by_id']]['lastname']);
-			$userName2 = ucwords($users[$res1['assigned_id']]['firstname'])." ".ucwords($users[$res1['assigned_id']]['lastname']);
-			$body = $res1['description'];
-			$smarty -> assign('email_ticket_id',$ticketId);
-			$smarty -> assign('email_created_on',$res1['created_on']);
-			$smarty -> assign('email_assigned_to',$userName2);
-			$smarty -> assign('email_created_by',$userName);
-			$smarty -> assign('email_category',$res1['category']);
-			$smarty -> assign('email_title',$res1['subject']);
-			$smarty -> assign('email_priority',$res1['priority']);				
-			$smarty -> assign('email_description',nl2br($res1['description']));
-			$smarty -> assign('showRes',"0");
-			if(isset($respon)){	$smarty -> assign('respon',$respon);}
-			$body = $smarty->fetch('email.tpl');
-			if($_GET['nagiosTicket']!=881234123 || !isset($_GET['nagiosTicket']) || $_GET['newTicketType']=="new"){
-				generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail);	
+			//echo $db->Lastsql;
+		$response["newTicketId"] = $ticketId = $db->Lastid;
+		$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);
+		$locationEmail= $db->Fetch("row");
+		$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category FROM tcview WHERE id=".$ticketId);
+		$res1 = $db->Fetch("assoc");
+		$users = getUsers();
+
+		$userName = ucwords($users[$res1['created_by_id']]['firstname'])." ".ucwords($users[$res1['created_by_id']]['lastname']);
+		$userName2 = ucwords($users[$res1['assigned_id']]['firstname'])." ".ucwords($users[$res1['assigned_id']]['lastname']);		
+
+		if($_GET["newTicketBugTrouble"]==1){
+			$tempName = "email.tpl";
+		}else{
+			$tempName = "emailBug.tpl";
+		}
+		$smarty -> assign('email_ticket_id',$ticketId);
+		$smarty -> assign('email_title',$res1['subject']);
+		$smarty -> assign('showRes',"0");
+		$body = $smarty->fetch($tempName);
+		if(isset($respon)){	$smarty -> assign('respon',$respon);}
+		if($_GET['nagiosTicket']!=881234123 || !isset($_GET['nagiosTicket']) || $_GET['newTicketType']=="new"){
+			if($_GET["newTicketBugTrouble"]==2){
+			//	generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail,false,true);	
+			}else{
+				generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail);		
 			}
-				
+		}		
 		
 		/** Achievements area */	
 		//	$response['achievements'] = $usr->F_CheckAchievements(array(1,2,3,4));

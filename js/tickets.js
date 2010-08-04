@@ -339,12 +339,18 @@ function loadTicketBody(inputData, container) {
 	container.find("#ticketTitle").html(data.subject);
 	container.find("#ticketDate").html(data.created_on);
 	container.find("#ticketBugId").html("Bug ID:");
+	container.find("#projectBox").show()
+	container.find("#categoryBox").hide();
+	container.find("#ticketProject").html($("<a/>",{"class":"fakelink ticket_button ticket_sprite task-arrow",href:"#ticketList/project/"+data.project_id,html:data.project_name}))
 	if(!bug){
+		container.find("#projectBox").hide()
+		container.find("#categoryBox").show();
 		container.find("#ticketBugId").html("Ticket ID:");
 		container.find("#dueOnBox").show();
 		container.find("#assignedToBox").show();
 		container.find("#locationBox").show();
 		container.find("#lockBox").show();
+		
 
 		if (data.timeRemaining > 0) { //ticket is over due.
 			container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
@@ -361,7 +367,10 @@ function loadTicketBody(inputData, container) {
 					$("<a/>",{"class":"nolink ",html:$("<div/>",{css:{"display":"inline-block"},"class":"ticket_sprite information"})})
 						.attr("href", "#userPage/" + data.assigned_id)
 				);
-		container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketList/location/" + data.locationId).addClass("nolink library-link ").html(data.locationName));
+		container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketList/location/" + data.location_id).addClass("nolink library-link ").html(data.locationName));
+	}
+	if(bug){
+
 	}
 	container.find("#ticketBody").html(data.description);
 	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketList/category/" + data.category).addClass("nolink ticket_button ticket_sprite gear ").html(data.category));
@@ -718,6 +727,7 @@ function loadUserPage(userId){
 	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
 	var localUser = false;
 	if (Params.UserId == userId){localUser = true;}
+	if (localStorage.Userid == userId){localUser = true;}
 
 	$("<div/>",{id:"userInfoBox","class":"",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
 		.append(
@@ -735,7 +745,7 @@ function loadUserPage(userId){
 						.append(
 							$("<div/>",{
 								html:"ID:"+userId,
-								css:{"font":"22px 'Droid Sans', Arial, sans-serif","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "22px"},
+								css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "25px"},
 								"class":"font-bold font-X rotate90 transformTL"
 							})
 						)
@@ -842,42 +852,69 @@ function loadUserPage(userId){
 						
 				);
 		Tlb.find("#openBugs").append(data.bugs.byMeOpen);
-
-		if(data.userInfo.tickets.notify==2){ //1 = following. 0,2,nothing = not following
-			loc = Tlb.find("#follow").position();
-			Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5}).html("Yes").show();
-		} else {
-			loc = Tlb.find("#unfollow").position();
-			Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5}).html("No").show();
-		}
-
-		
-	});
-	
-	
-	Tlb.find("#follow").click(function () {	jQuery.post(uri + "ajax/login.php", {user_id: Params.UserId,opt: 2}, function (data) {checkResponse(data);
-		loc = Tlb.find("#follow").position();
-		Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5});
-	}, "json");	});
-	Tlb.find("#unfollow").click(function () {	jQuery.post(uri + "ajax/login.php", {user_id: Params.UserId,opt: 1}, function (data) {checkResponse(data);
-		loc = Tlb.find("#unfollow").position();
-		Tlb.find("#followUnfollowHighlight").css({"top":loc.top,"left":loc.left+5});
-	}, "json");	});
-	Tlb.find("#userSecondaryEmail").blur(function () {
-		jQuery.post(uri + "ajax/login.php", {
-			"altEmail": $(this).val()
-		}, function (data) {
-			checkResponse(data);
-			if (data.error.length === 0) {
-				$("#depOk").show();
-				$("#depError").hide();
-			} else {
-				$("#depOk").hide();
-				$("#depError").show();
+		if (localUser) {
+			if (data.userInfo.tickets.notify == 2) { //1 = following. 0,2,nothing = not following
+				loc = Tlb.find("#follow").position();
+				Tlb.find("#followUnfollowHighlight").css({
+					"top": loc.top,
+					"left": loc.left + 5
+				}).html("Yes").show();
 			}
-		}, "json");
-
+			else {
+				loc = Tlb.find("#unfollow").position();
+				Tlb.find("#followUnfollowHighlight").css({
+					"top": loc.top,
+					"left": loc.left + 5
+				}).html("No").show();
+			}
+			
+		}
 	});
+	
+	if (localUser) {
+		Tlb.find("#follow").click(function(){
+			jQuery.post(uri + "ajax/login.php", {
+				user_id: Params.UserId,
+				opt: 2
+			}, function(data){
+				checkResponse(data);
+				loc = Tlb.find("#follow").position();
+				Tlb.find("#followUnfollowHighlight").css({
+					"top": loc.top,
+					"left": loc.left + 5
+				});
+			}, "json");
+		});
+		Tlb.find("#unfollow").click(function(){
+			jQuery.post(uri + "ajax/login.php", {
+				user_id: Params.UserId,
+				opt: 1
+			}, function(data){
+				checkResponse(data);
+				loc = Tlb.find("#unfollow").position();
+				Tlb.find("#followUnfollowHighlight").css({
+					"top": loc.top,
+					"left": loc.left + 5
+				});
+			}, "json");
+		});
+		Tlb.find("#userSecondaryEmail").blur(function(){
+			jQuery.post(uri + "ajax/login.php", {
+				"altEmail": $(this).val()
+			}, function(data){
+				checkResponse(data);
+				if (data.error.length === 0) {
+					$("#depOk").show();
+					$("#depError").hide();
+				}
+				else {
+					$("#depOk").hide();
+					$("#depError").show();
+				}
+			}, "json");
+			
+		});
+	}
 
 }
 function checkHash() {
