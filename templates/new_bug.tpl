@@ -11,10 +11,7 @@
 							<td style="text-align:left;"><span class="font-X">Title of Bug:</span><input type="text" name="newTicketTitle" id="newTicketTitle"  class=" Ticketform " maxlength="35" /></td>
 						</tr>
 						<tr>
-							<td style="text-align:left;"><span class="font-X">Category:</span><select class=" Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate }</select></td>
-						</tr>
-						<tr>
-							<td style="text-align:left;"><span class="font-X">Project:</span><select class=" Ticketform " id="newTicketAssign" name="newTicketAssign"><option value="">Select Project</option>{html_options options=$projects }</select></td>
+							<td style="text-align:left;"><span class="font-X">Project:</span><select class=" Ticketform " id="newTicketProject" name="newTicketProject"><option value="">Select Project</option>{html_options options=$projects }</select></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Priority:</span><select class=" Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
@@ -24,7 +21,7 @@
 						</tr>
 						<tr>
 							<td>
-								<INPUT type="hidden" id="newTicketBugTrouble" name="newTicketBugTrouble" value="1" >
+								<INPUT type="hidden" id="newTicketBugTrouble" name="newTicketBugTrouble" value="2" >
 								<INPUT type="hidden" id="newTicketUser_id" name="newTicketUser_id" value="{$user_id}" >
 								<INPUT type="hidden" id="newTicketTicket_id" name="newTicketTicket_id"  value="{$ticket_id}" >
 								<INPUT type="hidden" id="newTicketType" name="newTicketType" value="{$type}">
@@ -35,7 +32,7 @@
 			</div>
 			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
 				<a class="button-theme ticketButton font-Y lapcatButton Cancel" id="replyCancelBtn">Cancel</a>
-				<a class="button-theme ticketButton font-Y lapcatButton" id="ticketAddBtn" style="width:75px;">Add Bug</a>
+				<a class="button-theme ticketButton font-Y lapcatButton" id="bugAddBtn" style="width:75px;">Add Bug</a>
 			</div>
 		</div>
 	</div>

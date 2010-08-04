@@ -8,7 +8,7 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIX</span>
-			<span style="font-size: 90%; line-height: normal;" id="version">v.2.13.19.r175</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.14.19.r175</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<ol>
 				<li>Large Graphs are finally working properly again. Not all of the graphs are back in place.</li>
@@ -35,6 +35,7 @@
 			<ol>
 				<li><strike>Large Graphs are still not working properly</strike></li>
 				<li>Some themes do not work 100%</li>
+				<li>Going directly to the user Page in Firefox can result in odd placement of the yes/no selector.  This is a result of how Firefox renders report @font-face fonts.</li>
 				<li>There are no page numbers, nor any way to show more then the default amount of tickets in the list view.</li>
 				<li><strike>Problem or bug icons do not show up in the ticket list.</strike> No longer relative</li> 
 				<li>Going directly to a ticketlist search result can lead to a broken page.</li>
