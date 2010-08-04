@@ -95,9 +95,9 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			break;
 			case "img":
 				if($email){
-					$formated1 = "<img src=\"".$matchOld."\">";
+					$formated1 = "<img src=\"".$matchOld."\" style=\"height:100px;width:100px;display:block;\">";
 				}else{
-					$formated1 = "<a class=\"popImageSmallLink\" href=\"".$matchOld."\"><img src=\"".$matchOld."\" class=\"border-all-B-2 popImageSmall\"></a>";
+					$formated1 = "<div style=\"background-image:url(".$matchOld.")\" class=\"border-all-B-2 popImageSmall\"></div>";
 				}
 				$formated = str_replace("[".$match[0]."=".$matchOld."]", $formated1,$formated);			
 			break;
