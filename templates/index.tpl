@@ -38,7 +38,7 @@
 <div style="height:50px;"></div>
 <div id="wrap" style="width:98%; padding:4px;position:relative;" class="">
 	<div style="min-height:300px;position:absolute;top:3px;left:2px;width:200px;"  class="corners-bottom-2 corners-top-2">
-		{include file="navagation.tpl"} <br> {include file="bugs.tpl"} <br> {include file="stats.tpl"} <br> {include file="features.tpl"} <br> {include file="log.tpl"} 
+		{include file="navagation.tpl"} <br> {include file="bugs.tpl"}<!--<br> {include file="stats.tpl"} <br> {include file="features.tpl"} <br> {include file="log.tpl"} -->
 	</div>
   	<div style="margin-left:220px;" class=" corners-bottom-2 corners-top-2">
 	    <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">{include file="$content"}</div>
@@ -46,6 +46,7 @@
 </div>
 
 <div id="newTicketdialogTpl" class="ui-helper-hidden" title="Create new ticket">{include file="new.tpl"}</div>
+<div id="newBugdialogTpl" class="ui-helper-hidden" title="Create new ticket">{include file="new_bug.tpl"}</div>
 <div id="newReplydialogTpl" class="ui-helper-hidden" title="Reply to Ticket">{include file="reply.tpl"}</div>
 <div id="newsearchdialogTpl" class="ui-helper-hidden">{include file="search.tpl"}</div>
 <div id="reassignTpl" class="ui-helper-hidden" title="Reassign Ticket">{include file="reassign.tpl"}</div>
@@ -57,6 +58,5 @@
 <div id="notifyTpl" style="position:absolute" class="ui-helper-hidden">{include file="notify.tpl"}</div>
 <div id="statisticsTpl" style="position:absolute" class="ui-helper-hidden">{include file="statistics.tpl"}</div>
 <div id="notifyArea" style="width:0px;" class=""></div>
-<div id="statusBar" style="position:absolute;bottom:0;left:0;width:100%">{include file="status_bar.tpl"}</div>
 </body>
 </html>

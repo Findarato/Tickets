@@ -58,7 +58,7 @@
 			$db->Query("DELETE FROM alt_email WHERE user_id=".$usr->User_id." AND email='".$db->Clean($_POST["oldAltEmail"])."' LIMIT 1;");
 			$response['message']="Email address cleared";
 		}else{
-			$db->Query("INSERT INTO alt_email (user_id,email) VALUES(".$usr->User_id.",'".$db->Clean($_POST["altEmail"])."');");
+			$db->Query("REPLACE INTO alt_email (user_id,email) VALUES(".$usr->User_id.",'".$db->Clean($_POST["altEmail"])."');");
 			if(count($db->Error)==2){$db->Query("UPDATE alt_email SET email=".$db->Clean($_POST["altEmail"])." WHERE user_id=".$usr->User_id.";");}
 			$response['message']="Update Successful";
 		}
