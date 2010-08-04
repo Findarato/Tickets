@@ -12,4 +12,5 @@
 	<div class="left font-Y font-bold ticket_button fakelink" id="t_fT" style="width:auto" title="Toggle Bookmark"><span class="ticket_button ticket_sprite bookmark">Bookmark</span></div>
 	<div class="left font-Y font-bold ticket_button fakelink" id="replyToggle" style="width:auto" title="Toggle Replies"><span class="ticket_button ticket_sprite eye">Toggle Replies</span></div>
 	<div class="right font-Y font-bold ticket_button "><a class="ticket_link" id="Version" href="#updateNotes" style="margin:5px;padding:2px;">Live Tickets Update XIII</a></div>
+<div id="userIdHolder" style="display:none">{$userId}</div>
 </div>
