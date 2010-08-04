@@ -250,9 +250,23 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 .popImageSmall{
 	height:100px;
 	width:100px;
-	position:static;
 	display:block;
 	float:left;
+	-webkit-background-size: 100px; 
+	-o-background-size: 100px;
+	-moz-background-size:100px;
+	-webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+}
+.popImageSmall:hover{
+	height:300px;
+	width:300px;
+	z-index:100;
+	-webkit-background-size: 300px; 
+	-o-background-size: 300px;
+	-moz-background-size:300px
+
 }
 .popImageLarge{
 	height:auto;

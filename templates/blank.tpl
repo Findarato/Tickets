@@ -13,7 +13,7 @@
 			<ol>
 				<li>Large Graphs are finally working properly again. Not all of the graphs are back in place.</li>
 				<li>All ticket lists, and responses should now display in the same order on all browsers</li>
-				<li>Departments dropdown no longer looks cluttered.  This was introduced with the last update.</li>
+				<li>Departments dropdown no longer looks cluttered.  This was introduced with the last update. This has been solved by moving the adjustments to a new user page.</li>
 			</ol>
 			<br>
 			<br>

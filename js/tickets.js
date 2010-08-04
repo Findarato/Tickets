@@ -250,7 +250,6 @@ function loadResponsesBody(ticketId, container, page) {
 			});
 			$("#replyticketid").val(ticketId);
 			cnt++;
-			$(".popImageSmallLink").colorbox({transition: "none",open: false,photo:true,title: "<span class=\"white\">Zoomed Image</span>"});
 		});
 		container.html(resCont.html());
 	});
@@ -1330,24 +1329,6 @@ jQuery(document).ready(function () {
 	$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	//Live items
 	//Ticket display live items
-	/*
-	$(".popImageSmall").live("click",function(){
-		pis = $(this);
-		smallH = pis.outerHeight();
-		smallW = pis.outerWidth()
-		//if(!pis.hasClass("box_transition")){pis.addClass("box_transition");} // some quick assurance that it will transition
-		pis.toggleClass("popImageLarge");
-		if(pis.hasClass("popImageLarge")){
-			pis
-				.parent()
-					.append(
-						$("<div/>",{id:"placeholderpis","class":"",css:{"position":"static","display":"block","visability":"hidden","height":smallH,"width":smallW}})
-					);
-		}else{
-			$("#placeholderpis").replaceWith();
-		}
-	});
-	*/
 	$(".actionButtons").live("click", function () {
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
@@ -1364,12 +1345,6 @@ jQuery(document).ready(function () {
 		});
 	});
 	//Global page live 
-	/*
-	$("section [contenteditable|=true]").live("focus",function(){
-		offset = $(this).offset();
-		$("<div/>",{id:"saveEdit",css:{"top":offset.top+$(this).innerHeight(),"left":offset.left,"position":"absolute"},"class":"button-theme fg-button ticketButton font-Y lapcatButton openTicket actionButtons closeLink"}).html("save").appendTo("body");
-	});
-	*/
 	$(":text").live("click", function () {
 		$(this).select();
 		$(this).focus();
