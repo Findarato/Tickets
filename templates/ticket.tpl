@@ -15,7 +15,7 @@
 						<div class="left ticket_sprite bug" id="imgTicketBug" style="height:15px;display:none;" title="Bug Report"></div>
 					</div>
 				</div>
-			</div>
+			</div> 
 			<div class="color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
 		        <div id="lockBox" style="position:absolute;:1px;right:0px;clear:both;display:none">
 					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons holdLink" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
@@ -23,40 +23,40 @@
 					<!--<div class="button-purple fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
 				</div>
 				<div style="clear:both">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span id="ticketBugId" class="font-X" >Ticket ID:</font></div>
-			       	<div class="left "><span class="font-X" id="ticketId"></font></div>
+			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span id="ticketBugId" class="font-X" >Ticket ID:</span></div>
+			       	<div class="left "><span class="font-X" id="ticketId"></span></div>
 		        </div>
 		        <div style="clear:both">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Opened On</font></div>
-			       	<div class="left "><span class="font-X" id="ticketDate"></font></div>
+			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Opened On</span></div>
+			       	<div class="left "><span class="font-X" id="ticketDate"></span></div>
 		        </div>
 		        <div id="dueOnBox" style="clear:both;display:none;">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Due On</font></div>
-			       	<div class="left "><span class="font-X" id="ticketDueDate"></font></div>
+			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Due On</span></div>
+			       	<div class="left "><span class="font-X" id="ticketDueDate"></span></div>
 		        </div>
 		        <div style="clear:both;display:none" class="closedTicket" id="ticketClosedOn">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Closed On</font></div>
-			       	<div class="left "><span class="font-X" id="ticketClosedOnDate"></font></div>
+			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Closed On</span></div>
+			       	<div class="left "><span class="font-X" id="ticketClosedOnDate"></span></div>
 		        </div>
 		        <div style="clear:both">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Category</font></div>
-			       	<div class="left "><span class="font-X" id="ticketCategory"></font></div>
+			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Category</span></div>
+			       	<div class="left "><span class="font-X" id="ticketCategory"></span></div>
 		        </div>
 		        <div style="clear:both;height:16px;">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Created By</font></div>
-			       	<div class="left " style="height:16px;"><span class="font-X" id="ticketCreatedBy" style="height:16px;"></font></div>
+			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Created By</span></div>
+			       	<div class="left " style="height:16px;"><span class="font-X" id="ticketCreatedBy" style="height:16px;"></span></div>
 		       </div>
 				<div id="assignedToBox" style="clear:both;display:none;">
-			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Assigned To</font></div>
-			       	<div class="left" ><span class="font-X" id="ticketAssignedTo"></font></div>
+			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Assigned To</span></div>
+			       	<div class="left" ><span class="font-X" id="ticketAssignedTo"></span></div>
 		       </div> 
 				<div style="clear:both">
-			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Priority</font></div>
-			       	<div class="left" ><span class="font-X" id="ticketPriority"></font></div>
+			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Priority</span></div>
+			       	<div class="left" ><span class="font-X" id="ticketPriority"></span></div>
 				</div>
 				<div id="locationBox" style="clear:both;display:none;">
-			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Location</font></div>
-			       	<div class="left" ><span class="font-X" id="ticketLocation"></font></div>
+			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Location</span></div>
+			       	<div class="left" ><span class="font-X" id="ticketLocation"></span></div>
 				</div>
 				<section id="ticketDataBox" style="display:block;padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:385px;overflow:auto;vertical-align:top; clear:both">
 					<article id="ticketBody" style="display:block;"></article>
@@ -74,7 +74,7 @@
 		<div class="corners-top-2 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
 			<div class="droidSans font-X head message_head corners-top-2 color-B-2 border-all-D-1" id="replyTitleArea" style="height:16px;">
 				<div style="width:100%">
-					<font id="replyareaTitle" style="margin-left:10px;margin:5px;">Replies (0)</font>
+					<span id="replyareaTitle" style="margin-left:10px;margin:5px;">Replies (0)</span>
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 			</div>
