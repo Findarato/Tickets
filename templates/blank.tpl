@@ -8,12 +8,13 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
 			<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XIX</span>
-			<span style="font-size: 90%; line-height: normal;" id="version">v.2.14.19.r175</span>
+			<span style="font-size: 90%; line-height: normal;" id="version">v.2.14.20.r211</span>
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<ol>
 				<li>Large Graphs are finally working properly again. Not all of the graphs are back in place.</li>
 				<li>All ticket lists, and responses should now display in the same order on all browsers</li>
 				<li>Departments dropdown no longer looks cluttered.  This was introduced with the last update. This has been solved by moving the adjustments to a new user page.</li>
+				<li>Ticket email was showing too much information thus making looking at tickets less important.  This has been fixed</li>
 			</ol>
 			<br>
 			<br>

@@ -987,8 +987,12 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
+	if(Params.UserId == 0 || !localStorage.userId){
+		Params.UserId = $("#userIdHolder").text();
+		localStorage.userId = Params.UserId;
+	}
 	populateAllBugs();
-	if(localStorage.userId){Params.UserId = localStorage.userId;}
+	//if(localStorage.userId){Params.UserId = localStorage.userId;}
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
 		localStorage.clear();

@@ -81,6 +81,8 @@
 		$projTemp[$proj["id"]]=$proj["name"];
 	}
 	if(count($depart)<2){$depart[1]="None!";}
+
+	$smarty -> assign('userId',$usr->User_id);
 	$smarty -> assign('altEmail',$altE);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
