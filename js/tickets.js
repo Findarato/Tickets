@@ -330,7 +330,7 @@ function loadTicketBody(inputData, container) {
 		}
 	}else{	notice("Debug",inputData+"<br>Error: 100382B",true); }
 	
-	if(data.tickettype_id==2){bug=true}
+	if(data.tickettype_id==2){bug=true;}
 //Display code.	
 	if(data.priority>5){data.priority = data.priority -5;} //normalize old data with new numbering scheme
 	container.find(".statusImage ").hide();
@@ -342,7 +342,8 @@ function loadTicketBody(inputData, container) {
 	container.find("#projectBox").show()
 	container.find("#categoryBox").hide();
 	container.find("#ticketProject").html($("<a/>",{"class":"fakelink ticket_button ticket_sprite task-arrow",href:"#ticketList/project/"+data.project_id,html:data.project_name}))
-	if(!bug){
+	
+	if(!bug){ //just ticket stuff
 		container.find("#projectBox").hide()
 		container.find("#categoryBox").show();
 		container.find("#ticketBugId").html("Ticket ID:");
@@ -350,8 +351,6 @@ function loadTicketBody(inputData, container) {
 		container.find("#assignedToBox").show();
 		container.find("#locationBox").show();
 		container.find("#lockBox").show();
-		
-
 		if (data.timeRemaining > 0) { //ticket is over due.
 			container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
 		} else { //ticket is not over due
@@ -369,6 +368,7 @@ function loadTicketBody(inputData, container) {
 				);
 		container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketList/location/" + data.location_id).addClass("nolink library-link ").html(data.locationName));
 	}
+	//Global stuff for bugs and tickets
 	container.find("#ticketBody").html(data.description);
 	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketList/category/" + data.category).addClass("nolink ticket_button ticket_sprite gear ").html(data.category));
 	container
