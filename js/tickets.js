@@ -1304,7 +1304,8 @@ jQuery(document).ready(function () {
 		loadTicketList();
 		$.fn.colorbox.close();
 	});
-	$("#ticketAddBtn").click(function () {
+	$("#ticketAddBtn,#bugAddBtn").click(function () {
+		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
 		var ticketDesc = $("#newTicketDescription");
 		if (ticketTitle.val() === "") {
@@ -1317,11 +1318,11 @@ jQuery(document).ready(function () {
 				notice("Error", "You must enter a description", false);
 				return false;
 			} else { 
-				if ($("#newTicketLocation").val() === "") {
+				if ($("#newTicketLocation").val() === "" && ticketBug.val() == 1) {
 					notice("Error", "You must select a Location", false);
 					return false;
 				
-				}else if(($("#newTicketDueDate").val() === "")){
+				}else if(($("#newTicketDueDate").val() === "" && ticketBug.val() == 1)){
 					notice("Error", "You must enter a Due date", false);
 					return false;
 				 }else {

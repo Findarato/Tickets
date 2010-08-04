@@ -16,24 +16,53 @@ if($_SESSION){
 		@$usr = new User();
 	}
 }
-if($_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
+/**
+ * 
+ * newTicketAssign	1
+newTicketBugTrouble	2
+newTicketCategory	1
+newTicketDescription	asdfasdf
+newTicketPriority	0
+newTicketTicket_id	
+newTicketTitle	test
+newTicketType	new
+newTicketUser_id	1321
+ * 
+ */
+if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
 	if($_GET['nagiosTicket']==881234123){$_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";}
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
-		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
-		VALUES(
-				"'.$_GET["newTicketUser_id"].'",
-				"'.$_GET["newTicketUser_id"].'",
-				"'.$_GET["newTicketAssign"].'",
-				"'.$_GET["newTicketCategory"].'",
-				"'.$_GET["newTicketTitle"].'",				
-				"'.str_replace("\\n","<br>",nl2br($_GET["newTicketDescription"])).'",
-				NOW(),1,
-				"'.(intval($_GET["newTicketPriority"])+1).'",
-				"'.$dueOn.'",
-				"'.$_GET["newTicketLocation"].'",
-				"'.$_GET["newTicketBugTrouble"].'"
-					)');
-			//echo $db->Lastsql;
+		if($_GET["newTicketBugTrouble"] == 1){
+			$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
+			VALUES(
+					"'.$_GET["newTicketUser_id"].'",
+					"'.$_GET["newTicketUser_id"].'",
+					"'.$_GET["newTicketAssign"].'",
+					"'.$_GET["newTicketCategory"].'",
+					"'.$_GET["newTicketTitle"].'",				
+					"'.str_replace("\\n","<br>",nl2br($_GET["newTicketDescription"])).'",
+					NOW(),1,
+					"'.(intval($_GET["newTicketPriority"])+1).'",
+					"'.$dueOn.'",
+					"'.$_GET["newTicketLocation"].'",
+					"1"
+						)');
+		}elseif($_GET["newTicketBugTrouble"] == 2){
+			$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,project_id,category_id,subject,description,created_on,open,priority,tickettype_id) 
+			VALUES(
+					"'.$_GET["newTicketUser_id"].'",
+					"'.$_GET["newTicketUser_id"].'",
+					"'.$_GET["newTicketUser_id"].'",
+					"'.$_GET["newTicketProject"].'",8,
+					"'.$_GET["newTicketTitle"].'",				
+					"'.str_replace("\\n","<br>",nl2br($_GET["newTicketDescription"])).'",
+					NOW(),1,
+					"'.(intval($_GET["newTicketPriority"])+1).'",
+					"2"	)');
+		}else{
+			$response["error"] = "There was an error on line 61 of add_ticket";
+		}	
+			echo $db->Lastsql;
 			
 			$response["newTicketId"] = $ticketId = $db->Lastid;
 			$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);

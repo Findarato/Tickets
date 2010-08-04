@@ -203,7 +203,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 						JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
 						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC ';	
-
+						
 			}
 			
 		break;
