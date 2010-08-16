@@ -1230,12 +1230,10 @@ jQuery(document).ready(function () {
 					if (data.departmentname === "") {
 						notice("Error", "No Department");
 					}
-					loadStats();
 					$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
 					$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
 					if (window.location.hash.length > 1) {
 						updateTickets();
-						//window.onpopstate = function(event) {checkHash();Params.popChange = true;}; //Building in support for browsers that do not support it
 						if(!Params.popChange){checkHash();}
 					} else {
 						loadNew(data.lastlogon); //show the new tickets
