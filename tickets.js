@@ -989,7 +989,6 @@ jQuery(document).ready(function () {
 		Params.UserId = $("#userIdHolder").text();
 		localStorage.userId = Params.UserId;
 	}
-	alert(Params.UserId);
 	populateAllBugs();
 	//if(localStorage.userId){Params.UserId = localStorage.userId;}
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
