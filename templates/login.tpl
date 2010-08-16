@@ -6,11 +6,11 @@
 		<div style="display:table;margin-bottom:10px;">
 			<div style="display:table-cell">
 				<div class="font-X">Username:</div>
-					<input class="corners-top-2 corners-bottom-2 color-B-2 font-X" id="un" name="un" placeholder="Enter Username" style="border:0px; padding:5px;" type="text"/>
+					<input class="corners-top-2 corners-bottom-2 border-all-B-2 font-X" id="un" name="un" placeholder="Enter Username" style="padding:5px;" type="text"/>
 				</div>
 			<div style="display:table-cell">
 				<div class="font-X ">Password:</div>
-				<input class="corners-top-2 corners-bottom-2 color-B-2 font-X" id="loginpassword" name="pw" placeholder="Enter Password" style="border:0px; padding:5px; margin-left:10px" type="password"/>
+				<input class="corners-top-2 corners-bottom-2 border-all-B-2 font-X" id="loginpassword" name="pw" placeholder="Enter Password" style="padding:5px; margin-left:10px" type="password"/>
 			</div>
 		</div>
 		</form>
