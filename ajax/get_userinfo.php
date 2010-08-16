@@ -41,6 +41,7 @@ FROM
 WHERE 
 	id=".$_GET["userId"]
 ,false,"assoc");
+
 $json["userInfo"]["tickets"] = $db->Query("
 SELECT
 	dm.department_id,
@@ -55,6 +56,7 @@ ON
 WHERE 
 	user_id=".$_GET["userId"]
 ,false,"assoc");
+
 $json["userInfo"]["tickets"]["altEmail"] = $db->Query("
 SELECT
 	email
@@ -63,6 +65,13 @@ FROM
 WHERE 
 	user_id=".$_GET["userId"]
 ,false,"row");
+
+$json["userInfo"]["departments"] = $db->Query("
+SELECT
+	id,name
+FROM 
+	tickets.department;" 
+,false,"assoc");
 $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
 $monthLables = array();
 for($a=1;$a<13;$a++){

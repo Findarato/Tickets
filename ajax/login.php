@@ -40,9 +40,9 @@
 				$response["altEmail"] = $altE;
 			}
 		}
-	}elseif(isset($_POST["department_id"]) && isset($_POST["user_id"])){ 
-		$db->Query("INSERT INTO department_members (department_id,user_id) VALUES(".$db->Clean($_POST["department_id"]).",".$db->Clean($_POST["user_id"]).");");
-		if(count($db->Error)==2){$db->Query("UPDATE department_members SET department_id=".$db->Clean($_POST["department_id"])." WHERE user_id=".$db->Clean($_POST["user_id"]).";");}
+	}elseif(isset($_GET["department_id"]) && isset($_GET["user_id"])){ 
+		$db->Query("INSERT INTO department_members (department_id,user_id) VALUES(".$db->Clean($_GET["department_id"]).",".$db->Clean($_GET["user_id"]).");");
+		if(count($db->Error)==2){$db->Query("UPDATE department_members SET department_id=".$db->Clean($_GET["department_id"])." WHERE user_id=".$db->Clean($_GET["user_id"]).";");}
 		$response['message']="Update Successful";
 	}elseif(isset($_POST["getDepartment"])){
 		$response["departmentname"] = getDepartment_by_userid($db->Clean($_POST["getDepartment"]));
@@ -52,7 +52,7 @@
 			$response["message"] = "You will be Notified on all Department Tickets";
 		}else{$response["message"] = "You will no longer be notified on all Department Tickets";}
 		$response["opt"] = $_POST["opt"];
-	}elseif(isset($_POST["altEmail"])){
+	}elseif(isset($_GET["altEmail"])){
 		$usr = unserialize($_SESSION['user']);
 		if($_POST["altEmail"]=="clear"){
 			$db->Query("DELETE FROM alt_email WHERE user_id=".$usr->User_id." AND email='".$db->Clean($_POST["oldAltEmail"])."' LIMIT 1;");
