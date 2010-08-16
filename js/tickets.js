@@ -985,10 +985,11 @@ function checkHash() {
 
 jQuery(document).ready(function () {
 	localStorage.tickets = "true";
-	if(Params.UserId == 0 || !localStorage.userId){
+	if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
 		Params.UserId = $("#userIdHolder").text();
 		localStorage.userId = Params.UserId;
 	}
+	alert(Params.UserId);
 	populateAllBugs();
 	//if(localStorage.userId){Params.UserId = localStorage.userId;}
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
@@ -1173,6 +1174,7 @@ jQuery(document).ready(function () {
 	});
 
 	$("#t_uI").click(function () {
+		
 		setHash("#userPage/"+Params.UserId);
 		checkHash();
 	});
