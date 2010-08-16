@@ -17,10 +17,91 @@ var Params = {
 	"LastArea": "",
 	"popChange":false,
 	"LastLogon":0,
+	"Departments":{},
 	"Priority_string":{1:"Very Low",2:"Low",3:"Tolerable",4:"Important",5:"Mission Critical"}
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
+
+function addEditControls(itemEdit,selector,type,obj,callBack){
+	callBack = callBack ? callBack : false;
+	idSelector = selector.attr("id");
+	selector
+		.append(
+			$("<div/>",{id:idSelector+"Edit","class":"ticket_sprite pencil fakelink",css:{"display":"inline-block"}})
+				.click(function(){
+					me = $(this);
+					myParent = me.parent();
+					localStorage.setItem(myParent.attr("id"),myParent.find(".contentEdit").text());
+					//alert(myParent.find(".contentEdit").text());
+					
+					switch(type){
+						default:case "text":
+							edit = myParent.find(".contentEdit").attr("contentEditable","true").focus();
+						break;
+						case "select":
+							edit = myParent.find(".contentEdit").text();
+							myParent.find(".contentEdit").html(
+								$("<select/>")
+									.append(function(){
+										html = "";
+										$.each(obj,function(i,item){
+											html +="<option value="+item.id+">"+item.name+"</option>";	
+										})
+										return html;
+									})
+							);
+						break;
+						
+					}
+					
+					
+					me.css("display","none");
+					myParent.find(".ticket_sprite.cross").css("display","inline-block");
+					myParent.find(".ticket_sprite.tick").css("display","inline-block");
+					
+				})
+		)
+		.append(
+			$("<div/>",{id:idSelector+"Accept","class":"ticket_sprite tick fakelink",css:{"display":"none"}})
+				.click(function(){
+					me = $(this);
+					myParent = me.parent();
+					myParent.find(".ticket_sprite.pencil").css("display","inline-block");
+					myParent.find(".contentEdit").attr("contentEditable","false");
+					me.css("display","none");
+					myParent.find(".ticket_sprite.cross").css("display","none");
+					switch (type) {
+						default:
+						case "text":
+							if (callBack) {
+								callBack(itemEdit, myParent.find(".contentEdit").text(), myParent.attr("id"))
+							}							
+						break;
+						case "select":
+							if (callBack) {
+								callBack(itemEdit, myParent.find("select option:selected").val(), myParent.attr("id"))
+							}
+							myParent.find(".contentEdit").html(myParent.find("select option:selected").text());
+						break;
+							
+					}
+
+				})
+		)
+		.append(
+			$("<div/>",{id:idSelector+"Cancel","class":"ticket_sprite cross fakelink",css:{"display":"none"}})
+				.click(function(){
+					me = $(this);
+					myParent = me.parent();
+					myParent.find(".ticket_sprite.pencil").css("display","inline-block");
+					myParent.find(".contentEdit").attr("contentEditable","false");
+					me.css("display","none");
+					myParent.find(".ticket_sprite.tick").css("display","none");
+					myParent.find(".contentEdit").text(localStorage.getItem(myParent.attr("id")));
+				})
+		)
+}
 
 function checkResponse(json) {
 	if (json.error !== null && json.error.length > 2) {
@@ -764,25 +845,34 @@ function loadUserPage(userId){
 		.append(
 			function(index,html){
 				if(!localUser){	return "";}
-				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"200px"}})
+				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"250px"}})
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
-					.append( $("<div>",{id:"followDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
+					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
 						.append(
-							$("<div/>",{"class":"corners-bottom-2 corners-top-2 border-all-B-1 color-B-1",css: {"display":"inline-block","width":"auto"}})
+							$("<div/>",{"class":"corners-bottom-2 corners-top-2 border-all-B-1 color-B-1",css: {"display":"inline-block","width":"auto","position":"relative"}})
 								.append(
 									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y ",html:"Yes"})
 								)
 								.append(
 									$("<div>",{id:"unfollow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y",html:"No"})
 								)
+								.append(
+									$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","width":"25px","padding":"0","height":"20px","color":"rgba(0,0,0,0)"},"class":"font-Y corners-bottom-2 corners-top-2 border-all-K-1 fuzzyoutlineBlack"})
+								)
 						)
-						.append(
-							$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","width":"25px","padding":"0","height":"20px","color":"rgba(0,0,0,0)"},"class":"font-Y corners-bottom-2 corners-top-2 border-all-K-1 fuzzyoutlineBlack"})
-						)
+
 					)
 					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
 					.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
 					.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
+
+			
+			/*
+			 * 
+			 * 			addEditControls(Params.inventorySelected,$("#hardwareLocation"),"select",Params.inventoryStatic.locations,function(serial,value,item){
+				$.getJSON("ajax/updateRecord.php",{"serial":serial,"value":value,"item":item})
+			});
+			 */
 			} 
 		)
 		.appendTo(Tlb);
@@ -792,7 +882,10 @@ function loadUserPage(userId){
 
 
 	$.getJSON("ajax/get_userinfo.php",{"userId":userId},function(data){
-		Tlb.find("#userDepartment").append(data.userInfo.tickets.departmentName)
+		Tlb.find("#userDepartment").append($("<div/>",{"class":"ilb contentEdit",html:data.userInfo.tickets.departmentName}));
+		addEditControls(Params.UserId,$("#userDepartment"),"select",data.userInfo.departments,function(userId,value,item){
+			$.getJSON("ajax/login.php",{"user_id":userId,"department_id":value})
+		});
 		Tlb.find("#userName").append(data.userInfo.username);
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
@@ -877,7 +970,7 @@ function loadUserPage(userId){
 				checkResponse(data);
 				loc = Tlb.find("#follow").position();
 				Tlb.find("#followUnfollowHighlight").css({
-					"top": loc.top,
+					//"top": loc.top,
 					"left": loc.left + 5
 				});
 			}, "json");
@@ -890,7 +983,7 @@ function loadUserPage(userId){
 				checkResponse(data);
 				loc = Tlb.find("#unfollow").position();
 				Tlb.find("#followUnfollowHighlight").css({
-					"top": loc.top,
+					//"top": loc.top,
 					"left": loc.left + 5
 				});
 			}, "json");
@@ -1172,11 +1265,7 @@ jQuery(document).ready(function () {
 		$('body').append(Shadow);
 	});
 
-	$("#t_uI").click(function () {
-		
-		setHash("#userPage/"+Params.UserId);
-		checkHash();
-	});
+	$("#t_uI").click(function () {setHash("#userPage/"+Params.UserId);checkHash();});
 	$("#t_fT").click(function () {
 		var hash = jQuery.makeArray(window.location.hash.split("\/"));
 		var display = $("#imgBookmark");
@@ -1260,18 +1349,6 @@ jQuery(document).ready(function () {
 		if (event.keyCode == 13) {
 			$("#btn_login").trigger('click')
 		}
-	});
-	$("#userDepartmentSelect").change(function () {
-		jQuery.post(uri + "ajax/login.php", {
-			department_id: $("#userDepartmentSelect option:selected").val(),
-			user_id: Params.UserId
-		}, function () {
-			$("#userDepartmentName").empty().html($("#userDepartmentSelect option:selected").text());
-			notice("Notice", "Welcome to the " + $("#userDepartmentSelect option:selected").text() + " Department", false);
-		});
-	});
-	$("#closeNotify").click(function () {
-		$("#notifyTpl").fadeOut(Params.FadeTime);
 	});
 
 	$('#ReAssignBtn').click(function () {

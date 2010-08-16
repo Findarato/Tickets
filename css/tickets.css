@@ -15,6 +15,7 @@ body {
 	font-size:12px;
 	font-family:'Cantarell', arial, sans-serif;
 }
+.ilb{display:inline-block;}
 .whiteBackground{background-color:#FFF;}
 .right{float:right;}
 .left{float:left;}
