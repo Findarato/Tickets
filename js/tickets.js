@@ -849,7 +849,7 @@ function loadUserPage(userId){
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
 						.append(
-							$("<div/>",{"class":"corners-bottom-2 corners-top-2 border-all-B-1 color-B-1",css: {"display":"inline-block","width":"auto","position":"relative"}})
+							$("<div/>",{"class":"corners-bottom-2 corners-top-2 border-all-B-1 color-B-1",css: {"display":"block","width":"70px","position":"relative","height":"23px"}})
 								.append(
 									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y fakelink",html:"Yes"})
 								)
