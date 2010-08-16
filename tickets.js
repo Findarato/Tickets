@@ -851,10 +851,10 @@ function loadUserPage(userId){
 						.append(
 							$("<div/>",{"class":"corners-bottom-2 corners-top-2 border-all-B-1 color-B-1",css: {"display":"inline-block","width":"auto","position":"relative"}})
 								.append(
-									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y ",html:"Yes"})
+									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y fakelink",html:"Yes"})
 								)
 								.append(
-									$("<div>",{id:"unfollow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y",html:"No"})
+									$("<div>",{id:"unfollow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y fakelink",html:"No"})
 								)
 								.append(
 									$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","width":"25px","padding":"0","height":"20px","color":"rgba(0,0,0,0)"},"class":"font-Y corners-bottom-2 corners-top-2 border-all-K-1 fuzzyoutlineBlack"})
