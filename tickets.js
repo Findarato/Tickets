@@ -289,7 +289,6 @@ function populateAllBugs(Area) {
 }
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
-	loadStats();
 	populateAllTickets();
 	populateAllBugs();
 }
@@ -765,40 +764,6 @@ function loadTicketList(pageNumber,queryObj) {
 		});
 	});
 }
-function loadStats() {
-	$.getJSON(uri + "ajax/stats.php", {
-		"type": "1,2,3,4,5",
-		"style": "1"
-	}, function (data) {
-		var dom_stats = $("#statistics");
-		/*		if (null == data.error) { notice("Notice", "You suck", false);}*/
-		if (null === data.error) {
-			notice("Debug", "There was a strange error loading statistics", false);
-		}
-		if (data.error.length > 0) {
-			notice("Debug", data.error, false);
-		} else {
-			if (data.stats.general.cntId.length > 0) {
-				dom_stats.html("Tickets: " + data.stats.general.cntId);
-				addBr(dom_stats);
-				dom_stats.append("Responses: " + data.stats.totalResponses.cntId);
-				addBr(dom_stats);
-				dom_stats.append("Average Priority: " + data.stats.general.avgPriority);
-				addBr(dom_stats);
-			} else {
-				alert(data.stats.general.length);
-			}
-			if (data.stats.open.length > 0) {
-				stats.append("Total Open Tickets: " + data.stats.open.cntId);
-				addBr(dom_stats);
-			}
-			dom_stats.append("Ave Ticket Duration: " + sec2readable(data.stats.closed.dago));
-			addBr(dom_stats);
-			dom_stats.append("My Ave Ticket Duration: " + sec2readable(data.stats.myclosed.dago));
-			addBr(dom_stats);
-		}
-	}, "json");
-}
 function loadUserPage(userId){
 	Params.Content.html($("#generic").html());
 	Tlb = Params.Content.find("#ticketListbody");
@@ -865,14 +830,6 @@ function loadUserPage(userId){
 					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
 					.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
 					.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
-
-			
-			/*
-			 * 
-			 * 			addEditControls(Params.inventorySelected,$("#hardwareLocation"),"select",Params.inventoryStatic.locations,function(serial,value,item){
-				$.getJSON("ajax/updateRecord.php",{"serial":serial,"value":value,"item":item})
-			});
-			 */
 			} 
 		)
 		.appendTo(Tlb);
@@ -1083,7 +1040,6 @@ jQuery(document).ready(function () {
 		localStorage.userId = Params.UserId;
 	}
 	populateAllBugs();
-	//if(localStorage.userId){Params.UserId = localStorage.userId;}
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
 		localStorage.clear();
@@ -1092,7 +1048,6 @@ jQuery(document).ready(function () {
 		localStorage.tickets = "true";
 		return false;
 	});
-	//$(window).bind( 'hashchange', function(){checkHash();});
 	if(localStorage.tickets = true){$("#featuresBoxDisplay").append($("<div/>",{"class":"table ticket_sprite",title:"Local Storage",css:{"display":"inline-block"}}));}
 	if (("WebSocket" in window)) {
 		$("#featuresBoxDisplay").append($("<div/>",{"class":"gear ticket_sprite",title:"Web Sockets",css:{"display":"inline-block"}}));
@@ -1138,8 +1093,6 @@ jQuery(document).ready(function () {
 	if ($("#t_userid").html === "") {} else {
 		User_id = $("#t_userid").text();
 	}
-	
-	
 	if ($("#t_uI").text().length > 10) {
 		function ut(){
 			updateTickets();
@@ -1216,55 +1169,6 @@ jQuery(document).ready(function () {
 	}, function () {
 		$("#newSearchdialog").find(".Ticketform").val('');
 	});
-	$("#topperRecent").click(function () {
-		var position = $(this).position();
-		var outWidth = $(this).outerWidth();
-		position.right = position.left + $(this).outerWidth();
-		var bodyHeight = $('body').height();
-		var bodyWidth = $('body').width();
-		var RecTick = $("<div/>").css({
-			overflow: "hidden",
-			width: "150px"
-		});
-		$.getJSON(uri + "ajax/get_ticket.php", {
-			recentOnly: true
-		}, function (data) {
-			loadRecentTickets(data, $("#recentTickets"));
-		});
-		Shadow = $("<div style=\" z-index:49;\" id=\"Shadow\"/>").click(function () {
-			$("#recentTickets").fadeOut(Params.FadeTime);
-			$("#Shadow").remove();
-		}).css({
-			display: "block",
-			top: 0,
-			left: 0,
-			height: bodyHeight,
-			width: bodyWidth,
-			position: "absolute"
-		});
-
-		if ($("#recentTickets").html()) {
-			$("#recentTickets").css({
-				"left": position.left
-			});
-		} else { //no reason to make the box twice
-			var recentTickets = $("<div/>").css({
-				"top": position.top + 22,
-				"left": position.left,
-				"position": "absolute",
-				"width": "150px",
-				"zIndex": "50",
-				"textAlign": "left",
-				"overflow": "hidden"
-			}).addClass("border-all-B-1 color-D-1 corners-bottom-2 corners-top-2").html(RecTick).attr({
-				"id": "recentTickets"
-			});
-			$('body').append(recentTickets);
-			$("#recentTickets").show();
-		}
-		$('body').append(Shadow);
-	});
-
 	$("#t_uI").click(function () {setHash("#userPage/"+Params.UserId);checkHash();});
 	$("#t_fT").click(function () {
 		var hash = jQuery.makeArray(window.location.hash.split("\/"));
