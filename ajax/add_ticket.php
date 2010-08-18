@@ -7,6 +7,10 @@
  */
 	include_once("../header.php");
 $_GET = $db->Clean($_GET);
+$ok = true;
+$service = "";
+$host = "";
+$locationEmail = "";
 
 if($_SESSION){
 	//$_GET['nagiosTicket']=881234123;
@@ -16,45 +20,65 @@ if($_SESSION){
 		@$usr = new User();
 	}
 }
+
 if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
-	if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123){$_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";}
-		if($_GET["newTicketBugTrouble"] == 1){
-			$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
-			$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
-			VALUES(
-					"'.$_GET["newTicketUser_id"].'",
-					"'.$_GET["newTicketUser_id"].'",
-					"'.$_GET["newTicketAssign"].'",
-					"'.$_GET["newTicketCategory"].'",
-					"'.$_GET["newTicketTitle"].'",				
-					"'.str_replace("\\n","<br>",nl2br($_GET["newTicketDescription"])).'",
-					NOW(),1,
-					"'.(intval($_GET["newTicketPriority"])+1).'",
-					"'.$dueOn.'",
-					"'.$_GET["newTicketLocation"].'",
-					"1"
-						)');
-		}elseif($_GET["newTicketBugTrouble"] == 2){
-			$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,project_id,category_id,subject,description,created_on,open,priority,tickettype_id) 
-			VALUES(
-					"'.$_GET["newTicketUser_id"].'",
-					"'.$_GET["newTicketUser_id"].'",
-					"'.$_GET["newTicketUser_id"].'",
-					"'.$_GET["newTicketProject"].'",8,
-					"'.$_GET["newTicketTitle"].'",				
-					"'.str_replace("\\n","<br>",nl2br($_GET["newTicketDescription"])).'",
-					NOW(),1,
-					"'.(intval($_GET["newTicketPriority"])+1).'",
-					"2"	)');
-		}else{
-			$response["error"] = "There was an error on line 61 of add_ticket";
-		}	
-			//echo $db->Lastsql;
+	if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123){
+	   $_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";
+     if(stripos($_GET["newTicketTitle"],"is OK") || stripos($_GET["newTicketTitle"],"is UP") ){
+       //This is a ticket that does not need to be a new ticket, but instead needs to be entered as a comment
+       $ok = false;
+       if(stripos($_GET["newTicketTitle"],"is OK")){ //service being down
+         $service = str_replace("is OK","is",$_GET["newTicketTitle"]);
+       }else{
+         $host = explode(":",$_GET["newTicketTitle"]);
+         $host = str_replace("is UP","",$service[1]);
+       }
+     }
+  }
+  
+	if($_GET["newTicketBugTrouble"] == 1 && $ok===true){
+		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
+		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
+		VALUES(
+				"'.$_GET["newTicketUser_id"].'",
+				"'.$_GET["newTicketUser_id"].'",
+				"'.$_GET["newTicketAssign"].'",
+				"'.$_GET["newTicketCategory"].'",
+				"'.$_GET["newTicketTitle"].'",				
+				"'.str_replace("\\n","<br>",nl2br($_GET["newTicketDescription"])).'",
+				NOW(),1,
+				"'.(intval($_GET["newTicketPriority"])+1).'",
+				"'.$dueOn.'",
+				"'.$_GET["newTicketLocation"].'",
+				"1"
+					)'); 
+	}elseif($_GET["newTicketBugTrouble"] == 2 && $ok===true){
+		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,project_id,category_id,subject,description,created_on,open,priority,tickettype_id) 
+		VALUES(
+				"'.$_GET["newTicketUser_id"].'",
+				"'.$_GET["newTicketUser_id"].'",
+				"'.$_GET["newTicketUser_id"].'",
+				"'.$_GET["newTicketProject"].'",8,
+				"'.$_GET["newTicketTitle"].'",				
+				"'.str_replace("\\n","<br>",nl2br($_GET["newTicketDescription"])).'",
+				NOW(),1,
+				"'.(intval($_GET["newTicketPriority"])+1).'",
+				"2"	)');
+	}elseif($ok===false){//lets take the ticket info and convert it into a response
+    if($host !=""){//this is a host reporting that it is back up
+      $sqlItem = $host." is DOWN";
+    }else{//this should be a service reporting its up
+      $sqlItem = $service;
+    }
+    $res = $db->Query("SELECT id FROM tickets.tickets WHERE subject LIKE '%".$sqlItem."%' ORDER BY id DESC LIMIT 1; ",false,"row");
+    addReply($res,128,$_GET["newTicketTitle"],nl2br($_GET["newTicketDescription"]));
+    die();
+	}else{
+		$response["error"] = "There was an error on line 61 of add_ticket";
+	}	
+    
 		$response["newTicketId"] = $ticketId = $db->Lastid;
-	//	$db->Query("SELECT email from library_names WHERE id=".$_GET["newTicketLocation"]);
-		//$locationEmail= $db->Fetch("row");
-		$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category FROM tcview WHERE id=".$ticketId);
-		$res1 = $db->Fetch("assoc");
+		$res1 = $db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category FROM tcview WHERE id=".$ticketId,false,"assoc");
 		$users = getUsers();
 
 		$userName = ucwords($users[$res1['created_by_id']]['firstname'])." ".ucwords($users[$res1['created_by_id']]['lastname']);
@@ -70,20 +94,14 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 		$smarty -> assign('showRes',"0");
 		$body = $smarty->fetch($tempName);
 		if(isset($respon)){	$smarty -> assign('respon',$respon);}
+		
 		if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']!=881234123 || !isset($_GET['nagiosTicket']) || $_GET['newTicketType']=="new"){
 			if($_GET["newTicketBugTrouble"]==2){
-			//	generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail,false,true);	
 			}else{
 				generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],false,$locationEmail);		
 			}
 		}		
-		
-		/** Achievements area */	
-		//	$response['achievements'] = $usr->F_CheckAchievements(array(1,2,3,4));
-		//	$response['message']="Achievements are cool!";
-		
-	}else{ //this should be edit
-		//Lets make sure there are not any extra attachments
+  }else{ //this should be edit
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		$db->Query('UPDATE tickets SET
 				assigned_id="'.$_GET["newTicketAssign"].'",
@@ -111,6 +129,6 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 		}
 		$db->Query("UPDATE tickets SET status='".$res1['status']."' WHERE id=".$_GET['newTicketTicket_id']. " LIMIT 1;");//put in the new status
 		//end status area
-	}
+}
 echo json_encode($response);
 ?> 
