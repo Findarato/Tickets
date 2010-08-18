@@ -6,7 +6,7 @@
  * @copyright March 28, 2009
  */
 	include_once("../header.php");
-$_GET = $db->Clean($_GET);
+$_GET = $db->Clean($_GET,true);
 $ok = true;
 $service = "";
 $host = "";
@@ -70,8 +70,10 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
     }else{//this should be a service reporting its up
       $sqlItem = $service;
     }
+    $_GET["newTicketDescription"] = nl2br($_GET["newTicketDescription"]);
+    //$_GET["newTicketDescription"] = str_replace('\\',"",$_GET["newTicketDescription"]);
     $res = $db->Query("SELECT id FROM tickets.tickets WHERE subject LIKE '%".$sqlItem."%' ORDER BY id DESC LIMIT 1; ",false,"row");
-    addReply($res,128,$_GET["newTicketTitle"],nl2br($_GET["newTicketDescription"]));
+    addReply($res,128,$_GET["newTicketTitle"],str_replace(addslashes('\\n'),"<br>",$_GET["newTicketDescription"]));
     die();
 	}else{
 		$response["error"] = "There was an error on line 61 of add_ticket";
