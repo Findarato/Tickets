@@ -74,7 +74,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				$userinfo = id2Username($match[1]);
 				if($email){
 					$formated1 = "
-						<a href=\"http://dev.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>"
+						<a href=\"http://www.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>"
 						."<a href=\"\#userPage/\"><div class=\"ticket_sprite information\" style=\"display:inline-block;\"></div></a>
 						";
 				}else{
