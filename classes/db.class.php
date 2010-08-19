@@ -170,7 +170,13 @@
 						if($this -> Count_res() == 1 || $force === true)
 							$return = mysql_fetch_assoc($this -> Resid); 
 						else					
-							while($line = mysql_fetch_assoc($this -> Resid)){ $return[] = $line; }
+							while($line = mysql_fetch_assoc($this -> Resid)){
+                if(isset($line[$idField])){
+                  $return[$line[$idField]] = $line; 
+                }else{
+                  $return[] = $line;  
+                } 
+              }
 					break;
 					case "row":
 						if($this -> Count_res() == 1 || $force === true){
