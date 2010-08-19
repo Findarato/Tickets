@@ -1,7 +1,6 @@
 <html>
 	<head>
-		<link id="themegencss" type="text/css" href="http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=22&hsl" rel="stylesheet" /> 
-		<link id="ticketcss" type="text/css" href="http://www.lapcat.org/tickets/css/tickets.css" rel="stylesheet" />
+		<style>{$styleCode}</style>
 	</head>
 	<body class="image-background color-background">
 		<table cellpadding="0" cellspacing="0" style="width:100%" border="0">

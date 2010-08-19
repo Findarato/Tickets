@@ -156,6 +156,9 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	$smarty -> assign('email_location',$locationEmail[2]);
 	$smarty -> assign('email_description',nl2br(Tcode($res1['description'],false,false,true)));
 	$smarty -> assign('respon',$respon);
+	$styleCode = join("",file("http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=22&hsl"));
+  $styleCode .= join("",file("http://www.lapcat.org/tickets/css/tickets.css"));
+  $smarty -> assign('styleCode',$styleCode);
 	$body = $smarty->fetch('email.tpl');
 	if($email){generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],$closed,$locationEmail[1],true);}
 }

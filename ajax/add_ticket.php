@@ -92,7 +92,6 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 			$tempName = "emailBug.tpl";
 		}
     $locs = $db->Query("SELECT ID,name,email FROM tickets.library_names",false,"assoc_array",false,"ID");
-    print_r($locs);
 		$smarty -> assign('email_ticket_id',$res1['id']);
 		$smarty -> assign('email_title',$res1['subject']);
     $smarty -> assign('email_created_on',$res1['created_on']);
@@ -105,6 +104,9 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
     $smarty -> assign('email_location',$locs[$_GET["newTicketLocation"]]["name"]);
     $smarty -> assign('email_description',nl2br(Tcode($res1['description'],false,false,true)));
 		$smarty -> assign('showRes',"0");
+    $styleCode = join("",file("http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=22&hsl"));
+    $styleCode .= join("",file("http://www.lapcat.org/tickets/css/tickets.css"));
+    $smarty -> assign('styleCode',$styleCode);
 		$body = $smarty->fetch($tempName);
 		if(isset($respon)){	$smarty -> assign('respon',$respon);}
 		
