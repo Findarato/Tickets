@@ -105,8 +105,10 @@
 					$return = "There was an error with your sql";
 				}else { $this -> Error = array(); 
 					$this -> Queries++;
-					if(strpos(strtolower($sql),"insert") == 0){//this was an insert
-						$this -> Lastid = mysql_insert_id($this -> linkid);	}
+          if(substr_count(strtolower($sql),"insert") > 0){//this was an insert
+            $this -> Lastid = mysql_insert_id($this -> linkid);
+            return $this->Lastid;
+          }
 				}
 				if(!$fetch){
 					return true; //Something always has to be returned	
