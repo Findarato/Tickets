@@ -6,7 +6,7 @@
  * @copyright March 28, 2009
  */
 	include_once("../header.php");
-$_GET = $db->Clean($_GET,true);
+$_GET["newTicketDescription"] = $db->Clean($_GET["newTicketDescription"],true);
 $ok = true;
 $service = "";
 $host = "";
@@ -19,19 +19,19 @@ if($_SESSION){
 	}else {
 		@$usr = new User();
 	}
-}
-
+} 
 if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
 	if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123){
 	   $_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";
      if(stripos($_GET["newTicketTitle"],"is OK") || stripos($_GET["newTicketTitle"],"is UP") ){
        //This is a ticket that does not need to be a new ticket, but instead needs to be entered as a comment
        $ok = false;
+       
        if(stripos($_GET["newTicketTitle"],"is OK")){ //service being down
          $service = str_replace("is OK","is",$_GET["newTicketTitle"]);
        }else{
-         $host = explode(":",$_GET["newTicketTitle"]);
-         $host = str_replace("is UP","",$service[1]);
+         $host = str_replace("is UP","is DOWN",$_GET["newTicketTitle"]);
+         $host = str_replace("RECOVERY","PROBLEM",$host);
        }
      }
   }
@@ -66,14 +66,13 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 				"2"	)');
 	}elseif($ok===false){//lets take the ticket info and convert it into a response
     if($host !=""){//this is a host reporting that it is back up
-      $sqlItem = $host." is DOWN";
+      $sqlItem = $host;
     }else{//this should be a service reporting its up
-      $sqlItem = $service;
+      $sqlItem = "LIKE '%".$service."%'";
     }
     $_GET["newTicketDescription"] = nl2br($_GET["newTicketDescription"]);
-    //$_GET["newTicketDescription"] = str_replace('\\',"",$_GET["newTicketDescription"]);
-    $res = $db->Query("SELECT id FROM tickets.tickets WHERE subject LIKE '%".$sqlItem."%' ORDER BY id DESC LIMIT 1; ",false,"row");
-    addReply($res,128,$_GET["newTicketTitle"],str_replace(addslashes('\\n'),"<br>",$_GET["newTicketDescription"]));
+    $res = $db->Query("SELECT id FROM tickets.tickets WHERE subject='".$sqlItem."' ORDER BY id DESC LIMIT 1; ",false,"row");
+    addReply($res,128,$_GET["newTicketTitle"],str_replace('\\\\\\\\n',"<br>",$_GET["newTicketDescription"]));
     die();
 	}else{
 		$response["error"] = "There was an error on line 61 of add_ticket";
