@@ -182,7 +182,7 @@
 						if($this -> Count_res() == 1 || $force === true){
 							$return = mysql_fetch_row($this -> Resid);
             }elseif($this -> Count_res() == 0){
-              return "The Query:".$this->Lastsql."  resulted in no results";
+              return 0;
 						}else{
 							while($line = mysql_fetch_row($this -> Resid)){ $return[] = $line; }}
 							if($this->Count_res() > 0){
@@ -200,6 +200,9 @@
 						}
 					break;
 					case "row_array":
+            if($this -> Count_res() == 0){
+              return 0;
+            }
 						while($line = mysql_fetch_row($this -> Resid)){ $return[] = $line; }
 						if(count($return) == 1) {return $return;} //make sure its more than one
 						if(count($return[0])==1){foreach($return as $r){$newArray[]=$r[0];}	$return = $newArray;}
