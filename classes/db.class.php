@@ -181,6 +181,8 @@
 					case "row":
 						if($this -> Count_res() == 1 || $force === true){
 							$return = mysql_fetch_row($this -> Resid);
+            }elseif($this -> Count_res() == 0){
+              return "The Query:".$this->Lastsql."  resulted in no results";
 						}else{
 							while($line = mysql_fetch_row($this -> Resid)){ $return[] = $line; }}
 							if($this->Count_res() > 0){
