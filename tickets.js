@@ -22,6 +22,8 @@ var Params = {
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
+//alert($(window).height());
+//alert($(window).width());
 
 function addEditControls(itemEdit,selector,type,obj,callBack){
 	callBack = callBack ? callBack : false;
