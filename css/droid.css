@@ -393,7 +393,7 @@ input:focus{
  *   Droid Customizations
  */
 
-#replyToggle,#topperStart,#sideArea,#Version{display:none;}
+#replyToggle,#topperStart,#sideArea,#Version,.topperText{display:none;}
 #mainArea{
   margin-left:5px;
 }
