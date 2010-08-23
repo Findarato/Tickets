@@ -1,5 +1,5 @@
-<div style="display:table;width:100%;height:500px;margin-right:5px;">
-	<div id="ticketarea" style="display:table-cell;width:300px;height:500px;min-width:300px" >
+<div class="t" style="width:100%;height:500px;margin-right:5px;">
+	<div id="ticketarea" >
 		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:5px;">
 			<div class="font-X head message_head corners-top-2 color-B-2 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
 				<div class="font-X" id="ticketTitle"></div>
@@ -69,7 +69,7 @@
 			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
 				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket actionButtons editLink" id="editlink" style="width:45px;">Edit</div>
 				<div class="button-theme fg-button ticketButton font-Y lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>
-				<div class="button-black fg-button ticketButton font-Y lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:45px;display:none">Reopen</div>
+				<div class="button-black fg-button ticketButton font-Y lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:auto;display:none">Reopen</div>
 				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
 			</div>
 		</div>

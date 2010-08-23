@@ -5,8 +5,11 @@
 <title>Tickets - The tracking system</title>
 <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 <link id="themegencss" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl" rel="stylesheet" />  
-<link media="screen" rel="stylesheet" href="css/colorbox.css" />
-<link href="css/tickets.css" rel="stylesheet"  />
+<link rel="stylesheet" media="screen" href="css/tickets.css"  />
+<link rel="stylesheet" media="screen and (max-width: 600px)" href="css/small.css" />
+<link rel="stylesheet" media="screen and (min-width: 600px) and (max-width: 900px)" href="css/droid.css" />
+<link rel="stylesheet" media="screen" rel="stylesheet" href="css/colorbox.css" />
+
 
 <meta http-equiv="X-UA-Compatible" content="IE=100" >
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -35,12 +38,12 @@
 </head>
 <body onResize="javascript:resize();"  class="image-background color-B-1">
 <div class="header1" style="overflow:hidden;height:30px">{include file="topper.tpl"}</div>
-<div style="height:50px;"></div>
+<div id="headerPadding" style="height:50px;"></div>
 <div id="wrap" style="width:98%; padding:4px;position:relative;" class="">
-	<div style="min-height:300px;position:absolute;top:3px;left:2px;width:200px;"  class="corners-bottom-2 corners-top-2">
-		{include file="navagation.tpl"} <br> {include file="bugs.tpl"}<!--<br> {include file="stats.tpl"} <br> {include file="features.tpl"} <br> {include file="log.tpl"} -->
+	<div id="sideArea" class="corners-bottom-2 corners-top-2">
+		{include file="navagation.tpl"} <br> {include file="bugs.tpl"}<br><div id="droidId">Droid</div><!--<br> {include file="stats.tpl"} <br> {include file="features.tpl"} <br> {include file="log.tpl"} -->
 	</div>
-  	<div style="margin-left:220px;" class=" corners-bottom-2 corners-top-2">
+  	<div id="mainArea" class=" corners-bottom-2 corners-top-2">
 	    <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">{include file="$content"}</div>
 	</div>
 </div>

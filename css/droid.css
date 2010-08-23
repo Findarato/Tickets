@@ -389,28 +389,24 @@ input:focus{
 	-o-transform: rotate(180deg);
 }
 
-#ticketarea{
-  display:table-cell;
-  width:300px;
-  height:500px;
-  min-width:300px
-}
 /**
- *   
- * Full display 
- * 
+ *   Droid Customizations
  */
-#droidId{display:none;}
-#sideArea{
-  min-height:300px;
-  position:absolute;
-  top:3px;
-  left:2px;
-  width:200px;  
-}
+
+#replyToggle,#topperStart,#sideArea,#Version{display:none;}
 #mainArea{
-  margin-left:220px;
+  margin-left:5px;
 }
 #headerPadding{
   height:50px;
 }
+#sideArea{
+  position:absolute;
+  top:3px;
+  left:2px;
+  width:0px;  
+}
+.actionButtons{
+  font-size:16px;
+}
+.actionButtons .ticket_sprite{background: url() no-repeat; }
