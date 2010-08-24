@@ -70,7 +70,9 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
     }else{//this should be a service reporting its up
       $sqlItem = "LIKE '%".$service."%'";
     }
+    
     $_GET["newTicketDescription"] = nl2br($_GET["newTicketDescription"]);
+    mail("jharry@lapcat.org","tickets Debug","SELECT id FROM tickets.tickets WHERE subject='".$sqlItem."' ORDER BY id DESC LIMIT 1; ");
     $res = $db->Query("SELECT id FROM tickets.tickets WHERE subject='".$sqlItem."' ORDER BY id DESC LIMIT 1; ",false,"row");
     addReply($res,128,$_GET["newTicketTitle"],str_replace('\\\\\\\\n',"<br>",$_GET["newTicketDescription"]));
     die();

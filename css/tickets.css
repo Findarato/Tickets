@@ -3,7 +3,7 @@
 	padding: 0;
 	
 }
-section,article{display:block;}
+section,article,footer,header{display:block;}
 
 a, font span,.custom {
 	text-decoration:none;
