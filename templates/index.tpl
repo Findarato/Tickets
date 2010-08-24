@@ -36,7 +36,7 @@
 <link id="rss2" href="ticketsrss.php?id={$user_id}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
 
 </head>
-<body onResize="javascript:resize();"  class="image-background color-B-1">
+<body onResize="javascript:resize();"  class="image-background color-B-1" style="overflow-y:auto;overflow-x:hidden">
 <div class="header1" style="overflow:hidden;height:30px">{include file="topper.tpl"}</div>
 <div id="headerPadding" style="height:50px;"></div>
 <div id="wrap" style="width:98%; padding:4px;position:relative;" class="">
@@ -45,8 +45,10 @@
 	</div>
   	<div id="mainArea" class=" corners-bottom-2 corners-top-2">
 	    <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">{include file="$content"}</div>
+	   
 	</div>
 </div>
+
 
 <div id="newTicketdialogTpl" class="ui-helper-hidden" title="Create new ticket">{include file="new.tpl"}</div>
 <div id="newBugdialogTpl" class="ui-helper-hidden" title="Create new ticket">{include file="new_bug.tpl"}</div>
