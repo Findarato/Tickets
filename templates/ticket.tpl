@@ -17,11 +17,28 @@
 				</div>
 			</div> 
 			<div class="color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
-		        <div id="lockBox" style="position:absolute;:1px;right:0px;clear:both;display:none">
-					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons holdLink" id="Holdlink" style="width:auto;"><span class="ticket_button ticket_sprite lock">Lock</span></div>
-					<div class="button-theme fg-button ticketButton font-Y lapcatButton left openTicket hold actionButtons unholdLink" id="unHoldlink" style="width:auto;display:none;"><span class="ticket_button ticket_sprite unlock">unlock</span></div>
-					<!--<div class="button-purple fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
+		    <div id="lockBox" style="width:100%;clear:both;display:none">
+          <div class="td" style="width:auto;"><!-- Previous Button -->
+            <div class="actionButtons font-X corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="previousTicket" style="width:auto;margin-right:5px;padding:3px;">
+             <span>Previous</span>     
+            </div>
+          </div>
+          <div class="td" style="width:auto;"><!-- Next Button -->
+            <div class="actionButtons font-X corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="nextTicket" style="width:auto;margin-right:5px;padding:3px;">
+              <span style="margin-right:5px">Next</span>
+            </div>
+          </div> 
+					<div class="td" style="width:75px;"> <!-- Locked Area -->
+            <div class="font-X openTicket hold actionButtons holdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
+              <span">Lock</span>
+            </div>
+            <div class="font-X openTicket hold actionButtons unholdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="unHoldlink" style="width:auto;margin-right:5px;display:none;padding:3px;">
+              <span>unlock</span>
+            </div>
+            <!--<div class="button-purple fg-button corners-bottom-2 corners-top-2 font-Y lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
+          </div>
 				</div>
+				
 				<div style="clear:both">
 			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span id="ticketBugId" class="font-X" >Ticket ID:</span></div>
 			       	<div class="left "><span class="font-X" id="ticketId"></span></div>
