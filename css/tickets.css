@@ -108,8 +108,14 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 	width: 70px;
 }
 /* New ticket image sprites*/
+.ticket_button,.ticket_button_no_pad,.ticket_button_right{
+  height:16px;
+}
 .ticket_button{
-	padding: 0 0 0 19px;height:16px;
+  padding:0 0 0 19px;
+}
+.ticket_button_right{
+  padding:0 19px 0 0;
 }
 .box_transition,input{
      -moz-transition: all 1s ease-out;  /* FF3.7+ */
@@ -302,26 +308,28 @@ button.fg-button { width:auto; overflow:visible; }
 .fg-toolbar .fg-buttonset { margin-right:1.5em; padding-left: 1px; }
 .fg-toolbar .fg-button { font-size: 1em;  }
 
-.ticketButton, .ticketButton:visited {
-	/*background-color: #222;
-	background-image: url(images/alert-overlay.png);
-	*/ 
-	display: block; 
-	padding: 2px; 
-	-moz-border-radius: 5px; 
-	-webkit-border-radius: 5px;
-	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-	border-bottom: 1px solid rgba(0,0,0,0.25);
-	position: relative;
-	cursor: pointer;
-	text-decoration:none !important; 
-	text-align: center; 
-	zoom: 1;
+
+.ticketButton, .ticketButton:visited,.ticketButtonNoShadow, .ticketButtonNoShadow:visited {
+  display: block; 
+  padding: 2px; 
+  -moz-border-radius: 5px; 
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  position: relative;
+  cursor: pointer;
+  text-decoration:none !important; 
+  text-align: center; 
+  zoom: 1;
+  margin-right:5px;
 }
 
+.ticketButton, .ticketButton:visited {
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 
+}
 
 #purr-container {
 	position: fixed;
@@ -413,6 +421,7 @@ input:focus{
    * Full display 
    * 
    */
+  .mobile{display:none;}
   #droidId{display:none;}
   #sideArea{
     min-height:300px;
@@ -432,7 +441,7 @@ input:focus{
   /**
    *   Droid Customizations
    */
-  
+  .mobile{display:inline-block;}
   #replyToggle,#topperStart,#sideArea,.topperText{display:none;}
   #mainArea{
     margin-left:5px;
