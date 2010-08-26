@@ -6,8 +6,6 @@
 <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 <link id="themegencss" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl" rel="stylesheet" />  
 <link rel="stylesheet" media="screen" href="css/tickets.css"  />
-<link rel="stylesheet" media="screen and (max-width: 600px)" href="css/small.css" />
-<link rel="stylesheet" media="screen and (min-width: 600px) and (max-width: 900px)" href="css/droid.css" />
 <link rel="stylesheet" media="screen" rel="stylesheet" href="css/colorbox.css" />
 
 

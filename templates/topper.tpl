@@ -13,9 +13,11 @@
 	   <span class="topperText">Toggle Replies</span>
 	 </span>
 	</div>
-  <div class="left font-Y font-bold ticket_button fakelink" style="width:auto" title="Update Notes">
-   <span class="ticket_button ticket_sprite information">
-     <span class="topperText"><a class="ticket_link font-Y font-bold" id="Version" href="#updateNotes" style="width:auto">Live Tickets Update XIII</a></span>
+  <div class="left font-Y font-bold ticket_button fakelink" style="width:auto" id="updateNotesContainer" title="Update Notes">
+   <span class="ticket_button ticket_sprite information" id="UpdateNotes">
+     <span class="topperText">
+      <span id="Version"></span>
+     </span>
    </span>
   </div>
   <div id="userIdHolder" style="display:none">{$userId}</div>

@@ -1036,6 +1036,8 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
+  $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
+  
 	localStorage.tickets = "true";
 	if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
 		Params.UserId = $("#userIdHolder").text();
