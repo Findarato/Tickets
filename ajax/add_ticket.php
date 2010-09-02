@@ -12,6 +12,9 @@ $service = "";
 $host = "";
 $locationEmail = "";
 
+if(isset($_GET["debug"])){
+  return;die();
+}
 if($_SESSION){
 	//$_GET['nagiosTicket']=881234123;
 	if(isset($_SESSION["user"])){
@@ -120,7 +123,6 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
   }else{ //this should be edit
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		$db->Query('UPDATE tickets SET
-				assigned_id="'.$_GET["newTicketAssign"].'",
 				category_id="'.$_GET["newTicketCategory"].'",
 				subject="'.$_GET["newTicketTitle"].'",				
 				description="'.nl2br($_GET["newTicketDescription"]).'",

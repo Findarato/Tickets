@@ -17,7 +17,7 @@
 				</div>
 			</div> 
 			<div class="color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
-		    <div id="lockBox" style="width:100%;clear:both;display:none">
+		    <div id="lockBox" style="width:100%;display:none">
           <div class="td" style="width:auto;"><!-- Previous Button -->
             <div class="actionButtons font-X corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="previousTicket" style="width:auto;margin-right:5px;padding:3px;">
              <span>Previous</span>     
@@ -39,52 +39,43 @@
           </div>
 				</div>
 				
-				<div style="clear:both">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span id="ticketBugId" class="font-X" >Ticket ID:</span></div>
-			       	<div class="left "><span class="font-X" id="ticketId"></span></div>
+    				<div style="height:16px;">
+			       	<div class="font-X" id="ticketId" style="font-weight:bold;padding-left:2px;padding-right:3px">Ticket ID</div>
 		        </div>
-		        <div style="clear:both">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Opened On</span></div>
-			       	<div class="left "><span class="font-X" id="ticketDate"></span></div>
+		       	<div class="font-X" id="ticketDate" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;width:auto;" >Opened On</div>
+
+		        <div id="dueOnBox" style="display:none;height:16px;">
+			       	<div class="font-X" id="ticketDueDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >Due On</div>
 		        </div>
-		        <div id="dueOnBox" style="clear:both;display:none;">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Due On</span></div>
-			       	<div class="left "><span class="font-X" id="ticketDueDate"></span></div>
+
+		        <div style="display:none;height:16px;" class="closedTicket" id="ticketClosedOn">
+			       	<div class="font-X" id="ticketClosedOnDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >Closed On</div>
 		        </div>
-		        <div style="clear:both;display:none" class="closedTicket" id="ticketClosedOn">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px" ><span class="font-X" >Closed On</span></div>
-			       	<div class="left "><span class="font-X" id="ticketClosedOnDate"></span></div>
+
+		        <div id="projectBox" style="height:16px;">
+			       	<div class="font-X" id="ticketProject" style="font-weight:bold;padding-left:2px;padding-right:3px">Project</div>
 		        </div>
-		        <div id="projectBox" style="clear:both">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Project</span></div>
-			       	<div class="left "><span class="font-X" id="ticketProject"></span></div>
-		        </div>
-		        <div id="categoryBox" style="clear:both">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Category</span></div>
-			       	<div class="left "><span class="font-X" id="ticketCategory"></span></div>
-		        </div>
-		        <div style="clear:both;height:16px;">
-			       	<div class="left " style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Created By</span></div>
-			       	<div class="left " style="height:16px;"><span class="font-X" id="ticketCreatedBy" style="height:16px;"></span></div>
-		       </div>
-				<div id="assignedToBox" style="clear:both;display:none;">
-			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Assigned To</span></div>
-			       	<div class="left" ><span class="font-X" id="ticketAssignedTo"></span></div>
-		       </div> 
-				<div style="clear:both">
-			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Priority</span></div>
-			       	<div class="left" ><span class="font-X" id="ticketPriority"></span></div>
-				</div>
-				<div id="locationBox" style="clear:both;display:none;">
-			       	<div class="left" style="font-weight:bold;padding-left:2px;padding-right:3px"><span class="font-X" >Location</span></div>
-			       	<div class="left" ><span class="font-X" id="ticketLocation"></span></div>
-				</div>
-				<section id="ticketDataBox" style="display:block;padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:385px;overflow:auto;vertical-align:top; clear:both">
-					<article id="ticketBody" style="display:block;"></article>
-				</section>
+
+		        <div id="categoryBox" style="display:none;">
+              <div class="font-X" id="ticketCategory" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Category</div>
+            </div>
+
+		       	<div class="font-X " id="ticketCreatedBy" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Created By</div>
+
+  				  <div id="assignedToBox" style="display:none;;height:16px;">
+  			       	<div class="font-X" id="ticketAssignedTo" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Assigned To</div>
+  		      </div> 
+  				  
+  			    <div class="font-X" id="ticketPriority" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Priority</div>
+            
+            <div id="locationBox" style="display:none;height:16px;">
+                <div class="font-X" id="ticketLocation" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Location</div>
+            </div>
+  				<section id="ticketDataBox" style="display:block;padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:385px;overflow:auto;vertical-align:top; clear:both">
+  					<article id="ticketBody" style="display:block;"></article>
+  				</section>
 			</div>
 			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
-				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket actionButtons editLink" id="editlink" style="width:45px;">Edit</div>
 				<div class="button-theme fg-button ticketButton font-Y lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>
 				<div class="button-black fg-button ticketButton font-Y lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:auto;display:none">Reopen</div>
 				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
