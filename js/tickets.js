@@ -18,7 +18,14 @@ var Params = {
 	"popChange":false,
 	"LastLogon":0,
 	"Departments":{},
-	"Priority_string":{1:"Very Low",2:"Low",3:"Tolerable",4:"Important",5:"Mission Critical"}
+	"Priority_string":{
+	  1:{"id":1,"name":"Very Low"},
+	  2:{"id":2,"name":"Low"},
+	  3:{"id":3,"name":"Tolerable"},
+	  4:{"id":4,"name":"Important"},
+	  5:{"id":5,"name":"Mission Critical"}
+	 },
+	"Categories":{}
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
@@ -48,7 +55,12 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 									.append(function(){
 										html = "";
 										$.each(obj,function(i,item){
-											html +="<option value="+item.id+">"+item.name+"</option>";	
+											if(item.name == edit){
+											 html +="<option selected=selected value="+item.id+">"+item.name+"</option>"; 
+											}else{
+											 html +="<option value="+item.id+">"+item.name+"</option>";  
+											}
+												
 										})
 										return html;
 									})
@@ -56,12 +68,9 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 						break;
 						
 					}
-					
-					
 					me.css("display","none");
 					myParent.find(".ticket_sprite.cross").css("display","inline-block");
 					myParent.find(".ticket_sprite.tick").css("display","inline-block");
-					
 				})
 		)
 		.append(
@@ -419,8 +428,17 @@ function loadTicketBody(inputData, container) {
 	Params.Ticket_id = ticketId = data.id; //set the global
 	Params.TicketJSON = data;
 	container.find("#ticketTitle").html(data.subject);
-	container.find("#ticketDate").html(data.created_on);
-	container.find("#ticketBugId").html("Bug ID:");
+	container
+   .find("#ticketDate")
+   .addClass("ilb")
+   .append(
+     $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+       .html(
+         $("<div/>",{id:"ticketDateDisplay",html:data.created_on})
+       )
+   );
+	
+	container.find("#ticketId").html("Bug ID:");
 	container.find("#projectBox").show()
 	container.find("#categoryBox").hide();
 	container.find("#ticketProject").html($("<a/>",{"class":"fakelink ticket_button ticket_sprite task-arrow",href:"#ticketList/project/"+data.project_id,html:data.project_name}))
@@ -428,46 +446,119 @@ function loadTicketBody(inputData, container) {
 	if(!bug){ //just ticket stuff
 		container.find("#projectBox").hide()
 		container.find("#categoryBox").show();
-		container.find("#ticketBugId").html("Ticket ID:");
+		container.find("#ticketId").html("Ticket ID:");
 		container.find("#dueOnBox").show();
 		container.find("#assignedToBox").show();
 		container.find("#locationBox").show();
 		container.find("#lockBox").show();
-		if (data.timeRemaining > 0) { //ticket is over due.
-			container.find("#ticketDueDate").html(data.due_on).addClass("dark-red");
-		} else { //ticket is not over due
-			container.find("#ticketDueDate").html(data.due_on);
-		}
+
+//		if (data.timeRemaining > 0) { //ticket is over due.
+    
+   container
+     .find("#ticketDueDate")
+     .addClass("ilb")
+     .append(
+       $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+         .html(
+           $("<div/>",{id:"ticketDueDateDisplay",html:data.due_on})
+         )
+     );
+  
+  
+  container
+   .find("#ticketAssignedTo")
+   .addClass("ilb")
+   .append(
+     $("<div/>",{"class":"ilb contentEdit ticket_button ticket_sprite user",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+       .html(
+         $("<div/>",{id:"ticketCreatedByDisplay",html:data.firstname + " " + data.lastname,data:data.assigned_id})
+       )
+   );				
 		container
-			.find("#ticketAssignedTo")
-				.html(
-					$("<a/>",{"class":"nolink ticket_button ticket_sprite user ",html:data.firstname + " " + data.lastname})
-						.attr("href", "#ticketList/assigned/" + data.assigned_id)
-				)
-				.append(
-					$("<a/>",{"class":"nolink ",html:$("<div/>",{css:{"display":"inline-block"},"class":"ticket_sprite information"})})
-						.attr("href", "#userPage/" + data.assigned_id)
-				);
-		container.find("#ticketLocation").html($("<a/>").attr("href", "#ticketList/location/" + data.location_id).addClass("nolink library-link ").html(data.locationName));
+		  .find("#ticketLocation")
+		    .addClass("ilb")
+		    .append(
+		      $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"}})
+		        .html(
+		          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
+		        )
+		    );
 	}
 	//Global stuff for bugs and tickets
-	container.find("#ticketBody").html(data.description);
-	container.find("#ticketCategory").html($("<a/>").attr("href", "#ticketList/category/" + data.category).addClass("nolink ticket_button ticket_sprite gear ").html(data.category));
+
 	container
-		.find("#ticketCreatedBy")
-			.html(
-				$("<a/>",{"class":"nolink ticket_button ticket_sprite user ",html:data.firstname2 + " " + data.lastname2})
-					.attr("href", "#ticketList/created_by/" + data.created_by_id)
-			)
-			.append(
-				$("<a/>",{"class":"nolink ",html:$("<div/>",{css:{"display":"inline-block"},"class":"ticket_sprite information"})})
-					.attr("href", "#userPage/" + data.created_by_id)
-			);
+   .find("#ticketBody")
+   .addClass("ilb")
+   .append(
+     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"}})
+       .html(
+         $("<div/>",{id:"ticketBodyDisplay",html:data.description})
+       )
+   );
 
+  container
+   .find("#ticketCategory")
+   .addClass("ilb")
+   .append(
+     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"}})
+       .html(
+         $("<div/>",{id:"ticketCategoryDisplay",html:data.category})
+       )
+   );
 
+  container
+   .find("#ticketCreatedBy")
+   .addClass("ilb")
+   .append(
+     $("<div/>",{"class":"ilb contentEdit ticket_button ticket_sprite user",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+       .html(
+         $("<div/>",{id:"ticketCreatedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
+       )
+   );
 	container.find("#replyticketid").val(ticketId);
-	container.find("#ticketId").html(data.id);
-	container.find("#ticketPriority").html(Params.Priority_string[data.priority]);
+	container
+   .find("#ticketId")
+   .addClass("ilb")
+   .append(
+     $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+       .html(
+         $("<div/>",{id:"ticketIdDisplay",html:data.id})
+       )
+   );
+	container
+	 .find("#ticketPriority")
+	 .addClass("ilb")
+	 .append(
+	   $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"}})
+	     .html(
+	       $("<div/>",{id:"ticketPriorityDisplay",html:Params.Priority_string[data.priority].name})
+	     )
+	 );
+	 
+	 
+	/// Adding edit controls to the page
+  
+  addEditControls(Params.UserId,container.find("#ticketBody"),"text",{},
+  function(userId,value,item){
+    $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
+      
+    });
+  });
+
+  addEditControls(Params.UserId,container.find("#ticketPriority"),"select",Params.Priority_string,
+  function(userId,value,item){
+    $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
+      
+    });
+  });
+  addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Priority_string,
+  function(userId,value,item){
+    $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
+      
+    });
+  });
+
+
 	if (data.favorite !== null && data.favorite!==0) {
 		container.find("#imgBookmark").show();
 	}
@@ -497,6 +588,7 @@ function loadTicketBody(inputData, container) {
 	}
 	var pri = parseInt(container.find("#ticketPriority").text() - 2, 10);
 	$("#replyareaTitle").text("Replies (" + data.responseCount + ")"); //display the total response count
+/*
 	$('#editlink').colorbox({
 		iframe: false,
 		transition: "none",
@@ -505,6 +597,7 @@ function loadTicketBody(inputData, container) {
 		href: "#newTicketdialog",
 		title: "<font class=\"white\">Edit Ticket</font>"
 	}, function () {
+	  $("#ticketAssignBox").hide();
 		$("#newTicketDescription").val(Params.TicketJSON.dbDescription);
 		$("#newTicketTitle").val(Params.TicketJSON.subject);
 		$("#newTicketLocation").val(Params.TicketJSON.locationName);
@@ -514,7 +607,7 @@ function loadTicketBody(inputData, container) {
 		$("#newTicketAssign").val(Params.TicketJSON.firstname + " " + Params.TicketJSON.lastname);
 		$("#newTicketCategory").val(Params.TicketJSON.category);
 		$("#newTicketDueDate").val(Params.TicketJSON.due_on);
-		$("#ticketAddBtn").text("Commit Changes");
+		$("#ticketAddBtn").text("Commit Changes").css("width","auto");
 		$("#newTicketDueDate").val(Date.today().add({
 			days: 3
 		}).toString("M/d/yyyy")).blur(function () {
@@ -528,6 +621,7 @@ function loadTicketBody(inputData, container) {
 			}
 		});
 	});
+	*/
 	$('#replylink').colorbox({
 		iframe: false,
 		transition: "none",
@@ -595,7 +689,6 @@ function loadTicket(ticketId,display) {
 		loadResponsesBody(ticketId, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
-
 function loadTicketList(pageNumber,queryObj) {
 	Params.LastArea = "ticketList";
 	var html = "";
@@ -1125,6 +1218,7 @@ jQuery(document).ready(function () {
 		href: "#newTicketdialog",
 		title: "<font class=\"white\">Create a new Ticket</font>"
 	}, function () {
+	  $("#ticketAssignBox").show();
 		$("#newTicketType").val("new");
 		$("#newTicketTitle,#newTicketDescription").val("");
 		$("#newTicketFileList").empty();
@@ -1344,6 +1438,7 @@ jQuery(document).ready(function () {
 						value: ""
 					});
 					$.fn.colorbox.close();
+					localStorage.removeItem("TicketId"+Params.Ticket_id);
 					loadTicket(Params.Ticket_id);
 				}
 			}

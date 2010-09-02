@@ -13,7 +13,7 @@
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Category:</span><select class=" Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate }</select></td>
 						</tr>
-						<tr>
+						<tr id="ticketAssignBox">
 							<td style="text-align:left;"><span class="font-X">Assign:</span><select class=" Ticketform " id="newTicketAssign" name="newTicketAssign"><option value="">Select User</option>{html_options options=$assign }</select></td>
 						</tr>
 						<tr>

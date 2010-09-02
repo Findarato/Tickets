@@ -94,7 +94,7 @@ if(isset($_GET['recentOnly'])){
 	$response['recentTickets']=recentTickets($usr->User_id,"","",true);
 	echo json_encode($response['recentTickets']); 
 }else{
-	$response['recentTickets']=recentTickets($usr->User_id,$_GET['ticket_id'],$response['subject'],false);
+	//$response['recentTickets']=recentTickets($usr->User_id,$_GET['ticket_id'],$response['subject'],false);
 	echo json_encode($response);	
 }
 ?>  
