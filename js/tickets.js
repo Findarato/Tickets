@@ -1160,7 +1160,7 @@ jQuery(document).ready(function () {
 	}
 	
 	$("title").html($("title").html()+"  "+$("#version").html());
-	$("#Version").html($("#newestVersion").html()); //to make sure the version on tickets is always updated
+	$("#Version").html($("#version").html()); //to make sure the version on tickets is always updated
 	
 
 	if (uri.match('dev') == 'dev') {
