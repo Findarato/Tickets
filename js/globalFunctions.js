@@ -77,7 +77,6 @@ function pageAnator(container, count, perPage) {
         textAlign: "center",
         textDecoration: "none"
     }).html($("<font/>").html("Pages:")));
-
     if (count === 0) {
         container.append($("<a/>").addClass("corners-top-2 corners-bottom-2 background-alpha-4 border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
             width: "20px",
