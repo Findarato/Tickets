@@ -7,7 +7,8 @@
 <link id="themegencss" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl" rel="stylesheet" />  
 <link rel="stylesheet" media="screen" href="css/tickets.css"  />
 <link rel="stylesheet" media="screen" rel="stylesheet" href="css/colorbox.css" />
-
+<link rel="stylesheet" type="text/css" href="js/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="js/markitup/style.css" />
 
 <meta http-equiv="X-UA-Compatible" content="IE=100" >
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -30,8 +31,13 @@
 <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.line.js" ></script>
 <script src="js/combine.php"></script>
 
+<!--End Mark it up style -->
+
+
 <link id="rss1" href="ticketsrss.php?id={$user_id}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
 <link id="rss2" href="ticketsrss.php?id={$user_id}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
+
+
 
 </head>
 <body onResize="javascript:resize();"  class="image-background color-B-1" style="overflow-y:auto;overflow-x:hidden">
@@ -43,11 +49,8 @@
 	</div>
   	<div id="mainArea" class=" corners-bottom-2 corners-top-2">
 	    <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">{include file="$content"}</div>
-	   
 	</div>
 </div>
-
-
 <div id="newTicketdialogTpl" class="ui-helper-hidden" title="Create new ticket">{include file="new.tpl"}</div>
 <div id="newBugdialogTpl" class="ui-helper-hidden" title="Create new ticket">{include file="new_bug.tpl"}</div>
 <div id="newReplydialogTpl" class="ui-helper-hidden" title="Reply to Ticket">{include file="reply.tpl"}</div>
