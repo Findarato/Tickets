@@ -41,13 +41,15 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 				.click(function(){
 					me = $(this);
 					myParent = me.parent();
-					localStorage.setItem(myParent.attr("id"),myParent.find(".contentEdit").text());
+					localStorage.setItem(myParent.attr("id"),myParent.find(".contentEdit").html());
 					switch(type){
 						default:case "text":
+		          myParent.find(".ticket_sprite.cross").css("display","inline-block");
+              myParent.find(".ticket_sprite.tick").css("display","inline-block");
 							edit = myParent.find(".contentEdit").attr("contentEditable","true").focus();
 						break;
 						case "textarea":
-						  edit = myParent.find(".contentEdit").text();
+						  edit = myParent.find(".contentEdit").html();
               myParent.find(".contentEdit").html(
                 $("<textarea/>",{id:"editor"}).val(edit)
               );
@@ -55,6 +57,8 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 						break;
 						case "select":
 							edit = myParent.find(".contentEdit").text();
+					    myParent.find(".ticket_sprite.cross").css("display","inline-block");
+              myParent.find(".ticket_sprite.tick").css("display","inline-block");
 							myParent.find(".contentEdit").html(
 								$("<select/>")
 									.append(function(){
@@ -74,8 +78,7 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 						
 					}
 					me.css("display","none");
-					myParent.find(".ticket_sprite.cross").css("display","inline-block");
-					myParent.find(".ticket_sprite.tick").css("display","inline-block");
+
 				})
 		)
 		.append(
@@ -316,41 +319,47 @@ function loadResponsesBody(ticketId, container, page) {
 	var params = {
 		"ticket_id": ticketId
 	};
-	if (page.length !== 0) {
-		params["page"] = page;
-	} // adds the page number to the request
+	if(page !== undefined){
+  	if (page.length !== 0) {
+      params["page"] = page;
+    } // adds the page number to the request  
+	}
+	
 	//var resCont = $("<div/>");
 	$.getJSON(uri + "ajax/display_reply.php", params, function (data) {
 		var cnt = 0;
 		var resCont = $("<div/>");
-		$.each(data.reply, function (i, item) {
-			if (i % 2 == 1) {
-				var color = "background-alpha-4";
-			} else {
-				var color = "background-alpha-3";
-			}
-			resCont.append($("#responsestpl").html());
-			resCont.find("#ticketListDueDate").hide();
-			resCont.find("#changemeColor").addClass(color).attr({
-				id: "userid" + item.id
-			});
-			resCont.find("#changemeUserid").html(item.firstname + " " + item.lastname).attr({
-				id: "userid" + item.id
-			});
-			resCont.find("#changemeSubject").html(item.subject).css({
-				fontWeight: "bold"
-			}).attr({
-				id: "subject" + item.id
-			});
-			resCont.find("#changemeBody").html(stripslashes(item.body)).attr({
-				id: "body" + item.id
-			});
-			resCont.find("#changemeDay").html(sec2readable(item.ddt)).attr({
-				id: "created" + item.id
-			});
-			$("#replyticketid").val(ticketId);
-			cnt++;
-		});
+		if(data!==undefined){ //need to make sure there are responses
+  		$.each(data.reply, function (i, item) {
+        if (i % 2 == 1) {
+          var color = "background-alpha-4";
+        } else {
+          var color = "background-alpha-3";
+        }
+        resCont.append($("#responsestpl").html());
+        resCont.find("#ticketListDueDate").hide();
+        resCont.find("#changemeColor").addClass(color).attr({
+          id: "userid" + item.id
+        });
+        resCont.find("#changemeUserid").html(item.firstname + " " + item.lastname).attr({
+          id: "userid" + item.id
+        });
+        resCont.find("#changemeSubject").html(item.subject).css({
+          fontWeight: "bold"
+        }).attr({
+          id: "subject" + item.id
+        });
+        resCont.find("#changemeBody").html(stripslashes(item.body)).attr({
+          id: "body" + item.id
+        });
+        resCont.find("#changemeDay").html(sec2readable(item.ddt)).attr({
+          id: "created" + item.id
+        });
+        $("#replyticketid").val(ticketId);
+        cnt++;
+      });  
+		}
+		
 		container.html(resCont.html());
 	});
 	container.show();
@@ -499,10 +508,7 @@ function loadTicketBody(inputData, container) {
    .find("#ticketBody")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"}})
-       .html(
-         $("<div/>",{id:"ticketBodyDisplay",html:data.description})
-       )
+     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"},html:data.description})
    );
 
   container
@@ -666,7 +672,7 @@ function loadTicketBody(inputData, container) {
 	}
 	//Run some functions to deal with the data.	
 	pageAnator(container.find("#pageAnator").empty(), data.responseCount, 20); //add Page numbers
-	loadRecentTickets(data.recentTickets, $("#recentTickets")); //Recent ticket list
+	//loadRecentTickets(data.recentTickets, $("#recentTickets")); //Recent ticket list
 	displayStatus(data.status, container.find("#ticketStatusImage")); //status icons
 }
 /**
