@@ -83,26 +83,30 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 				.click(function(){
 					me = $(this);
 					myParent = me.parent();
-					myParent.find(".ticket_sprite.pencil").css("display","inline-block");
-					myParent.find(".contentEdit").attr("contentEditable","false");
-					me.css("display","none");
-					myParent.find(".ticket_sprite.cross").css("display","none");
 					switch (type) {
 						default:
 						case "text":
 							if (callBack) {
 								callBack(itemEdit, myParent.find(".contentEdit").text(), myParent.attr("id"))
-							}							
+							}
+							myParent.find(".contentEdit").attr("contentEditable","false");
 						break;
+            case "textarea":
+              if (callBack) {
+                callBack(itemEdit, $("#editor").val(), myParent.attr("id"));
+              }
+              myParent.find(".contentEdit").html($("#editor").val());            
+            break;
 						case "select":
 							if (callBack) {
 								callBack(itemEdit, myParent.find("select option:selected").val(), myParent.attr("id"))
 							}
 							myParent.find(".contentEdit").html(myParent.find("select option:selected").text());
 						break;
-							
 					}
-
+          myParent.find(".ticket_sprite.pencil").css("display","inline-block");
+          me.css("display","none");
+          myParent.find(".ticket_sprite.cross").css("display","none");
 				})
 		)
 		.append(
