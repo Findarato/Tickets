@@ -42,11 +42,16 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 					me = $(this);
 					myParent = me.parent();
 					localStorage.setItem(myParent.attr("id"),myParent.find(".contentEdit").text());
-					//alert(myParent.find(".contentEdit").text());
-					
 					switch(type){
 						default:case "text":
 							edit = myParent.find(".contentEdit").attr("contentEditable","true").focus();
+						break;
+						case "textarea":
+						  edit = myParent.find(".contentEdit").text();
+              myParent.find(".contentEdit").html(
+                $("<textarea/>",{id:"editor"}).val(edit)
+              );
+              $("#editor").markItUp(mySettings);
 						break;
 						case "select":
 							edit = myParent.find(".contentEdit").text();
@@ -538,23 +543,23 @@ function loadTicketBody(inputData, container) {
 	 
 	/// Adding edit controls to the page
   
-  addEditControls(Params.UserId,container.find("#ticketBody"),"text",{},
+  addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
   function(userId,value,item){
     $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
-      
+      //do some stuff here      
     });
   });
 
   addEditControls(Params.UserId,container.find("#ticketPriority"),"select",Params.Priority_string,
   function(userId,value,item){
     $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
-      
+      //some actions need to happen
     });
   });
   addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Priority_string,
   function(userId,value,item){
+    //some actions need to happen
     $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
-      
     });
   });
 
