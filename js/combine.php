@@ -14,6 +14,8 @@ $files = array(
 'jquery.colorbox.js',
 'jquery.purr.js',
 'date.js',
+'markitup/jquery.markitup.js',
+'markitup/set.js',
 'globalFunctions.js',
 'tickets.js'
 );
