@@ -30,7 +30,7 @@
           </div> 
 					<div class="td" style="width:75px;"> <!-- Locked Area -->
             <div class="font-X openTicket hold actionButtons holdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
-              <span">Lock</span>
+              <span>Lock</span>
             </div>
             <div class="font-X openTicket hold actionButtons unholdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="unHoldlink" style="width:auto;margin-right:5px;display:none;padding:3px;">
               <span>unlock</span>
@@ -71,8 +71,8 @@
             <div id="locationBox" style="display:none;height:16px;">
                 <div class="font-X" id="ticketLocation" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Location</div>
             </div>
-  				<section id="ticketDataBox" style="display:block;padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:385px;overflow:auto;vertical-align:top; clear:both">
-  					<article id="ticketBody" style="display:block;"></article>
+  				<section id="ticketDataBox" style="display:block;padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:260px;overflow:auto;vertical-align:top; clear:both">
+  					<article id="ticketBody" style="display:block;height:260px;with:200px; overflow:auto"></article>
   				</section>
 			</div>
 			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
