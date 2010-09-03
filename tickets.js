@@ -515,10 +515,7 @@ function loadTicketBody(inputData, container) {
    .find("#ticketCategory")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"}})
-       .html(
-         $("<div/>",{id:"ticketCategoryDisplay",html:data.category})
-       )
+     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"},html:data.category})
    );
 
   container
@@ -544,10 +541,7 @@ function loadTicketBody(inputData, container) {
 	 .find("#ticketPriority")
 	 .addClass("ilb")
 	 .append(
-	   $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"}})
-	     .html(
-	       $("<div/>",{id:"ticketPriorityDisplay",html:Params.Priority_string[data.priority].name})
-	     )
+	   $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"},html:Params.Priority_string[data.priority].name})
 	 );
 	 
 	 
@@ -1144,6 +1138,12 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
+  
+  if(localStorage.getItem("version") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
+    localStorage.clear();
+    localStorage.setItem("version",$("#version").html()); 
+  }
+  
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
   
 	localStorage.tickets = "true";
