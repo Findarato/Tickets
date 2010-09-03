@@ -26,6 +26,7 @@ var Params = {
 	  5:{"id":5,"name":"Mission Critical"}
 	 },
 	"Categories":{}
+	
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
@@ -33,7 +34,7 @@ uri = uri.replace(window.location.hash, "");
 //alert($(window).width());
 
 function addEditControls(itemEdit,selector,type,obj,callBack){
-	callBack = callBack ? callBack : false;
+  callBack = callBack ? callBack : false;
 	idSelector = selector.attr("id");
 	selector
 		.append(
@@ -53,7 +54,17 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
               myParent.find(".contentEdit").html(
                 $("<textarea/>",{id:"editor"}).val(edit)
               );
+              //aec =  {markupSet: [{name:'Save', className:'ticket_sprite tick save', replaceWith:} ]};
+
+
+              mySettings.markupSet.save.replaceWith = function(markitup) {
+                callBack(itemEdit, $("#editor").val(), myParent.attr("id"));
+                myParent.find(".contentEdit").html(markitup.textarea.value);
+                myParent.find(".ticket_sprite.pencil").css("display","inline-block"); 
+              }; 
+              //test = $.extend({},aec,mySettings);
               $("#editor").markItUp(mySettings);
+              //$("#editor").markItUp(mySettings);
 						break;
 						case "select":
 							edit = myParent.find(".contentEdit").text();
@@ -152,8 +163,8 @@ function loadLargeBarGraph(selectorId,data,lables) {
     Bar.Set('chart.gutter',45);
     Bar.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
     Bar.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
-	Bar.Set('chart.linewidth', 2);
-	Bar.Set('chart.ylabels.count', 3);
+	  Bar.Set('chart.linewidth', 2);
+    Bar.Set('chart.ylabels.count', 3);
     Bar.Set('chart.filled', true);
     Bar.Set('chart.background.grid', true);
     Bar.Set('chart.colors', ['rgba(0,0,0,.60)']);
@@ -167,8 +178,8 @@ function loadLargeLineGraph(selectorId,data,lables) {
     line.Set('chart.gutter',45);
     line.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
     line.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
-	line.Set('chart.linewidth', 2);
-	line.Set('chart.ylabels.count', 3);
+    line.Set('chart.linewidth', 2);
+    line.Set('chart.ylabels.count', 3);
     line.Set('chart.filled', true);
     line.Set('chart.background.grid', true);
     line.Set('chart.colors', ['rgba(0,0,0,.60)']);
@@ -549,21 +560,22 @@ function loadTicketBody(inputData, container) {
   
   addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
   function(userId,value,item){
-    $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
+    $.getJSON("ajax/add_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
+      
       //do some stuff here      
     });
   });
 
   addEditControls(Params.UserId,container.find("#ticketPriority"),"select",Params.Priority_string,
   function(userId,value,item){
-    $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
+    $.getJSON("ajax/add_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
       //some actions need to happen
     });
   });
   addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Priority_string,
   function(userId,value,item){
     //some actions need to happen
-    $.getJSON("ajax/add_ticket.php",{"debug":1},function(){
+    $.getJSON("ajax/add_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
     });
   });
 

@@ -8,12 +8,13 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
       <span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XX</span>
-      <span style="font-size: 90%; line-height: normal;" id="version">v.2.15.21.r217</span>
+      <span style="font-size: 90%; line-height: normal;" id="version">v.2.17.23.r217</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
-        <li></li>
+        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/595">bug #595</a>.</li>
+        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/583">bug #583</a>.</li>
+        <li>Fixed a javascript uncaught TypeError bug that would happen when there were no responses on a ticket.</li>
       </ol>
-      <br>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
       <ol>
@@ -23,8 +24,14 @@
             <li>This will also work on a desktop, just resize your browser window down and see the results.</li>
           </ol>
         </li>
+        <li>Editing is totally revamped.
+          <ol>
+            <li>Tickets is now using the markitup editor that the main site is using</li>
+            <li>Tickets are now edited in line. Meaning you just click on the pencil and you are able to edit the ticket as you need.</li>
+          </ol>
+        </li>
+         <li>Recent Tickets has been removed from this version of tickets. Its going to be handled differently than before.</li>
       </ol>
-      <br>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
       <ol>
