@@ -8,11 +8,13 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
       <span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XX</span>
-      <span style="font-size: 90%; line-height: normal;" id="version">v.2.17.23.r217</span>
+      <span style="font-size: 90%; line-height: normal;" id="version">v.2.18.26.r217</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
         <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/595">bug #595</a>.</li>
         <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/583">bug #583</a>.</li>
+        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/602">bug #602</a>.</li>
+        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/604">bug #604</a>.</li>
         <li>Fixed a javascript uncaught TypeError bug that would happen when there were no responses on a ticket.</li>
       </ol>
       <br>
@@ -31,6 +33,7 @@
           </ol>
         </li>
          <li>Recent Tickets has been removed from this version of tickets. Its going to be handled differently than before.</li>
+         <li>Implemented  <a class="bug_link ticket_button ticket_sprite" href="#ticket/601">bug #601</a>.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
