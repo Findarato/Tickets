@@ -470,7 +470,17 @@ function loadTicketBody(inputData, container) {
 	container.find("#ticketId").html("Bug ID:");
 	container.find("#projectBox").show()
 	container.find("#categoryBox").hide();
-	container.find("#ticketProject").html($("<a/>",{"class":"fakelink ticket_button ticket_sprite task-arrow",href:"#ticketList/project/"+data.project_id,html:data.project_name}))
+	
+	container
+     .find("#ticketProject")
+     .addClass("ilb")
+     .append(
+       $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+         .html(
+           $("<div/>",{id:"ticketDueDateDisplay",html:data.project_name})
+         )
+     );
+	
 	
 	if(!bug){ //just ticket stuff
 		container.find("#projectBox").hide()
@@ -591,7 +601,16 @@ function loadTicketBody(inputData, container) {
 		$("#unHoldlink").hide();
 	}
 	if (data.closed_on !== null) { //All closed tickets
-		container.find("#ticketClosedOnDate").html(data.closed_on);
+	    container
+       .find("#ticketClosedOnDate")
+       .addClass("ilb")
+       .append(
+         $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+           .html(
+             $("<div/>",{id:"ticketClosedOnDateDisplay",html:data.closed_on})
+           )
+       );
+		
 		if (data.dagoc < 604800 || data.open == 1) { //newly closed
 			container.find(".openTicket").hide();
 			container.find(".closedTicket").show();
@@ -713,6 +732,7 @@ function loadTicket(ticketId,display) {
 function loadTicketList(pageNumber,queryObj) {
 	Params.LastArea = "ticketList";
 	var html = "";
+	var bugs = false;
 	if (pageNumber < 0) {
 		pageNumber = 0;
 	}
@@ -740,8 +760,10 @@ function loadTicketList(pageNumber,queryObj) {
 					a++;
 				}
 			}
+	    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1){bugs == true;}		
 		}	
 	}
+	
 	
 	$.getJSON(uri + "ajax/tickets.php", O_search, function (data) {
 		var s_ocd; //string open closed display
@@ -785,7 +807,6 @@ function loadTicketList(pageNumber,queryObj) {
 					});
 				}
 			}
-
 			tlistHolder.append($("#responsestpl").html());
 			tlistHolder.find("#changemeColor").addClass(color).attr({
 				"id": "Color" + item.id
@@ -802,50 +823,51 @@ function loadTicketList(pageNumber,queryObj) {
 			}).attr({
 				"id": "subject" + item.id
 			});
-			if (!OC) { //closed Ticket
-				if (item.timeRemaining !== null) { //Ticket with due date
-					if (item.timeTaken > item.timeAllowed) { //over due ticket
-						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-							"id": "duedate" + item.id
-						});
-						tlistHolder.find("#changemeTr").html($("<span/>").html("Time Allowed:" + sec2readable(item.timeAllowed))).attr({
-							"id": "duedatetr" + item.id
-						});
-						tlistHolder.find("#changemeTT").html("Time Taken:" + sec2readable(item.timeTaken)).attr({
-							"id": "timeTaken" + item.id
-						});
-					} else { //Completed on time or ahead of time
-						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-							"id": "duedate" + item.id
-						});
-						tlistHolder.find("#changemeTr").html(sec2readable(item.timeAllowed)).attr({
-							"id": "duedatetr" + item.id
-						});
-					}
-				} else { //old ticket
-					tlistHolder.find("#changemeTT").html("Time Taken: " + sec2readable(item.timeTaken)).attr({
-						"id": "timeTaken" + item.id
-					});
-				}
-
-			} else { //Open ticket
-				if (item.timeRemaining !== null) {
-					if (item.timeRemaining > 0) {
-						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-							"id": "duedate" + item.id
-						});
-						tlistHolder.find("#changemeTr").html($("<span/>").html("Over due by: "+sec2readable(item.timeRemaining))).attr({
-							"id": "duedatetr" + item.id
-						});
-					} else {
-						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-							"id": "duedate" + item.id
-						});
-						tlistHolder.find("#changemeTr").html("Time Remaining: "+sec2readable(item.timeRemaining)).attr({
-							"id": "duedatetr" + item.id
-						});
-					}
-				}
+			if(item.tickettype_id == 1){ //This information is only needed on tickets, not bug reports
+  			if (!OC) { //closed Ticket
+  				if (item.timeRemaining !== null) { //Ticket with due date
+  					if (item.timeTaken > item.timeAllowed) { //over due ticket
+  						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
+  							"id": "duedate" + item.id
+  						});
+  						tlistHolder.find("#changemeTr").html($("<span/>").html("Time Allowed:" + sec2readable(item.timeAllowed))).attr({
+  							"id": "duedatetr" + item.id
+  						});
+  						tlistHolder.find("#changemeTT").html("Time Taken:" + sec2readable(item.timeTaken)).attr({
+  							"id": "timeTaken" + item.id
+  						});
+  					} else { //Completed on time or ahead of time
+  						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
+  							"id": "duedate" + item.id
+  						});
+  						tlistHolder.find("#changemeTr").html(sec2readable(item.timeAllowed)).attr({
+  							"id": "duedatetr" + item.id
+  						});
+  					}
+  				} else { //old ticket
+  					tlistHolder.find("#changemeTT").html("Time Taken: " + sec2readable(item.timeTaken)).attr({
+  						"id": "timeTaken" + item.id
+  					});
+  				}
+        }else { //Open ticket
+  				if (item.timeRemaining !== null) {
+  					if (item.timeRemaining > 0) {
+  						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
+  							"id": "duedate" + item.id
+  						});
+  						tlistHolder.find("#changemeTr").html($("<span/>").html("Over due by: "+sec2readable(item.timeRemaining))).attr({
+  							"id": "duedatetr" + item.id
+  						});
+  					} else {
+  						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
+  							"id": "duedate" + item.id
+  						});
+  						tlistHolder.find("#changemeTr").html("Time Remaining: "+sec2readable(item.timeRemaining)).attr({
+  							"id": "duedatetr" + item.id
+  						});
+  					}
+  				}
+  			}
 			}
 			tlistHolder.find("#changemeBody").html(item.description).attr({
 				"id": "body" + item.id
@@ -871,13 +893,6 @@ function loadTicketList(pageNumber,queryObj) {
 			displayStatus(item.status, tlistHolder.find("#"+item.id+"-ticketListIcons")); //status icons
 		});
 		Tlb.html(tlistHolder);
-		
-		$(".popImageSmallLink").colorbox({
-			transition: "none",
-			open: false,
-			photo:true,
-			title: "<font class=\"white\">Zoomed Image</font>"
-		});
 	});
 }
 function loadUserPage(userId){
@@ -1486,7 +1501,7 @@ jQuery(document).ready(function () {
 			checkResponse(data);
 			localStorage.removeItem("TicketId"+Params.Ticket_id);
 
-			loadTicket(Params.Ticket_id, true);
+			loadTicket(Params.Ticket_id);
 			//loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
 		});
 	});
