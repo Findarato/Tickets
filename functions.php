@@ -64,24 +64,30 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 		switch($match[0]){
 			case "ticket":
 				if($email){
-					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
 				}else{
 					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
 			break;
+      case "bug":
+        if($email){
+          $formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+        }else{
+          $formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+        }
+        $formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);     
+      break;
+
 			case "user":
 				$userinfo = id2Username($match[1]);
 				if($email){
 					$formated1 = "
-						<a href=\"http://www.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>"
-						."<a href=\"\#userPage/\"><div class=\"ticket_sprite information\" style=\"display:inline-block;\"></div></a>
-						";
+						<a href=\"http://www.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"user ticket_link ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
 				}else{
 					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user ticket_link ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>"
 					."<a class=\"nolink\" href=\"#userPage/".$match[1]."\"><div class=\"ticket_sprite information\" style=\"display:inline-block;\"></div></a>
 					";
-					
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
 			break;
