@@ -3,6 +3,7 @@ include_once "../small_header.php";
 header('Content-type: application/json');
 $response = array("tickets"=>"","replies"=>"");
 $usr = unserialize($_SESSION['user']);
+if(isset($_SESSION['user'])){
 	$dt = $db->Clean($_GET["dateTime"]);
 	$dt = date("Y-m-d H:m:s",$dt-60);
 	$sql = "SELECT tcv.subject,tcv.id,TIMESTAMPDIFF(SECOND ,tcv.created_on, NOW() ) AS tsd
@@ -25,5 +26,9 @@ $usr = unserialize($_SESSION['user']);
 	 AND ticket_id IN (".join(",",$ids).")";
 	$db->Query($sql);
 	$response["replies"] = $db->Fetch("assoc_array");
+	$response["status"]="1";
+}else{ //the user is logged out and needs to be notified.
+  $response["status"]="0";
+}
 echo json_encode($response);
 ?>

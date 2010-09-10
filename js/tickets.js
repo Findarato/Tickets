@@ -200,11 +200,15 @@ function checkNotify(dt) {
 		$.each(data.replies, function (i, item) {
 			if (item.ticket_id > 1) {
 				notice("New Response!", item.subject, true, item.ticket_id);
-			}
-		});
+			} 
+    });
+   if(data.status==0){
+     notice("Error","You have been logged out for inactivity",true);     
+   }
 	});
 	var dat = new Date();
 	Lastcheck = Math.round(dat.getTime() / 1000.0); //set the global variable to now
+	
 }
 
 function resize() {
@@ -628,40 +632,6 @@ function loadTicketBody(inputData, container) {
 	}
 	var pri = parseInt(container.find("#ticketPriority").text() - 2, 10);
 	$("#replyareaTitle").text("Replies (" + data.responseCount + ")"); //display the total response count
-/*
-	$('#editlink').colorbox({
-		iframe: false,
-		transition: "none",
-		open: false,
-		inline: true,
-		href: "#newTicketdialog",
-		title: "<font class=\"white\">Edit Ticket</font>"
-	}, function () {
-	  $("#ticketAssignBox").hide();
-		$("#newTicketDescription").val(Params.TicketJSON.dbDescription);
-		$("#newTicketTitle").val(Params.TicketJSON.subject);
-		$("#newTicketLocation").val(Params.TicketJSON.locationName);
-		$("#newTicketTicket_id").val(Params.TicketJSON.id);
-		$("#newTicketType").val("edit");
-		$("#newTicketPriority").val(Params.TicketJSON.priority - 1);
-		$("#newTicketAssign").val(Params.TicketJSON.firstname + " " + Params.TicketJSON.lastname);
-		$("#newTicketCategory").val(Params.TicketJSON.category);
-		$("#newTicketDueDate").val(Params.TicketJSON.due_on);
-		$("#ticketAddBtn").text("Commit Changes").css("width","auto");
-		$("#newTicketDueDate").val(Date.today().add({
-			days: 3
-		}).toString("M/d/yyyy")).blur(function () {
-			var cleanDate = Date.parse($(this).val(), "M/d/yyyy");
-			if (cleanDate === null) {
-				notice("Error", "bad date", false);
-				$("#ticketAddBtn").hide();
-			} else {
-				$(this).val(cleanDate.toString("M/d/yyyy"));
-				$("#ticketAddBtn").show();
-			}
-		});
-	});
-	*/
 	$('#replylink').colorbox({
 		iframe: false,
 		transition: "none",
@@ -760,7 +730,7 @@ function loadTicketList(pageNumber,queryObj) {
 					a++;
 				}
 			}
-	    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1){bugs == true;}		
+	    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1){$("#ticketListtitle").html("Bug search Result");}		
 		}	
 	}
 	
@@ -776,123 +746,59 @@ function loadTicketList(pageNumber,queryObj) {
 			Tlb.html("There are no tickets that match this search")
 			return;
 		}
+		 displayTable = $("<table/>",{css:{"border":1,"width":"100%"},id:"ticketListTable"});
+		if(O_search.bugs_open == 1){ //bugs display
+		 displayTable.html("<tr><td>&nbsp;</td><td>ID</td><td>Title</td><td>Project</td><td>Created By</td><td>Created On</td></tr>");
+		}else{ //tickets display
+		 displayTable.html("<tr><td>&nbsp;</td><td>ID</td><td>Title</td><td>Location</td><td>Priority</td><td>Category</td><td>Created By</td><td>Due On</td></tr>");
+		}		
+    var display = 
+      $("<div/>",{css:{"width":"100%"}})
+        .html(
+          $("<div/>",{"class":"corners-top-2 color-B-2",css:{"width":"100%"}})
+        )
+        .append(
+          $("<div/>",{css:{"width":"100%"}})
+            .append(displayTable)
+        );
 		$.each(data.tickets, function (i, item) {
-			var OC = false;
-			if (i % 2 == 1) {
-				var color = "background-alpha-4";
-			} else {
-				var color = "background-alpha-3";
-			}
-			if (item.timeRemaining === null) {} else {} if (item.open === 0) {
-				s_ocd = $("<span/>").html("Closed").addClass("font-L font-bold").css({
-					paddingLeft: "3px",
-					fontSize: "9px"
-				});
-			} else {
-				OC = true;
-				s_ocd = $("<span/>").html("");
-			}
-			if (item.timeRemaining === null) {
-				s_tr = $("<span/>").html("");
-			} else {
-				if (item.open == 0) { //closed_on
-					s_tr = $("<span/>").html("Closed On: " + Date.parse(item.closed_on).toString("M/d/yyyy HH:mm")).css({
-						"paddingLeft": "3px",
-						"fontSize": "9px"
-					});
-				}else {
-					s_tr = $("<span/>").html("Due On: " + Date.parse(item.due_on).toString("M/d/yyyy HH:mm")).css({
-						"paddingLeft": "3px",
-						"fontSize": "9px"
-					});
-				}
-			}
-			tlistHolder.append($("#responsestpl").html());
-			tlistHolder.find("#changemeColor").addClass(color).attr({
-				"id": "Color" + item.id
-			});
-			tlistHolder.find("#changemeUserid").html($("<a/>").attr({
-				"href": "#ticketList/assigned/" + item.assigned_id
-			}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname + " " + item.lastname)).attr({
-				"id": "User" + item.id
-			});
-			tlistHolder.find("#changemeSubject").html($("<a/>").attr({
-				"href": "#ticket/" + item.id
-			}).addClass("nolink").html(item.subject)).append(s_ocd).css({
-				"fontWeight": "bold"
-			}).attr({
-				"id": "subject" + item.id
-			});
-			if(item.tickettype_id == 1){ //This information is only needed on tickets, not bug reports
-  			if (!OC) { //closed Ticket
-  				if (item.timeRemaining !== null) { //Ticket with due date
-  					if (item.timeTaken > item.timeAllowed) { //over due ticket
-  						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-  							"id": "duedate" + item.id
-  						});
-  						tlistHolder.find("#changemeTr").html($("<span/>").html("Time Allowed:" + sec2readable(item.timeAllowed))).attr({
-  							"id": "duedatetr" + item.id
-  						});
-  						tlistHolder.find("#changemeTT").html("Time Taken:" + sec2readable(item.timeTaken)).attr({
-  							"id": "timeTaken" + item.id
-  						});
-  					} else { //Completed on time or ahead of time
-  						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-  							"id": "duedate" + item.id
-  						});
-  						tlistHolder.find("#changemeTr").html(sec2readable(item.timeAllowed)).attr({
-  							"id": "duedatetr" + item.id
-  						});
-  					}
-  				} else { //old ticket
-  					tlistHolder.find("#changemeTT").html("Time Taken: " + sec2readable(item.timeTaken)).attr({
-  						"id": "timeTaken" + item.id
-  					});
-  				}
-        }else { //Open ticket
-  				if (item.timeRemaining !== null) {
-  					if (item.timeRemaining > 0) {
-  						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-  							"id": "duedate" + item.id
-  						});
-  						tlistHolder.find("#changemeTr").html($("<span/>").html("Over due by: "+sec2readable(item.timeRemaining))).attr({
-  							"id": "duedatetr" + item.id
-  						});
-  					} else {
-  						tlistHolder.find("#changemeDueDate").html(s_tr).attr({
-  							"id": "duedate" + item.id
-  						});
-  						tlistHolder.find("#changemeTr").html("Time Remaining: "+sec2readable(item.timeRemaining)).attr({
-  							"id": "duedatetr" + item.id
-  						});
-  					}
-  				}
-  			}
-			}
-			tlistHolder.find("#changemeBody").html(item.description).attr({
-				"id": "body" + item.id
-			});
-			tlistHolder.find("#changemeDay").html(sec2readable(item.dago)).attr({
-				"id": "created" + item.id
-			});
-			tlistHolder.find("#changemeCategory").html("Category: ").append($("<a/>").attr({
-				"href": "#ticketList/category/" + item.category
-			}).addClass("nolink category_link").html(item.category)).css({
-				"fontSize": "9px"
-			}).attr({
-				"id": "category" + item.id
-			});
-			tlistHolder.find("#changemeAssignedid").html("Created By:").append($("<a/>").attr({
-				"href": "#ticketList/created_by/" + item.created_by_id
-			}).addClass("nolink user ticket_button ticket_sprite").html(item.firstname2 + " " + item.lastname2)).css({
-				"fontSize": "9px"
-			}).attr({
-				"id": "CreatedBy" + item.id
-			});
-			tlistHolder.find("#changemeTicketListIcons").attr("id",item.id+"-ticketListIcons")
-			displayStatus(item.status, tlistHolder.find("#"+item.id+"-ticketListIcons")); //status icons
+		  //Starting a whole new javascript only approach.
+		  displayTable
+		    .append(
+		     $("<tr/>")
+		      .html(
+		        $("<td/>")
+		          .html(
+                $("<div/>",{id:"bookmark"+item.id,css:{},"class":"bookmark-off ticket_sprite"})		          
+		          )
+		      )
+		      .append($("<td/>")
+		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold").html(item.id).attr({"id": "ID" + item.id })) 
+		      ) 
+		      .append($("<td/>")
+		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold").html(item.subject).attr({"id": "subject" + item.id }))
+		      )
+		      .append($("<td/>").html(item.locationName))
+		      .append( 
+		        $("<td/>")
+		          .html(
+    		        function(i,html){
+    		         if(item.priority>0){
+    		           if(item.priority>5){item.priority = item.priority-5;}
+    		           result = Params.Priority_string[item.priority].name;}
+    		         else{result = Params.Priority_string[0].name;}
+    		         return result;
+    		        }
+    		      )
+    		   )
+		      .append($("<td/>").html(item.category))
+		      .append($("<td/>").html(item.firstname2+" "+item.lastname2))
+		      .append($("<td/>").html(item.due_on))
+		    )
 		});
-		Tlb.html(tlistHolder);
+
+		Tlb.html(display);
+		$("#ticketListTable tr:odd").addClass("color-A-3")
 	});
 }
 function loadUserPage(userId){
@@ -1466,6 +1372,9 @@ jQuery(document).ready(function () {
 				}else if(($("#newTicketDueDate").val() === "" && ticketBug.val() == 1)){
 					notice("Error", "You must enter a Due date", false);
 					return false;
+				 }else if($("#newTicketAssign").val()==0){
+          notice("Error", "You must select a user!", false);
+          return false;
 				 }else {
 					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
 						/*
