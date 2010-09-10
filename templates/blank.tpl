@@ -15,6 +15,7 @@
         <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/583">bug #583</a>.</li>
         <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/602">bug #602</a>.</li>
         <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/604">bug #604</a>.</li>
+        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/605">bug #605</a>.</li>
         <li>Fixed a javascript uncaught TypeError bug that would happen when there were no responses on a ticket.</li>
       </ol>
       <br>
@@ -34,6 +35,7 @@
         </li>
          <li>Recent Tickets has been removed from this version of tickets. Its going to be handled differently than before.</li>
          <li>Implemented  <a class="bug_link ticket_button ticket_sprite" href="#ticket/601">bug #601</a>.</li>
+         <li>Tickets are now sorted by priority then due date</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>

@@ -76,7 +76,7 @@ function countTickets($user_id,$type="open"){
  * 
  * @todo Figure out a way to search by user name 
  */
-function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
+function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 	$db = db::getInstance();
 	$sql = "";
 	$wc = array();
@@ -90,10 +90,12 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 			$sc[]="t.description AS description";
 			$sc[]="t.status";
 			$sc[]="t.tickettype_id";
-			$sql = "SELECT ".join(",",$sc).",t.id,t.subject,t.created_on, t.due_on,
+			$sql = "SELECT ".join(",",$sc).",t.id,t.subject,
+			DATE_FORMAT(t.created_on,'%c.%d.Y%') AS created_on,
+			DATE_FORMAT(t.due_on,'%c.%d.Y%') AS due_on,
 			TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago,
 			TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,			
-			t.due_on,TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining 
+			TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining 
 			FROM tcview AS t JOIN favorite AS f ON (t.id=f.ticket_id) WHERE f.user_id=".$user_id." ORDER BY  created_on  LIMIT 0,$amount";
 		break;
 		case "search":
@@ -156,7 +158,7 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 						//$wc[]="tcv.assigned_id=".$usr->User_id;
 					break;
 					case "page":
-						$end = 20;
+						$end = 30;
 						$start = ($k*$end);
 						$limit = $amount*$s;
 						$amount = $limit+$amount;
@@ -190,38 +192,24 @@ function getTickets($user_id,$type,$amount=10,$style=1,$search=array()){
 				$sc[]="tcv.description AS description";
 				$sc[]="tcv.status";
 				$sc[]="tcv.tickettype_id";
-				$sql = 'SELECT '.join(",",$sc).',tcv.open,tcv.id,tcv.assigned_id,tcv.subject,tcv.created_on,
+				$sql = 'SELECT '.join(",",$sc).',tcv.open,tcv.id,tcv.assigned_id,tcv.subject,
+				    DATE_FORMAT(tcv.created_on,"%c.%d.%Y") AS created_on,
+            DATE_FORMAT(tcv.due_on,"%c.%d.%Y") AS due_on,
 						tcv.closed_on,tcv.category,tcv.category_id,tcv.created_by_id, 
 						TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
 						lhu.username,lhu.firstname,lhu.lastname, lhu2.firstname AS firstname2,lhu2.lastname AS lastname2,lhu2.username AS username2,
-						tcv.due_on,
 						TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,
 						TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,
 						TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.due_on ) AS timeAllowed,
-						tcv.locationId,tcv.locationName  
+						tcv.locationId,tcv.locationName,tcv.priority
 						FROM tcview AS tcv 
 						JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 						JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
-						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC ';	
-						
+						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.priority DESC,tcv.due_on DESC ';	
 			}
 			
 		break;
-		default: case "small":
-			switch ($style){
-				default:case 1:
-				$sc[]="tcv.id";
-				$sc[]="tcv.status";
-				$sc[]="tcv.tickettype_id";
-				$sql = "SELECT ".join(",",$sc).",tcv.subject, 
-								tcv.due_on,TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,
-								TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken 
-								FROM tcview AS tcv 
-								JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
-								JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
-								WHERE ".getWhereClause($user_id,$type)." GROUP BY tcv.id ORDER BY tcv.due_on ASC,created_on DESC LIMIT 20;";
-				break;
-			}
+		default: 
 		break;
 	}
 	$db->Query($sql);
@@ -338,7 +326,7 @@ if(isset($_SESSION["user"])){ //the session is set
 
 			break;
 			case "search":
-				$response["tickets"] = getTickets($usr->User_id,"search",10,'',$_GET);
+				$response["tickets"] = getTickets($usr->User_id,"search",100,'',$_GET);
 				if($response["tickets"]){
 					$response["tickets"] = aTcode($response["tickets"]);	
 				}
