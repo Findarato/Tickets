@@ -102,18 +102,17 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 			foreach ($search as $k=>$s){
 				switch($k){
 					default:break;
-
 					case "location":
 						$wc[]="tcv.locationId=\"".$s."\"";
 					break;
 					case "dateTime":
 						switch($s){
 							case "0":
-		                      	if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
+		            if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
 									$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
-	                        	}else{ 
+	              }else{ 
 									$dt = date("Y-m-d H:m:s");
-	                        	}
+	              }
 							break;
 							default:
 								$dt = date("Y-m-d H:m:s",$s-60);
@@ -122,23 +121,21 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 								$dt = date("Y-m-d H:m:s",strtotime("today"));
 							break;
 						}
-						
-						//$dt = date("Y-m-d H:m:s",strtotime("3/19/2010"));
 						//new tickets
-                        $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
+            $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
 						//die($sql);
 						$db->Query($sql);
-                        $ticketIds = $db->Fetch("row",false,false);
+            $ticketIds = $db->Fetch("row",false,false);
 						//new replies
-                        $sql = "SELECT tcv.id FROM tcview AS tcv WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
+            $sql = "SELECT tcv.id FROM tcview AS tcv WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
 						$db->Query($sql);
-                        $replyTicketids = $db->Fetch("row",false,false);
+            $replyTicketids = $db->Fetch("row",false,false);
 						if(!is_array($replyTicketids)){$replyTicketids = array(0=>$replyTicketids);}else{$replyTicketids = array_implode($replyTicketids);}
 						
 						
 						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
 						$db->Query($sql);
-                        $response = $db->Fetch("row",false,false);
+            $response = $db->Fetch("row",false,false);
 
 						//some simple error checking.
 						if(!is_array($ticketIds)){if($ticketIds == ""){$ticketIds = 0;}$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
@@ -146,11 +143,11 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						if(!is_array($response)){if($response == ""){$response = 0;}$response = array(0=>$response);}else{$response = array_implode($response);}
 						
 						$ticketIds = array_merge($ticketIds,$response);
-                        if($ticketIds){
-                        	$wc[]="tcv.id IN(".join(",",$ticketIds).")";
-                        }else{
-                        	$wc[]="tcv.id in(0,0)";
-                        }
+            if($ticketIds){
+            	$wc[]="tcv.id IN(".join(",",$ticketIds).")";
+            }else{
+            	$wc[]="tcv.id in(0,0)";
+            }
 					break;
 					case "open":
 						$wc[]="tcv.open=\"".$s."\"";
@@ -163,9 +160,9 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						$limit = $amount*$s;
 						$amount = $limit+$amount;
 						break;
-					case "sFavorite": 
-						$db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id);
-						$favIds = $db->Fetch("row",false,false);
+					case "sFavorite":
+						$favIds = $db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id,false,"row",false,false);
+            $response["favIds"] = json_encode($favIds);
 						if(is_array($favIds)){
 							$favIds = array_implode($favIds);
 						}else{//This is only one result
@@ -185,7 +182,6 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 					case "sOpen":$wc[]="tcv.open=1";$wc[]="tcv.assigned_id=".$usr->User_id;$wc[]="tcv.tickettype_id=1";break;
 					case "bugs_open": $wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=2";break;
 					case "bugs_closed": $wc[]="tcv.open=0";$wc[]="tcv.tickettype_id=2";break;
-									
 				}				
 			}
 			if($type!="favorite"){
@@ -335,25 +331,21 @@ if(isset($_SESSION["user"])){ //the session is set
 				if(isset($_GET['index'])){
 					   	switch($_GET['index']){
 							case "all": //merged all ticket requests into one large return to reduce requests
-								if(!isset($_GET['area'])){$_GET['area']="none";}
-					   			switch($_GET['index']){
-					   				case "o":$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));break;
-									case "c":$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));break;
-					   				case "a":$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));break;
-									case "od":$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));break;
-									case "ad":$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));break;
-									case "f":$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));break;									
-									default:
-										$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));
-										$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));
-										$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));
-										$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));
-										$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));								
-										$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));
-									break;
-								}
-								$response["message"]="All Ticket lists generated Successfully";
+								$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));
+								$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));
+								$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));
+								$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));
+								$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));								
+								$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));
+                $response["message"]="All Ticket lists generated Successfully";
 							break;
+              case "o":$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));break;
+              case "c":$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));break;
+              case "a":$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));break;
+              case "od":$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));break;
+              case "ad":$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));break;
+              case "f":$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));break;
+              case "flist":$response["favIds"] = array_implode($db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id,false,"row",false,false));break;                 
 							default:
 								$response["error"]="The wrong type index is being passed!";
 							break;								

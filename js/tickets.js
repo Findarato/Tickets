@@ -25,7 +25,8 @@ var Params = {
 	  4:{"id":4,"name":"Important"},
 	  5:{"id":5,"name":"Mission Critical"}
 	 },
-	"Categories":{}
+	"Categories":{},
+	"FavoriteObject":[]
 	
 };
 var uri = window.location.toString();
@@ -135,6 +136,11 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 					myParent.find(".contentEdit").text(localStorage.getItem(myParent.attr("id")));
 				})
 		)
+}
+
+function updateFavorites(){
+  localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
+  //alert(JSON.stringify(Params.FavoriteObject));
 }
 
 function checkResponse(json) {
@@ -403,35 +409,6 @@ function displayStatus(jsonData, Selector) {
 			default:
 				break;
 		}
-	});
-}
-/**
- * Simple function to build and display the recent tickets data
- * @param {Object} jsonData
- * @param jQuery Selector Object selector
- */
-
-function loadRecentTickets(jsonData, selector) {
-	selector.empty();
-	$.each(jsonData, function (t, tl) {
-		selector.append(
-		$("<div/>").css({
-			overflow: "hidden",
-			width: "150px",
-			height: "15px"
-		}).html(
-		$("<a/>").attr("href", "#ticket/" + tl.ticket_id).addClass("ticket_link ticket_button ticket_sprite").css({
-			fontSize: "135%"
-		}).html(tl.ticket_name.replace(/\+/g, " "))));
-		selector.append(
-		$("<div/>").css({
-			overflow: "hidden",
-			width: "150px",
-			height: "15px",
-			paddingBottom: "5px"
-		}).html($("<span/>").css({
-			fontSize: "9px"
-		}).html(tl.dt)));
 	});
 }
 
@@ -738,8 +715,12 @@ function loadTicketList(pageNumber,queryObj) {
 	$.getJSON(uri + "ajax/tickets.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
-		Params.Content.html($("#generic").html());
 		Tlb = Params.Content.find("#ticketListbody");
+		if(Tlb.html() === null){
+		  Params.Content.html($("#generic").html());
+		  Tlb = Params.Content.find("#ticketListbody");
+		}
+		//Tlb.fadeOut("fast");
 		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
 		var tlistHolder = $("<div/>");
 		if(!data.tickets){ //there are no tickets to display
@@ -750,7 +731,7 @@ function loadTicketList(pageNumber,queryObj) {
 		if(O_search.bugs_open == 1){ //bugs display
 		 displayTable.html("<tr><td>&nbsp;</td><td>ID</td><td>Title</td><td>Project</td><td>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td>&nbsp;</td><td>ID</td><td>Title</td><td>Location</td><td>Priority</td><td>Category</td><td>Created By</td><td>Due On</td></tr>");
+		 displayTable.html("<tr><td>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Location</td><td>Priority</td><td>Category</td><td>Created By</td><td>Due On</td></tr>");
 		}		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
@@ -763,17 +744,47 @@ function loadTicketList(pageNumber,queryObj) {
         );
 		$.each(data.tickets, function (i, item) {
 		  //Starting a whole new javascript only approach.
+		  //alert(typeof Params.FavoriteObject[item.id])
+		  //alert(item.id);
+		  //alert(item.id in Params.FavoriteObject)
+		  bmClass = "bookmark-off";
+		  for(var a in Params.FavoriteObject){
+		    if(Params.FavoriteObject[a]==item.id){
+		      bmClass = "bookmark";
+		    }
+		  }
 		  displayTable
 		    .append(
 		     $("<tr/>")
 		      .html(
 		        $("<td/>")
 		          .html(
-                $("<div/>",{id:"bookmark"+item.id,css:{},"class":"bookmark-off ticket_sprite"})		          
-		          )
+                $("<div/>",{id:"bookmark"+item.id,css:{},"class":" ticket_sprite fakelink "+bmClass})
+                .click(function(){
+                  me = $(this);
+                  if(me.hasClass("bookmark-off")){favVal = 1;}else{favVal = 0;}
+                  bookmarkId = this.id.replace("bookmark","");
+                  $.getJSON("ajax/tickets.php",{"type":"favorite","ticket_id":bookmarkId,"favorite":favVal},function(data){
+                    checkResponse(data);
+                    if(favVal ==0){//removing a favorite
+                      for(var i in Params.FavoriteObject){
+                        if(Params.FavoriteObject[i]==bookmarkId){
+                          //alert(Params.FavoriteObject[i]);
+                          delete Params.FavoriteObject[i];
+                        }
+                      }
+                    }else{
+                      Params.FavoriteObject[Params.FavoriteObject.length+1] = bookmarkId;
+                    }
+                   // alert(JSON.stringify(Params.FavoriteObject));
+                    updateFavorites();
+                  });
+                  me.toggleClass("bookmark-off").toggleClass("bookmark");
+                })
+              )
 		      )
 		      .append($("<td/>")
-		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold").html(item.id).attr({"id": "ID" + item.id })) 
+		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink").html(item.id).attr({"id": "ID" + item.id })) 
 		      ) 
 		      .append($("<td/>")
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold").html(item.subject).attr({"id": "subject" + item.id }))
@@ -799,6 +810,7 @@ function loadTicketList(pageNumber,queryObj) {
 
 		Tlb.html(display);
 		$("#ticketListTable tr:odd").addClass("color-A-3")
+		//Tlb.fadeIn("fast");
 	});
 }
 function loadUserPage(userId){
@@ -1071,6 +1083,15 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
+  localStorage.clear();
+  if(!localStorage.getItem("ticketsFavorite")){
+    $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
+      Params.FavoriteObject = data.favIds;
+      updateFavorites();
+    })
+  }else{
+    Params.FavoriteObject = $.parseJSON(localStorage.getItem("ticketsFavorite"));
+  }
   
   if(localStorage.getItem("version") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
     localStorage.clear();
