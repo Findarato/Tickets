@@ -739,7 +739,7 @@ function loadTicketList(pageNumber,queryObj) {
 			Tlb.html("There are no tickets that match this search")
 			return;
 		}
-		 displayTable = $("<table/>",{"class":"border-all-B-2","cellpadding":"2px","cellspacing":"0",css:{"border":1,"width":"100%"},id:"ticketListTable"});
+		 displayTable = $("<table/>",{"class":"","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
 		if(O_search.bugs_open == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Project</td><td>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
@@ -764,7 +764,7 @@ function loadTicketList(pageNumber,queryObj) {
 		  displayTable
 		    .append(
 		     $("<tr/>")
-		      .addClass("border-all-B-2")
+		      .css({"padding":"3px 0"})
 		      .html(
 		        $("<td/>")
 		          .html(
@@ -793,14 +793,17 @@ function loadTicketList(pageNumber,queryObj) {
               )
 		      )
 		      .append($("<td/>")
+		        .addClass("border-bottom-I-1-35")
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink").html(item.id).attr({"id": "ID" + item.id })) 
 		      ) 
 		      .append($("<td/>")
+		        .addClass("border-bottom-I-1-35")
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold").html(item.subject).attr({"id": "subject" + item.id }))
 		      )
-		      .append($("<td/>").html(item.locationName))
+		      .append($("<td/>").html(item.locationName).addClass("border-bottom-I-1-35"))
 		      .append( 
 		        $("<td/>")
+		          .addClass("border-bottom-I-1-35")
 		          .html(
     		        function(i,html){
     		         if(item.priority>0){
@@ -811,9 +814,9 @@ function loadTicketList(pageNumber,queryObj) {
     		        }
     		      )
     		   )
-		      .append($("<td/>").html(item.category))
-		      .append($("<td/>").html(item.firstname2+" "+item.lastname2))
-		      .append($("<td/>").html(item.due_on))
+		      .append($("<td/>").html(item.category).addClass("border-bottom-I-1-35"))
+		      .append($("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35"))
+		      .append($("<td/>").html(item.due_on).addClass("border-bottom-I-1-35"))
 		    )
 		});
 
