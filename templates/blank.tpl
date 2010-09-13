@@ -36,6 +36,7 @@
          <li>Recent Tickets has been removed from this version of tickets. Its going to be handled differently than before.</li>
          <li>Implemented  <a class="bug_link ticket_button ticket_sprite" href="#ticket/601">bug #601</a>.</li>
          <li>Tickets are now sorted by priority then due date</li>
+         <li>Bookmarks are now done in line vs though a toolbar button.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>

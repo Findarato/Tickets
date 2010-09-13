@@ -7,7 +7,6 @@
 	<div class="left font-Y font-bold ticket_button fakelink" id="topperNewBug" style="width:auto"><span class="ticket_button ticket_sprite bug"><span class="topperText">New Bug Report</div></span></span>
 	<div class="left font-Y font-bold ticket_button fakelink" id="topperSearch" style="width:auto"><span class="ticket_button ticket_sprite magnifier"><span class="topperText">Search</div></span></span>
 	<!--<div class="left font-Y font-bold ticket_button fakelink" id="topperRecent" style="width:auto" title="Toggle Recent"><span class="ticket_button ticket_sprite ticket"><span class="topperText">Recent Tickets</span></span></div>-->
-	<div class="left font-Y font-bold ticket_button fakelink" id="t_fT" style="width:auto" title="Toggle Bookmark"><span class="ticket_button ticket_sprite bookmark"><span class="topperText">Bookmark</span></span></div>
 	<div class="left font-Y font-bold ticket_button fakelink" id="replyToggle" style="width:auto" title="Toggle Replies">
 	 <span class="ticket_button ticket_sprite eye">
 	   <span class="topperText">Toggle Replies</span>
