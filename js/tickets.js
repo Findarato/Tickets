@@ -385,7 +385,6 @@ function loadResponsesBody(ticketId, container, page) {
 	});
 	container.show();
 }
-
 function displayStatus(jsonData, Selector) {
 	$.each(jsonData, function (key, item) {
 		switch (key) {
@@ -437,7 +436,14 @@ function loadTicketBody(inputData, container) {
 	container.find(".statusImage ").hide();
 	Params.Ticket_id = ticketId = data.id; //set the global
 	Params.TicketJSON = data;
-	container.find("#ticketTitle").html(data.subject);
+	
+	bmClass = "bookmark-off";
+  for(var a in Params.FavoriteObject){
+    if(Params.FavoriteObject[a]==data.id){
+      bmClass = "bookmark";
+    }
+  }
+	container.find("#ticketTitle").html(data.subject).addClass(bmClass).attr({"name":"bookmark"+data.id});
 	container
    .find("#ticketDate")
    .addClass("ilb")
@@ -471,8 +477,6 @@ function loadTicketBody(inputData, container) {
 		container.find("#assignedToBox").show();
 		container.find("#locationBox").show();
 		container.find("#lockBox").show();
-
-//		if (data.timeRemaining > 0) { //ticket is over due.
     
    container
      .find("#ticketDueDate")
@@ -552,7 +556,6 @@ function loadTicketBody(inputData, container) {
   addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
   function(userId,value,item){
     $.getJSON("ajax/add_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
-      
       //do some stuff here      
     });
   });
@@ -570,10 +573,6 @@ function loadTicketBody(inputData, container) {
     });
   });
 
-
-	if (data.favorite !== null && data.favorite!==0) {
-		container.find("#imgBookmark").show();
-	}
 	if (data.status.lock == 1) {
 		$("#Holdlink").hide();
 		$("#unHoldlink").show();
@@ -628,12 +627,6 @@ function loadTicketBody(inputData, container) {
 		href: "#reassignTicketdialog",
 		title: "<font class=\"white\">Reassign Ticket</font>"
 	});
-	$(".popImageSmallLink").colorbox({
-		transition: "none",
-		open: false,
-		photo:true,
-		title: "<span class=\"white\">Zoomed Image</span>"
-	});
 	//Set the ticket type icon
 	if (data.tickettype_id == 1) {
 		$("#ticketStatusImage").find("#imgTicketTrouble").show();
@@ -644,8 +637,27 @@ function loadTicketBody(inputData, container) {
 	}
 	//Run some functions to deal with the data.	
 	pageAnator(container.find("#pageAnator").empty(), data.responseCount, 20); //add Page numbers
-	//loadRecentTickets(data.recentTickets, $("#recentTickets")); //Recent ticket list
 	displayStatus(data.status, container.find("#ticketStatusImage")); //status icons
+	
+	$("#ticketTitle").click(function(){
+	  me = $(this)
+    if(me.hasClass("bookmark-off")){favVal = 1;}else{favVal = 0;}
+    bookmarkId = me.attr("name").replace("bookmark","");
+    $.getJSON("ajax/tickets.php",{"type":"favorite","ticket_id":bookmarkId,"favorite":favVal},function(data){
+      checkResponse(data);
+      if(favVal ==0){//removing a favorite
+        for(var i in Params.FavoriteObject){
+          if(Params.FavoriteObject[i]==bookmarkId){
+           delete Params.FavoriteObject[i];
+          }
+        }
+      }else{
+        Params.FavoriteObject[Params.FavoriteObject.length+1] = bookmarkId;
+      }
+      updateFavorites();
+    });
+    me.toggleClass("bookmark-off").toggleClass("bookmark");
+	});
 }
 /**
  * Loads the ticket value into the display
@@ -727,11 +739,11 @@ function loadTicketList(pageNumber,queryObj) {
 			Tlb.html("There are no tickets that match this search")
 			return;
 		}
-		 displayTable = $("<table/>",{css:{"border":1,"width":"100%"},id:"ticketListTable"});
+		 displayTable = $("<table/>",{"class":"border-all-B-2","cellpadding":"2px","cellspacing":"0",css:{"border":1,"width":"100%"},id:"ticketListTable"});
 		if(O_search.bugs_open == 1){ //bugs display
-		 displayTable.html("<tr><td>&nbsp;</td><td>ID</td><td>Title</td><td>Project</td><td>Created By</td><td>Created On</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Project</td><td>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Location</td><td>Priority</td><td>Category</td><td>Created By</td><td>Due On</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td>Location</td><td>Priority</td><td>Category</td><td>Created By</td><td>Due On</td></tr>");
 		}		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
@@ -743,10 +755,6 @@ function loadTicketList(pageNumber,queryObj) {
             .append(displayTable)
         );
 		$.each(data.tickets, function (i, item) {
-		  //Starting a whole new javascript only approach.
-		  //alert(typeof Params.FavoriteObject[item.id])
-		  //alert(item.id);
-		  //alert(item.id in Params.FavoriteObject)
 		  bmClass = "bookmark-off";
 		  for(var a in Params.FavoriteObject){
 		    if(Params.FavoriteObject[a]==item.id){
@@ -756,6 +764,7 @@ function loadTicketList(pageNumber,queryObj) {
 		  displayTable
 		    .append(
 		     $("<tr/>")
+		      .addClass("border-all-B-2")
 		      .html(
 		        $("<td/>")
 		          .html(
@@ -809,7 +818,7 @@ function loadTicketList(pageNumber,queryObj) {
 		});
 
 		Tlb.html(display);
-		$("#ticketListTable tr:odd").addClass("color-A-3")
+	//	$("#ticketListTable tr:odd").addClass("color-A-3")
 		//Tlb.fadeIn("fast");
 	});
 }
