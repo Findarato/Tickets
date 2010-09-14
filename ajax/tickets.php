@@ -201,7 +201,7 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						FROM tcview AS tcv 
 						JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
 						JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
-						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.priority DESC,tcv.due_on DESC ';	
+						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.priority DESC,tcv.due_on ';	
 			}
 			
 		break;
