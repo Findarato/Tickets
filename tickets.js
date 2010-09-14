@@ -410,7 +410,6 @@ function displayStatus(jsonData, Selector) {
 		}
 	});
 }
-
 function loadTicketBody(inputData, container) {
 	//Basically figures out what kind of data is being send to the function and how to deal with it.
 	var data = {};
@@ -566,7 +565,7 @@ function loadTicketBody(inputData, container) {
       //some actions need to happen
     });
   });
-  addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Priority_string,
+  addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Categories,
   function(userId,value,item){
     //some actions need to happen
     $.getJSON("ajax/add_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
@@ -659,12 +658,6 @@ function loadTicketBody(inputData, container) {
     me.toggleClass("bookmark-off").toggleClass("bookmark");
 	});
 }
-/**
- * Loads the ticket value into the display
- *
- * @param {int} ticketId
- */
-
 function loadTicket(ticketId,display) {
 	Params.LastArea = "ticket";
 	if(!display){Params.Content.html($("#ticketTpl").html());}
@@ -727,12 +720,7 @@ function loadTicketList(pageNumber,queryObj) {
 	$.getJSON(uri + "ajax/tickets.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
-		Tlb = Params.Content.find("#ticketListbody");
-		if(Tlb.html() === null){
-		  Params.Content.html($("#generic").html());
-		  Tlb = Params.Content.find("#ticketListbody");
-		}
-		//Tlb.fadeOut("fast");
+
 		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
 		var tlistHolder = $("<div/>");
 		if(!data.tickets){ //there are no tickets to display
@@ -819,10 +807,14 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append($("<td/>").html(item.due_on).addClass("border-bottom-I-1-35"))
 		    )
 		});
-
+		
+    Tlb = Params.Content.find("#ticketListbody");
+    if(Tlb.html() === null){ //they came from a different paged
+      
+      Params.Content.html($("#generic").html());
+      Tlb = Params.Content.find("#ticketListbody");
+    }
 		Tlb.html(display);
-	//	$("#ticketListTable tr:odd").addClass("color-A-3")
-		//Tlb.fadeIn("fast");
 	});
 }
 function loadUserPage(userId){
@@ -1095,7 +1087,7 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
-  localStorage.clear();
+  //localStorage.clear();
   if(!localStorage.getItem("ticketsFavorite")){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
@@ -1104,6 +1096,15 @@ jQuery(document).ready(function () {
   }else{
     Params.FavoriteObject = $.parseJSON(localStorage.getItem("ticketsFavorite"));
   }
+  //lets make sure there are categories in the localStorage. Remember to assume localStorage does not work, or is not available
+  if(!localStorage.getItem("ticketsCategory")){
+    $.getJSON("ajax/get_categories.php",{},function(data){
+      Params.Categories = data.categories;
+    })
+  }else{
+    Params.Categories = $.parseJSON(localStorage.getItem("ticketsCategory"));
+  }
+
   
   if(localStorage.getItem("version") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
     localStorage.clear();
