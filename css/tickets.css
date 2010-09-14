@@ -128,7 +128,7 @@ div .fakelink:hover{ cursor:pointer;color:#0099CC;}*/
 /* fugue icons */
 
 
-.ticket_sprite{background: url(http://cdn1.lapcat.org/fugue/ticketSprite-Fugue.png) no-repeat; }
+.ticket_sprite{background: url(http://cdn1.lapcat.org/fugue/ticketSprite-Fugue.png?XX) no-repeat; }
 .balloon { background-position: 0 0; width: 16px; height: 16px; } 
 .bookmark-plus { background-position: 0 -17px; width: 16px; height: 16px; } 
 .bookmark-off { background-position: 0 -34px; width: 16px; height: 16px; } 
