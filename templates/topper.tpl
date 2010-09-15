@@ -1,6 +1,6 @@
 <header class="color-A-1 font-Y small-shadow-black-down-1" style="height:13px;width:100%;overflow:hidden;padding:4px 0 4px 0;position:relative" id="topper">
 	<div class="left font-Y font-bold ticket_button fakelink" id="t_uI">
-  	<span class="ticket_button ticket_sprite user" style="width:auto;">{if ($firstname)}{$firstname} {$lastname} ({$username}) {else} {/if}</span>
+  	<a class="ticket_button ticket_sprite user nolink" href="#userPage/" style="width:auto;">{if ($firstname)}{$firstname} {$lastname} ({$username}) {else} {/if}</a>
   </div>
 	<div class="left font-Y font-bold ticket_button fakelink" id="topperStart" style="width:auto" title="Show Start Page"><span class="ticket_button ticket_sprite lightning"><span class="topperText">Start</span></span></div>
 	<div class="left font-Y font-bold ticket_button fakelink" id="topperNew" style="width:auto" title="Create a new Ticket"><span class="ticket_button ticket_sprite ticket-plus"><span class="topperText">New Ticket</span></span></div>

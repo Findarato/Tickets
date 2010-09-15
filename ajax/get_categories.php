@@ -1,9 +1,9 @@
 <?Php
 /**
- * Ticket display script.  Very simple just returns the ticket info, and responses if needed
+ * This script will get all of the categories and return them in a json string.
  * @author Joseph Harry
  * @version 1.0
- * @copyright March 16, 2009
+ * @started September 14, 2010
  */
 include_once("../small_header.php");
 header('Content-type: application/json');
