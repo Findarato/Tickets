@@ -55,17 +55,12 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
               myParent.find(".contentEdit").html(
                 $("<textarea/>",{id:"editor"}).val(edit)
               );
-              //aec =  {markupSet: [{name:'Save', className:'ticket_sprite tick save', replaceWith:} ]};
-
-
               mySettings.markupSet.save.replaceWith = function(markitup) {
                 callBack(itemEdit, $("#editor").val(), myParent.attr("id"));
                 myParent.find(".contentEdit").html(markitup.textarea.value);
                 myParent.find(".ticket_sprite.pencil").css("display","inline-block"); 
               }; 
-              //test = $.extend({},aec,mySettings);
               $("#editor").markItUp(mySettings);
-              //$("#editor").markItUp(mySettings);
 						break;
 						case "select":
 							edit = myParent.find(".contentEdit").text();
@@ -134,6 +129,7 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 					me.css("display","none");
 					myParent.find(".ticket_sprite.tick").css("display","none");
 					myParent.find(".contentEdit").text(localStorage.getItem(myParent.attr("id")));
+					localStorage.removeItem(myParent.attr("id"));
 				})
 		)
 }
@@ -554,21 +550,21 @@ function loadTicketBody(inputData, container) {
   
   addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
   function(userId,value,item){
-    $.getJSON("ajax/add_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
+    $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
       //do some stuff here      
     });
   });
 
   addEditControls(Params.UserId,container.find("#ticketPriority"),"select",Params.Priority_string,
   function(userId,value,item){
-    $.getJSON("ajax/add_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
+    $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
       //some actions need to happen
     });
   });
   addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Categories,
   function(userId,value,item){
     //some actions need to happen
-    $.getJSON("ajax/add_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
+    $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
     });
   });
 
@@ -810,7 +806,6 @@ function loadTicketList(pageNumber,queryObj) {
 		
     Tlb = Params.Content.find("#ticketListbody");
     if(Tlb.html() === null){ //they came from a different paged
-      
       Params.Content.html($("#generic").html());
       Tlb = Params.Content.find("#ticketListbody");
     }
@@ -1087,7 +1082,7 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
-  //localStorage.clear();
+  localStorage.clear();
   if(!localStorage.getItem("ticketsFavorite")){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
@@ -1097,14 +1092,14 @@ jQuery(document).ready(function () {
     Params.FavoriteObject = $.parseJSON(localStorage.getItem("ticketsFavorite"));
   }
   //lets make sure there are categories in the localStorage. Remember to assume localStorage does not work, or is not available
-  if(!localStorage.getItem("ticketsCategory")){
+  if(!localStorage.getItem("ticketsCategories")){
     $.getJSON("ajax/get_categories.php",{},function(data){
+      localStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
       Params.Categories = data.categories;
     })
   }else{
-    Params.Categories = $.parseJSON(localStorage.getItem("ticketsCategory"));
+    Params.Categories = $.parseJSON(localStorage.getItem("ticketsCategories"));
   }
-
   
   if(localStorage.getItem("version") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
     localStorage.clear();
@@ -1113,7 +1108,6 @@ jQuery(document).ready(function () {
   
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
   
-	localStorage.tickets = "true";
 	if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
 		Params.UserId = $("#userIdHolder").text();
 		localStorage.userId = Params.UserId;
@@ -1124,7 +1118,6 @@ jQuery(document).ready(function () {
 		localStorage.clear();
 		if (Params.Debug) {	$("#DebugLog").append("Cleared Local Storage<br>");}
 		if(!localStorage.tickets){notice("Debug","Local Storage is cleared!",true);}
-		localStorage.tickets = "true";
 		return false;
 	});
 	if(localStorage.tickets = true){$("#featuresBoxDisplay").append($("<div/>",{"class":"table ticket_sprite",title:"Local Storage",css:{"display":"inline-block"}}));}
@@ -1399,25 +1392,18 @@ jQuery(document).ready(function () {
 				notice("Error", "You must enter a description", false);
 				return false;
 			} else { 
-				if ($("#newTicketLocation").val() === "" && ticketBug.val() == 1) {
+				if ($("#newTicketLocation").val() === "" && this.id=="ticketAddBtn") {
 					notice("Error", "You must select a Location", false);
 					return false;
-				
-				}else if(($("#newTicketDueDate").val() === "" && ticketBug.val() == 1)){
+				}else if(($("#newTicketDueDate").val() === "" && this.id=="ticketAddBtn")){
 					notice("Error", "You must enter a Due date", false);
 					return false;
-				 }else if($("#newTicketAssign").val()==0){
+				}else if($("#newTicketAssign").val()==0 && this.id=="ticketAddBtn"){
           notice("Error", "You must select a user!", false);
           return false;
-				 }else {
+				}else {
 					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
-						/*
-						$.each(data.achievements,function(a,ach){
-							notice("Achievement",ach,false);
-						});
-						*/
 						if(data.error==""){	setHash("#ticket/"+data.newTicketId); loadTicket(data.newTicketId);}
-						
 					});
 					$(".Ticketform").attr({
 						value: ""

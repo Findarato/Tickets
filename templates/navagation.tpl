@@ -7,10 +7,10 @@
 		<a class="smallTicketL nolink ticket_button ticket_sprite pencil font-bold" href="#ticketList/sAssigned">By Me</a>
 		<span id="csAssigned" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite users font-bold" href="#ticketList/sOdepartment">To My Department</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite users font-bold" href="#ticketList/sOdepartment" id="toMyDepartment">To My Department</a>
 		<span id="csOdepartment" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite user--pencil font-bold" href="#ticketList/sAdepartment">By My Department</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite user--pencil font-bold" href="#ticketList/sAdepartment" id="byMyDepartment">By My Department</a>
 		<span id="csAdepartment" class="timestamp " style="position:absolute;right:25px"></span
 		><br>
 		<a class="smallTicketL nolink ticket_button ticket_sprite bookmark font-bold" href="#ticketList/sFavorite">Bookmarks</a>

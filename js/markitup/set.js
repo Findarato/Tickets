@@ -26,7 +26,11 @@ mySettings = {
 		"l":{name:'Link', key:'L', openWith:'<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>', closeWith:'</a>', placeHolder:'Your text to link...' },
 		"sep3":{separator:'---------------' },
 		"save":{name:'Save', className:'ticket_sprite tick save', replaceWith:function(markitup) { }},
-		"close":{name:'Close', className:'ticket_sprite cross cancel', replaceWith:function(markitup) { myParent.find(".contentEdit").html(localStorage.getItem(myParent.attr("id").replace(/\n/g,'<br />')));myParent.find(".ticket_sprite.pencil").css("display","inline-block");} 
+		"close":{name:'Close', className:'ticket_sprite cross cancel', replaceWith:function(markitup) { 
+		  myParent.find(".contentEdit").html(localStorage.getItem(myParent.attr("id")).replace(/\n/g,'<br />'));
+		  myParent.find(".ticket_sprite.pencil").css("display","inline-block");
+		  localStorage.removeItem(myParent.attr("id"));
+		} 
 		}
 	}
 } 

@@ -33,19 +33,9 @@ body {
 .left {
     float: left
 }
-.white10 {
-    font-size: 10px;
-    color: #FFF;
-}
-.small {
-    font-size: 10px
-}
 .matchwrap {
     margin: 0 auto;
     text-align: left;
-}
-.contentborder {
-    border: rgb(69,69,69) 1px solid
 }
 #fullwrap {
     height: inherit
@@ -53,35 +43,6 @@ body {
 #wrap {
     text-align: left;
     height: auto;
-}
-.ticket a {
-    color: #0099CC
-}
-.smallText {
-    font-size: 9px
-}
-.smallimage {
-    height: 16px;
-    width: 16px;
-    padding: 0px;
-    border: none;
-    margin-left: 5px;
-}
-.ticketbody {
-    margin: 0 auto
-}
-.header1 {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-.header2 {
-    width: 100%;
-    height: 22px;
-    position: absolute;
-    top: 22px;
-    left: 0;
 }
 .smallticketL {
     width: 120px;
@@ -100,10 +61,6 @@ body {
 .smallShow {
     height: auto;
     display: block;
-}
-.smallHide {
-    height: 10px;
-    display: none;
 }
 .head {
     clear: both;
@@ -169,8 +126,7 @@ p {
 .ticket_button_right {
     padding: 0 19px 0 0
 }
-.box_transition,
-input {
+.box_transition,input {
     -moz-transition: all 1s ease-out;
     -o-transition: all 1s ease-in;
     -webkit-transition: all 1s ease-out;
@@ -696,8 +652,7 @@ input {
     /* Opera 10.5 */: ;
     -webkit-transition: all 0.3s;
 }
-.fuzzyoutlineBlack,
-input:focus {
+.fuzzyoutlineBlack.input:focus {
     box-shadow: 0 0 6px rgba(0,0,0,1);
     -webkit-box-shadow: 0 0 6px rgba(0,0,0,1);
     -moz-box-shadow: 0 0 6px rgba(0,0,0,1);
