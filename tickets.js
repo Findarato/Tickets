@@ -1320,7 +1320,7 @@ jQuery(document).ready(function () {
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
 		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
-		if($(this).hasClass("closeLink")){	queryObj = {type:"close",ticket_id: Params.Ticket_id};	}
+		if($(this).hasClass("closeLink")){queryObj = {type:"close",ticket_id: Params.Ticket_id};	}
 		if($(this).hasClass("openLink")){queryObj = {type:"open",ticket_id: Params.Ticket_id};}
 		$.getJSON(uri + "ajax/tickets.php", queryObj,
 		function (data) {
