@@ -28,11 +28,15 @@
             </div>
           </div>
           <div class="td" style="width:auto;"><!-- Close Button -->
-            <!--<div class="button-theme fg-button ticketButton font-Y lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>-->
-            <div class="actionButtons closeLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-theme border-all-D-1 lapcatButton fakelink" id="closelink" style="width:auto;margin-right:5px;padding:3px;">
+            <div class="actionButtons closeLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-theme border-all-D-1 lapcatButton fakelink openTicket" id="closeButton" style="width:auto;margin-right:5px;padding:3px;">
               <span style="margin-right:5px">Close</span>
             </div>
-          </div>            
+          </div>
+          <div class="td" style="width:auto;"><!-- Open Button -->
+            <div class="actionButtons openLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-black border-all-D-1 lapcatButton fakelink closedTicket" id="reOpenButton" style="width:auto;margin-right:5px;padding:3px;">
+              <span style="margin-right:5px">Open</span>
+            </div>
+          </div>                  
 					<div class="td" style="width:75px;"> <!-- Locked Area -->
             <div class="font-X openTicket hold actionButtons holdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
               <span>Lock</span>
@@ -81,7 +85,6 @@
   				</section>
 			</div>
 			<div class="droidSerif font-X head message_head corners-bottom-2 color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
-				<div class="button-black fg-button ticketButton font-Y lapcatButton closedTicket actionButtons openLink" id="openlink" style="width:auto;display:none">Reopen</div>
 				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
 				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="editLink" style="width:auto;"><span class="ticket_button ticket_sprite pencil">Modify</span></div>
 			</div>
