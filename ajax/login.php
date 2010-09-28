@@ -26,8 +26,7 @@
 				$db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
 				$res = $db->Fetch("row");
 				$response["opt"] = $res;
-				//$dt = date("U");
-				$dt =date("U");
+				$dt = date("U");
 				$response['message'] = "Login Successful";
 				$db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
 				$llo = $db->Fetch("row");

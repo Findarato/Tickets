@@ -34,8 +34,8 @@
   <!--End Mark it up style -->
 </head>
 <body onResize="javascript:resize();"  class="image-background color-B-1" style="overflow-y:auto;overflow-x:hidden">
-<div class="header1" style="overflow:hidden;height:30px;margin-bottom:20px;">{include file="topper.tpl"}</div>
-<div class="" style="display:table;width:98%;" class="">
+<header class="header1" style="overflow:hidden;height:30px;margin-bottom:20px;">{include file="topper.tpl"}</header>
+<div class="" style="display:table;width:98%;">
 	<div id="sideArea1" class="corners-bottom-2 corners-top-2" style="display:table-cell;vertical-align:top;width:220px">
 		{include file="navagation.tpl"} <br> {include file="bugs.tpl"}{*<!--<br><div id="droidId">Droid</div><br> {include file="stats.tpl"} <br> {include file="features.tpl"} <br> {include file="log.tpl"} -->*}
 	</div>
