@@ -228,3 +228,103 @@ function buildTable(o_data,o_target){
 	});
 	o_target.append(table);
 }
+
+function addEditControls(itemEdit,selector,type,obj,callBack){
+  callBack = callBack ? callBack : false;
+  idSelector = selector.attr("id");
+  selector
+    .append(
+      $("<div/>",{id:idSelector+"Edit","class":"ticket_sprite pencil fakelink",css:{"display":"inline-block"}})
+        .click(function(){
+          me = $(this);
+          myParent = me.parent();
+          localStorage.setItem(myParent.attr("id"),myParent.find(".contentEdit").html());
+          switch(type){
+            default:case "text":
+              myParent.find(".ticket_sprite.cross").css("display","inline-block");
+              myParent.find(".ticket_sprite.tick").css("display","inline-block");
+              edit = myParent.find(".contentEdit").attr("contentEditable","true").focus();
+            break;
+            case "textarea":
+              edit = myParent.find(".contentEdit").html();
+              myParent.find(".contentEdit").html(
+                $("<textarea/>",{id:"editor"}).val(edit)
+              );
+              mySettings.markupSet.save.replaceWith = function(markitup) {
+                callBack(itemEdit, $("#editor").val(), myParent.attr("id"));
+                myParent.find(".contentEdit").html(markitup.textarea.value);
+                myParent.find(".ticket_sprite.pencil").css("display","inline-block"); 
+              }; 
+              $("#editor").markItUp(mySettings);
+            break;
+            case "select":
+              edit = myParent.find(".contentEdit").text();
+              myParent.find(".ticket_sprite.cross").css("display","inline-block");
+              myParent.find(".ticket_sprite.tick").css("display","inline-block");
+              myParent.find(".contentEdit").html(
+                $("<select/>")
+                  .append(function(){
+                    html = "";
+                    $.each(obj,function(i,item){
+                      if(item.name == edit){
+                       html +="<option selected=selected value="+item.id+">"+item.name+"</option>"; 
+                      }else{
+                       html +="<option value="+item.id+">"+item.name+"</option>";  
+                      }
+                        
+                    })
+                    return html;
+                  })
+              );
+            break;
+            
+          }
+          me.css("display","none");
+
+        })
+    )
+    .append(
+      $("<div/>",{id:idSelector+"Accept","class":"ticket_sprite tick fakelink",css:{"display":"none"}})
+        .click(function(){
+          me = $(this);
+          myParent = me.parent();
+          switch (type) {
+            default:
+            case "text":
+              if (callBack) {
+                callBack(itemEdit, myParent.find(".contentEdit").text(), myParent.attr("id"))
+              }
+              myParent.find(".contentEdit").attr("contentEditable","false");
+            break;
+            case "textarea":
+              if (callBack) {
+                callBack(itemEdit, $("#editor").val(), myParent.attr("id"));
+              }
+              myParent.find(".contentEdit").html($("#editor").val());            
+            break;
+            case "select":
+              if (callBack) {
+                callBack(itemEdit, myParent.find("select option:selected").val(), myParent.attr("id"))
+              }
+              myParent.find(".contentEdit").html(myParent.find("select option:selected").text());
+            break;
+          }
+          myParent.find(".ticket_sprite.pencil").css("display","inline-block");
+          me.css("display","none");
+          myParent.find(".ticket_sprite.cross").css("display","none");
+        })
+    )
+    .append(
+      $("<div/>",{id:idSelector+"Cancel","class":"ticket_sprite cross fakelink",css:{"display":"none"}})
+        .click(function(){
+          me = $(this);
+          myParent = me.parent();
+          myParent.find(".ticket_sprite.pencil").css("display","inline-block");
+          myParent.find(".contentEdit").attr("contentEditable","false");
+          me.css("display","none");
+          myParent.find(".ticket_sprite.tick").css("display","none");
+          myParent.find(".contentEdit").text(localStorage.getItem(myParent.attr("id")));
+          localStorage.removeItem(myParent.attr("id"));
+        })
+    )
+}
