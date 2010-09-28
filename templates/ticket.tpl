@@ -29,7 +29,7 @@
           </div>
           <div class="td" style="width:auto;"><!-- Close Button -->
             <!--<div class="button-theme fg-button ticketButton font-Y lapcatButton openTicket actionButtons closeLink" id="closelink" style="width:45px;">Close</div>-->
-            <div class="actionButtons font-X corners-bottom-2 corners-top-2 background-alpha-4 button-theme border-all-D-1 lapcatButton fakelink" id="closelink" style="width:auto;margin-right:5px;padding:3px;">
+            <div class="actionButtons closeLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-theme border-all-D-1 lapcatButton fakelink" id="closelink" style="width:auto;margin-right:5px;padding:3px;">
               <span style="margin-right:5px">Close</span>
             </div>
           </div>            
