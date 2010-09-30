@@ -363,7 +363,6 @@ function loadTicketBody(inputData, container) {
          )
      );
 	
-	
 	if(!bug){ //just ticket stuff
 		container.find("#projectBox").hide()
 		container.find("#categoryBox").show();
@@ -371,7 +370,7 @@ function loadTicketBody(inputData, container) {
 		container.find("#dueOnBox").show();
 		container.find("#assignedToBox").show();
 		container.find("#locationBox").show();
-		container.find("#lockBox").show();
+		container.find("#ticketBox").show();
     
    container
      .find("#ticketDueDate")
@@ -485,17 +484,17 @@ function loadTicketBody(inputData, container) {
              $("<div/>",{id:"ticketClosedOnDateDisplay",html:data.closed_on})
            )
        );
-		
 		if (data.dagoc < 604800 || data.open == 1) { //newly closed
 			container.find(".openTicket").hide();
 			container.find(".closedTicket").show();
-		} else { //very old closed
+		} else { //very old closed 
 			container.find(".openTicket").hide();
 			container.find(".closedTicket").hide();
 		}
 	} else { //open tickets
-		container.find(".openTicket:not(.hold)").show();
+		container.find(".openTicket :not(.hold)").show();
 		container.find(".closedTicket").hide();
+		
 	}
 	var attCnt = 0;
 	if ($("#storage").html() == 1) {
