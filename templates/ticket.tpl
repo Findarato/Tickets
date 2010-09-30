@@ -16,7 +16,7 @@
 				</div>
 			</div> 
 			<div class="color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
-		    <div id="lockBox" style="width:100%;display:none">
+		    <div id="ticketBox" style="width:100%;display:inline-block">
           <div class="td" style="width:auto;"><!-- Previous Button -->
             <div class="actionButtons font-X corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="previousTicket" style="width:auto;margin-right:5px;padding:3px;">
              <span>Previous</span>     
@@ -27,16 +27,16 @@
               <span style="margin-right:5px">Next</span>
             </div>
           </div>
-          <div class="td" style="width:auto;"><!-- Close Button -->
+          <div class="td" style="width:auto;">
+            <!-- Close Button -->
             <div class="actionButtons closeLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-theme border-all-D-1 lapcatButton fakelink openTicket" id="closeButton" style="width:auto;margin-right:5px;padding:3px;">
               <span style="margin-right:5px">Close</span>
             </div>
-          </div>
-          <div class="td" style="width:auto;"><!-- Open Button -->
-            <div class="actionButtons openLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-black border-all-D-1 lapcatButton fakelink closedTicket" id="reOpenButton" style="width:auto;margin-right:5px;padding:3px;">
+            <!-- Open Button -->
+            <div class="actionButtons openLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-black border-all-D-1 lapcatButton fakelink closedTicket" id="reOpenButton" style="width:auto;margin-right:5px;padding:3px;display:none;">
               <span style="margin-right:5px">Open</span>
             </div>
-          </div>                  
+          </div>
 					<div class="td" style="width:75px;"> <!-- Locked Area -->
             <div class="font-X openTicket hold actionButtons holdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
               <span>Lock</span>
