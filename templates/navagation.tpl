@@ -20,9 +20,9 @@
 		<span id="csClosed" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
 		<br>
-		<div class="smallTicketL font-X font-bold ticket_sprite ticket_button fakelink ticket-plus" id="topperNew" style="width:auto" title="Create a new Ticket">
-		  <span>New Ticket</span>
-		</div>
-    <span id="" class="timestamp " style="position:absolute;right:25px"></span>
+    <button class="font-X font-bold" id="topperNew" style="width:auto" title="Create a new Ticket">
+      <span class="ticket_button ticket_sprite ticket-plus"></span>
+      <span>New Ticket</span>
+    </button>
 	</div>
 </section>
