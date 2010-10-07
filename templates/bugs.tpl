@@ -8,10 +8,10 @@
 		<span id="cBugsClosed" class="timestamp" style="position:absolute;right:25px">0</span>
 		<br>
 		<br>
-    <div class="left font-X font-bold ticket_button fakelink ticket_sprite bug" id="topperNewBug" style="width:auto">
-      <span>New Bug Report</span>
-    </div>
-    <span id="" class="timestamp" style="position:absolute;right:25px"></span>
+    <button class="font-X font-bold" id="topperNewBug" style="width:auto">
+    <span class="ticket_button ticket_sprite bug"></span>
+    <span>New Bug</span>
+    </button>
     <br>
 	</div>
 </section>
