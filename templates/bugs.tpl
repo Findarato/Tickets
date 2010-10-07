@@ -7,5 +7,11 @@
 		<a class="smallTicketL nolink ticket_sprite ticket_button door font-bold" href="#ticketList/bugs_closed">Closed Bugs</a>
 		<span id="cBugsClosed" class="timestamp" style="position:absolute;right:25px">0</span>
 		<br>
+		<br>
+    <div class="left font-X font-bold ticket_button fakelink ticket_sprite bug" id="topperNewBug" style="width:auto">
+      <span>New Bug Report</span>
+    </div>
+    <span id="" class="timestamp" style="position:absolute;right:25px"></span>
+    <br>
 	</div>
 </section>

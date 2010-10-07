@@ -19,5 +19,10 @@
 		<a class="smallTicketL nolink ticket_button ticket_sprite door font-bold" href="#ticketList/sClosed">Closed Tickets</a>
 		<span id="csClosed" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
+		<br>
+		<div class="smallTicketL font-X font-bold ticket_sprite ticket_button fakelink ticket-plus" id="topperNew" style="width:auto" title="Create a new Ticket">
+		  <span>New Ticket</span>
+		</div>
+    <span id="" class="timestamp " style="position:absolute;right:25px"></span>
 	</div>
 </section>
