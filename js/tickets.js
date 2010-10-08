@@ -1,7 +1,6 @@
 /**
  * Simple global variables that are needed everywhere
  */
-var User_id = 0;
 var OuterHeight = 0;
 var OuterWidth = 0;
 var UploadCnt = 0;
@@ -18,6 +17,7 @@ var Params = {
 	"popChange":false,
 	"LastLogon":0,
 	"Departments":{},
+	"UserId":0,
 	"Priority_string":{
 	  1:{"id":1,"name":"Very Low"},
 	  2:{"id":2,"name":"Low"},
@@ -211,6 +211,7 @@ function loadLargeStats() {
 function populateAllTickets(Area) {
 	var cnt,html,Ttype;
 	$.getJSON(uri + "ajax/tickets.php", {"type": "small","index": "all","area": Area,"style": 1},function (data, text) {
+	  Params.UserId = data.user_id;
 		$.each(data.ticket,	function (i, item) {
 			cnt = 0;html = "";Ttype = "";
 			$("#c" + item.type)
@@ -329,7 +330,7 @@ function loadTicketBody(inputData, container) {
 //Display code.	
 	if(data.priority>5){data.priority = data.priority -5;} //normalize old data with new numbering scheme
 	container.find(".statusImage ").hide();
-	Params.Ticket_id = ticketId = data.id; //set the global
+	Params.TicketId = ticketId = data.id; //set the global
 	Params.TicketJSON = data;
 	
 	bmClass = "bookmark-off";
@@ -511,7 +512,7 @@ function loadTicketBody(inputData, container) {
 		title: "<font class=\"white\">Reply to Ticket</font>"
 	}, function () {
 		$("#replyTitle").val("Re:" + Params.TicketJSON.subject);
-		$("#replyticketid").val(Params.Ticket_id);
+		$("#replyticketid").val(Params.TicketId);
 		$("#replyuserid").val(Params.UserId);
 	});
 	$('#ReAssignlink').colorbox({
@@ -978,7 +979,7 @@ function checkHash() {
 }
 
 jQuery(document).ready(function () {
-  localStorage.clear();
+  //localStorage.clear();
   if(!localStorage.getItem("ticketsFavorite")){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
@@ -1051,17 +1052,14 @@ jQuery(document).ready(function () {
 			}
 		}, "json");
 	});
-	if (User_id > 0) {
-		$("#rss1").attr("href", "ticketsrss.php?id=" + User_id);
-		$("#rss2").attr("href", "ticketsrss.php?id=" + User_id + "&bookmark=1");
+	if (Params.UserId > 0) {
+		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
+		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
 	}
 
 	OuterHeight = $("body").outerHeight() - 50;
 	OuterWidth = $("body").outerWidth() - 5;
-	if ($("#t_userid").html === "") {} else {
-		User_id = $("#t_userid").text();
-	}
-	if ($("#t_uI").text().length > 10) {
+	if ($("#topperUserInfo").text().length > 10) {
 		function ut(){
 			updateTickets();
 			setTimeout(function(){ut();},30000);
@@ -1129,25 +1127,15 @@ jQuery(document).ready(function () {
 
 	});
 	
-	$('#topperSearch').colorbox({
-		"transition": "none",
-		"open": false,
-		"inline": true,
-		"href": "#newSearchdialog",
-		"title": "<font class=\"white\">Search for a Ticket</font>"
-	}, function () {
-		$("#newSearchdialog").find(".Ticketform").val('');
-	});
-	$("#t_uI").click(function () {setHash("#userPage/"+Params.UserId);checkHash();});
 	$("#t_fT").click(function () {
 		var hash = jQuery.makeArray(window.location.hash.split("\/"));
 		var display = $("#imgBookmark");
 		if (hash[0] == "#ticket") {
-			localStorage.removeItem("TicketId"+Params.Ticket_id);
+			localStorage.removeItem("TicketId"+Params.TicketId);
 			if (display.css("display") == "block" || display.css("display") == "inline") { //Add bookmark
 				$.get(uri + "ajax/tickets.php", {
 					type: "favorite",
-					ticket_id: Params.Ticket_id,
+					ticket_id: Params.TicketId,
 					favorite: 0
 				}, function (data) {
 					populateAllTickets("f");
@@ -1158,7 +1146,7 @@ jQuery(document).ready(function () {
 			} else { //remove bookmark
 				$.get(uri + "ajax/tickets.php", {
 					type: "favorite",
-					ticket_id: Params.Ticket_id,
+					ticket_id: Params.TicketId,
 					favorite: 1
 				}, function (data) {
 					populateAllTickets("f");
@@ -1179,7 +1167,6 @@ jQuery(document).ready(function () {
 			return;
 		} else {
 			jQuery.post(uri + "ajax/login.php", $("#frm_login").serialize(), function (data) {
-				
 				if (data.error.length > 0) {
 					checkResponse(data);
 				} else {
@@ -1189,7 +1176,7 @@ jQuery(document).ready(function () {
 						$("#themegencss").attr("href","http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme="+data.theme);
 					}
 					Params.LastLogon = data.lastlogon;
-					$("#t_uI").html($("<span/>").addClass("user ticket_sprite ticket_button").html(data.firstname + " " + data.lastname + " (" + data.username + ")"));
+					$("#topperUserInfo").html(data.firstname + " " + data.lastname + " (" + data.username + ")").attr("href","#userPage/"+data.userid);
 					checkResponse(data);
 					Params.UserId = data.userid;
 					if(localStorage.tickets = true){
@@ -1227,20 +1214,20 @@ jQuery(document).ready(function () {
 		$.fn.colorbox.close();
 		$.getJSON(uri + "ajax/tickets.php", {
 			"type": "reassign",
-			"ticket_id": Params.Ticket_id,
+			"ticket_id": Params.TicketId,
 			"user_id": reassignVal
 		}, function (data) {
 			checkResponse(data);
 			if (data.error.length > 1) {} else {
 				$("#imgReassigned").show();
-				loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);
-				loadTicket(Params.Ticket_id);
+				loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
+				loadTicket(Params.TicketId);
 			}
 		});
 	});
 	$("#replyAddBtn").click(function () {
 		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
-			loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);	
+			loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);	
 		});
 		$(".Ticketform").attr({
 			value: ""
@@ -1305,8 +1292,8 @@ jQuery(document).ready(function () {
 						value: ""
 					});
 					$.fn.colorbox.close();
-					localStorage.removeItem("TicketId"+Params.Ticket_id);
-					loadTicket(Params.Ticket_id);
+					localStorage.removeItem("TicketId"+Params.TicketId);
+					loadTicket(Params.TicketId);
 				}
 			}
 		}
@@ -1319,15 +1306,15 @@ jQuery(document).ready(function () {
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
 		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
-		if($(this).hasClass("closeLink")){queryObj = {type:"close",ticket_id: Params.Ticket_id};	}
-		if($(this).hasClass("openLink")){queryObj = {type:"open",ticket_id: Params.Ticket_id};}
+		if($(this).hasClass("closeLink")){queryObj = {type:"close",ticket_id: Params.TicketId};	}
+		if($(this).hasClass("openLink")){queryObj = {type:"open",ticket_id: Params.TicketId};}
 		$.getJSON(uri + "ajax/tickets.php", queryObj,
 		function (data) {
 			checkResponse(data);
-			localStorage.removeItem("TicketId"+Params.Ticket_id);
+			localStorage.removeItem("TicketId"+Params.TicketId);
 
-			loadTicket(Params.Ticket_id);
-			//loadResponsesBody(Params.Ticket_id, $("#replyareabody"), 0);; //reload the first response page
+			loadTicket(Params.TicketId);
+			//loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);; //reload the first response page
 		});
 	});
 	//Global page live 

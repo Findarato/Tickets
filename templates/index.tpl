@@ -15,7 +15,6 @@
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <link rel="icon" type="image/png" href="/tickets/bug.png" /> 
-  {literal}
   <script type="text/javascript">
   	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
   	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -24,13 +23,14 @@
   	var pageTracker = _gat._getTracker("UA-8067208-4");
   	pageTracker._trackPageview();
   </script>
-  {/literal}
+  
   <script src="http://cdn1.lapcat.org/js/jquery-1.4.2.min.js"></script>
   <script src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
   <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.js" ></script>
   <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
   <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.line.js" ></script>
   <script src="js/combine.php"></script>
+  <script>Params.UserId = {$user_id};</script>
   <!--End Mark it up style -->
 </head>
 <body onResize="javascript:resize();"  class="" style="overflow-y:auto;overflow-x:hidden">
