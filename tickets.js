@@ -33,7 +33,15 @@ var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
 //alert($(window).height());
 //alert($(window).width());
-
+function oc(a)
+{
+  var o = {};
+  for(var i=0;i<a.length;i++)
+  {
+    o[a[i]]='';
+  }
+  return o;
+}
 function updateFavorites(){
   localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
   //alert(JSON.stringify(Params.FavoriteObject));
