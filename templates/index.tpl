@@ -47,7 +47,7 @@
 <div id="newBugdialogTpl" class="ui-helper-hidden" title="Create new ticket">{include file="new_bug.tpl"}</div>
 <div id="newReplydialogTpl" class="ui-helper-hidden" title="Reply to Ticket">{include file="reply.tpl"}</div>
 <div id="newsearchdialogTpl" class="ui-helper-hidden">{include file="search.tpl"}</div>
-<div id="reassignTpl" class="ui-helper-hidden" title="Reassign Ticket">{include file="reassign.tpl"}</div>
+{*<div id="reassignTpl" class="ui-helper-hidden" title="Reassign Ticket">{include file="reassign.tpl"}</div>*}
 <div id="responsestpl" class="ui-helper-hidden">{include file="responses.tpl"}</div>
 <div id="ticketTpl" class="ui-helper-hidden">{include file="ticket.tpl"}</div>
 <div id="generic" class="ui-helper-hidden">{include file="generic.tpl"}</div>
