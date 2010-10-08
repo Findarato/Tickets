@@ -433,7 +433,7 @@ function loadTicketBody(inputData, container) {
    .append(
      $("<div/>",{"class":"ilb contentEdit ticket_button ticket_sprite user",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
        .html(
-         $("<div/>",{id:"ticketCreatedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
+         $("<div/>",{id:"ticketAssignedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
        )
    );
 	container.find("#replyticketid").val(ticketId);
@@ -455,26 +455,29 @@ function loadTicketBody(inputData, container) {
 	 
 	 
 	/// Adding edit controls to the page
-  
-  addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
-  function(userId,value,item){
-    $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
-      //do some stuff here      
-    });
+  $("#editLink").click(function(){
+    $(this).hide();
+      addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
+      function(userId,value,item){
+        $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
+          //do some stuff here      
+        });
+      });
+    
+      addEditControls(Params.UserId,container.find("#ticketPriority"),"select",Params.Priority_string,
+      function(userId,value,item){
+        $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
+          //some actions need to happen
+        });
+      });
+      addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Categories,
+      function(userId,value,item){
+        //some actions need to happen
+        $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
+        });
+      });
   });
 
-  addEditControls(Params.UserId,container.find("#ticketPriority"),"select",Params.Priority_string,
-  function(userId,value,item){
-    $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
-      //some actions need to happen
-    });
-  });
-  addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Categories,
-  function(userId,value,item){
-    //some actions need to happen
-    $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
-    });
-  });
 
 	if (data.status.lock == 1) {
 		$("#Holdlink").hide();
@@ -523,6 +526,16 @@ function loadTicketBody(inputData, container) {
 		$("#replyticketid").val(Params.TicketId);
 		$("#replyuserid").val(Params.UserId);
 	});
+	
+	/*
+	 * Please WORK ON ME
+	 * 
+	 * 
+	 */
+	 $('#ReAssignlink').click(function(){
+	   $("#reassignBox").css("bottom","30px");
+	 });
+	 /*
 	$('#ReAssignlink').colorbox({
 		transition: "none",
 		open: false,
@@ -530,6 +543,8 @@ function loadTicketBody(inputData, container) {
 		href: "#reassignTicketdialog",
 		title: "<font class=\"white\">Reassign Ticket</font>"
 	});
+	*/
+	
 	//Set the ticket type icon
 	if (data.tickettype_id == 1) {
 		$("#ticketStatusImage").find("#imgTicketTrouble").show();
@@ -1217,9 +1232,9 @@ jQuery(document).ready(function () {
 		}
 	});
 
-	$('#ReAssignBtn').click(function () {
-		var reassignVal = $("#reassignTicketdialog").find("#TicketAssign").val();
-		$.fn.colorbox.close();
+	$('#ReAssignBtn').live("click",function () {
+		var reassignVal = $("#TicketAssign").val();
+		//$.fn.colorbox.close();
 		$.getJSON(uri + "ajax/tickets.php", {
 			"type": "reassign",
 			"ticket_id": Params.TicketId,
@@ -1229,7 +1244,7 @@ jQuery(document).ready(function () {
 			if (data.error.length > 1) {} else {
 				$("#imgReassigned").show();
 				loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
-				loadTicket(Params.TicketId);
+				//loadTicket(Params.TicketId);
 			}
 		});
 	});

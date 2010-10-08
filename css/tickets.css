@@ -130,9 +130,9 @@ p {
     padding: 0 19px 0 0
 }
 .box_transition,input {
-    -moz-transition: all 1s ease-out;
-    -o-transition: all 1s ease-in;
-    -webkit-transition: all 1s ease-out;
+    -moz-transition: all .5s ease-out;
+    -o-transition: all .5s ease-in;
+    -webkit-transition: all .5s ease-out;
 }
 
 .small-shadow-black-1 {
