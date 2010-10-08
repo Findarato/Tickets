@@ -355,6 +355,7 @@ if(isset($_SESSION["user"])){ //the session is set
 				
 			default:$response["error"]="There was some kind of error!";break;		
 		}
+		$response["user_id"] = $usr->User_id;
 		echo json_encode($response);
 	}
 }
