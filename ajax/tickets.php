@@ -66,6 +66,11 @@ function countTickets($user_id,$type="open"){
 	$res = $db->Fetch("row",false,false);
 	return $res;
 }
+function getFavoriteIds($user_id){
+  $db = db::getInstance();
+  $ids = $db->Query("SELECT ticket_id FROM tickets.favorite WHERE user_id=".$user_id,false,"row_array");
+  return $ids;  
+}
 /**
  * Atempt to create the one function that does the work of the old multi functions
  * @return 
@@ -356,6 +361,7 @@ if(isset($_SESSION["user"])){ //the session is set
 			default:$response["error"]="There was some kind of error!";break;		
 		}
 		$response["user_id"] = $usr->User_id;
+		$response["favorite_ids"] = getFavoriteIds($usr->User_id);
 		echo json_encode($response);
 	}
 }
