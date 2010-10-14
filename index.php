@@ -84,6 +84,8 @@
 
 	if(isset($usr)){
 		$smarty -> assign('userId',$usr->User_id);	
+	}else{
+	  $smarty -> assign('userId',-1);
 	}
 	
 	$smarty -> assign('altEmail',$altE);
