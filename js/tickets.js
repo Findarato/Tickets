@@ -254,14 +254,9 @@ function loadResponsesBody(ticketId, container, page) {
 	//var resCont = $("<div/>");
 	$.getJSON(uri + "ajax/display_reply.php", params, function (data) {
 		var cnt = 0;
-		var resCont = $("<div/>");
+		var resCont = $("<div id=\"responseContainer\" />");
 		if(data!==undefined){ //need to make sure there are responses
   		$.each(data.reply, function (i, item) {
-        if (i % 2 == 1) {
-          var color = "background-alpha-4";
-        } else {
-          var color = "background-alpha-3";
-        }
         resCont.append($("#responsestpl").html());
         resCont.find("#ticketListDueDate").hide();
         resCont.find("#changemeColor").addClass(color).attr({
@@ -514,7 +509,9 @@ function loadTicketBody(inputData, container) {
 	}
 	var pri = parseInt(container.find("#ticketPriority").text() - 2, 10);
 	$("#replyareaTitle").text("Replies (" + data.responseCount + ")"); //display the total response count
-	$('#replylink').colorbox({
+	
+	
+	$('#replyButton').colorbox({
 		iframe: false,
 		transition: "none",
 		open: false,
@@ -531,10 +528,10 @@ function loadTicketBody(inputData, container) {
 	 $('#ReAssignlink').click(function(){
 	   $("#reassignBox").css("height","30px");
 	 });
-	 $("#replyCancelBtn").click(function(){
+	 $("#ReAssignCancelButton").click(function(){
     $("#reassignBox").css({"height":"0px"});
   });
-  $('#ReAssignBtn').live("click",function () {
+  $('#ReAssignButton').live("click",function () {
     var reassignVal = $("#TicketAssign").val();
     $("#reassignBox").css({"height":"0px"});
     $.getJSON(uri + "ajax/tickets.php", {
@@ -1105,9 +1102,6 @@ jQuery(document).ready(function () {
 		checkHash();
 	} //disables running with out being logged in
 
-	$("button,a").bind("focus", function () {
-		$(this).blur();
-	});
 	$("#replyToggle").click(function () {
 		$("#replyArea").toggle();
 		if ($("#storage").html() == "1") {
@@ -1196,7 +1190,7 @@ jQuery(document).ready(function () {
 			notice("Notice!", "You must first select a ticket!", false);
 		}
 	});
-	$("#btn_login").click(function () {
+	$("#loginButton").click(function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error", "Please enter a username", false);
 			return;
@@ -1247,7 +1241,7 @@ jQuery(document).ready(function () {
 		}
 	});
 
-	$("#replyAddBtn").click(function () {
+	$("#replyAddButton").click(function () {
 		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
 			loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);	
 		});
@@ -1257,7 +1251,7 @@ jQuery(document).ready(function () {
 		$.fn.colorbox.close();
 		
 	});
-	$("#ticketSearchBtn").click(function () {
+	$("#ticketSearchButton").click(function () {
 		var hash = "ticketList";
 		var s_Title = $("#searchTitle").val();
 		var s_Category = $("#searchCategory").val();
@@ -1268,7 +1262,7 @@ jQuery(document).ready(function () {
 			hash += "/title/" + s_Title;
 		}
 		if (s_Category !== "") {
-			hash += "/category/" + s_Category;
+			hash += "/category/" + s_Category; 
 		}
 		if (s_Assign !== "") {
 			hash += "/assigned/" + s_Assign;
@@ -1283,7 +1277,7 @@ jQuery(document).ready(function () {
 		loadTicketList();
 		$.fn.colorbox.close();
 	});
-	$("#ticketAddBtn,#bugAddBtn").click(function () {
+	$("#ticketAddButton,#bugAddButton").click(function () {
 		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
 		var ticketDesc = $("#newTicketDescription");
@@ -1297,13 +1291,13 @@ jQuery(document).ready(function () {
 				notice("Error", "You must enter a description", false);
 				return false;
 			} else { 
-				if ($("#newTicketLocation").val() === "" && this.id=="ticketAddBtn") {
+				if ($("#newTicketLocation").val() === "" && this.id=="ticketAddButton") {
 					notice("Error", "You must select a Location", false);
 					return false;
-				}else if(($("#newTicketDueDate").val() === "" && this.id=="ticketAddBtn")){
+				}else if(($("#newTicketDueDate").val() === "" && this.id=="ticketAddButton")){
 					notice("Error", "You must enter a Due date", false);
 					return false;
-				}else if($("#newTicketAssign").val()==0 && this.id=="ticketAddBtn"){
+				}else if($("#newTicketAssign").val()==0 && this.id=="ticketAddButton"){
           notice("Error", "You must select a user!", false);
           return false;
 				}else {
