@@ -396,9 +396,9 @@ function loadTicketBody(inputData, container) {
    .find("#ticketAssignedTo")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb contentEdit ticket_button ticket_sprite user",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+     $("<div/>",{"class":"ilb ticket_button ticket_sprite user",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
        .html(
-         $("<div/>",{id:"ticketCreatedByDisplay",html:data.firstname + " " + data.lastname,data:data.assigned_id})
+         $("<div/>",{id:"ticketAssignedToDisplay",html:data.firstname + " " + data.lastname,data:data.assigned_id})
        )
    );				
 		container
@@ -453,8 +453,9 @@ function loadTicketBody(inputData, container) {
 	   $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"},html:Params.Priority_string[data.priority].name})
 	 );
 	 
-	 
-	/// Adding edit controls to the page
+	//
+	// Adding edit controls to the page
+	//
   $("#editLink").click(function(){
     $(this).hide();
       addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
@@ -533,15 +534,29 @@ function loadTicketBody(inputData, container) {
 	 $("#replyCancelBtn").click(function(){
     $("#reassignBox").css({"height":"0px"});
   });
-	 /*
-	$('#ReAssignlink').colorbox({
-		transition: "none",
-		open: false,
-		inline: true,
-		href: "#reassignTicketdialog",
-		title: "<font class=\"white\">Reassign Ticket</font>"
-	});
-	*/
+  $('#ReAssignBtn').live("click",function () {
+    var reassignVal = $("#TicketAssign").val();
+    $("#reassignBox").css({"height":"0px"});
+    $.getJSON(uri + "ajax/tickets.php", {
+      "type": "reassign",
+      "ticket_id": Params.TicketId,
+      "user_id": reassignVal
+    }, function (data) {
+      $("#ticketAssignedToDisplay").html($("#TicketAssign option:selected").text());
+      localStorage.removeItem("TicketId"+ticketId);
+      //this might need some looking into.
+      //loadTicket(Params.TicketId,false,true);//this should load the ticket information from the server and store it in localStorage again
+      
+      checkResponse(data);
+      if (data.error.length > 1) {} else {
+        $("#imgReassigned").show();
+        loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
+
+      }
+    });
+  });
+
+
 	
 	//Set the ticket type icon
 	if (data.tickettype_id == 1) {
@@ -575,7 +590,7 @@ function loadTicketBody(inputData, container) {
     me.toggleClass("bookmark-off").toggleClass("bookmark");
 	});
 }
-function loadTicket(ticketId,display) {
+function loadTicket(ticketId,display,update) {
 	Params.LastArea = "ticket";
 	if(!display){Params.Content.html($("#ticketTpl").html());}
 	if(data = localStorage.getItem("TicketId"+ticketId)){
@@ -583,8 +598,10 @@ function loadTicket(ticketId,display) {
 		loadTicketBody(data,Params.Content);
 	}else{
 		if (Params.Debug) {	$("#DebugLog").append("Pulled from Database<br>");}
-		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {loadTicketBody(data,Params.Content);});	
+		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {loadTicketBody(data,Params.Content);});
+		
 	}
+	
 	var hash = getHashArray();
 	if (hash[2] == "page" && hash[3] > -1) {
 		if (Params.Debug) {
@@ -1230,22 +1247,6 @@ jQuery(document).ready(function () {
 		}
 	});
 
-	$('#ReAssignBtn').live("click",function () {
-		var reassignVal = $("#TicketAssign").val();
-		//$.fn.colorbox.close();
-		$.getJSON(uri + "ajax/tickets.php", {
-			"type": "reassign",
-			"ticket_id": Params.TicketId,
-			"user_id": reassignVal
-		}, function (data) {
-			checkResponse(data);
-			if (data.error.length > 1) {} else {
-				$("#imgReassigned").show();
-				loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
-				//loadTicket(Params.TicketId);
-			}
-		});
-	});
 	$("#replyAddBtn").click(function () {
 		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
 			loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);	
