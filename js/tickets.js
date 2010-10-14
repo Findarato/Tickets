@@ -259,7 +259,7 @@ function loadResponsesBody(ticketId, container, page) {
   		$.each(data.reply, function (i, item) {
         resCont.append($("#responsestpl").html());
         resCont.find("#ticketListDueDate").hide();
-        resCont.find("#changemeColor").addClass(color).attr({
+        resCont.find("#changemeColor").addClass("").attr({ 
           id: "userid" + item.id
         });
         resCont.find("#changemeUserid").html(item.firstname + " " + item.lastname).attr({
@@ -531,7 +531,7 @@ function loadTicketBody(inputData, container) {
 	 $("#ReAssignCancelButton").click(function(){
     $("#reassignBox").css({"height":"0px"});
   });
-  $('#ReAssignButton').live("click",function () {
+  $('#ReAssignButton').click(function () {
     var reassignVal = $("#TicketAssign").val();
     $("#reassignBox").css({"height":"0px"});
     $.getJSON(uri + "ajax/tickets.php", {
@@ -543,12 +543,10 @@ function loadTicketBody(inputData, container) {
       localStorage.removeItem("TicketId"+ticketId);
       //this might need some looking into.
       //loadTicket(Params.TicketId,false,true);//this should load the ticket information from the server and store it in localStorage again
-      
       checkResponse(data);
       if (data.error.length > 1) {} else {
         $("#imgReassigned").show();
         loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
-
       }
     });
   });
