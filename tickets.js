@@ -478,8 +478,7 @@ function loadTicketBody(inputData, container) {
       });
   });
 
-
-	if (data.status.lock == 1) {
+  if (data.status.lock == 1) {
 		$("#Holdlink").hide();
 		$("#unHoldlink").show();
 	} else {
@@ -527,14 +526,13 @@ function loadTicketBody(inputData, container) {
 		$("#replyuserid").val(Params.UserId);
 	});
 	
-	/*
-	 * Please WORK ON ME
-	 * 
-	 * 
-	 */
+// Reassign button 
 	 $('#ReAssignlink').click(function(){
-	   $("#reassignBox").css("bottom","30px");
+	   $("#reassignBox").css("height","30px");
 	 });
+	 $("#replyCancelBtn").click(function(){
+    $("#reassignBox").css({"height":"0px"});
+  });
 	 /*
 	$('#ReAssignlink').colorbox({
 		transition: "none",
@@ -1323,7 +1321,12 @@ jQuery(document).ready(function () {
 		populateAllTickets();
 	});
 	$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
+	
+	
+	//
 	//Live items
+	//
+	
 	//Ticket display live items
 	$(".actionButtons").live("click", function () {
 		var queryObj = {};
@@ -1335,11 +1338,11 @@ jQuery(document).ready(function () {
 		function (data) {
 			checkResponse(data);
 			localStorage.removeItem("TicketId"+Params.TicketId);
-
 			loadTicket(Params.TicketId);
 			//loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);; //reload the first response page
 		});
 	});
+
 	//Global page live 
 	$(":text").live("click", function () {
 		$(this).select();
