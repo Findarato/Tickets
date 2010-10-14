@@ -1,7 +1,7 @@
 <div class="t" style="width:100%;height:500px;margin-right:5px;">
 	<div id="ticketarea" >
 		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:5px;">
-			<div class="font-X head message_head corners-top-2 color-B-1 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
+			<div class="font-X head message_head corners-top-2 color-B-2 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
 				<div class="font-X ticket_sprite ticket_button fakelink" id="ticketTitle" name="bookmark" style="width:230px;text-overflow: ellipsis-word;"><span></span></div><!-- Ticket Title area -->
 				<div class="color-X" id="ticketStatusImage" style="position:absolute;right:5px;top:2px;height:13px;">
 					<div class="corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" style="width:auto;padding:2px;">
@@ -85,8 +85,8 @@
   			</section>
 			</div>
 			<div class="corners-bottom-2" style="position:relative">
-  			<div class="corners-bottom-2 color-C-2 box_transition" id="reassignBox" style="position:absolute;bottom:4px;left:0;height:30px;width:100%">
-          <div style="overflow:auto;height:auto;padding:3px;">
+  			<div class="corners-bottom-2 color-B-2 box_transition" id="reassignBox" style="overflow:hidden;position:absolute;bottom:34px;left:0;height:0px;width:100%">
+          <div style="overflow:hidden;height:auto;padding:3px;">
             <div class="textLeft">
               <span>Assign:</span>
               <select style="width:150px" id="TicketAssign" name="TicketAssign">{html_options options=$assign }</select>
@@ -95,7 +95,7 @@
             </div>
           </div>
  			  </div>
-  			<div class="custom font-X head message_head corners-bottom-2 color-B-1 border-all-D-1" id="ticketFooterArea" style="height:24px">
+  			<div class="custom font-X head message_head corners-bottom-2 color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
   				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
   				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="editLink" style="width:auto;"><span class="ticket_button ticket_sprite pencil">Modify</span></div>
   			</div>
@@ -104,14 +104,14 @@
 	</div>
 	<div id="replyArea"  style="display:table-cell;width:auto;height:500px;vertical-align:top;">
 		<div class="corners-top-2 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
-			<div class="custom font-X head message_head corners-top-2 color-B-1 border-all-D-1" id="replyTitleArea" style="height:16px;">
+			<div class="custom font-X head message_head corners-top-2 color-B-2 border-all-D-1" id="replyTitleArea" style="height:16px;">
 				<div style="width:100%">
 					<span id="replyareaTitle" style="margin-left:10px;margin:5px;">Replies (0)</span>
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 			</div>
 			<div class="color-X-1" id="replyareabody" style="overflow:auto;height:430px;padding:3px;">	</div>
-			<div class="font-X message_head corners-bottom-2 color-B-1 border-all-D-1" id="" style="height:24px">
+			<div class="font-X message_head corners-bottom-2 color-B-2 border-all-D-1" id="" style="height:24px">
 				<div class="button-purple fg-button ticketButton font-Y lapcatButton" id="replylink" style="width: 80px;"><span class="ticket_button ticket_sprite balloon">Add Reply</span></div>
 			</div>
 		</div>
