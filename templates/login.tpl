@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		</form>
-		<div class="button-purple ticketButton font-bold font-Y" id="btn_login" style="width:auto;max-width:50px" >Login</div>
+		<div class="button-purple ticketButton font-bold font-Y" id="loginButton" style="width:auto;max-width:50px" >Login</div>
 		
 	</div>	
 </div>

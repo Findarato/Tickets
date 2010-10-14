@@ -41,7 +41,7 @@
 			</div>
 			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
 				<a class="button-theme ticketButton font-Y lapcatButton Cancel" id="replyCancelBtn">Cancel</a>
-				<a class="button-theme ticketButton font-Y lapcatButton" id="ticketAddBtn" style="width:75px;">Add Ticket</a>
+				<a class="button-theme ticketButton font-Y lapcatButton" id="ticketAddButton" style="width:75px;">Add Ticket</a>
 			</div>
 		</div>
 	</div>

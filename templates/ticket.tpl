@@ -90,8 +90,8 @@
             <div class="textLeft">
               <span>Assign:</span>
               <select style="width:150px" id="TicketAssign" name="TicketAssign">{html_options options=$assign }</select>
-              <div class="ticket_sprite cross Cancel fakelink" id="replyCancelBtn" style="display:inline-block"></div>
-              <div id="ReAssignBtn" class="ticket_sprite tick fakelink" style="display:inline-block"></div>
+              <div class="ticket_sprite cross fakelink" id="ReAssignCancelButton" style="display:inline-block"></div>
+              <div id="ReAssignButton" class="ticket_sprite tick fakelink" style="display:inline-block"></div>
             </div>
           </div>
  			  </div>
@@ -112,7 +112,7 @@
 			</div>
 			<div class="color-X-1" id="replyareabody" style="overflow:auto;height:430px;padding:3px;">	</div>
 			<div class="font-X message_head corners-bottom-2 color-B-2 border-all-D-1" id="" style="height:24px">
-				<div class="button-purple fg-button ticketButton font-Y lapcatButton" id="replylink" style="width: 80px;"><span class="ticket_button ticket_sprite balloon">Add Reply</span></div>
+				<div class="button-purple fg-button ticketButton font-Y lapcatButton" id="replyButton" style="width: 80px;"><span class="ticket_button ticket_sprite balloon">Add Reply</span></div>
 			</div>
 		</div>
 	</div>
