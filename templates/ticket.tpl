@@ -17,12 +17,12 @@
 			</div> 
 			<div class="color-X-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
 		    <div id="ticketBox" style="width:100%;display:inline-block">
-          <div class="td" style="width:auto;"><!-- Previous Button -->
+          <div class="td" style="width:auto;display:none;"><!-- Previous Button -->
             <div class="actionButtons font-X corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="previousTicket" style="width:auto;margin-right:5px;padding:3px;">
              <span>Previous</span>     
             </div>
           </div>
-          <div class="td" style="width:auto;"><!-- Next Button -->
+          <div class="td" style="width:auto;display:none;"><!-- Next Button -->
             <div class="actionButtons font-X corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="nextTicket" style="width:auto;margin-right:5px;padding:3px;">
               <span style="margin-right:5px">Next</span>
             </div>
