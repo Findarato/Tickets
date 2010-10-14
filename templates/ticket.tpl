@@ -90,8 +90,8 @@
             <div class="textLeft">
               <span>Assign:</span>
               <select style="width:150px" id="TicketAssign" name="TicketAssign">{html_options options=$assign }</select>
-              <div class="ticket_sprite cross Cancel" id="replyCancelBtn" style="display:inline-block"></div>
-              <div id="ReAssignBtn" class="ticket_sprite tick" style="display:inline-block"></div>
+              <div class="ticket_sprite cross Cancel fakelink" id="replyCancelBtn" style="display:inline-block"></div>
+              <div id="ReAssignBtn" class="ticket_sprite tick fakelink" style="display:inline-block"></div>
             </div>
           </div>
  			  </div>

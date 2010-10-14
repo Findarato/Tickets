@@ -186,8 +186,12 @@ function id2Email($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
 		$formatedArray[$r['user_id']]=$r['email'];
 	}
 	//$db -> Store_results($formatedArray,"users");	
-		
-	$Userinfo = $formatedArray[$user_id];
+	if($user_id==0){
+	  $Userinfo = "automation@lapcat.org";
+	}else{
+    $Userinfo = $formatedArray[$user_id];    
+	}
+	
 	return $Userinfo;
 }
 function getDepartmentMembers($dep_id,$notify=0){
