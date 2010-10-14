@@ -511,6 +511,13 @@ function loadTicketBody(inputData, container) {
 	$("#replyareaTitle").text("Replies (" + data.responseCount + ")"); //display the total response count
 	
 	
+	//
+	//Reply Button
+	//
+	//$('#replyButton').click(function(){
+	  
+	//});
+	
 	$('#replyButton').colorbox({
 		iframe: false,
 		transition: "none",

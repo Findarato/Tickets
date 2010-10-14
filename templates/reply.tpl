@@ -16,7 +16,7 @@
 			</div>
 			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
 				<a class="button-theme ticketButton font-Y lapcatButton Cancel" id="replyCancelBtn">Cancel</a>
-				<a class="button-theme ticketButton font-Y lapcatButton" id="replyAddBtn">Add</a>
+				<a class="button-theme ticketButton font-Y lapcatButton" id="replyAddButton">Add</a>
 			</div>
 		</div>
 	</div>
