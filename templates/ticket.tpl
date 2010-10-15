@@ -96,8 +96,10 @@
           </div>
  			  </div>
   			<div class="custom font-X head message_head corners-bottom-2 color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
-  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ReAssignlink" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
-  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="editLink" style="width:auto;"><span class="ticket_button ticket_sprite pencil">Modify</span></div>
+  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="reAssignButton" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
+  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="modifyButton" style="width:auto;"><span class="ticket_button ticket_sprite pencil">Modify</span></div>
+  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ticketModifySaveButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite tick">Save</span></div>
+  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ticketModifyCancelButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite cross">Cancel</span></div>
   			</div>
 			</div>
 		</div>
