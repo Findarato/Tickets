@@ -71,6 +71,7 @@
 			case "All Libraries":case "See Description":break;
 			default:
 				$location[$l[0]]=$l[1];
+				$locJson[$l[0]] = array("id"=>$l[0],"name"=>$l[1]);
 				break;
 		}
 	}
@@ -87,14 +88,16 @@
 	}else{
 	  $smarty -> assign('userId',-1);
 	}
-	
+
 	$smarty -> assign('altEmail',$altE);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
+	$smarty -> assign('locationJSON',json_encode($locJson));
 	$smarty -> assign('departmentName',$depart[1]);
 	$smarty -> assign('departmentList',$Depres);
 	$smarty -> assign('department',$department);
 	$smarty -> assign('cate',$cate);
+  $smarty -> assign('cateJSON',json_encode($cate));
 	$smarty -> assign('assign',$dep);
 	$smarty -> assign('projects',$projTemp);
 	$smarty -> assign('type',"new");

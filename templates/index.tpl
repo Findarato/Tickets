@@ -30,7 +30,7 @@
   <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
   <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.line.js" ></script>
   <script src="js/combine.php"></script>
-  <script>Params.UserId = {$user_id};</script>
+  <script>Params.UserId = {$user_id};Params.Locations = {$locationJSON};</script>
   <!--End Mark it up style -->
 </head>
 <body onResize="javascript:resize();"  class="" style="overflow-y:auto;overflow-x:hidden">
