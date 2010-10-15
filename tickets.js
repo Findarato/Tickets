@@ -12,7 +12,7 @@ var Params = {
 	"Ticket_id": 0,
 	"Content": "",
 	"Debug":false,
-	"TicketJSON": "",
+	TicketJSON: {},
 	"LastArea": "",
 	"popChange":false,
 	"LastLogon":0,
@@ -25,7 +25,8 @@ var Params = {
 	  4:{"id":4,"name":"Important"},
 	  5:{"id":5,"name":"Mission Critical"}
 	 },
-	"Categories":{},
+	Categories:{},
+	Locations:{},
 	"FavoriteObject":[]
 	
 };
@@ -335,7 +336,7 @@ function loadTicketBody(inputData, container) {
 	container.find(".statusImage ").hide();
 	Params.TicketId = ticketId = data.id; //set the global
 	Params.TicketJSON = data;
-	
+		
 	bmClass = "bookmark-off";
   for(var a in Params.FavoriteObject){
     if(Params.FavoriteObject[a]==data.id){
@@ -414,6 +415,8 @@ function loadTicketBody(inputData, container) {
    .append(
      $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"},html:data.description})
    );
+   
+
 
   container
    .find("#ticketCategory")
@@ -451,8 +454,29 @@ function loadTicketBody(inputData, container) {
 	//
 	// Adding edit controls to the page
 	//
-  $("#editLink").click(function(){
+	$("#ticketModifySaveButton").click(function(){
+	  $("#modifyButton").show();
+	  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
+	  $(".ticketModifyForm").each(function(f,frm){
+      //alert(typeof $(frm));
+      //alert($(frm).parent().parent().attr("id"));
+      $(frm).parent().html($(frm).text());
+    });
+	});
+  $("#modifyButton").click(function(){
     $(this).hide();
+    $("#ticketModifySaveButton,#ticketModifyCancelButton").show();
+    //$(".ticketModifyForm").each(function(f,frm){
+      //alert($(frm).val());
+    //});
+    
+    
+    //category edit code
+    selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
+    selectBoxReplace(container.find("#ticketPriority").find(".contentEdit"),Params.Priority_string[Params.TicketJSON.priority].name,Params.Priority_string);
+    selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
+    textAreaReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
+    /*
       addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
       function(userId,value,item){
         $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
@@ -472,6 +496,7 @@ function loadTicketBody(inputData, container) {
         $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
         });
       });
+      */
   });
 
   if (data.status.lock == 1) {
@@ -532,7 +557,7 @@ function loadTicketBody(inputData, container) {
 	});
 	
 // Reassign button 
-	 $('#ReAssignlink').click(function(){
+	 $('#reAssignButton').click(function(){
 	   $("#reassignBox").css("height","30px");
 	 });
 	 $("#ReAssignCancelButton").click(function(){
@@ -1351,7 +1376,7 @@ jQuery(document).ready(function () {
 	$(".Cancel").live("click", function () {
 		$.fn.colorbox.close();
 	});
-	$(".ticket_link,.nolink").live("click", function () {
+	$(".ticket_link,.nolink,.bug_link").live("click", function () {
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		pageTracker._trackPageview($(this).attr("href"));
 		setHash($(this).attr("href"));

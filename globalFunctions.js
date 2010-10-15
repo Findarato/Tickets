@@ -271,7 +271,6 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
                       }else{
                        html +="<option value="+item.id+">"+item.name+"</option>";  
                       }
-                        
                     })
                     return html;
                   })
@@ -327,4 +326,36 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
           localStorage.removeItem(myParent.attr("id"));
         })
     )
+}
+
+function selectBoxReplace(target,value,possibleValues){
+  //alert(value);
+   target.html(
+    $("<select id='' class='ticketModifyForm'/>")
+      .append(function(){
+        html = "";
+        $.each(possibleValues,function(i,item){
+          if(item.name == value){
+           html +="<option selected=selected value="+item.id+">"+item.name+"</option>"; 
+          }else{
+           html +="<option value="+item.id+">"+item.name+"</option>";  
+          }
+        })
+        return html;
+      })
+      
+  );
+}
+function textBoxReplace(target,value){
+   target.html(
+    $("<input type='text' class='ticketModifyForm'/>").val(value).data("editedItem",target.attr("id"))
+  );
+}
+function textAreaReplace(target,value){
+   target.html(
+    $("<textarea class='ticketModifyForm' resize='false'/>").val(value).css({
+      "height":"250px",
+      "width":"270px"
+    })
+  );
 }
