@@ -457,11 +457,12 @@ function loadTicketBody(inputData, container) {
 	$("#ticketModifySaveButton").click(function(){
 	  $("#modifyButton").show();
 	  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
-	  values = {"edit":1,"debug":1};
-	  $(".ticketModifyForm").each(function(f,frm){
+	  values = {"edit":1,"ticketId":data.id};
+	  //values = {"edit":1,"debug":1,"ticketId":data.id};
+	  $(".ticketModifyForm").each(function(f,frm){ 
       switch(this.tagName){
         case "SELECT":
-          values[this.name] = $(frm).find(":selected").text();
+          values[this.name] = $(frm).find(":selected").val();
           $(frm).parent().html($(frm).find(":selected").text());
         break;
         case "TEXTAREA":
@@ -470,7 +471,9 @@ function loadTicketBody(inputData, container) {
         break;
       }
     });
-    $.getJSON("/tickets/ajax/edit_ticket.php",values,function(data){});
+    $.getJSON("/tickets/ajax/edit_ticket.php",values,function(data){
+      localStorage.removeItem("TicketId"+data.modifiedTicket);
+    });
 	});
   $("#modifyButton").click(function(){
     $(this).hide();
