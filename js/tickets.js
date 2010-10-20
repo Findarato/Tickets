@@ -457,46 +457,30 @@ function loadTicketBody(inputData, container) {
 	$("#ticketModifySaveButton").click(function(){
 	  $("#modifyButton").show();
 	  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
+	  values = {"edit":1,"debug":1};
 	  $(".ticketModifyForm").each(function(f,frm){
-      //alert(typeof $(frm));
-      //alert($(frm).parent().parent().attr("id"));
-      $(frm).parent().html($(frm).text());
+      switch(this.tagName){
+        case "SELECT":
+          values[this.name] = $(frm).find(":selected").text();
+          $(frm).parent().html($(frm).find(":selected").text());
+        break;
+        case "TEXTAREA":
+          values[this.name] = $(frm).val();
+          $(frm).parent().html($(frm).val());
+        break;
+      }
     });
+    $.getJSON("/tickets/ajax/edit_ticket.php",values,function(data){});
 	});
   $("#modifyButton").click(function(){
     $(this).hide();
     $("#ticketModifySaveButton,#ticketModifyCancelButton").show();
-    //$(".ticketModifyForm").each(function(f,frm){
-      //alert($(frm).val());
-    //});
-    
     
     //category edit code
     selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
     selectBoxReplace(container.find("#ticketPriority").find(".contentEdit"),Params.Priority_string[Params.TicketJSON.priority].name,Params.Priority_string);
     selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
     textAreaReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
-    /*
-      addEditControls(Params.UserId,container.find("#ticketBody"),"textarea",{},
-      function(userId,value,item){
-        $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
-          //do some stuff here      
-        });
-      });
-    
-      addEditControls(Params.UserId,container.find("#ticketPriority"),"select",Params.Priority_string,
-      function(userId,value,item){
-        $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
-          //some actions need to happen
-        });
-      });
-      addEditControls(Params.UserId,container.find("#ticketCategory"),"select",Params.Categories,
-      function(userId,value,item){
-        //some actions need to happen
-        $.getJSON("ajax/edit_ticket.php",{"user_id":userId,"val":value,"item":item,"edit":1,"debug":1},function(){
-        });
-      });
-      */
   });
 
   if (data.status.lock == 1) {
@@ -710,7 +694,7 @@ function loadTicketList(pageNumber,queryObj) {
 		  displayTable
 		    .append(
 		     $("<tr/>")
-		      .css({"padding":"3px 0"})
+		      .css({"padding":"3px","margin":"3px"})
 		      .html(
 		        $("<td/>")
 		          .html(
