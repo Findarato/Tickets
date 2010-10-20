@@ -329,8 +329,6 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 }
 
 function selectBoxReplace(target,value,possibleValues){
-  //alert(value);
-    
    target.html(
     $("<select id='' name='"+target.parent().attr('id')+"' class='ticketModifyForm'/>")
       .append(function(){
