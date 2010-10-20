@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-
 <html style:"width:100%">
 <head>
+  <meta charset="utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="description" content="La Porte County Public Library Ticket tracking system"> 
+  <meta name="author" content="Joseph Harry"> 
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"> 
   <title>Tickets - The tracking system</title>
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
-  <link id="themegencss" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl" rel="stylesheet" />  
+  <link id="themegencss" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl&update" rel="stylesheet" />  
+  <link rel="stylesheet" href="css/resetStyle.css?v=1"> 
+  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1"> 
   <link rel="stylesheet" media="screen" href="css/tickets.css"  />
   <link rel="stylesheet" media="screen" rel="stylesheet" href="css/colorbox.css" />
   <link rel="stylesheet" type="text/css" href="js/markitup/skins/markitup/style.css" />
   <link rel="stylesheet" type="text/css" href="js/markitup/style.css" />
+  <link rel="shortcut icon" href="/tickets/bug.png"> 
+  <link rel="apple-touch-icon" href="/tickets/bug.png"> 
+  <link rel="icon" type="image/png" href="/tickets/bug.png" />
   <link id="rss1" href="ticketsrss.php?id={$user_id}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
   <link id="rss2" href="ticketsrss.php?id={$user_id}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />  
-  <meta http-equiv="X-UA-Compatible" content="IE=100" >
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <link rel="icon" type="image/png" href="/tickets/bug.png" /> 
   <script type="text/javascript">
@@ -31,9 +38,12 @@
   <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.line.js" ></script>
   <script src="js/combine.php"></script>
   <script>Params.UserId = {$user_id};Params.Locations = {$locationJSON};</script>
-  <!--End Mark it up style -->
 </head>
-<body onResize="javascript:resize();"  class="" style="overflow-y:auto;overflow-x:hidden">
+<!--[if lt IE 7 ]> <body class="ie6"> <![endif]--> 
+<!--[if IE 7 ]>    <body class="ie7"> <![endif]--> 
+<!--[if IE 8 ]>    <body class="ie8"> <![endif]--> 
+<!--[if IE 9 ]>    <body class="ie9"> <![endif]--> 
+<!--[if (gt IE 9)|!(IE)]><!--> <body style="overflow-y:scroll;overflow-x:hidden"><!--<![endif]--> 
 <header class="header1" style="height:30px;margin-bottom:20px;">{include file="topper.tpl"}</header>
 <div class="" style="display:table;width:98%;">
 	<div id="sideArea1" class="corners-bottom-2 corners-top-2" style="display:table-cell;vertical-align:top;width:220px">

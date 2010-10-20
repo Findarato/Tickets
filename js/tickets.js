@@ -392,7 +392,7 @@ function loadTicketBody(inputData, container) {
    .find("#ticketAssignedTo")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb ticket_button ticket_sprite user",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+     $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
        .html(
          $("<div/>",{id:"ticketAssignedToDisplay",html:data.firstname + " " + data.lastname,data:data.assigned_id})
        )
@@ -429,7 +429,7 @@ function loadTicketBody(inputData, container) {
    .find("#ticketCreatedBy")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb contentEdit ticket_button ticket_sprite user",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
        .html(
          $("<div/>",{id:"ticketAssignedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
        )
@@ -685,7 +685,7 @@ function loadTicketList(pageNumber,queryObj) {
 		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
 		var tlistHolder = $("<div/>");
 
-		 displayTable = $("<table/>",{"class":"","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
+		 displayTable = $("<table/>",{"class":"font-X2","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
 		if(O_search.bugs_open == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Project</td><td>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
@@ -740,16 +740,16 @@ function loadTicketList(pageNumber,queryObj) {
 		      )
 		      .append($("<td/>")
 		        .addClass("border-bottom-I-1-35")
-		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink").html(item.id).attr({"id": "ID" + item.id })) 
+		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-X2").html(item.id).attr({"id": "ID" + item.id })) 
 		      ) 
 		      .append($("<td/>")
 		        .addClass("border-bottom-I-1-35")
-		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold").html(item.subject).attr({"id": "subject" + item.id }))
+		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold font-X2").html(item.subject).attr({"id": "subject" + item.id }))
 		      )
-		      .append($("<td/>").html(item.locationName).addClass("border-bottom-I-1-35"))
+		      .append($("<td/>").html(item.locationName).addClass("border-bottom-I-1-35 font-X2"))
 		      .append( 
 		        $("<td/>")
-		          .addClass("border-bottom-I-1-35")
+		          .addClass("border-bottom-I-1-35 font-X2")
 		          .html(
     		        function(i,html){
     		         if(item.priority>0){
@@ -760,9 +760,9 @@ function loadTicketList(pageNumber,queryObj) {
     		        }
     		      )
     		   )
-		      .append($("<td/>").html(item.category).addClass("border-bottom-I-1-35"))
-		      .append($("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35"))
-		      .append($("<td/>").html(item.due_on).addClass("border-bottom-I-1-35"))
+		      .append($("<td/>").html(item.category).addClass("border-bottom-I-1-35 font-X2"))
+		      .append($("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X2"))
+		      .append($("<td/>").html(item.due_on).addClass("border-bottom-I-1-35 font-X2"))
 		    )
 		});
 		
