@@ -15,23 +15,35 @@ if(isset($_GET["debug"])){
   echo "<pre>";
   print_r($_GET);
   echo "</pre>";
-  die();
 }
 
+$sql = "UPDATE tickets.tickets SET ";
+$setArray = array();
 if(isset($_GET["edit"]) && $_GET["edit"]==1){
-  switch($_GET["item"]){
-   case "ticketPriority":
-    
-    
-   break;
+  foreach($_GET as $key => $val){
+    switch($key){
+     case "ticketPriority":
+       $setArray[] = " priority=".$val;
+     break;
+     case "ticketCategory":
+       $setArray[] = " category_id=".$val;
+     break;
+     case "ticketLocation":
+       $setArray[] = " location=".$val;
+     break;
       
-    
-   default:break;
+     default:break;
+    }  
   }
-  
 }
-
-
-
-
+$sql .= join(",",$setArray);
+$sql .= " WHERE id=".$_GET["ticketId"]. " LIMIT 1;";
+$db->Query($sql);
+if(count($db->Error)==2){
+  $response["error"] = $db->Error;
+}else{
+  $response["message"] = "Ticket Updated Successfully";
+  $response["modifiedTicket"] = $_GET["ticketId"];
+}
+echo json_encode($response);
 ?>
