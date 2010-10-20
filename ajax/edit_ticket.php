@@ -31,7 +31,9 @@ if(isset($_GET["edit"]) && $_GET["edit"]==1){
      case "ticketLocation":
        $setArray[] = " location=".$val;
      break;
-      
+     case "ticketBody":
+       $setArray[] = " description='".$val."'";
+     break;      
      default:break;
     }  
   }

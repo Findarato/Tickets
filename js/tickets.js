@@ -469,6 +469,18 @@ function loadTicketBody(inputData, container) {
           values[this.name] = $(frm).val();
           $(frm).parent().html($(frm).val());
         break;
+        case "INPUT":
+          switch(this.type){
+            case "text":
+              values[this.name] = $(frm).val();
+              $(frm).parent().html($(frm).val());
+            break;
+            default:break;  
+          }
+                    
+        break;
+        
+        default:alert(this.tagName);break;
       }
     });
     $.getJSON("/tickets/ajax/edit_ticket.php",values,function(data){
@@ -484,6 +496,7 @@ function loadTicketBody(inputData, container) {
     selectBoxReplace(container.find("#ticketPriority").find(".contentEdit"),Params.Priority_string[Params.TicketJSON.priority].name,Params.Priority_string);
     selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
     textAreaReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
+   //textBoxReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
   });
 
   if (data.status.lock == 1) {
