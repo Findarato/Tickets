@@ -85,9 +85,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 					$formated1 = "
 						<a href=\"http://www.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"user ticket_link ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
 				}else{
-					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user ticket_link ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>"
-					."<a class=\"nolink\" href=\"#userPage/".$match[1]."\"><div class=\"ticket_sprite information\" style=\"display:inline-block;\"></div></a>
-					";
+					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user ticket_link ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
 			break;
