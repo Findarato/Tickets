@@ -1,8 +1,6 @@
 /**
  * Simple global variables that are needed everywhere
  */
-var OuterHeight = 0;
-var OuterWidth = 0;
 var UploadCnt = 0;
 //Setup the global variables for selectors
 var Tlb = "";
@@ -25,6 +23,10 @@ var Params = {
 	  4:{"id":4,"name":"Important"},
 	  5:{"id":5,"name":"Mission Critical"}
 	 },
+	Projects:{
+	  1:{"id":1,"name":"Test 1"},
+    2:{"id":2,"name":"Test 2"},
+	},
 	Categories:{},
 	Locations:{},
 	"FavoriteObject":[]
@@ -121,17 +123,6 @@ function checkNotify(dt) {
 	Lastcheck = Math.round(dat.getTime() / 1000.0); //set the global variable to now
 	
 }
-
-function resize() {
-	OuterHeight = $("body").outerHeight() - 50;
-	OuterWidth = $("body").outerWidth() - 5;
-}
-/* This is will work*/
-/**
- * Used to convert seconds in to a more readable format
- * @param int seconds
- */
-
 function loadLargeStats() {
 	Params.Content.empty();
 	Params.Content.html(
@@ -370,7 +361,7 @@ function loadTicketBody(inputData, container) {
      .find("#ticketProject")
      .addClass("ilb")
      .append(
-       $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+       $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
          .html(
            $("<div/>",{id:"ticketProjectDisplay",html:data.project_name})
          )
@@ -594,8 +585,6 @@ function loadTicketBody(inputData, container) {
     }, function (data) {
       $("#ticketAssignedToDisplay").html($("#TicketAssign option:selected").text());
       localStorage.removeItem("TicketId"+ticketId);
-      //this might need some looking into.
-      //loadTicket(Params.TicketId,false,true);//this should load the ticket information from the server and store it in localStorage again
       checkResponse(data);
       if (data.error.length > 1) {} else {
         $("#imgReassigned").show();
@@ -1064,8 +1053,8 @@ function checkHash() {
 	}
 }
 
-jQuery(document).ready(function () {
-  //localStorage.clear();
+function loadLocalStorage(clear){
+  if(clear){localStorage.clear();}
   if(!localStorage.getItem("ticketsFavorite")){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
@@ -1083,17 +1072,33 @@ jQuery(document).ready(function () {
   }else{
     Params.Categories = $.parseJSON(localStorage.getItem("ticketsCategories"));
   }
+  if(!localStorage.getItem("ticketsProjects")){
+    $.getJSON("ajax/get_projects.php",{},function(data){
+      localStorage.setItem("ticketsProjects",JSON.stringify(data.projects));
+      Params.Projects = data.projects;
+    })
+  }else{
+    Params.Projects = $.parseJSON(localStorage.getItem("ticketsProjects"));
+  }
+
   
   if(localStorage.getItem("ticketsVersion") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
     localStorage.clear();
     localStorage.setItem("ticketsVersion",$("#version").html()); 
   }
+}
+
+jQuery(document).ready(function () {
+  //localStorage.clear();
+  if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
+    localStorage.userId = Params.UserId;
+  }
+  
+  loadLocalStorage();
   
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
   
-	if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
-		localStorage.userId = Params.UserId;
-	}
+
 	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});
 	populateAllBugs();
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
@@ -1103,10 +1108,7 @@ jQuery(document).ready(function () {
 		if(!localStorage.tickets){notice("Debug","Local Storage is cleared!",true);}
 		return false;
 	});
-	if(localStorage.tickets = true){$("#featuresBoxDisplay").append($("<div/>",{"class":"table ticket_sprite",title:"Local Storage",css:{"display":"inline-block"}}));}
-	if (("WebSocket" in window)) {
-		$("#featuresBoxDisplay").append($("<div/>",{"class":"gear ticket_sprite",title:"Web Sockets",css:{"display":"inline-block"}}));
-	}
+
 	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#version").html()); //to make sure the version on tickets is always updated
@@ -1143,8 +1145,6 @@ jQuery(document).ready(function () {
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
 	}
 
-	OuterHeight = $("body").outerHeight() - 50;
-	OuterWidth = $("body").outerWidth() - 5;
 	if ($("#topperUserInfo").text().length > 10) {
 		function ut(){
 			updateTickets();
@@ -1152,15 +1152,6 @@ jQuery(document).ready(function () {
 		};ut();
 		checkHash();
 	} //disables running with out being logged in
-
-	$("#replyToggle").click(function () {
-		$("#replyArea").toggle();
-		if ($("#storage").html() == "1") {
-			$("#storage").html("0");
-		} else {
-			$("#storage").html("1");
-		}
-	});
 
 	$('#topperNew').colorbox({
 		iframe: false,

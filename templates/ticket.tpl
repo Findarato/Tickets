@@ -80,7 +80,7 @@
           <div id="locationBox" style="display:none;height:16px;">
               <div class="font-X2" id="ticketLocation" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Location</div>
           </div>
-  			<section id="ticketDataBox" style="display:block;padding-left:2px;position:relative;margin-bottom:5px;width:100%;height:260px;overflow:auto;vertical-align:top; clear:both">
+  			<section id="ticketDataBox" style="display:block;padding-left:2px;position:relative;margin-bottom:5px;margin-top:5px;width:100%;height:260px;overflow:auto;vertical-align:top; clear:both">
   				<article id="ticketBody" style="display:block;height:260px;with:200px; overflow:auto"></article>
   			</section>
 			</div>
