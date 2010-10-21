@@ -364,7 +364,7 @@ function loadTicketBody(inputData, container) {
      .append(
        $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
          .html(
-           $("<div/>",{id:"ticketDueDateDisplay",html:data.project_name})
+           $("<div/>",{id:"ticketProjectDisplay",html:data.project_name})
          )
      );
 	
@@ -435,6 +435,7 @@ function loadTicketBody(inputData, container) {
        )
    );
 	container.find("#replyticketid").val(ticketId);
+	
 	container
    .find("#ticketId")
    .addClass("ilb")
@@ -458,28 +459,27 @@ function loadTicketBody(inputData, container) {
 	  $("#modifyButton").show();
 	  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
 	  values = {"edit":1,"ticketId":data.id};
-	  //values = {"edit":1,"debug":1,"ticketId":data.id};
+	  me = $(frm);
+    myParent = me.parent();
 	  $(".ticketModifyForm").each(function(f,frm){ 
       switch(this.tagName){
         case "SELECT":
-          values[this.name] = $(frm).find(":selected").val();
-          $(frm).parent().html($(frm).find(":selected").text());
+          values[this.name] = me.find(":selected").val();
+          myParent.html($(frm).find(":selected").text());
         break;
         case "TEXTAREA":
-          values[this.name] = $(frm).val();
-          $(frm).parent().html($(frm).val());
+          values[this.name] = me.val();
+          myParent.html($(frm).val());
         break;
         case "INPUT":
           switch(this.type){
             case "text":
-              values[this.name] = $(frm).val();
-              $(frm).parent().html($(frm).val());
+              values[this.name] = me.val();
+              myParent.html($(frm).val());
             break;
             default:break;  
           }
-                    
         break;
-        
         default:alert(this.tagName);break;
       }
     });
@@ -492,13 +492,28 @@ function loadTicketBody(inputData, container) {
     $("#ticketModifySaveButton,#ticketModifyCancelButton").show();
     
     //category edit code
-    selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
-    selectBoxReplace(container.find("#ticketPriority").find(".contentEdit"),Params.Priority_string[Params.TicketJSON.priority].name,Params.Priority_string);
-    selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
     textAreaReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
+    //Global Boxes
+    selectBoxReplace(container.find("#ticketPriority").find(".contentEdit"),Params.Priority_string[Params.TicketJSON.priority].name,Params.Priority_string);
+    if(bug){//this is for the project
+      selectBoxReplace(container.find("#ticketProject").find(".contentEdit"),data.project_name,Params.Projects);
+    }else{
+      selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
+      selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
+    }
    //textBoxReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
   });
-
+  $("#ticketModifyCancelButton").click(function(){
+    $("#modifyButton").show();
+    $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
+    $(".ticketModifyForm").each(function(f,frm){
+      me = $(frm);
+      myParent = me.parent();
+      myParent.html(myParent.data("prevValue"));
+    });    
+    
+    
+  });
   if (data.status.lock == 1) {
 		$("#Holdlink").hide();
 		$("#unHoldlink").show();
