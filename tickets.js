@@ -458,6 +458,7 @@ function loadTicketBody(inputData, container) {
 	  $("#modifyButton").show();
 	  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
 	  values = {"edit":1,"ticketId":data.id};
+	  ticketBodyBox = {};
 	  $(".ticketModifyForm").each(function(f,frm){ 
       me = $(frm);
       myParent = me.parent();
@@ -469,6 +470,7 @@ function loadTicketBody(inputData, container) {
         case "TEXTAREA":
           values[this.name] = me.val();
           myParent.html($(frm).val());
+          ticketBodyBox = myParent;
         break;
         case "INPUT":
           switch(this.type){
@@ -484,6 +486,8 @@ function loadTicketBody(inputData, container) {
     });
     $.getJSON("/tickets/ajax/edit_ticket.php",values,function(data){
       localStorage.removeItem("TicketId"+data.modifiedTicket);
+      loadResponsesBody(data.modifiedTicket, $("#replyareabody"), 0);
+     // ticketBodyBox.html(data.modifiedTicketBody);
     });
 	});
   $("#modifyButton").click(function(){
@@ -691,13 +695,13 @@ function loadTicketList(pageNumber,queryObj) {
 	$.getJSON(uri + "ajax/tickets.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
-
+    if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
 		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
 		var tlistHolder = $("<div/>");
 
 		 displayTable = $("<table/>",{"class":"font-X2","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
-		if(O_search.bugs_open == 1){ //bugs display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Project</td><td>Created By</td><td>Created On</td></tr>");
+		if(bugs == 1){ //bugs display
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Project</td><td>Priority</td><td>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td>Location</td><td>Priority</td><td>Category</td><td>Created By</td><td>Due On</td></tr>");
 		}		
@@ -748,15 +752,29 @@ function loadTicketList(pageNumber,queryObj) {
                 })
               )
 		      )
-		      .append($("<td/>")
-		        .addClass("border-bottom-I-1-35")
-		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-X2").html(item.id).attr({"id": "ID" + item.id })) 
+		      .append(
+		        function(){
+	            html = $("<td/>")
+                .addClass("border-bottom-I-1-35")
+                .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-X2").html(item.id).attr({"id": "ID" + item.id }))
+		          return html;
+		        }
+		         
 		      ) 
 		      .append($("<td/>")
 		        .addClass("border-bottom-I-1-35")
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold font-X2").html(item.subject).attr({"id": "subject" + item.id }))
 		      )
-		      .append($("<td/>").html(item.locationName).addClass("border-bottom-I-1-35 font-X2"))
+		      .append(
+		        function(){
+		          if(bugs){
+		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("border-bottom-I-1-35 font-X2")
+		          }else{
+		            return $("<td/>").html(item.locationName).addClass("border-bottom-I-1-35 font-X2")
+		          }
+		        }
+		        
+		      )
 		      .append( 
 		        $("<td/>")
 		          .addClass("border-bottom-I-1-35 font-X2")
@@ -766,13 +784,38 @@ function loadTicketList(pageNumber,queryObj) {
     		           if(item.priority>5){item.priority = item.priority-5;}
     		           result = Params.Priority_string[item.priority].name;}
     		         else{result = Params.Priority_string[0].name;}
-    		         return result;
+    		           return result;
     		        }
     		      )
     		   )
-		      .append($("<td/>").html(item.category).addClass("border-bottom-I-1-35 font-X2"))
-		      .append($("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X2"))
-		      .append($("<td/>").html(item.due_on).addClass("border-bottom-I-1-35 font-X2"))
+		      .append(
+		        function(){
+		          if(bugs){
+		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X2")
+		          }else{
+		            return $("<td/>").html(item.category).addClass("border-bottom-I-1-35 font-X2");    
+		          }
+		        }
+		        
+		      )
+		      .append(
+		        function(i,html){
+		          if(bugs){
+		            return $("<td/>").html(item.created_on).addClass("border-bottom-I-1-35 font-X2")
+		          }else{
+		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X2")
+		          } 
+		        }
+		        
+		       )
+		      .append(
+		        function(){
+		          if(!bugs){
+		            return $("<td/>").html(item.due_on).addClass("border-bottom-I-1-35 font-X2");
+		          }  
+		        }
+		        
+		      )
 		    )
 		});
 		
@@ -1093,14 +1136,13 @@ jQuery(document).ready(function () {
   if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
     localStorage.userId = Params.UserId;
   }
-  
   loadLocalStorage();
+  populateAllBugs();
   
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
-  
 
 	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});
-	populateAllBugs();
+	
 	if (Params.Debug) {	$("#DebugLogDisplay").show();}
 	$("#clearLocalStorage").click(function(){
 		localStorage.clear();
@@ -1200,38 +1242,6 @@ jQuery(document).ready(function () {
 		$(".Ticketform").css("background-color", "");
 
 	});
-	
-	$("#t_fT").click(function () {
-		var hash = jQuery.makeArray(window.location.hash.split("\/"));
-		var display = $("#imgBookmark");
-		if (hash[0] == "#ticket") {
-			localStorage.removeItem("TicketId"+Params.TicketId);
-			if (display.css("display") == "block" || display.css("display") == "inline") { //Add bookmark
-				$.get(uri + "ajax/tickets.php", {
-					type: "favorite",
-					ticket_id: Params.TicketId,
-					favorite: 0
-				}, function (data) {
-					populateAllTickets("f");
-					display.toggle();
-					notice("Notice", data.message, false);
-				}, "json");
-				
-			} else { //remove bookmark
-				$.get(uri + "ajax/tickets.php", {
-					type: "favorite",
-					ticket_id: Params.TicketId,
-					favorite: 1
-				}, function (data) {
-					populateAllTickets("f");
-					display.toggle();
-					notice("Notice", data.message, false);
-				}, "json");
-			}
-		} else {
-			notice("Notice!", "You must first select a ticket!", false);
-		}
-	});
 	$("#loginButton").click(function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error", "Please enter a username", false);
@@ -1293,6 +1303,7 @@ jQuery(document).ready(function () {
 		$.fn.colorbox.close();
 		
 	});
+	/*
 	$("#ticketSearchButton").click(function () {
 		var hash = "ticketList";
 		var s_Title = $("#searchTitle").val();
@@ -1319,6 +1330,7 @@ jQuery(document).ready(function () {
 		loadTicketList();
 		$.fn.colorbox.close();
 	});
+	*/
 	$("#ticketAddButton,#bugAddButton").click(function () {
 		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
@@ -1357,7 +1369,7 @@ jQuery(document).ready(function () {
 		}
 		populateAllTickets();
 	});
-	$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
+	//$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	
 	
 	//
