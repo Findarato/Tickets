@@ -30,7 +30,7 @@
         </li>
         <li>Editing is totally revamped.
           <ol>
-            <li>Tickets is now using the markitup editor that the main site is using</li>
+            <li><del>Tickets is now using the markitup editor that the main site is using</del> This will be included at a later date.</li>
             <li>Tickets are now edited in line. When the modify button is clicked the editing interface will show up.  Click save to make the changes, or cancel to undo any adjustments that were made.</li>
           </ol>
         </li>
