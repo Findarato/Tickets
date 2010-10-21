@@ -8,7 +8,7 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
       <span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XX</span>
-      <span style="font-size: 90%; line-height: normal;" id="version">v.3.0.0.r273</span>
+      <span style="font-size: 90%; line-height: normal;" id="version">v.3.0.0.r293</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
         <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/595">bug #595</a>.</li>
@@ -31,13 +31,14 @@
         <li>Editing is totally revamped.
           <ol>
             <li>Tickets is now using the markitup editor that the main site is using</li>
-            <li>Tickets are now edited in line. Meaning you just click on the pencil and you are able to edit the ticket as you need.</li>
+            <li>Tickets are now edited in line. When the modify button is clicked the editing interface will show up.  Click save to make the changes, or cancel to undo any adjustments that were made.</li>
           </ol>
         </li>
          <li>Recent Tickets has been removed from this version of tickets. Its going to be handled differently than before.</li>
          <li>Implemented  <a class="bug_link ticket_button ticket_sprite" href="#ticket/601">bug #601</a>.</li>
          <li>Tickets are now sorted by priority then due date</li>
          <li>Bookmarks are now done in line vs though a toolbar button.  You can click the (<div class="ilb bookmark-off ticket_sprite"></div>/<div class="ilb bookmark ticket_sprite"></div>) icon anywhere it is on the page, and it will toggle the book mark for the ticket you have selected.</li>
+         <li></li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
@@ -46,6 +47,10 @@
         <li>Going directly to the user Page in Firefox can result in odd placement of the yes/no selector.  This is a result of how Firefox renders report @font-face fonts.</li>
         <li>There are no page numbers, nor any way to show more then the default amount of tickets in the list view.</li>
         <li>Going directly to a ticketlist search result can lead to a broken page.</li>
+        <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
+        <li>Closed tickets are not showing up for some people. Even though a number shows up next to Closed Tickets.</li>
+        <li>New tickets / bugs and new replies are not in their final form.  These will be integrated into the new look in a later version.</li>
+        
       </ol>
       <br>
       <br>
