@@ -71,12 +71,12 @@
   
          	<div class="font-X2 " id="ticketCreatedBy" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Created By</div>
   
-  			  <div id="assignedToBox" style="display:none;;height:16px;">
+  			  <div id="assignedToBox" style="display:none;height:16px;">
   		       	<div class="font-X2" id="ticketAssignedTo" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Assigned To</div>
   	      </div> 
-  			  
-  		    <div class="font-X2" id="ticketPriority" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Priority</div>
-          
+  			  <div id="priorityBox" style="display:block;height:16px;">
+  		      <div class="font-X2" id="ticketPriority" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Priority</div>
+          </div>
           <div id="locationBox" style="display:none;height:16px;">
               <div class="font-X2" id="ticketLocation" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">Location</div>
           </div>

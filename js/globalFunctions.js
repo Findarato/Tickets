@@ -329,7 +329,7 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 }
 
 function selectBoxReplace(target,value,possibleValues){
-   target.html(
+   target.data("prevValue",value).html(
     $("<select id='' name='"+target.parent().attr('id')+"' class='ticketModifyForm'/>")
       .append(function(){
         html = "";
@@ -346,15 +346,15 @@ function selectBoxReplace(target,value,possibleValues){
   );
 }
 function textBoxReplace(target,value){
-   target.html(
+   target.data("prevValue",value).html(
     $("<input type='text' name='"+target.parent().attr('id')+"' class='ticketModifyForm'/>").val(value).data("editedItem",target.attr("id"))
   );
 }
 function textAreaReplace(target,value){
-   target.html(
+   target.data("prevValue",value).html(
     $("<textarea class='ticketModifyForm' name='"+target.parent().attr('id')+"' resize='false'/>").val(value).css({
-      "height":"250px",
-      "width":"270px"
+      "height":"230px",
+      "width":"250px"
     })
   );
 }
