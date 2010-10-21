@@ -108,7 +108,7 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 				switch($k){
 					default:break;
 					case "location":
-						$wc[]="tcv.locationId=\"".$s."\"";
+						$wc[]="t.locationId=\"".$s."\"";
 					break;
 					case "dateTime":
 						switch($s){
@@ -127,12 +127,12 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 							break;
 						}
 						//new tickets
-            $sql = "SELECT tcv.id FROM tcview AS tcv WHERE TIMESTAMPDIFF(SECOND,'$dt',tcv.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
+            $sql = "SELECT t.id FROM tcview Atcv WHERE TIMESTAMPDIFF(SECOND,'$dt',t.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
 						//die($sql);
 						$db->Query($sql);
             $ticketIds = $db->Fetch("row",false,false);
 						//new replies
-            $sql = "SELECT tcv.id FROM tcview AS tcv WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
+            $sql = "SELECT t.id FROM tcview AS t WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
 						$db->Query($sql);
             $replyTicketids = $db->Fetch("row",false,false);
 						if(!is_array($replyTicketids)){$replyTicketids = array(0=>$replyTicketids);}else{$replyTicketids = array_implode($replyTicketids);}
@@ -149,15 +149,15 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						
 						$ticketIds = array_merge($ticketIds,$response);
             if($ticketIds){
-            	$wc[]="tcv.id IN(".join(",",$ticketIds).")";
+            	$wc[]="t.id IN(".join(",",$ticketIds).")";
             }else{
-            	$wc[]="tcv.id in(0,0)";
+            	$wc[]="t.id in(0,0)";
             }
 					break;
 					case "open":
-						$wc[]="tcv.open=\"".$s."\"";
+						$wc[]="t.open=\"".$s."\"";
 					case "new":
-						//$wc[]="tcv.assigned_id=".$usr->User_id;
+						//$wc[]="t.assigned_id=".$usr->User_id;
 					break;
 					case "page":
 						$end = 30;
@@ -173,40 +173,48 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						}else{//This is only one result
 							$favIds = array(0=>$favIds);
 						}
-						$wc[]="tcv.id in(".join(",",$favIds).")";
+						$wc[]="t.id in(".join(",",$favIds).")";
 					break;
 					case "title":
-						if($s!=""){$wc[]="tcv.subject LIKE \"%".$s."%\"";}
+						if($s!=""){$wc[]="t.subject LIKE \"%".$s."%\"";}
 					break;
 
 				//New right pannel list. 
-					case "sOdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.assigned_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=1";break;
-					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(tcv.created_by_id IN (".join(",",$idList)."))";$wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=1";break;
-					case "sAssigned":$wc[]="tcv.created_by_id=".$usr->User_id;$wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=1";break;
-					case "sClosed":$wc[]="tcv.open=0";$wc[]="tcv.assigned_id=".$usr->User_id;$wc[]="tcv.tickettype_id=1";break;
-					case "sOpen":$wc[]="tcv.open=1";$wc[]="tcv.assigned_id=".$usr->User_id;$wc[]="tcv.tickettype_id=1";break;
-					case "bugs_open": $wc[]="tcv.open=1";$wc[]="tcv.tickettype_id=2";break;
-					case "bugs_closed": $wc[]="tcv.open=0";$wc[]="tcv.tickettype_id=2";break;
+					case "sOdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(t.assigned_id IN (".join(",",$idList)."))";$wc[]="t.open=1";$wc[]="t.tickettype_id=1";break;
+					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(t.created_by_id IN (".join(",",$idList)."))";$wc[]="t.open=1";$wc[]="t.tickettype_id=1";break;
+					case "sAssigned":$wc[]="t.created_by_id=".$usr->User_id;$wc[]="t.open=1";$wc[]="t.tickettype_id=1";break;
+					case "sClosed":$wc[]="t.open=0";$wc[]="t.assigned_id=".$usr->User_id;$wc[]="t.tickettype_id=1";break;
+					case "sOpen":$wc[]="t.open=1";$wc[]="t.assigned_id=".$usr->User_id;$wc[]="t.tickettype_id=1";break;
+					case "bugs_open": $wc[]="t.open=1";$wc[]="t.tickettype_id=2";break;
+					case "bugs_closed": $wc[]="t.open=0";$wc[]="t.tickettype_id=2";break;
 				}				
 			}
 			if($type!="favorite"){
-				$sc[]="tcv.description AS description";
-				$sc[]="tcv.status";
-				$sc[]="tcv.tickettype_id";
-				$sql = 'SELECT '.join(",",$sc).',tcv.open,tcv.id,tcv.assigned_id,tcv.subject,
-				    DATE_FORMAT(tcv.created_on,"%c.%d.%Y") AS created_on,
-            DATE_FORMAT(tcv.due_on,"%c.%d.%Y") AS due_on,
-						tcv.closed_on,tcv.category,tcv.category_id,tcv.created_by_id, 
-						TIMESTAMPDIFF(SECOND ,tcv.created_on, now( ) ) AS dago,
+				$sc[]="t.description AS description";
+				$sc[]="t.status";
+				$sc[]="t.tickettype_id";
+				$sql = 'SELECT '.join(",",$sc).',t.open,t.id,t.assigned_id,t.subject,
+				    DATE_FORMAT(t.created_on,"%c.%d.%Y") AS created_on,
+            DATE_FORMAT(t.due_on,"%c.%d.%Y") AS due_on,
+						t.closed_on,
+            t.project_id,						
+						c.name AS category,
+						t.category_id,
+						t.created_by_id, 
+						TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago,
 						lhu.username,lhu.firstname,lhu.lastname, lhu2.firstname AS firstname2,lhu2.lastname AS lastname2,lhu2.username AS username2,
-						TIMESTAMPDIFF(SECOND ,tcv.due_on, now( ) ) AS timeRemaining,
-						TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.closed_on ) AS timeTaken,
-						TIMESTAMPDIFF(SECOND ,tcv.created_on, tcv.due_on ) AS timeAllowed,
-						tcv.locationId,tcv.locationName,tcv.priority
-						FROM tcview AS tcv 
-						JOIN lapcat.hex_users AS lhu ON (tcv.assigned_id=lhu.id)
-						JOIN lapcat.hex_users AS lhu2 ON (tcv.created_by_id=lhu2.id)
-						WHERE '.join(" AND ",$wc).' GROUP BY tcv.id ORDER BY tcv.priority DESC,tcv.due_on ';	
+						TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining,
+						TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,
+						TIMESTAMPDIFF(SECOND ,t.created_on, t.due_on ) AS timeAllowed,
+						t.location AS locationId,
+						ln.name AS locationName,
+						t.priority
+						FROM tickets AS t 
+						JOIN category AS c ON (c.id=t.category_id)
+						JOIN library_names AS ln ON (ln.ID=t.location)
+						JOIN lapcat.hex_users AS lhu ON (t.assigned_id=lhu.id)
+						JOIN lapcat.hex_users AS lhu2 ON (t.created_by_id=lhu2.id)
+						WHERE '.join(" AND ",$wc).' GROUP BY t.id ORDER BY t.priority DESC,t.due_on ';	
 			}
 			
 		break;
