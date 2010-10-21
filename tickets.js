@@ -312,6 +312,14 @@ function displayStatus(jsonData, Selector) {
 	});
 }
 function loadTicketBody(inputData, container) {
+  // lets make sure the previous tickets modifications are gone.
+  $("#modifyButton").show();
+  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
+  $(".ticketModifyForm").each(function(f,frm){
+    me = $(frm);
+    myParent = me.parent();
+    myParent.html(myParent.data("prevValue"));
+  }); 
 	//Basically figures out what kind of data is being send to the function and how to deal with it.
 	var data = {};
 	var bug = false;
@@ -459,9 +467,9 @@ function loadTicketBody(inputData, container) {
 	  $("#modifyButton").show();
 	  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
 	  values = {"edit":1,"ticketId":data.id};
-	  me = $(frm);
-    myParent = me.parent();
 	  $(".ticketModifyForm").each(function(f,frm){ 
+      me = $(frm);
+      myParent = me.parent();
       switch(this.tagName){
         case "SELECT":
           values[this.name] = me.find(":selected").val();
@@ -511,8 +519,6 @@ function loadTicketBody(inputData, container) {
       myParent = me.parent();
       myParent.html(myParent.data("prevValue"));
     });    
-    
-    
   });
   if (data.status.lock == 1) {
 		$("#Holdlink").hide();
