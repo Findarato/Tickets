@@ -90,22 +90,27 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 		$userName = ucwords($users[$res1['created_by_id']]['firstname'])." ".ucwords($users[$res1['created_by_id']]['lastname']);
 		$userName2 = ucwords($users[$res1['assigned_id']]['firstname'])." ".ucwords($users[$res1['assigned_id']]['lastname']);		
 
+		
 		if($_GET["newTicketBugTrouble"]==1){
+		  $locs = $db->Query("SELECT ID,name,email FROM tickets.library_names",false,"assoc_array",false,"ID");
 			$tempName = "email.tpl";
+		  $smarty -> assign('email_due_on',$dueOn);
+		  $smarty -> assign('email_location',$locs[$_GET["newTicketLocation"]]["name"]);
+      $smarty -> assign('email_assigned_to',$userName2);
 		}else{
 			$tempName = "emailBug.tpl";
 		}
-    $locs = $db->Query("SELECT ID,name,email FROM tickets.library_names",false,"assoc_array",false,"ID");
+    
 		$smarty -> assign('email_ticket_id',$res1['id']);
 		$smarty -> assign('email_title',$res1['subject']);
     $smarty -> assign('email_created_on',$res1['created_on']);
-    $smarty -> assign('email_due_on',$dueOn);
+    
     $smarty -> assign('email_created_by',$userName);
-    $smarty -> assign('email_assigned_to',$userName2);
+
     $smarty -> assign('email_category',$res1['category']);
     $smarty -> assign('email_title',$res1['subject']);
     $smarty -> assign('email_priority',$res1['priority']);        
-    $smarty -> assign('email_location',$locs[$_GET["newTicketLocation"]]["name"]);
+    
     $smarty -> assign('email_description',nl2br(Tcode($res1['description'],false,false,true)));
 		$smarty -> assign('showRes',"0");
     $styleCode = join("",file("http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=22&hsl"));

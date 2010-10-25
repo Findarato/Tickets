@@ -1357,14 +1357,18 @@ jQuery(document).ready(function () {
           return false;
 				}else {
 					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
-						if(data.error==""){	setHash("#ticket/"+data.newTicketId); loadTicket(data.newTicketId);}
+						if(data.error==""){	
+						  setHash("#ticket/"+data.newTicketId); 
+						  loadTicket(data.newTicketId);
+						  localStorage.removeItem("TicketId"+data.newTicketId);
+              //loadTicket(Params.TicketId);
+						}else{}
 					});
 					$(".Ticketform").attr({
 						value: ""
 					});
 					$.fn.colorbox.close();
-					localStorage.removeItem("TicketId"+Params.TicketId);
-					loadTicket(Params.TicketId);
+
 				}
 			}
 		}
