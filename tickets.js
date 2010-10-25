@@ -768,12 +768,12 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 		          if(bugs){
+		            if(item.project_id === undefined || item.project_id == 0){ item.project_id = 1; } // fix bugs that do not have a project.  Default them to the first project
 		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("border-bottom-I-1-35 font-X2")
 		          }else{
 		            return $("<td/>").html(item.locationName).addClass("border-bottom-I-1-35 font-X2")
 		          }
 		        }
-		        
 		      )
 		      .append( 
 		        $("<td/>")
@@ -1098,7 +1098,7 @@ function checkHash() {
 
 function loadLocalStorage(clear){
   if(clear){localStorage.clear();}
-  if(!localStorage.getItem("ticketsFavorite")){
+  if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false"){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
       updateFavorites();
@@ -1123,39 +1123,26 @@ function loadLocalStorage(clear){
   }else{
     Params.Projects = $.parseJSON(localStorage.getItem("ticketsProjects"));
   }
-
-  
   if(localStorage.getItem("ticketsVersion") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
     localStorage.clear();
     localStorage.setItem("ticketsVersion",$("#version").html()); 
+  }
+  if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
+    localStorage.userId = Params.UserId;
   }
 }
 
 jQuery(document).ready(function () {
   //localStorage.clear();
-  if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
-    localStorage.userId = Params.UserId;
-  }
+
   loadLocalStorage();
   populateAllBugs();
+  Params.Content = $("#content"); //lets stop searching for it a hundred times
   
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
-
 	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});
-	
-	if (Params.Debug) {	$("#DebugLogDisplay").show();}
-	$("#clearLocalStorage").click(function(){
-		localStorage.clear();
-		if (Params.Debug) {	$("#DebugLog").append("Cleared Local Storage<br>");}
-		if(!localStorage.tickets){notice("Debug","Local Storage is cleared!",true);}
-		return false;
-	});
-
-	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#version").html()); //to make sure the version on tickets is always updated
-	
-
 	if (uri.match('dev') == 'dev') {
 		$("#themegencss").attr("href", "http://dev.lapcat.org/" + $("#themegencss").attr("href"));	
 	} else {
@@ -1164,7 +1151,7 @@ jQuery(document).ready(function () {
 	
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
-	Params.Content = $("#content"); //lets stop searching for it a hundred times
+
 
 	$("#depCancel").click(function () {
 		jQuery.post(uri + "ajax/login.php", {
@@ -1361,7 +1348,6 @@ jQuery(document).ready(function () {
 						  setHash("#ticket/"+data.newTicketId); 
 						  loadTicket(data.newTicketId);
 						  localStorage.removeItem("TicketId"+data.newTicketId);
-              //loadTicket(Params.TicketId);
 						}else{}
 					});
 					$(".Ticketform").attr({
