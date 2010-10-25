@@ -1262,6 +1262,7 @@ jQuery(document).ready(function () {
 					Params.LastLogon = data.lastlogon;
 					$("#topperUserInfo").html(data.firstname + " " + data.lastname + " (" + data.username + ")").attr("href","#userPage/"+data.userid);
 					checkResponse(data);
+					loadLocalStorage();
 					Params.UserId = data.userid;
 					if(localStorage.tickets = true){
 						localStorage.setItem("userId",data.userid);
