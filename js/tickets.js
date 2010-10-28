@@ -699,7 +699,7 @@ function loadTicketList(pageNumber,queryObj) {
 		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
 		var tlistHolder = $("<div/>");
 
-		 displayTable = $("<table/>",{"class":"font-X2","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
+		 displayTable = $("<table/>",{"class":"font-X","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Project</td><td>Priority</td><td>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
@@ -756,28 +756,28 @@ function loadTicketList(pageNumber,queryObj) {
 		        function(){
 	            html = $("<td/>")
                 .addClass("border-bottom-I-1-35")
-                .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-X2").html(item.id).attr({"id": "ID" + item.id }))
+                .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-X").html(item.id).attr({"id": "ID" + item.id }))
 		          return html;
 		        }
 		         
 		      ) 
 		      .append($("<td/>")
 		        .addClass("border-bottom-I-1-35")
-		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold font-X2").html(item.subject).attr({"id": "subject" + item.id }))
+		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold font-X").html(item.subject).attr({"id": "subject" + item.id }))
 		      )
 		      .append(
 		        function(){
 		          if(bugs){
 		            if(item.project_id === undefined || item.project_id == 0){ item.project_id = 1; } // fix bugs that do not have a project.  Default them to the first project
-		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("border-bottom-I-1-35 font-X2")
+		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("border-bottom-I-1-35 font-X")
 		          }else{
-		            return $("<td/>").html(item.locationName).addClass("border-bottom-I-1-35 font-X2")
+		            return $("<td/>").html(item.locationName).addClass("border-bottom-I-1-35 font-X")
 		          }
 		        }
 		      )
 		      .append( 
 		        $("<td/>")
-		          .addClass("border-bottom-I-1-35 font-X2")
+		          .addClass("border-bottom-I-1-35 font-X")
 		          .html(
     		        function(i,html){
     		         if(item.priority>0){
@@ -791,9 +791,9 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 		          if(bugs){
-		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X2")
+		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X")
 		          }else{
-		            return $("<td/>").html(item.category).addClass("border-bottom-I-1-35 font-X2");    
+		            return $("<td/>").html(item.category).addClass("border-bottom-I-1-35 font-X");    
 		          }
 		        }
 		        
@@ -801,9 +801,9 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(i,html){
 		          if(bugs){
-		            return $("<td/>").html(item.created_on).addClass("border-bottom-I-1-35 font-X2")
+		            return $("<td/>").html(item.created_on).addClass("border-bottom-I-1-35 font-X")
 		          }else{
-		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X2")
+		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X")
 		          } 
 		        }
 		        
@@ -811,7 +811,7 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 		          if(!bugs){
-		            return $("<td/>").html(item.due_on).addClass("border-bottom-I-1-35 font-X2");
+		            return $("<td/>").html(item.due_on).addClass("border-bottom-I-1-35 font-X");
 		          }  
 		        }
 		        

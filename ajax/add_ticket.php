@@ -38,7 +38,7 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
        }
      }
   }
-  
+  if($_GET["newTicketUser_id"] == 0 || $_GET["newTicketUser_id"] == ""){ $_GET["newTicketUser_id"] = $usr->User_id; } // lets see if we can fix this issue
 	if($_GET["newTicketBugTrouble"] == 1 && $ok===true){
 		$dueOn = date("Y-m-d G:i:s",mktime(date("G"),date("i"),0,date("m",strtotime($_GET["newTicketDueDate"])),date("d",strtotime($_GET["newTicketDueDate"])),date("Y",strtotime($_GET["newTicketDueDate"]))));
 		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
