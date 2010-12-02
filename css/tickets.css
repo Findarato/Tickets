@@ -6,6 +6,7 @@ body {
     height: 100%;
     font-size: 12px;
     font-family: 'Cantarell', arial, sans-serif;
+    background: url(/tickets/css/backgrounds/wallpaper-401891.jpg);
 }
 .ilb {
     display: inline-block
