@@ -12,7 +12,6 @@
   <link id="themegencss" href="/lapcat/css/themes/theme-generator.php?theme={$theme_id}&hsl&update" rel="stylesheet" />  
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1"> 
   <link rel="stylesheet" media="screen" href="css/tickets.css"  />
-  <link rel="stylesheet" media="screen" rel="stylesheet" href="css/colorbox.css" />
   <link rel="stylesheet" type="text/css" href="js/markitup/skins/markitup/style.css" />
   <link rel="stylesheet" type="text/css" href="js/markitup/style.css" />
   <link rel="shortcut icon" href="/tickets/bug.png"> 
