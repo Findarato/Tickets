@@ -183,8 +183,8 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 					case "sOdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(t.assigned_id IN (".join(",",$idList)."))";$wc[]="t.open=1";$wc[]="t.tickettype_id=1";break;
 					case "sAdepartment":$idList = getDepartmentMembers_by_userid($usr -> User_id);$wc[]="(t.created_by_id IN (".join(",",$idList)."))";$wc[]="t.open=1";$wc[]="t.tickettype_id=1";break;
 					case "sAssigned":$wc[]="t.created_by_id=".$usr->User_id;$wc[]="t.open=1";$wc[]="t.tickettype_id=1";break;
-					case "sClosed":$wc[]="t.open=0";$wc[]="t.assigned_id=".$usr->User_id;$wc[]="t.tickettype_id=1";break;
-					case "sOpen":$wc[]="t.open=1";$wc[]="t.assigned_id=".$usr->User_id." OR t.created_by_id=".$usr->User_id;$wc[]="t.tickettype_id=1";break;
+					case "sClosed":$wc[]="t.open=0";$wc[]="t.assigned_id=".$usr->User_id." OR t.created_by_id=".$usr->User_id;$wc[]="t.tickettype_id=1";break;
+					case "sOpen":$wc[]="t.open=1";$wc[]="t.assigned_id=".$usr->User_id;$wc[]="t.tickettype_id=1";break;
 					case "bugs_open": $wc[]="t.open=1";$wc[]="t.tickettype_id=2";break;  
 					case "bugs_closed": $wc[]="t.open=0";$wc[]="t.tickettype_id=2";break;
 				}				
