@@ -29,7 +29,7 @@
             var pageTracker = _gat._getTracker("UA-8067208-4");
             pageTracker._trackPageview();
         </script>
-        <script src="http://cdn1.lapcat.org/js/jquery-1.4.2.min.js"></script>
+        <script src="http://cdn1.lapcat.org/js/jquery-1.4.4.min.js"></script>
         <script src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
