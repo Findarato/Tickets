@@ -2,7 +2,7 @@
 	<div id="ticketarea" >
 		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:5px;">
 			<div class="font-X head message_head corners-top-2 color-B-2 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
-				<div class="font-X ticket_sprite ticket_button fakelink" id="ticketTitle" name="bookmark" style="width:230px;text-overflow: ellipsis-word;"><span></span></div><!-- Ticket Title area -->
+				<div class="font-X ticket_sprite ticket_button fakelink" id="ticketTitle" name="bookmark" style="width:230px;text-overflow: ellipsis-word;"></div><!-- Ticket Title area -->
 				<div class="color-X" id="ticketStatusImage" style="position:absolute;right:5px;top:2px;height:13px;">
 					<div class="corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" style="width:auto;padding:2px;">
 						<div class="statusImage left ticket_sprite pencil" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>

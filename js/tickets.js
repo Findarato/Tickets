@@ -10,7 +10,7 @@ var Params = {
 	"Ticket_id": 0,
 	"Content": "",
 	"Debug":false,
-	TicketJSON: {},
+	"TicketJSON": {},
 	"LastArea": "",
 	"popChange":false,
 	"LastLogon":0,
@@ -23,19 +23,16 @@ var Params = {
 	  4:{"id":4,"name":"Important"},
 	  5:{"id":5,"name":"Mission Critical"}
 	 },
-	Projects:{
+	"Projects":{
 	  1:{"id":1,"name":"Test 1"},
     2:{"id":2,"name":"Test 2"},
 	},
-	Categories:{},
-	Locations:{},
-	"FavoriteObject":[]
-	
+	"Categories":{},
+	"Locations":{},
+	"FavoriteObject":[] 
 };
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
-//alert($(window).height());
-//alert($(window).width());
 function oc(a)
 {
   var o = {};
@@ -47,7 +44,6 @@ function oc(a)
 }
 function updateFavorites(){
   localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
-  //alert(JSON.stringify(Params.FavoriteObject));
 }
 
 function checkResponse(json) {
@@ -243,7 +239,6 @@ function loadResponsesBody(ticketId, container, page) {
     } // adds the page number to the request  
 	}
 	
-	//var resCont = $("<div/>");
 	$.getJSON(uri + "ajax/display_reply.php", params, function (data) {
 		var cnt = 0;
 		var resCont = $("<div id=\"responseContainer\" />");
@@ -314,23 +309,32 @@ function loadTicketBody(inputData, container) {
 	//Basically figures out what kind of data is being send to the function and how to deal with it.
 	var data = {};
 	var bug = false;
+
 	if(typeof inputData == "string" || typeof inputData == "object"){
-		if(typeof inputData == "object"){
-			data = inputData;
-		}else{
+		if(typeof inputData == "object"){ // this is JSON from loadTicket
+		  if (!localStorage.getItem("TicketId" + inputData.id)) { 
+        localStorage.setItem("TicketId" + inputData.id,JSON.stringify(inputData));
+      }
+      data = inputData;
+		}else{ // Something odd happened
+		  console.log("tried to parse out the inputData");
 			data = $.parseJSON(inputData);
 		}
-		if (typeof data == "object" ) { //We now have an object and need to deal with it
-			if (!localStorage.getItem("TicketId" + data.id)) {//local storage Support
-				localStorage.setItem("TicketId" + data.id,JSON.stringify(inputData));
-			}
-		}else{ // received the string ID of a ticket to load
-			notice("Debug", inputData+"<br>Error: 100380A", true);
-		}
-	}else{	notice("Debug",inputData+"<br>Error: 100382B",true); }
-	
+	}else{ // data is not a string or an object	
+	  notice("Error",inputData+"<br>Error: 100382B",true); 
+	}
+  if(typeof data != "object"){
+      if(data === null){ 
+        notice("Error","Data Null<br>Error: 100334B",true);
+        return false; 
+      }else{
+        notice("Error","Data not an Object<br>Error: 100337B",true);
+        return false;
+      }
+  } 
+  
 	if(data.tickettype_id==2){bug=true;}
-//Display code.	
+
 	if(data.priority>5){data.priority = data.priority -5;} //normalize old data with new numbering scheme
 	container.find(".statusImage ").hide();
 	Params.TicketId = ticketId = data.id; //set the global
@@ -342,7 +346,12 @@ function loadTicketBody(inputData, container) {
       bmClass = "bookmark";
     }
   }
-	container.find("#ticketTitle").html(data.subject).addClass(bmClass).attr({"name":"bookmark"+data.id});
+	container
+	 .find("#ticketTitle")
+	   .html(data.subject)
+	   .addClass(bmClass)
+	   .attr({"name":"bookmark"+data.id});
+	
 	container
    .find("#ticketDate")
    .addClass("ilb")
@@ -558,7 +567,7 @@ function loadTicketBody(inputData, container) {
 	//$('#replyButton').click(function(){
 	  
 	//});
-	
+/*	
 	$('#replyButton').colorbox({
 		iframe: false,
 		transition: "none",
@@ -571,7 +580,7 @@ function loadTicketBody(inputData, container) {
 		$("#replyticketid").val(Params.TicketId);
 		$("#replyuserid").val(Params.UserId);
 	});
-	
+	*/
 // Reassign button 
 	 $('#reAssignButton').click(function(){
 	   $("#reassignBox").css("height","30px");
@@ -596,9 +605,6 @@ function loadTicketBody(inputData, container) {
       }
     });
   });
-
-
-	
 	//Set the ticket type icon
 	if (data.tickettype_id == 1) {
 		$("#ticketStatusImage").find("#imgTicketTrouble").show();
@@ -631,16 +637,20 @@ function loadTicketBody(inputData, container) {
     me.toggleClass("bookmark-off").toggleClass("bookmark");
 	});
 }
-function loadTicket(ticketId,display,update) {
-	Params.LastArea = "ticket";
-	if(!display){Params.Content.html($("#ticketTpl").html());}
-	if(data = localStorage.getItem("TicketId"+ticketId)){
+function loadTicket(ticketId,update) {
+	if(Params.LastArea != "ticket"){
+	  Params.Content.html($("#ticketTpl").html());
+	  Params.LastArea = "ticket";
+	}
+	if(data = $.parseJSON(localStorage.getItem("TicketId"+ticketId))){
 		if (Params.Debug) {	$("#DebugLog").append("Pulled from localStorage<br>");	}
-		loadTicketBody(data,Params.Content);
+  	loadTicketBody(data,Params.Content);
 	}else{
 		if (Params.Debug) {	$("#DebugLog").append("Pulled from Database<br>");}
-		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {loadTicketBody(data,Params.Content);});
-		
+		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {
+  		loadTicketBody(data,Params.Content);
+  		localStorage.setItem("TicketId"+ticketId,JSON.stringify(data)); // lets stick it inside of the storage.  
+		});
 	}
 	
 	var hash = getHashArray();
@@ -738,14 +748,12 @@ function loadTicketList(pageNumber,queryObj) {
                     if(favVal ==0){//removing a favorite
                       for(var i in Params.FavoriteObject){
                         if(Params.FavoriteObject[i]==bookmarkId){
-                          //alert(Params.FavoriteObject[i]);
                           delete Params.FavoriteObject[i];
                         }
                       }
                     }else{
                       Params.FavoriteObject[Params.FavoriteObject.length+1] = bookmarkId;
                     }
-                   // alert(JSON.stringify(Params.FavoriteObject));
                     updateFavorites();
                   });
                   me.toggleClass("bookmark-off").toggleClass("bookmark");
@@ -1034,32 +1042,21 @@ function checkHash() {
 		switch (hash[0]) {
 		case "#ticket":
 			switch (hash[2]) {
-			case "page":
-				if ($("#ticketId").html().length < 1) {
-					//This should fix the directly accessing a response page bug
-					if (Params.LastArea == "ticket") {
-						loadTicketBody(hash[1], Params.Content);
-						loadResponsesBody(hash[1], $("#replyareabody"), 0);
-					} else {
-						loadTicket(hash[1]);
-					}
-				} else {
-					loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
-				}
-				break;
-			default:
-				if (Params.LastArea == "ticket") {
-					loadTicketBody(hash[1], Params.Content);
-					loadResponsesBody(hash[1], $("#replyareabody"), 0);
-				} else {
-					loadTicket(hash[1]);
-				}
-				break;
-			}
-			break;
+  			case "page": // ticket with a page number selected
+  				if ($("#ticketId").html().length < 1) {
+  					//This should fix the directly accessing a response page bug
+  				} else {
+  					loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
+  				}
+  				break;
+  			default: // ticket with out a page
+          loadTicket(hash[1]);
+          loadResponsesBody(hash[1], $("#replyareabody"), 0);
+  			 break;
+  			}
+  			break;
 		case "#ticketList":
 			$.each(hash, function (key, value) {
-				//alert(key+"=>"+value);
 				if (key % 2 === 0) {
 					switch (value) {
 					case "page":
@@ -1098,6 +1095,7 @@ function checkHash() {
 
 function loadLocalStorage(clear){
   if(clear){localStorage.clear();}
+  
   if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false"){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
@@ -1132,9 +1130,12 @@ function loadLocalStorage(clear){
   }
 }
 
+/**
+ * 
+ * Lets run some code that needs to be ran after the page loads
+ */
 jQuery(document).ready(function () {
   //localStorage.clear();
-
   loadLocalStorage();
   populateAllBugs();
   Params.Content = $("#content"); //lets stop searching for it a hundred times
@@ -1143,12 +1144,7 @@ jQuery(document).ready(function () {
 	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").html($("#version").html()); //to make sure the version on tickets is always updated
-	if (uri.match('dev') == 'dev') {
-		$("#themegencss").attr("href", "http://dev.lapcat.org/" + $("#themegencss").attr("href"));	
-	} else {
-		$("#themegencss").attr("href", "http://www.lapcat.org/" + $("#themegencss").attr("href"));	
-	}
-	
+
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
 
@@ -1181,54 +1177,41 @@ jQuery(document).ready(function () {
 		};ut();
 		checkHash();
 	} //disables running with out being logged in
-
-	$('#topperNew').colorbox({
-		iframe: false,
-		transition: "none",
-		open: false,
-		inline: true,
-		href: "#newTicketdialog",
-		title: "<font class=\"white\">Create a new Ticket</font>"
-	}, function () {
-	  $("#ticketAssignBox").show();
-		$("#newTicketType").val("new");
-		$("#newTicketTitle,#newTicketDescription").val("");
-		$("#newTicketFileList").empty();
-		$(".Ticketform").css("background-color", "");
-
-		$("#newTicketDueDate").dateter({
-			"pastDayShades": true,
-			"backgroundClass": "color-D-2",
-			"borderClass": "border-all-B-1",
-			"borderRoundClass": "corners-bottom-2 corners-top-2",
-			"shadeClass": "background-alpha-3",
-			"highLightToday": true,
-			"highLightTodayClass": Params.HighlightClass,
-			"height": "114px",
-			"width": "200px",
-			"uniqueName": "smallPickStart",
-			"offsetX": 0,
-			"offsetY": 0
-		}, function (v_Month, v_Day, v_Year) {
-			$("#newTicketDueDate").val(v_Month + "/" + v_Day + "/" + v_Year);
-		}
-
-		);
-	});
-	$('#topperNewBug').colorbox({
-		iframe: false,
-		transition: "none",
-		open: false,
-		inline: true,
-		href: "#newBugdialog",
-		title: "<font class=\"white\">Report a Bug</font>"
-	}, function () {
-		$("#newTicketType").val("new");
-		$("#newTicketTitle,#newTicketDescription").val("");
-		$("#newTicketFileList").empty();
-		$(".Ticketform").css("background-color", "");
-
-	});
+  
+  $("#topperNew").click(function(){
+    Params.LastArea = "newTicket";
+    Params.Content.html($("#newTicketdialog").html());
+    
+    Params.Content.find("#ticketAssignBox").show();
+    Params.Content.find("#newTicketType").val("new");
+    Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
+    Params.Content.find(".Ticketform").css("background-color", "");
+    
+    $("#newTicketDueDate").dateter({
+      "pastDayShades": true,
+      "backgroundClass": "color-D-2",
+      "borderClass": "border-all-B-1",
+      "borderRoundClass": "corners-bottom-2 corners-top-2",
+      "shadeClass": "background-alpha-3",
+      "highLightToday": true,
+      "highLightTodayClass": Params.HighlightClass,
+      "height": "114px",
+      "width": "200px",
+      "uniqueName": "smallPickStart",
+      "offsetX": 0,
+      "offsetY": 0
+    },
+    function (v_Month, v_Day, v_Year) {$("#newTicketDueDate").val(v_Month + "/" + v_Day + "/" + v_Year);}
+    );
+  });
+  $("#topperNewBug").click(function(){
+    Params.LastArea = "newBug";
+    Params.Content.html($("#newBugdialog").html());
+    Params.Content.find("#ticketAssignBox").show();
+    Params.Content.find("#newTicketType").val("new");
+    Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
+    Params.Content.find(".Ticketform").css("background-color", "");
+  });  
 	$("#loginButton").click(function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error", "Please enter a username", false);
@@ -1241,11 +1224,6 @@ jQuery(document).ready(function () {
 				if (data.error.length > 0) {
 					checkResponse(data);
 				} else {
-					if (uri.match('dev') == 'dev') {
-						$("#themegencss").attr("href","http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme="+data.theme);
-					} else {
-						$("#themegencss").attr("href","http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme="+data.theme);
-					}
 					Params.LastLogon = data.lastlogon;
 					$("#topperUserInfo").html(data.firstname + " " + data.lastname + " (" + data.username + ")").attr("href","#userPage/"+data.userid);
 					checkResponse(data);
@@ -1319,7 +1297,7 @@ jQuery(document).ready(function () {
 		$.fn.colorbox.close();
 	});
 	*/
-	$("#ticketAddButton,#bugAddButton").click(function () {
+	$("#ticketAddButton,#bugAddButton").live("click",function () {
 		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
 		var ticketDesc = $("#newTicketDescription");
@@ -1389,14 +1367,13 @@ jQuery(document).ready(function () {
 		$(this).focus();
 	});
 	$(".Cancel").live("click", function () {
-		$.fn.colorbox.close();
+		checkHash();
 	});
 	$(".ticket_link,.nolink,.bug_link").live("click", function () {
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		pageTracker._trackPageview($(this).attr("href"));
 		setHash($(this).attr("href"));
-		if(!Params.popChange){checkHash();} //Need to force a check if the browser is not already doing it.
-		
+    checkHash();
 		return false; //to make sure the a isnt clicked
 	});
 });

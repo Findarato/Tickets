@@ -11,7 +11,6 @@ require 'jsmin-1.1.1.php';
 //output the HTTP header
   Header($expire);
 $files = array(
-'jquery.colorbox.js',
 'jquery.purr.js',
 'date.js',
 'markitup/jquery.markitup.js',
