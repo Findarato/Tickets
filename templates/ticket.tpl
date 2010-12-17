@@ -104,7 +104,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="replyArea"  style="display:table-cell;width:auto;height:500px;vertical-align:top;">
+	<section id="replyArea"  style="display:table-cell;width:auto;height:500px;vertical-align:top;">
 		<div class="corners-top-2 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
 			<div class="custom font-X head message_head corners-top-2 color-B-2 border-all-D-1" id="replyTitleArea" style="height:16px;">
 				<div style="width:100%">
@@ -112,10 +112,16 @@
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 			</div>
-			<div class="color-X-1" id="replyareabody" style="overflow:auto;height:430px;padding:3px;">	</div>
-			<div class="font-X message_head corners-bottom-2 color-B-2 border-all-D-1" id="" style="height:24px">
-				<div class="button-purple fg-button ticketButton font-Y lapcatButton" id="replyButton" style="width: 80px;"><span class="ticket_button ticket_sprite balloon">Add Reply</span></div>
+			<div class="color-X-1" id="replyareabody" style="overflow:auto;height:430px;padding:3px;"></div>
+			<div class="corners-bottom-2" style="position:relative">
+        <div class="corners-bottom-2 box_transition" id="replyBox" style="overflow:hidden;position:absolute;bottom:34px;left:0;height:0px;width:100%;background-color:#FFF">
+          {include file="reply.tpl"}
+        </div>
+			<div class="font-X message_head corners-bottom-2 color-B-2 border-all-D-1" id="replyFooter" style="height:24px">
+				<div class="button-purple fg-button ticketButton font-Y lapcatButton" id="replyButton" style="width: 80px;">
+				  <span class="ticket_button ticket_sprite balloon">Add Reply</span>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</section>

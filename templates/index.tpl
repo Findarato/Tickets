@@ -35,7 +35,7 @@
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.line.js" ></script>
         <script src="js/combine.php"></script>
-        <script>Params.UserId = {$user_id};Params.Locations = {$locationJSON};</script>
+        <script>Params.UserId = {$user_id};Params.Locations = {$locationJSON}; </script>
     </head>
     <!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
     <!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
@@ -64,9 +64,11 @@
         <div id="newBugdialogTpl" class="ui-helper-hidden" title="Create new ticket">
             {include file="new_bug.tpl"}
         </div>
+        {*
         <div id="newReplydialogTpl" class="ui-helper-hidden" title="Reply to Ticket">
             {include file="reply.tpl"}
         </div>
+        *}
         <div id="newsearchdialogTpl" class="ui-helper-hidden">
             {include file="search.tpl"}
         </div>
