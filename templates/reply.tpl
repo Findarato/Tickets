@@ -1,4 +1,4 @@
-<div class="corners-bottom-2 color-B-2" style="width:auto;height:auto;position:relative;">
+<div class="color-B-2" style="width:auto;height:auto;position:relative;">
 	<div id="replyareabody" style="padding:3px;">
 		<form name="newReplyForm" id="newReplyForm">
 			<div class="textLeft">
