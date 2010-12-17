@@ -7,6 +7,29 @@
 			<span> More detailed update notes can be found <a class="ticket_sprite global_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite global_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
+<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XXI</span>
+      <span style="font-size: 90%; line-height: normal;" id="version">v.3.1.0.r301</span>
+      <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+      <ol>
+        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/545">bug #545</a>.</li>
+        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/693">bug #693</a>.</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">New Features</span>
+      <ol>
+        <li>Creating a new ticket, or a new bug report now shows up inside of the ticket display instead of as a popup.</li>
+        <li>Adding a reply now follows the same look and feel of new tickets and bug reports.</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">Known Issues</span>
+      <ol>
+        <li>Searching By project does not work</li>
+        <li>There are no page numbers, nor any way to show more then the default amount of tickets in the list view.</li>
+        <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
+        <li>Closed tickets are not showing up for some people. Even though a number shows up next to Closed Tickets.</li>
+      </ol>
+      <br>
+      <br>
       <span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XX</span>
       <span style="font-size: 90%; line-height: normal;" id="version">v.3.0.0.r301</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>

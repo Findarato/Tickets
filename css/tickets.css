@@ -374,6 +374,9 @@ input:focus {
     height: 500px;
     min-width: 300px;
 }
+textarea {
+    resize: none;
+}
 @media screen and (min-width: 901px) and (max-width: 950px) {
     #updateNotesContainer .topperText,
     #replyToggle .topperText,
