@@ -562,7 +562,7 @@ function loadTicketBody(inputData, container) {
 	//Reply Button
 	//
   $('#replyButton').click(function(){
-    $("#replyBox").css("height","80px");
+    $("#replyBox").css("height","78px");
     $("#replyTitle").val("Re:" + Params.TicketJSON.subject);
     $("#replyticketid").val(Params.TicketId);
     $("#replyuserid").val(Params.UserId);
@@ -571,6 +571,7 @@ function loadTicketBody(inputData, container) {
     $("#replyBox").css({"height":"0px"});
   });
   $("#replyAddButton").click(function () {
+    $("#replyBox").css({"height":"0px"});
     $.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
       loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
       $(".Ticketform").attr({value: ""}); 
@@ -666,7 +667,6 @@ function loadTicket(ticketId,update) {
 	} //load the responses page 0
 }
 function loadTicketList(pageNumber,queryObj) {
-  alert(Params.LastArea);
 	Params.LastArea = "ticketList";
 	var html = "";
 	var bugs = false;
