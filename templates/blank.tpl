@@ -8,7 +8,7 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
 <span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XXI</span>
-      <span style="font-size: 90%; line-height: normal;" id="version">v.3.1.0.r301</span>
+      <span style="font-size: 90%; line-height: normal;" id="version">v.3.1.0.r314</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
         <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/545">bug #545</a>.</li>
