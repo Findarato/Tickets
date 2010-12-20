@@ -11,10 +11,10 @@
 							<td style="text-align:left;"><span class="font-X">Title of Bug:</span><input type="text" name="newTicketTitle" id="newTicketTitle"  class=" Ticketform " maxlength="35" /></td>
 						</tr>
 						<tr>
-							<td style="text-align:left;"><span class="font-X">Project:</span><select class=" Ticketform " id="newTicketProject" name="newTicketProject"><option value="">Select Project</option>{html_options options=$projects }</select></td>
+							<td style="text-align:left;"><span class="font-X">Project:</span><select class=" Ticketform " id="newTicketProject" name="newTicketProject"><option value="">Select Project</option>{html_options options=$projects}</select></td>
 						</tr>
 						<tr>
-							<td style="text-align:left;"><span class="font-X">Priority:</span><select class=" Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
+							<td style="text-align:left;"><span class="font-X">Priority:</span><select class=" Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority}</select></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Description of the Bug</span><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class=" Ticketform "></textarea></td>
