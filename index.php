@@ -89,6 +89,9 @@
 	  $smarty -> assign('userId',-1);
 	}
 
+  $blankPage = $smarty->createTemplate("blank.tpl");
+  $blankPage = Tcode($blankPage -> Fetch());
+  $smarty -> assign('blankDisplay',$blankPage);
 	$smarty -> assign('altEmail',$altE);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
