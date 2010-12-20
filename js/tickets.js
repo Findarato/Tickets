@@ -297,9 +297,13 @@ function displayStatus(jsonData, Selector) {
 		}
 	});
 }
+/**
+ * Lots the contents of the ticket to the screen.  All of the display elements should already be there
+ */
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
   $("#modifyButton").show();
+  $(".ticketData").remove();
   $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
   $(".ticketModifyForm").each(function(f,frm){
     me = $(frm);
@@ -356,7 +360,7 @@ function loadTicketBody(inputData, container) {
    .find("#ticketDate")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+     $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
        .html(
          $("<div/>",{id:"ticketDateDisplay",html:data.created_on})
        )
@@ -370,7 +374,7 @@ function loadTicketBody(inputData, container) {
      .find("#ticketProject")
      .addClass("ilb")
      .append(
-       $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+       $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
          .html(
            $("<div/>",{id:"ticketProjectDisplay",html:data.project_name})
          )
@@ -389,7 +393,7 @@ function loadTicketBody(inputData, container) {
      .find("#ticketDueDate")
      .addClass("ilb")
      .append(
-       $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+       $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
          .html(
            $("<div/>",{id:"ticketDueDateDisplay",html:data.due_on})
          )
@@ -400,7 +404,7 @@ function loadTicketBody(inputData, container) {
    .find("#ticketAssignedTo")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+     $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
        .html(
          $("<div/>",{id:"ticketAssignedToDisplay",html:data.firstname + " " + data.lastname,data:data.assigned_id})
        )
@@ -409,7 +413,7 @@ function loadTicketBody(inputData, container) {
 		  .find("#ticketLocation")
 		    .addClass("ilb")
 		    .append(
-		      $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"}})
+		      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"}})
 		        .html(
 		          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
 		        )
@@ -421,7 +425,7 @@ function loadTicketBody(inputData, container) {
    .find("#ticketBody")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"},html:data.description})
+     $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:data.description})
    );
    
 
@@ -430,14 +434,14 @@ function loadTicketBody(inputData, container) {
    .find("#ticketCategory")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"},html:data.category})
+     $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:data.category})
    );
 
   container
    .find("#ticketCreatedBy")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+     $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
        .html(
          $("<div/>",{id:"ticketAssignedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
        )
@@ -448,7 +452,7 @@ function loadTicketBody(inputData, container) {
    .find("#ticketId")
    .addClass("ilb")
    .append(
-     $("<div/>",{"class":"ilb",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+     $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
        .html(
          $("<div/>",{id:"ticketIdDisplay",html:data.id})
        )
@@ -457,7 +461,7 @@ function loadTicketBody(inputData, container) {
 	 .find("#ticketPriority")
 	 .addClass("ilb")
 	 .append(
-	   $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px"},html:Params.Priority_string[data.priority].name})
+	   $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:Params.Priority_string[data.priority].name})
 	 );
 	 
 	//
@@ -536,7 +540,7 @@ function loadTicketBody(inputData, container) {
        .find("#ticketClosedOnDate")
        .addClass("ilb")
        .append(
-         $("<div/>",{"class":"ilb contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+         $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
            .html(
              $("<div/>",{id:"ticketClosedOnDateDisplay",html:data.closed_on})
            )
@@ -637,35 +641,31 @@ function loadTicketBody(inputData, container) {
     me.toggleClass("bookmark-off").toggleClass("bookmark");
 	});
 }
+
+/**
+ * Function to Load the whole ticket including the display.
+ */
 function loadTicket(ticketId,update) {
 	if(Params.LastArea != "ticket"){
 	  Params.Content.html($("#ticketTpl").html());
 	  Params.LastArea = "ticket";
 	}
 	if(data = $.parseJSON(localStorage.getItem("TicketId"+ticketId))){
-		if (Params.Debug) {	$("#DebugLog").append("Pulled from localStorage<br>");	}
   	loadTicketBody(data,Params.Content);
 	}else{
-		if (Params.Debug) {	$("#DebugLog").append("Pulled from Database<br>");}
 		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {
   		loadTicketBody(data,Params.Content);
   		localStorage.setItem("TicketId"+ticketId,JSON.stringify(data)); // lets stick it inside of the storage.  
 		});
 	}
-	
 	var hash = getHashArray();
 	if (hash[2] == "page" && hash[3] > -1) {
-		if (Params.Debug) {
-			$("#DebugLog").append("Loaded Responses #" + hash[3] + "<br>");
-		}
 		loadResponsesBody(ticketId, $("#replyareabody"), hash[3]); //load the selected response page
 	} else {
-		if (Params.Debug) {
-			$("#DebugLog").append("Loaded Responses<br>");
-		}
 		loadResponsesBody(ticketId, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
+
 function loadTicketList(pageNumber,queryObj) {
 	Params.LastArea = "ticketList";
 	var html = "";
@@ -1256,8 +1256,6 @@ jQuery(document).ready(function () {
 			$("#btn_login").trigger('click')
 		}
 	});
-
-
 	/*
 	$("#ticketSearchButton").click(function () {
 		var hash = "ticketList";
@@ -1320,8 +1318,6 @@ jQuery(document).ready(function () {
 					$(".Ticketform").attr({
 						value: ""
 					});
-					$.fn.colorbox.close();
-
 				}
 			}
 		}
@@ -1346,7 +1342,6 @@ jQuery(document).ready(function () {
 			checkResponse(data);
 			localStorage.removeItem("TicketId"+Params.TicketId);
 			loadTicket(Params.TicketId);
-			//loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);; //reload the first response page
 		});
 	});
 
