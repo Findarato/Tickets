@@ -13,8 +13,6 @@ require 'jsmin-1.1.1.php';
 $files = array(
 'jquery.purr.js',
 'date.js',
-'markitup/jquery.markitup.js',
-'markitup/set.js',
 'globalFunctions.js',
 'tickets.js'
 );
