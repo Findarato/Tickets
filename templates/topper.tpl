@@ -22,5 +22,4 @@
      <span class="topperText">Toggle Replies</span>
    </span>
   </div>
-  
   *}
