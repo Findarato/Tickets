@@ -50,6 +50,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 	$end =  strpos($text,"]");
 	preg_match_all('(\[[^]]+\])', $text, $matches);
 	$matches = $matches[0];
+  $db = db::getInstance();
 	foreach($matches as $match){
 		$orig = $match;
 		$match=str_replace(" ","",$match);
@@ -63,10 +64,17 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 		//print_r($match);
 		switch($match[0]){
 			case "ticket":
+        // Lets make sure the ticket is still open.  If its closed put in the <del> tag around it.
+        $ticketInfo = $db->Query("SELECT closed_on,open FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
+        if($ticketInfo["open"]==0){
+          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[0]." ".$match[1]."</del>";
+        }else{
+          $ticketDisplay = $match[0]." ".$match[1];
+        }
 				if($email){
-					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
 				}else{
-					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
 			break;

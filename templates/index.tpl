@@ -12,8 +12,6 @@
         <link id="themegencss" href="http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme=&hsl&update" rel="stylesheet" />
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
         <link rel="stylesheet" media="screen" href="css/tickets.css"  />
-        <link rel="stylesheet" type="text/css" href="js/markitup/skins/markitup/style.css" />
-        <link rel="stylesheet" type="text/css" href="js/markitup/style.css" />
         <link rel="shortcut icon" href="/tickets/bug.png">
         <link rel="apple-touch-icon" href="/tickets/bug.png">
         <link rel="icon" type="image/png" href="/tickets/bug.png" />
