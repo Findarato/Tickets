@@ -11,19 +11,19 @@
 							<td style="text-align:left;"><span class="font-X">Title of Ticket:</span><input type="text" name="newTicketTitle" id="newTicketTitle"  class=" Ticketform " maxlength="35" /></td>
 						</tr>
 						<tr>
-							<td style="text-align:left;"><span class="font-X">Category:</span><select class=" Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate }</select></td>
+							<td style="text-align:left;"><span class="font-X">Category:</span><select class=" Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate}</select></td>
 						</tr>
 						<tr id="ticketAssignBox">
-							<td style="text-align:left;"><span class="font-X">Assign:</span><select class=" Ticketform " id="newTicketAssign" name="newTicketAssign"><option value="">Select User</option>{html_options options=$assign }</select></td>
+							<td style="text-align:left;"><span class="font-X">Assign:</span><select class=" Ticketform " id="newTicketAssign" name="newTicketAssign"><option value="">Select User</option>{html_options options=$assign}</select></td>
 						</tr>
 						<tr>
-							<td style="text-align:left;"><span class="font-X">Priority:</span><select class=" Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority }</select></td>
+							<td style="text-align:left;"><span class="font-X">Priority:</span><select class=" Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority}</select></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Due Date:</span><input type="text" name="newTicketDueDate" id="newTicketDueDate" class=" Ticketform" maxlength="50" style="width:8em" value="" /><img src="http://cdn1.lapcat.org/famfamfam/silk/calendar.png" title="calendar" id="newTicketCalendar"></td>
 						</tr>
 						<tr>
-							<td style="text-align:left;"><span class="font-X">Problem Location:</span><select name="newTicketLocation" id="newTicketLocation" class=" Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location }</select></td>
+							<td style="text-align:left;"><span class="font-X">Problem Location:</span><select name="newTicketLocation" id="newTicketLocation" class=" Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location}</select></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Ticket Description</span><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class=" Ticketform "></textarea></td>

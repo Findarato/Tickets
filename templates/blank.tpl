@@ -2,12 +2,12 @@
 	<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="">Update Notes</div>
 	<div class="droidSerif message_body color-X-1 corners-bottom-2" id="" >
 		<div class="corners-bottom-2 corners-top-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">
-			Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above. {$junk}
+			Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above.
     		<br>
 			<span> More detailed update notes can be found <a class="ticket_sprite global_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite global_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto" class="corners-bottom-2 corners-top-2 border-all-A-1">
-<span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XXI</span>
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XXI</span>
       <span style="font-size: 90%; line-height: normal;" id="version">v.3.1.0.r314</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
@@ -19,6 +19,7 @@
       <ol>
         <li>Creating a new ticket, or a new bug report now shows up inside of the ticket display instead of as a popup.</li>
         <li>Adding a reply now follows the same look and feel of new tickets and bug reports.</li>
+        <li>Closed tickets that are linked using the [ticket=###] link style will now look like [bug=693]<del><a class="bug_link ticket_button ticket_sprite" href="#ticket/693">#693</a></del></li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
