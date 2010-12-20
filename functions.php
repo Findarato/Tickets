@@ -9,18 +9,14 @@
  */
 function id2Username($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
 	$db = db::getInstance();
-	if($storedResults = $db->Get_results("users")){/*This query has already been run */
-		$Userinfo = $storedResults[$user_id];
-	}else{
-		$db -> Query("SELECT id,username,firstname,lastname FROM $userDatabase.$userTable",true);
-		$res = $db->Format("assoc_array");
-		$formatedArray = array(); //Create the storage array
-		foreach ($res as $r){
-			$formatedArray[$r['id']]=array("username"=>$r['username'],"firstname"=>$r['firstname'],"lastname"=>$r['lastname']);
-		}
-		$db -> Store_results($formatedArray,"users");	
-		$Userinfo = $formatedArray[$user_id];
+	$db -> Query("SELECT id,username,firstname,lastname FROM $userDatabase.$userTable",true);
+	$res = $db->Format("assoc_array");
+	$formatedArray = array(); //Create the storage array
+	foreach ($res as $r){
+		$formatedArray[$r['id']]=array("username"=>$r['username'],"firstname"=>$r['firstname'],"lastname"=>$r['lastname']);
 	}
+	$db -> Store_results($formatedArray,"users");	
+	$Userinfo = $formatedArray[$user_id];
 	return $Userinfo;
 }
 
@@ -67,9 +63,9 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
         // Lets make sure the ticket is still open.  If its closed put in the <del> tag around it.
         $ticketInfo = $db->Query("SELECT closed_on,open FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
         if($ticketInfo["open"]==0){
-          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[0]." ".$match[1]."</del>";
+          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[1]."</del>";
         }else{
-          $ticketDisplay = $match[0]." ".$match[1];
+          $ticketDisplay = $match[1];
         }
 				if($email){
 					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
@@ -79,10 +75,17 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
 			break;
       case "bug":
-        if($email){
-          $formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+        // Lets make sure the ticket is still open.  If its closed put in the <del> tag around it.
+        $ticketInfo = $db->Query("SELECT closed_on,open FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
+        if($ticketInfo["open"]==0){
+          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[1]."</del>";
         }else{
-          $formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+          $ticketDisplay = $match[1];
+        }
+        if($email){
+          $formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
+        }else{
+          $formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
         }
         $formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);     
       break;
