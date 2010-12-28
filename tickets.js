@@ -555,9 +555,7 @@ function loadTicketBody(inputData, container) {
 	} else { //open tickets
 		container.find(".openTicket :not(.hold)").show();
 		container.find(".closedTicket").hide();
-		
 	}
-
 	var pri = parseInt(container.find("#ticketPriority").text() - 2, 10);
 	$("#replyareaTitle").text("Replies (" + data.responseCount + ")"); //display the total response count
 	
@@ -592,7 +590,7 @@ function loadTicketBody(inputData, container) {
 	 $("#ReAssignCancelButton").click(function(){
     $("#reassignBox").css({"height":"0px"});
    });
-  $('#ReAssignButton').click(function () {
+  $('#reAssignAcceptButton').click(function () {
     var reassignVal = $("#TicketAssign").val();
     $("#reassignBox").css({"height":"0px"});
     $.getJSON(uri + "ajax/tickets.php", {
