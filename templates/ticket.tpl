@@ -27,16 +27,6 @@
               <span style="margin-right:5px">Next</span>
             </div>
           </div>
-          <div class="td" style="width:auto;">
-            <!-- Close Button -->
-            <div class="actionButtons closeLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-theme border-all-D-1 lapcatButton fakelink openTicket" id="closeButton" style="width:auto;margin-right:5px;padding:3px;">
-              <span style="margin-right:5px">Close</span>
-            </div>
-            <!-- Open Button -->
-            <div class="actionButtons openLink font-X corners-bottom-2 corners-top-2 background-alpha-4 button-black border-all-D-1 lapcatButton fakelink closedTicket" id="reOpenButton" style="width:auto;margin-right:5px;padding:3px;display:none;">
-              <span style="margin-right:5px">Open</span>
-            </div>
-          </div>
 					<div class="td" style="width:75px;"> <!-- Locked Area -->
             <div class="font-X openTicket hold actionButtons holdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
               <span>Lock</span>
@@ -91,15 +81,17 @@
               <span>Assign:</span>
               <select style="width:150px" id="TicketAssign" name="TicketAssign">{html_options options=$assign}</select>
               <div class="ticket_sprite cross fakelink" id="ReAssignCancelButton" style="display:inline-block"></div>
-              <div id="ReAssignButton" class="ticket_sprite tick fakelink" style="display:inline-block"></div>
+              <div id="reAssignAcceptButton" class="ticket_sprite tick fakelink" style="display:inline-block"></div>
             </div>
           </div>
  			  </div>
   			<div class="custom font-X2 head message_head corners-bottom-2 color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
-  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="reAssignButton" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
-  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="modifyButton" style="width:auto;"><span class="ticket_button ticket_sprite pencil">Modify</span></div>
-  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ticketModifySaveButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite tick">Save</span></div>
-  				<div class="button-purple fg-button ticketButton font-Y lapcatButton openTicket" id="ticketModifyCancelButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite cross">Cancel</span></div>
+  				<div class="openTicket button-purple ticketButton font-Y lapcatButton" id="reAssignButton" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
+  				<div class="openTicket button-purple ticketButton font-Y lapcatButton" id="modifyButton" style="width:auto;"><span class="ticket_button ticket_sprite pencil">Modify</span></div>
+  				<div class="openTicket button-purple ticketButton font-Y lapcatButton" id="ticketModifySaveButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite tick">Save</span></div>
+  				<div class="openTicket button-purple ticketButton font-Y lapcatButton" id="ticketModifyCancelButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite cross">Cancel</span></div>
+          <div class="openTicket button-purple ticketButton font-Y lapcatButton actionButtons closeLink" id="closeButton" style="width:auto;"><span style="margin-right:5px">Close</span></div>
+          <div class="closedTicket button-purple ticketButton font-Y lapcatButton actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;padding:3px;display:none;"><span style="margin-right:5px">Open</span></div>
   			</div>
 			</div>
 		</div>
