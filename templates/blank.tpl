@@ -11,8 +11,8 @@
       <span style="font-size: 90%; line-height: normal;" id="version">v.3.1.0.r314</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
-        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/545">bug #545</a>.</li>
-        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/693">bug #693</a>.</li>
+        <li>Fixed [bug=545].</li>
+        <li>Fixed [bug=693].</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
@@ -35,11 +35,11 @@
       <span style="font-size: 90%; line-height: normal;" id="version">v.3.0.0.r301</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
-        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/595">bug #595</a>.</li>
-        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/583">bug #583</a>.</li>
-        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/602">bug #602</a>.</li>
-        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/604">bug #604</a>.</li>
-        <li>Fixed <a class="bug_link ticket_button ticket_sprite" href="#ticket/605">bug #605</a>.</li>
+        <li>Fixed [bug=595].</li>
+        <li>Fixed [bug=583].</li>
+        <li>Fixed [bug=602].</li>
+        <li>Fixed [bug=604].</li>
+        <li>Fixed [bug=605].</li>
         <li>Fixed a javascript uncaught TypeError bug that would happen when there were no responses on a ticket.</li>
       </ol>
       <br>
@@ -59,7 +59,7 @@
           </ol>
         </li>
          <li>Recent Tickets has been removed from this version of tickets. Its going to be handled differently than before.</li>
-         <li>Implemented  <a class="bug_link ticket_button ticket_sprite" href="#ticket/601">bug #601</a>.</li>
+         <li>Implemented [bug=601].</li>
          <li>Tickets are now sorted by priority then due date</li>
          <li>Bookmarks are now done in line vs though a toolbar button.  You can click the (<div class="ilb bookmark-off ticket_sprite"></div>/<div class="ilb bookmark ticket_sprite"></div>) icon anywhere it is on the page, and it will toggle the book mark for the ticket you have selected.</li>
          <li></li>
@@ -192,9 +192,9 @@
 			<br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
 			<br>1. Fixed some spelling problems. 
 			<br>2. Closing and reopening of tickets should be a lot faster.
-			<br>3. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/450">ticket 450</a>.
+			<br>3. Fixed the bug from [ticket=450].
 			<br>4. The ticket list is now the same height as the ticket area.
-			<br>5. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/451">ticket 451</a>.
+			<br>5. Fixed the bug from [ticket=451].
 			<br>6. Fixed some theme issues relating to fonts.
 			<br>7. Ticket lists now fit inside the default window height.  There is a scroll bar inside the page to see tickets that can not be seen.
 			<br>8. Ticket list now shows more relavant information about each of the tickets.  Including due on, completed on, and over dy by.  This was always intended and was not working properly.		
@@ -266,7 +266,7 @@
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">New Features</span>
-			<br>1. User links.  You can now link to a search of all tickets created by a user with [user=1234]
+			<br>1. User links.  You can now link to a search of all tickets created by a user with [user=1321]
 			<br>2. Tickets now uses the newest version of <a href="http://www.jquery.com">Jquery</a>!
 			<br>3. Dater is now part of tickets!
 			<br>3.1 Enjoy selecting due dates with a new popup date selector.

@@ -1,5 +1,5 @@
 <section class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:205px;margin-left:5px;">
-	<div class="droidSans font-X head message_head corners-top-2 color-B-2 border-all-D-1 " style="">Tickets</div>
+	<div class="droidSans fontMain head message_head corners-top-2 color-B-2 border-all-D-1 " style="">Tickets</div>
 	<div style="position:relative;" class="message_body color-X-1 corners-bottom-2">
 		<a class="smallTicketL nolink ticket_button ticket_sprite user font-bold" href="#ticketList/sOpen">To Me</a>
 		<span id="csOpen" class="timestamp" style="position:absolute;right:25px"></span>
@@ -20,7 +20,7 @@
 		<span id="csClosed" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
 		<br>
-    <button class="font-X font-bold" id="topperNew" style="width:auto" title="Create a new Ticket">
+    <button class="fontMain font-bold" id="topperNew" style="width:auto" title="Create a new Ticket">
       <span class="ticket_button ticket_sprite ticket-plus"></span>
       <span>New Ticket</span>
     </button>

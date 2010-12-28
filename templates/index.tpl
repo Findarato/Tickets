@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style:"width:100%">
+<html style="width:100%">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -9,7 +9,7 @@
         <title>Tickets - The tracking system</title>
         <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/resetStyle.css?v=1">
-        <link id="themegencss" href="/tickets/css/theme-generator.php?theme=&hsl&update" rel="stylesheet" />
+        <link id="themegencss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
         <link rel="stylesheet" media="screen" href="css/tickets.css"  />
         <link rel="shortcut icon" href="/tickets/bug.png">
