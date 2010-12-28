@@ -71,14 +71,14 @@ function pageAnator(container, count, perPage) {
     hash = getHashArray();
     //Content.find("#pageAnator")
     container.empty().html(
-    $("<span/>").addClass("corners-top-2 corners-bottom-2 lapcatButton").css({
+    $("<span/>").addClass("roundAll4 lapcatButton").css({
         width: "auto",
         padding: "1px",
         textAlign: "center",
         textDecoration: "none"
     }).html($("<font/>").html("Pages:")));
     if (count === 0) {
-        container.append($("<a/>").addClass("corners-top-2 corners-bottom-2 background-alpha-4 border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
+        container.append($("<a/>").addClass("roundAll4 colorBlack30 border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
             width: "20px",
             padding: "1px",
             textAlign: "center",
@@ -88,7 +88,7 @@ function pageAnator(container, count, perPage) {
         var pages = count / perPage;
         for (var a = 1; a < pages + 1; a++) {
             var b = parseInt(a - 1, 10);
-            container.append($("<a/>").addClass("corners-top-2 corners-bottom-2 background-alpha-4 border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + b).css({
+            container.append($("<a/>").addClass("roundAll4 colorBlack30 border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + b).css({
                 width: "20px",
                 padding: "1px",
                 textAlign: "center",

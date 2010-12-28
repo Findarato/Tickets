@@ -1,0 +1,2274 @@
+.animate
+{
+  moz-transition: 0.3s ease-in-out;
+  o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  webkit-transition: 0.3s ease-in-out;
+}
+.roundAll2
+{
+  border-radius: 2px;
+  moz-border-radius: 2px;
+  webkit-border-radius: 2px;
+}
+.roundAll4
+{
+  border-radius: 4px;
+  moz-border-radius: 4px;
+  webkit-border-radius: 4px;
+}
+.roundAll6
+{
+  border-radius: 6px;
+  moz-border-radius: 6px;
+  webkit-border-radius: 6px;
+}
+.roundBottom2
+{
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  moz-border-radius-bottomleft: 2px;
+  moz-border-radius-bottomright: 2px;
+  webkit-border-bottom-left-radius: 2px;
+  webkit-border-bottom-right-radius: 2px;
+}
+.roundBottom4
+{
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  moz-border-radius-bottomleft: 4px;
+  moz-border-radius-bottomright: 4px;
+  webkit-border-bottom-left-radius: 4px;
+  webkit-border-bottom-right-radius: 4px;
+}
+.roundBottom6
+{
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  moz-border-radius-bottomleft: 6px;
+  moz-border-radius-bottomright: 6px;
+  webkit-border-bottom-left-radius: 6px;
+  webkit-border-bottom-right-radius: 6px;
+}
+.roundBottomLeft2
+{
+  border-bottom-left-radius: 2px;
+  moz-border-radius-bottomleft: 2px;
+  webkit-border-bottom-left-radius: 2px;
+}
+.roundBottomLeft4
+{
+  border-bottom-left-radius: 4px;
+  moz-border-radius-bottomleft: 4px;
+  webkit-border-bottom-left-radius: 4px;
+}
+.roundBottomLeft6
+{
+  border-bottom-left-radius: 6px;
+  moz-border-radius-bottomleft: 6px;
+  webkit-border-bottom-left-radius: 6px;
+}
+.roundLeft2
+{
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+  moz-border-radius-bottomleft: 2px;
+  moz-border-radius-topleft: 2px;
+  webkit-border-bottom-left-radius: 2px;
+  webkit-border-top-left-radius: 2px;
+}
+.roundLeft4
+{
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  moz-border-radius-bottomleft: 4px;
+  moz-border-radius-topleft: 4px;
+  webkit-border-bottom-left-radius: 4px;
+  webkit-border-top-left-radius: 4px;
+}
+.roundLeft6
+{
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+  moz-border-radius-bottomleft: 6px;
+  moz-border-radius-topleft: 6px;
+  webkit-border-bottom-left-radius: 6px;
+  webkit-border-top-left-radius: 6px;
+}
+.roundRight2
+{
+  moz-border-radius-bottomright: 2px;
+  moz-border-radius-topright: 2px;
+  webkit-border-bottom-right-radius: 2px;
+  webkit-border-top-right-radius: 2px;
+}
+.roundRight4
+{
+  moz-border-radius-bottomright: 4px;
+  moz-border-radius-topright: 2px;
+  webkit-border-bottom-right-radius: 4px;
+  webkit-border-top-right-radius: 2px;
+}
+.roundRight6
+{
+  moz-border-radius-bottomright: 6px;
+  moz-border-radius-topright: 2px;
+  webkit-border-bottom-right-radius: 6px;
+  webkit-border-top-right-radius: 2px;
+}
+.corners-top-1
+{
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  moz-border-radius-topleft: 2px;
+  moz-border-radius-topright: 2px;
+  webkit-border-top-left-radius: 2px;
+  webkit-border-top-right-radius: 2px;
+}
+.corners-top-2
+{
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  moz-border-radius-topleft: 4px;
+  moz-border-radius-topright: 4px;
+  webkit-border-top-left-radius: 4px;
+  webkit-border-top-right-radius: 4px;
+}
+.corners-top-3
+{
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  moz-border-radius-topleft: 6px;
+  moz-border-radius-topright: 6px;
+  webkit-border-top-left-radius: 6px;
+  webkit-border-top-right-radius: 6px;
+}
+.corners-top-left-1
+{
+  border-top-left-radius: 2px;
+  moz-border-radius-topleft: 2px;
+  webkit-border-top-left-radius: 2px;
+}
+.corners-top-left-2
+{
+  border-top-left-radius: 4px;
+  moz-border-radius-topleft: 4px;
+  webkit-border-top-left-radius: 4px;
+}
+.corners-top-left-3
+{
+  border-top-left-radius: 6px;
+  moz-border-radius-topleft: 6px;
+  webkit-border-top-left-radius: 6px;
+}
+.corners-top-right-1
+{
+  border-top-right-radius: 2px;
+  moz-border-radius-topright: 2px;
+  webkit-border-top-right-radius: 2px;
+}
+.corners-top-right-2
+{
+  border-top-right-radius: 4px;
+  moz-border-radius-topright: 4px;
+  webkit-border-top-right-radius: 4px;
+}
+.corners-top-right-3
+{
+  border-top-right-radius: 6px;
+  moz-border-radius-topright: 6px;
+  webkit-border-top-right-radius: 6px;
+}
+.inside-border
+{
+  box-sizing: border-box;
+  moz-box-sizing: border-box;
+  webkit-box-sizing: border-box;
+}
+.info-black
+{
+  background-color: rgb(255,255,255);
+  background-color: rgba(255,255,255,0.5);
+  border: 1px solid rgb(235,235,255);
+  border: 1px solid rgba(235,235,255,0.65);
+}
+#purr-container
+{
+  position: fixed;
+  right: 7px;
+  top: 27px;
+  z-index: 8;
+}
+.notice
+{
+  margin-bottom: 6px;
+  position: relative;
+  width: 188px;
+}
+.notice-body
+{
+  min-height: 65px;
+  padding: 2px 2px 2px 2px;
+  text-align: left;
+}
+.notice-body h3
+{
+  font-size: 1.1em;
+  margin: 0;
+}
+.float-left
+{
+  float: left;
+}
+.float-right
+{
+  float: right;
+}
+.library-link-1,.library-link-2,.library-link-3
+{
+  background: url(http://cdn1.lapcat.org/famfamfam/silk/building.png) no-repeat 0 50%;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  text-decoration: none;
+}
+.library-link-3
+{
+  background: url(http://cdn1.lapcat.org/famfamfam/silk/building_go.png) no-repeat 0 50%;
+}
+.user-link-1,.user-link-2
+{
+  background: url(http://cdn1.lapcat.org/famfamfam/silk/user.png) no-repeat 0 50%;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  text-decoration: none;
+}
+.user-link-2
+{
+  text-decoration: underline;
+}
+.button-black
+{
+  background-color: rgb(0,0,0);
+  border: 1px solid rgb(76,76,76);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-black:hover
+{
+  background-color: rgb(26,26,26);
+  border: 1px solid rgb(126,126,126);
+}
+.button-brown
+{
+  background-color: rgb(115,53,13);
+  border: 1px solid rgb(135,83,80);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-brown:hover
+{
+  background-color: rgb(115,83,57);
+}
+.button-grey
+{
+  background-color: rgb(125,125,125);
+  border: 1px solid rgb(201,201,201);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-grey:hover
+{
+  background-color: rgb(151,151,151);
+  border: 1px solid rgb(227,227,227);
+}
+.button-black-2
+{
+  background-color: rgb(76,76,76);
+  border: 1px solid rgb(126,126,126);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-black-2:hover
+{
+  background-color: rgb(126,126,126);
+  border: 1px solid rgb(146,146,146);
+}
+.button-blue
+{
+  background-color: rgb(0,13,52);
+  border: 1px solid rgb(0,13,119);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-blue:hover
+{
+  background-color: rgb(26,39,78);
+}
+.button-blue-2
+{
+  background-color: rgb(78,91,130);
+  border: 1px solid rgb(0,13,119);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-blue-2:hover
+{
+  background-color: rgb(104,117,156);
+}
+.button-purple
+{
+  background-color: rgb(130,65,130);
+  border: 1px solid rgb(149,113,149);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-purple:hover
+{
+  background-color: rgb(156,91,156);
+  border: 1px solid rgb(149,113,149);
+}
+.button-green
+{
+  background-color: rgb(13,52,0);
+  border: 1px solid rgb(13,49,0);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-green:hover
+{
+  background-color: rgb(39,78,26);
+}
+.button-red
+{
+  background-color: rgb(52,13,0);
+  border: 1px solid rgb(119,13,0);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-red:hover
+{
+  background-color: rgb(78,39,26);
+  border: 1px solid rgb(119,13,0);
+}
+.option-black
+{
+  background-color: rgb(0,0,0);
+  border: 1px solid rgb(0,0,0);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.option-black:hover
+{
+  background-color: rgb(26,26,26);
+}
+.image-lines
+{
+  background-image: url(/lapcat/layout/images/18-18-0.png);
+  background-repeat: repeat;
+}
+.button-X
+{
+  background-color: rgb(0,0,0);
+  border: 1px solid rgb(76,76,76);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-X:hover
+{
+  background-color: rgb(26,26,26);
+  border: 1px solid rgb(126,126,126);
+}
+.button-X-fake
+{
+  background-color: rgb(26,26,52);
+  border: 1px solid rgb(126,126,152);
+  border-radius: 4px;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-Y-fake
+{
+  background-color: rgb(225,225,251);
+  border: 1px solid rgb(179,179,205);
+  border-radius: 4px;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-X-35
+{
+  background-color: rgba(0,0,0,0.35);
+  border: 1px solid rgba(76,76,76,0.35);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-X-35:hover
+{
+  background-color: rgba(26,26,26,0.35);
+  border: 1px solid rgba(126,126,126,0.35);
+}
+.menu-X-35
+{
+  background-color: rgba(0,0,0,0.35);
+  border: 1px solid rgba(76,76,76,0.35);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-bottom-radius: 4px;
+  vertical-align: middle;
+  webkit-border-bottom-radius: 4px;
+}
+.menu-X-35:hover
+{
+  background-color: rgba(76,76,76,0.65);
+}
+.menu-X-65
+{
+  background-color: rgba(0,0,0,0.65);
+  border: 1px solid rgba(76,76,76,0.65);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-bottom-radius: 4px;
+  vertical-align: middle;
+  webkit-border-bottom-radius: 4px;
+}
+.menu-X-65:hover
+{
+  background-color: rgb(76,76,76);
+}
+.menu-Y-35
+{
+  background-color: rgba(255,255,255,0.35);
+  border: 1px solid rgba(179,179,179,0.35);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-bottom-radius: 4px;
+  vertical-align: middle;
+  webkit-border-bottom-radius: 4px;
+}
+.menu-Y-35:hover
+{
+  background-color: rgba(255,255,255,0.65);
+}
+.menu-Y-65
+{
+  background-color: rgba(255,255,255,0.65);
+  border: 1px solid rgba(179,179,179,0.65);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-bottom-radius: 4px;
+  vertical-align: middle;
+  webkit-border-bottom-radius: 4px;
+}
+.menu-Y-65:hover
+{
+  background-color: rgb(255,255,255);
+}
+.menu-Z-35
+{
+  background-color: rgba(78,91,130,0.35);
+  border: 1px solid rgba(0,13,119,0.35);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.menu-Z-35:hover
+{
+  background-color: rgba(104,117,156,0.35);
+}
+.menu-Z-65
+{
+  background-color: rgba(78,91,130,0.65);
+  border: 1px solid rgba(0,13,119,0.65);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.menu-Z-65:hover
+{
+  background-color: rgb(104,117,156);
+}
+.button-X-2
+{
+  background-color: rgb(76,76,76);
+  border: 1px solid rgb(126,126,126);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-X-2:hover
+{
+  background-color: rgb(126,126,126);
+  border: 1px solid rgb(146,146,146);
+}
+.button-gold
+{
+  background-color: rgb(255,193,37);
+  border: 1px solid rgb(225,163,7);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-gold:hover
+{
+  background-color: rgb(225,163,7);
+  border: 1px solid rgb(195,133,0);
+}
+.border-all-gold-1
+{
+  border: 1px solid rgb(255,193,37);
+}
+.color-gold
+{
+  background-color: rgb(255,193,37);
+}
+.font-gold
+{
+  color: rgb(255,193,37);
+}
+.button-orange
+{
+  background-color: rgb(255,140,0);
+  border: 1px solid rgb(205,90,0);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-orange:hover
+{
+  background-color: rgb(205,90,0);
+  border: 1px solid rgb(155,40,0);
+}
+.font-orange
+{
+  color: rgb(255,140,0);
+}
+.button-Y
+{
+  background-color: rgb(255,255,255);
+  border: 1px solid rgb(179,179,179);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-Y:hover
+{
+  background-color: rgb(229,229,229);
+  border: 1px solid rgb(129,129,129);
+}
+.button-Y-35
+{
+  background-color: rgba(255,255,255,0.35);
+  border: 1px solid rgba(179,179,179,0.35);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-Y-35:hover
+{
+  background-color: rgba(229,229,229,0.35);
+  border: 1px solid rgba(129,129,129,0.35);
+}
+.button-Y-65
+{
+  background-color: rgba(255,255,255,0.65);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-Y-65:hover
+{
+  background-color: rgba(255,255,255,1.00);
+}
+.button-Y-2
+{
+  background-color: rgb(179,179,179);
+  border: 1px solid rgb(129,129,129);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+.button-Y-2:hover
+{
+  background-color: rgb(129,129,129);
+  border: 1px solid rgb(109,109,109);
+}
+.light-down
+{
+  background-image: url(/lapcat/layout/icons/16-16-31.png);
+  background-position: bottom;
+  background-repeat: repeat-x;
+}
+.light-up
+{
+  background-image: url(/lapcat/layout/icons/16-16-29.png);
+  background-position: top;
+  background-repeat: repeat-x;
+}
+.shadow-down
+{
+  background-image: url(/lapcat/layout/icons/16-16-26.png);
+  background-position: bottom;
+  background-repeat: repeat-x;
+}
+.shadow-up
+{
+  background-image: url(/lapcat/layout/icons/16-16-27.png);
+  background-position: top;
+  background-repeat: repeat-x;
+}
+.border-all-I-1-35
+{
+  border: 1px solid hsla(0,0%,49%,0.35);
+}
+.border-all-I-1-65
+{
+  border: 1px solid hsla(0,0%,49%,0.65);
+}
+.border-bottom-I-1-35
+{
+  border-bottom: 1px solid hsla(0,0%,49%,0.35);
+}
+.border-bottom-I-1-65
+{
+  border-bottom: 1px solid hsla(0,0%,49%,0.65);
+}
+.border-left-I-1-35
+{
+  border-left: 1px solid hsla(0,0%,49%,0.35);
+}
+.border-left-I-1-65
+{
+  border-left: 1px solid hsla(0,0%,49%,0.65);
+}
+.border-right-I-1-35
+{
+  border-right: 1px solid hsla(0,0%,49%,0.35);
+}
+.border-right-I-1-65
+{
+  border-right: 1px solid hsla(0,0%,49%,0.65);
+}
+.border-top-I-1-35
+{
+  border-top: 1px solid hsla(0,0%,49%,0.35);
+}
+.border-top-I-1-65
+{
+  border-top: 1px solid hsla(0,0%,49%,0.65);
+}
+.border-all-A-1
+{
+  border: 1px solid hsl(212,51%,60%);
+}
+.border-all-A-2
+{
+  border: 2px solid hsl(212,51%,60%);
+}
+.border-bottom-A-1
+{
+  border-bottom: 1px solid hsl(212,51%,60%);
+}
+.border-left-A-1
+{
+  border-left: 1px solid hsl(212,51%,60%);
+}
+.border-right-A-1
+{
+  border-right: 1px solid hsl(212,51%,60%);
+}
+.border-sides-A-1
+{
+  border-left: 1px solid hsl(212,51%,60%);
+  border-right: 1px solid hsl(212,51%,60%);
+}
+.border-top-A-1
+{
+  border-top: 1px solid hsl(212,51%,60%);
+}
+.color-A-1
+{
+  background-color: hsl(212,51%,60%);
+}
+.color-A-2
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.8);
+}
+.color-A-3
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.6);
+}
+.color-A-4
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.3);
+}
+.font-A
+{
+  color: hsl(212,51%,60%);
+}
+.effect-hover-A-1:hover
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,1.00);
+}
+.effect-hover-A-2:hover
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.65);
+}
+.effect-hover-A-3:hover
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.35);
+}
+.border-all-B-1
+{
+  border: 1px solid hsl(212,43%,53%);
+}
+.border-all-B-2
+{
+  border: 2px solid hsl(212,43%,53%);
+}
+.border-bottom-B-1
+{
+  border-bottom: 1px solid hsl(212,43%,53%);
+}
+.border-left-B-1
+{
+  border-left: 1px solid hsl(212,43%,53%);
+}
+.border-right-B-1
+{
+  border-right: 1px solid hsl(212,43%,53%);
+}
+.border-sides-B-1
+{
+  border-left: 1px solid hsl(212,43%,53%);
+  border-right: 1px solid hsl(212,43%,53%);
+}
+.border-top-B-1
+{
+  border-top: 1px solid hsl(212,43%,53%);
+}
+.color-B-1
+{
+  background-color: hsl(212,43%,53%);
+}
+.color-B-2
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,0.8);
+}
+.color-B-3
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,0.6);
+}
+.color-B-4
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,0.3);
+}
+.font-B
+{
+  color: hsl(212,43%,53%);
+}
+.effect-hover-B-1:hover
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,1.00);
+}
+.effect-hover-B-2:hover
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,0.65);
+}
+.effect-hover-B-3:hover
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,0.35);
+}
+.border-all-C-1
+{
+  border: 1px solid hsl(212,35%,45%);
+}
+.border-all-C-2
+{
+  border: 2px solid hsl(212,35%,45%);
+}
+.border-bottom-C-1
+{
+  border-bottom: 1px solid hsl(212,35%,45%);
+}
+.border-left-C-1
+{
+  border-left: 1px solid hsl(212,35%,45%);
+}
+.border-right-C-1
+{
+  border-right: 1px solid hsl(212,35%,45%);
+}
+.border-sides-C-1
+{
+  border-left: 1px solid hsl(212,35%,45%);
+  border-right: 1px solid hsl(212,35%,45%);
+}
+.border-top-C-1
+{
+  border-top: 1px solid hsl(212,35%,45%);
+}
+.color-C-1
+{
+  background-color: hsl(212,35%,45%);
+}
+.color-C-2
+{
+  background-color: hsl(212,35%,45%);
+  background-color: hsla(212,35%,45%,0.8);
+}
+.color-C-3
+{
+  background-color: hsl(212,35%,45%);
+  background-color: hsla(212,35%,45%,0.6);
+}
+.color-C-4
+{
+  background-color: hsl(212,35%,45%);
+  background-color: hsla(212,35%,45%,0.3);
+}
+.font-C
+{
+  color: hsl(212,35%,45%);
+}
+.effect-hover-C-1:hover
+{
+  background-color: hsl(212,35%,45%);
+  background-color: hsla(212,35%,45%,1.00);
+}
+.effect-hover-C-2:hover
+{
+  background-color: hsl(212,35%,45%);
+  background-color: hsla(212,35%,45%,0.65);
+}
+.effect-hover-C-3:hover
+{
+  background-color: hsl(212,35%,45%);
+  background-color: hsla(212,35%,45%,0.35);
+}
+.border-all-D-1
+{
+  border: 1px solid hsl(212,27%,37%);
+}
+.border-all-D-2
+{
+  border: 2px solid hsl(212,27%,37%);
+}
+.border-bottom-D-1
+{
+  border-bottom: 1px solid hsl(212,27%,37%);
+}
+.border-left-D-1
+{
+  border-left: 1px solid hsl(212,27%,37%);
+}
+.border-right-D-1
+{
+  border-right: 1px solid hsl(212,27%,37%);
+}
+.border-sides-D-1
+{
+  border-left: 1px solid hsl(212,27%,37%);
+  border-right: 1px solid hsl(212,27%,37%);
+}
+.border-top-D-1
+{
+  border-top: 1px solid hsl(212,27%,37%);
+}
+.color-D-1
+{
+  background-color: hsl(212,27%,37%);
+}
+.color-D-2
+{
+  background-color: hsl(212,27%,37%);
+  background-color: hsla(212,27%,37%,0.8);
+}
+.color-D-3
+{
+  background-color: hsl(212,27%,37%);
+  background-color: hsla(212,27%,37%,0.6);
+}
+.color-D-4
+{
+  background-color: hsl(212,27%,37%);
+  background-color: hsla(212,27%,37%,0.3);
+}
+.font-D
+{
+  color: hsl(212,27%,37%);
+}
+.effect-hover-D-1:hover
+{
+  background-color: hsl(212,27%,37%);
+  background-color: hsla(212,27%,37%,1.00);
+}
+.effect-hover-D-2:hover
+{
+  background-color: hsl(212,27%,37%);
+  background-color: hsla(212,27%,37%,0.65);
+}
+.effect-hover-D-3:hover
+{
+  background-color: hsl(212,27%,37%);
+  background-color: hsla(212,27%,37%,0.35);
+}
+.border-all-E-1
+{
+  border: 1px solid hsl(212,20%,30%);
+}
+.border-all-E-2
+{
+  border: 2px solid hsl(212,20%,30%);
+}
+.border-bottom-E-1
+{
+  border-bottom: 1px solid hsl(212,20%,30%);
+}
+.border-left-E-1
+{
+  border-left: 1px solid hsl(212,20%,30%);
+}
+.border-right-E-1
+{
+  border-right: 1px solid hsl(212,20%,30%);
+}
+.border-sides-E-1
+{
+  border-left: 1px solid hsl(212,20%,30%);
+  border-right: 1px solid hsl(212,20%,30%);
+}
+.border-top-E-1
+{
+  border-top: 1px solid hsl(212,20%,30%);
+}
+.color-E-1
+{
+  background-color: hsl(212,20%,30%);
+}
+.color-E-2
+{
+  background-color: hsl(212,20%,30%);
+  background-color: hsla(212,20%,30%,0.8);
+}
+.color-E-3
+{
+  background-color: hsl(212,20%,30%);
+  background-color: hsla(212,20%,30%,0.6);
+}
+.color-E-4
+{
+  background-color: hsl(212,20%,30%);
+  background-color: hsla(212,20%,30%,0.3);
+}
+.font-E
+{
+  color: hsl(212,20%,30%);
+}
+.effect-hover-E-1:hover
+{
+  background-color: hsl(212,20%,30%);
+  background-color: hsla(212,20%,30%,1.00);
+}
+.effect-hover-E-2:hover
+{
+  background-color: hsl(212,20%,30%);
+  background-color: hsla(212,20%,30%,0.65);
+}
+.effect-hover-E-3:hover
+{
+  background-color: hsl(212,20%,30%);
+  background-color: hsla(212,20%,30%,0.35);
+}
+.border-all-F-1
+{
+  border: 1px solid hsl(220,11%,22%);
+}
+.border-all-F-2
+{
+  border: 2px solid hsl(220,11%,22%);
+}
+.border-bottom-F-1
+{
+  border-bottom: 1px solid hsl(220,11%,22%);
+}
+.border-left-F-1
+{
+  border-left: 1px solid hsl(220,11%,22%);
+}
+.border-right-F-1
+{
+  border-right: 1px solid hsl(220,11%,22%);
+}
+.border-sides-F-1
+{
+  border-left: 1px solid hsl(220,11%,22%);
+  border-right: 1px solid hsl(220,11%,22%);
+}
+.border-top-F-1
+{
+  border-top: 1px solid hsl(220,11%,22%);
+}
+.color-F-1
+{
+  background-color: hsl(220,11%,22%);
+}
+.color-F-2
+{
+  background-color: hsl(220,11%,22%);
+  background-color: hsla(220,11%,22%,0.8);
+}
+.color-F-3
+{
+  background-color: hsl(220,11%,22%);
+  background-color: hsla(220,11%,22%,0.6);
+}
+.color-F-4
+{
+  background-color: hsl(220,11%,22%);
+  background-color: hsla(220,11%,22%,0.3);
+}
+.font-F
+{
+  color: hsl(220,11%,22%);
+}
+.effect-hover-F-1:hover
+{
+  background-color: hsl(220,11%,22%);
+  background-color: hsla(220,11%,22%,1.00);
+}
+.effect-hover-F-2:hover
+{
+  background-color: hsl(220,11%,22%);
+  background-color: hsla(220,11%,22%,0.65);
+}
+.effect-hover-F-3:hover
+{
+  background-color: hsl(220,11%,22%);
+  background-color: hsla(220,11%,22%,0.35);
+}
+.border-all-G-1
+{
+  border: 1px solid hsl(0,0%,100%);
+}
+.border-all-G-2
+{
+  border: 2px solid hsl(0,0%,100%);
+}
+.border-bottom-G-1
+{
+  border-bottom: 1px solid hsl(0,0%,100%);
+}
+.border-left-G-1
+{
+  border-left: 1px solid hsl(0,0%,100%);
+}
+.border-right-G-1
+{
+  border-right: 1px solid hsl(0,0%,100%);
+}
+.border-sides-G-1
+{
+  border-left: 1px solid hsl(0,0%,100%);
+  border-right: 1px solid hsl(0,0%,100%);
+}
+.border-top-G-1
+{
+  border-top: 1px solid hsl(0,0%,100%);
+}
+.color-G-1
+{
+  background-color: hsl(0,0%,100%);
+}
+.color-G-2
+{
+  background-color: hsl(0,0%,100%);
+  background-color: hsla(0,0%,100%,0.8);
+}
+.color-G-3
+{
+  background-color: hsl(0,0%,100%);
+  background-color: hsla(0,0%,100%,0.6);
+}
+.color-G-4
+{
+  background-color: hsl(0,0%,100%);
+  background-color: hsla(0,0%,100%,0.3);
+}
+.font-G
+{
+  color: hsl(0,0%,100%);
+}
+.effect-hover-G-1:hover
+{
+  background-color: hsl(0,0%,100%);
+  background-color: hsla(0,0%,100%,1.00);
+}
+.effect-hover-G-2:hover
+{
+  background-color: hsl(0,0%,100%);
+  background-color: hsla(0,0%,100%,0.65);
+}
+.effect-hover-G-3:hover
+{
+  background-color: hsl(0,0%,100%);
+  background-color: hsla(0,0%,100%,0.35);
+}
+.border-all-H-1
+{
+  border: 1px solid hsl(0,0%,67%);
+}
+.border-all-H-2
+{
+  border: 2px solid hsl(0,0%,67%);
+}
+.border-bottom-H-1
+{
+  border-bottom: 1px solid hsl(0,0%,67%);
+}
+.border-left-H-1
+{
+  border-left: 1px solid hsl(0,0%,67%);
+}
+.border-right-H-1
+{
+  border-right: 1px solid hsl(0,0%,67%);
+}
+.border-sides-H-1
+{
+  border-left: 1px solid hsl(0,0%,67%);
+  border-right: 1px solid hsl(0,0%,67%);
+}
+.border-top-H-1
+{
+  border-top: 1px solid hsl(0,0%,67%);
+}
+.color-H-1
+{
+  background-color: hsl(0,0%,67%);
+}
+.color-H-2
+{
+  background-color: hsl(0,0%,67%);
+  background-color: hsla(0,0%,67%,0.8);
+}
+.color-H-3
+{
+  background-color: hsl(0,0%,67%);
+  background-color: hsla(0,0%,67%,0.6);
+}
+.color-H-4
+{
+  background-color: hsl(0,0%,67%);
+  background-color: hsla(0,0%,67%,0.3);
+}
+.font-H
+{
+  color: hsl(0,0%,67%);
+}
+.effect-hover-H-1:hover
+{
+  background-color: hsl(0,0%,67%);
+  background-color: hsla(0,0%,67%,1.00);
+}
+.effect-hover-H-2:hover
+{
+  background-color: hsl(0,0%,67%);
+  background-color: hsla(0,0%,67%,0.65);
+}
+.effect-hover-H-3:hover
+{
+  background-color: hsl(0,0%,67%);
+  background-color: hsla(0,0%,67%,0.35);
+}
+.border-all-I-1
+{
+  border: 1px solid hsl(0,0%,49%);
+}
+.border-all-I-2
+{
+  border: 2px solid hsl(0,0%,49%);
+}
+.border-bottom-I-1
+{
+  border-bottom: 1px solid hsl(0,0%,49%);
+}
+.border-left-I-1
+{
+  border-left: 1px solid hsl(0,0%,49%);
+}
+.border-right-I-1
+{
+  border-right: 1px solid hsl(0,0%,49%);
+}
+.border-sides-I-1
+{
+  border-left: 1px solid hsl(0,0%,49%);
+  border-right: 1px solid hsl(0,0%,49%);
+}
+.border-top-I-1
+{
+  border-top: 1px solid hsl(0,0%,49%);
+}
+.color-I-1
+{
+  background-color: hsl(0,0%,49%);
+}
+.color-I-2
+{
+  background-color: hsl(0,0%,49%);
+  background-color: hsla(0,0%,49%,0.8);
+}
+.color-I-3
+{
+  background-color: hsl(0,0%,49%);
+  background-color: hsla(0,0%,49%,0.6);
+}
+.color-I-4
+{
+  background-color: hsl(0,0%,49%);
+  background-color: hsla(0,0%,49%,0.3);
+}
+.font-I
+{
+  color: hsl(0,0%,49%);
+}
+.effect-hover-I-1:hover
+{
+  background-color: hsl(0,0%,49%);
+  background-color: hsla(0,0%,49%,1.00);
+}
+.effect-hover-I-2:hover
+{
+  background-color: hsl(0,0%,49%);
+  background-color: hsla(0,0%,49%,0.65);
+}
+.effect-hover-I-3:hover
+{
+  background-color: hsl(0,0%,49%);
+  background-color: hsla(0,0%,49%,0.35);
+}
+.border-all-J-1
+{
+  border: 1px solid hsl(0,0%,33%);
+}
+.border-all-J-2
+{
+  border: 2px solid hsl(0,0%,33%);
+}
+.border-bottom-J-1
+{
+  border-bottom: 1px solid hsl(0,0%,33%);
+}
+.border-left-J-1
+{
+  border-left: 1px solid hsl(0,0%,33%);
+}
+.border-right-J-1
+{
+  border-right: 1px solid hsl(0,0%,33%);
+}
+.border-sides-J-1
+{
+  border-left: 1px solid hsl(0,0%,33%);
+  border-right: 1px solid hsl(0,0%,33%);
+}
+.border-top-J-1
+{
+  border-top: 1px solid hsl(0,0%,33%);
+}
+.color-J-1
+{
+  background-color: hsl(0,0%,33%);
+}
+.color-J-2
+{
+  background-color: hsl(0,0%,33%);
+  background-color: hsla(0,0%,33%,0.8);
+}
+.color-J-3
+{
+  background-color: hsl(0,0%,33%);
+  background-color: hsla(0,0%,33%,0.6);
+}
+.color-J-4
+{
+  background-color: hsl(0,0%,33%);
+  background-color: hsla(0,0%,33%,0.3);
+}
+.font-J
+{
+  color: hsl(0,0%,33%);
+}
+.effect-hover-J-1:hover
+{
+  background-color: hsl(0,0%,33%);
+  background-color: hsla(0,0%,33%,1.00);
+}
+.effect-hover-J-2:hover
+{
+  background-color: hsl(0,0%,33%);
+  background-color: hsla(0,0%,33%,0.65);
+}
+.effect-hover-J-3:hover
+{
+  background-color: hsl(0,0%,33%);
+  background-color: hsla(0,0%,33%,0.35);
+}
+.border-all-K-1
+{
+  border: 1px solid hsl(0,0%,2%);
+}
+.border-all-K-2
+{
+  border: 2px solid hsl(0,0%,2%);
+}
+.border-bottom-K-1
+{
+  border-bottom: 1px solid hsl(0,0%,2%);
+}
+.border-left-K-1
+{
+  border-left: 1px solid hsl(0,0%,2%);
+}
+.border-right-K-1
+{
+  border-right: 1px solid hsl(0,0%,2%);
+}
+.border-sides-K-1
+{
+  border-left: 1px solid hsl(0,0%,2%);
+  border-right: 1px solid hsl(0,0%,2%);
+}
+.border-top-K-1
+{
+  border-top: 1px solid hsl(0,0%,2%);
+}
+.color-K-1
+{
+  background-color: hsl(0,0%,2%);
+}
+.color-K-2
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,0.8);
+}
+.color-K-3
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,0.6);
+}
+.color-K-4
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,0.3);
+}
+.font-K
+{
+  color: hsl(0,0%,2%);
+}
+.effect-hover-K-1:hover
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,1.00);
+}
+.effect-hover-K-2:hover
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,0.65);
+}
+.effect-hover-K-3:hover
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,0.35);
+}
+.border-all-L-1
+{
+  border: 1px solid hsl(25,94%,51%);
+}
+.border-all-L-2
+{
+  border: 2px solid hsl(25,94%,51%);
+}
+.border-bottom-L-1
+{
+  border-bottom: 1px solid hsl(25,94%,51%);
+}
+.border-left-L-1
+{
+  border-left: 1px solid hsl(25,94%,51%);
+}
+.border-right-L-1
+{
+  border-right: 1px solid hsl(25,94%,51%);
+}
+.border-sides-L-1
+{
+  border-left: 1px solid hsl(25,94%,51%);
+  border-right: 1px solid hsl(25,94%,51%);
+}
+.border-top-L-1
+{
+  border-top: 1px solid hsl(25,94%,51%);
+}
+.color-L-1
+{
+  background-color: hsl(25,94%,51%);
+}
+.color-L-2
+{
+  background-color: hsl(25,94%,51%);
+  background-color: hsla(25,94%,51%,0.8);
+}
+.color-L-3
+{
+  background-color: hsl(25,94%,51%);
+  background-color: hsla(25,94%,51%,0.6);
+}
+.color-L-4
+{
+  background-color: hsl(25,94%,51%);
+  background-color: hsla(25,94%,51%,0.3);
+}
+.font-L
+{
+  color: hsl(25,94%,51%);
+}
+.effect-hover-L-1:hover
+{
+  background-color: hsl(25,94%,51%);
+  background-color: hsla(25,94%,51%,1.00);
+}
+.effect-hover-L-2:hover
+{
+  background-color: hsl(25,94%,51%);
+  background-color: hsla(25,94%,51%,0.65);
+}
+.effect-hover-L-3:hover
+{
+  background-color: hsl(25,94%,51%);
+  background-color: hsla(25,94%,51%,0.35);
+}
+.border-all-M-1
+{
+  border: 1px solid hsl(97,51%,33%);
+}
+.border-all-M-2
+{
+  border: 2px solid hsl(97,51%,33%);
+}
+.border-bottom-M-1
+{
+  border-bottom: 1px solid hsl(97,51%,33%);
+}
+.border-left-M-1
+{
+  border-left: 1px solid hsl(97,51%,33%);
+}
+.border-right-M-1
+{
+  border-right: 1px solid hsl(97,51%,33%);
+}
+.border-sides-M-1
+{
+  border-left: 1px solid hsl(97,51%,33%);
+  border-right: 1px solid hsl(97,51%,33%);
+}
+.border-top-M-1
+{
+  border-top: 1px solid hsl(97,51%,33%);
+}
+.color-M-1
+{
+  background-color: hsl(97,51%,33%);
+}
+.color-M-2
+{
+  background-color: hsl(97,51%,33%);
+  background-color: hsla(97,51%,33%,0.8);
+}
+.color-M-3
+{
+  background-color: hsl(97,51%,33%);
+  background-color: hsla(97,51%,33%,0.6);
+}
+.color-M-4
+{
+  background-color: hsl(97,51%,33%);
+  background-color: hsla(97,51%,33%,0.3);
+}
+.font-M
+{
+  color: hsl(97,51%,33%);
+}
+.effect-hover-M-1:hover
+{
+  background-color: hsl(97,51%,33%);
+  background-color: hsla(97,51%,33%,1.00);
+}
+.effect-hover-M-2:hover
+{
+  background-color: hsl(97,51%,33%);
+  background-color: hsla(97,51%,33%,0.65);
+}
+.effect-hover-M-3:hover
+{
+  background-color: hsl(97,51%,33%);
+  background-color: hsla(97,51%,33%,0.35);
+}
+.border-all-N-1
+{
+  border: 1px solid hsl(23,31%,43%);
+}
+.border-all-N-2
+{
+  border: 2px solid hsl(23,31%,43%);
+}
+.border-bottom-N-1
+{
+  border-bottom: 1px solid hsl(23,31%,43%);
+}
+.border-left-N-1
+{
+  border-left: 1px solid hsl(23,31%,43%);
+}
+.border-right-N-1
+{
+  border-right: 1px solid hsl(23,31%,43%);
+}
+.border-sides-N-1
+{
+  border-left: 1px solid hsl(23,31%,43%);
+  border-right: 1px solid hsl(23,31%,43%);
+}
+.border-top-N-1
+{
+  border-top: 1px solid hsl(23,31%,43%);
+}
+.color-N-1
+{
+  background-color: hsl(23,31%,43%);
+}
+.color-N-2
+{
+  background-color: hsl(23,31%,43%);
+  background-color: hsla(23,31%,43%,0.8);
+}
+.color-N-3
+{
+  background-color: hsl(23,31%,43%);
+  background-color: hsla(23,31%,43%,0.6);
+}
+.color-N-4
+{
+  background-color: hsl(23,31%,43%);
+  background-color: hsla(23,31%,43%,0.3);
+}
+.font-N
+{
+  color: hsl(23,31%,43%);
+}
+.effect-hover-N-1:hover
+{
+  background-color: hsl(23,31%,43%);
+  background-color: hsla(23,31%,43%,1.00);
+}
+.effect-hover-N-2:hover
+{
+  background-color: hsl(23,31%,43%);
+  background-color: hsla(23,31%,43%,0.65);
+}
+.effect-hover-N-3:hover
+{
+  background-color: hsl(23,31%,43%);
+  background-color: hsla(23,31%,43%,0.35);
+}
+.border-all-P-1
+{
+  border: 1px solid hsl(288,98%,49%);
+}
+.border-all-P-2
+{
+  border: 2px solid hsl(288,98%,49%);
+}
+.border-bottom-P-1
+{
+  border-bottom: 1px solid hsl(288,98%,49%);
+}
+.border-left-P-1
+{
+  border-left: 1px solid hsl(288,98%,49%);
+}
+.border-right-P-1
+{
+  border-right: 1px solid hsl(288,98%,49%);
+}
+.border-sides-P-1
+{
+  border-left: 1px solid hsl(288,98%,49%);
+  border-right: 1px solid hsl(288,98%,49%);
+}
+.border-top-P-1
+{
+  border-top: 1px solid hsl(288,98%,49%);
+}
+.color-P-1
+{
+  background-color: hsl(288,98%,49%);
+}
+.color-P-2
+{
+  background-color: hsl(288,98%,49%);
+  background-color: hsla(288,98%,49%,0.8);
+}
+.color-P-3
+{
+  background-color: hsl(288,98%,49%);
+  background-color: hsla(288,98%,49%,0.6);
+}
+.color-P-4
+{
+  background-color: hsl(288,98%,49%);
+  background-color: hsla(288,98%,49%,0.3);
+}
+.font-P
+{
+  color: hsl(288,98%,49%);
+}
+.effect-hover-P-1:hover
+{
+  background-color: hsl(288,98%,49%);
+  background-color: hsla(288,98%,49%,1.00);
+}
+.effect-hover-P-2:hover
+{
+  background-color: hsl(288,98%,49%);
+  background-color: hsla(288,98%,49%,0.65);
+}
+.effect-hover-P-3:hover
+{
+  background-color: hsl(288,98%,49%);
+  background-color: hsla(288,98%,49%,0.35);
+}
+.border-all-Q-1
+{
+  border: 1px solid hsl(132,98%,49%);
+}
+.border-all-Q-2
+{
+  border: 2px solid hsl(132,98%,49%);
+}
+.border-bottom-Q-1
+{
+  border-bottom: 1px solid hsl(132,98%,49%);
+}
+.border-left-Q-1
+{
+  border-left: 1px solid hsl(132,98%,49%);
+}
+.border-right-Q-1
+{
+  border-right: 1px solid hsl(132,98%,49%);
+}
+.border-sides-Q-1
+{
+  border-left: 1px solid hsl(132,98%,49%);
+  border-right: 1px solid hsl(132,98%,49%);
+}
+.border-top-Q-1
+{
+  border-top: 1px solid hsl(132,98%,49%);
+}
+.color-Q-1
+{
+  background-color: hsl(132,98%,49%);
+}
+.color-Q-2
+{
+  background-color: hsl(132,98%,49%);
+  background-color: hsla(132,98%,49%,0.8);
+}
+.color-Q-3
+{
+  background-color: hsl(132,98%,49%);
+  background-color: hsla(132,98%,49%,0.6);
+}
+.color-Q-4
+{
+  background-color: hsl(132,98%,49%);
+  background-color: hsla(132,98%,49%,0.3);
+}
+.font-Q
+{
+  color: hsl(132,98%,49%);
+}
+.effect-hover-Q-1:hover
+{
+  background-color: hsl(132,98%,49%);
+  background-color: hsla(132,98%,49%,1.00);
+}
+.effect-hover-Q-2:hover
+{
+  background-color: hsl(132,98%,49%);
+  background-color: hsla(132,98%,49%,0.65);
+}
+.effect-hover-Q-3:hover
+{
+  background-color: hsl(132,98%,49%);
+  background-color: hsla(132,98%,49%,0.35);
+}
+.border-all-R-1
+{
+  border: 1px solid hsl(0,98%,49%);
+}
+.border-all-R-2
+{
+  border: 2px solid hsl(0,98%,49%);
+}
+.border-bottom-R-1
+{
+  border-bottom: 1px solid hsl(0,98%,49%);
+}
+.border-left-R-1
+{
+  border-left: 1px solid hsl(0,98%,49%);
+}
+.border-right-R-1
+{
+  border-right: 1px solid hsl(0,98%,49%);
+}
+.border-sides-R-1
+{
+  border-left: 1px solid hsl(0,98%,49%);
+  border-right: 1px solid hsl(0,98%,49%);
+}
+.border-top-R-1
+{
+  border-top: 1px solid hsl(0,98%,49%);
+}
+.color-R-1
+{
+  background-color: hsl(0,98%,49%);
+}
+.color-R-2
+{
+  background-color: hsl(0,98%,49%);
+  background-color: hsla(0,98%,49%,0.8);
+}
+.color-R-3
+{
+  background-color: hsl(0,98%,49%);
+  background-color: hsla(0,98%,49%,0.6);
+}
+.color-R-4
+{
+  background-color: hsl(0,98%,49%);
+  background-color: hsla(0,98%,49%,0.3);
+}
+.font-R
+{
+  color: hsl(0,98%,49%);
+}
+.effect-hover-R-1:hover
+{
+  background-color: hsl(0,98%,49%);
+  background-color: hsla(0,98%,49%,1.00);
+}
+.effect-hover-R-2:hover
+{
+  background-color: hsl(0,98%,49%);
+  background-color: hsla(0,98%,49%,0.65);
+}
+.effect-hover-R-3:hover
+{
+  background-color: hsl(0,98%,49%);
+  background-color: hsla(0,98%,49%,0.35);
+}
+.border-all-S-1
+{
+  border: 1px solid hsl(60,98%,49%);
+}
+.border-all-S-2
+{
+  border: 2px solid hsl(60,98%,49%);
+}
+.border-bottom-S-1
+{
+  border-bottom: 1px solid hsl(60,98%,49%);
+}
+.border-left-S-1
+{
+  border-left: 1px solid hsl(60,98%,49%);
+}
+.border-right-S-1
+{
+  border-right: 1px solid hsl(60,98%,49%);
+}
+.border-sides-S-1
+{
+  border-left: 1px solid hsl(60,98%,49%);
+  border-right: 1px solid hsl(60,98%,49%);
+}
+.border-top-S-1
+{
+  border-top: 1px solid hsl(60,98%,49%);
+}
+.color-S-1
+{
+  background-color: hsl(60,98%,49%);
+}
+.color-S-2
+{
+  background-color: hsl(60,98%,49%);
+  background-color: hsla(60,98%,49%,0.8);
+}
+.color-S-3
+{
+  background-color: hsl(60,98%,49%);
+  background-color: hsla(60,98%,49%,0.6);
+}
+.color-S-4
+{
+  background-color: hsl(60,98%,49%);
+  background-color: hsla(60,98%,49%,0.3);
+}
+.font-S
+{
+  color: hsl(60,98%,49%);
+}
+.effect-hover-S-1:hover
+{
+  background-color: hsl(60,98%,49%);
+  background-color: hsla(60,98%,49%,1.00);
+}
+.effect-hover-S-2:hover
+{
+  background-color: hsl(60,98%,49%);
+  background-color: hsla(60,98%,49%,0.65);
+}
+.effect-hover-S-3:hover
+{
+  background-color: hsl(60,98%,49%);
+  background-color: hsla(60,98%,49%,0.35);
+}
+.border-all-T-1
+{
+  border: 1px solid hsl(0,51%,45%);
+}
+.border-all-T-2
+{
+  border: 2px solid hsl(0,51%,45%);
+}
+.border-bottom-T-1
+{
+  border-bottom: 1px solid hsl(0,51%,45%);
+}
+.border-left-T-1
+{
+  border-left: 1px solid hsl(0,51%,45%);
+}
+.border-right-T-1
+{
+  border-right: 1px solid hsl(0,51%,45%);
+}
+.border-sides-T-1
+{
+  border-left: 1px solid hsl(0,51%,45%);
+  border-right: 1px solid hsl(0,51%,45%);
+}
+.border-top-T-1
+{
+  border-top: 1px solid hsl(0,51%,45%);
+}
+.color-T-1
+{
+  background-color: hsl(0,51%,45%);
+}
+.color-T-2
+{
+  background-color: hsl(0,51%,45%);
+  background-color: hsla(0,51%,45%,0.8);
+}
+.color-T-3
+{
+  background-color: hsl(0,51%,45%);
+  background-color: hsla(0,51%,45%,0.6);
+}
+.color-T-4
+{
+  background-color: hsl(0,51%,45%);
+  background-color: hsla(0,51%,45%,0.3);
+}
+.font-T
+{
+  color: hsl(0,51%,45%);
+}
+.effect-hover-T-1:hover
+{
+  background-color: hsl(0,51%,45%);
+  background-color: hsla(0,51%,45%,1.00);
+}
+.effect-hover-T-2:hover
+{
+  background-color: hsl(0,51%,45%);
+  background-color: hsla(0,51%,45%,0.65);
+}
+.effect-hover-T-3:hover
+{
+  background-color: hsl(0,51%,45%);
+  background-color: hsla(0,51%,45%,0.35);
+}
+.LAPCAT-image
+{
+  background-image: url(/lapcat/images/100-18-1.png);
+  background-repeat: no-repeat;
+}
+a,a:active, a:visited, font
+{
+  color: hsl(0,0%,2%);
+}
+.effect-hover-X-1:hover,.effect-hover-X-2:hover,.effect-hover-X-3:hover,.effect-hover-X-4:hover,
+{
+  background-color: hsl(0,0%,2%);
+}
+.effect-hover-X-2:hover
+{
+  background-color: hsla(0,0%,2%,0.8);
+}
+.effect-hover-X-3:hover
+{
+  background-color: hsla(0,0%,2%,0.6);
+}
+.effect-hover-X-4:hover
+{
+  background-color: hsla(0,0%,2%,0.3);
+}
+.effect-hover-Z-1:hover
+{
+  background-color: hsl(212,51%,60%);
+}
+.effect-hover-Z-1-35:hover
+{
+  background-color: hsla(212,51%,60%,0.35);
+}
+.effect-hover-Z-1-65:hover
+{
+  background-color: hsla(212,51%,60%,0.65);
+}
+.effect-hover-Z-2:hover
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.8);
+}
+.effect-hover-Z-3:hover
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.6);
+}
+.effect-hover-Z-4:hover
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.3);
+}
+.colorWhite-1,.colorWhite-2,.colorWhite-3,.colorWhite-4
+{
+  background-color: hsl(0,0%,100%);
+}
+.colorWhite-2
+{
+  background-color: hsla(0,0%,100%,0.8);
+}
+.colorWhite-3
+{
+  background-color: hsla(0,0%,100%,0.6);
+}
+.colorWhite-4
+{
+  background-color: hsla(0,0%,100%,0.3);
+}
+.colorBlack-1
+{
+  background-color: hsl(0,0%,2%);
+}
+.colorBlack80
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,0.8);
+}
+.colorBlack60
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,0.6);
+}
+.colorBlack30
+{
+  background-color: hsl(0,0%,2%);
+  background-color: hsla(0,0%,2%,0.3);
+}
+.color-Z-1
+{
+  background-color: hsl(212,51%,60%);
+}
+.color-Z-2
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.8);
+}
+.color-Z-3
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.6);
+}
+.color-Z-4
+{
+  background-color: hsl(212,51%,60%);
+  background-color: hsla(212,51%,60%,0.3);
+}
+.border-all-X-1
+{
+  border: 1px solid hsl(0,0%,100%);
+}
+.border-all-X-2
+{
+  border: 2px solid hsl(0,0%,100%);
+}
+.border-bottom-X-1
+{
+  border-bottom: 1px solid hsl(0,0%,100%);
+}
+.border-left-X-1
+{
+  border-left: 1px solid hsl(0,0%,100%);
+}
+.border-right-X-1
+{
+  border-right: 1px solid hsl(0,0%,100%);
+}
+.border-sides-X-1
+{
+  border-left: 1px solid hsl(0,0%,100%);
+  border-right: 1px solid hsl(0,0%,100%);
+}
+.border-top-X-1
+{
+  border-top: 1px solid hsl(0,0%,100%);
+}
+.border-all-Z-1
+{
+  border: 1px solid hsl(213,43%,52%);
+}
+.fontMain
+{
+  color: hsl(0,0%,2%);
+}
+.fontMain2
+{
+  color: hsl(0,0%,27%);
+}
+.fontReverse
+{
+  color: hsl(0,0%,100%);
+}
+.font-Z
+{
+  color: hsl(213,43%,52%);
+}
+.menu-highlight
+{
+  background-color: hsl(212,51%,60%);
+}
+.menu-normal
+{
+  background-color: hsla(0,0%,2%,0.8);
+}
+.color-M-1
+{
+  background-color: hsl(97,51%,33%);
+}
+.catalog-link
+{
+  color: hsl(125,125,255);
+}
+.font-bold
+{
+  font-weight: bold;
+}
+.font-italic
+{
+  font-style: italic;
+}
+.fake-link
+{
+  cursor: pointer;
+}
+.color-blue
+{
+  background-color: rgb(0,13,52);
+}
+.border-blue
+{
+  border: 1px solid rgb(0,13,119);
+}
+.button-theme
+{
+  background-color: hsl(220,11%,22%);
+  border: 1px solid hsl(212,35%,45%);
+  border-radius: 4px;
+  cursor: pointer;
+  moz-border-radius: 4px;
+  vertical-align: middle;
+  webkit-border-radius: 4px;
+}
+
+.next-button
+{
+  background-color: hsl(212,43%,53%);
+  cursor: pointer;
+}
+.dropbutton
+{
+  background-color: hsl(212,43%,53%);
+  border: 1px solid hsl(212,43%,53%);
+  border-radius: 6px;
+  color: rgb(255,255,255);
+  cursor: pointer;
+  moz-border-radius: 6px;
+  webkit-border-radius: 6px;
+}
+.option-theme
+{
+  background-color: hsl(212,35%,45%);
+  background-color: hsla(212,35%,45%,1.0);
+  background-image: url(/lapcat/layout/images/1-13-0.png);
+  background-repeat: repeat-x;
+  border: 1px solid rgb(0,0,0);
+  border: 1px solid rgb(0,0,0,1.0);
+}
+.line:hover
+{
+  background-color: hsl(212,35%,45%);
+  background-color: hsla(212,35%,45%,0.6);
+  cursor: pointer;
+}
+.OL-fred
+{
+  border: 1px solid hsl(212,27%,37%);
+}
+.option-selected
+{
+  background-color: hsl(212,27%,37%);
+  border: 1px solid hsl(220,11%,22%);
+  border-bottom: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  cursor: pointer;
+  moz-border-radius-topleft: 6px;
+  moz-border-radius-topright: 6px;
+  webkit-border-top-left-radius: 6px;
+  webkit-border-top-right-radius: 6px;
+}
+.option-empty
+{
+  background-color: hsl(212,20%,30%);
+  background-image: url(/lapcat/layout/images/1-13-0.png);
+  background-repeat: repeat-x;
+  border: 1px solid rgb(0,0,0);
+  border: 1px solid rgb(0,0,0,1.0);
+}
+.option-theme:hover
+{
+  background-color: hsl(220,11%,22%);
+  background-color: hsla(220,11%,22%,1.0);
+}
+
+.dropbutton:hover
+{
+  background-color: hsl(220,11%,22%);
+  border: 1px solid hsl(220,11%,22%);
+  color: rgb(255,255,255);
+}
+.notice .close
+{
+  background-color: hsl(220,11%,22%);
+  display: block;
+  height: 13px;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 14px;
+}
+.option-selected font
+{
+  color: hsl(212,43%,53%);
+}
+.option-selected:hover font
+{
+  color: hsl(212,35%,45%);
+}

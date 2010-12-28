@@ -1,6 +1,6 @@
 <section class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:205px;margin-left:5px;">
-	<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-D-1 " style="">Bugs</div>
-	<div style="position:relative;" class="message_body color-X-1 corners-bottom-2  ">
+	<div class="droidSerif fontBlack head message_head corners-top-2 color-B-2 border-all-D-1 " style="">Bugs</div>
+	<div style="position:relative;" class="message_body colorWhite-1 corners-bottom-2  ">
 		<a class="smallTicketL nolink ticket_sprite ticket_button bug font-bold" href="#ticketList/bugs_open">Open Bugs</a>
 		<span id="cBugsOpen" class="timestamp" style="position:absolute;right:25px">0</span>
 		<br>
@@ -8,7 +8,7 @@
 		<span id="cBugsClosed" class="timestamp" style="position:absolute;right:25px">0</span>
 		<br>
 		<br>
-    <button class="font-X font-bold" id="topperNewBug" style="width:auto">
+    <button class="fontBlack font-bold" id="topperNewBug" style="width:auto">
     <span class="ticket_button ticket_sprite bug"></span>
     <span>New Bug</span>
     </button>
