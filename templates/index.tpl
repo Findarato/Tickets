@@ -48,7 +48,8 @@
         <div class="" style="display:table;width:98%;">
             <aside id="sideArea1" class="corners-bottom-2 corners-top-2" style="display:table-cell;vertical-align:top;width:220px">
                 {include file="navagation.tpl"}
-                <br> {include file="bugs.tpl"}{*<!--<br><div id="droidId">Droid</div><br> {include file="stats.tpl"} <br> {include file="features.tpl"} <br> {include file="log.tpl"} -->*}
+                <br> {include file="bugs.tpl"}
+                <br> {include file="search.tpl"}
             </aside>
             <div id="mainArea1" class="corners-bottom-2 corners-top-2"  style="display:table-cell;text-align:left;">
                 <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">

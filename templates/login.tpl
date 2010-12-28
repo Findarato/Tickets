@@ -1,6 +1,6 @@
 <div class="roundAll4 small-shadow-black-1" style="height:500px;width:auto;margin-left:5px;">
 	<div class="fontMain head message_head corners-top-2 color-B-2 border-all-B-1" id="" style="">Please Login</div>
-	<div class="message_body color-X-1 corners-bottom-2" id="" style="height:451px;">
+	<div class="message_body colorWhite-1 corners-bottom-2" id="" style="height:451px;">
 		<form id="frm_login" action="javascript:void(none);" name="login">
 		<div style="display:table;margin-bottom:10px;">
 			<div style="display:table-cell">
@@ -14,6 +14,5 @@
 		</div>
 		</form>
 		<div class="button-purple ticketButton font-bold fontReverse" id="loginButton" style="width:auto;max-width:50px" >Login</div>
-		
 	</div>	
 </div>
