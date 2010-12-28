@@ -9,14 +9,14 @@
         <title>Tickets - The tracking system</title>
         <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/resetStyle.css?v=1">
-        <link id="themegencss" href="http://dev.lapcat.org/lapcat/css/themes/theme-generator.php?theme=&hsl&update" rel="stylesheet" />
+        <link id="themegencss" href="/tickets/css/theme-generator.php?theme=&hsl&update" rel="stylesheet" />
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
         <link rel="stylesheet" media="screen" href="css/tickets.css"  />
         <link rel="shortcut icon" href="/tickets/bug.png">
         <link rel="apple-touch-icon" href="/tickets/bug.png">
         <link rel="icon" type="image/png" href="/tickets/bug.png" />
-        <link id="rss1" href="ticketsrss.php?id={$user_id}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
-        <link id="rss2" href="ticketsrss.php?id={$user_id}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
+        <link id="rss1" href="ticketsrss.php?id={if isset($user_id)}{$user_id}){/if}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
+        <link id="rss2" href="ticketsrss.php?id={if isset($user_id)}{$user_id}){/if}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
 
         <link rel="icon" type="image/png" href="/tickets/bug.png" />
         <script type="text/javascript">
