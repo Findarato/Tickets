@@ -1,6 +1,8 @@
-<section class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:205px;margin-left:5px;">
-    <div class="droidSerif fontBlack head message_head corners-top-2 color-B-2 border-all-D-1 " style="">
-        Search
+<section class="roundTop4 small-shadow-black-1" style="width:205px;margin-left:5px;position:relative">
+    <div class="roundTop4" style="height:100%;width:100%;position:absolute;top:0;right:0;background:hsla(0,0%,0%,0.6);z-index:50"></div>
+    <div class="fontBlack head message_head roundTop4 color-B-2 border-all-D-1 " style="">
+        <div class="td" style="width:90%">Search</div>
+        <div class="td" style="text-align:right"></div>
     </div>
     <div style="position:relative;" class="message_body colorWhite-1 corners-bottom-2  ">
         <div>
