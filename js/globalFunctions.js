@@ -69,7 +69,6 @@ function setHash(htbs) {
 
 function pageAnator(container, count, perPage) {
     hash = getHashArray();
-    //Content.find("#pageAnator")
     container.empty().html(
     $("<span/>").addClass("roundAll4 lapcatButton").css({
         width: "auto",
