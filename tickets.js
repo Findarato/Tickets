@@ -675,33 +675,39 @@ function loadTicketList(pageNumber,queryObj) {
 	if(queryObj){
 		O_search = queryObj;
 		O_search.type = "search";
-		O_search.page = pageNumber;			
+		O_search.page = pageNumber;		
 	}else{
 		$("#ticketListtitle").html("Tickets search Result");
 		hash = getHashArray();
 		O_search = {
-			"type": "search",
 			"page": pageNumber,
 			"search": {}
 		};
-		if (hash[1]) {
-			for (a = 1; a <= hash.length; a++) {
+		if (hash[1]) { //there is something other than #ticketlist
+			for (a = 1; a <= hash.length; a++) { //we will now loop though search
 				if (a == hash.length) {} else {
 					var holder = a + 1;
 					if (!hash[holder]) {
 						hash[holder] = "1";
 					}
-					O_search[hash[a]] = hash[holder];
+					if(a==1){//this should be the first value
+					  O_search["area"] = hash[a];
+					}else{
+					  O_search[hash[a]] = hash[holder];
+					}
+					
+					
 					a++;
 				}
 			}
 	    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1){$("#ticketListtitle").html("Bug search Result");}		
 		}	
 	}
-	$.getJSON(uri + "ajax/tickets.php", O_search, function (data) {
+	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
     if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
+    alert(data.ticketCount);
 		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
 		var tlistHolder = $("<div/>");
 
@@ -1055,12 +1061,12 @@ function checkHash() {
 			$.each(hash, function (key, value) {
 				if (key % 2 === 0) {
 					switch (value) {
-					case "page":
-						loadTicketList(hash[key + 1]);
-						break;
-					default:
-						loadTicketList(0);
-						break;
+  					case "page":
+  						loadTicketList(hash[key + 1]);
+  						break;
+  					default:
+  						loadTicketList(0);
+  						break;
 					}
 				}
 			});
