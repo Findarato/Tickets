@@ -116,7 +116,7 @@
   webkit-border-bottom-right-radius: 6px;
   webkit-border-top-right-radius: 2px;
 }
-.corners-top-1
+.roundTop2
 {
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
@@ -125,7 +125,7 @@
   webkit-border-top-left-radius: 2px;
   webkit-border-top-right-radius: 2px;
 }
-.corners-top-2
+.roundTop4
 {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -134,7 +134,7 @@
   webkit-border-top-left-radius: 4px;
   webkit-border-top-right-radius: 4px;
 }
-.corners-top-3
+.roundTop6
 {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;

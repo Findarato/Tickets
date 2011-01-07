@@ -334,6 +334,11 @@ if(isset($_SESSION["user"])){ //the session is set
 				}
 
 			break;
+      /**
+       * 
+       * Used to get the ticket list
+       * 
+       */
 			case "search":
 				$response["tickets"] = getTickets($usr->User_id,"search",100,'',$_GET);
 				if($response["tickets"]){
