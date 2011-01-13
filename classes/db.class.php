@@ -16,6 +16,7 @@
 		public $Lastid = 0;
 		public $Prefix	= "";
 		public $Cache_all = false; //This will force all selects to be cache queries.
+		public $ResultsCount = 0;
 		//Define the database connection information
 		private $prefixString = "{prefix}";
 		private $config = array(); //config values in associat
@@ -109,6 +110,7 @@
             $this -> Lastid = mysql_insert_id($this -> linkid);
             return $this->Lastid;
           }
+          $this ->ResultsCount = $this->Count_res($this -> linkid);
 				}
 				if(!$fetch){
 					return true; //Something always has to be returned	
