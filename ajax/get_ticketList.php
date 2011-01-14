@@ -20,10 +20,10 @@ header("Cache-Control: max-age=60, must-revalidate");
   
   if($page>0){
     $page = $page*$count+1;
-    $amount = $page+$count-1;  
+    $amount = $count;  
   }else{
     $page = $page*$count;
-    $amount = $page+$count;
+    $amount = $count;
   }
   
 if(isset($_GET["area"]) ){

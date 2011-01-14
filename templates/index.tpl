@@ -11,14 +11,12 @@
         <link rel="stylesheet" href="css/resetStyle.css?v=1">
         <link id="themegencss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
-        <link rel="stylesheet" media="screen" href="css/tickets.css"  />
+        <link rel="stylesheet" media="screen" href="css/tickets.css"  /> 
         <link rel="shortcut icon" href="/tickets/bug.png">
         <link rel="apple-touch-icon" href="/tickets/bug.png">
         <link rel="icon" type="image/png" href="/tickets/bug.png" />
         <link id="rss1" href="ticketsrss.php?id={if isset($user_id)}{$user_id}){/if}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
         <link id="rss2" href="ticketsrss.php?id={if isset($user_id)}{$user_id}){/if}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
-
-        <link rel="icon" type="image/png" href="/tickets/bug.png" />
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -27,7 +25,8 @@
             var pageTracker = _gat._getTracker("UA-8067208-4");
             pageTracker._trackPageview();
         </script>
-        <script src="http://cdn1.lapcat.org/js/jquery-1.4.4.min.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
         <script src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
@@ -63,18 +62,9 @@
         <div id="newBugdialogTpl" class="ui-helper-hidden" title="Create new ticket">
             {include file="new_bug.tpl"}
         </div>
-        {*
-        <div id="newReplydialogTpl" class="ui-helper-hidden" title="Reply to Ticket">
-            {include file="reply.tpl"}
-        </div>
-        *}
         <div id="newsearchdialogTpl" class="ui-helper-hidden">
             {include file="search.tpl"}
         </div>
-        {*
-        <div id="reassignTpl" class="ui-helper-hidden" title="Reassign Ticket">
-            {include file="reassign.tpl"}
-        </div>*}
         <div id="responsestpl" class="ui-helper-hidden">
             {include file="responses.tpl"}
         </div>

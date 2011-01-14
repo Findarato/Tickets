@@ -6,9 +6,9 @@
     </div>
     <div style="width:auto;height:40px;display:inline-block;text-align:left;">
       <div class="" style="width:auto;height:16px">The issue tracking system</div>
-      <div class="fontReverse  fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
+      <div class="fontReverse fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
        <span class="" id="UpdateNotes">
-          <a class="ticket_link fakelink fontReverse" href="#updateNotes" id="Version"></a>
+          <a class="fakelink fontReverse" href="#updateNotes" id="Version"></a>
        </span>
       </div>
     </div>    

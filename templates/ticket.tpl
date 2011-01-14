@@ -1,8 +1,8 @@
 <div class="t" style="width:100%;height:500px;margin-right:5px;">
 	<div id="ticketarea" >
-		<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:5px;">
-			<div class="fontMain head message_head corners-top-2 color-B-2 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
-				<div class="fontMain ticket_sprite ticket_button fakelink" id="ticketTitle" name="bookmark" style="width:230px;text-overflow: ellipsis-word;"></div><!-- Ticket Title area -->
+		<div class="roundAll4 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:5px;">
+			<div class="fontMain head message_head roundTop4 color-B-2 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
+				<div class="fontMain ticket_sprite ticket_button fakelink" id="ticketTitle" name="bookmark" style="width:230px;height:16px;overflow:hidden;text-overflow: ellipsis-word;"></div><!-- Ticket Title area -->
 				<div class="colorWhite" id="ticketStatusImage" style="position:absolute;right:5px;top:2px;height:13px;">
 					<div class="roundAll4 colorBlack30 border-all-D-1 lapcatButton" style="width:auto;padding:2px;">
 						<div class="statusImage left ticket_sprite pencil" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
@@ -17,24 +17,14 @@
 			</div> 
 			<div class="colorWhite-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
 		    <div id="ticketBox" style="width:100%;display:inline-block">
-          <div class="td" style="width:auto;display:none;"><!-- Previous Button -->
-            <div class="actionButtons fontMain corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="previousTicket" style="width:auto;margin-right:5px;padding:3px;">
-             <span>Previous</span>     
-            </div>
-          </div>
-          <div class="td" style="width:auto;display:none;"><!-- Next Button -->
-            <div class="actionButtons fontMain corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="nextTicket" style="width:auto;margin-right:5px;padding:3px;">
-              <span style="margin-right:5px">Next</span>
-            </div>
-          </div>
 					<div class="td" style="width:75px;"> <!-- Locked Area -->
-            <div class="fontMain openTicket hold actionButtons holdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
+            <div class="fontMain openTicket hold actionButtons holdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
               <span>Lock</span>
             </div>
-            <div class="fontMain openTicket hold actionButtons unholdLink corners-bottom-2 corners-top-2 background-alpha-4 border-all-D-1 lapcatButton" id="unHoldlink" style="width:auto;margin-right:5px;display:none;padding:3px;">
+            <div class="fontMain openTicket hold actionButtons unholdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton" id="unHoldlink" style="width:auto;margin-right:5px;display:none;padding:3px;">
               <span>unlock</span>
             </div>
-            <!--<div class="button-purple fg-button corners-bottom-2 corners-top-2 fontReverse lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
+            <!--<div class="button-purple fg-button roundAll4 fontReverse lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
           </div>
 				</div>
   		
@@ -97,8 +87,8 @@
 		</div>
 	</div>
 	<section id="replyArea"  style="display:table-cell;width:auto;height:500px;vertical-align:top;">
-		<div class="corners-top-2 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
-			<div class="custom fontMain head message_head corners-top-2 color-B-2 border-all-D-1" id="replyTitleArea" style="height:16px;">
+		<div class="roundTop4 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
+			<div class="custom fontMain head message_head roundTop4 color-B-2 border-all-D-1" id="replyTitleArea" style="height:16px;">
 				<div style="width:100%">
 					<span id="replyareaTitle" style="margin-left:10px;margin:5px;">Replies (0)</span>
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>

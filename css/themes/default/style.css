@@ -190,31 +190,6 @@
   background-image: url(/lapcat/layout/images/18-18-0.png);
   background-repeat: repeat;
 }
-.button-X-2
-{
-  background-color: rgb(76,76,76);
-  border: 1px solid rgb(126,126,126);
-  border-radius: 4px;
-  cursor: pointer;
-  moz-border-radius: 4px;
-  vertical-align: middle;
-  webkit-border-radius: 4px;
-}
-.button-X-2:hover
-{
-  background-color: rgb(126,126,126);
-  border: 1px solid rgb(146,146,146);
-}
-.button-gold
-{
-  background-color: rgb(255,193,37);
-  border: 1px solid rgb(225,163,7);
-  border-radius: 4px;
-  cursor: pointer;
-  moz-border-radius: 4px;
-  vertical-align: middle;
-  webkit-border-radius: 4px;
-}
 .light-down
 {
   background-image: url(/lapcat/layout/icons/16-16-31.png);
@@ -293,7 +268,7 @@
   background-image: url(/lapcat/images/100-18-1.png);
   background-repeat: no-repeat;
 }
-a,a:active, a:visited, font
+a,a:active, a:visited
 {
   color: hsl(0,0%,2%);
 }
@@ -340,8 +315,9 @@ a,a:active, a:visited, font
 {
   color: hsl(0,0%,27%);
 }
-.fontReverse
+.fontReverse, a .fontReverse
 {
+  color: rgb(255,255,255);
   color: hsl(0,0%,100%);
 }
 .font-bold
@@ -355,4 +331,7 @@ a,a:active, a:visited, font
 .fake-link
 {
   cursor: pointer;
+}
+.noticeBackgroundDefault{
+  background:hsl(0,0,30%);
 }

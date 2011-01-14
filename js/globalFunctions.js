@@ -125,36 +125,36 @@ function notice(title, body, sticky, ticketid,icon) {
     switch (title) {
     case "Error":
         noticeClass = "button-red";
-		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
-		fontClass = "font-Y";
+    		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
+    		fontClass = "fontReverse";
     break;
     case "Debug":
         noticeClass = "button-purple";
-		image = "http://cdn1.lapcat.org/fugue/bonus/icons-24/fire.png";
-		fontClass = "font-Y";
+    		image = "http://cdn1.lapcat.org/fugue/bonus/icons-24/fire.png";
+    		fontClass = "fontReverse";
     break;
     case "Notice":
-        noticeClass = "color-D-1";
-		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
-		fontClass = "font-Y";
+        noticeClass = "noticeBackgroundDefault";
+    		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
+    		fontClass = "fontReverse";
     break;
     case "Achievement":
-        noticeClass = "color-D-1";
-		fontClass = "font-Y";
+        noticeClass = "noticeBackgroundDefault";
+		    fontClass = "fontReverse";
         image = "";
     break;
 	case "New Response!":
-        noticeClass = "color-D-1";
+        noticeClass = "noticeBackgroundDefault";
         image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/document-text.png";
-		fontClass = "font-Y";
+		fontClass = "fontReverse";
     break;
 	case "New Ticket!":
-        noticeClass = "color-D-1";
-		fontClass = "font-Y";
+        noticeClass = "noticeBackgroundDefault";
+		fontClass = "fontReverse";
         image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/balloon.png";
     break;
     default:
-        noticeClass = "color-D-1 ";
+        noticeClass = "noticeBackgroundDefault ";
         break;
     }
     var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all box_transition ">' 
