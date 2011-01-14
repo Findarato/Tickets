@@ -10,8 +10,34 @@ header("Cache-Control: max-age=60, must-revalidate");
 //output the HTTP header
   Header($expire);
   
-  $usr = unserialize($_SESSION['user']);
   $db = db::getInstance();
+  $sql = "";
+  $wc = array();
+  $limit = 0;
+  $sc = array();
+  $start = 0;
+  $end = 0;
+  
+  $count = 20; // The amount of records returned
+  if(isset($_GET["count"])){
+    $count = $_GET["count"];
+  }
+  $page = 0; // the default page to return incase one is not passed
+  if(isset($_GET["page"])){
+    $page = $_GET["page"];
+  }  
+  
+  if($page>0){
+    $page = $page*$count+1;
+    $amount = $page+$count-1;  
+  }else{
+    $page = $page*$count;
+    $amount = $page+$count;
+  }
+  
+  
+  $usr = unserialize($_SESSION['user']);
+  
 function searchTickets($user_id,$area,$amount=100,$page=0,$search=array()){
   $db = db::getInstance();
   switch ($area) {
@@ -187,6 +213,8 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
   return $return;
 }
 
+
+
 if(isset($_GET["area"]) ){
   switch($_GET["area"]){
     case "sOpen":
@@ -200,17 +228,62 @@ if(isset($_GET["area"]) ){
     case "sAssigned":
       break;
     case "sFavorite":
+      $sql = "SELECT 
+      f.ticket_id
+      FROM favorite AS f 
+      WHERE f.user_id=".$usr->User_id; 
+      $favIds = array_implode($db->Query($sql,false,"row"));
+      $wc[] = "t.id IN(".join(",",$favIds).")";
       break;
     default:
       $response["tickets"] = searchTickets($usr->User_id,$_GET["type"],100,$_GET["page"],$_GET["search"]);
       break;    
   }
+  // Lets take the switch statement above and use it to determain the where clause of the sql that needs to get ran.  Even favorites should be able to be done this way.
+ 
+      $sql = '
+      SELECT 
+        t.open,
+        t.id,
+        t.assigned_id,
+        t.subject,
+        t.tickettype_id,
+        t.status,
+        t.description AS description,
+        t.location AS locationId,
+        t.priority,
+        t.closed_on,
+        t.project_id,
+        t.category_id,
+        t.created_by_id, 
+        DATE_FORMAT(t.created_on,"%c.%d.%Y") AS created_on,
+        DATE_FORMAT(t.due_on,"%c.%d.%Y") AS due_on,
+        ln.name AS locationName,
+        c.name AS category,
+        TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago,
+        lhu.username,lhu.firstname,lhu.lastname, lhu2.firstname AS firstname2,lhu2.lastname AS lastname2,lhu2.username AS username2,
+        TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining,
+        TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,
+        TIMESTAMPDIFF(SECOND ,t.created_on, t.due_on ) AS timeAllowed
+      FROM tickets AS t 
+      JOIN category AS c ON (c.id=t.category_id)
+      JOIN library_names AS ln ON (ln.ID=t.location)
+      JOIN lapcat.hex_users AS lhu ON (t.assigned_id=lhu.id)
+      JOIN lapcat.hex_users AS lhu2 ON (t.created_by_id=lhu2.id)
+      WHERE '.join(" AND ",$wc).' GROUP BY t.id ORDER BY t.priority DESC,t.due_on 
+      LIMIT '.$page.','.$amount.';';
+      $response["tickets"] = $db->Query($sql,false,"assoc_array");
 }
 
 
 
 if(isset($response["tickets"])){
-  $response["tickets"] = aTcode($response["tickets"]);
+  if($db->ResultsCount == 0){
+    $response["tickets"] = "No tickets found";
+  }else{
+    $response["tickets"] = aTcode($response["tickets"]);  
+  }
+  $response["ticketCount"] = $db->ResultsCount;
 }
 echo json_encode($response);
 ?>

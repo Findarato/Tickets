@@ -7,7 +7,7 @@
         <meta name="author" content="Joseph Harry">
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
         <title>Tickets - The tracking system</title>
-        <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/resetStyle.css?v=1">
         <link id="themegencss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
