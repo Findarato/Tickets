@@ -20,6 +20,10 @@ function id2Username($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
 	return $Userinfo;
 }
 
+function preFormat($string=""){
+  return "<pre>".$string."</pre>";
+}
+
 function aTcode($array,$id='description'){
 	$a_fixed = $array;
 	foreach($array as $k => $a){
