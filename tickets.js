@@ -564,15 +564,19 @@ function loadTicketBody(inputData, container) {
 	//Reply Button
 	//
   $('#replyButton').click(function(){
-    $("#replyBox").css("height","78px");
-    $("#replyTitle").val("Re:" + Params.TicketJSON.subject);
-    $("#replyticketid").val(Params.TicketId);
-    $("#replyuserid").val(Params.UserId);
+    if($("#replyBox").css("height") == "78px"){
+      $("#replyAddButton").trigger('click');
+    }else{
+      $("#replyBox").css("height","78px");
+      $("#replyTitle").val("Re:" + Params.TicketJSON.subject);
+      $("#replyticketid").val(Params.TicketId);
+      $("#replyuserid").val(Params.UserId);      
+    }
   });
   $("#replyCancelButton").click(function(){
     $("#replyBox").css({"height":"0px"});
   });
-  $("#replyAddButton").click(function () {
+  $("#replyAddButton").bind('click',function () {
     $("#replyBox").css({"height":"0px"});
     $.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
       loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
@@ -668,9 +672,7 @@ function loadTicketList(pageNumber,queryObj) {
 	Params.LastArea = "ticketList";
 	var html = "";
 	var bugs = false;
-	if (pageNumber < 0) {
-		pageNumber = 0;
-	}
+	if (pageNumber < 0) {	pageNumber = 0;}
 	$("#ticketListbody").empty();
 	if(queryObj){
 		O_search = queryObj;
@@ -692,11 +694,7 @@ function loadTicketList(pageNumber,queryObj) {
 					}
 					if(a==1){//this should be the first value
 					  O_search["area"] = hash[a];
-					}else{
-					  O_search[hash[a]] = hash[holder];
 					}
-					
-					
 					a++;
 				}
 			}
@@ -707,8 +705,10 @@ function loadTicketList(pageNumber,queryObj) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
     if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
-    alert(data.ticketCount);
-		pageAnator(Params.Content.find("#pageAnator").empty(), data.ticketCount, 20);
+    
+		
+		pageAnator($("#tldPageAnator"), data.ticketCount, 20);
+		
 		var tlistHolder = $("<div/>");
 
 		 displayTable = $("<table/>",{"class":"font-X","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
@@ -1058,18 +1058,15 @@ function checkHash() {
   			}
   			break;
 		case "#ticketList":
-			$.each(hash, function (key, value) {
-				if (key % 2 === 0) {
-					switch (value) {
-  					case "page":
-  						loadTicketList(hash[key + 1]);
-  						break;
-  					default:
-  						loadTicketList(0);
-  						break;
-					}
-				}
-			});
+      switch (hash[2]) {
+        case "page": // ticket with a page number selected
+          loadTicketList(hash[3]);
+          break;
+        default: // ticket with out a page
+          loadTicketList(0);
+         break;
+        }
+        break;
 			break;
 		case "#search":
 			loadSearch();
@@ -1145,7 +1142,7 @@ jQuery(document).ready(function () {
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
 	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});
 	$("title").html($("title").html()+"  "+$("#version").html());
-	$("#Version").html($("#version").html()); //to make sure the version on tickets is always updated
+	$("#Version").text($("#version").text()); //to make sure the version on tickets is always updated
 
 	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
 	$("#cboxClose").addClass("ticket_sprite bug");
