@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="width:100%">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -42,16 +42,16 @@
     <body>
         <!--<![endif]-->
         <header class="header1" style="height:30px;margin-bottom:20px;">
-            {include file="topper.tpl"}
+            {include file="header.tpl"}
         </header>
-        <div class="" style="display:table;width:98%;">
-            <aside id="sideArea1" class="corners-bottom-2 corners-top-2" style="display:table-cell;vertical-align:top;width:220px">
+        <div class="" style="display:table;width:100%;">
+            <aside id="sideArea1" class="roundAll4" style="display:table-cell;vertical-align:top;width:220px">
                 {include file="navagation.tpl"}
                 <br> {include file="bugs.tpl"}
                 <br> {include file="search.tpl"}
             </aside>
-            <div id="mainArea1" class="corners-bottom-2 corners-top-2"  style="display:table-cell;text-align:left;">
-                <div style="min-height:300px;width:100%;" class="corners-bottom-2 corners-top-2" id="content">
+            <div id="mainArea1" class="roundAll4"  style="display:table-cell;text-align:left;padding-right:25px">
+                <div style="min-height:300px;width:100%;" class="roundBottom4" id="content">
                     {include file="$content"}
                 </div>
             </div>
@@ -68,9 +68,14 @@
         <div id="responsestpl" class="ui-helper-hidden">
             {include file="responses.tpl"}
         </div>
+{*
+        <div id="ticketTpl" class="ui-helper-hidden">
+            {include file="vertical_ticket.tpl"}
+        </div>
+  *}      
         <div id="ticketTpl" class="ui-helper-hidden">
             {include file="ticket.tpl"}
-        </div>
+        </div>        
         <div id="generic" class="ui-helper-hidden">
             {include file="generic.tpl"}
         </div>
