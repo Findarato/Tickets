@@ -1,26 +1,28 @@
 <section class="roundTop4 small-shadow-black-1" style="width:205px;margin-left:5px;">
 	<div class="fontMain head message_head roundTop4 color-B-2 border-all-D-1 " style="">Tickets</div>
 	<div style="position:relative;" class="message_body colorWhite-1 corners-bottom-2">
-		<a class="smallTicketL nolink ticket_button ticket_sprite user font-bold" href="#ticketList/sOpen">To Me</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite user fontBold" href="#ticketList/sOpen">To Me</a>
 		<span id="csOpen" class="timestamp" style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite pencil font-bold" href="#ticketList/sAssigned">By Me</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite pencil fontBold" href="#ticketList/sAssigned">By Me</a>
 		<span id="csAssigned" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite users font-bold" href="#ticketList/sOdepartment" id="toMyDepartment">To My Department</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite users fontBold" href="#ticketList/sOdepartment" id="toMyDepartment">To My Department</a>
 		<span id="csOdepartment" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite user--pencil font-bold" href="#ticketList/sAdepartment" id="byMyDepartment">By My Department</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite user--pencil fontBold" href="#ticketList/sAdepartment" id="byMyDepartment">By My Department</a>
 		<span id="csAdepartment" class="timestamp " style="position:absolute;right:25px"></span
 		><br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite bookmark font-bold" href="#ticketList/sFavorite">Bookmarks</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite bookmark fontBold" href="#ticketList/sFavorite">Bookmarks</a>
 		<span id="csFavorite" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite door font-bold" href="#ticketList/sClosed">Closed Tickets</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite door fontBold" href="#ticketList/sClosed">Closed Tickets</a>
 		<span id="csClosed" class="timestamp " style="position:absolute;right:25px"></span>
+    <br>
+    <a class="smallTicketL nolink ticket_button ticket_sprite chart fontBold" href="#stats">General Stats</a>
 		<br>
 		<br>
-    <button class="fontMain font-bold" id="topperNew" style="width:auto" title="Create a new Ticket">
+    <button class="fontMain fontBold" id="topperNew" style="width:auto" title="Create a new Ticket">
       <span class="ticket_button ticket_sprite ticket-plus"></span>
       <span>New Ticket</span>
     </button>

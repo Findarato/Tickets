@@ -1,4 +1,4 @@
-<div class="fontReverse" style="height:40px;width:100%;padding:4px 4px 4px 0;position:relative;text-align:right;" id="topper">
+<div class="fontReverse" style="height:40px;width:100%;padding:4px 0px 4px 0;position:relative;text-align:right;" id="topper">
   <a class="right ticket_button ticket_sprite user nolink fontReverse" href="#userPage/" id="topperUserInfo" style="padding-right:5px;width:auto;text-decoration:none;">{if isset($firstname)}{$firstname} {$lastname} ({$username}) {else} No User (Please Log in) {/if}</a>
   <div style="display:block;height:40px;width:auto;position:absolute;top:0;left:0;">
     <div style="height:40px;display:inline-block">
@@ -8,7 +8,9 @@
       <div class="" style="width:auto;height:16px">The issue tracking system</div>
       <div class="fontReverse fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
        <span class="" id="UpdateNotes">
-          <a class="fakelink fontReverse" href="#updateNotes" id="Version"></a>
+        <a class="fontReverse fakelink " href="#updateNotes" >
+          <span class="fontReverse" id="Version"></span>
+        </a>
        </span>
       </div>
     </div>    
