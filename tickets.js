@@ -129,9 +129,9 @@ function loadLargeStats() {
 		padding: "2px",
 		height: "20px",
 		position: "relative"
-	}).addClass("corners-bottom-2 corners-top-2 color-B-2 border-all-B-1").append($("<font/>").css({
+	}).addClass("rountAll4 color-B-2 border-all-B-1").append($("<font/>").css({
 		margin: "5px"
-	}).html("Large Stats for tickets"))).append(holder = $("<div/>").addClass("color-E-2 corners-bottom-2 corners-top-2 border-all-B-1").css({
+	}).html("Large Stats for tickets"))).append(holder = $("<div/>").addClass("color-E-2 rountAll4 border-all-B-1").css({
 		height: "500px",
 		overflow: "auto",
 		margin: "4px",
@@ -564,10 +564,10 @@ function loadTicketBody(inputData, container) {
 	//Reply Button
 	//
   $('#replyButton').click(function(){
-    if($("#replyBox").css("height") == "78px"){
+    if($("#replyBox").css("height") == "90px"){
       $("#replyAddButton").trigger('click');
     }else{
-      $("#replyBox").css("height","78px");
+      $("#replyBox").css("height","90px");
       $("#replyTitle").val("Re:" + Params.TicketJSON.subject);
       $("#replyticketid").val(Params.TicketId);
       $("#replyuserid").val(Params.UserId);      
@@ -577,11 +577,14 @@ function loadTicketBody(inputData, container) {
     $("#replyBox").css({"height":"0px"});
   });
   $("#replyAddButton").bind('click',function () {
-    $("#replyBox").css({"height":"0px"});
-    $.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
-      loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
-      $(".Ticketform").attr({value: ""}); 
-    });
+    if($("#newReplyForm").find("#description").text() != "")
+    {
+      $("#replyBox").css({"height":"0px"});
+      $.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
+        loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
+        $(".Ticketform").attr({value: ""}); 
+      });
+    }else{}
   });
   
   //
@@ -711,7 +714,7 @@ function loadTicketList(pageNumber,queryObj) {
 		
 		var tlistHolder = $("<div/>");
 
-		 displayTable = $("<table/>",{"class":"font-X","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
+		 displayTable = $("<table/>",{"class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Project</td><td>Priority</td><td>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
@@ -720,7 +723,7 @@ function loadTicketList(pageNumber,queryObj) {
     var display = 
       $("<div/>",{css:{"width":"100%"}})
         .html(
-          $("<div/>",{"class":"corners-top-2 color-B-2",css:{"width":"100%"}})
+          $("<div/>",{"class":"rountTop4 color-B-2",css:{"width":"100%"}})
         )
         .append(
           $("<div/>",{css:{"width":"100%"}})
@@ -765,29 +768,29 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 	            html = $("<td/>")
-                .addClass("border-bottom-I-1-35")
-                .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-X").html(item.id).attr({"id": "ID" + item.id }))
+                .addClass("borderBottomBlack")
+                .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontMain").html(item.id).attr({"id": "ID" + item.id }))
 		          return html;
 		        }
 		         
 		      ) 
 		      .append($("<td/>")
-		        .addClass("border-bottom-I-1-35")
-		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink font-bold font-X").html(item.subject).attr({"id": "subject" + item.id }))
+		        .addClass("borderBottomBlack")
+		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontBold fontMain").html(item.subject).attr({"id": "subject" + item.id }))
 		      )
 		      .append(
 		        function(){
 		          if(bugs){
 		            if(item.project_id === undefined || item.project_id == 0){ item.project_id = 1; } // fix bugs that do not have a project.  Default them to the first project
-		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("border-bottom-I-1-35 font-X")
+		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("borderBottomBlack fontMain")
 		          }else{
-		            return $("<td/>").html(item.locationName).addClass("border-bottom-I-1-35 font-X")
+		            return $("<td/>").html(item.locationName).addClass("borderBottomBlack fontMain")
 		          }
 		        }
 		      )
 		      .append( 
 		        $("<td/>")
-		          .addClass("border-bottom-I-1-35 font-X")
+		          .addClass("borderBottomBlack fontMain")
 		          .html(
     		        function(i,html){
     		         if(item.priority>0){
@@ -801,9 +804,9 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 		          if(bugs){
-		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X")
+		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain")
 		          }else{
-		            return $("<td/>").html(item.category).addClass("border-bottom-I-1-35 font-X");    
+		            return $("<td/>").html(item.category).addClass("borderBottomBlack fontMain");    
 		          }
 		        }
 		        
@@ -811,9 +814,9 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(i,html){
 		          if(bugs){
-		            return $("<td/>").html(item.created_on).addClass("border-bottom-I-1-35 font-X")
+		            return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain")
 		          }else{
-		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("border-bottom-I-1-35 font-X")
+		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain")
 		          } 
 		        }
 		        
@@ -821,7 +824,7 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 		          if(!bugs){
-		            return $("<td/>").html(item.due_on).addClass("border-bottom-I-1-35 font-X");
+		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain");
 		          }  
 		        }
 		        
@@ -852,7 +855,7 @@ function loadUserPage(userId){
 					$("<div>",
 						{
 							id:"userIconBox",
-							"class":"small-shadow-black-1 color-B-2 border-all-B-1 corners-bottom-2 corners-top-2",
+							"class":"small-shadow-black-1 color-B-2 border-all-B-1 roundAll4",
 							css:{
 								"overflow":"hidden","display":"block","height":"100px","width":"100px","margin":"5px","position":"relative"
 							}
@@ -862,7 +865,7 @@ function loadUserPage(userId){
 							$("<div/>",{
 								html:"ID:"+userId,
 								css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "25px"},
-								"class":"font-bold font-X rotate90 transformTL"
+								"class":"fontBold fontMain rotate90 transformTL"
 							})
 						)
 				)
@@ -887,7 +890,7 @@ function loadUserPage(userId){
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
 						.append(
-							$("<div/>",{"class":"corners-bottom-2 corners-top-2 border-all-B-1 color-B-1",css: {"display":"block","width":"70px","position":"relative","height":"23px"}})
+							$("<div/>",{"class":"rountAll4 border-all-B-1 color-B-1",css: {"display":"block","width":"70px","position":"relative","height":"23px"}})
 								.append(
 									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y fakelink",html:"Yes"})
 								)
@@ -895,7 +898,7 @@ function loadUserPage(userId){
 									$("<div>",{id:"unfollow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y fakelink",html:"No"})
 								)
 								.append(
-									$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","width":"25px","padding":"0","height":"20px","color":"rgba(0,0,0,0)"},"class":"font-Y corners-bottom-2 corners-top-2 border-all-K-1 fuzzyoutlineBlack"})
+									$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","width":"25px","padding":"0","height":"20px","color":"rgba(0,0,0,0)"},"class":"font-Y rountAll4 border-all-K-1 fuzzyoutlineBlack"})
 								)
 						)
 
@@ -1190,7 +1193,7 @@ jQuery(document).ready(function () {
       "pastDayShades": true,
       "backgroundClass": "color-D-2",
       "borderClass": "border-all-B-1",
-      "borderRoundClass": "corners-bottom-2 corners-top-2",
+      "borderRoundClass": "rountAll4",
       "shadeClass": "background-alpha-3",
       "highLightToday": true,
       "highLightTodayClass": Params.HighlightClass,
