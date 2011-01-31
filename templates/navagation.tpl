@@ -1,5 +1,5 @@
 <section class="roundTop4 small-shadow-black-1" style="width:205px;margin-left:5px;">
-	<div class="fontMain head message_head roundTop4 color-B-2 border-all-D-1 " style="">Tickets</div>
+	<div class="fontMain head message_head roundTop4 color-B-2 " style="">Tickets</div>
 	<div style="position:relative;" class="message_body colorWhite-1 corners-bottom-2">
 		<a class="smallTicketL nolink ticket_button ticket_sprite user fontBold" href="#ticketList/sOpen">To Me</a>
 		<span id="csOpen" class="timestamp" style="position:absolute;right:25px"></span>
