@@ -8,7 +8,7 @@
 		<span id="cBugsClosed" class="timestamp" style="position:absolute;right:25px">0</span>
 		<br>
 		<br>
-    <button class="fontMain fontBold" id="topperNewBug" style="width:auto">
+    <button class="fontMain fontBold minimal" id="topperNewBug" style="width:auto;padding:3px">
     <span class="ticket_button ticket_sprite bug"></span>
     <span>New Bug</span>
     </button>

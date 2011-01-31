@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/resetStyle.css?v=1">
         <link id="themegencss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
+        <link rel="stylesheet" media="screen" href="css/buttons.css"  /> 
         <link rel="stylesheet" media="screen" href="css/tickets.css"  /> 
         <link rel="shortcut icon" href="/tickets/bug.png">
         <link rel="apple-touch-icon" href="/tickets/bug.png">
