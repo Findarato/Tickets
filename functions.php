@@ -65,11 +65,11 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 		switch($match[0]){
 			case "ticket":
         // Lets make sure the ticket is still open.  If its closed put in the <del> tag around it.
-        $ticketInfo = $db->Query("SELECT closed_on,open FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
+        $ticketInfo = $db->Query("SELECT closed_on,open,subject FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
         if($ticketInfo["open"]==0){
-          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[1]."</del>";
+          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[1]." ".$ticketInfo["subject"]."</del>";
         }else{
-          $ticketDisplay = $match[1];
+          $ticketDisplay = $match[1]." ".$ticketInfo["subject"];
         }
 				if($email){
 					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
@@ -80,11 +80,11 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			break;
       case "bug":
         // Lets make sure the ticket is still open.  If its closed put in the <del> tag around it.
-        $ticketInfo = $db->Query("SELECT closed_on,open FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
+        $ticketInfo = $db->Query("SELECT closed_on,open,subject FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
         if($ticketInfo["open"]==0){
-          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[1]."</del>";
+          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[1]." ".$ticketInfo["subject"]."</del>";
         }else{
-          $ticketDisplay = $match[1];
+          $ticketDisplay = $match[1]." ".$ticketInfo["subject"];
         }
         if($email){
           $formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
