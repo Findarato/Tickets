@@ -77,9 +77,10 @@ function pageAnator(container, count, perPage) {
         textDecoration: "none"
     }).html($("<font/>").html("Pages:")));
     if (count === 0) {
-        container.append($("<a/>").addClass("roundAll4 colorBlack30 border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
+        container.append($("<button/>").addClass("minimal nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
             width: "20px",
             padding: "1px",
+            marginRight:"2px",
             textAlign: "center",
             textDecoration: "none"
         }).html(1));
@@ -87,9 +88,10 @@ function pageAnator(container, count, perPage) {
         var pages = count / perPage;
         for (var a = 1; a < pages + 1; a++) {
             var b = parseInt(a - 1, 10);
-            container.append($("<a/>").addClass("roundAll4 colorBlack30 border-all-B-1 lapcatButton nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + b).css({
+            container.append($("<button/>").addClass("minimal nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + b).css({
                 width: "20px",
                 padding: "1px",
+                marginRight:"2px",
                 textAlign: "center",
                 textDecoration: "none"
             }).html(a));
