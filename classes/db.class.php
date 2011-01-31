@@ -104,13 +104,17 @@
 					$this -> Error["Query"] = $this -> Lastsql;
 					$this -> Error["Error"] = mysql_error();
 					$return = "There was an error with your sql";
-				}else { $this -> Error = array(); 
+				}else { // there was no error with the query
+				  $this -> Error = array(); 
 					$this -> Queries++;
-          if(substr_count(strtolower($sql),"insert") > 0){//this was an insert
+          if(substr_count(strtolower($sql),"insert") > 0 ){//this was an insert
             $this -> Lastid = mysql_insert_id($this -> linkid);
             return $this->Lastid;
           }
-          $this ->ResultsCount = $this->Count_res($this -> linkid);
+          if(substr_count(strtolower($sql),"select") >0){ // you can not get a results count of a insert
+            $this ->ResultsCount = $this->Count_res($this -> linkid);  
+          }
+          
 				}
 				if(!$fetch){
 					return true; //Something always has to be returned	

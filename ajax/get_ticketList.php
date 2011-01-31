@@ -28,6 +28,31 @@ header("Cache-Control: max-age=60, must-revalidate");
   
 if(isset($_GET["area"]) ){
   switch($_GET["area"]){
+    case "bugs_open": // Tickets assigned to the user {To Me}
+      $sql = "SELECT 
+      t.id
+      FROM tickets AS t 
+      WHERE (t.open=1
+      AND t.tickettype_id=2)
+      ";
+      $Ids = array_implode($db->Query($sql,false,"row"));
+      $wc = "t.id IN(".join(",",$Ids).")";
+      break;
+    case "bugs_closed": // Tickets assigned to the user {To Me}
+      $sql = "SELECT 
+      t.id
+      FROM tickets AS t 
+      WHERE (t.open=0
+      AND t.tickettype_id=2)
+      ";
+      $Ids = array_implode($db->Query($sql,false,"row"));
+      $wc = "t.id IN(".join(",",$Ids).")";
+      break;
+
+/*
+ * Ticket area
+ * 
+ */
     case "sOpen": // Tickets assigned to the user {To Me}
       $sql = "SELECT 
       t.id
@@ -99,7 +124,8 @@ if(isset($_GET["area"]) ){
       $wc = "t.id IN(".join(",",$Ids).")";
       break;
     default:
-      $response["tickets"] = searchTickets($usr->User_id,$_GET["type"],100,$_GET["page"],$_GET["search"]);
+      $response["ticketCount"] = "Error with the request";
+      $response["error"] = "You have requested a ticket area that does not exsist yet";
       break;    
   }
   // Lets take the switch statement above and use it to determain the where clause of the sql that needs to get ran.  Even favorites should be able to be done this way.
