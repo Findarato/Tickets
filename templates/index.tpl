@@ -26,7 +26,7 @@
             pageTracker._trackPageview();
         </script>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
         <script src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
