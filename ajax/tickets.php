@@ -245,7 +245,6 @@ if(isset($_SESSION["user"])){ //the session is set
 		switch($_GET['type']){
 			case "close":
 				$db->Query("UPDATE tickets SET  closed_on = NOW( ) , open = '0' WHERE id=".$_GET['ticket_id']. " LIMIT 1;");
-				
 				$db->Query("SELECT assigned_by_id,created_on,assigned_id,created_by_id,id,subject,description,priority,category,status FROM tcview WHERE id=".$_GET['ticket_id']);
 				$res1 = $db->Fetch("assoc",false,false);
 				//Put in the close variable and store it in the table

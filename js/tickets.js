@@ -553,7 +553,7 @@ function loadTicketBody(inputData, container) {
 			container.find(".closedTicket").hide();
 		}
 	} else { //open tickets
-		container.find(".openTicket :not(.hold)").show();
+		container.find(".openTicket").show();
 		container.find(".closedTicket").hide();
 	}
 	var pri = parseInt(container.find("#ticketPriority").text() - 2, 10);
@@ -577,7 +577,7 @@ function loadTicketBody(inputData, container) {
     $("#replyBox").css({"height":"0px"});
   });
   $("#replyAddButton").bind('click',function () {
-    if($("#newReplyForm").find("#description").text() != "")
+    if($("#newReplyForm").find("#replyDescription").val() != "")
     {
       $("#replyBox").css({"height":"0px"});
       $.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
@@ -1146,10 +1146,6 @@ jQuery(document).ready(function () {
 	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").text($("#version").text()); //to make sure the version on tickets is always updated
-
-	$("#cboxTitle").addClass("color-E-1 border-all-B-1");
-	$("#cboxClose").addClass("ticket_sprite bug");
-
 
 	$("#depCancel").click(function () {
 		jQuery.post(uri + "ajax/login.php", {
