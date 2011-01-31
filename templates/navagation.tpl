@@ -22,7 +22,7 @@
     <a class="smallTicketL nolink ticket_button ticket_sprite chart fontBold" href="#stats">General Stats</a>
 		<br>
 		<br>
-    <button class="fontMain fontBold" id="topperNew" style="width:auto" title="Create a new Ticket">
+    <button class="fontMain fontBold minimal" id="topperNew" style="width:auto;padding:3px" title="Create a new Ticket">
       <span class="ticket_button ticket_sprite ticket-plus"></span>
       <span>New Ticket</span>
     </button>
