@@ -16,8 +16,6 @@
 				</div>
 			</div> 
 			<div class="colorWhite-1 " id="ticket" style="position:relative;height:430px;width:auto;padding:3px" ><!-- Ticket Body -->
-		    
-  		
   				<div style="height:16px;">
   	       	<div class="fontMain2" id="ticketId" style="font-weight:bold;padding-left:2px;padding-right:3px">Ticket ID</div>
           </div>
@@ -68,11 +66,11 @@
   			<div class="custom fontMain2 head message_head  color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
   				<div class="openTicket button-purple ticketButton fontReverse lapcatButton" id="reAssignButton" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></div>
   				<div class="openTicket button-purple ticketButton fontReverse lapcatButton" id="modifyButton" style="width:auto;"><span class="ticket_button ticket_sprite pencil">Modify</span></div>
-  				<div class="openTicket button-purple ticketButton fontReverse lapcatButton" id="ticketModifySaveButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite tick">Save</span></div>
-  				<div class="openTicket button-purple ticketButton fontReverse lapcatButton" id="ticketModifyCancelButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite cross">Cancel</span></div>
+  				<div class="button-purple ticketButton fontReverse lapcatButton" id="ticketModifySaveButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite tick">Save</span></div>
+  				<div class="button-purple ticketButton fontReverse lapcatButton" id="ticketModifyCancelButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite cross">Cancel</span></div>
           <div class="openTicket button-purple ticketButton fontReverse lapcatButton actionButtons closeLink" id="closeButton" style="width:auto;"><span style="margin-right:5px">Close</span></div>
           <div class="closedTicket button-purple ticketButton fontReverse lapcatButton actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;padding:3px;display:none;"><span style="margin-right:5px">Open</span></div>
-          <div class="td" style="width:75px;"> <!-- Locked Area -->
+          <div class="td" style="width:75px;display:none"> <!-- Locked Area -->
             <div class="fontMain openTicket hold actionButtons holdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
               <span>Lock</span>
             </div>
@@ -96,7 +94,7 @@
 			<div class="colorWhite-1" id="replyareabody" style="overflow:auto;height:430px;padding:3px;"></div>
 			<div class="" style="position:relative">
         <div class="box_transition" id="replyBox" style="overflow:hidden;position:absolute;bottom:34px;left:0;height:0px;width:100%;background-color:#FFF">{include file="reply.tpl"}</div>
-        <div class="fontMain message_head color-B-2 border-all-B-1" id="replyFooter" style="height:24px;background:#F00">
+        <div class="fontMain message_head color-B-2 border-all-B-1" id="replyFooter" style="height:24px;">
           <div class="button-purple fg-button ticketButton fontReverse lapcatButton" id="replyButton" style="width:80px;">
             <span class="ticket_button ticket_sprite balloon">Add Reply</span>
           </div>
