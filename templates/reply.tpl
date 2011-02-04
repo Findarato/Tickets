@@ -1,8 +1,8 @@
-<div class="color-B-2" style="width:auto;height:90px;position:relative;">
+<div class="color-B-2" style="width:auto;height:90px;position:relative;" title="Reply Box">
 	<div id="replyareabody" style="padding:3px;">
 		<form name="newReplyForm" id="newReplyForm">
 			<div class="textLeft">
-			  <span class="">Title:</span>
+			  <span class="" title="Reply Title">Title:</span>
 			  <input type="text" name="title" autocomplete="off" maxlength="100" id="replyTitle" class="Ticketform roundAll4 border-all-B-2 fontMain" style="padding:2px;width:400px;"/><br>
 			  <div style="width:auto;border:none;margin:5px;padding-right:10px;height:100%">
 			   <textarea name="description" id="replyDescription" autocomplete="off"  class="Ticketform roundAll4 border-all-B-2 fontMain" style="padding:2px;width:100%;height:100%"></textarea>

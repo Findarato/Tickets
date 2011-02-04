@@ -114,9 +114,9 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						switch($s){
 							case "0":
 		            if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
-									$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
+						$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
 	              }else{ 
-									$dt = date("Y-m-d H:m:s");
+						$dt = date("Y-m-d H:m:s");
 	              }
 							break;
 							default:
@@ -129,44 +129,44 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						//new tickets
             $sql = "SELECT t.id FROM tcview Atcv WHERE TIMESTAMPDIFF(SECOND,'$dt',t.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
 						//die($sql);
-						$db->Query($sql);
+			$db->Query($sql);
             $ticketIds = $db->Fetch("row",false,false);
-						//new replies
+			//new replies
             $sql = "SELECT t.id FROM tcview AS t WHERE assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id;
-						$db->Query($sql);
+			$db->Query($sql);
             $replyTicketids = $db->Fetch("row",false,false);
-						if(!is_array($replyTicketids)){$replyTicketids = array(0=>$replyTicketids);}else{$replyTicketids = array_implode($replyTicketids);}
-						
-						
-						$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
-						$db->Query($sql);
+			if(!is_array($replyTicketids)){$replyTicketids = array(0=>$replyTicketids);}else{$replyTicketids = array_implode($replyTicketids);}
+			
+			
+			$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
+			$db->Query($sql);
             $response = $db->Fetch("row",false,false);
 
-						//some simple error checking.
-						if(!is_array($ticketIds)){if($ticketIds == ""){$ticketIds = 0;}$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
-						
-						if(!is_array($response)){if($response == ""){$response = 0;}$response = array(0=>$response);}else{$response = array_implode($response);}
-						
-						$ticketIds = array_merge($ticketIds,$response);
+			//some simple error checking.
+			if(!is_array($ticketIds)){if($ticketIds == ""){$ticketIds = 0;}$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
+			
+			if(!is_array($response)){if($response == ""){$response = 0;}$response = array(0=>$response);}else{$response = array_implode($response);}
+			
+			$ticketIds = array_merge($ticketIds,$response);
             if($ticketIds){
             	$wc[]="t.id IN(".join(",",$ticketIds).")";
             }else{
             	$wc[]="t.id in(0,0)";
             }
-					break;
-					case "open":
-						$wc[]="t.open=\"".$s."\"";
-					case "new":
-						//$wc[]="t.assigned_id=".$usr->User_id;
-					break;
-					case "page":
-						$end = 30;
-						$start = ($k*$end);
-						$limit = $amount*$s;
-						$amount = $limit+$amount;
-						break;
-					case "sFavorite":
-						$favIds = $db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id,false,"row",false,false);
+			break;
+			case "open":
+				$wc[]="t.open=\"".$s."\"";
+			case "new":
+				//$wc[]="t.assigned_id=".$usr->User_id;
+			break;
+			case "page":
+				$end = 30;
+				$start = ($k*$end);
+				$limit = $amount*$s;
+				$amount = $limit+$amount;
+				break;
+			case "sFavorite":
+	$favIds = $db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id,false,"row",false,false);
             $response["favIds"] = json_encode($favIds);
 						if(is_array($favIds)){
 							$favIds = array_implode($favIds);

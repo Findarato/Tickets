@@ -13,6 +13,6 @@
 			</div>
 		</div>
 		</form>
-		<div class="button-purple ticketButton font-bold fontReverse" id="loginButton" style="width:auto;max-width:50px" >Login</div>
+		<button class="fontReverse minimal ticketPadding3" id="loginButton" style="width:auto;" >Login</button>
 	</div>	
 </div>
