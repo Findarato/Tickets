@@ -39,7 +39,7 @@
         <div class="table textLeft">
             <div class="td">
                 <button class="fontMain fontBold minimal" id="topperNew" style="width:auto;padding:3px" id="ticketSearchBtn" >
-                    <span class="ticket_button ticket_sprite bug"></span>
+                    <span class="ticket_button ticket_sprite magnifier"></span>
                     <span>Search</span>
                 </button>
             </div>
