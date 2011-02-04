@@ -130,7 +130,7 @@ if(isset($_GET["area"]) ){
 			$dt = date("Y-m-d H:m:s");
 		}
 		
-        $sql = "SELECT t.id FROM tcview Atcv WHERE TIMESTAMPDIFF(SECOND,'$dt',t.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
+        $sql = "SELECT t.id FROM tickets as t WHERE TIMESTAMPDIFF(SECOND,'$dt',t.created_on)>0 AND (t.assigned_id=".$usr->User_id." OR t.created_by_id=".$usr->User_id.")";
 		$db->Query($sql);
         $ticketIds = $db->Fetch("row",false,false);
 		//new replies
@@ -141,14 +141,14 @@ if(isset($_GET["area"]) ){
 		
 		$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
 		$db->Query($sql);
-        $response = $db->Fetch("row",false,false);
+        $responses = $db->Fetch("row",false,false);
 
 		//some simple error checking.
 		if(!is_array($ticketIds)){if($ticketIds == ""){$ticketIds = 0;}$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
 		
-		if(!is_array($response)){if($response == ""){$response = 0;}$response = array(0=>$response);}else{$response = array_implode($response);}
+		if(!is_array($responses)){if($response == ""){$responses = 0;}$responses = array(0=>$responses);}else{$responses = array_implode($responses);}
 		
-		$ticketIds = array_merge($ticketIds,$response);
+		$ticketIds = array_merge($ticketIds,$responses);
         if($ticketIds){
         	$wc="t.id IN(".join(",",$ticketIds).")";
         }else{
@@ -194,6 +194,7 @@ if(isset($_GET["area"]) ){
       WHERE '.$wc.' AND t.due_on>0 GROUP BY t.id ORDER BY t.priority DESC,t.due_on 
       LIMIT '.$page.','.$amount.';';
       $response["tickets"] = $db->Query($sql,false,"assoc_array");
+	  
 }
 
 
