@@ -122,8 +122,40 @@ if(isset($_GET["area"]) ){
       WHERE f.user_id=".$usr->User_id; 
       $Ids = array_implode($db->Query($sql,false,"row"));
       $wc = "t.id IN(".join(",",$Ids).")";
-      break;
-    default:
+		break;
+	case "new":
+		if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
+			$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
+	    }else{ 
+			$dt = date("Y-m-d H:m:s");
+		}
+		
+        $sql = "SELECT t.id FROM tcview Atcv WHERE TIMESTAMPDIFF(SECOND,'$dt',t.created_on)>0 AND (assigned_id=".$usr->User_id." OR created_by_id=".$usr->User_id.")";
+		$db->Query($sql);
+        $ticketIds = $db->Fetch("row",false,false);
+		//new replies
+        $sql = "SELECT t.id FROM tickets AS t WHERE t.assigned_id=".$usr->User_id." OR t.created_by_id=".$usr->User_id."";
+		$db->Query($sql);
+        $replyTicketids = $db->Fetch("row",false,false);
+		if(!is_array($replyTicketids)){$replyTicketids = array(0=>$replyTicketids);}else{$replyTicketids = array_implode($replyTicketids);}
+		
+		$sql = "SELECT ticket_id FROM responses AS r WHERE TIMESTAMPDIFF(SECOND,'$dt',r.created_on)>0 AND ticket_id IN (".join(",",$replyTicketids).")";
+		$db->Query($sql);
+        $response = $db->Fetch("row",false,false);
+
+		//some simple error checking.
+		if(!is_array($ticketIds)){if($ticketIds == ""){$ticketIds = 0;}$ticketIds = array(0=>$ticketIds);}else{$ticketIds = array_implode($ticketIds);}
+		
+		if(!is_array($response)){if($response == ""){$response = 0;}$response = array(0=>$response);}else{$response = array_implode($response);}
+		
+		$ticketIds = array_merge($ticketIds,$response);
+        if($ticketIds){
+        	$wc="t.id IN(".join(",",$ticketIds).")";
+        }else{
+        	$wc="t.id in(0,0)";
+        }
+		break;
+ 	default:
       $response["ticketCount"] = "Error with the request";
       $response["error"] = "You have requested a ticket area that does not exsist yet";
       break;    

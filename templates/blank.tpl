@@ -8,15 +8,16 @@
 		</div>
 		<div style="padding:5px;margin:5px; height:400px; overflow:auto;position:relative" class="roundAll4 border-all-A-1">
 		  <div style="position:absolute;top:0px;right:20px">
-		    <a href="http://www.w3.org/html/logo/">
+		    <a href="http://www.w3.org/html/logo/" title="Link to HTML5 logo">
           <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-performance-semantics-storage.png" width="115" height="32" alt="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
         </a>
 		  </div>
-      <span style="font-size: 175%; line-height: normal;" id="newestVersion">Live Ticket Update XXII</span>
-      <span style="font-size: 90%; line-height: normal;" id="version">v.3.2.0.r314</span>
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Live Ticket Update XXII (The its not dead Update)</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.2.0.r314</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
         <li>Fixed [bug=742].</li>
+        <li>Fixed a regression that was causing some text to be white, thus making it un readable</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
