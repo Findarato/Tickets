@@ -56,7 +56,7 @@ function checkResponse(json) {
 }
 
 function loadNew(timestamp){
-	loadTicketList(0,{"new":"1","dateTime":timestamp});
+	loadTicketList(0,{"area":"new","dateTime":timestamp});
 	$("#ticketListtitle").html("Tickets with activity since your last visit");
 }
 
