@@ -68,7 +68,7 @@ function setHash(htbs) {
 }
 
 function pageAnator(container, count, perPage) {
-    hash = getHashArray();
+    var hash = getHashArray();
     container.empty().html(
     $("<span/>").addClass("roundAll4 lapcatButton").css({
         width: "auto",
@@ -122,13 +122,13 @@ function notice(title, body, sticky, ticketid,icon) {
 		//image = "http://www.lapcat.org/lapcat/images/101-58-1.png";
 		image = "http://cdn1.lapcat.org/fugue/icons/bug.png";
 	}
-    var fontClass = "font-X";
+    var fontClass = "fontReverse";
     
     switch (title) {
     case "Error":
-        noticeClass = "button-red";
+        	noticeClass = "minimal";
     		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
-    		fontClass = "fontReverse";
+    		fontClass = "fontMain";
     break;
     case "Debug":
         noticeClass = "button-purple";
@@ -136,33 +136,37 @@ function notice(title, body, sticky, ticketid,icon) {
     		fontClass = "fontReverse";
     break;
     case "Notice":
-        noticeClass = "noticeBackgroundDefault";
+        noticeClass = "minimal";
     		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
-    		fontClass = "fontReverse";
+    		fontClass = "fontMain";
     break;
     case "Achievement":
-        noticeClass = "noticeBackgroundDefault";
-		    fontClass = "fontReverse";
+        noticeClass = "minimal";
+		    fontClass = "fontMain";
         image = "";
     break;
 	case "New Response!":
-        noticeClass = "noticeBackgroundDefault";
+        noticeClass = "minimal";
         image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/document-text.png";
-		fontClass = "fontReverse";
+		fontClass = "fontMain";
     break;
 	case "New Ticket!":
-        noticeClass = "noticeBackgroundDefault";
-		fontClass = "fontReverse";
+        noticeClass = "minimal";
+		fontClass = "fontMain";
         image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/balloon.png";
     break;
     default:
-        noticeClass = "noticeBackgroundDefault ";
+        noticeClass = "minimal ";
         break;
     }
-    var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all box_transition ">' 
-			+ '<div class="notice-body ' + noticeClass + ' corners-top-2 corners-bottom-2">' 
-				+ '<div style="float:left;width:50px;padding-right:5px;">'
-					+ '<img src="' + image + '" alt="" /></div>' + '<div style="float:left;width:200px;"><h3><font class="' + fontClass + '">' + title + '</font></h3>' + '<font class="' + fontClass + '">' + body + '</font></div>' + '</div>' + '</div>';
+    var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all box_transition " >'+ 
+			 '<div class="notice-body ' + noticeClass + '" style="width:auto"">'+ 
+				'<div style="float:left;width:40px;padding-right:5px;">'	+ 
+					'<img src="' + image + '" alt="" />'+
+				'</div>'+
+				 '<div style="float:left;width:200px;">'+
+					'<h3><font class="' + fontClass + '">' + title + '</font></h3>'+ 
+					'<font class="' + fontClass + '">' + body + '</font></div>' + '</div>' + '</div>';
     if (sticky) {
         if (parseInt(ticketid, 10) > 0) {
             $(noticeBox).click(function () {
