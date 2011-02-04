@@ -1,4 +1,4 @@
-<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:auto;margin-left:5px;">
+<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:auto;margin-left:5px;" title="Update Notes">
 	<div class="droidSerif font-X head message_head roundTop4 color-B-2 border-all-B-1" id="" style="">Update Notes</div>
 	<div class="droidSerif message_body colorWhite-1 corners-bottom-2" id="" >
 		<div class="corners-bottom-2 corners-top-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">

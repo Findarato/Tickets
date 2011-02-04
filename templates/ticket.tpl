@@ -1,5 +1,5 @@
-<div class="t" style="width:100%;height:500px;margin-right:5px;">
-	<div id="ticketarea" >
+<div class="t" style="width:100%;height:500px;margin-right:5px;" title="Ticket Display">
+	<section id="ticketarea" title="Ticket Side">
 		<div class="roundTop4 small-shadow-black-1" style="vertical-align:top;height:500px;margin-right:5px;">
 			<div class="fontMain head message_head roundTop4 color-B-2 border-all-D-1" id="ticketTitlearea" style="position:relative;height:16px;">
 				<div class="fontMain ticket_sprite ticket_button fakelink" id="ticketTitle" name="bookmark" style="width:230px;height:16px;word-wrap: break-word;overflow: hidden;text-overflow: ellipsis;"></div><!-- Ticket Title area -->
@@ -53,52 +53,53 @@
   			</section>
 			</div>
 			<div class="" style="position:relative">
-  			<div class=" color-B-2 box_transition" id="reassignBox" style="overflow:hidden;position:absolute;bottom:34px;left:0;height:0px;width:100%">
-          <div style="overflow:hidden;height:auto;padding:3px;">
-            <div class="textLeft">
-              <span>Assign:</span>
-              <select style="width:150px" id="TicketAssign" name="TicketAssign">{html_options options=$assign}</select>
-              <div class="ticket_sprite cross fakelink" id="ReAssignCancelButton" style="display:inline-block"></div>
-              <div id="reAssignAcceptButton" class="ticket_sprite tick fakelink" style="display:inline-block"></div>
-            </div>
-          </div>
- 			  </div>
-  			<div class="custom fontMain2 head message_head  color-B-2 border-all-D-1" id="ticketFooterArea" style="height:24px">
-  				<button class="openTicket fontReverse minimal" id="reAssignButton" style="width:auto;padding:3px;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></button>
-  				<button class="openTicket fontReverse minimal" id="modifyButton" style="width:auto;padding:3px;"><span class="ticket_button ticket_sprite pencil">Modify</span></button>
-  				<button class="fontReverse minimal" id="ticketModifySaveButton" style="width:auto;display:none;padding:3px;"><span class="ticket_button ticket_sprite tick">Save</span></button>
-  				<button class="fontReverse minimal" id="ticketModifyCancelButton" style="width:auto;display:none;padding:3px;"><span class="ticket_button ticket_sprite cross">Cancel</span></button>
-          <button class="openTicket fontReverse minimal actionButtons closeLink" id="closeButton" style="width:auto;padding:3px;"><span class="ticket_button ticket_sprite door" style="margin-right:5px">Close</span></button>
-          <button class="closedTicket fontReverse minimal actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;padding:3px;display:none;"><span style="margin-right:5px">Open</span></button>
-          <div class="td" style="width:75px;display:none"> <!-- Locked Area -->
-            <div class="fontMain openTicket hold actionButtons holdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton" id="Holdlink" style="width:auto;margin-right:5px;padding:3px;">
-              <span>Lock</span>
-            </div>
-            <div class="fontMain openTicket hold actionButtons unholdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton" id="unHoldlink" style="width:auto;margin-right:5px;display:none;padding:3px;">
-              <span>unlock</span>
-            </div>
-            <!--<div class="button-purple fg-button roundAll4 fontReverse lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
-          </div>
+	  			<div class=" color-B-2 box_transition" id="reassignBox" style="overflow:hidden;position:absolute;bottom:34px;left:0;height:0px;width:100%">
+					<div style="overflow:hidden;height:auto;padding:3px;">
+						<div class="textLeft">
+							<span>Assign:</span>
+							<select style="width:150px" id="TicketAssign" name="TicketAssign">{html_options options=$assign}</select>
+							<div class="ticket_sprite cross fakelink" id="ReAssignCancelButton" style="display:inline-block"></div>  
+							<div id="reAssignAcceptButton" class="ticket_sprite tick fakelink" style="display:inline-block"></div>
+						</div>
+					</div>
+				</div>
+  			<div class="custom fontMain color-B-2 message_head" id="ticketFooterArea" style="height:28px;">
+				<button class="openTicket fontReverse  minimal " id="reAssignButton" style="width:auto;"><span class="ticket_button ticket_sprite user-pencil">Reassign</span></button>
+				<button class="openTicket fontReverse  minimal " id="modifyButton" style="width:auto;"><span class="ticket_button ticket_sprite pencil">Modify</span></button>
+				<button class="fontReverse minimal " id="ticketModifySaveButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite tick">Save</span></button>
+				<button class="fontReverse minimal " id="ticketModifyCancelButton" style="width:auto;display:none;"><span class="ticket_button ticket_sprite cross">Cancel</span></button>
+         		<button class="openTicket fontReverse  minimal actionButtons closeLink " id="closeButton" style="width:auto;"><span class="ticket_button ticket_sprite door" style="margin-right:5px">Close</span></button>
+        		<button class="closedTicket fontReverse  minimal actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;display:none;"><span style="margin-right:5px">Open</span></button>
+	          	<div class="td" style="width:75px;display:none"> <!-- Locked Area -->
+		            <div class="fontMain openTicket hold actionButtons holdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton " id="Holdlink" style="width:auto;m5px;">
+			        	<span>Lock</span>
+	            	</div>
+	            	<div class="fontMain openTicket hold actionButtons unholdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton " id="unHoldlink" style="width:auto;margin-right:5one;">
+						<span>unlock</span>
+	            	</div>
+	            	<!--<div class="button-purple fg-button roundAll4 fontReverse lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
+	          	</div>
   			</div>
 			</div>
 		</div>
-	</div>
-	<section id="replyArea"  style="display:table-cell;width:auto;height:500px;vertical-align:top;">
+	</section>
+	<section id="replyArea"  style="display:table-cell;width:auto;height:500px;vertical-align:top;" title="Reply Display"><!-- Reply area-->
 		<div class="roundTop4 small-shadow-black-1" style="width:auto;height:500px;margin-left:5px;">
-			<div class="custom fontMain head message_head roundTop4 color-B-2 border-all-D-1" id="replyTitleArea" style="height:16px;">
+			<div class="custom fontMain head message_head roundTop4 color-B-2 border-all-D-1" id="replyTitleArea" style="height:16px;"> <!--Reply Title -->
 				<div style="width:100%">
-					<span id="replyareaTitle" style="margin-left:10px;margin:5px;">Replies (0)</span>
+					<span id="replyareaTitle" style="margin-left:10px;margin:5px;" title="Reply Title">Replies (0)</span>
 					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
 				</div>
 			</div>
-			<div class="colorWhite-1" id="replyareabody" style="overflow:auto;height:430px;padding:3px;"></div>
-			<div class="" style="position:relative">
-        <div class="box_transition" id="replyBox" style="overflow:hidden;position:absolute;bottom:34px;left:0;height:0px;width:100%;background-color:#FFF">{include file="reply.tpl"}</div>
-        <div class="fontMain message_head color-B-2 border-all-B-1" id="replyFooter" style="height:24px;">
-          <button class="fontReverse minimal" id="replyButton" style="width:auto;padding:3px">
-            <span class="ticket_button ticket_sprite balloon">Add Reply</span>
-          </button>
-        </div>
-		  </div>
-	</div>
-</section>
+			<div class="colorWhite-1 " id="replyareabody" style="overflow:auto;height:430px;padding:3px"></div>
+			<div class="" id="replyFooterArea" style="position:relative;"> <!-- Reply Footer -->
+		        <div class="box_transition" id="replyBox" style="overflow:hidden;position:absolute;bottom:34px;left:0;height:0px;width:100%;background-color:#FFF">{include file="reply.tpl"}</div>
+	        	<div class="fontMain message_head color-B-2 border-all-B-1" id="replyFooter" style="height:28px;"><!-- Footer of the reply box-->
+	          		<button class="fontReverse minimal" id="replyButton" style="width:auto;" title="Add Reply">
+	            		<span class="ticket_button ticket_sprite balloon">Add Reply</span>
+	          		</button>
+	        	</div>
+			</div>
+		</div>
+	</section>
+</div>

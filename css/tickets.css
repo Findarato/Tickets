@@ -156,7 +156,7 @@ p {
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
-}
+} 
 .popImageSmall:hover {
     height: 300px;
     width: 300px;
@@ -175,7 +175,7 @@ p {
     -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
     -moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
 }
-
+.ticketPadding3{padding:3px;}
 .ticketButton,
 .ticketButton:visited,
 .ticketButtonNoShadow,
