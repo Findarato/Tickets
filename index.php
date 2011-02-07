@@ -100,7 +100,7 @@
 	$smarty -> assign('departmentList',$Depres);
 	$smarty -> assign('department',$department);
 	$smarty -> assign('cate',$cate);
-  $smarty -> assign('cateJSON',json_encode($cate));
+	$smarty -> assign('cateJSON',json_encode($cate));
 	$smarty -> assign('assign',$dep);
 	$smarty -> assign('projects',$projTemp);
 	$smarty -> assign('type',"new");
