@@ -1143,7 +1143,10 @@ jQuery(document).ready(function () {
   Params.Content = $("#content"); //lets stop searching for it a hundred times
   
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
-	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});
+  	if(Params.UserId>0){
+	  	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});	
+  	}
+	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").text($("#version").text()); //to make sure the version on tickets is always updated
 
