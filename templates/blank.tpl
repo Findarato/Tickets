@@ -24,6 +24,7 @@
       <ol>
         <li>Do to popular request after the add reply box is showing clicking on the "Add Reply" button will add the reply.  The green check mark still does the same thing, and will continue to.  This is just an added feature as many people were requesting.</li>
         <li>Tickets has been updated to work with the newest version of jQuery, 1.5.0.</li>
+        <li>Tickets has been updated to work with the newest version of RGraph.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>

@@ -29,11 +29,11 @@
         
         <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.5.min.js"></script>
         <script src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
-        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.js" ></script>
+        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
-        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.line.js" ></script>
+        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/Graph.line.js" ></script>
         <script src="js/combine.php"></script>
-        <script>Params.UserId = {$user_id};Params.Locations = {$locationJSON}; </script>
+        <script>Params.UserId = {if isset($user_id)}{$user_id} {else} "-1" {/if};Params.Locations = {$locationJSON}; </script>
     </head>
     <!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
     <!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
