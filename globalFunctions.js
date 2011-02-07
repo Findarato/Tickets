@@ -69,7 +69,8 @@ function setHash(htbs) {
 
 function pageAnator(container, count, perPage) {
     var hash = getHashArray();
-    container.empty().html(
+    
+    container.html(
     $("<span/>").addClass("roundAll4 lapcatButton").css({
         width: "auto",
         padding: "1px",
@@ -102,7 +103,6 @@ function pageAnator(container, count, perPage) {
 function stripslashes(str) {
     str = str.replace(/\\'/g, '\'');
     str = str.replace(/\\"/g, '"');
-    str = str.replace(/\\0/g, '\0');
     str = str.replace(/\\\\/g, '\\');
     return str;
 }
@@ -126,19 +126,19 @@ function notice(title, body, sticky, ticketid,icon) {
     
     switch (title) {
     case "Error":
-        	noticeClass = "minimal";
-    		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
-    		fontClass = "fontMain";
+		noticeClass = "minimal";
+		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
+		fontClass = "fontMain";
     break;
     case "Debug":
         noticeClass = "button-purple";
-    		image = "http://cdn1.lapcat.org/fugue/bonus/icons-24/fire.png";
-    		fontClass = "fontReverse";
+		image = "http://cdn1.lapcat.org/fugue/bonus/icons-24/fire.png";
+		fontClass = "fontReverse";
     break;
     case "Notice":
         noticeClass = "minimal";
-    		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
-    		fontClass = "fontMain";
+		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
+		fontClass = "fontMain";
     break;
     case "Achievement":
         noticeClass = "minimal";
@@ -201,8 +201,8 @@ function notice(title, body, sticky, ticketid,icon) {
  * Complex:
  */
 function buildTable(o_data,o_target){
-	table = $("<div/>",{css:{"display":"table","width":"100%"}}).addClass("generated");
-	lables = {};
+	var table = $("<div/>",{css:{"display":"table","width":"100%"}}).addClass("generated");
+	var lables = {};
 	$.each(o_data,function(key,tableRowdata){
 		table
 			.append(
@@ -235,33 +235,28 @@ function buildTable(o_data,o_target){
 }
 
 function addEditControls(itemEdit,selector,type,obj,callBack){
-  callBack = callBack ? callBack : false;
-  idSelector = selector.attr("id");
+	callBack = callBack ? callBack : false;
+	var idSelector = selector.attr("id");
   selector
     .append(
       $("<div/>",{id:idSelector+"Edit","class":"ticket_sprite pencil fakelink",css:{"display":"inline-block"}})
         .click(function(){
-          me = $(this);
-          myParent = me.parent();
+          var me = $(this);
+          var myParent = me.parent();
           localStorage.setItem(myParent.attr("id"),myParent.find(".contentEdit").html());
           switch(type){
+            case "textarea":
+              var edit = myParent.find(".contentEdit").html();
+              myParent.find(".contentEdit").html(
+                $("<textarea/>",{id:"editor"}).val(edit)
+              );
+            break;
             default:case "text":
               myParent.find(".ticket_sprite.cross").css("display","inline-block");
               myParent.find(".ticket_sprite.tick").css("display","inline-block");
               edit = myParent.find(".contentEdit").attr("contentEditable","true").focus();
             break;
-            case "textarea":
-              edit = myParent.find(".contentEdit").html();
-              myParent.find(".contentEdit").html(
-                $("<textarea/>",{id:"editor"}).val(edit)
-              );
-              mySettings.markupSet.save.replaceWith = function(markitup) {
-                callBack(itemEdit, $("#editor").val(), myParent.attr("id"));
-                myParent.find(".contentEdit").html(markitup.textarea.value);
-                myParent.find(".ticket_sprite.pencil").css("display","inline-block"); 
-              }; 
-              $("#editor").markItUp(mySettings);
-            break;
+
             case "select":
               edit = myParent.find(".contentEdit").text();
               myParent.find(".ticket_sprite.cross").css("display","inline-block");
@@ -269,14 +264,14 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
               myParent.find(".contentEdit").html(
                 $("<select/>")
                   .append(function(){
-                    html = "";
+                    var html = "";
                     $.each(obj,function(i,item){
                       if(item.name == edit){
                        html +="<option selected=selected value="+item.id+">"+item.name+"</option>"; 
                       }else{
                        html +="<option value="+item.id+">"+item.name+"</option>";  
                       }
-                    })
+                    });
                     return html;
                   })
               );
@@ -290,25 +285,26 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
     .append(
       $("<div/>",{id:idSelector+"Accept","class":"ticket_sprite tick fakelink",css:{"display":"none"}})
         .click(function(){
-          me = $(this);
-          myParent = me.parent();
+          var me = $(this);
+          var myParent = me.parent();
           switch (type) {
-            default:
-            case "text":
-              if (callBack) {
-                callBack(itemEdit, myParent.find(".contentEdit").text(), myParent.attr("id"))
-              }
-              myParent.find(".contentEdit").attr("contentEditable","false");
-            break;
             case "textarea":
               if (callBack) {
                 callBack(itemEdit, $("#editor").val(), myParent.attr("id"));
               }
               myParent.find(".contentEdit").html($("#editor").val());            
             break;
+            default:
+            case "text":
+              if (callBack) {
+                callBack(itemEdit, myParent.find(".contentEdit").text(), myParent.attr("id"));
+              }
+              myParent.find(".contentEdit").attr("contentEditable","false");
+            break;
+
             case "select":
               if (callBack) {
-                callBack(itemEdit, myParent.find("select option:selected").val(), myParent.attr("id"))
+                callBack(itemEdit, myParent.find("select option:selected").val(), myParent.attr("id"));
               }
               myParent.find(".contentEdit").html(myParent.find("select option:selected").text());
             break;
@@ -321,8 +317,8 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
     .append(
       $("<div/>",{id:idSelector+"Cancel","class":"ticket_sprite cross fakelink",css:{"display":"none"}})
         .click(function(){
-          me = $(this);
-          myParent = me.parent();
+          var me = $(this);
+          var myParent = me.parent();
           myParent.find(".ticket_sprite.pencil").css("display","inline-block");
           myParent.find(".contentEdit").attr("contentEditable","false");
           me.css("display","none");
@@ -330,21 +326,21 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
           myParent.find(".contentEdit").text(localStorage.getItem(myParent.attr("id")));
           localStorage.removeItem(myParent.attr("id"));
         })
-    )
+    );
 }
 
 function selectBoxReplace(target,value,possibleValues){
    target.data("prevValue",value).html(
     $("<select id='' name='"+target.parent().attr('id')+"' class='ticketModifyForm'/>")
       .append(function(){
-        html = "";
+        var html = "";
         $.each(possibleValues,function(i,item){
           if(item.name == value){
            html +="<option selected=selected value="+item.id+">"+item.name+"</option>"; 
           }else{
            html +="<option value="+item.id+">"+item.name+"</option>";  
           }
-        })
+        });
         return html;
       })
       
