@@ -10,6 +10,7 @@ header("Cache-Control: max-age=60, must-revalidate");
 
   // Define some global variables
   $usr = unserialize($_SESSION['user']);
+  //print_r($usr);die();
   $db = db::getInstance();
   $wc = array();
   $count = 20; // The amount of records returned
