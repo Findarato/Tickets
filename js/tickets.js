@@ -841,7 +841,7 @@ function loadTicketList(pageNumber,queryObj) {
       Tlb = Params.Content.find("#ticketListbody");
     }
 		Tlb.html(display);
-		pageAnator($("#tldPageAnator"), ticketCount, 20);
+		pageAnator($("#tldPageAnator"), ticketCount, 20,pageNumber);
 	});
 }
 function loadUserPage(userId){

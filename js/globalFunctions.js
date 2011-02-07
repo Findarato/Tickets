@@ -92,8 +92,29 @@ function pageAnator(container, count, perPage,curPage) {
 			totalPages = parseInt(pages);
 			pages = 10;	
         }
+        if(curPage>5){// if the current page is greater than 5, lets start shifting
+			if(totalPages==curPage || totalPages<curPage){
+				//alert("totalPages");
+				var a = curPage-9;
+				pages = parseInt(curPage);				
+			}else{
+				var a = curPage-5;
+				if(a<0){a=0;}
+				if(parseInt(curPage)+4 > totalPages){
+					pages = totalPages
+				}else{
+					pages = parseInt(curPage)+4;	
+				}
+				
+				//alert("a=>"+a+" pages=>"+pages);
+        	}
+        }else{
+			var a = 1;
+			//alert("a=>"+a+" pages=>"+pages);	
+        }
         
-        for (var a = 1; a < pages + 1; a++) {
+        
+        for (a; a < pages + 1; a++) {
             var b = parseInt(a - 1, 10);
             container.append($("<button/>").addClass("minimal nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + b).css({
                 width: "20px",
@@ -103,16 +124,19 @@ function pageAnator(container, count, perPage,curPage) {
                 textDecoration: "none"
             }).html(a));
         } // end of for loop
-        
+
         if(totalPages > 10){
-			container.append($("<div/>",{css:{width: "10px",padding: "1px",marginRight:"2px",display:"inline-block"}}));
-            container.append($("<button/>").addClass("minimal nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + totalPages).css({
-                width: "20px",
-                padding: "1px",
-                marginRight:"2px",
-                textAlign: "center",
-                textDecoration: "none"
-            }).html(totalPages));
+	        if(parseInt(curPage)+4 < totalPages){
+				container.append($("<div/>",{css:{width: "10px",padding: "1px",marginRight:"2px",display:"inline-block"}}));
+	            container.append($("<button/>").addClass("minimal nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + totalPages).css({
+	                width: "20px",
+	                padding: "1px",
+	                marginRight:"2px",
+	                textAlign: "center",
+	                textDecoration: "none"
+	            }).html(totalPages));			
+			}
+
         }
         
     }
