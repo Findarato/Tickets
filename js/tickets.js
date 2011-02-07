@@ -17,15 +17,15 @@ var Params = {
 	"Departments":{},
 	"UserId":0,
 	"Priority_string":{
-	  1:{"id":1,"name":"Very Low"},
-	  2:{"id":2,"name":"Low"},
-	  3:{"id":3,"name":"Tolerable"},
-	  4:{"id":4,"name":"Important"},
-	  5:{"id":5,"name":"Mission Critical"}
+		1:{"id":1,"name":"Very Low"},
+		2:{"id":2,"name":"Low"},
+		3:{"id":3,"name":"Tolerable"},
+		4:{"id":4,"name":"Important"},
+		5:{"id":5,"name":"Mission Critical"}
 	 },
 	"Projects":{
-	  1:{"id":1,"name":"Test 1"},
-    2:{"id":2,"name":"Test 2"},
+		1:{"id":1,"name":"Test 1"},
+		2:{"id":2,"name":"Test 2"}
 	},
 	"Categories":{},
 	"Locations":{},
@@ -111,12 +111,12 @@ function checkNotify(dt) {
 				notice("New Response!", item.subject, true, item.ticket_id);
 			} 
     });
-   if(data.status==0){
+   if(data.status===0){
      notice("Error","You have been logged out for inactivity",true);     
    }
 	});
 	var dat = new Date();
-	Lastcheck = Math.round(dat.getTime() / 1000.0); //set the global variable to now
+	var Lastcheck = Math.round(dat.getTime() / 1000.0); //set the global variable to now
 	
 }
 function loadLargeStats() {
@@ -672,9 +672,11 @@ function loadTicket(ticketId,update) {
 }
 
 function loadTicketList(pageNumber,queryObj) {
+	Tlb = Params.Content.find("#ticketListbody");
 	Params.LastArea = "ticketList";
 	var html = "";
 	var bugs = false;
+	var ticketCount = 0;
 	if (pageNumber < 0) {	pageNumber = 0;}
 	$("#ticketListbody").empty();
 	if(queryObj){
@@ -708,9 +710,10 @@ function loadTicketList(pageNumber,queryObj) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
     if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
-    
+    	ticketCount = data.ticketCount;
 		
-		pageAnator($("#tldPageAnator"), data.ticketCount, 20);
+		
+		//alert(data.ticketCount);
 		
 		var tlistHolder = $("<div/>");
 
@@ -832,12 +835,13 @@ function loadTicketList(pageNumber,queryObj) {
 		    )
 		});
 		
-    Tlb = Params.Content.find("#ticketListbody");
+    
     if(Tlb.html() === null || Tlb.html()==""){ //they came from a different paged
       Params.Content.html($("#generic").html());
       Tlb = Params.Content.find("#ticketListbody");
     }
 		Tlb.html(display);
+		pageAnator($("#tldPageAnator"), ticketCount, 20);
 	});
 }
 function loadUserPage(userId){
