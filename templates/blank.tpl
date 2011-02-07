@@ -25,11 +25,13 @@
         <li>Do to popular request after the add reply box is showing clicking on the "Add Reply" button will add the reply.  The green check mark still does the same thing, and will continue to.  This is just an added feature as many people were requesting.</li>
         <li>Tickets has been updated to work with the newest version of jQuery, 1.5.0.</li>
         <li>Tickets has been updated to work with the newest version of RGraph.</li>
+        <li>Pageanation should be working in all areas.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
       <ol>
         <li>Searching By project does not work</li>
+        <li>Searching is slated for the next update to tickets.</li>
         <li><del>There are no page numbers, nor any way to show more then the default amount of tickets in the list view.</del></li>
         <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
         <li><del>Closed tickets are not showing up for some people. Even though a number shows up next to Closed Tickets.</del></li>
