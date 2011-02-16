@@ -7,13 +7,13 @@
     <div style="position:relative;" class="message_body colorWhite-1 corners-bottom-2  ">
         <div>
             <span class="">Title of Ticket:</span>
-            <input type="text" name="searchTitle" id="searchTitle"  class="Ticketform roundAll4 border-all-B-2 fontMain" style="padding:2px;width:150px;" />
+            <input type="search" name="searchTitle" id="searchTitle"  class="Ticketform roundAll4 border-all-B-2 fontMain" style="padding:2px;width:150px;" />
         </div>
         <div>
             <span class="">Category:</span>
             <select id="searchCategory" name="searchCategory" class="Ticketform roundAll4 border-all-B-2 fontMain" style="padding:2px;width:150px;">
                 <option value=""></option>
-                {html_options  options=$cate}
+                {html_options options=$cate}
             </select>
         </div>
         <div>
@@ -38,9 +38,8 @@
         </div>
         <div class="table textLeft">
             <div class="td">
-                <button class="fontMain fontBold minimal" id="topperNew" style="width:auto;padding:3px" id="ticketSearchBtn" >
-                    <span class="ticket_button ticket_sprite magnifier"></span>
-                    <span>Search</span>
+                <button class="fontMain fontBold minimal" id="searchButton" style="width:auto;padding:3px" id="ticketSearchBtn" >
+                    <span class="ticket_button ticket_sprite magnifier" style="text-indent:-9990px;">Search</span>
                 </button>
             </div>
         </div>
