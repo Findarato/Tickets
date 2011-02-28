@@ -5,8 +5,7 @@ a:hover {text-decoration: underline}
 body,html {
     height: 100%;
     font-size: 12px;
-    font-family: 'Ubuntu',arial, sans-serif;
-    background: url(/tickets/css/backgrounds/wallpaper-401891.jpg);
+    font-family: 'Ubuntu', sans-serif;
 }
 .ilb {
     display: inline-block
