@@ -1,10 +1,10 @@
 <div id="newTicketdialog">
-	<div style="width:auto;vertical-align:top;">
-		<div class="corners-top-2 " style="width:auto;height:auto;margin-left:5px;">
-			<div class="droidSerif font-X head message_head corners-top-2 color-B-2 border-all-B-1" id="replyTitleAreaBOX" style="height:16px;">
+	<div class="small-shadow-black-1" style="width:auto;vertical-align:top;">
+		<div class="roundTop4 " style="width:auto;height:auto;">
+			<div class=" fontMain head message_head roundTop4 color-B-2 border-all-B-1" id="" style="height:16px;">
 				Add new Ticket
 			</div>
-			<div class="droidSerif color-X-1" id="replyareabody" style="overflow:auto;height:auto;padding:3px;">
+			<div class=" color-X-1" id="replyareabody" style="overflow:auto;height:auto;padding:3px;">
 				<form name="newTicketForm" action="#" method="post" id="newTicketForm">
 					<table border="0" cellpadding="0" cellspacing="0">
 						<tr>
@@ -39,9 +39,16 @@
 					</table>
 				</form>
 			</div>
-			<div class="droidSerif font-X message_head corners-bottom-2 color-B-2 border-all-B-1" id="" style="height:24px">
-				<a class="button-theme ticketButton font-Y lapcatButton Cancel" id="replyCancelBtn">Cancel</a>
-				<a class="button-theme ticketButton font-Y lapcatButton" id="ticketAddButton" style="width:75px;">Add Ticket</a>
+			<div class=" fontMain message_head roundBottom4 color-B-2 border-all-B-1" id="" style="height:24px">
+				<button class="fontMain fontBold minimal Cancel" id="replyCancelBtn" style="width:auto;padding:3px" title="Cancel">
+					<span class="ticket_button ticket_sprite cross"></span>
+					<span>Cancel</span>
+				</button>
+
+				<button class="fontMain fontBold minimal Cancel" id="replyCancelBtn" style="width:auto;padding:3px" title="Add Ticket">
+					<span class="ticket_button ticket_sprite tick"></span>
+					<span>Add Ticket</span>
+				</button>
 			</div>
 		</div>
 	</div>
