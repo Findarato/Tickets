@@ -1,0 +1,119 @@
+@import url("roundCorners.css");
+
+.animate
+{
+  moz-transition: 0.3s ease-in-out;
+  o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  webkit-transition: 0.3s ease-in-out;
+}
+
+.border-all-B-1
+{
+  border: 1px solid hsl(212,43%,53%);
+}
+.border-all-B-2
+{
+  border: 2px solid hsl(212,43%,53%);
+}
+.border-bottom-B-1
+{
+  border-bottom: 1px solid hsl(212,43%,53%);
+}
+.border-left-B-1
+{
+  border-left: 1px solid hsl(212,43%,53%);
+}
+.border-right-B-1
+{
+  border-right: 1px solid hsl(212,43%,53%);
+}
+.border-sides-B-1
+{
+  border-left: 1px solid hsl(212,43%,53%);
+  border-right: 1px solid hsl(212,43%,53%);
+}
+.border-top-B-1
+{
+  border-top: 1px solid hsl(212,43%,53%);
+}
+.color-B-1
+{
+  background-color: hsl(212,43%,53%);
+}
+.color-B-2
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,0.8);
+}
+.color-B-3
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,0.6);
+}
+.color-B-4
+{
+  background-color: hsl(212,43%,53%);
+  background-color: hsla(212,43%,53%,0.3);
+}
+
+.LAPCAT-image
+{
+  background-image: url(/lapcat/images/100-18-1.png);
+  background-repeat: no-repeat;
+}
+.colorWhite-1
+{
+  background-color: hsl(0,0%,100%);
+}
+.colorWhite-2
+{
+  background-color: hsla(0,0%,100%,0.8);
+}
+.colorWhite-3
+{
+  background-color: hsla(0,0%,100%,0.6);
+}
+.colorWhite-4
+{
+  background-color: hsla(0,0%,100%,0.3);
+}
+.colorBlack-1
+{
+  background-color: hsl(0,0%,2%);
+}
+.colorBlack80
+{
+  background-color: hsla(0,0%,2%,0.8);
+}
+.colorBlack60
+{
+  background-color: hsla(0,0%,2%,0.6);
+}
+.colorBlack30
+{
+  background-color: hsla(0,0%,2%,0.3);
+}
+.borderBottomBlack{
+  border-bottom:1px solid hsla(0,0%,0%,0.3);
+}
+.fontMain,a,a:active, a:visited
+{
+  color: hsl(0,0%,2%);
+}
+.fontMain2
+{
+  color: hsl(0,0%,27%);
+}
+.fontReverse, a.fontReverse
+{
+  color: hsl(0,0%,100%);
+}
+
+.noticeBackgroundDefault{
+  background:hsl(0,0,30%);
+}
+
+body,html {
+    font-family: 'Ubuntu', sans-serif;
+}
