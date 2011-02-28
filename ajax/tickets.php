@@ -28,6 +28,7 @@ $smallDisplay = array();
 function getWhereClause($user_id,$type){
 	$sqlw = "";
 	if($user_id!=0){
+		$dep = getDepartmentMembers_by_userid($user_id);
 		switch($type){
 			case "open":
 				$sqlw = "open=1 AND tickettype_id=1 AND assigned_id=$user_id";
@@ -42,11 +43,16 @@ function getWhereClause($user_id,$type){
 				$sqlw = "open=1 AND tickettype_id=1 AND assigned_by_id=$user_id";
 			break;
 			case "Odepartment":
-				$sqlw = "open=1 AND tickettype_id=1 AND assigned_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
+				$sqlw = "open=1 AND tickettype_id=1 AND assigned_id IN (".join(",",$dep).") ";
 			break;
 			case "Adepartment":
-				$sqlw = "open=1 AND tickettype_id=1 AND created_by_id IN (".join(",",getDepartmentMembers_by_userid($user_id)).") ";
+				$sqlw = "open=1 AND tickettype_id=1 AND created_by_id IN (".join(",",$dep).") ";
 			break;
+			case "closedDepartment":
+				
+				$sqlw = "(created_by_id IN(".join(",",$dep).") OR assigned_by_id IN(".join(",",$dep).")	OR assigned_id IN(".join(",",$dep).")) AND (open=0 AND tickettype_id=1)";
+			break;
+			
 			default:break;
 		}
 	}
@@ -350,6 +356,7 @@ if(isset($_SESSION["user"])){ //the session is set
 							case "all": //merged all ticket requests into one large return to reduce requests
 								$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));
 								$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));
+								$response["ticket"]['CD']=array("type"=>"closedDepartment","Count"=>countTickets($usr->User_id,"closedDepartment"));
 								$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));
 								$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));
 								$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));								

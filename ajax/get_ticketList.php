@@ -78,6 +78,21 @@ if(isset($_GET["area"]) ){
       $Ids = array_implode($db->Query($sql,false,"row"));
       $wc = "t.id IN(".join(",",$Ids).")";
       break;
+    case "closedDepartment": // closed tickets that my Department is involved in
+    	$dep = getDepartmentMembers_by_userid($usr->User_id);
+		//print_r($dep);die(join(",",$dep));
+		$sql = "SELECT 
+		t.id
+		FROM tickets AS t 
+		WHERE (t.created_by_id IN(".join(",",$dep).")
+		OR t.assigned_by_id IN(".join(",",$dep).")
+		OR t.assigned_id IN(".join(",",$dep)."))
+		AND (t.open=0
+		AND t.tickettype_id=1)
+		";
+		$Ids = array_implode($db->Query($sql,false,"row"));
+		$wc = "t.id IN(".join(",",$Ids).")";
+		break;      
     case "sOdepartment":  // Assigned to people in my department {To My Department}
       $depIds = getDepartmentMembers_by_userid($usr->User_id);
       $sql = "SELECT 

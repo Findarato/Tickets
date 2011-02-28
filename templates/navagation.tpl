@@ -7,17 +7,21 @@
 		<a class="smallTicketL nolink ticket_button ticket_sprite pencil fontBold" href="#ticketList/sAssigned">By Me</a>
 		<span id="csAssigned" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite users fontBold" href="#ticketList/sOdepartment" id="toMyDepartment">To My Department</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite users fontBold" href="#ticketList/sOdepartment" id="toMyDepartment">To My Dep.</a>
 		<span id="csOdepartment" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite user--pencil fontBold" href="#ticketList/sAdepartment" id="byMyDepartment">By My Department</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite user--pencil fontBold" href="#ticketList/sAdepartment" id="byMyDepartment">By My Dep.</a>
 		<span id="csAdepartment" class="timestamp " style="position:absolute;right:25px"></span
 		><br>
 		<a class="smallTicketL nolink ticket_button ticket_sprite bookmark fontBold" href="#ticketList/sFavorite">Bookmarks</a>
 		<span id="csFavorite" class="timestamp " style="position:absolute;right:25px"></span>
 		<br>
-		<a class="smallTicketL nolink ticket_button ticket_sprite door fontBold" href="#ticketList/sClosed">Closed Tickets</a>
+		<a class="smallTicketL nolink ticket_button ticket_sprite door fontBold" href="#ticketList/sClosed">My Closed</a>
 		<span id="csClosed" class="timestamp " style="position:absolute;right:25px"></span>
+		<br>
+		<a class="smallTicketL nolink ticket_button ticket_sprite door fontBold" href="#ticketList/closedDepartment">Dep. Closed</a>
+		<span id="cclosedDepartment" class="timestamp " style="position:absolute;right:25px"></span>
+
     <br>
     <a class="smallTicketL nolink ticket_button ticket_sprite chart fontBold" href="#stats">General Stats</a>
 		<br>
