@@ -7,35 +7,6 @@
   webkit-transition: 0.3s ease-in-out;
 }
 
-.image-lines
-{
-  background-image: url(/lapcat/layout/images/18-18-0.png);
-  background-repeat: repeat;
-}
-.light-down
-{
-  background-image: url(/lapcat/layout/icons/16-16-31.png);
-  background-position: bottom;
-  background-repeat: repeat-x;
-}
-.light-up
-{
-  background-image: url(/lapcat/layout/icons/16-16-29.png);
-  background-position: top;
-  background-repeat: repeat-x;
-}
-.shadow-down
-{
-  background-image: url(/lapcat/layout/icons/16-16-26.png);
-  background-position: bottom;
-  background-repeat: repeat-x;
-}
-.shadow-up
-{
-  background-image: url(/lapcat/layout/icons/16-16-27.png);
-  background-position: top;
-  background-repeat: repeat-x;
-}
 .border-all-B-1
 {
   border: 1px solid hsl(212,43%,53%);
@@ -140,4 +111,8 @@
 
 .noticeBackgroundDefault{
   background:hsl(0,0,30%);
+}
+
+body,html {
+    font-family: 'Ubuntu', sans-serif;
 }
