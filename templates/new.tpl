@@ -1,6 +1,6 @@
 <div id="newTicketdialog">
-	<div class="small-shadow-black-1" style="width:auto;vertical-align:top;">
-		<div class="roundTop4 " style="width:auto;height:auto;">
+	<div class="roundAll4 small-shadow-black-1" style="width:auto;vertical-align:top;">
+		<div class="roundAll4 " style="width:auto;height:auto;">
 			<div class=" fontMain head message_head roundTop4 color-B-2 border-all-B-1" id="" style="height:16px;">
 				Add new Ticket
 			</div>
