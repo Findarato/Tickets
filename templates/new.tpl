@@ -45,7 +45,7 @@
 					<span>Cancel</span>
 				</button>
 
-				<button class="fontMain fontBold minimal Cancel" id="replyCancelBtn" style="width:auto;padding:3px" title="Add Ticket">
+				<button class="fontMain fontBold minimal Cancel" id="ticketAddButton" style="width:auto;padding:3px" title="Add Ticket">
 					<span class="ticket_button ticket_sprite tick"></span>
 					<span>Add Ticket</span>
 				</button>
