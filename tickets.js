@@ -1078,7 +1078,7 @@ function checkHash() {
 		case "#search":
 			loadSearch();
 			break;
-		case "#largestats":
+		case "#largestats": case "#stats":
 			loadLargeStats();
 			break;
 		case "#largegraphs":
