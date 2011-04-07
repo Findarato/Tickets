@@ -67,11 +67,6 @@
         <div id="responsestpl" class="ui-helper-hidden">
             {include file="responses.tpl"}
         </div>
-{*
-        <div id="ticketTpl" class="ui-helper-hidden">
-            {include file="vertical_ticket.tpl"}
-        </div>
-  *}      
         <div id="ticketTpl" class="ui-helper-hidden">
             {include file="ticket.tpl"}
         </div>        
@@ -83,6 +78,9 @@
         </div>
         <div id="notifyTpl" style="position:absolute" class="ui-helper-hidden">
             {include file="notify.tpl"}
+        </div>
+        <div id="ticketTopTpl" class="ui-helper-hidden">
+            {include file="ticket_top.tpl"}
         </div>
         <div id="statisticsTpl" style="position:absolute" class="ui-helper-hidden">
             {include file="statistics.tpl"}
