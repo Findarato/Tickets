@@ -1193,18 +1193,6 @@ jQuery(document).ready(function () {
 			}
 		}, "json");
 	});
-	if (Params.UserId > 0) {
-		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
-		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
-	}
-
-	if ($("#topperUserInfo").text().length > 10) {
-		function ut(){
-			updateTickets();
-			setTimeout(function(){ut();},30000);
-		};ut();
-		checkHash();
-	} //disables running with out being logged in
   
   $("#topperNew").click(function(){
     Params.LastArea = "newTicket";
@@ -1356,13 +1344,35 @@ jQuery(document).ready(function () {
 	//$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	
 	
+
+	$(".tab").bind("click",function(){
+		$(".tab").removeClass("selectedTab");
+		me = $(this);
+		me.addClass("selectedTab").blur();
+		
+		//alert(this.id);
+	});
+
+	//
+	// Events that need to happen late in the page rendering
+	//
+	if ($("#topperUserInfo").text().length > 10) {
+		$("#ticketTab").trigger("click");		
+		function ut(){
+			updateTickets();
+			setTimeout(function(){ut();},30000);
+		};
+		ut();
+		checkHash();
+		if (Params.UserId > 0) {
+			$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
+			$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
+		}		
+	} //disables running with out being logged in
+
 	//
 	//Live items
 	//
-	$(".tab").click(function(){
-		$(".tab").removeClass("selectedTab");
-		$(this).addClass("selectedTab");
-	});
 	
 	//Ticket display live items
 	$(".actionButtons").live("click", function () {

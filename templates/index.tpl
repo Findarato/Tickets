@@ -45,10 +45,9 @@
         <header class="header1" style="height:70px;margin-bottom:20px;">
             {include file="header.tpl"}
         </header>
-        <div class="" style="display:table;width:100%;">
-            <aside id="sideArea1" class="" style="display:table-cell;vertical-align:top;width:220px;border-right:solid 2px hsla(0,0%,0%,.5);">
+        <div class="" style="display:table;width:100%">
+            <aside id="sideArea1" class="" style="overflow:hidden;display:none;vertical-align:top;width:0;border-right:solid 2px hsla(0,0%,0%,.5);"> <!-- 220px display:table-cell -->
                 {include file="left_side.tpl"}
-                <br> {include file="search.tpl"}
             </aside>
             <div id="mainArea1" class="roundAll4"  style="display:table-cell;text-align:left;padding-right:25px;margin-right:5px">
                 <div style="width:100%;" class="roundBottom4" id="content">
