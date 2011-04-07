@@ -1116,9 +1116,22 @@ function checkHash() {
 		case "#userPage":
 			loadUserPage(hash[1]);
 		break;
+		case "#tickets":
+			changeArea("tickets");
+		break;
 		}
 	} else {
 		loadNew(Params.LastLogon);
+	}
+}
+
+function changeArea(area){
+	var location = $("#subAreaBar"); 
+	switch(area){
+		case "tickets":
+			location.html($("#ticketTopTpl").html());
+			updateTickets();
+		break;
 	}
 }
 
