@@ -42,17 +42,16 @@
     <!--[if (gt IE 9)|!(IE)]><!-->
     <body>
         <!--<![endif]-->
-        <header class="header1" style="height:30px;margin-bottom:20px;">
+        <header class="header1" style="height:70px;margin-bottom:20px;">
             {include file="header.tpl"}
         </header>
         <div class="" style="display:table;width:100%;">
-            <aside id="sideArea1" class="roundAll4" style="display:table-cell;vertical-align:top;width:220px">
-                {include file="navagation.tpl"}
-                <br> {include file="bugs.tpl"}
+            <aside id="sideArea1" class="" style="display:table-cell;vertical-align:top;width:220px;border-right:solid 2px hsla(0,0%,0%,.5);">
+                {include file="left_side.tpl"}
                 <br> {include file="search.tpl"}
             </aside>
-            <div id="mainArea1" class="roundAll4"  style="display:table-cell;text-align:left;padding-right:25px">
-                <div style="min-height:300px;width:100%;" class="roundBottom4" id="content">
+            <div id="mainArea1" class="roundAll4"  style="display:table-cell;text-align:left;padding-right:25px;margin-right:5px">
+                <div style="width:100%;" class="roundBottom4" id="content">
                     {include file="$content"}
                 </div>
             </div>
