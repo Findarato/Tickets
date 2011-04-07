@@ -16,6 +16,9 @@
 						<tr id="ticketAssignBox">
 							<td style="text-align:left;"><span class="font-X">Assign:</span><select class=" Ticketform " id="newTicketAssign" name="newTicketAssign"><option value="">Select User</option>{html_options options=$assign}</select></td>
 						</tr>
+						<tr id="ticketCreateForBox" style="display:none;">
+							<td style="text-align:left;"><span class="font-X">Create For:</span><select class=" Ticketform " id="newTicketCreateFor" name="newTicketCreateFor"><option value="">Select User</option>{html_options options=$assign}</select></td>
+						</tr>
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Priority:</span><select class=" Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority}</select></td>
 						</tr>

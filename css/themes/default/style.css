@@ -8,32 +8,32 @@
   webkit-transition: 0.3s ease-in-out;
 }
 
-.border-all-B-1
+.border-all-B-1,.border-all-Main-1
 {
   border: 1px solid hsl(212,43%,53%);
 }
-.border-all-B-2
+.border-all-B-2,.border-all-Main-2
 {
   border: 2px solid hsl(212,43%,53%);
 }
-.border-bottom-B-1
+.border-bottom-B-1,.border-bottom-Main-1
 {
   border-bottom: 1px solid hsl(212,43%,53%);
 }
-.border-left-B-1
+.border-left-B-1,.border-left-Main-1
 {
   border-left: 1px solid hsl(212,43%,53%);
 }
-.border-right-B-1
+.border-right-B-1,.border-right-Main-1
 {
   border-right: 1px solid hsl(212,43%,53%);
 }
-.border-sides-B-1
+.border-sides-B-1,.border-sides-Main-1
 {
   border-left: 1px solid hsl(212,43%,53%);
   border-right: 1px solid hsl(212,43%,53%);
 }
-.border-top-B-1
+.border-top-B-1,.border-top-Main-1
 {
   border-top: 1px solid hsl(212,43%,53%);
 }
@@ -116,4 +116,47 @@
 
 body,html {
     font-family: 'Ubuntu', sans-serif;
+}
+
+.WhitetoLightBlue{
+	background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.12, rgb(212,221,255)),
+	    color-stop(0.68, rgb(255,255,255))
+	);
+	background-image: -moz-linear-gradient(
+	    center bottom,
+	    rgb(212,221,255) 12%,
+	    rgb(255,255,255) 68%
+	);
+}
+.WhitetoLightOff{
+	background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0, rgb(241,241,241)),
+	    color-stop(0.96, rgb(255,255,255))
+	);
+	background-image: -moz-linear-gradient(
+	    center bottom,
+	    rgb(241,241,241) 0%,
+	    rgb(255,255,255) 96%
+	);
+}
+.selectedTab,.tab{
+	height:25px;
+	padding-top:10px;
+	padding-left:5px;
+	padding-right:5px;
+	bottom:-1px;
+	
+}
+.selectedTab{
+	background:rgb(255,255,255);
+	border: 1px solid hsl(212,43%,53%);
+	border-bottom:none;
+	
 }

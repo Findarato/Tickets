@@ -31,6 +31,29 @@ var Params = {
 	"Locations":{},
 	"FavoriteObject":[] 
 };
+
+var navgationMenu = {
+	"tickets":{
+		0:{
+			"name":"To Me",
+			"link":"sOpen"
+		},
+		1:{
+			"name":"By Me",
+			"link":"sAssigned"
+		},
+		2:{
+			"name":"To My Dep.",
+			"link":"sOdepartment"
+		},		
+	},
+	"Bugs":{
+		0:{
+		"name":"Open Bugs",
+		"link":"bugs_open"
+		},
+	}
+}
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
 function oc(a)
@@ -1336,6 +1359,10 @@ jQuery(document).ready(function () {
 	//
 	//Live items
 	//
+	$(".tab").click(function(){
+		$(".tab").removeClass("selectedTab");
+		$(this).addClass("selectedTab");
+	});
 	
 	//Ticket display live items
 	$(".actionButtons").live("click", function () {
@@ -1351,7 +1378,7 @@ jQuery(document).ready(function () {
 			loadTicket(Params.TicketId);
 		});
 	});
-
+	
 	//Global page live 
 	$(":text").live("click", function () {
 		$(this).select();
