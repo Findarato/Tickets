@@ -37,21 +37,21 @@
 {
   border-top: 1px solid hsl(212,43%,53%);
 }
-.color-B-1
+.color-B-1,.colorMain-1
 {
   background-color: hsl(212,43%,53%);
 }
-.color-B-2
+.color-B-2,.colorMain-2
 {
   background-color: hsl(212,43%,53%);
   background-color: hsla(212,43%,53%,0.8);
 }
-.color-B-3
+.color-B-3,.colorMain-3
 {
   background-color: hsl(212,43%,53%);
   background-color: hsla(212,43%,53%,0.6);
 }
-.color-B-4
+.color-B-4,.colorMain-4
 {
   background-color: hsl(212,43%,53%);
   background-color: hsla(212,43%,53%,0.3);
@@ -123,12 +123,12 @@ body,html {
 	    linear,
 	    left bottom,
 	    left top,
-	    color-stop(0.12, rgb(212,221,255)),
+	    color-stop(0.35, rgb(211,217,240)),
 	    color-stop(0.68, rgb(255,255,255))
 	);
 	background-image: -moz-linear-gradient(
 	    center bottom,
-	    rgb(212,221,255) 12%,
+	    rgb(211,217,240) 35%,
 	    rgb(255,255,255) 68%
 	);
 }
