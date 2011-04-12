@@ -49,7 +49,7 @@
             <aside id="sideArea1" class="" style="overflow:hidden;display:none;vertical-align:top;width:0;border-right:solid 2px hsla(0,0%,0%,.5);"> <!-- 220px display:table-cell -->
                 {include file="left_side.tpl"}
             </aside>
-            <div id="mainArea1" class="roundAll4"  style="display:table-cell;text-align:left;padding-right:25px;margin-right:5px">
+            <div id="mainArea1" class="roundAll4"  style="display:table-cell;min-height:400px;text-align:left;padding:0 5px 0 5px;margin-right:5px">
                 <div style="width:100%;" class="roundBottom4" id="content">
                     {include file="$content"}
                 </div>
