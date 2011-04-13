@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
         <title>Tickets - The tracking system</title>
         <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="css/resetStyle.css?v=1">
+        <link rel="stylesheet" href="/tickets/css/resetStyle.css?v=1">
         <link id="themegencss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
         <link rel="stylesheet" media="screen" href="css/buttons.css"  /> 
@@ -35,12 +35,7 @@
         <script src="js/combine.php"></script>
         <script>Params.UserId = {if isset($user_id)}{$user_id} {else} "-1" {/if};Params.Locations = {$locationJSON}; </script>
     </head>
-    <!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
-    <!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
-    <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
-    <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
-    <!--[if (gt IE 9)|!(IE)]><!-->
-    <body>
+    <body >
         <!--<![endif]-->
         <header class="header1" style="height:70px;margin-bottom:20px;">
             {include file="header.tpl"}
