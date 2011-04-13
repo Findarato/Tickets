@@ -34,11 +34,8 @@
 	</div>
 </div>
 <div style="display:table;width:100%">
-	<div class="border-right-Main-1" style="display:table-cell;width:300px">
+	<div class="border-right-Main-1" style="display:table-cell;width:300px;vertical-align:top;">
 		<!-- Left Side ticket information -->
-		<div class="fontMain2" id="ticketDate" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;width:auto;" >
-			Opened On
-		</div>
 		<div style="display:none;height:16px;" class="closedTicket" id="ticketClosedOn">
 			<div class="fontMain2" id="ticketClosedOnDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >
 				Closed On
@@ -54,9 +51,11 @@
 				Project
 			</div>
 		</div>
+		<!--
 		<div class="fontMain2 " id="ticketCreatedBy" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
 			Created By
 		</div>
+		-->
 		<div id="assignedToBox" style="display:none;height:16px;">
 			<div class="fontMain2" id="ticketAssignedTo" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
 				Assigned To
@@ -72,44 +71,56 @@
 				Location
 			</div>
 		</div>
-	</div>
-	<div style="display:table-cell;width:auto;">
-		<!-- Right Side ticket body and Replies -->
-		<div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" id="changemeColor" class="corners-bottom-2 corners-top-2 border-all-B-1">
-			<div style="display:table-row;width:100%">
-				<div style="display:table-cell; padding:6px; width:100px;">
-					<div class="font-X2" id="changemeUserid" style="width:100px;">
-					</div>
-					<div id="changemeDay" class="font-L font-bold">
-					</div>
+		<div id="locationBox" style="display:none;height:16px;">
+			<div class="fontMain2" id="replyareaTitle" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
+				Replies
+			</div>
+		</div>		
+<!--		<span id="replyareaTitle" style="margin-left:10px;margin:5px;" title="Reply Title">Replies (0)</span> -->
+		<!-- Modification Buttons -->		
+		<div class="" id="ticketFooterArea" style="height:28px;margin-top:20px">
+			<button class="openTicket fontReverse  minimal " id="reAssignButton" style="width:auto;">
+				<span class="ticket_button ticket_sprite user-pencil">Reassign</span>
+			</button>
+			<button class="openTicket fontReverse  minimal " id="modifyButton" style="width:auto;">
+				<span class="ticket_button ticket_sprite pencil">Modify</span>
+			</button>
+			<button class="fontReverse minimal " id="ticketModifySaveButton" style="width:auto;display:none;">
+				<span class="ticket_button ticket_sprite tick">Save</span>
+			</button>
+			<button class="fontReverse minimal " id="ticketModifyCancelButton" style="width:auto;display:none;">
+				<span class="ticket_button ticket_sprite cross">Cancel</span>
+			</button>
+			<button class="openTicket fontReverse  minimal actionButtons closeLink " id="closeButton" style="width:auto;">
+				<span class="ticket_button ticket_sprite door" style="margin-right:5px">Close</span>
+			</button>
+			<button class="closedTicket fontReverse  minimal actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;display:none;">
+				<span style="margin-right:5px">Open</span>
+			</button>
+			<div class="td" style="width:75px;display:none">
+				<!-- Locked Area -->
+				<div class="fontMain openTicket hold actionButtons holdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton " id="Holdlink" style="width:auto;m5px;">
+					<span>Lock</span>
 				</div>
-				<div style="display:table-cell;">
-					<div style="display:table-row">
-						<div class="font-X2" style="display:table-cell" id="changemeSubject">
-						</div>
-						<div id="changemeTicketListIcons" style="display:table-cell">
-							<div class="statusImage left ticket_sprite pencil" style="display:none;height:15px;" id="imgEdited" title="Edited">
-							</div>
-							<div class="statusImage left ticket_sprite user-pencil" style="display:none;height:15px;" id="imgReassigned" title="Reassigned">
-							</div>
-							<div class="statusImage left ticket_sprite door" style="display:none;height:15px;" id="imgClosed" title="Closed">
-							</div>
-							<div class="statusImage left ticket_sprite bookmark" style="display:none;height:15px;" id="imgBookmark" title="Bookmarked">
-							</div>
-							<div class="statusImage left ticket_sprite wall" style="display:none;height:15px;" id="imgBlocked" title="Blocked">
-							</div>
-							<div class="statusImage left ticket_sprite lock" style="display:none;height:15px;" id="imgLock" title="Locked">
-							</div>
-							<div class="left ticket_sprite ticket" id="imgTicketTrouble" style="height:15px;display:none;" title="Trouble Ticket">
-							</div>
-							<div class="left ticket_sprite bug" id="imgTicketBug" style="height:15px;display:none;" title="Bug Report">
-							</div>
-						</div>
-					</div>
-					<div class="font-X2" style="word-wrap:break-word;white-space: normal;" id="changemeBody">
-					</div>
-					<div class="font-X2" id="changemeCategory">
-					</div>
+				<div class="fontMain openTicket hold actionButtons unholdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton " id="unHoldlink" style="width:auto;margin-right:5one;">
+					<span>unlock</span>
+				</div>
+				<!--<div class="button-purple fg-button roundAll4 fontReverse lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
+			</div>
+		</div>
+		
+		<div id="pageAnator" style=""></div>
+	</div>
+	<div style="display:table-cell;width:auto;padding:3px">
+		<!-- Right Side ticket body and Replies -->
+		<div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" class="border-all-B-1 WhitetoLightBlue"> <!-- Body of the ticket -->
+			<div style="display:table-row;width:100%">
+				<div style="display:table-cell; padding:6px; width:100px;vertical-align:top;">
+					<div class="font-X2" id="ticketCreatedBy" style="width:100px;vertical-align:top;"></div>
+					<div id="ticketDate" class="font-L font-bold" style="vertical-align:top;"></div>
+				</div>
+				<div style="display:table-cell;vertical-align:top;padding:6px;">
+					<div class="font-X2" style="word-wrap:break-word;white-space: normal;vertical-align:top;" id="ticketBody"></div>
 				</div>
 				<div id="ticketListDueDate" style="display:table-cell;width:200px;right:0px;">
 					<div class="font-X2" id="changemeDueDate">
@@ -122,9 +133,15 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div><!-- End Body of the ticket -->
+		<div class="colorWhite-1 " id="replyareabody" style=""></div>
 	</div>
 </div>
+asdfadf
+
+
+
+<!-- Old code down below this point-->
 <div class="t" style="width:100%;height:645px;margin-right:5px;" title="Ticket Display">
 	<section id="ticketarea" title="Ticket Side" style="height:600px;">
 		<div class="roundTop4 small-shadow-black-1" style="vertical-align:top;height:100%;margin-right:5px;">
@@ -153,36 +170,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="custom fontMain color-B-2 message_head" id="ticketFooterArea" style="height:28px;">
-					<button class="openTicket fontReverse  minimal " id="reAssignButton" style="width:auto;">
-						<span class="ticket_button ticket_sprite user-pencil">Reassign</span>
-					</button>
-					<button class="openTicket fontReverse  minimal " id="modifyButton" style="width:auto;">
-						<span class="ticket_button ticket_sprite pencil">Modify</span>
-					</button>
-					<button class="fontReverse minimal " id="ticketModifySaveButton" style="width:auto;display:none;">
-						<span class="ticket_button ticket_sprite tick">Save</span>
-					</button>
-					<button class="fontReverse minimal " id="ticketModifyCancelButton" style="width:auto;display:none;">
-						<span class="ticket_button ticket_sprite cross">Cancel</span>
-					</button>
-					<button class="openTicket fontReverse  minimal actionButtons closeLink " id="closeButton" style="width:auto;">
-						<span class="ticket_button ticket_sprite door" style="margin-right:5px">Close</span>
-					</button>
-					<button class="closedTicket fontReverse  minimal actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;display:none;">
-						<span style="margin-right:5px">Open</span>
-					</button>
-					<div class="td" style="width:75px;display:none">
-						<!-- Locked Area -->
-						<div class="fontMain openTicket hold actionButtons holdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton " id="Holdlink" style="width:auto;m5px;">
-							<span>Lock</span>
-						</div>
-						<div class="fontMain openTicket hold actionButtons unholdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton " id="unHoldlink" style="width:auto;margin-right:5one;">
-							<span>unlock</span>
-						</div>
-						<!--<div class="button-purple fg-button roundAll4 fontReverse lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</section>
@@ -192,13 +180,13 @@
 			<div class="custom fontMain head message_head roundTop4 color-B-2 border-all-D-1" id="replyTitleArea" style="height:16px;">
 				<!--Reply Title -->
 				<div style="width:100%">
+					<!--
 					<span id="replyareaTitle" style="margin-left:10px;margin:5px;" title="Reply Title">Replies (0)</span>
-					<div id="pageAnator" style="right:5px;position:absolute;top:2px;">
-					</div>
+					<div id="pageAnator" style="right:5px;position:absolute;top:2px;"></div>
+					-->
 				</div>
 			</div>
-			<div class="colorWhite-1 " id="replyareabody" style="overflow:auto;height:573px;padding:3px">
-			</div>
+			<div class="colorWhite-1 " id="replyareabody" style="overflow:auto;height:573px;padding:3px"></div>
 			<div class="" id="replyFooterArea" style="position:relative;">
 				<!-- Reply Footer -->
 				<div class="box_transition" id="replyBox" style="overflow:hidden;position:absolute;bottom:34px;left:0;height:0px;width:100%;background-color:#FFF">
