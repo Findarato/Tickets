@@ -54,6 +54,11 @@ var navgationMenu = {
 		},
 	}
 }
+
+function focusMe(id){
+	window.scrollBy(0,5000);
+	$(id).focus();
+}
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
 function oc(a)
@@ -587,15 +592,8 @@ function loadTicketBody(inputData, container) {
 	//Reply Button
 	//
   $('#replyButton').click(function(){
-    if($("#replyBox").css("height") == "90px"){
       $("#replyAddButton").trigger('click');
-    }else{
-      $("#replyBox").css("height","90px");
-      $("#replyTitle").val("Re:" + Params.TicketJSON.subject);
-      $("#replyticketid").val(Params.TicketId);
-      $("#replyuserid").val(Params.UserId);      
-    }
-  });
+   });
   $("#replyCancelButton").click(function(){
     $("#replyBox").css({"height":"0px"});
   });
