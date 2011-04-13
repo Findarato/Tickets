@@ -28,6 +28,10 @@
 {
   border-right: 1px solid hsl(212,43%,53%);
 }
+.border-right-Main-4
+{
+  border-right: 4px solid hsl(212,43%,53%);
+}
 .border-sides-B-1,.border-sides-Main-1
 {
   border-left: 1px solid hsl(212,43%,53%);
