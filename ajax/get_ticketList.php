@@ -54,7 +54,17 @@ if(isset($_GET["area"]) ){
  * Ticket area
  * 
  */
-    case "sOpen": // Tickets assigned to the user {To Me}
+    case "all": // Tickets assigned to the user {To Me}
+      $sql = "SELECT 
+      t.id
+      FROM tickets AS t 
+      WHERE (t.open=1
+      AND t.tickettype_id=1)
+      ";
+      $Ids = array_implode($db->Query($sql,false,"row"));
+      $wc = "t.id IN(".join(",",$Ids).")";
+      break;
+     case "sOpen": // Tickets assigned to the user {To Me}
       $sql = "SELECT 
       t.id
       FROM tickets AS t 
