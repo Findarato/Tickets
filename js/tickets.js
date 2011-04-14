@@ -1071,6 +1071,7 @@ function checkHash() {
 		//This checks for a url passed hash, otherwise its just going to go in there.
 		switch (hash[0]) {
 		case "#ticket":
+			changeArea("tickets");
 			switch (hash[2]) {
   			case "page": // ticket with a page number selected
   				if ($("#ticketId").html().length < 1) {
@@ -1086,8 +1087,10 @@ function checkHash() {
   			}
   			break;
 		case "#ticketList":
+			changeArea("tickets");
       switch (hash[2]) {
         case "page": // ticket with a page number selected
+        	changeArea("tickets");
           loadTicketList(hash[3]);
           break;
         default: // ticket with out a page
@@ -1100,6 +1103,7 @@ function checkHash() {
 			loadSearch();
 			break;
 		case "#largestats": case "#stats":
+			changeArea("stats");
 			loadLargeStats();
 			break;
 		case "#largegraphs":
@@ -1127,8 +1131,12 @@ function changeArea(area){
 	var location = $("#subAreaBar"); 
 	switch(area){
 		case "tickets":
+			if(location.html() == ""){alert("BROKE!")}
 			location.html($("#ticketTopTpl").html());
 			updateTickets();
+		break;
+		case "stats":
+			location.html("");
 		break;
 	}
 }
