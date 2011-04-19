@@ -13,7 +13,7 @@ header("Cache-Control: max-age=60, must-revalidate");
   //print_r($usr);die();
   $db = db::getInstance();
   $wc = array();
-  $count = 20; // The amount of records returned
+  $count = 40; // The amount of records returned
   $page = 0; // the default page to return incase one is not passed
 
   if(isset($_GET["count"])){ $count = $_GET["count"]; }
