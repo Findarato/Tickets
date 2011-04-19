@@ -70,6 +70,67 @@ function oc(a)
   }
   return o;
 }
+function checkHash() {
+	var hash = getHashArray();
+	if (window.location.hash.length > 1) {
+		//This checks for a url passed hash, otherwise its just going to go in there.
+		switch (hash[0]) {
+		case "#ticket":
+			changeArea("tickets");
+			switch (hash[2]) {
+  			case "page": // ticket with a page number selected
+  				if ($("#ticketId").html().length < 1) {
+  					//This should fix the directly accessing a response page bug
+  				} else {
+  					loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
+  				}
+  				break;
+  			default: // ticket with out a page
+          loadTicket(hash[1]);
+          loadResponsesBody(hash[1], $("#replyareabody"), 0);
+  			 break;
+  			}
+  			break;
+		case "#ticketList":
+      switch (hash[2]) {
+        case "page": // ticket with a page number selected
+          loadTicketList(hash[3]);
+          break;
+        default: // ticket with out a page
+          loadTicketList(0);
+         break;
+        }
+        break;
+			break;
+		case "#search":
+			loadSearch();
+			break;
+		case "#largestats": case "#stats":
+			changeArea("stats");
+			loadLargeStats();
+			break;
+		case "#largegraphs":
+			loadLargeGraphs();
+			break;
+		case "#updateNotes":
+			loadBlank();
+			break;
+		default: case "#start":
+			loadNew(Params.LastLogon);
+			break;
+		case "#userPage":
+			loadUserPage(hash[1]);
+		break;
+		case "#tickets": // this triggers when the tab tickets is clicked
+			changeArea("tickets");
+			loadTicketList(0,{"search":"","area":"all"});
+		break;
+		}
+	} else {
+		loadNew(Params.LastLogon);
+	}
+}
+
 function updateFavorites(){
   localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
 }
@@ -233,6 +294,7 @@ function loadLargeStats() {
  */
 
 function populateAllTickets(Area) {
+	/*
 	var cnt,html,Ttype;
 	$.getJSON(uri + "ajax/tickets.php", {"type": "small","index": "all","area": Area,"style": 1},function (data, text) {
 	  Params.UserId = data.user_id;
@@ -244,6 +306,7 @@ function populateAllTickets(Area) {
 			}
 		);
 	});
+	*/
 }
 function populateAllBugs(Area) {
 	var cnt,html,Ttype;
@@ -644,7 +707,7 @@ function loadTicketBody(inputData, container) {
 		$("#ticketStatusImage").find("#imgTicketTrouble").hide();
 	}
 	//Run some functions to deal with the data.	
-	pageAnator(container.find("#pageAnator").empty(), data.responseCount, 20); //add Page numbers
+	pageAnator(container.find("#pageAnator").empty(), data.responseCount, 30); //add Page numbers
 	displayStatus(data.status, container.find("#ticketStatusImage")); //status icons
 	
 	$("#ticketTitle").click(function(){
@@ -862,7 +925,7 @@ function loadTicketList(pageNumber,queryObj) {
       Tlb = Params.Content.find("#ticketListbody");
     }
 		Tlb.html(display);
-		pageAnator($("#tldPageAnator"), ticketCount, 20,pageNumber);
+		pageAnator($("#tldPageAnator"), ticketCount, 30,pageNumber);
 	});
 }
 function loadUserPage(userId){
@@ -1064,67 +1127,6 @@ function loadUserPage(userId){
 		});
 	}
 
-}
-function checkHash() {
-	var hash = getHashArray();
-	if (window.location.hash.length > 1) {
-		//This checks for a url passed hash, otherwise its just going to go in there.
-		switch (hash[0]) {
-		case "#ticket":
-			changeArea("tickets");
-			switch (hash[2]) {
-  			case "page": // ticket with a page number selected
-  				if ($("#ticketId").html().length < 1) {
-  					//This should fix the directly accessing a response page bug
-  				} else {
-  					loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
-  				}
-  				break;
-  			default: // ticket with out a page
-          loadTicket(hash[1]);
-          loadResponsesBody(hash[1], $("#replyareabody"), 0);
-  			 break;
-  			}
-  			break;
-		case "#ticketList":
-			changeArea("tickets");
-      switch (hash[2]) {
-        case "page": // ticket with a page number selected
-        	changeArea("tickets");
-          loadTicketList(hash[3]);
-          break;
-        default: // ticket with out a page
-          loadTicketList(0);
-         break;
-        }
-        break;
-			break;
-		case "#search":
-			loadSearch();
-			break;
-		case "#largestats": case "#stats":
-			changeArea("stats");
-			loadLargeStats();
-			break;
-		case "#largegraphs":
-			loadLargeGraphs();
-			break;
-		case "#updateNotes":
-			loadBlank();
-			break;
-		default: case "#start":
-			loadNew(Params.LastLogon);
-			break;
-		case "#userPage":
-			loadUserPage(hash[1]);
-		break;
-		case "#tickets":
-			changeArea("tickets");
-		break;
-		}
-	} else {
-		loadNew(Params.LastLogon);
-	}
 }
 
 function changeArea(area){
