@@ -29,7 +29,7 @@ function aTcode($array,$id='description'){
 	foreach($array as $k => $a){
 		if(is_array($a)){
 			foreach($a as $key => $a2){
-				if($key==$id){$a_fixed[$k][$key] = Tcode($a[$id]);}
+				if($key==$id){$a_fixed[$k][$key] = nl2br(Tcode($a[$id]));}
 			}
 		}else{
 			if($k==$id){$a_fixed = Tcode($a[$id]);}
