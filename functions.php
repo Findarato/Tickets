@@ -29,7 +29,7 @@ function aTcode($array,$id='description'){
 	foreach($array as $k => $a){
 		if(is_array($a)){
 			foreach($a as $key => $a2){
-				if($key==$id){$a_fixed[$k][$key] = nl2br(Tcode($a[$id]));}
+				if($key==$id){$a_fixed[$k][$key] = Tcode($a[$id]);}
 			}
 		}else{
 			if($k==$id){$a_fixed = Tcode($a[$id]);}
@@ -141,8 +141,8 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			default:break;
 		}
 	}
-	if($escape){return mysql_escape_string($formated);
-	}else{return $formated;}
+	if($escape){return nl2br(mysql_escape_string($formated));
+	}else{return nl2br($formated);}
 }
 /**
  * Post a response to the ticket.
@@ -172,7 +172,7 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	"lastname"=>ucwords($users[$res2['user_id']]['lastname']),
 	"subject"=>$res2['subject'],
 	"date"=>$res2['created_on'],					
-	"body"=>nl2br(Tcode($res2['body'],false,false,true)));
+	"body"=>Tcode($res2['body'],false,false,true));
 	if(!isset($smarty)){
 		$smarty = new Smarty();
 		$smarty->template_dir = '/www/tickets/templates'; 
@@ -189,7 +189,7 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	$smarty -> assign('email_title',$res1['subject']);
 	$smarty -> assign('email_priority',$res1['priority']);				
 	$smarty -> assign('email_location',$locationEmail[2]);
-	$smarty -> assign('email_description',nl2br(Tcode($res1['description'],false,false,true)));
+	$smarty -> assign('email_description',Tcode($res1['description'],false,false,true));
 	$smarty -> assign('respon',$respon);
 	$styleCode = join("",file("http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=22&hsl"));
   $styleCode .= join("",file("http://www.lapcat.org/tickets/css/tickets.css"));
