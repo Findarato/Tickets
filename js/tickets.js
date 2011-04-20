@@ -1186,8 +1186,8 @@ function loadLocalStorage(clear){
  */
 jQuery(document).ready(function () {
   //localStorage.clear();
-  loadLocalStorage();
-  populateAllBugs();
+  loadLocalStorage(true);
+  //populateAllBugs();
   Params.Content = $("#content"); //lets stop searching for it a hundred times
   
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
@@ -1360,7 +1360,7 @@ jQuery(document).ready(function () {
 				}
 			}
 		}
-		populateAllTickets();
+		//populateAllTickets();
 	});
 	//$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	
