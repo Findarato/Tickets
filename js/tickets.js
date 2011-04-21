@@ -104,7 +104,8 @@ function checkHash() {
         break;
 			break;
 		case "#search":
-			loadSearch();
+			changeArea("search");
+			//loadSearch();
 			break;
 		case "#largestats": case "#stats":
 			changeArea("stats");
