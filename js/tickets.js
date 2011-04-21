@@ -29,7 +29,8 @@ var Params = {
 	},
 	"Categories":{},
 	"Locations":{},
-	"FavoriteObject":[] 
+	"FavoriteObject":[],
+	"NavArea":""
 };
 
 var navgationMenu = {
@@ -123,9 +124,15 @@ function checkHash() {
 		break;
 		case "#tickets": // this triggers when the tab tickets is clicked
 			changeArea("tickets");
-			loadTicketList(0,{"search":"","area":"all"});
+			loadTicketList(0,{"search":"","area":"all_tickets"});
 		break;
+		case "#bugs": // this triggers when the tab tickets is clicked
+			changeArea("bugs");
+			loadTicketList(0,{"search":"","area":"all_bugs"});
+		break;
+		
 		}
+		//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets"}
 	} else {
 		loadNew(Params.LastLogon);
 	}
@@ -756,6 +763,7 @@ function loadTicket(ticketId,update) {
 }
 
 function loadTicketList(pageNumber,queryObj) {
+	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets"}
 	Tlb = Params.Content.find("#ticketListbody");
 	Params.LastArea = "ticketList";
 	var html = "";
@@ -1137,6 +1145,11 @@ function changeArea(area){
 			location.html($("#ticketTopTpl").html());
 			updateTickets();
 		break;
+		case "bugs":
+			if(location.html() == ""){alert("BROKE!")}
+			location.html($("#ticketTopTpl").html());
+			updateTickets();
+		break;
 		case "stats":
 			location.html("");
 		break;
@@ -1215,7 +1228,8 @@ jQuery(document).ready(function () {
 		}, "json");
 	});
   
-  $("#topperNew").click(function(){
+  $("#topperNew").live("click",function(){
+  	alert("cicked");
     Params.LastArea = "newTicket";
     Params.Content.html($("#newTicketdialog").html());
     
@@ -1223,7 +1237,7 @@ jQuery(document).ready(function () {
     Params.Content.find("#newTicketType").val("new");
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
     Params.Content.find(".Ticketform").css("background-color", "");
-    
+    /*
     $("#newTicketDueDate").dateter({
       "pastDayShades": true,
       "backgroundClass": "color-D-2",
@@ -1240,6 +1254,7 @@ jQuery(document).ready(function () {
     },
     function (v_Month, v_Day, v_Year) {$("#newTicketDueDate").val(v_Month + "/" + v_Day + "/" + v_Year);}
     );
+    */
   });
   $("#topperNewBug").click(function(){
     Params.LastArea = "newBug";
