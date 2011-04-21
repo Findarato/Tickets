@@ -324,8 +324,8 @@ function populateAllBugs(Area) {
 }
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
-	populateAllTickets();
-	populateAllBugs();
+	//populateAllTickets();
+	//populateAllBugs();
 }
 function loadResponsesBody(ticketId, container, page) {
 	var params = {
@@ -763,21 +763,26 @@ function loadTicket(ticketId,update) {
 }
 
 function loadTicketList(pageNumber,queryObj) {
-	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets"}
 	Tlb = Params.Content.find("#ticketListbody");
 	Params.LastArea = "ticketList";
 	var html = "";
 	var bugs = false;
 	var ticketCount = 0;
 	if (pageNumber < 0) {	pageNumber = 0;}
+	var hash = getHashArray();
 	$("#ticketListbody").empty();
 	if(queryObj){
 		O_search = queryObj;
 		O_search.type = "search";
-		O_search.page = pageNumber;		
-	}else{
+		O_search.page = pageNumber;	
+	    if(hash[0]=="#bugs"){
+	    	if(Params.NavArea!="bugs"){changeArea("bugs");Params.NavArea=="bugs";}
+	    }else{
+	    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
+	    }				
+	}else{ //this happens when there is no query object being sent.  Also when the tabs are clicked, as a specific query is being used by the tabs
 		$("#ticketListtitle").html("Tickets search Result");
-		hash = getHashArray();
+		
 		O_search = {
 			"page": pageNumber,
 			"search": {}
@@ -795,9 +800,14 @@ function loadTicketList(pageNumber,queryObj) {
 					a++;
 				}
 			}
-	    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1){$("#ticketListtitle").html("Bug search Result");}		
+		    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1 || hash[1]=="bugs"){
+		    	if(Params.NavArea!="bugs"){changeArea("bugs");Params.NavArea=="bugs";}
+		    }else{
+		    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
+		    }		
 		}	
 	}
+	//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
@@ -1141,18 +1151,23 @@ function changeArea(area){
 	var location = $("#subAreaBar"); 
 	switch(area){
 		case "tickets":
-			if(location.html() == ""){alert("BROKE!")}
-			location.html($("#ticketTopTpl").html());
-			updateTickets();
+			$("#ticketTab").trigger("click");	
+			location.load("templates/ticket_top.tpl");
+			Params.NavArea="tickets";
 		break;
 		case "bugs":
-			if(location.html() == ""){alert("BROKE!")}
-			location.html($("#ticketTopTpl").html());
-			updateTickets();
+			$("#bugTab").trigger("click");	
+			location.load("templates/bug_top.tpl");
+			Params.NavArea="bugs";
 		break;
-		case "stats":
+		case "search":
+			$("#searchTab").trigger("click");	
 			location.html("");
 		break;
+		case "stats":
+			$("#statsTab").trigger("click");	
+			location.html("");
+		break;		
 	}
 }
 
@@ -1385,15 +1400,12 @@ jQuery(document).ready(function () {
 		$(".tab").removeClass("selectedTab");
 		me = $(this);
 		me.addClass("selectedTab").blur();
-		
-		//alert(this.id);
 	});
 
 	//
 	// Events that need to happen late in the page rendering
 	//
 	if ($("#topperUserInfo").text().length > 10) {
-		$("#ticketTab").trigger("click");		
 		function ut(){
 			updateTickets();
 			setTimeout(function(){ut();},30000);
