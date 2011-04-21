@@ -10,9 +10,8 @@
         <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/tickets/css/resetStyle.css?v=1">
         <link id="themegencss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
-        <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
-        <link rel="stylesheet" media="screen" href="css/buttons.css"  /> 
-        <link rel="stylesheet" media="screen" href="css/tickets.css"  /> 
+        <link rel="stylesheet" media="screen" href="css/buttons.css?v=21"  /> 
+        <link rel="stylesheet" media="screen" href="css/tickets.css?v=22"  /> 
         <link rel="shortcut icon" href="/tickets/bug.png">
         <link rel="apple-touch-icon" href="/tickets/bug.png">
         <link rel="icon" type="image/png" href="/tickets/bug.png" />
@@ -27,13 +26,13 @@
             pageTracker._trackPageview();
         </script>
         
-        <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.5.min.js"></script>
+        <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.5.2.min.js"></script>
         <script src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/Graph.line.js" ></script>
         <script src="js/combine.php"></script>
-        <script>Params.UserId = {if isset($user_id)}{$user_id} {else} "-1" {/if};Params.Locations = {$locationJSON}; </script>
+        <script>Params.UserId = {if isset($user_id)}{$user_id} {else} "-1" {/if};Params.Locations = {$locationJSON};</script>
     </head>
     <body >
         <!--<![endif]-->
@@ -41,9 +40,6 @@
             {include file="header.tpl"}
         </header>
         <div class="" style="display:table;width:100%">
-            <aside id="sideArea1" class="" style="overflow:hidden;display:none;vertical-align:top;width:0;border-right:solid 2px hsla(0,0%,0%,.5);"> <!-- 220px display:table-cell -->
-                {include file="left_side.tpl"}
-            </aside>
             <div id="mainArea1" class="roundAll4"  style="display:table-cell;min-height:400px;text-align:left;padding:0 5px 0 5px;margin-right:5px">
                 <div style="width:100%;" class="roundBottom4" id="content">
                     {include file="$content"}
@@ -73,9 +69,6 @@
         </div>
         <div id="notifyTpl" style="position:absolute" class="ui-helper-hidden">
             {include file="notify.tpl"}
-        </div>
-        <div id="ticketTopTpl" class="ui-helper-hidden">
-            {include file="ticket_top.tpl"}
         </div>
         <div id="statisticsTpl" style="position:absolute" class="ui-helper-hidden">
             {include file="statistics.tpl"}
