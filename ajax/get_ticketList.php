@@ -49,12 +49,22 @@ if(isset($_GET["area"]) ){
       $Ids = array_implode($db->Query($sql,false,"row"));
       $wc = "t.id IN(".join(",",$Ids).")";
       break;
+    case "all_bugs": // Tickets assigned to the user {To Me}
+      $sql = "SELECT 
+      t.id
+      FROM tickets AS t 
+      WHERE (t.open=1
+      AND t.tickettype_id=)
+      ";
+      $Ids = array_implode($db->Query($sql,false,"row"));
+      $wc = "t.id IN(".join(",",$Ids).")";
+      break;	  
 
 /*
  * Ticket area
  * 
  */
-    case "all": // Tickets assigned to the user {To Me}
+    case "all_tickets": // Tickets assigned to the user {To Me}
       $sql = "SELECT 
       t.id
       FROM tickets AS t 
@@ -217,7 +227,7 @@ if(isset($_GET["area"]) ){
       JOIN library_names AS ln ON (ln.ID=t.location)
       JOIN lapcat.hex_users AS lhu ON (t.assigned_id=lhu.id)
       JOIN lapcat.hex_users AS lhu2 ON (t.created_by_id=lhu2.id)
-      WHERE '.$wc.' GROUP BY t.id ORDER BY t.priority DESC,t.due_on 
+      WHERE '.$wc.' GROUP BY t.id ORDER BY t.id,t.priority DESC,t.due_on 
       LIMIT '.$page.','.$amount.';';
 	  //die($sql);
       $response["tickets"] = $db->Query($sql,false,"assoc_array");

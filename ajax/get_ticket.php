@@ -76,7 +76,6 @@ if(isset($_GET['ticket_id'])){
 	if(count($db->Error)==2){$response['error']==$db->Error;}
 	if(@unserialize($response['status'])){$response['status'] = unserialize($response['status']);}
 	//if(@unserialize($response['attachment'])){$response['attachment'] = unserialize($response['attachment']);}
-	
 	$response['dbDescription']=$response['description'];
 	$response['description']=Tcode($response['description']);
 			
