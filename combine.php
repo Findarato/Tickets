@@ -12,7 +12,6 @@ require 'jsmin-1.1.1.php';
   Header($expire);
 $files = array(
 'jquery.purr.js',
-'date.js',
 'globalFunctions.js',
 'tickets.js'
 );

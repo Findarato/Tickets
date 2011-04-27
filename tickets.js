@@ -1245,7 +1245,7 @@ jQuery(document).ready(function () {
 	});
   
   $("#topperNew").live("click",function(){
-  	alert("cicked");
+  	
     Params.LastArea = "newTicket";
     Params.Content.html($("#newTicketdialog").html());
     
@@ -1253,26 +1253,9 @@ jQuery(document).ready(function () {
     Params.Content.find("#newTicketType").val("new");
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
     Params.Content.find(".Ticketform").css("background-color", "");
-    /*
-    $("#newTicketDueDate").dateter({
-      "pastDayShades": true,
-      "backgroundClass": "color-D-2",
-      "borderClass": "border-all-B-1",
-      "borderRoundClass": "rountAll4",
-      "shadeClass": "background-alpha-3",
-      "highLightToday": true,
-      "highLightTodayClass": Params.HighlightClass,
-      "height": "114px",
-      "width": "200px",
-      "uniqueName": "smallPickStart",
-      "offsetX": 0,
-      "offsetY": 0
-    },
-    function (v_Month, v_Day, v_Year) {$("#newTicketDueDate").val(v_Month + "/" + v_Day + "/" + v_Year);}
-    );
-    */
   });
-  $("#topperNewBug").click(function(){
+  $("#topperNewBug").live("click",function(){
+    alert("cicked");
     Params.LastArea = "newBug";
     Params.Content.html($("#newBugdialog").html());
     Params.Content.find("#ticketAssignBox").show();
