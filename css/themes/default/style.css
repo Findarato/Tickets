@@ -94,11 +94,11 @@ body, html {
 	min-height:100%;
 }
 .WhitetoLightBlue {
-	
-	background:-webkit-gradient(linear,left bottom,left top,color-stop(0.35,#d3d9f0),color-stop(0.68,#fff));
-	background:-moz-linear-gradient(center bottom,#d3d9f0 35%,#fff 68%)
-	background:-o-linear-gradient(center bottom,#d3d9f0 35%,#fff 68%)
-	background:linear-gradient(center bottom,#d3d9f0 35%,#fff 68%)
+	background: #DDF1F1; /* old browsers */
+	background: -moz-linear-gradient(top, #FFFFFF 0, #DDF1F1 96%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#FFFFFF), color-stop(96%,#DDF1F1)); /* webkit */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#DDF1F1',GradientType=0 ); /* ie */
+	background: -o-linear-gradient(top, #FFFFFF 0,#DDF1F1 96%); /* opera */
 }
 .WhitetoLightOff {
 	background: #F1F1F1; /* old browsers */
