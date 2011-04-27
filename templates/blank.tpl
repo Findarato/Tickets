@@ -1,19 +1,18 @@
-<div class="corners-bottom-2 corners-top-2 small-shadow-black-1" style="width:auto;margin-left:5px;" title="Update Notes">
-	<div class="droidSerif font-X head message_head roundTop4 color-B-2 border-all-B-1" id="" style="">Update Notes</div>
-	<div class="droidSerif message_body colorWhite-1 corners-bottom-2" id="" >
+<div class="" style="width:auto;margin-left:5px;font-size:90%;line-height:10px" title="Update Notes">
+	<div class="" id="" >
 		<div class="corners-bottom-2 corners-top-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">
 			Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above.
     		<br>
 			<span> More detailed update notes can be found <a class="ticket_sprite global_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite global_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
 		</div>
-		<div style="padding:5px;margin:5px; height:400px; overflow:auto;position:relative" class="roundAll4 border-all-A-1">
+		<div style="padding:5px;margin:5px; ; overflow:auto;position:relative;background-color:#FFF" class="roundAll4 border-all-A-1">
 		  <div style="position:absolute;top:0px;right:20px">
 		    <a href="http://www.w3.org/html/logo/" title="Link to HTML5 logo">
           <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-performance-semantics-storage.png" width="115" height="32" alt="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
         </a>
 		  </div>
-      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Live Ticket Update XXII</span>
-      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.2.0.r413</span>
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Live Ticket Update XXIII</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.0.r413</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
         <li>.</li>
@@ -21,7 +20,14 @@
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
       <ol>
-        <li></li>
+        <li>New Ticket layout.  Tickets has separated from the website and is once again a separate product.  Some of the same feel is in the new look, but much is new.
+	      <ol>
+	        <li>Tickets has become more HTML 5 friendly.  Future updates where made to the styles to improve load times.</li>
+	        <li>New Layout is more friendly with any width of screen/window.  All of the navagation is done in the header of the page.</li>
+	        <li>You can now see up to 30 tickets per screen instead of the normal 20.</li>
+	        <li>The body of a ticket now shows up as the first reply</li>
+	      </ol>
+        </li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
