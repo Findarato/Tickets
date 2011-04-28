@@ -26,6 +26,7 @@
 	        <li>New Layout is more friendly with any width of screen/window.  All of the navagation is done in the header of the page.</li>
 	        <li>You can now see up to 30 tickets per screen instead of the normal 20.</li>
 	        <li>The body of a ticket now shows up as the first reply</li>
+	        <li>Tickets works much better on Smart phones.  You can now check and interact will all of the ticket features straight from your phone.  There may be bugs in how it work in the initial release, and it will be improved over time.</li>
 	      </ol>
         </li>
       </ol>

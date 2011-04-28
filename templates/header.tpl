@@ -18,7 +18,7 @@
 			</div> <!-- End of logo Stuff -->
 			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 1 -->
 				<div id="ticketTab" class="tab border-bottom-Main-1 roundTop4" >
-					<a class="ticket_button ticket_sprite ticket nolink fontMain" href="#tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Tickets</span></a>
+					<a class="ticket_button ticket_sprite ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Tickets</span></a>
 				</div>
 			</div>	
 			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 2 -->
