@@ -1,5 +1,5 @@
 <div style="height:100%;">
-	<div class="colorMain-2" id="ticketTitlearea" style="width:100%;height:40px;">
+	<div class="colorMain-1" id="ticketTitlearea" style="width:100%;height:40px;">
 		<div style="display:table;width:100%;height:100%">
 			<div style="display:table-cell;width:50%;text-align:left;">
 				<div class="fontMain2" id="ticketId" style="font-weight:bold;padding-left:2px;padding-right:3px">
@@ -28,7 +28,7 @@
 				</div>
 				<div id="" style="display:block;height:16px;">
 					<div class="fontMain" id="backnext" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
-						<--BACK NEXT-->
+						<!-- <--BACK NEXT-->
 					</div>
 				</div>
 			</div>
@@ -136,8 +136,7 @@
 					<!--<div class="button-purple fg-button roundAll4 fontReverse lapcatButton left" id="Blocklink" style="width:auto;"><span class="ticket_button ticket_sprite brick">Block</span></div>-->
 				</div>
 			</div>
-			<div id="pageAnator" style="">
-			</div>
+			<div id="pageAnator" style=""></div>
 		</div>
 		<div style="display:table-cell;width:auto;padding:3px">
 			<!-- Right Side ticket body and Replies -->
@@ -152,16 +151,6 @@
 					</div>
 					<div style="display:table-cell;vertical-align:top;padding:6px;">
 						<div class="font-X2" style="word-wrap:break-word;white-space: normal;vertical-align:top;" id="ticketBody">
-						</div>
-					</div>
-					<div id="ticketListDueDate" style="display:table-cell;width:200px;right:0px;">
-						<div class="font-X2" id="changemeDueDate">
-						</div>
-						<div class="font-X2" id="changemeTr">
-						</div>
-						<div class="font-X2" id="changemeTT">
-						</div>
-						<div class="font-X2" id="changemeAssignedid">
 						</div>
 					</div>
 				</div>
