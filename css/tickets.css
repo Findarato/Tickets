@@ -339,12 +339,13 @@ textarea {
 @media screen and (max-width: 900px) {
     /*Droid Customizations*/
    
-    .topMenuItem > a > span,.tab > a > span{
+    .topMenuItem > a > span,.tab > a > span,.ticketProjectLocation,.ticketCreatedBy{
     	display:none;
     }
     .tab > a{
     	width:20px;
     }
+    
     .mobile {
         display: inline-block
     }

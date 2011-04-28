@@ -93,6 +93,9 @@ function checkHash() {
   			}
   			break;
 		case "#ticketList":
+			changeArea("tickets");
+//			loadTicketList(0,{"search":"","area":"all_tickets"});
+
       switch (hash[2]) {
         case "page": // ticket with a page number selected
           loadTicketList(hash[3]);
@@ -822,9 +825,9 @@ function loadTicketList(pageNumber,queryObj) {
 
 		 displayTable = $("<table/>",{"class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
 		if(bugs == 1){ //bugs display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td>Project</td><td>Priority</td><td>Created By</td><td>Created On</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td>Location</td><td>Priority</td><td>Category</td><td>Created By</td><td>Due On</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Location</td><td>Priority</td><td>Category</td><td class='ticketCreatedBy'>Created By</td><td>Due On</td></tr>");
 		}		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
@@ -847,7 +850,7 @@ function loadTicketList(pageNumber,queryObj) {
 		     $("<tr/>")
 		      .css({"padding":"3px","margin":"3px"})
 		      .html(
-		        $("<td/>")
+		        $("<td/>",{"class":"bookmark"})
 		          .html(
                 $("<div/>",{id:"bookmark"+item.id,css:{},"class":" ticket_sprite fakelink "+bmClass})
                 .click(function(){
@@ -873,7 +876,7 @@ function loadTicketList(pageNumber,queryObj) {
 		      )
 		      .append(
 		        function(){
-	            html = $("<td/>")
+	            html = $("<td/>",{"class":"ticketId"})
                 .addClass("borderBottomBlack")
                 .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontMain").html(item.id).attr({"id": "ID" + item.id }))
 		          return html;
@@ -881,22 +884,22 @@ function loadTicketList(pageNumber,queryObj) {
 		         
 		      ) 
 		      .append($("<td/>")
-		        .addClass("borderBottomBlack")
+		        .addClass("borderBottomBlack",{"class":"ticketTitle"})
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontBold fontMain").html(item.subject).attr({"id": "subject" + item.id }))
 		      )
 		      .append(
 		        function(){
 		          if(bugs){
 		            if(item.project_id === undefined || item.project_id == 0){ item.project_id = 1; } // fix bugs that do not have a project.  Default them to the first project
-		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("borderBottomBlack fontMain")
+		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("borderBottomBlack fontMain ticketProjectLocation")
 		          }else{
-		            return $("<td/>").html(item.locationName).addClass("borderBottomBlack fontMain")
+		            return $("<td/>").html(item.locationName).addClass("borderBottomBlack fontMain ticketProjectLocation")
 		          }
 		        }
 		      )
 		      .append( 
 		        $("<td/>")
-		          .addClass("borderBottomBlack fontMain")
+		          .addClass("borderBottomBlack fontMain ticketPriority")
 		          .html(
     		        function(i,html){
     		         if(item.priority>0){
@@ -910,9 +913,9 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 		          if(bugs){
-		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain")
+		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy")
 		          }else{
-		            return $("<td/>").html(item.category).addClass("borderBottomBlack fontMain");    
+		            return $("<td/>").html(item.category).addClass("borderBottomBlack fontMain ticketCategory");    
 		          }
 		        }
 		        
@@ -920,9 +923,9 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(i,html){
 		          if(bugs){
-		            return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain")
+		            return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn")
 		          }else{
-		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain")
+		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy")
 		          } 
 		        }
 		        
@@ -945,6 +948,7 @@ function loadTicketList(pageNumber,queryObj) {
     }
 		Tlb.html(display);
 		pageAnator($("#tldPageAnator"), ticketCount, 30,pageNumber);
+		
 	});
 }
 function loadUserPage(userId){
