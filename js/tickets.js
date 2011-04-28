@@ -1384,6 +1384,7 @@ jQuery(document).ready(function () {
 		$(".tab").removeClass("selectedTab");
 		me = $(this);
 		me.addClass("selectedTab").blur();
+		//me.find(":first-child").trigger("click");
 	});
 
 	//

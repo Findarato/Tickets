@@ -333,31 +333,18 @@ textarea {
 .topMenuItem{
 	padding:0 4px 0 4px;
 }
-@media screen and (min-width: 901px) and (max-width: 950px) {
-    #updateNotesContainer .topperText,
-    #replyToggle .topperText,
-    #sideArea .topperText {
-        display: none
-    }
-    .topMenuItem > a > span{
+@media screen and (min-width: 901px) {
+    /** Full display  */
+}
+@media screen and (max-width: 900px) {
+    /*Droid Customizations*/
+   
+    .topMenuItem > a > span,.tab > a > span{
     	display:none;
     }
-}
-@media screen and (min-width: 901px) and (max-width: 1100px) {
-    #updateNotesContainer .topperText {
-        display: none
+    .tab > a{
+    	width:20px;
     }
-}
-@media screen and (min-width: 901px) {
-    /**
-       *   
-       * Full display 
-       * 
-       */
-
-}
-@media screen and (min-width: 600px) and (max-width: 900px) {
-    /*Droid Customizations*/
     .mobile {
         display: inline-block
     }
