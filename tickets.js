@@ -126,8 +126,9 @@ function checkHash() {
 		case "#userPage":
 			loadUserPage(hash[1]);
 		break;
-		case "#tickets": // this triggers when the tab tickets is clicked
+		case "#tickets":// this triggers when the tab tickets is clicked
 			changeArea("tickets");
+			case "#search":
 			loadTicketList(0,{"search":"","area":"all_tickets"});
 		break;
 		case "#bugs": // this triggers when the tab tickets is clicked
@@ -1167,7 +1168,7 @@ function changeArea(area){
 		break;
 		case "search":
 			$("#searchTab").trigger("click");	
-			location.html("");
+			location.load("templates/search_top.tpl");
 		break;
 		case "stats":
 			$("#statsTab").trigger("click");	
@@ -1382,7 +1383,12 @@ jQuery(document).ready(function () {
 	});
 	//$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	
-	
+	$("#ticketSearchButton").live("click",function(){
+
+		loadTicketList(0,{"search":$("#ticketSearch").val(),"area":"all_tickets"});//			loadTicketList(0,{"search":"","area":"all_tickets"});
+		
+		
+	});
 
 	$(".tab").bind("click",function(){
 		$(".tab").removeClass("selectedTab");
