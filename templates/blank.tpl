@@ -1,4 +1,4 @@
-<div class="" style="width:auto;margin-left:5px;font-size:90%;line-height:10px" title="Update Notes">
+<div class="colorWhite-1" style="width:auto;margin-left:5px;font-size:90%;line-height:10px" title="Update Notes">
 	<div class="" id="" >
 		<div class="corners-bottom-2 corners-top-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">
 			Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above.

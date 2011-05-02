@@ -197,7 +197,16 @@ if(isset($_GET["area"]) ){
       break;    
   }
   // Lets take the switch statement above and use it to determain the where clause of the sql that needs to get ran.  Even favorites should be able to be done this way.
-   $response["ticketCount"] = $db->ResultsCount;
+  if($_GET["search"]!=""){
+  	$wc.=" AND (t.id='".$_GET["search"]."'";
+	$wc.=" OR t.subject LIKE '%".$_GET["search"]."%'";
+	$wc.=" OR t.description LIKE '%".$_GET["search"]."%'";
+	$wc.=" OR t.location LIKE '%".$_GET["search"]."%'";
+	$wc.=")";
+	
+	//echo $wc;die();
+  }
+  $response["ticketCount"] = $db->ResultsCount;
       $sql = '
       SELECT 
         t.open,
@@ -225,12 +234,13 @@ if(isset($_GET["area"]) ){
       FROM tickets AS t 
       JOIN category AS c ON (c.id=t.category_id)
       JOIN library_names AS ln ON (ln.ID=t.location)
-      JOIN lapcat.hex_users AS lhu ON (t.assigned_id=lhu.id)
-      JOIN lapcat.hex_users AS lhu2 ON (t.created_by_id=lhu2.id)
+      JOIN users AS lhu ON (t.assigned_id=lhu.id)
+      JOIN users AS lhu2 ON (t.created_by_id=lhu2.id)
       WHERE '.$wc.' GROUP BY t.id ORDER BY t.id,t.priority DESC,t.due_on 
       LIMIT '.$page.','.$amount.';';
 	  //die($sql);
       $response["tickets"] = $db->Query($sql,false,"assoc_array");
+	  
 	  
 }
 

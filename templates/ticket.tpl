@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div style="display:table;width:100%">
-		<div class="border-right-Main-4" style="display:table-cell;width:300px;vertical-align:top;">
+		<div class="border-right-Main-4 colorWhite-1" style="display:table-cell;width:300px;vertical-align:top;">
 			<!-- Left Side ticket information -->
 			<div style="display:none;height:16px;" class="closedTicket" id="ticketClosedOn">
 				<div class="fontMain2" id="ticketClosedOnDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >
@@ -160,7 +160,7 @@
 		</div>
 	</div>
 	<div style="width:100%" id="bottomReplyArea">
-		<div class="color-B-2" style="width:auto;height:90px;position:relative;" title="Reply Box">
+		<div class="colorMain-1" style="width:auto;height:90px;position:relative;" title="Reply Box">
 			<div id="1replyareabody" style="padding:3px;">
 				<form name="newReplyForm" id="newReplyForm">
 					<div class="textLeft">
