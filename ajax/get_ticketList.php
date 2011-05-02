@@ -203,10 +203,11 @@ if(isset($_GET["area"]) ){
 	$wc.=" OR t.description LIKE '%".$_GET["search"]."%'";
 	$wc.=" OR t.location LIKE '%".$_GET["search"]."%'";
 	$wc.=")";
-	
+	$response["ticketCount"] = $db->Query("SELECT count(t.id) FROM tickets AS t WHERE ".$wc,false,"row");
+	//die($db->Lastsql);
 	//echo $wc;die();
-  }
-  $response["ticketCount"] = $db->ResultsCount;
+  }else{$response["ticketCount"] = $db->ResultsCount;}
+  
       $sql = '
       SELECT 
         t.open,
