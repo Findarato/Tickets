@@ -29,12 +29,13 @@
 	        <li>Tickets works much better on Smart phones.  You can now check and interact will all of the ticket features straight from your phone.  There may be bugs in how it work in the initial release, and it will be improved over time.</li>
 	      </ol>
         </li>
+        <li>Searching works.  It is now a keyword search that searches the title, body, and id of the ticket.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
       <ol>
         <li>Searching By project does not work</li>
-        <li>Searching is slated for the next update to tickets.</li>
+        <li>Page indicators in a search result do not currently work.</li>
         <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
       </ol>
       <br>
