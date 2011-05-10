@@ -1218,7 +1218,9 @@ function loadLocalStorage(clear){
  * 
  * Lets run some code that needs to be ran after the page loads
  */
+
 jQuery(document).ready(function () {
+
   //localStorage.clear();
   loadLocalStorage(true);
   //populateAllBugs();
