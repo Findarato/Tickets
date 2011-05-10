@@ -335,9 +335,14 @@ textarea {
 }
 @media screen and (min-width: 901px) {
     /** Full display  */
+	.ticketSideLeft,.ticketSideRight{display:table-cell;width:auto;}
+	.ticketSideLeft {width:300px;}
+
 }
 @media screen and (max-width: 900px) {
     /*Droid Customizations*/
+	.ticketSideLeft,.ticketSideRight{display:block;width:auto}
+	.border-right-Main-4{border-right:0px}
    
     .topMenuItem > a > span,.tab > a > span,.ticketProjectLocation,.ticketCreatedBy{
     	display:none;
@@ -369,8 +374,5 @@ textarea {
     }
     .actionButtons {
         font-size: 16px
-    }
-    .actionButtons .ticket_sprite {
-        background: url() no-repeat
     }
 }
