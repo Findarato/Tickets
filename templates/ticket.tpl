@@ -34,8 +34,8 @@
 			</div>
 		</div>
 	</div>
-	<div style="display:table;width:100%">
-		<div class="border-right-Main-4 colorWhite-1" style="display:table-cell;width:300px;vertical-align:top;">
+	<div style="display:table;width:100%"><!--Main Content -->
+		<div class="ticketSideRight border-right-Main-4 colorWhite-1" style="vertical-align:top;width:300px">
 			<!-- Left Side ticket information -->
 			<div style="display:none;height:16px;" class="closedTicket" id="ticketClosedOn">
 				<div class="fontMain2" id="ticketClosedOnDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >
@@ -138,7 +138,7 @@
 			</div>
 			<div id="pageAnator" style=""></div>
 		</div>
-		<div style="display:table-cell;width:auto;padding:3px">
+		<div class="ticketSideRight" style="padding:3px">
 			<!-- Right Side ticket body and Replies -->
 			<div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" class="border-all-B-1 WhitetoLightBlue">
 				<!-- Body of the ticket -->
