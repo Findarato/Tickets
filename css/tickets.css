@@ -310,7 +310,6 @@ input:focus {
 textarea {
     resize: none;
 }
-
 .inside-border
 {
   box-sizing: border-box;
