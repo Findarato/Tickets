@@ -1316,34 +1316,6 @@ jQuery(document).ready(function () {
 			$("#btn_login").trigger('click')
 		}
 	});
-	/*
-	$("#ticketSearchButton").click(function () {
-		var hash = "ticketList";
-		var s_Title = $("#searchTitle").val();
-		var s_Category = $("#searchCategory").val();
-		var s_Assign = $("#searchAssign").val();
-		var s_Priority = $("#searchPriority").val();
-		var s_Department = $("#searchDepartment").val();
-		if (s_Title !== "") {
-			hash += "/title/" + s_Title;
-		}
-		if (s_Category !== "") {
-			hash += "/category/" + s_Category; 
-		}
-		if (s_Assign !== "") {
-			hash += "/assigned/" + s_Assign;
-		}
-		if (s_Priority !== "") {
-			hash += "/priority/" + s_Priority;
-		}
-		if (s_Department !== "") {
-			hash += "/department/" + s_Department;
-		}
-		setHash(hash);
-		loadTicketList();
-		$.fn.colorbox.close();
-	});
-	*/
 	$("#ticketAddButton,#bugAddButton").live("click",function () {
 		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
@@ -1433,6 +1405,24 @@ jQuery(document).ready(function () {
 			loadTicket(Params.TicketId);
 		});
 	});
+	$("#forgotPasswordButton").live("click",function(){
+		$("#forgotPasswordBox").css({"height":"125px"})
+		$("#requestSent").css({"opacity":"0"})
+	});
+	$("#forgotPasswordSubmitButton").live("click",function(){
+		jQuery.post(uri + "ajax/resetPassword.php", $("#frm_resetPassword").serialize(), function (data) {
+			data = $.parseJSON(data);
+			if(data.error != ""){
+				$("#loginErrorMessage").text(data.error).css({"opacity":"1"})
+			}else{
+				$("#requestSent").css({"opacity":"1"})
+				$("#forgotPasswordBox").css({"height":"0"})
+			}
+		});		
+	});
+	$("#frm_login").live("focus",function(){
+		$("#requestSent").css({"opacity":"0"})
+	})
 	
 	//Global page live 
 	$(":text").live("click", function () {
