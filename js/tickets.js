@@ -126,6 +126,9 @@ function checkHash() {
 		case "#userPage":
 			loadUserPage(hash[1]);
 		break;
+		case "#login":
+			loadLoginPage(hash[1]);
+		break;
 		case "#tickets":// this triggers when the tab tickets is clicked
 			changeArea("tickets");
 			case "#search":
@@ -305,21 +308,6 @@ function loadLargeStats() {
  * @param String Area
  */
 
-function populateAllTickets(Area) {
-	/*
-	var cnt,html,Ttype;
-	$.getJSON(uri + "ajax/tickets.php", {"type": "small","index": "all","area": Area,"style": 1},function (data, text) {
-	  Params.UserId = data.user_id;
-		$.each(data.ticket,	function (i, item) {
-			cnt = 0;html = "";Ttype = "";
-			$("#c" + item.type)
-				.html(item.Count);
-				Ttype = item.type;
-			}
-		);
-	});
-	*/
-}
 function populateAllBugs(Area) {
 	var cnt,html,Ttype;
 	$.getJSON(uri + "ajax/get_bugs.php", {"all": "1","small":"1"},function (data, text) {
