@@ -127,7 +127,7 @@ function checkHash() {
 			loadUserPage(hash[1]);
 		break;
 		case "#login":
-			loadLoginPage(hash[1]);
+			loadLoginPage();
 		break;
 		case "#tickets":// this triggers when the tab tickets is clicked
 			changeArea("tickets");
@@ -1141,11 +1141,15 @@ function loadUserPage(userId){
 
 }
 
+function loadLoginPage(){ 
+	Params.Content.load("templates/login.tpl");
+}
+
 function changeArea(area){
 	var location = $("#subAreaBar"); 
 	switch(area){
 		case "tickets":
-			$("#ticketTab").trigger("click");	
+			$("#ticketTab").trigger("click");
 			location.load("templates/ticket_top.tpl");
 			Params.NavArea="tickets";
 		break;
@@ -1161,7 +1165,7 @@ function changeArea(area){
 		case "stats":
 			$("#statsTab").trigger("click");	
 			location.html("");
-		break;		
+		break;
 	}
 }
 
