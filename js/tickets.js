@@ -171,12 +171,12 @@ function loadBlank() {
 
 function loadLargeBarGraph(selectorId,data,lables) {
 	var Bar = new RGraph.Bar(selectorId, data);
-	RGraph.Clear(Bar.canvas);
+	RGraph.Clear(Bar.canvas); 
     Bar.Set('chart.labels', lables);
     Bar.Set('chart.gutter',45);
     Bar.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
     Bar.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
-	  Bar.Set('chart.linewidth', 2);
+	Bar.Set('chart.linewidth', 2);
     Bar.Set('chart.ylabels.count', 3);
     Bar.Set('chart.filled', true);
     Bar.Set('chart.background.grid', true);
