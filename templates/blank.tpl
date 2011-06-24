@@ -15,7 +15,7 @@
       <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.0.r413</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
-        <li>.</li>
+        <li>Clicking on the "No User (Please Login) link correctly takes you to the login window. (Finally)</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
