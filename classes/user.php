@@ -62,10 +62,10 @@ class User {
 			(u.username="'.$name.'" AND u.password=MD5("'.$pass.'")) 
 			OR (u.open_id="'.$name.'" AND u.email_address="'.$pass.'");'
 		;
-		$v_DC=db::getInstance();
-		$v_DC->Query($SQL);
-		$rows=$v_DC->Format('assoc_array');
-		if($v_DC->Count_res()>0){
+		$db=db::getInstance();
+		$db->Query($SQL);
+		$rows=$db->Format('assoc_array');
+		if($db->Count_res()>0){
 			foreach($rows as $row){
 				$this->a_User['logged-in']=true;
 				
@@ -85,7 +85,7 @@ class User {
 					if(strtotime('today - 13 years')<$v_Birthday){
 						return array('success'=>1,'could-not-create-account'=>true);
 					}else{
-						$v_DC->Query('INSERT INTO hex_users (type,cardnumber,pin,birthday) VALUES (3,"'.$name.'","'.$pass.'","'.date('Y-m-d',$v_Birthday).'");');
+						$db->Query('INSERT INTO hex_users (type,cardnumber,pin,birthday) VALUES (3,"'.$name.'","'.$pass.'","'.date('Y-m-d',$v_Birthday).'");');
 						return $this->UserLogin($name,$pass,true);
 					}
 				}
