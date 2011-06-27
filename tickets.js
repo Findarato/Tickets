@@ -1013,7 +1013,7 @@ function loadUserPage(userId){
 							css:{"display":"block","margin":"5px","width":"auto"},
 							html:$("<a class=\"minimal ticketPadding3\" id=logOut href=\"ajax/login.php?logout&id="+Params.UserId+"\" title=\"Log out of Tickets\">Log Out</a>")
 								.click(function(){
-									$.getJSON(this.href,function(){ window.location = "/";		})
+									$.getJSON(this.href,function(){ window.location = "/";})
 									return false;
 								})
 							})	
