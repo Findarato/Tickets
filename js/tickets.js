@@ -1006,6 +1006,18 @@ function loadUserPage(userId){
 					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
 					.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
 					.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
+					.append( 
+						$("<div>",
+							{id:"",
+							"class":"",
+							css:{"display":"block","margin":"5px","width":"auto"},
+							html:$("<a class=\"minimal ticketPadding3\" id=logOut href=\"ajax/login.php?logout&id="+Params.UserId+"\" title=\"Log out of Tickets\">Log Out</a>")
+								.click(function(){
+									$.getJSON(this.href,function(){ window.location = "/";		})
+									return false;
+								})
+							})	
+					)
 			} 
 		)
 		.appendTo(Tlb);
@@ -1263,10 +1275,10 @@ jQuery(document).ready(function () {
     Params.Content.find(".Ticketform").css("background-color", "");
   });  
   	//Clicking login with google button
-  	$("#googleLogin").click(function(){
+  	$("#googleLogin").live("click",function(){
   		window.location = "classes/lightopenid/google.php?login";
   	});
-	$("#loginButton").click(function () {
+	$("#loginButton").live("click",function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error", "Please enter a username", false);
 			return;
