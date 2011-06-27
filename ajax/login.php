@@ -61,8 +61,13 @@
 			$response['message']="Update Successful";
 		}
 		$response["altEmail"] = $_POST["altEmail"];
+	}elseif(isset($_GET["logout"])){
+		$usr = unserialize($_SESSION['user']);			
+		$usr->LogUserOut();
+		unset($_SESSION['user']);
+		$response["message"]="Successfully Logged out of Tickets";
 	}else{
-		$response["error"]=="Invalid Username or passwordd";
+		$response["error"]=="Invalid Username or password";
 		echo json_encode($response);
 		die();
 	}

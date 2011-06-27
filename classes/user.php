@@ -3,33 +3,22 @@ class User {
 
 	//
 	// Function - User
-	function User($tickets=false){if(!$tickets){$this->F_LoadPromotions();}}
+	function User($tickets=false){
+	}
 	
 	/* Array - User */
 	public $a_User=array(
 		'logged-in'=>false,
 	);
+	public $A_U = array();
 	public $User_id = -1;//adding compatability to Joe's coding style
 	
-	/* Function - Get Logged In Status */
-	function f_GetLoggedInStatus(){
-		return json_encode(array('switch'=>$this->a_User['logged-in'],'type'=>$this->A_U['type'],'theme'=>$this->a_User['theme']));
-	}
 	/* Function - Log User Out */
-	function f_LogUserOut(){
+	function LogUserOut(){
 		$this->a_User['logged-in']=false;
-		$this->a_User['theme']=22;
-		$this->A_U['type']=2;
-		return $this->f_GetLoggedInStatus();
+		$this->User_id = -1; //adding compatability to Joe's coding style
+		$this->A_U = array();
 	}
-	/* Function - Get Theme */ 
-	function f_GetTheme($v_UserID=0){
-		$v_DC=db::getInstance();
-		$v_SQL='SELECT htbu.theme_ID AS theme FROM lapcat.hex_themes_by_user AS htbu WHERE htbu.user_ID='.$v_UserID.';';
-		$v_DC->Query($v_SQL);
-		if($v_DC->Count_res()>0){$a_Results=$v_DC->Format('assoc');$this->a_User['theme']=$a_Results['theme'];}
-	}
-	
 	
 	/* Function - Patron API */
 	function patAPI($cardno) { //take validated card information and get values.
