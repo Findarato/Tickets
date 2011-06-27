@@ -24,7 +24,6 @@
 				$smarty->assign('firstname',$usr->A_U['first-name']);
 				$smarty->assign('lastname',$usr->A_U['last-name']);
 				$smarty->assign('user_id',$usr->User_id);
-				$smarty->assign('theme_id',$usr->a_User["theme"]);
 				$depart = getDepartment_by_userid($usr->User_id);
 				$db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id);
 				$altE = $db->Fetch("row");
