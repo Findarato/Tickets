@@ -31,7 +31,12 @@ try {
             echo "first_name: " . $first_name . "<br>";
             echo "last_name: " . $last_name . "<br>";
 			$res = $db->Query("SELECT id FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
-			print_r($res);
+			if($res == 0){
+				
+			}else{
+				print_r($res);	
+			}
+			
         }
         else
         {
