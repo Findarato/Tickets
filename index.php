@@ -20,7 +20,7 @@
 			if($usr->User_id==-1 || $usr->A_U['type']<4){$smarty -> assign('content','login.tpl');$smarty -> assign('error','Invalid Username or Password');}else{
 				$_SESSION["user"] = serialize($usr);
 				$smarty-> assign("content","empty.tpl");
-				$smarty->assign('username',$usr->A_P['username']);
+				$smarty->assign('username',$usr->A_P['username']); 
 				$smarty->assign('firstname',$usr->A_U['first-name']);
 				$smarty->assign('lastname',$usr->A_U['last-name']);
 				$smarty->assign('user_id',$usr->User_id);
@@ -35,7 +35,6 @@
 		$smarty->assign('firstname',$usr->A_U['first-name']);
 		$smarty->assign('lastname',$usr->A_U['last-name']);
 		$smarty->assign('user_id',$usr->User_id);
-		$smarty->assign('theme_id',$usr->a_User["theme"]);
 		$depart = getDepartment_by_userid($usr->User_id);
 		$db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id);
 		$altE = $db->Fetch("row");
