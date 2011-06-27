@@ -74,7 +74,8 @@ p {
     display: table
 }
 .td {
-    display: table-cell
+    display: table-cell;
+    vertical-align: top;
 }
 .message_body {
     padding: 5px 10px 15px;

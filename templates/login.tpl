@@ -2,7 +2,8 @@
 	<div class="fontMain head message_head colorMain-1 border-all-B-1" id="" style="">
 		Please Login
 	</div>
-	<div class="message_body colorWhite-1 corners-bottom-2" id="" style="height:451px;">
+	<div class="td">
+			<div class="message_body colorWhite-1 corners-bottom-2" id="" style="height:451px;">
 		<form id="frm_login" action="javascript:void(none);" name="login">
 			<div style="display:table;margin-bottom:10px;">
 				<div style="display:table-cell">
@@ -25,6 +26,11 @@
 		<button class="fontReverse minimal ticketPadding3" id="forgotPasswordButton" style="width:auto;">
 			Forgot Password
 		</button>
+		
+		<button class="fontReverse minimal ticketPadding3" id="googleLogin" style="width:auto;">
+			Login with Google
+		</button>
+		<a href="<?php echo $_SERVER['PHP_SELF'] . "?login"?>">Login with Google</a>
 		<div class="box_transition textMessages" style="opacity:0;color:#f00;font-weight:bold;display:inline-block;" id="requestSent">Request Sent, Check your inbox.</div>
 		<div class="box_transition textMessages" style="opacity:0;color:#f00;font-weight:bold;display:inline-block;" id="loginErrorMessage"></div>
 		<div class="" id="forgotPasswordBox" style="width:400px;margin:10px 0 10px 0;height:0;overflow:hidden;">
@@ -53,5 +59,11 @@
 				<div style="float:left;margin-left:10px">
 				</div>
 		</div>
+	</div>
+	</div>
+
+	<div class="td">
+		<a href="classes/lightopenid/google.php">test</a>
+		<iframe src="classes/lightopenid/google.php">You need a new Browser</iframe>
 	</div>
 </div>

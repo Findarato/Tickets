@@ -1262,6 +1262,10 @@ jQuery(document).ready(function () {
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
     Params.Content.find(".Ticketform").css("background-color", "");
   });  
+  	//Clicking login with google button
+  	$("#googleLogin").click(function(){
+  		window.location = "classes/lightopenid/google.php?login";
+  	});
 	$("#loginButton").click(function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error", "Please enter a username", false);
