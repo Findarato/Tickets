@@ -1,5 +1,6 @@
 <?php
 require 'openid.php';
+require "../../small_header.php";
 try {
     $openid = new LightOpenID;
     if(!$openid->mode) {
@@ -8,9 +9,6 @@ try {
             $openid->required = array('namePerson/first', 'namePerson/last', 'contact/email');
             header('Location: ' . $openid->authUrl());
         }
-?>
-
-<?php
     } elseif($openid->mode == 'cancel') {
         echo 'User has canceled authentication!';
     } else {
@@ -32,6 +30,8 @@ try {
             echo "email: " . $email . "<br>";
             echo "first_name: " . $first_name . "<br>";
             echo "last_name: " . $last_name . "<br>";
+			$res = $db->Query("SELECT id FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
+			print_r($res);
         }
         else
         {
