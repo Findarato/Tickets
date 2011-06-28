@@ -1,6 +1,7 @@
 <?php
 require 'openid.php';
 require "../../small_header.php";
+$_SESSION["validOpenID"] = false;
 try {
     $openid = new LightOpenID;
     if(!$openid->mode) {
@@ -31,11 +32,18 @@ try {
             echo "email: " . $email . "<br>";
             echo "first_name: " . $first_name . "<br>";
             echo "last_name: " . $last_name . "<br>";
-			$res = $db->Query("SELECT id FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
+			$user_id = $db->Query("SELECT id FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
+
 			if($res == 0){
 				
 			}else{
-				print_r($res);	
+				print_r($res);
+				$_SESSION["validOpenID"] = true;
+				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$User_id."' ",false,"row");
+				if($openIdtoUserID == 0){ //There is no link in the openID table
+					
+				}
+				
 			}
 			
         }
