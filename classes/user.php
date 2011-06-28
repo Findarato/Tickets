@@ -6,12 +6,17 @@ class User {
 	function User($tickets=false){
 	}
 	
-	/* Array - User */
+	//Public Arrays
 	public $a_User=array(
 		'logged-in'=>false,
 	);
 	public $A_U = array();
 	public $User_id = -1;//adding compatability to Joe's coding style
+	public $Permissions = array();
+	
+	//Private stuff
+	private $openID = "";
+	
 	
 	/* Function - Log User Out */
 	function LogUserOut(){
@@ -39,15 +44,16 @@ class User {
 			}
 		}
 	
-		//$this->Homelibrary = $info["HOMELIBR"];
-		//$this->Birthdate = $info["BIRTHDATE"];
-		//$this->Currentcheckout = $info["CURCHKOUT"];
-		//$this->Patapi = $info;
 		return $info["BIRTHDATE"];
 	}
 
-	//
-	// User Log-In
+	public function LoadPermissions($user_id){
+		$permission = array();
+		
+		return $permissions;
+	}
+	
+	
 	function UserLogin($name=0,$pass='',$v_FailSafe=false){
 		$SQL='
 		SELECT 
@@ -55,16 +61,17 @@ class User {
 			u.username, 
 			u.type, 
 			u.firstname,
-			u.lastname 
+			u.lastname
 		FROM 
 			tickets.users AS u 
 		WHERE 
 			(u.username="'.$name.'" AND u.password=MD5("'.$pass.'")) 
 			OR (u.open_id="'.$name.'" AND u.email_address="'.$pass.'");'
 		;
+		
 		$db=db::getInstance();
-		$db->Query($SQL);
-		$rows=$db->Format('assoc_array');
+		$rows = $db->Query($SQL,false,"assoc_array");
+		
 		if($db->Count_res()>0){
 			foreach($rows as $row){
 				$this->a_User['logged-in']=true;
@@ -77,19 +84,11 @@ class User {
 				$this->A_P['username']=$row['username'];
 				$this->A_U['logged-in']=3;
 				$this->A_U['validated']=true;
+				$this->UserInfo["openID"]="";
+				$this->Permissions = $this->LoadPermissions($row['ID']);
 			}
-		}else{
-			if(!$v_FailSafe){
-				if(FF_PinAPI($name,$pass)){
-					$v_Birthday=strtotime($this->patAPI($name));
-					if(strtotime('today - 13 years')<$v_Birthday){
-						return array('success'=>1,'could-not-create-account'=>true);
-					}else{
-						$db->Query('INSERT INTO hex_users (type,cardnumber,pin,birthday) VALUES (3,"'.$name.'","'.$pass.'","'.date('Y-m-d',$v_Birthday).'");');
-						return $this->UserLogin($name,$pass,true);
-					}
-				}
-			}
+		}else{//Lets check to see if there is a valid openID but no user account information			
+			
 		}
 		return array('success'=>0);
 	}
