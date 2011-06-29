@@ -1,11 +1,5 @@
 <?
 class User {
-
-	//
-	// Function - User
-	function User($tickets=false){
-	}
-	
 	//Public Arrays
 	public $a_User=array(
 		'logged-in'=>false,
@@ -13,9 +7,50 @@ class User {
 	public $A_U = array();
 	public $User_id = -1;//adding compatability to Joe's coding style
 	public $Permissions = array();
+	public $Permissions_name = array();
 	
 	//Private stuff
 	private $openID = "";
+
+	function User(){
+		$SQL='
+			SELECT 
+				u.ID, 
+				u.username, 
+				u.type, 
+				u.firstname,
+				u.lastname
+			FROM 
+				tickets.users AS u 
+			WHERE 
+				(u.username="'.$name.'" AND u.password=MD5("'.$pass.'")) 
+				OR (u.open_id="'.$name.'" AND u.email_address="'.$pass.'");'
+		;
+		
+		$db=db::getInstance();
+		$rows = $db->Query($SQL,false,"assoc_array");
+		
+		if($db->Count_res()>0){
+			foreach($rows as $row){
+				$this->a_User['logged-in']=true;
+				
+				// Valid Log-In and Password 
+				$this->User_id=$row['ID']; //adding compatability to Joe's coding style
+				$this->A_U['type']=$row['type'];
+				$this->A_U['first-name']=$row['firstname'];
+				$this->A_U['last-name']=$row['lastname']; //adding compatability to Joe's coding style
+				$this->A_P['username']=$row['username'];
+				$this->A_U['logged-in']=3;
+				$this->A_U['validated']=true;
+				$this->UserInfo["openID"]="";
+				$this->Permissions = $this->LoadPermissions($row['ID']);
+			}
+		}else{//Lets check to see if there is a valid openID but no user account information			
+			
+		}
+		return array('success'=>0);
+	}
+	
 	
 	
 	/* Function - Log User Out */
@@ -47,52 +82,22 @@ class User {
 		return $info["BIRTHDATE"];
 	}
 
-	public function LoadPermissions($user_id){
+	public function LoadPermissions($user_id){ //Load the permissions into the object and return true on success and false on fail
 		$permissions = array();
 		$db=db::getInstance();
-		$rows = $db->Query("SELECT ",false,"assoc_array");
-		
-		return $permissions;
+		$sql = "SELECT permission_id FROM user_permissions WHERE user_id=$user_id";
+		$permissions = $db->Query($SQL,false,"assoc_array");
+		if($permissions==0){
+			return false;	
+		}else{
+			$this->Permissions = $permissions;
+			return true;
+		}
 	}
 	
 	
 	function UserLogin($name=0,$pass='',$v_FailSafe=false){
-		$SQL='
-		SELECT 
-			u.ID, 
-			u.username, 
-			u.type, 
-			u.firstname,
-			u.lastname
-		FROM 
-			tickets.users AS u 
-		WHERE 
-			(u.username="'.$name.'" AND u.password=MD5("'.$pass.'")) 
-			OR (u.open_id="'.$name.'" AND u.email_address="'.$pass.'");'
-		;
-		
-		$db=db::getInstance();
-		$rows = $db->Query($SQL,false,"assoc_array");
-		
-		if($db->Count_res()>0){
-			foreach($rows as $row){
-				$this->a_User['logged-in']=true;
-				
-				// Valid Log-In and Password 
-				$this->User_id=$row['ID']; //adding compatability to Joe's coding style
-				$this->A_U['type']=$row['type'];
-				$this->A_U['first-name']=$row['firstname'];
-				$this->A_U['last-name']=$row['lastname']; //adding compatability to Joe's coding style
-				$this->A_P['username']=$row['username'];
-				$this->A_U['logged-in']=3;
-				$this->A_U['validated']=true;
-				$this->UserInfo["openID"]="";
-				$this->Permissions = $this->LoadPermissions($row['ID']);
-			}
-		}else{//Lets check to see if there is a valid openID but no user account information			
-			
-		}
-		return array('success'=>0);
+
 	}
 
 }
