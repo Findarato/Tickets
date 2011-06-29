@@ -7,7 +7,6 @@ class User {
 	public $A_U = array();
 	public $User_id = -1;//adding compatability to Joe's coding style
 	public $Permissions = array();
-	public $Permissions_name = array();
 	
 	//Private stuff
 	private $openID = "";
