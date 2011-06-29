@@ -48,7 +48,9 @@ class User {
 	}
 
 	public function LoadPermissions($user_id){
-		$permission = array();
+		$permissions = array();
+		$db=db::getInstance();
+		$rows = $db->Query("SELECT ",false,"assoc_array");
 		
 		return $permissions;
 	}
