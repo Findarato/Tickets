@@ -1279,7 +1279,7 @@ jQuery(document).ready(function () {
   		//window.location = "classes/lightopenid/google.php?login";
  		URL = "classes/lightopenid/google.php?login";
 		window.open(URL, '" + id + "', 'toolbar=0,scrollbars=0,location=1,statusbar=0,menubar=0,resizable=0,width=350,height=400,left = 810,top = 290');
-  	});
+  	}); 
 	$("#loginButton").live("click",function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error", "Please enter a username", false);
