@@ -7,4 +7,15 @@
 jQuery(document).ready(function () {
 
 
+	$("#yesLink").live("click",function(){
+		alert("yes");
+		$.getJSON("",function(json){
+			
+		});
+	});
+	
+	$("#noLink").live("click",function(){
+		alert("no");
+	});
+
 });
