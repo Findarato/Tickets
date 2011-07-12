@@ -42,10 +42,11 @@ try {
 				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$User_id."' ",false,"row");
 				if($openIdtoUserID == 0){ //There is no link in the openID table
 					
+				}else{//There is a link to a user id in the table.
+					
+							
 				}
-				
 			}
-			
         }
         else
         {
