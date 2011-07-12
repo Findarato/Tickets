@@ -3,6 +3,8 @@ require 'openid.php';
 require "../../small_header.php";
 $_SESSION["validOpenID"] = false;
 $_SESSION["openID"] = array();
+
+
 ?>
 <html>
 	<head>
@@ -19,7 +21,7 @@ $_SESSION["openID"] = array();
             pageTracker._trackPageview();
         </script>
 		<script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.5.2.min.js"></script>
-		<script src="js/login.js"></script>
+		<script src="http://<?=$server;?>/js/login.js"></script>
 	</head>
 	<body>
 		<?php
