@@ -93,11 +93,6 @@ class User {
 			return true;
 		}
 	}
-	
-	
-	function UserLogin($name=0,$pass='',$v_FailSafe=false){
-
-	}
 
 }
 ?>
