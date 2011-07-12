@@ -27,6 +27,7 @@
 	        <li>You can now see up to 30 tickets per screen instead of the normal 20.</li>
 	        <li>The body of a ticket now shows up as the first reply</li>
 	        <li>Tickets works much better on Smart phones.  You can now check and interact will all of the ticket features straight from your phone.  There may be bugs in how it work in the initial release, and it will be improved over time.</li>
+	        <li>You can login to tickets with a Google account.  More OpenID providers will be enabled in the future, but for now its just google.</li>
 	      </ol>
         </li>
         <li>Searching works.  It is now a keyword search that searches the title, body, and id of the ticket.</li>
