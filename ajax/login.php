@@ -1,5 +1,5 @@
 <?php
-	include_once "../small_header.php";
+	include_once "../small_header.php"; 
 	$_POST = $db->Clean($_POST);//clean out the post before it can be used
 	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ||unserialize($_SESSION['user'])->A_U['type']<4) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.

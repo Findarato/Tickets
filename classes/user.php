@@ -11,7 +11,11 @@ class User {
 	//Private stuff
 	private $openID = "";
 
-	function User(){
+	function UserLogin($name,$pass){ // just a wrapper to make sure that older stuff works
+		$this->User($name,$pass);
+	}
+
+	function User($name,$pass){
 		$SQL='
 			SELECT 
 				u.ID, 
