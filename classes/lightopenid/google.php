@@ -24,6 +24,15 @@ $_SESSION["openID"] = array();
 		<script src="http://<?=$server;?>/js/login.js"></script>
 	</head>
 	<body>
+		<script>
+			$.get("https://www.google.com/m8/feeds/photos/profile/lapcat.org/jharry",function(data){
+				alert(data);
+			});
+					
+
+			
+			
+		</script>
 		<?php
 try {
     $openid = new LightOpenID;
@@ -50,20 +59,14 @@ try {
             $first_name = $attributes['namePerson/first'];
             $last_name = $attributes['namePerson/last'];
  			
- 			/*
-            echo "mode: " . $openid->mode . "<br>";
-            echo "identity: " . $identity . "<br>";
-            echo "email: " . $email . "<br>";
-            echo "first_name: " . $first_name . "<br>";
-            echo "last_name: " . $last_name . "<br>";
-			*/
-
 			$_SESSION["openID"]["email"] = $email;
 			$_SESSION["openID"]["mode"] = $openid->mode;
 			$_SESSION["openID"]["identity"] = $identity;
 			$_SESSION["openID"]["first_name"] = $first_name;
 			$_SESSION["openID"]["last_name"] = $last_name;
 		
+		
+			echo $identity;
 			$user_id = $db->Query("SELECT id FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
 			
 			if($user_id == 0){ //We did not find a account to link
@@ -75,12 +78,12 @@ try {
 				if($openIdtoUserID == 0){ //There is no link in the openID table
 					echo "There is an account with the same email address found. Do you want to link it?";
 					echo "<button id='yesLink'>Yes</button>";
-					echo "<button id='noLink'>No</button>";		
+					echo "<button id='noLink'>No</button>";
 				}else{//There is a link to a user id in the table.
 					//echo "There is no Google ID link<br>";
 					//echo "If you have a Tickets account please login with that now.";
 					//echo "<button>Close</button>";	
-
+					
 				}
 			}
         }
