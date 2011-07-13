@@ -12,23 +12,47 @@ class User {
 	private $openID = "";
 
 	function UserLogin($name,$pass){ // just a wrapper to make sure that older stuff works
-		$this->User($name,$pass);
+		$this->User($name,$pass); 
 	}
 
-	function User($name,$pass){
-		$SQL='
-			SELECT 
-				u.ID, 
-				u.username, 
-				u.type, 
-				u.firstname,
-				u.lastname
-			FROM 
-				tickets.users AS u 
-			WHERE 
-				(u.username="'.$name.'" AND u.password=MD5("'.$pass.'")) 
-				OR (u.open_id="'.$name.'" AND u.email_address="'.$pass.'");'
-		;
+	function User($name,$pass,$openID=false,$md5Pass=false){
+		if(!$openID){//Not a openID login
+			$SQL='
+				SELECT 
+					u.ID, 
+					u.username, 
+					u.type, 
+					u.firstname,
+					u.lastname
+				FROM 
+					tickets.users AS u 
+				WHERE';
+				if($md5Pass){
+					$SQL.='(u.username="'.$name.'" AND u.password="'.$pass.'");';
+				}else{
+					$SQL.='(u.username="'.$name.'" AND u.password=MD5("'.$pass.'"));';
+				}
+					
+		}else{//This is an openID login, lets do some cool stuff
+			$SQL='
+				SELECT 
+					u.user_id, 
+					u.open_id, 
+				FROM 
+					tickets.open_id AS u 
+				WHERE 
+					(u.user_id="'.$name.'" AND u.open_id="'.$pass.'";';
+
+			$open = $db->Query($SQL,false,"row");
+			print_r($open);die();
+			
+			//$pass = $db->Query("SELECT password FROM tickets.users WHERE id='".$open."'",false,"row");
+			
+			//$this->User($open,$pass,false,true);
+			//return;
+		}
+		
+		
 		
 		$db=db::getInstance();
 		$rows = $db->Query($SQL,false,"assoc_array");

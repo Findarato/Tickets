@@ -270,7 +270,12 @@
       $request_url .= "?openid.ns=".urlencode(GoogleOpenID::openid_ns);
       $request_url .= "&openid.mode=associate";
       $request_url .= "&openid.assoc_type=HMAC-SHA1";
+      $request_url .= "&openid.ui.icon=true";
       $request_url .= "&openid.session_type=no-encryption";
+	  $request_url .= "&openid.oauth.scope=https://www.google.com/m8/feeds/profiles/";
+	  
+	  
+	  
       
       //create a CURL session with the request URL
       $c = curl_init($request_url);
