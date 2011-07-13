@@ -16,6 +16,7 @@
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
         <li>Clicking on the "No User (Please Login) link correctly takes you to the login window. (Finally)</li>
+        <li>Trying to take an action on a ticket when you are not logged in will now force you to login.  Before events were seeming to happen when a person was not logged in, but where blocked by the server and not shown to the user.  This lead to confusion.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
