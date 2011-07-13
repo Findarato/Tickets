@@ -228,23 +228,32 @@ if(isset($_GET["area"]) ){
         ln.name AS locationName,
         c.name AS category,
         TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago,
-        lhu.username,lhu.firstname,lhu.lastname, lhu2.firstname AS firstname2,lhu2.lastname AS lastname2,lhu2.username AS username2,
+
+        u.username,
+        u.firstname,
+        u.lastname, 
+        u2.firstname AS firstname2,
+        u2.lastname AS lastname2,
+        u2.username AS username2,
+
         TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining,
         TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,
         TIMESTAMPDIFF(SECOND ,t.created_on, t.due_on ) AS timeAllowed
-      FROM tickets AS t 
-      JOIN category AS c ON (c.id=t.category_id)
-      JOIN library_names AS ln ON (ln.ID=t.location)
-      JOIN users AS lhu ON (t.assigned_id=lhu.id)
-      JOIN users AS lhu2 ON (t.created_by_id=lhu2.id)
-      WHERE '.$wc.' GROUP BY t.id ORDER BY t.id,t.priority DESC,t.due_on 
+
+      FROM tickets.tickets AS t 
+      JOIN tickets.category AS c ON (c.id=t.category_id)
+      JOIN tickets.library_names AS ln ON (ln.ID=t.location)
+      JOIN tickets.users AS u ON (t.assigned_id=u.id)
+      JOIN tickets.users AS u2 ON (t.created_by_id=u2.id)
+      WHERE '.$wc.' 
+      GROUP BY t.id 
+      ORDER BY t.id,t.priority DESC,t.due_on 
       LIMIT '.$page.','.$amount.';';
 	  //die($sql);
       $response["tickets"] = $db->Query($sql,false,"assoc_array");
 	  
 	  
 }
-
 
 
 if(isset($response["tickets"])){
