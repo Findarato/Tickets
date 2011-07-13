@@ -1403,6 +1403,12 @@ jQuery(document).ready(function () {
 	
 	//Ticket display live items
 	$(".actionButtons").live("click", function () {
+		
+		if(Params.UserId == 0){
+			setHash("#login");
+    		checkHash();
+    		return;
+		}
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
 		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
@@ -1443,7 +1449,7 @@ jQuery(document).ready(function () {
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		pageTracker._trackPageview($(this).attr("href"));
 		setHash($(this).attr("href"));
-    checkHash();
+    	checkHash();
 		return false; //to make sure the a isnt clicked
 	});
 });
