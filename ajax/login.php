@@ -46,12 +46,11 @@
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$response = login($db->Clean($_POST['un']),$db->Clean($_POST['pw']),$response);
 		}elseif(isset($_GET["openId"]) && isset($_GET["userId"])){
-			$response["openid"] = $_GET["openId"];
-			$response["openid2"] = $_SESSION["openID"]["identity"];
-
 			$res = $db->Query("SELECT open_id FROm openId_users WHERE user_id=".$_SESSION["openID"]["user_id"][0],false,"row");
+			//print_r($res);
 			if($res == 0){ // lets just make sure that we are not entering in a lot of values
-				$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"][0].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");	
+				$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"][0].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
+				$response["debug"] = "Added to the table";	
 			}
 			
 			/*
