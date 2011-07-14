@@ -1,42 +1,50 @@
 <?php
 	include_once "../small_header.php"; 
+	
+	
+	function login($un,$pw,$response,$openid=false){
+		$db = db::getInstance();
+		$usr = new user($un,$pw);
+		if($usr->User_id==-1|| $usr->A_U['type']<4){
+			$response['error']="Invalid Username or Password";
+		}else{  
+			$_SESSION["user"] = serialize($usr);
+			$response["username"]=$usr->A_P['username'];
+			$response["firstname"]=$usr->A_U['first-name'];
+			$response["lastname"]=$usr->A_U['last-name'];
+			$response["userid"]=$usr->User_id;
+			$dep = getDepartment_by_userid($usr->User_id); 
+			$dep = array_implode($dep);
+			if(count($dep)!=2 || $dep===false){
+				$response["departmentid"]=-1; 
+				$response["departmentname"] = "None!";
+			}else{
+				$response["departmentid"] = $dep[0];
+				$response["departmentname"] = $dep[1];
+			}
+			$db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
+			$res = $db->Fetch("row");
+			$response["opt"] = $res;
+			$dt = date("U");
+			$response['message'] = "Login Successful";
+			$db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
+			$llo = $db->Fetch("row");
+			$response['lastlogon'] = $llo;
+			$_SESSION["lastlogon"] = $llo;
+			$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
+			if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
+			$db->Query("SELECT email FROM alt_email WHERE user_id=".$response["userid"]);
+			$altE = $db->Fetch("row");
+			$response["altEmail"] = $altE;
+			
+		}
+		return $response;
+	} 
+	
 	$_POST = $db->Clean($_POST);//clean out the post before it can be used
 	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ||unserialize($_SESSION['user'])->A_U['type']<4) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
-			$usr = new user(true);
-			$usr->UserLogin($db->Clean($_POST['un']),$db->Clean($_POST['pw']));
-			if($usr->User_id==-1|| $usr->A_U['type']<4){
-				$response['error']="Invalid Username or Password";
-			}else{  
-				$_SESSION["user"] = serialize($usr);
-				$response["username"]=$usr->A_P['username'];
-				$response["firstname"]=$usr->A_U['first-name'];
-				$response["lastname"]=$usr->A_U['last-name'];
-				$response["userid"]=$usr->User_id;
-				$dep = getDepartment_by_userid($usr->User_id); 
-				$dep = array_implode($dep);
-				if(count($dep)!=2 || $dep===false){
-					$response["departmentid"]=-1; 
-					$response["departmentname"] = "None!";
-				}else{
-					$response["departmentid"] = $dep[0];
-					$response["departmentname"] = $dep[1];
-				}
-				$db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
-				$res = $db->Fetch("row");
-				$response["opt"] = $res;
-				$dt = date("U");
-				$response['message'] = "Login Successful";
-				$db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
-				$llo = $db->Fetch("row");
-				$response['lastlogon'] = $llo;
-				$_SESSION["lastlogon"] = $llo;
-				$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
-				if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
-				$db->Query("SELECT email FROM alt_email WHERE user_id=".$response["userid"]);
-				$altE = $db->Fetch("row");
-				$response["altEmail"] = $altE;
-			}
+			$response = login($db->Clean($_POST['un']),$db->Clean($_POST['pw']),$response);
 		}
 	}elseif(isset($_GET["department_id"]) && isset($_GET["user_id"])){ 
 		$db->Query("INSERT INTO department_members (department_id,user_id) VALUES(".$db->Clean($_GET["department_id"]).",".$db->Clean($_GET["user_id"]).");");
@@ -66,7 +74,8 @@
 		$usr->LogUserOut();
 		unset($_SESSION['user']);
 		$response["message"]="Successfully Logged out of Tickets";
-	}elseif(){
+	}elseif(isset($_GET["openID"]) && isset($_GET["userId"])){
+		
 	}else{
 		$response["error"]=="Invalid Username or password";
 		echo json_encode($response);
