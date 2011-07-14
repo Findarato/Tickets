@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
 
 	$("#yesLink").live("click",function(){
 		alert("yes");
-		$.getJSON("",function(json){
+		$.getJSON("/ajax/login.php",{"":""},function(json){
 			
 		});
 	});
