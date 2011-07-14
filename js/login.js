@@ -14,8 +14,6 @@ jQuery(document).ready(function () {
 		});
 	});
 	
-	$("#noLink").live("click",function(){
-		alert("no");
-	});
+	$("#noLink").live("click",function(){window.close();});
 
 });
