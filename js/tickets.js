@@ -1306,13 +1306,8 @@ jQuery(document).ready(function () {
 					}
 					$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
 					$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
-					if (window.location.hash.length > 1) {
-						updateTickets();
-						if(!Params.popChange){checkHash();}
-					} else {
-						loadNew(data.lastlogon); //show the new tickets
-						updateTickets();
-					}
+					setHash("#ticketList/all_tickets");
+					checkHash();
 					$("#userSecondaryEmail").val(data.altEmail);
 					$("#depOk").show();
 					$("#depError").hide();
@@ -1385,11 +1380,6 @@ jQuery(document).ready(function () {
 	// Events that need to happen late in the page rendering
 	//
 	if ($("#topperUserInfo").text().length > 10) {
-		function ut(){
-			updateTickets();
-			setTimeout(function(){ut();},30000);
-		};
-		ut();
 		checkHash();
 		if (Params.UserId > 0) {
 			$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);

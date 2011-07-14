@@ -27,7 +27,7 @@ class User {
 				FROM 
 					tickets.users AS u 
 				WHERE';
-				if($md5Pass){
+				if($md5Pass || $openID){
 					$SQL.='(u.username="'.$name.'" AND u.password="'.$pass.'");';
 				}else{
 					$SQL.='(u.username="'.$name.'" AND u.password=MD5("'.$pass.'"));';
