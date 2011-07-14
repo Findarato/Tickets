@@ -66,6 +66,7 @@
 		$usr->LogUserOut();
 		unset($_SESSION['user']);
 		$response["message"]="Successfully Logged out of Tickets";
+	}elseif(){
 	}else{
 		$response["error"]=="Invalid Username or password";
 		echo json_encode($response);
