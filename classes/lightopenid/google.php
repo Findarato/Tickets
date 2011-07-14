@@ -55,13 +55,14 @@ try {
 		
 		
 			//echo $identity;
-			$user_id = $db->Query("SELECT id FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
+			$user_id = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
 			
 			if($user_id == 0){ //We did not find a account to link
 				
 			}else{ //There is an account with the same email address
 				//print_r($user_id);
 				$_SESSION["validOpenID"] = true;
+				$_SESSION["openID"]["user_id"] = $user_id;
 				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$User_id."' ",false,"row");
 				if($openIdtoUserID == 0){ //There is no link in the openID table
 					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
