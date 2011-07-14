@@ -45,7 +45,22 @@
 	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ||unserialize($_SESSION['user'])->A_U['type']<4) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$response = login($db->Clean($_POST['un']),$db->Clean($_POST['pw']),$response);
-		}
+		}elseif(isset($_GET["openId"]) && isset($_GET["userId"])){
+			$response["openid"] = $_GET["openId"];
+			$response["openid2"] = $_SESSION["openID"]["identity"];
+
+			$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"][0].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
+			/*
+			 * 
+			 * 			$_SESSION["openID"]["email"] = $email;
+			$_SESSION["openID"]["mode"] = $openid->mode;
+			$_SESSION["openID"]["identity"] = $identity;
+			$_SESSION["openID"]["first_name"] = $first_name;
+			$_SESSION["openID"]["last_name"] = $last_name;
+			 * 
+			 * 
+			 */  
+		}	
 	}elseif(isset($_GET["department_id"]) && isset($_GET["user_id"])){ 
 		$db->Query("INSERT INTO department_members (department_id,user_id) VALUES(".$db->Clean($_GET["department_id"]).",".$db->Clean($_GET["user_id"]).");");
 		if(count($db->Error)==2){$db->Query("UPDATE department_members SET department_id=".$db->Clean($_GET["department_id"])." WHERE user_id=".$db->Clean($_GET["user_id"]).";");}
@@ -74,8 +89,6 @@
 		$usr->LogUserOut();
 		unset($_SESSION['user']);
 		$response["message"]="Successfully Logged out of Tickets";
-	}elseif(isset($_GET["openID"]) && isset($_GET["userId"])){
-		
 	}else{
 		$response["error"]=="Invalid Username or password";
 		echo json_encode($response);
