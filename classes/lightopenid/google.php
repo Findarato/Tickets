@@ -69,7 +69,7 @@ try {
 					echo "<button class='minimal ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
 					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>No</button>";
 				}else{//There is a link to a user id in the table.
-
+					echo "Thank you for logging into ticket with a google account.  We will now fully log you into tickets<br>";
 					
 				}
 			}

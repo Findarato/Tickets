@@ -1225,6 +1225,10 @@ function loadLocalStorage(clear){
 
 jQuery(document).ready(function () {
 
+	
+  $(window).focus(function(){
+  	//alert("focus");
+  });
   //localStorage.clear();
   loadLocalStorage(true);
   //populateAllBugs();
