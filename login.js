@@ -8,9 +8,9 @@ jQuery(document).ready(function () {
 
 
 	$("#yesLink").live("click",function(){
-		alert("yes");
+		//alert("yes");
 		$.getJSON("/ajax/login.php",{"openId":"1","userId":"1"},function(json){
-			alert(json);
+			//alert(json);
 		});
 	});
 	
