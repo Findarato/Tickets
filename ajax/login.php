@@ -6,12 +6,9 @@
 		$db = db::getInstance();
 		if($openid){
 			$usr = new user($un,$pw,true,true);
-			echo "cool";
-			print_r($usr);die();
 		}else{
 			$usr = new user($un,$pw);
 		}
-		die();
 		if($usr->User_id==-1|| $usr->A_U['type']<4){
 			$response['error']="Invalid Username or Password";
 		}else{  
