@@ -1223,6 +1223,34 @@ function loadLocalStorage(clear){
  * Lets run some code that needs to be ran after the page loads
  */
 
+
+function login(data){
+	if (data.error.length > 0) {
+		checkResponse(data);
+	} else {
+		Params.LastLogon = data.lastlogon;
+		$("#topperUserInfo").html(data.firstname + " " + data.lastname + " (" + data.username + ")").attr("href","#userPage/"+data.userid);
+		checkResponse(data);
+		loadLocalStorage();
+		Params.UserId = data.userid;
+		if(localStorage.tickets = true){
+			localStorage.setItem("userId",data.userid);
+		}
+		$("#newTicketUser_id").val(Params.UserId);
+		if (data.departmentname === "") {
+			notice("Error", "No Department");
+		}
+		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
+		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
+		setHash("#ticketList/all_tickets");
+		checkHash();
+		$("#userSecondaryEmail").val(data.altEmail);
+		$("#depOk").show();
+		$("#depError").hide();
+	}
+}
+
+
 jQuery(document).ready(function () {
 
 	
@@ -1293,29 +1321,7 @@ jQuery(document).ready(function () {
 			return;
 		} else {
 			jQuery.post(uri + "ajax/login.php", $("#frm_login").serialize(), function (data) {
-				if (data.error.length > 0) {
-					checkResponse(data);
-				} else {
-					Params.LastLogon = data.lastlogon;
-					$("#topperUserInfo").html(data.firstname + " " + data.lastname + " (" + data.username + ")").attr("href","#userPage/"+data.userid);
-					checkResponse(data);
-					loadLocalStorage();
-					Params.UserId = data.userid;
-					if(localStorage.tickets = true){
-						localStorage.setItem("userId",data.userid);
-					}
-					$("#newTicketUser_id").val(Params.UserId);
-					if (data.departmentname === "") {
-						notice("Error", "No Department");
-					}
-					$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
-					$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
-					setHash("#ticketList/all_tickets");
-					checkHash();
-					$("#userSecondaryEmail").val(data.altEmail);
-					$("#depOk").show();
-					$("#depError").hide();
-				}
+				login(data);
 			}, "json");
 		}
 	});
