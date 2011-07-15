@@ -7,6 +7,7 @@ class User {
 	public $A_U = array();
 	public $User_id = -1;//adding compatability to Joe's coding style
 	public $Permissions = array();
+	public $debug = array();
 	
 	//Private stuff
 	private $openID = "";
@@ -16,6 +17,7 @@ class User {
 	}
 
 	function User($name,$pass,$openID=false,$md5Pass=false){
+		$db=db::getInstance();			
 		if(!$openID){//Not a openID login
 			$SQL='
 				SELECT 
@@ -27,24 +29,33 @@ class User {
 				FROM 
 					tickets.users AS u 
 				WHERE';
-				if($md5Pass || $openID){
-					$SQL.='(u.username="'.$name.'" AND u.password="'.$pass.'");';
+				if($md5Pass){
+					$SQL.=' (u.username="'.$name.'" AND u.password="'.$pass.'");';
 				}else{
-					$SQL.='(u.username="'.$name.'" AND u.password=MD5("'.$pass.'"));';
+					$SQL.=' (u.username="'.$name.'" AND u.password=MD5("'.$pass.'"));';
 				}
 					
 		}else{//This is an openID login, lets do some cool stuff
 			$SQL='
-				SELECT 
-					u.user_id, 
-					u.open_id, 
+				SELECT
+					u.ID, 
+					u.username, 
+					u.type, 
+					u.firstname,
+					u.lastname
 				FROM 
-					tickets.open_id AS u 
+					tickets.users AS u 
 				WHERE 
-					(u.user_id="'.$name.'" AND u.open_id="'.$pass.'";';
-
-			$open = $db->Query($SQL,false,"row");
-			print_r($open);die();
+					';
+				if($md5Pass){
+					$SQL.=' (u.id="'.$name.'" AND u.password="'.$pass.'");';
+				}else{
+					$SQL.=' (u.id="'.$name.'" AND u.password=MD5("'.$pass.'"));';
+				}
+					
+		//$this -> debug["sql"] = $SQL;
+			//$open = $db->Query($SQL,false,"row");
+			//print_r($open);die();
 			
 			//$pass = $db->Query("SELECT password FROM tickets.users WHERE id='".$open."'",false,"row");
 			
@@ -53,8 +64,6 @@ class User {
 		}
 		
 		
-		
-		$db=db::getInstance();
 		$rows = $db->Query($SQL,false,"assoc_array");
 		
 		if($db->Count_res()>0){
