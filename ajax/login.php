@@ -45,13 +45,23 @@
 	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ||unserialize($_SESSION['user'])->A_U['type']<4) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$response = login($db->Clean($_POST['un']),$db->Clean($_POST['pw']),$response);
-		}elseif(isset($_GET["openId"]) && isset($_GET["userId"])){
-			$res = $db->Query("SELECT open_id FROm openId_users WHERE user_id=".$_SESSION["openID"]["user_id"][0],false,"row");
-			//print_r($res);
-			if($res == 0){ // lets just make sure that we are not entering in a lot of values
+		}elseif(isset($_GET["openId"]) && isset($_GET["userId"])){// We are trying to login with an openID
+			$res = $db->Query("SELECT open_id FROm openId_users WHERE user_id=".$_SESSION["openID"]["user_id"][0]." LIMIT 1",false,"row");
+			//print_r($res);echo count($res);
+			//$response["debug3"] = $res;	
+			if(count($res) == 0 || $res == 0){ // lets just make sure that we are not entering in a lot of values
 				$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"][0].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
-				$response["debug"] = "Added to the table";	
+				//$response["debug"] = "Added to the table";
+				//$response["debug2"] = count($res);	
+			}else{
+				//$response["debug"] = "DID NOT Add to the table";
+				//$response["debug2"] = count($res);
 			}
+				//Lets do some cryptic database and data manip. 
+				
+				$password = $db->Query("SELECT password FROM users WHERE id=".$_SESSION["openID"]["user_id"][0],false,"row");
+				$response["pwtest"] = $password;
+				$response = login($_SESSION["openID"]["user_id"][0],$password,$response,true);
 			
 			/*
 			 * 
