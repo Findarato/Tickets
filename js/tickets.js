@@ -142,7 +142,10 @@ function checkHash() {
 		}
 		//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets"}
 	} else {
-		loadNew(Params.LastLogon);
+		//loadNew(Params.LastLogon);
+		//alert("blah");
+		setHash("#ticketList/all_tickets");
+		checkHash();
 	}
 }
 
@@ -518,8 +521,6 @@ function loadTicketBody(inputData, container) {
    .append(
      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:data.description})
    );
-   
-
 
   container
    .find("#ticketCategory")
@@ -1018,6 +1019,14 @@ function loadUserPage(userId){
 								})
 							})	
 					)
+					.append(
+						$("<button>",{
+							"class":"fontReverse minimal ticketPadding3",
+							id:"googleLogin",
+							"css":{"width":"auto"},
+							html:"Link to Google Account"
+						})
+					)
 			} 
 		)
 		.appendTo(Tlb);
@@ -1026,9 +1035,9 @@ function loadUserPage(userId){
 		infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"730px\" height=\"300px\" id=\"graphDisplay\">Please use a browser that supports canvas</canvas>"));
 
 
-	$.getJSON("ajax/get_userinfo.php",{"userId":userId},function(data){
+	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
 		Tlb.find("#userDepartment").append($("<div/>",{"class":"ilb contentEdit",html:data.userInfo.tickets.departmentName}));
-		addEditControls(Params.UserId,$("#userDepartment"),"select",data.userInfo.departments,function(userId,value,item){
+		addEditControls(localStorage.userId,$("#userDepartment"),"select",data.userInfo.departments,function(userId,value,item){
 			$.getJSON("ajax/login.php",{"user_id":userId,"department_id":value})
 		});
 		Tlb.find("#userName").append(data.userInfo.username);
@@ -1109,7 +1118,7 @@ function loadUserPage(userId){
 	if (localUser) {
 		Tlb.find("#follow").click(function(){
 			jQuery.post(uri + "ajax/login.php", {
-				user_id: Params.UserId,
+				user_id: localStorage.userId,
 				opt: 2
 			}, function(data){
 				checkResponse(data);
@@ -1122,7 +1131,7 @@ function loadUserPage(userId){
 		});
 		Tlb.find("#unfollow").click(function(){
 			jQuery.post(uri + "ajax/login.php", {
-				user_id: Params.UserId,
+				user_id: localStorage.userId,
 				opt: 1
 			}, function(data){
 				checkResponse(data);
@@ -1232,7 +1241,7 @@ function login(data){
 		$("#topperUserInfo").html(data.firstname + " " + data.lastname + " (" + data.username + ")").attr("href","#userPage/"+data.userid);
 		checkResponse(data);
 		loadLocalStorage();
-		Params.UserId = data.userid;
+		localStorage.userId = data.userid;
 		if(localStorage.tickets = true){
 			localStorage.setItem("userId",data.userid);
 		}
