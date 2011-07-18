@@ -14,7 +14,7 @@
         <link rel="stylesheet" media="screen" href="css/tickets.css?v=22"  /> 
         <link rel="shortcut icon" href="/tickets/bug.png">
         <link rel="apple-touch-icon" href="/tickets/bug.png">
-        <link rel="icon" type="image/png" href="/tickets/bug.png" />
+        <link rel="icon" type="image/png" href="/bug.png" />
         <link id="rss1" href="ticketsrss.php?id={if isset($user_id)}{$user_id}){/if}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
         <link id="rss2" href="ticketsrss.php?id={if isset($user_id)}{$user_id}){/if}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
         <script type="text/javascript">

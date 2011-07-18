@@ -2,7 +2,7 @@
 
 
 require 'openid.php';
-require "../../small_header.php";
+require $_SERVER["DOCUMENT_ROOT"]."/small_header.php";
 $_SESSION["validOpenID"] = false;
 $_SESSION["openID"] = array();
 
@@ -24,7 +24,7 @@ if(isset($_SESSION["user"])){$usr = unserialize($_SESSION["user"]);}
             pageTracker._trackPageview();
         </script>
 		<script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
-		<script src="http://<?=$server;?>/js/login.js"></script>
+		<script type="text/javascript" src="http://<?Php echo $_SERVER['SERVER_NAME'];?>/js/login.js"></script>
 		
 	</head>
 	<body>
@@ -53,15 +53,6 @@ try {
 			$_SESSION["openID"]["identity"] = $identity;
 			$_SESSION["openID"]["first_name"] = $first_name;
 			$_SESSION["openID"]["last_name"] = $last_name;
-		
-			//echo $openid->mode;
-			/*
-			echo $first_name."<br>";
-			echo $last_name."<br>";
-			echo $email."<br>";
-			echo $identity."<br>"; 
-		*/
-			//echo $identity;
 			$userId = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"assoc");
 			// This needs its own if statement to make sure its actually ran.
 			if(is_array($userId)){ // There is a matching email address
@@ -72,8 +63,6 @@ try {
 					$userId["id"] = $openIdtoUserID[0];	
 				}
 			}
-
-
 			if(is_array($userId)){ // there is an email to link
 				if(is_array($openIdtoUserID)){ // There is a matching email and there is a linked account already
 					echo "Thank you for logging into ticket with a google account.  We will now fully log you into tickets<br>"; 
@@ -90,7 +79,6 @@ try {
 					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$usr->User_id.",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
 					if(count($db->Error==2)){//There was an error
 						echo "There was an error trying to link your accounts.";
-						print_r($db->Error);
 					}else{
 						echo "Your account is now linked with your google account";
 					}
@@ -102,9 +90,6 @@ try {
 					echo "<button class='minimal ticketPadding3' id='newUser' style='width:100px;'>Yes</button><br>";
 				}					
 			}
-        }
-        else{
-            echo 'User ' . $openid->identity . 'has not logged in.';
         }
     }
 } catch(ErrorException $e) {

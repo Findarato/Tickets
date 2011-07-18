@@ -52,15 +52,6 @@ class User {
 				}else{
 					$SQL.=' (u.id="'.$name.'" AND u.password=MD5("'.$pass.'"));';
 				}
-					
-		//$this -> debug["sql"] = $SQL;
-			//$open = $db->Query($SQL,false,"row");
-			//print_r($open);die();
-			
-			//$pass = $db->Query("SELECT password FROM tickets.users WHERE id='".$open."'",false,"row");
-			
-			//$this->User($open,$pass,false,true);
-			//return;
 		}
 		
 		
