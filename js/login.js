@@ -12,6 +12,13 @@ jQuery(document).ready(function () {
 		});
 	});
 	
+	$("#newUser").live("click",function(){
+		//alert("yes");
+		$.getJSON("/ajax/login.php",{"openId":"1","userId":"0"},function(json){
+			window.opener.window.login(json);
+			window.close();
+		});
+	});
 	$("#noLink").live("click",function(){window.close();});
 
 });

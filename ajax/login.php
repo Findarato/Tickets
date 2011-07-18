@@ -6,18 +6,42 @@
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$response = login($db->Clean($_POST['un']),$db->Clean($_POST['pw']),$response);
 		}elseif(isset($_GET["openId"]) && isset($_GET["userId"])){// We are trying to login with an openID
-			$res = $db->Query("SELECT open_id FROM openId_users WHERE user_id=".$_SESSION["openID"]["user_id"][0]." LIMIT 1",false,"row");
-			//print_r($res);echo count($res);
-			//$response["debug3"] = $res;	
-			if(count($res) == 0 || $res == 0){ // lets just make sure that we are not entering in a lot of values
+			if($_GET["userId"]>0){
+				$res = $db->Query("SELECT open_id FROM openId_users WHERE user_id=".$_SESSION["openID"]["user_id"][0]." LIMIT 1",false,"row");
+				//print_r($res);echo count($res);
+				//$response["debug3"] = $res;	
+				if(count($res) == 0 || $res == 0){ // lets just make sure that we are not entering in a lot of values
+					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"][0].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
+		
+				}else{
+				}
+					//Lets do some cryptic database and data manip. 
+					$password = $db->Query("SELECT password FROM users WHERE id=".$_SESSION["openID"]["user_id"][0],false,"row");
+					//$response["pwtest"] = $password;
+					$response = login($_SESSION["openID"]["user_id"][0],$password,$response,true);
+			}elseif($_GET["userId"] == 0){ // this will be a new user in tickets
+				$un = explode("@",$_SESSION["openID"]["email"]);
+				$res = $db->Query("INSERT INTO tickets.users (type,joined,firstname,lastname,username,email_address) VALUES (
+				1,
+				NOW(),
+				'".$_SESSION["openID"]["first_name"]."',
+				'".$_SESSION["openID"]["last_name"]."',
+				'".$un[0]."',
+				'".$_SESSION["openID"]["email"]."',
+				)",false,"row");
+
 				$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"][0].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
-	
-			}else{
+
+				/*
+				 * 
+				 * $_SESSION["openID"]["email"] = $email;
+			$_SESSION["openID"]["mode"] = $openid->mode;
+			$_SESSION["openID"]["identity"] = $identity;
+			$_SESSION["openID"]["first_name"] = $first_name;
+			$_SESSION["openID"]["last_name"] = $last_name;
+				 * 
+				 */
 			}
-				//Lets do some cryptic database and data manip. 
-				$password = $db->Query("SELECT password FROM users WHERE id=".$_SESSION["openID"]["user_id"][0],false,"row");
-				//$response["pwtest"] = $password;
-				$response = login($_SESSION["openID"]["user_id"][0],$password,$response,true);
 		}	
 	}elseif(isset($_GET["department_id"]) && isset($_GET["user_id"])){ 
 		$db->Query("INSERT INTO department_members (department_id,user_id) VALUES(".$db->Clean($_GET["department_id"]).",".$db->Clean($_GET["user_id"]).");");

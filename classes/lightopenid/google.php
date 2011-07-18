@@ -54,18 +54,39 @@ try {
 			$_SESSION["openID"]["first_name"] = $first_name;
 			$_SESSION["openID"]["last_name"] = $last_name;
 		
-		
+			//echo $openid->mode;
+			/*
+			echo $first_name."<br>";
+			echo $last_name."<br>";
+			echo $email."<br>";
+			echo $identity."<br>"; 
+		*/
 			//echo $identity;
 			$userId = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"assoc");
-			if($userId != 0){
-				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$userId["id"]."'AND open_id='".$identity."';",false,"row");	
-			}else{
+			// This needs its own if statement to make sure its actually ran.
+			if(is_array($userId)){ // There is a matching email address
+				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$userId["id"]."'AND open_id='".$identity."';",false,"row");
+			}else{// no matching email address
 				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE open_id='".$identity."';",false,"row");
-				$userId["id"] = $openIdtoUserID[0];
+				if(is_array($openIdtoUserID)){ // we did however find a id openId link 
+					$userId["id"] = $openIdtoUserID[0];	
+				}
 			}
-				
-			if($userId == 0 && $openIdtoUserID == 0){ //We did not find a account to link
-				if(isset($usr) && isset($usr->User_id)){
+
+
+			if(is_array($userId)){ // there is an email to link
+				if(is_array($openIdtoUserID)){ // There is a matching email and there is a linked account already
+					echo "Thank you for logging into ticket with a google account.  We will now fully log you into tickets<br>"; 
+					$password = $db->Query("SELECT password FROM users WHERE id=".$userId["id"],false,"row");
+					$response = login($userId["id"],$password,$response,true);
+					echo '<script type="text/javascript">window.opener.window.login('.json_encode($response).');window.close();</script>';
+				}else{// there is a matching email but no openid link
+					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
+					echo "<button class='minimal ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
+					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>No</button>";
+				}
+			}else{ // there is no matching email address 
+				if(isset($usr) && isset($usr->User_id)){ // this is a logged in user lets do some stuff
 					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$usr->User_id.",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
 					if(count($db->Error==2)){//There was an error
 						echo "There was an error trying to link your accounts.";
@@ -73,29 +94,13 @@ try {
 					}else{
 						echo "Your account is now linked with your google account";
 					}
-				}else{ // there is no logged in user.
+				}else{ // The user is NOT logged in there is no link and no openid info
 					echo "We could not find a Tickets account with the email address provided: <strong>".$email."</strong><br>";
 					echo "Please log in to tickets to link your email address.<br>";
-					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>Close</button>";
-				}
-				//print_r($userId);
-			}else{ //There is an account with the same email address
-				$_SESSION["validOpenID"] = true;
-				//$_SESSION["openID"]["user_id"] = $userId;
-				if($openIdtoUserID == 0){ //There is no link in the openID table
-					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
-					echo "<button class='minimal ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
-					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>No</button>";
-				}else{//There is a link to a user id in the table.
-					echo "Thank you for logging into ticket with a google account.  We will now fully log you into tickets<br>"; 
-					//require ($_SERVER["DOCUMENT_ROOT"]."/ajax/login.php");
-					$password = $db->Query("SELECT password FROM users WHERE id=".$userId["id"],false,"row");
-					$response = login($userId["id"],$password,$response,true);
-					
-					//print_r($response);die("died");
-					echo '<script type="text/javascript">window.opener.window.login('.json_encode($response).');window.close();</script>';
-					
-				}
+					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>Close</button><br>";
+					echo "Would you rather use this account's information in tickets as a new user?";
+					echo "<button class='minimal ticketPadding3' id='newUser' style='width:100px;'>Yes</button><br>";
+				}					
 			}
         }
         else{
