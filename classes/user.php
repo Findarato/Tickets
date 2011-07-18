@@ -122,7 +122,7 @@ class User {
 		$permissions = array();
 		$db=db::getInstance();
 		$sql = "SELECT permission_id FROM user_permissions WHERE user_id=$user_id";
-		$permissions = $db->Query($SQL,false,"assoc_array");
+		$permissions = $db->Query($sql,false,"assoc_array");
 		if($permissions==0){
 			return false;	
 		}else{

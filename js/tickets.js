@@ -56,6 +56,8 @@ var navgationMenu = {
 	}
 }
 
+function alertTest(tst){alert(tst);}
+
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
@@ -124,11 +126,12 @@ function checkHash() {
 			loadNew(Params.LastLogon);
 			break;
 		case "#userPage":
-			alert(hash[1]);
-			if(hash[1] == 0 || hash[1] == ""){
-				alert(localStorage.userId);
-			}else{
-				loadUserPage(hash[1]);	
+			if(hash[1] == 0 || hash[1] == ""){ // There is some strange bug we need to fix, but lets just call it good for now
+				if(localStorage.userId > 0){ // lets just be sure we are not causing more trouble
+					loadUserPage(localStorage.userId); // just load the local user's info page
+				}
+			}else{ // this is when everything works properly.
+				loadUserPage(hash[1]); // load the userpage that is requested.
 			}
 		break;
 		case "#login":
@@ -995,9 +998,7 @@ function loadUserPage(userId){
 		)
 		.append(
 			function(index,html){
-				alert(localUser);
-				if(!localUser){	return "";}
-				
+				if(!localUser){	return "";} // this is blocking the view of other user's page
 				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"250px"}})
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
@@ -1023,20 +1024,24 @@ function loadUserPage(userId){
 							{id:"",
 							"class":"",
 							css:{"display":"block","margin":"5px","width":"auto"},
-							html:$("<a class=\"minimal ticketPadding3\" id=logOut href=\"ajax/login.php?logout&id="+Params.UserId+"\" title=\"Log out of Tickets\">Log Out</a>")
+							html:$("<a class=\"minimal ticketPadding3\" id=logOut href=\"ajax/login.php?logout&id="+localStorage.userId+"\" title=\"Log out of Tickets\">Log Out</a>")
 								.click(function(){
 									$.getJSON(this.href,function(){ window.location = "/";})
+									localStorage.userId = 0; // lets make sure they can not sneak back in
 									return false;
 								})
 							})	
 					)
-					.append(
-						$("<button>",{
+					.append(function(){
+						//openIdLinks
+						return $("<button>",{
 							"class":"fontReverse minimal ticketPadding3",
 							id:"googleLogin",
 							"css":{"width":"auto"},
 							html:"Link to Google Account"
-						})
+						});
+					}
+						
 					)
 			} 
 		)
@@ -1051,6 +1056,10 @@ function loadUserPage(userId){
 		addEditControls(localStorage.userId,$("#userDepartment"),"select",data.userInfo.departments,function(userId,value,item){
 			$.getJSON("ajax/login.php",{"user_id":userId,"department_id":value})
 		});
+		if(data.userInfo.openIdLinks > 0){
+			Tlb.find("#googleLogin").before("This account is linked with "+ data.userInfo.openIdLinks + " Google account(s)");
+			Tlb.find("#googleLogin").remove();
+		}
 		Tlb.find("#userName").append(data.userInfo.username);
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
@@ -1241,7 +1250,8 @@ function loadLocalStorage(clear){
  */
 
 
-function login(data){
+function login(data){ //We need a json array, probably need to parse it, who knows
+	alert(data.message);
 	if (data.error.length > 0) {
 		checkResponse(data);
 	} else {
@@ -1403,9 +1413,9 @@ jQuery(document).ready(function () {
 	//
 	if ($("#topperUserInfo").text().length > 10) {
 		checkHash();
-		if (Params.UserId > 0) {
-			$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
-			$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
+		if (localStorage.userId  > 0) {
+			$("#rss1").attr("href", "ticketsrss.php?id=" + localStorage.userId );
+			$("#rss2").attr("href", "ticketsrss.php?id=" + localStorage.userId  + "&bookmark=1");
 		}		
 	} //disables running with out being logged in
 
@@ -1416,7 +1426,7 @@ jQuery(document).ready(function () {
 	//Ticket display live items
 	$(".actionButtons").live("click", function () {
 		
-		if(Params.UserId == 0){
+		if(localStorage.userId == 0){
 			setHash("#login");
     		checkHash();
     		return;

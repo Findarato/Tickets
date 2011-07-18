@@ -197,7 +197,7 @@ if(isset($_GET["area"]) ){
       break;    
   }
   // Lets take the switch statement above and use it to determain the where clause of the sql that needs to get ran.  Even favorites should be able to be done this way.
-  if($_GET["search"]!=""){
+  if(isset($_GET["search"]) && $_GET["search"]!=""){
   	$wc.=" AND (t.id='".$_GET["search"]."'";
 	$wc.=" OR t.subject LIKE '%".$_GET["search"]."%'";
 	$wc.=" OR t.description LIKE '%".$_GET["search"]."%'";
