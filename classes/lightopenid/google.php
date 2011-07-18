@@ -24,6 +24,7 @@ if(isset($_SESSION["usr"])){$usr = unserilize($_SESSION["usr"]);}
         </script>
 		<script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
 		<script src="http://<?=$server;?>/js/login.js"></script>
+		
 	</head>
 	<body>
 		<?php
@@ -39,8 +40,7 @@ try {
     } elseif($openid->mode == 'cancel') {
         echo 'User has canceled authentication!';
     } else {
-        if($openid->validate())
-        {
+        if($openid->validate()){
             $identity = $openid->identity;
             $attributes = $openid->getAttributes();
             $email = $attributes['contact/email'];
@@ -55,7 +55,7 @@ try {
 		
 		
 			//echo $identity;
-			$user_id = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
+			$user_id = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"assoc");
 				
 			if($user_id == 0){ //We did not find a account to link
 				if($usr){
@@ -72,22 +72,28 @@ try {
 				}
 				//print_r($user_id);
 			}else{ //There is an account with the same email address
-				//print_r($user_id);
 				$_SESSION["validOpenID"] = true;
-				$_SESSION["openID"]["user_id"] = $user_id;
-				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$user_id."' ",false,"row");
+				//$_SESSION["openID"]["user_id"] = $user_id;
+				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$user_id["id"]."' ",false,"row");
 				if($openIdtoUserID == 0){ //There is no link in the openID table
 					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
 					echo "<button class='minimal ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
 					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>No</button>";
 				}else{//There is a link to a user id in the table.
-					echo "Thank you for logging into ticket with a google account.  We will now fully log you into tickets<br>";
+					echo "Thank you for logging into ticket with a google account.  We will now fully log you into tickets<br>"; 
+					//require ($_SERVER["DOCUMENT_ROOT"]."/ajax/login.php");
+					$password = $db->Query("SELECT password FROM users WHERE id=".$user_id["id"],false,"row");
+					$response = login($user_id["id"],$password,$response,true);
+					
+					//print_r($response);die("died");
+					echo '<script type="text/javascript">
+						window.opener.window.login('.json_encode($response).');
+					</script>';
 					
 				}
 			}
         }
-        else
-        {
+        else{
             echo 'User ' . $openid->identity . 'has not logged in.';
         }
     }

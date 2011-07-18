@@ -115,5 +115,11 @@ $graphData = $db->Query("SELECT MONTH(created_on) AS month,count(*) AS total,YEA
 $json["responses"]["graph"]["byMe"]["data"] = formatData($graphData,$newMonths);
 $json["responses"]["graph"]["byMe"]["title"] = "Responses Added";
 //echo indentJson(json_encode($json));
+
+
+
+// Lets get the linked google accounts to see if this account is linked to any google accounts
+$json["userInfo"]["openIdLinks"] = $db->Query("SELECT count(user_id) FROM tickets.openId_users WHERE user_id=".$_GET["userId"],false,"row"); 
+
 echo json_encode($json);
 ?>    

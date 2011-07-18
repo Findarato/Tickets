@@ -3,7 +3,6 @@
  * 
  */
 
-
 jQuery(document).ready(function () {
 	$("#yesLink").live("click",function(){
 		//alert("yes");
