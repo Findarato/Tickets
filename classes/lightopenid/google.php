@@ -65,7 +65,6 @@ try {
 				$_SESSION["openID"]["user_id"] = $user_id;
 				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$User_id."' ",false,"row");
 				if($openIdtoUserID == 0){ //There is no link in the openID table
-					echo "test this is new";
 					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
 					echo "<button class='minimal ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
 					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>No</button>";
