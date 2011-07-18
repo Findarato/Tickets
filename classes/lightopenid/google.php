@@ -6,7 +6,7 @@ require "../../small_header.php";
 $_SESSION["validOpenID"] = false;
 $_SESSION["openID"] = array();
 
-
+if(isset($_SESSION["usr"])){$usr = unserilize($_SESSION["usr"]);}
 ?>
 <html>
 	<head>
@@ -56,14 +56,26 @@ try {
 		
 			//echo $identity;
 			$user_id = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"row");
-			
-			if($user_id == 0){ //We did not find a account to link
 				
+			if($user_id == 0){ //We did not find a account to link
+				if($usr){
+					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$usr->User_id.",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
+					if(count($db->Error==2)){//There was an error
+						echo "There was an error trying to link your accounts.";
+					}else{
+						echo "Your account is now linked with your google account";
+					}
+				}else{ // there is no logged in user.
+					echo "We could not find a Tickets account with the email address provided: <strong>".$email."</strong><br>";
+					echo "Please log in to tickets to link your email address.<br>";
+					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>Close</button>";
+				}
+				//print_r($user_id);
 			}else{ //There is an account with the same email address
 				//print_r($user_id);
 				$_SESSION["validOpenID"] = true;
 				$_SESSION["openID"]["user_id"] = $user_id;
-				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$User_id."' ",false,"row");
+				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$user_id."' ",false,"row");
 				if($openIdtoUserID == 0){ //There is no link in the openID table
 					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
 					echo "<button class='minimal ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";

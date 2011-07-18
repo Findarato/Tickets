@@ -2,7 +2,9 @@
 
 include "../small_header.php";
 header('Content-type: application/json');
-$usr = unserialize($_SESSION['user']);	
+$usr = unserialize($_SESSION['user']);
+
+//print_r($usr);
 $_GET = $db->Clean($_GET,true);
 
 function formatData($graphData,$monthData){
@@ -31,13 +33,13 @@ function formatData($graphData,$monthData){
 $json = array();
 $json["userInfo"] = $db->Query("
 SELECT 
-	lhu.firstname,
-	lhu.lastname,
-	lhu.username,
-	DATE_FORMAT(lhu.joined	, '%M %e, %Y') AS joined,
-	lhu.type 
+	u.firstname,
+	u.lastname,
+	u.username,
+	DATE_FORMAT(u.joined	, '%M %e, %Y') AS joined,
+	u.type 
 FROM 
-	lapcat.hex_users AS lhu 
+	users AS u 
 WHERE 
 	id=".$_GET["userId"]
 ,false,"assoc");
@@ -58,6 +60,7 @@ WHERE
 ,false,"assoc");
 
 $json["userInfo"]["tickets"]["altEmail"] = $db->Query("
+
 SELECT
 	email
 FROM 

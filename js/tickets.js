@@ -124,7 +124,12 @@ function checkHash() {
 			loadNew(Params.LastLogon);
 			break;
 		case "#userPage":
-			loadUserPage(hash[1]);
+			alert(hash[1]);
+			if(hash[1] == 0 || hash[1] == ""){
+				alert(localStorage.userId);
+			}else{
+				loadUserPage(hash[1]);	
+			}
 		break;
 		case "#login":
 			loadLoginPage();
@@ -144,8 +149,13 @@ function checkHash() {
 	} else {
 		//loadNew(Params.LastLogon);
 		//alert("blah");
-		setHash("#ticketList/all_tickets");
-		checkHash();
+		if(localStorage.userId > 0){
+			setHash("#ticketList/all_tickets");
+			checkHash();
+		}else{
+			setHash("#login");
+			checkHash();
+		}
 	}
 }
 
@@ -946,8 +956,7 @@ function loadUserPage(userId){
 	Tlb = Params.Content.find("#ticketListbody");
 	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
 	var localUser = false;
-	if (Params.UserId == userId){localUser = true;}
-	if (localStorage.Userid == userId){localUser = true;}
+	if (localStorage.userId == userId){localUser = true;}
 
 	$("<div/>",{id:"userInfoBox","class":"",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
 		.append(
@@ -976,7 +985,7 @@ function loadUserPage(userId){
 				.append( $("<div>",{id:"userName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Username: "})	)
 				.append( $("<div>",{id:"realName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Real Name: "})	)
 				.append( $("<div>",{id:"joinedOn","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Joined On: "})	)
-			//	.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Type: "})	)
+				.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Type: "})	)
 				.append( $("<div>",{id:"totalTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Tickets Created: "})	)
 				.append( $("<div>",{id:"openTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Tickets: "})	)
 				.append( $("<div>",{id:"avgTicketsTime","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Average Ticket Duration: "})	)
@@ -986,7 +995,9 @@ function loadUserPage(userId){
 		)
 		.append(
 			function(index,html){
+				alert(localUser);
 				if(!localUser){	return "";}
+				
 				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"250px"}})
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
@@ -1191,7 +1202,7 @@ function changeArea(area){
 }
 
 function loadLocalStorage(clear){
-  if(clear){localStorage.clear();}
+  //if(clear){localStorage.clear();}
   
   if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false"){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
@@ -1222,9 +1233,6 @@ function loadLocalStorage(clear){
     localStorage.clear();
     localStorage.setItem("ticketsVersion",$("#version").html()); 
   }
-  if(Params.UserId == 0 || Params.UserId===undefined || !localStorage.userId){
-    localStorage.userId = Params.UserId;
-  }
 }
 
 /**
@@ -1244,6 +1252,7 @@ function login(data){
 		localStorage.userId = data.userid;
 		if(localStorage.tickets = true){
 			localStorage.setItem("userId",data.userid);
+			alert(localStorage.userId);
 		}
 		$("#newTicketUser_id").val(Params.UserId);
 		if (data.departmentname === "") {
@@ -1264,9 +1273,7 @@ jQuery(document).ready(function () {
 
   //localStorage.clear();
   loadLocalStorage(true);
-  //populateAllBugs();
   Params.Content = $("#content"); //lets stop searching for it a hundred times
-  
   $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
   	if(Params.UserId>0){
 	  	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});	
