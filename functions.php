@@ -363,7 +363,7 @@ function indentJson($json) {
 		}else{
 			$usr = new user($un,$pw);
 		}
-		if($usr->User_id==-1|| $usr->A_U['type']<4){
+		if($usr->User_id==-1){
 			$response['error']="Invalid Username or Password";
 		}else{  
 			$_SESSION["user"] = serialize($usr);
