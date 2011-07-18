@@ -1057,8 +1057,8 @@ function loadUserPage(userId){
 			$.getJSON("ajax/login.php",{"user_id":userId,"department_id":value})
 		});
 		if(data.userInfo.openIdLinks > 0){
-			Tlb.find("#googleLogin").before("This account is linked with "+ data.userInfo.openIdLinks + " Google account(s)");
-			Tlb.find("#googleLogin").remove();
+			Tlb.find("#googleLogin").before("Linked with "+ data.userInfo.openIdLinks + " Google account(s)<br>");
+			//Tlb.find("#googleLogin").remove();
 		}
 		Tlb.find("#userName").append(data.userInfo.username);
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
