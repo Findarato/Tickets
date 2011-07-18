@@ -2,7 +2,7 @@
 	include_once $_SERVER["DOCUMENT_ROOT"]."/small_header.php"; 
 	
 	$_POST = $db->Clean($_POST);//clean out the post before it can be used
-	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ||unserialize($_SESSION['user'])->A_U['type']<4) {//there is not a valid session
+	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$response = login($db->Clean($_POST['un']),$db->Clean($_POST['pw']),$response);
 		}elseif(isset($_GET["openId"]) && isset($_GET["userId"])){// We are trying to login with an openID
