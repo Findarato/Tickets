@@ -1251,7 +1251,7 @@ function loadLocalStorage(clear){
 
 
 function login(data){ //We need a json array, probably need to parse it, who knows
-	alert(data.message);
+	//alert(data.message);
 	if (data.error.length > 0) {
 		checkResponse(data);
 	} else {
@@ -1262,7 +1262,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		localStorage.userId = data.userid;
 		if(localStorage.tickets = true){
 			localStorage.setItem("userId",data.userid);
-			alert(localStorage.userId);
+			//alert(localStorage.userId);
 		}
 		$("#newTicketUser_id").val(Params.UserId);
 		if (data.departmentname === "") {
