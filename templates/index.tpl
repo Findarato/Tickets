@@ -67,12 +67,15 @@
         <div id="blankTpl" class="ui-helper-hidden">
             {$blankDisplay}
         </div>
+        {*
         <div id="notifyTpl" style="position:absolute" class="ui-helper-hidden">
             {include file="notify.tpl"}
         </div>
+        
         <div id="statisticsTpl" style="position:absolute" class="ui-helper-hidden">
             {include file="statistics.tpl"}
         </div>
+        *}
         <div id="notifyArea" style="width:0px;" class="">
         </div>
     </body>
