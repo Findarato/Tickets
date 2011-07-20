@@ -1467,6 +1467,10 @@ jQuery(document).ready(function () {
 		$(this).select();
 		$(this).focus();
 	});
+	
+	$("#showOldLoginButton").live("click",function(){
+		$("#oldLogin").css({"height":"50px"});
+	});
 	$(".ticket_link,.nolink,.bug_link").live("click", function () {
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		pageTracker._trackPageview($(this).attr("href"));
