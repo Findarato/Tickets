@@ -107,22 +107,22 @@
 				</div>
 				<div class="box_transition" id="replyBox" style="overflow:hidden;width:100%;background-color:#FFF">
 				</div>
-				<button class="openTicket fontReverse  minimal " id="reAssignButton" style="width:auto;">
+				<button class="openTicket" id="reAssignButton" style="width:auto;">
 					<span class="ticket_button ticket_sprite user-pencil">Reassign</span>
 				</button>
-				<button class="openTicket fontReverse  minimal " id="modifyButton" style="width:auto;">
+				<button class="openTicket" id="modifyButton" style="width:auto;">
 					<span class="ticket_button ticket_sprite pencil">Modify</span>
 				</button>
-				<button class="fontReverse minimal " id="ticketModifySaveButton" style="width:auto;display:none;">
+				<button class="button" id="ticketModifySaveButton" style="width:auto;display:none;">
 					<span class="ticket_button ticket_sprite tick">Save</span>
 				</button>
-				<button class="fontReverse minimal " id="ticketModifyCancelButton" style="width:auto;display:none;">
+				<button class="button" id="ticketModifyCancelButton" style="width:auto;display:none;">
 					<span class="ticket_button ticket_sprite cross">Cancel</span>
 				</button>
-				<button class="openTicket fontReverse  minimal actionButtons closeLink " id="closeButton" style="width:auto;">
+				<button class="openTicket buttonactionButtons closeLink " id="closeButton" style="width:auto;">
 					<span class="ticket_button ticket_sprite door" style="margin-right:5px">Close</span>
 				</button>
-				<button class="closedTicket fontReverse  minimal actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;display:none;">
+				<button class="closedTicket button actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;display:none;">
 					<span style="margin-right:5px">Open</span>
 				</button>
 				<div class="td" style="width:75px;display:none">
