@@ -1003,18 +1003,19 @@ function loadUserPage(userId){
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
 						.append(
-							$("<div/>",{"class":"rountAll4 border-all-B-1 color-B-1",css: {"display":"block","width":"70px","position":"relative","height":"23px"}})
-								.append(
-									$("<div>",{id:"follow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y fakelink",html:"Yes"})
-								)
-								.append(
-									$("<div>",{id:"unfollow",css:{"text-align":"center","display":"inline-block","float":"left","width":"30px","padding":"0","margin":"2px","height":"20px"},"class":"font-Y fakelink",html:"No"})
-								)
-								.append(
-									$("<div/>",{id:"followUnfollowHighlight",css:{"display":"none","position":"absolute","width":"25px","padding":"0","height":"20px","color":"rgba(0,0,0,0)"},"class":"font-Y rountAll4 border-all-K-1 fuzzyoutlineBlack"})
-								)
+							$("<button>",{
+							"class":"button left ",
+							id:"follow",
+							"css":{"width":"40px"},
+							html:"Yes"})						
 						)
-
+						.append(
+							$("<button>",{
+							"class":"button right negative ",
+							id:"unfollow",
+							"css":{"width":"40px"},
+							html:"No"})						
+						)
 					)
 					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
 					.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
@@ -1035,7 +1036,7 @@ function loadUserPage(userId){
 					.append(function(){
 						//openIdLinks
 						return $("<button>",{
-							"class":"fontReverse minimal ticketPadding3",
+							"class":"button ticketPadding3",
 							id:"googleLogin",
 							"css":{"width":"auto"},
 							html:"Link to Google Account"
@@ -1116,23 +1117,6 @@ function loadUserPage(userId){
 						
 				);
 		Tlb.find("#openBugs").append(data.bugs.byMeOpen);
-		if (localUser) {
-			if (data.userInfo.tickets.notify == 2) { //1 = following. 0,2,nothing = not following
-				loc = Tlb.find("#follow").position();
-				Tlb.find("#followUnfollowHighlight").css({
-					"top": loc.top,
-					"left": loc.left + 5
-				}).html("Yes").show();
-			}
-			else {
-				loc = Tlb.find("#unfollow").position();
-				Tlb.find("#followUnfollowHighlight").css({
-					"top": loc.top,
-					"left": loc.left + 5
-				}).html("No").show();
-			}
-			
-		}
 	});
 	
 	if (localUser) {
@@ -1142,11 +1126,6 @@ function loadUserPage(userId){
 				opt: 2
 			}, function(data){
 				checkResponse(data);
-				loc = Tlb.find("#follow").position();
-				Tlb.find("#followUnfollowHighlight").css({
-					//"top": loc.top,
-					"left": loc.left + 5
-				});
 			}, "json");
 		});
 		Tlb.find("#unfollow").click(function(){
@@ -1155,11 +1134,7 @@ function loadUserPage(userId){
 				opt: 1
 			}, function(data){
 				checkResponse(data);
-				loc = Tlb.find("#unfollow").position();
-				Tlb.find("#followUnfollowHighlight").css({
-					//"top": loc.top,
-					"left": loc.left + 5
-				});
+
 			}, "json");
 		});
 		Tlb.find("#userSecondaryEmail").blur(function(){
