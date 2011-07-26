@@ -958,10 +958,7 @@ function loadUserPage(userId){
 	Tlb = Params.Content.find("#ticketListbody");
 	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
 	var localUser = false;
-	alert(localStorage.userId);
 	if (localStorage.userId == userId){localUser = true;}
-	alert(localUser);
-
 	
 	$("<div/>",{id:"userInfoBox","class":"",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
 		.append(
@@ -1222,7 +1219,7 @@ function loadLocalStorage(clear){
 	
  	if(!localStorage.userId || localStorage.userId == 0 || localStorage.userId=="undefined"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
-			localStorage.setItem("userId",JSON.stringify(data.user_id));
+			localStorage.setItem("userId",data.user_id);
     	});	
 	}
   
