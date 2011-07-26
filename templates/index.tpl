@@ -31,7 +31,10 @@
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/Graph.line.js" ></script>
-        <script src="js/combine.php"></script>
+        <script src="/js/tickets.js"></script>
+        <script src="/js/jquery.purr.js"></script>
+        <script src="/js/globalFunctions.js"></script>
+        
        <!-- <script>Params.UserId = {if isset($user_id)}{$user_id} {else} "-1" {/if};Params.Locations = {$locationJSON};</script> -->
     </head>
     <body >
