@@ -54,20 +54,23 @@
 		$response["opt"] = $_POST["opt"];
 	}elseif(isset($_POST["altEmail"])){ // this should be where the alternate email is set
 		$usr = unserialize($_SESSION['user']);
-		$response['message2']=$alt;
 		$db->Query("UPDATE users SET (email_address='".$_POST["altEmail"]."') WHERE id=".$usr->User_id);	
-
+		$alt = $db->Query ("SELECT email_address FROM tickets.users WHERE id=".$usr->User_id,false,"row");
 		if(count($db->Error)==2){
 			$response['message']=$db->Error;
 		}
 		$response['message']="Update Successful";
-		$response["altEmail"] = $_POST["altEmail"];
+		$response["altEmail"] = $alt;
 	}elseif(isset($_GET["logout"])){
 		$usr = unserialize($_SESSION['user']);	
 		unset($_SESSION["openID"]);		
 		$usr->LogUserOut();
 		unset($_SESSION['user']);
 		$response["message"]="Successfully Logged out of Tickets";
+	}elseif(isset($_GET["userIdFetch"])){
+		$usr = unserialize($_SESSION['user']);	
+		$response["user_id"]=$usr->User_id;
+		$response["message"]="Successfully Returned User ID";
 	}else{
 		$response["error"]=="Invalid Username or password";
 		echo json_encode($response);
