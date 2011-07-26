@@ -105,7 +105,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="box_transition" id="replyBox" style="overflow:hidden;width:100%;background-color:#FFF"></div>
+				<div class="box_transition" id="" style="overflow:hidden;width:100%;background-color:#FFF"></div>
 				<button class="openTicket button" id="reAssignButton" style="width:auto;">
 					<span class="ticket_button ticket_sprite user-pencil">Reassign</span>
 				</button>
