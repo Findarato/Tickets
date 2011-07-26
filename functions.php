@@ -145,6 +145,7 @@ function id2Email($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
 		$formatedArray[$r['id']]=$r['email_address'];
 	}
 	//Get the email address from the alt email table
+	/*
 	$db -> Query("SELECT user_id,email FROM tickets.alt_email",true);
 	$res = $db->Format("assoc_array");
 	foreach ($res as $r){
@@ -152,6 +153,7 @@ function id2Email($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
 		$formatedArray[$r['user_id']]=$r['email'];
 	}
 	$db -> Store_results($formatedArray,"users");	
+	 * */
 	$Userinfo = $formatedArray[$user_id];
 	return $Userinfo;
 }
@@ -391,7 +393,7 @@ function indentJson($json) {
 			$_SESSION["lastlogon"] = $llo;
 			$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
 			if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
-			$db->Query("SELECT email FROM alt_email WHERE user_id=".$response["userid"]);
+			$db->Query("SELECT email_address FROM tickets.users WHERE id=".$response["userid"]);
 			$altE = $db->Fetch("row");
 			$response["altEmail"] = $altE;
 		}

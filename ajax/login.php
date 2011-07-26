@@ -54,20 +54,14 @@
 		$response["opt"] = $_POST["opt"];
 	}elseif(isset($_POST["altEmail"])){ // this should be where the alternate email is set
 		$usr = unserialize($_SESSION['user']);
-		if($_POST["altEmail"]=="clear"){
-			$db->Query("DELETE FROM alt_email WHERE user_id=".$usr->User_id." AND email='".$db->Clean($_POST["oldAltEmail"])."' LIMIT 1;");
-			$response['message']="Email address cleared";
-		}else{
-			$alt = $db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id." LIMIT 1;",false,"row");
-			if($alt == 0){ // there is already an alt email address
-				$db->Query("UPDATE alt_email SET (email='".$_POST["altEmail"]."') WHERE user_id=".$alt);	
-			}else{
-				$db->Query("INSERT INTO alt_email (user_id,email) VALUES(".$usr->User_id.",'".$db->Clean($_POST["altEmail"])."');");	
-			}
-			
-			if(count($db->Error)==2){$db->Query("UPDATE alt_email SET email=".$db->Clean($_POST["altEmail"])." WHERE user_id=".$usr->User_id.";");}
-			$response['message']="Update Successful";
+		$alt = $db->Query("SELECT email_address FROM users WHERE id=".$usr->User_id." LIMIT 1;",false,"row");
+		if($alt == 0){ // there is already an alt email address
+			$db->Query("UPDATE users SET (email_address='".$_POST["altEmail"]."') WHERE id=".$alt);	
 		}
+		if(count($db->Error)==2){
+			$response['message']=$db->Error;
+		}
+		$response['message']="Update Successful";
 		$response["altEmail"] = $_POST["altEmail"];
 	}elseif(isset($_GET["logout"])){
 		$usr = unserialize($_SESSION['user']);	
