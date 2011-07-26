@@ -54,10 +54,9 @@
 		$response["opt"] = $_POST["opt"];
 	}elseif(isset($_POST["altEmail"])){ // this should be where the alternate email is set
 		$usr = unserialize($_SESSION['user']);
-		$alt = $db->Query("SELECT email_address FROM users WHERE id=".$usr->User_id." LIMIT 1;",false,"row");
-		if($alt == 0){ // there is already an alt email address
-			$db->Query("UPDATE users SET (email_address='".$_POST["altEmail"]."') WHERE id=".$alt);	
-		}
+		$response['message2']=$alt;
+		$db->Query("UPDATE users SET (email_address='".$_POST["altEmail"]."') WHERE id=".$usr->User_id);	
+
 		if(count($db->Error)==2){
 			$response['message']=$db->Error;
 		}
