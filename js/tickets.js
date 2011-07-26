@@ -413,11 +413,6 @@ function loadTicketBody(inputData, container) {
   $(".ticketData").remove();
   $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
   $(".ticketModifyForm").each(function(f,frm){
-  	$("#replyBox")
-  		.css({
-  			"height":"90px"
-  			
-  		});
     me = $(frm);
     myParent = me.parent();
     myParent.html(myParent.data("prevValue"));
@@ -717,6 +712,10 @@ function loadTicketBody(inputData, container) {
       }
     });
   });
+    	$("#replyBox")
+  		.css({
+  			"height":"90px"
+  		});
 	//Set the ticket type icon
 	if (data.tickettype_id == 1) {
 		$("#ticketStatusImage").find("#imgTicketTrouble").show();
