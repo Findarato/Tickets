@@ -1217,7 +1217,7 @@ function loadLocalStorage(clear){
 		localStorage.setItem("ticketsVersion",$("#version").html()); 
 	}
 	
- 	if(!localStorage.userId || localStorage.userId == 0 || localStorage.userId=="undefined"){// something broke lets take care of it
+ 	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
 			localStorage.setItem("userId",data.user_id);
     	});	
