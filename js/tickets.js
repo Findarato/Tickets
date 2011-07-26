@@ -960,7 +960,9 @@ function loadUserPage(userId){
 	var localUser = false;
 	alert(localStorage.userId);
 	if (localStorage.userId == userId){localUser = true;}
+	alert(localUser);
 
+	
 	$("<div/>",{id:"userInfoBox","class":"",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
 		.append(
 			$("<div>",{css:{"display":"table-cell","width":"110px"}})
