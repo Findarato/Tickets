@@ -1208,10 +1208,17 @@ function loadLocalStorage(clear){
   }else{
     Params.Projects = $.parseJSON(localStorage.getItem("ticketsProjects"));
   }
-  if(localStorage.getItem("ticketsVersion") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
-    localStorage.clear();
-    localStorage.setItem("ticketsVersion",$("#version").html()); 
-  }
+	if(localStorage.getItem("ticketsVersion") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
+		localStorage.clear();
+		localStorage.setItem("ticketsVersion",$("#version").html()); 
+	}
+	
+ 	if(!localStorage.userId || localStorage.userId == 0 || localStorage.userId=="undefined"){// something broke lets take care of it
+		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
+			localStorage.setItem("userId",JSON.stringify(data.user_id));
+    	});	
+	}
+  
 }
 
 /**
@@ -1252,9 +1259,9 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 jQuery(document).ready(function () {
 
   //localStorage.clear();
-  loadLocalStorage(true);
-  Params.Content = $("#content"); //lets stop searching for it a hundred times
-  $("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
+	loadLocalStorage(true);
+	Params.Content = $("#content"); //lets stop searching for it a hundred times
+	$("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
   	if(Params.UserId>0){
 	  	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});	
   	}
