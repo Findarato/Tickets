@@ -118,10 +118,10 @@
 				<button class="button negative " id="ticketModifyCancelButton" style="width:auto;display:none;">
 					<span class="ticket_button ticket_sprite cross">Cancel</span>
 				</button>
-				<button class="openTicket right negative buttonactionButtons closeLink " id="closeButton" style="width:auto;">
+				<button class="openTicket negative button actionButtons closeLink " id="closeButton" style="width:auto;">
 					<span class="ticket_button ticket_sprite door" style="margin-right:5px">Close</span>
 				</button>
-				<button class="closedTicket right button actionButtons openLink" id="reOpenButton" style="width:auto;margin-right:5px;display:none;">
+				<button class="closedTicket button actionButtons openLink" id="reOpenButton" style="width:auto;display:none;">
 					<span style="margin-right:5px">Open</span>
 				</button>
 				<div class="td" style="width:75px;display:none">
