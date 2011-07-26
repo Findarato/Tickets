@@ -16,6 +16,12 @@ body,html {
     margin: 0 auto;
     text-align: left;
 }
+.ticket_left{
+	float:left;
+}
+.ticket_right{
+	float:right;
+}
 #fullwrap {
     height: inherit
 }
