@@ -820,12 +820,7 @@ function loadTicketList(pageNumber,queryObj) {
 		var s_tr; // string time remaining
     if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
     	ticketCount = data.ticketCount;
-		
-		
-		//alert(data.ticketCount);
-		
 		var tlistHolder = $("<div/>");
-
 		 displayTable = $("<table/>",{"class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
@@ -1188,7 +1183,7 @@ function changeArea(area){
 function loadLocalStorage(clear){
   //if(clear){localStorage.clear();}
   
-  if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false"){
+  if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
       updateFavorites();
@@ -1436,7 +1431,9 @@ jQuery(document).ready(function () {
 	$("#frm_login").live("focus",function(){
 		$("#requestSent").css({"opacity":"0"})
 	})
-	
+	$("#createForButton").live("click",function(){
+		
+	});
 	//Global page live 
 	$(":text").live("click", function () {
 		$(this).select();
