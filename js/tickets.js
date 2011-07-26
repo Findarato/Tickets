@@ -958,6 +958,7 @@ function loadUserPage(userId){
 	Tlb = Params.Content.find("#ticketListbody");
 	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
 	var localUser = false;
+	alert(localStorage.userId);
 	if (localStorage.userId == userId){localUser = true;}
 
 	$("<div/>",{id:"userInfoBox","class":"",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
