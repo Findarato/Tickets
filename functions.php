@@ -135,7 +135,7 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	$body = $smarty->fetch('email.tpl');
 	if($email){generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],$closed,$locationEmail[1],true);}
 }
-function id2Email($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
+function id2Email($user_id,$userTable="users",$userDatabase="lapcat" ){
 	$db = db::getInstance();
 	//Get the email address from the user table
 	$db -> Query("SELECT id,email_address FROM $userDatabase.$userTable",true);
@@ -167,7 +167,7 @@ function getDepartmentMembers($dep_id,$notify=0){
 function getUsers(){
 	$return = array();
 	$db = db::getInstance();
-	$sql = "SELECT id,firstname,lastname FROM lapcat.hex_users";
+	$sql = "SELECT id,firstname,lastname FROM tickets.users";
 	$db->Query($sql);
 	$res = $db->Fetch("row_array");
 	foreach ($res as $r){$return[$r[0]]= array("firstname"=>$r[1],"lastname"=>$r[2]);}
