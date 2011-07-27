@@ -21,7 +21,7 @@
 						</tr>
 						<tr id="ticketCreateForBox" style="display:none;">
 							<td style="text-align:left;"><span class="font-X">Created For:</span></td>
-							<td style="text-align:left;"><select class=" Ticketform " id="newTicketCreateFor" name="newTicketCreateFor"><option value="">Select User</option>{html_options options=$assign}</select></td>
+							<td style="text-align:left;"><select class=" Ticketform " id="newTicketCreatedFor" name="newTicketCreatedFor"><option value="0">Select User</option>{html_options options=$assign}</select></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Priority:</span></td>

@@ -671,6 +671,7 @@ function loadTicketBody(inputData, container) {
   $("#replyButton").bind('click',function () {
 	if($("#newReplyForm").find("#replyDescription").val() != ""){
 		//$("#replyBox").css({"height":"0px"});
+		alert("post");
 		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
 			loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
 			$(".Ticketform").attr({value: ""}); 
@@ -1439,7 +1440,7 @@ jQuery(document).ready(function () {
 		$("#requestSent").css({"opacity":"0"})
 	})
 	$("#createForButton").live("click",function(){
-		
+		$("#ticketCreateForBox").show();
 	});
 	//Global page live 
 	$(":text").live("click", function () {
