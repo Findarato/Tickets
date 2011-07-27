@@ -1271,7 +1271,7 @@ jQuery(document).ready(function () {
   	}
 	
 	$("title").html($("title").html()+"  "+$("#version").html());
-	//$("#Version").text($("#version").text()); //to make sure the version on tickets is always updated
+	$("#Version").text($("#version").text()); //to make sure the version on tickets is always updated
 
 	$("#depCancel").click(function () {
 		jQuery.post(uri + "ajax/login.php", {

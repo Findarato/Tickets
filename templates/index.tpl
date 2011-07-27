@@ -68,7 +68,8 @@
             {include file="generic.tpl"}
         </div>
         <div id="blankTpl" class="ui-helper-hidden">
-            {$blankDisplay}
+            
+            {include file="blank.tpl"}
         </div>
         {*
         <div id="notifyTpl" style="position:absolute" class="ui-helper-hidden">
