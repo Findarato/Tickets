@@ -668,21 +668,14 @@ function loadTicketBody(inputData, container) {
 	//
 	//Reply Button
 	//
-  $('#replyButton').click(function(){
-      $("#replyAddButton").trigger('click');
-   });
-  $("#replyCancelButton").click(function(){
-    $("#replyBox").css({"height":"0px"});
-  });
-  $("#replyAddButton").bind('click',function () {
-    if($("#newReplyForm").find("#replyDescription").val() != "")
-    {
-      $("#replyBox").css({"height":"0px"});
-      $.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
-        loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
-        $(".Ticketform").attr({value: ""}); 
-      });
-    }else{}
+  $("#replyButton").bind('click',function () {
+	if($("#newReplyForm").find("#replyDescription").val() != ""){
+		//$("#replyBox").css({"height":"0px"});
+		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
+			loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
+			$(".Ticketform").attr({value: ""}); 
+		});
+	}else{}
   });
   
   //
@@ -1040,9 +1033,17 @@ function loadUserPage(userId){
 							"css":{"width":"auto"},
 							html:"Link to Google Account"
 						});
-					}
-						
-					)
+					})
+					.append("<br><br>")
+					.append(function(){
+						//openIdLinks
+						return $("<button>",{
+							"class":"button ticketPadding3",
+							id:"changeTheme",
+							"css":{"width":"auto"},
+							html:"Change Theme"							
+						});
+					})
 			} 
 		)
 		.appendTo(Tlb);
@@ -1291,23 +1292,18 @@ jQuery(document).ready(function () {
 	});
   
   $("#topperNew").live("click",function(){
-  	
     Params.LastArea = "newTicket";
     Params.Content.html($("#newTicketdialog").html());
-    
     Params.Content.find("#ticketAssignBox").show();
     Params.Content.find("#newTicketType").val("new");
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
-    Params.Content.find(".Ticketform").css("background-color", "");
   });
   $("#topperNewBug").live("click",function(){
-    alert("cicked");
     Params.LastArea = "newBug";
     Params.Content.html($("#newBugdialog").html());
     Params.Content.find("#ticketAssignBox").show();
     Params.Content.find("#newTicketType").val("new");
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
-    Params.Content.find(".Ticketform").css("background-color", "");
   });  
   	//Clicking login with google button
   	$("#googleLogin").live("click",function(){
