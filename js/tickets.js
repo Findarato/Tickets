@@ -1403,7 +1403,6 @@ jQuery(document).ready(function () {
 	
 	//Ticket display live items
 	$(".actionButtons").live("click", function () {
-		
 		if(localStorage.userId == 0){
 			setHash("#login");
     		checkHash();
@@ -1412,7 +1411,15 @@ jQuery(document).ready(function () {
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
 		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
-		if($(this).hasClass("closeLink")){queryObj = {type:"close",ticket_id: Params.TicketId};	}
+		if($(this).hasClass("closeLink")){
+			queryObj = {type:"close",ticket_id: Params.TicketId};
+			var closeResponse = prompt("Why are you closing this ticket","");
+			if (closeResponse!=null && closeResponse!=""){
+				$.post(uri + "/ajax/add_reply.php", {"title":"Ticket Finished","description":closeResponse,"ticket_id":Params.TicketId,"type":"new","user_id":localStorage.userId},function(){});
+			}else{
+				return;
+			}	
+		}
 		if($(this).hasClass("openLink")){queryObj = {type:"open",ticket_id: Params.TicketId};}
 		$.getJSON(uri + "ajax/tickets.php", queryObj,
 		function (data) {
