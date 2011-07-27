@@ -1018,7 +1018,7 @@ function loadUserPage(userId){
 							{id:"",
 							"class":"",
 							css:{"display":"block","margin":"5px","width":"auto"},
-							html:$("<a class=\"minimal ticketPadding3\" id=logOut href=\"ajax/login.php?logout&id="+localStorage.userId+"\" title=\"Log out of Tickets\">Log Out</a>")
+							html:$("<a class=\"button ticketPadding3\" id=logOut href=\"ajax/login.php?logout&id="+localStorage.userId+"\" title=\"Log out of Tickets\">Log Out</aS>")
 								.click(function(){
 									$.getJSON(this.href,function(){ window.location = "/";})
 									localStorage.userId = 0; // lets make sure they can not sneak back in
