@@ -23,6 +23,12 @@ if($_SESSION){
 		@$usr = new User();
 	}
 } 
+if(isset($_GET["newTicketCreatedFor"]) && $_GET["newTicketCreatedFor"] > 0 && $_GET["newTicketCreatedFor"] != "" ){ // simple switch 
+	$assignedById = $_GET["newTicketCreatedFor"];
+	$_GET["newTicketUser_id"] = $_GET["newTicketCreatedFor"]; 
+}else{
+	$assignedById = $_GET["newTicketUser_id"];
+}
 if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
 	if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123){
 	   $_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";
@@ -44,7 +50,7 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
 		VALUES(
 				"'.$_GET["newTicketUser_id"].'",
-				"'.$_GET["newTicketUser_id"].'",
+				"'.$assignedById.'",
 				"'.$_GET["newTicketAssign"].'",
 				"'.$_GET["newTicketCategory"].'",
 				"'.$_GET["newTicketTitle"].'",				
