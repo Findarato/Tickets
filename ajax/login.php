@@ -6,15 +6,14 @@
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$response = login($db->Clean($_POST['un']),$db->Clean($_POST['pw']),$response);
 		}elseif(isset($_GET["openId"]) && isset($_GET["userId"])){// We are trying to login with an openID
-			if($_GET["userId"]>1000){
-				$res = $db->Query("SELECT open_id FROM openId_users WHERE user_id=".$_SESSION["openID"]["user_id"][0]." LIMIT 1",false,"row");
+			if($_GET["userId"]==1){
+				$res = $db->Query("SELECT open_id FROM tickets.openId_users WHERE user_id=".$_SESSION["openID"]["user_id"]." LIMIT 1",false,"row");
 				if(count($res) == 0 || $res == 0){ // lets just make sure that we are not entering in a lot of values
-					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"][0].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
-				}else{
+					$db->Query("INSERT INTO tickets.openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
 				}
 					//Lets do some cryptic database and data manip. 
-					$password = $db->Query("SELECT password FROM users WHERE id=".$_SESSION["openID"]["user_id"][0],false,"row");
-					$response = login($_SESSION["openID"]["user_id"][0],$password,$response,true);
+				$password = $db->Query("SELECT password FROM tickets.users WHERE id=".$_SESSION["openID"]["user_id"],false,"row");
+				$response = login($_SESSION["openID"]["user_id"],$password,$response,true);
 			}elseif($_GET["userId"] == 2){ // this will be a new user in tickets
 				$pass = '!#4$#$%%^jDkksDFUISPSD453Ddded'; 
 				// Ok lets make a ticket user
