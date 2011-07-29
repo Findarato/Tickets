@@ -93,10 +93,9 @@ if(isset($_GET["area"]) ){
       ";
 	  	$Ids = array_implode($db->Query($sql,false,"row"));      
 	  if(is_array($Ids)){
-
 	  	$wc = "t.id IN(".join(",",$Ids).")";
 	  }else{
-	  	$wc = "t.id =".$Ids;
+	  	$wc = "t.id =".$Ids." testbroke";
 	  }
       break;
     case "sClosed": // closed tickets that I am invloved with {Closed Tickets}
