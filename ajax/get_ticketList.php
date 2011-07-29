@@ -87,7 +87,11 @@ if(isset($_GET["area"]) ){
       AND t.tickettype_id=1)
       ";
       $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";
+	  if(is_array($Ids)){
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
       break;
     case "sClosed": // closed tickets that I am invloved with {Closed Tickets}
       $sql = "SELECT 
@@ -101,6 +105,11 @@ if(isset($_GET["area"]) ){
       ";
       $Ids = array_implode($db->Query($sql,false,"row"));
       $wc = "t.id IN(".join(",",$Ids).")";
+	  if(is_array($Ids)){
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
       break;
     case "closedDepartment": // closed tickets that my Department is involved in
     	$dep = getDepartmentMembers_by_userid($usr->User_id);
@@ -115,7 +124,11 @@ if(isset($_GET["area"]) ){
 		AND t.tickettype_id=1)
 		";
 		$Ids = array_implode($db->Query($sql,false,"row"));
-		$wc = "t.id IN(".join(",",$Ids).")";
+		if(is_array($Ids)){
+	  		$wc = "t.id IN(".join(",",$Ids).")";
+	  	}else{
+	  		$wc = "t.id =".$Ids;
+	  	}
 		break;      
     case "sOdepartment":  // Assigned to people in my department {To My Department}
       $depIds = getDepartmentMembers_by_userid($usr->User_id);
@@ -141,7 +154,11 @@ if(isset($_GET["area"]) ){
       ";
       //die(preFormat($sql));
       $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";      
+      if(is_array($Ids)){
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }   
       break;      
     case "sAssigned": // created by me, or assigned by me {By Me}
       $sql = "SELECT 
@@ -161,7 +178,11 @@ if(isset($_GET["area"]) ){
       FROM favorite AS f 
       WHERE f.user_id=".$usr->User_id; 
       $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";
+      if(is_array($Ids)){
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
 		break;
 	case "new":
 		if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
