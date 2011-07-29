@@ -86,8 +86,9 @@ if(isset($_GET["area"]) ){
       AND (t.open=1
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
+      
 	  if(is_array($Ids)){
+	  	$Ids = array_implode($db->Query($sql,false,"row"));
 	  	$wc = "t.id IN(".join(",",$Ids).")";
 	  }else{
 	  	$wc = "t.id =".$Ids;
@@ -103,9 +104,10 @@ if(isset($_GET["area"]) ){
       AND (t.open=0
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";
+
+
 	  if(is_array($Ids)){
+      	$Ids = array_implode($db->Query($sql,false,"row"));
 	  	$wc = "t.id IN(".join(",",$Ids).")";
 	  }else{
 	  	$wc = "t.id =".$Ids;
@@ -123,9 +125,10 @@ if(isset($_GET["area"]) ){
 		AND (t.open=0
 		AND t.tickettype_id=1)
 		";
-		$Ids = array_implode($db->Query($sql,false,"row"));
+		
 		if(is_array($Ids)){
-	  		$wc = "t.id IN(".join(",",$Ids).")";
+	  		$Ids = array_implode($db->Query($sql,false,"row"));
+			$wc = "t.id IN(".join(",",$Ids).")";
 	  	}else{
 	  		$wc = "t.id =".$Ids;
 	  	}
@@ -139,8 +142,12 @@ if(isset($_GET["area"]) ){
       AND (t.open=1
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";      
+		if(is_array($Ids)){
+	  		$Ids = array_implode($db->Query($sql,false,"row"));
+			$wc = "t.id IN(".join(",",$Ids).")";
+	  	}else{
+	  		$wc = "t.id =".$Ids;
+	  	}     
       break;
     case "sAdepartment":  // Assigned to people in my department {By My Department}
       $depIds = getDepartmentMembers_by_userid($usr->User_id);
@@ -153,13 +160,13 @@ if(isset($_GET["area"]) ){
       AND t.tickettype_id=1)
       ";
       //die(preFormat($sql));
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      if(is_array($Ids)){
-	  	$wc = "t.id IN(".join(",",$Ids).")";
-	  }else{
-	  	$wc = "t.id =".$Ids;
-	  }   
-      break;      
+		if(is_array($Ids)){
+			$Ids = array_implode($db->Query($sql,false,"row"));
+			$wc = "t.id IN(".join(",",$Ids).")";
+		}else{
+			$wc = "t.id =".$Ids;
+		}
+	break;      
     case "sAssigned": // created by me, or assigned by me {By Me}
       $sql = "SELECT 
       t.id
