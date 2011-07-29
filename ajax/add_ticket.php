@@ -23,6 +23,12 @@ if($_SESSION){
 		@$usr = new User();
 	}
 } 
+if(isset($_GET["newTicketCreatedFor"]) && $_GET["newTicketCreatedFor"] > 0 && $_GET["newTicketCreatedFor"] != "" ){ // simple switch 
+	$assignedById = $_GET["newTicketCreatedFor"];
+	$_GET["newTicketUser_id"] = $_GET["newTicketCreatedFor"]; 
+}else{
+	$assignedById = $_GET["newTicketUser_id"];
+}
 if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['newTicketType']=="new"){
 	if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123){
 	   $_GET["newTicketUser_id"]=128;$_GET["newTicketType"]="new";
@@ -44,7 +50,7 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
 		$db->Query('INSERT INTO tickets(created_by_id,assigned_by_id,assigned_id,category_id,subject,description,created_on,open,priority,due_on,location,tickettype_id) 
 		VALUES(
 				"'.$_GET["newTicketUser_id"].'",
-				"'.$_GET["newTicketUser_id"].'",
+				"'.$assignedById.'",
 				"'.$_GET["newTicketAssign"].'",
 				"'.$_GET["newTicketCategory"].'",
 				"'.$_GET["newTicketTitle"].'",				
@@ -113,8 +119,8 @@ if(isset($_GET['nagiosTicket']) && $_GET['nagiosTicket']==881234123 || $_GET['ne
     
     $smarty -> assign('email_description',nl2br(Tcode($res1['description'],false,false,true)));
 		$smarty -> assign('showRes',"0");
-    $styleCode = join("",file("http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=22&hsl"));
-    $styleCode .= join("",file("http://www.lapcat.org/tickets/css/tickets.css"));
+    $styleCode .= join("",file("http://tickets.lapcat.org/css/themes/default/style.css"));
+    $styleCode .= join("",file("http://tickets.lapcat.org/css/tickets.css"));
     $smarty -> assign('styleCode',$styleCode);
 		$body = $smarty->fetch($tempName);
 		if(isset($respon)){	$smarty -> assign('respon',$respon);}

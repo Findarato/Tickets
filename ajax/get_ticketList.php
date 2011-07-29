@@ -9,7 +9,11 @@ header("Cache-Control: max-age=60, must-revalidate");
   Header($expire); //output the HTTP header
 
   // Define some global variables
-  $usr = unserialize($_SESSION['user']);
+  if(isset($_SESSION['user'])){
+  	$usr = unserialize($_SESSION['user']);	
+  }else {die("borke user");}
+  
+  
   //print_r($usr);die();
   $db = db::getInstance();
   $wc = array();
@@ -71,8 +75,13 @@ if(isset($_GET["area"]) ){
       WHERE (t.open=1
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";
+	  	$Ids = $db->Query($sql,false,"row");
+	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
       break;
      case "sOpen": // Tickets assigned to the user {To Me}
       $sql = "SELECT 
@@ -82,8 +91,13 @@ if(isset($_GET["area"]) ){
       AND (t.open=1
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";
+	  	$Ids = $db->Query($sql,false,"row");
+	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
       break;
     case "sClosed": // closed tickets that I am invloved with {Closed Tickets}
       $sql = "SELECT 
@@ -95,8 +109,14 @@ if(isset($_GET["area"]) ){
       AND (t.open=0
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";
+
+	  	$Ids = $db->Query($sql,false,"row");
+	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
       break;
     case "closedDepartment": // closed tickets that my Department is involved in
     	$dep = getDepartmentMembers_by_userid($usr->User_id);
@@ -110,8 +130,13 @@ if(isset($_GET["area"]) ){
 		AND (t.open=0
 		AND t.tickettype_id=1)
 		";
-		$Ids = array_implode($db->Query($sql,false,"row"));
-		$wc = "t.id IN(".join(",",$Ids).")";
+	  	$Ids = $db->Query($sql,false,"row");
+	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
 		break;      
     case "sOdepartment":  // Assigned to people in my department {To My Department}
       $depIds = getDepartmentMembers_by_userid($usr->User_id);
@@ -122,8 +147,13 @@ if(isset($_GET["area"]) ){
       AND (t.open=1
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";      
+	  	$Ids = $db->Query($sql,false,"row");
+	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }   
       break;
     case "sAdepartment":  // Assigned to people in my department {By My Department}
       $depIds = getDepartmentMembers_by_userid($usr->User_id);
@@ -136,9 +166,14 @@ if(isset($_GET["area"]) ){
       AND t.tickettype_id=1)
       ";
       //die(preFormat($sql));
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";      
-      break;      
+	  	$Ids = $db->Query($sql,false,"row");
+	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
+	break;      
     case "sAssigned": // created by me, or assigned by me {By Me}
       $sql = "SELECT 
       t.id
@@ -148,17 +183,26 @@ if(isset($_GET["area"]) ){
       AND (t.open=1
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";      
+	  	$Ids = $db->Query($sql,false,"row");
+	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }   
       break;
     case "sFavorite":
       $sql = "SELECT 
       f.ticket_id
       FROM favorite AS f 
       WHERE f.user_id=".$usr->User_id; 
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";
-		break;
+	  	$Ids = $db->Query($sql,false,"row");
+	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }reak;
 	case "new":
 		if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
 			$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);

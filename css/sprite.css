@@ -499,3 +499,13 @@
     width: 16px;
     height: 16px;
 }
+
+/*
+ * Not really sprite but still should go here
+ * 
+ */
+.google{
+	background-image: url("http://www.google.com/s2/u/0/favicons?domain=google.com");
+    width: 16px;
+    height: 16px;	
+}

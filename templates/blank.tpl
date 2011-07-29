@@ -12,11 +12,14 @@
         </a>
 		  </div>
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Live Ticket Update XXIII</span>
-      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.0.r413</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.0.r582</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
         <li>Clicking on the "No User (Please Login) link correctly takes you to the login window. (Finally)</li>
         <li>Trying to take an action on a ticket when you are not logged in will now force you to login.  Before events were seeming to happen when a person was not logged in, but where blocked by the server and not shown to the user.  This lead to confusion.</li>
+		<li>Fixed a TON of bugs related to the login process.</li>
+		<li>You can once again change your email address by clicking on your name</li>
+		<li>Fixed the posting 4 replies bug</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
@@ -28,8 +31,8 @@
 	        <li>You can now see up to 30 tickets per screen instead of the normal 20.</li>
 	        <li>The body of a ticket now shows up as the first reply</li>
 	        <li>Tickets works much better on Smart phones.  You can now check and interact will all of the ticket features straight from your phone.  There may be bugs in how it work in the initial release, and it will be improved over time.</li>
-	        <li>You can login to tickets with a Google account.  More OpenID providers will be enabled in the future, but for now its just google.</li>
 	      </ol>
+		<li>You can login to tickets with a Google account.  More OpenID providers will be enabled in the future, but for now its just google.</li>	      
         </li>
         <li>Searching works.  It is now a keyword search that searches the title, body, and id of the ticket.</li>
       </ol>
@@ -39,6 +42,7 @@
         <li>Searching By project does not work</li>
         <li>Page indicators in a search result do not currently work.</li>
         <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
+        <li>Commenting on a ticket that was closed or reopened will generate extra replies.</li>
       </ol>
       <br>
       <br>		  

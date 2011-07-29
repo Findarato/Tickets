@@ -157,6 +157,7 @@ function addBr(obj) {
 }
 
 function notice(title, body, sticky, ticketid,icon) {
+	return false;
     var noticeClass,image;
 	if(icon){
 		image = icon;

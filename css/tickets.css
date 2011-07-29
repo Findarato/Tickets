@@ -12,15 +12,15 @@ body,html {
 .whiteBackground {
     background-color: #FFF 
 }
-.right {
-    float: right
-}
-.left {
-    float: left
-}
 .matchwrap {
     margin: 0 auto;
     text-align: left;
+}
+.ticket_left{
+	float:left;
+}
+.ticket_right{
+	float:right;
 }
 #fullwrap {
     height: inherit

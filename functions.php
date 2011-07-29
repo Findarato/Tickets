@@ -7,21 +7,21 @@
  * @param string $userTable[optional]
  * @param string $userDatabase[optional]
  */
-function id2Username($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
+function id2Username($user_id,$userTable="users",$userDatabase="tickets" ){
 	$db = db::getInstance();
-	$db -> Query("SELECT id,username,firstname,lastname FROM $userDatabase.$userTable",true);
-	$res = $db->Format("assoc_array");
-	$formatedArray = array(); //Create the storage array
-	foreach ($res as $r){
-		$formatedArray[$r['id']]=array("username"=>$r['username'],"firstname"=>$r['firstname'],"lastname"=>$r['lastname']);
+	if($storedResults = $db->Get_results("users")){/*This query has already been run */
+		$Userinfo = $storedResults[$user_id];
+	}else{
+		$db -> Query("SELECT id,username,firstname,lastname FROM $userDatabase.$userTable",true);
+		$res = $db->Format("assoc_array");
+		$formatedArray = array(); //Create the storage array
+		foreach ($res as $r){
+			$formatedArray[$r['id']]=array("username"=>$r['username'],"firstname"=>$r['firstname'],"lastname"=>$r['lastname']);
+		}
+		$db -> Store_results($formatedArray,"users");	
+		$Userinfo = $formatedArray[$user_id];
 	}
-	$db -> Store_results($formatedArray,"users");	
-	$Userinfo = $formatedArray[$user_id];
 	return $Userinfo;
-}
-
-function preFormat($string=""){
-  return "<pre>".$string."</pre>";
 }
 
 function aTcode($array,$id='description'){
@@ -50,99 +50,40 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 	$end =  strpos($text,"]");
 	preg_match_all('(\[[^]]+\])', $text, $matches);
 	$matches = $matches[0];
-  $db = db::getInstance();
 	foreach($matches as $match){
 		$orig = $match;
 		$match=str_replace(" ","",$match);
 		$match=str_replace("[","",$match);
 		$match=str_replace("]","",$match);
-		$matchOld = $match;
 		$match = explode("=",$match);
-		//echo $match[0];
-		$matchOld = str_replace($match[0]."=", "", $matchOld);
-		//echo $matchOld;
 		//print_r($match);
-
 		switch($match[0]){
 			case "ticket":
-       if(is_numeric($match[1])){
-        // Lets make sure the ticket is still open.  If its closed put in the <del> tag around it.
-        $ticketInfo = $db->Query("SELECT closed_on,open,subject FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
-        if(!is_array($ticketInfo)){// there  was no ticket
-          $ticketInfo["closed_on"]="";
-          $ticketInfo["subject"]="Ticket Not Found";
-          $ticketInfo["open"]=0;
-        }
-        if($ticketInfo["open"]==0){
-          $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[1]." ".$ticketInfo["subject"]."</del>";
-        }else{
-          $ticketDisplay = $match[1]." ".$ticketInfo["subject"];
-        }
-        if($email){
-          $formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
-        }else{
-          $formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
-        }
-        $formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);        
-       }
-			break;
-      case "bug":
-        // Lets make sure the ticket is still open.  If its closed put in the <del> tag around it.
-        if(is_numeric($match[1])){
-          $ticketInfo = $db->Query("SELECT closed_on,open,subject FROM tickets.tickets WHERE id=".$match[1],false,"assoc");
-          if(!is_array($ticketInfo)){// there  was no ticket
-            $ticketInfo["closed_on"]="";
-            $ticketInfo["subject"]="Bug Not Found";
-            $ticketInfo["open"]=0;
-          }
-
-          if($ticketInfo["open"]==0){
-            $ticketDisplay = "<del datetime='".$ticketInfo["closed_on"]."'>".$match[1]." ".$ticketInfo["subject"]."</del>";
-          }else{
-            $ticketDisplay = $match[1]." ".$ticketInfo["subject"];
-          }
-          if($email){
-            $formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
-          }else{
-            $formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"bug_link ticket_button ticket_sprite\">".$ticketDisplay."</a>";
-          }
-          $formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);
-        }     
-      break;
-
+				if($email){
+					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+				}else{
+					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+				}
+				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
+				break;
 			case "user":
 				$userinfo = id2Username($match[1]);
 				if($email){
-					$formated1 = "
-						<a href=\"http://www.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"user ticket_link ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
+					$formated1 = "<a href=\"http://dev.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
 				}else{
-					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user ticket_link ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
+					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user fakelink ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
+					
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
+				
+				break;
+			default:
+				
 			break;
-			case "url":
-				if($email){
-					$formated1 = "<a href=\"".$matchOld."\" class=\"ticket_sprite global_link ticket_button\">".$matchOld."</a>";
-				}else{
-					$formated1 = "<a href=\"".$matchOld."\" class=\"ticket_sprite global_link ticket_button\">".$matchOld."</a>";
-				}
-				$formated = str_replace("[".$match[0]."=".$matchOld."]", $formated1,$formated);			
-			break;
-			case "img":
-				if($email){
-					$formated1 = "<img src=\"".$matchOld."\" style=\"height:100px;width:100px;display:block;\">";
-				}else{
-					$formated1 = "<div style=\"background-image:url(".$matchOld.")\" class=\"border-all-B-2 popImageSmall\"></div>";
-				}
-				$formated = str_replace("[".$match[0]."=".$matchOld."]", $formated1,$formated);			
-			break;
-
-			
-			default:break;
 		}
 	}
-	if($escape){return nl2br(mysql_escape_string($formated));
-	}else{return nl2br($formated);}
+	if($escape){return mysql_escape_string($formated);
+	}else{return $formated;}
 }
 /**
  * Post a response to the ticket.
@@ -172,7 +113,7 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	"lastname"=>ucwords($users[$res2['user_id']]['lastname']),
 	"subject"=>$res2['subject'],
 	"date"=>$res2['created_on'],					
-	"body"=>Tcode($res2['body'],false,false,true));
+	"body"=>nl2br(Tcode($res2['body'],false,false,true)));
 	if(!isset($smarty)){
 		$smarty = new Smarty();
 		$smarty->template_dir = '/www/tickets/templates'; 
@@ -189,38 +130,31 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	$smarty -> assign('email_title',$res1['subject']);
 	$smarty -> assign('email_priority',$res1['priority']);				
 	$smarty -> assign('email_location',$locationEmail[2]);
-	$smarty -> assign('email_description',Tcode($res1['description'],false,false,true));
+	$smarty -> assign('email_description',nl2br($res1['description']));
 	$smarty -> assign('respon',$respon);
-	$styleCode = join("",file("http://www.lapcat.org/lapcat/css/themes/theme-generator.php?theme=22&hsl"));
-  $styleCode .= join("",file("http://www.lapcat.org/tickets/css/tickets.css"));
-  $smarty -> assign('styleCode',$styleCode);
 	$body = $smarty->fetch('email.tpl');
 	if($email){generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],$closed,$locationEmail[1],true);}
 }
-function id2Email($user_id,$userTable="hex_users",$userDatabase="lapcat" ){
+function id2Email($user_id,$userTable="users",$userDatabase="tickets" ){
 	$db = db::getInstance();
 	//Get the email address from the user table
-	$db -> Query("SELECT id,email_address FROM $userDatabase.$userTable");
+	$db -> Query("SELECT id,email_address FROM $userDatabase.$userTable",true);
 	$res = $db->Format("assoc_array");
 	$formatedArray = array(); //Create the storage array
 	foreach ($res as $r){
 		$formatedArray[$r['id']]=$r['email_address'];
 	}
-
 	//Get the email address from the alt email table
-	$db -> Query("SELECT user_id,email FROM tickets.alt_email");
+	/*
+	$db -> Query("SELECT user_id,email FROM tickets.alt_email",true);
 	$res = $db->Format("assoc_array");
 	foreach ($res as $r){
 		//replace the user table email with the alt email
 		$formatedArray[$r['user_id']]=$r['email'];
 	}
-	//$db -> Store_results($formatedArray,"users");	
-	if($user_id==0){
-	  $Userinfo = "automation@lapcat.org";
-	}else{
-    $Userinfo = $formatedArray[$user_id];    
-	}
-	
+	$db -> Store_results($formatedArray,"users");	
+	 * */
+	$Userinfo = $formatedArray[$user_id];
 	return $Userinfo;
 }
 function getDepartmentMembers($dep_id,$notify=0){
@@ -230,10 +164,10 @@ function getDepartmentMembers($dep_id,$notify=0){
 	$db->Query($sql);
 	return $db->Fetch("row_array");
 }
-function getUsers(){ 
+function getUsers(){
 	$return = array();
 	$db = db::getInstance();
-	$sql = "SELECT id,firstname,lastname FROM lapcat.hex_users";
+	$sql = "SELECT id,firstname,lastname FROM tickets.users";
 	$db->Query($sql);
 	$res = $db->Fetch("row_array");
 	foreach ($res as $r){$return[$r[0]]= array("firstname"=>$r[1],"lastname"=>$r[2]);}
@@ -329,16 +263,15 @@ function rekeyArray($array){
 	}
 	return $tempArray;
 }
-function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$closed=false,$location=false,$reply=false,$bug=false){
+function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$closed=false,$location=false,$reply=false){
 	$from = "Tickets@lapcat.org";
 	$headers = "From: $from". "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	if($user_id!=128){
-		$emailIds['created'] = getDepartmentMembers_by_userid($user_id,1);//created by
-	}
+
+	$emailIds['created'] = getDepartmentMembers_by_userid($user_id,1);//created by
 	$emailIds['assigned'] = getDepartmentMembers_by_userid($assigned_id,1); //assigned to
-	$emailIds[] = $assigned_id;	
+	$emailIds[] = $assigned_id;
 	$idsToEmail = uniqueArray(array_implode($emailIds));
 	$email = array();
 	$replyMessageLocation = "There is a new reply to ($ticketTitle)";
@@ -347,21 +280,11 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 		$createdMessageLocation = "The Location ticket(".$ticketTitle.") is now Closed";
 		$assignedMessage = "$ticketTitle is now Closed";
 		$defaultMessage = "Ticket ".$ticketTitle. " is now Closed";
-		if($bug){
-			$createdMessage = "The Department Bug Report (".$ticketTitle.") is now Closed";
-			$createdMessageLocation = "The Location Bug Report (".$ticketTitle.") is now Closed";
-			$assignedMessage = "$ticketTitle is now Closed";
-		}
 	}else{
 		$createdMessage = "There is a new ticket ($ticketTitle) in your Department";
 		$createdMessageLocation = "There is a new ticket ($ticketTitle) for this Location";
 		$assignedMessage = "There is a new ticket ($ticketTitle) assigned to you";
 		$defaultMessage = "$ticketTitle is now assigned to you";
-		if($bug){
-			$createdMessage = "There is a new Bug Report ($ticketTitle) in your Department";
-			$createdMessageLocation = "There is a new Bug Report ($ticketTitle) for this Location";
-			$assignedMessage = "There is a new Bug Report ($ticketTitle) assigned to you";
-		}
 	}
 	if($location){
 		if($reply){
@@ -371,8 +294,7 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 	}
 	foreach ($idsToEmail as $key=>$ite){
 		$email = id2Email($ite); 
-		if($reply){
-			mail($email,"There has been a reply to a one of your tickets",$body,$headers);
+		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets",$body,$headers);
 		}else{
 			switch($key){
 				case "created":
@@ -435,4 +357,46 @@ function indentJson($json) {
  
     return $result;
 }
+
+	function login($un,$pw,$response,$openid=false){
+		$db = db::getInstance();
+		if($openid){
+			$usr = new user($un,$pw,true,true);
+		}else{
+			$usr = new user($un,$pw);
+		}
+		if($usr->User_id==-1){
+			$response['error']="Invalid Username or Password";
+		}else{  
+			$_SESSION["user"] = serialize($usr);
+			$response["username"]=$usr->A_P['username'];
+			$response["firstname"]=$usr->A_U['first-name'];
+			$response["lastname"]=$usr->A_U['last-name'];
+			$response["userid"]=$usr->User_id;
+			$dep = getDepartment_by_userid($usr->User_id); 
+			$dep = array_implode($dep);
+			if(count($dep)!=2 || $dep===false){
+				$response["departmentid"]=-1; 
+				$response["departmentname"] = "None!";
+			}else{
+				$response["departmentid"] = $dep[0];
+				$response["departmentname"] = $dep[1];
+			}
+			$db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
+			$res = $db->Fetch("row");
+			$response["opt"] = $res;
+			$dt = date("U");
+			$response['message'] = "Login Successful";
+			$db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
+			$llo = $db->Fetch("row");
+			$response['lastlogon'] = $llo;
+			$_SESSION["lastlogon"] = $llo;
+			$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
+			if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
+			$db->Query("SELECT email_address FROM tickets.users WHERE id=".$response["userid"]);
+			$altE = $db->Fetch("row");
+			$response["altEmail"] = $altE;
+		}
+		return $response;
+	} 
 ?>
