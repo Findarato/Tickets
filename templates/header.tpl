@@ -3,7 +3,7 @@
 		<div style="display:table;width:100%;text-align:right;">
 			<div class="border-bottom-Main-1" style="display:table-cell;height:auto;width:250px;text-align:left"> <!-- Logo stuff -->
 				<div style="height:30px;display:inline-block">
-					<a class="left fakelink ticket_link" href="#start" style="display:inline-block;background:url(/tickets/css/tickets-logo.png) no-repeat scroll 0% 0% transparent;height:40px;width:59px;-moz-background-size:100% 100%;-webkit-background-size:100% 100%;-o-background-size:100% 100%;background-size:100% 100%;"></a>
+					<a class="left fakelink ticket_link" href="#start" style="display:inline-block;background:url(/css/tickets-logo.png) no-repeat scroll 0% 0% transparent;height:40px;width:59px;-moz-background-size:100% 100%;-webkit-background-size:100% 100%;-o-background-size:100% 100%;background-size:100% 100%;"></a>
 				</div>
 				<div style="width:auto;height:30px;display:inline-block;text-align:left;">
 					<div class="" style="width:auto;height:16px">The issue tracking system</div>
