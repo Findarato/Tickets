@@ -300,6 +300,7 @@ if(isset($response["tickets"])){
     $response["tickets"] = "No tickets found";
   }else{
     $response["tickets"] = aTcode($response["tickets"]);  
+	$response["tickets"] = $db->Lastsql;
   }
 }
 echo json_encode($response);
