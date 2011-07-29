@@ -75,8 +75,13 @@ if(isset($_GET["area"]) ){
       WHERE (t.open=1
       AND t.tickettype_id=1)
       ";
-      $Ids = array_implode($db->Query($sql,false,"row"));
-      $wc = "t.id IN(".join(",",$Ids).")";
+	  	$Ids = array_implode($db->Query($sql,false,"row"));      
+	  if(is_array($Ids)){
+
+	  	$wc = "t.id IN(".join(",",$Ids).")";
+	  }else{
+	  	$wc = "t.id =".$Ids;
+	  }
       break;
      case "sOpen": // Tickets assigned to the user {To Me}
       $sql = "SELECT 
@@ -86,9 +91,9 @@ if(isset($_GET["area"]) ){
       AND (t.open=1
       AND t.tickettype_id=1)
       ";
-      
+	  	$Ids = array_implode($db->Query($sql,false,"row"));      
 	  if(is_array($Ids)){
-	  	$Ids = array_implode($db->Query($sql,false,"row"));
+
 	  	$wc = "t.id IN(".join(",",$Ids).")";
 	  }else{
 	  	$wc = "t.id =".$Ids;
@@ -105,9 +110,9 @@ if(isset($_GET["area"]) ){
       AND t.tickettype_id=1)
       ";
 
-
+$Ids = array_implode($db->Query($sql,false,"row"));
 	  if(is_array($Ids)){
-      	$Ids = array_implode($db->Query($sql,false,"row"));
+      	
 	  	$wc = "t.id IN(".join(",",$Ids).")";
 	  }else{
 	  	$wc = "t.id =".$Ids;
@@ -125,9 +130,9 @@ if(isset($_GET["area"]) ){
 		AND (t.open=0
 		AND t.tickettype_id=1)
 		";
-		
+		$Ids = array_implode($db->Query($sql,false,"row"));
 		if(is_array($Ids)){
-	  		$Ids = array_implode($db->Query($sql,false,"row"));
+	  		
 			$wc = "t.id IN(".join(",",$Ids).")";
 	  	}else{
 	  		$wc = "t.id =".$Ids;
@@ -142,8 +147,9 @@ if(isset($_GET["area"]) ){
       AND (t.open=1
       AND t.tickettype_id=1)
       ";
+      $Ids = array_implode($db->Query($sql,false,"row"));
 		if(is_array($Ids)){
-	  		$Ids = array_implode($db->Query($sql,false,"row"));
+	  		
 			$wc = "t.id IN(".join(",",$Ids).")";
 	  	}else{
 	  		$wc = "t.id =".$Ids;
@@ -160,8 +166,9 @@ if(isset($_GET["area"]) ){
       AND t.tickettype_id=1)
       ";
       //die(preFormat($sql));
+      $Ids = array_implode($db->Query($sql,false,"row"));
 		if(is_array($Ids)){
-			$Ids = array_implode($db->Query($sql,false,"row"));
+			
 			$wc = "t.id IN(".join(",",$Ids).")";
 		}else{
 			$wc = "t.id =".$Ids;
