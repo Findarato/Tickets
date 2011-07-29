@@ -82,7 +82,6 @@ if(isset($_GET["area"]) ){
 	  }else{
 	  	$wc = "t.id =".$Ids;
 	  }
-      bre
       break;
      case "sOpen": // Tickets assigned to the user {To Me}
       $sql = "SELECT 
