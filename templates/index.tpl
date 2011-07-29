@@ -8,10 +8,10 @@
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
         <title>Tickets - The tracking system</title>
         <link href='http://fonts.googleapis.com/css?family=Snippet|Stardos+Stencil|Open+Sans+Condensed:300|Inconsolata|Ubuntu|Droid+Sans|Droid+Sans+Mono|Droid+Serif&v2' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="/tickets/css/resetStyle.css?v=1">
+        <link rel="stylesheet" href="/css/resetStyle.css?v=1">
         <link rel="stylesheet" media="screen" href="css/buttons.css?v=21"  /> 
         <link rel="stylesheet" media="screen" href="css/tickets.css?v=22"  /> 
-        <link id="themeCss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
+        <link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"  />
         <link rel="shortcut icon" href="/bug.png">
         <link rel="apple-touch-icon" href="/bug.png">
         <link rel="icon" type="image/png" href="/bug.png" />
