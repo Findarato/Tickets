@@ -671,7 +671,6 @@ function loadTicketBody(inputData, container) {
   $("#replyButton").bind('click',function () {
 	if($("#newReplyForm").find("#replyDescription").val() != ""){
 		//$("#replyBox").css({"height":"0px"});
-		alert("post");
 		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
 			loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
 			$(".Ticketform").attr({value: ""}); 
