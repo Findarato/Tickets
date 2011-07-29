@@ -91,8 +91,9 @@ if(isset($_GET["area"]) ){
       AND (t.open=1
       AND t.tickettype_id=1)
       ";
-	  	$Ids = array_implode($db->Query($sql,false,"row"));      
+	  	$Ids = $db->Query($sql,false,"row");
 	  if(is_array($Ids)){
+	  	$Ids = array_implode($Ids);
 	  	$wc = "t.id IN(".join(",",$Ids).")";
 	  }else{
 	  	$wc = "t.id =".$Ids." testbroke";
