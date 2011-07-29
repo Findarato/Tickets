@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
 	$("#yesLink").live("click",function(){
 		$.getJSON("/ajax/login.php",{"openId":"1","userId":"1"},function(json){
 			window.opener.window.login(json);
-			//window.close();
+			window.close();
 		});
 	});
 	
