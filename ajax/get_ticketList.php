@@ -9,7 +9,11 @@ header("Cache-Control: max-age=60, must-revalidate");
   Header($expire); //output the HTTP header
 
   // Define some global variables
-  $usr = unserialize($_SESSION['user']);
+  if(isset($_SESSION['user'])){
+  	$usr = unserialize($_SESSION['user']);	
+  }else {die("borke user");}
+  
+  
   //print_r($usr);die();
   $db = db::getInstance();
   $wc = array();

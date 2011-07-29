@@ -54,6 +54,7 @@ try {
 			$_SESSION["openID"]["first_name"] = $first_name;
 			$_SESSION["openID"]["last_name"] = $last_name;
 			$userId = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"assoc");
+			$_SESSION["openID"]["user_id"] = $userId["id"];
 			// This needs its own if statement to make sure its actually ran.
 			if(is_array($userId)){ // There is a matching email address
 				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$userId["id"]."'AND open_id='".$identity."';",false,"row");
