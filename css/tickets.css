@@ -1,378 +1,415 @@
 @import url("sprite.css");
-
-a {text-decoration: none;}
-a:hover {text-decoration: underline}
-body,html {
-    height: 100%;
-    font-family: 'Ubuntu', sans-serif;
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+body, html {
+	height: 100%;
+	font-family: 'Ubuntu', sans-serif;
 }
 .ilb {
-    display: inline-block
+	display: inline-block;
 }
 .whiteBackground {
-    background-color: #FFF 
+	background-color: #FFF;
 }
 .matchwrap {
-    margin: 0 auto;
-    text-align: left;
+	margin: 0 auto;
+	text-align: left;
 }
-.ticket_left{
-	float:left;
+.ticket_left {
+	float: left;
 }
-.ticket_right{
-	float:right;
+.ticket_right {
+	float: right;
 }
 #fullwrap {
-    height: inherit
+	height: inherit;
 }
 #wrap {
-    text-align: left;
-    height: auto;
+	text-align: left;
+	height: auto;
 }
 .smallticketL {
-    width: 120px;
-    overflow: hidden;
-    height: 1.2em;
+	width: 120px;
+	overflow: hidden;
+	height: 1.2em;
 }
 .smallticketR {
-    width: 80px;
-    overflow: hidden;
-    height: 1.2em;
+	width: 80px;
+	overflow: hidden;
+	height: 1.2em;
 }
 .smallShow {
-    height: auto;
-    display: block;
+	height: auto;
+	display: block;
 }
 .head {
-    clear: both;
-    overflow: hidden;
-    padding: 5px 10px;
-    position: relative;
+	clear: both;
+	overflow: hidden;
+	padding: 5px 10px;
+	position: relative;
 }
 .headlist {
-    text-align: left
+	text-align: left;
 }
 p {
-    padding: 0 0 1em
+	padding: 0 0 1em;
 }
 /* message display page */
 .message_list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 210px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 210px;
 }
 .message_head {
-    padding: 5px 10px;
-    height: 16px;
-    position: relative;
+	padding: 5px 10px;
+	height: 16px;
+	position: relative;
 }
 .tr {
-    display: table-row
+	display: table-row;
 }
 .t {
-    display: table
+	display: table;
 }
 .td {
-    display: table-cell;
-    vertical-align: top;
+	display: table-cell;
+	vertical-align: top;
 }
 .message_body {
-    padding: 5px 10px 15px;
-    font-size: 1em;
+	padding: 5px 10px 15px;
+	font-size: 1em;
 }
-.fakelink,
-.hover {
-    cursor: pointer
+.fakelink, .hover {
+	cursor: pointer;
 }
 .textLeft {
-    text-align: left
+	text-align: left;
 }
 .textRight {
-    text-align: right
+	text-align: right;
 }
 .lapcatButton {
-    float: left;
-    margin-right: 4px;
-    width: 70px;
+	float: left;
+	margin-right: 4px;
+	width: 70px;
 }
 /* New ticket image sprites*/
-.ticket_button,
-.ticket_button_no_pad,
-.ticket_button_right {
-    height: 16px
+.ticket_button, .ticket_button_no_pad, .ticket_button_right {
+	height: 16px;
 }
 .ticket_button {
-    padding: 0 0 0 19px
+	padding: 0 0 0 19px;
 }
 .ticket_button_right {
-    padding: 0 19px 0 0
+	padding: 0 19px 0 0;
 }
-.box_transition,input {
-    -moz-transition: all .5s ease-out;
-    -o-transition: all .5s ease-in;
-    -webkit-transition: all .5s ease-out;
+-webkit-transition, input {
+	-moz-transition: all .5s ease-out;
+	-moz-transition, input {
+-moz-transition: all .5s ease-out;
+	-o-transition, input {
+-moz-transition: all .5s ease-out;
+	-ms-transition, input {
+-moz-transition: all .5s ease-out;
+	transition, input {
+-moz-transition: all .5s ease-out;
 }
-
 .small-shadow-black-1 {
-    box-shadow: 2px 2px 5px rgba(0,0,0,.60);
-    -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
-    -moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
+	box-shadow: 2px 2px 5px rgba(0,0,0,.60);
 }
 .small-shadow-black-down-1 {
-    box-shadow: 0px 2px 4px rgba(0,0,0,.60);
-    -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,.60);
-    -moz-box-shadow: 0px 2px 4px rgba(0,0,0,.60);
+	-webkit-box-shadow: 0px 2px 4px rgba(0,0,0,.60);
+	-moz-box-shadow: 0px 2px 4px rgba(0,0,0,.60);
+	box-shadow: 0px 2px 4px rgba(0,0,0,.60);
 }
 .fuzzyoutline {
-    box-shadow: 0 0 6px rgba(255,0,0,1);
-    -webkit-box-shadow: 0 0 6px rgba(255,0,0,1);
-    -moz-box-shadow: 0 0 6px rgba(255,0,0,1);
-    -moz-transition: all 0.3s;
-    /* FF3.7+ */: ;
-    -o-transition: all 0.3s;
-    /* Opera 10.5 */: ;
-    -webkit-transition: all 0.3s;
+	-webkit-box-shadow: 0 0 6px rgba(255,0,0,1);
+	-moz-box-shadow: 0 0 6px rgba(255,0,0,1);
+	box-shadow: 0 0 6px rgba(255,0,0,1);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	transition: all 0.3s;
+	/* FF3.7+ */
+	: ;
+	/* Opera 10.5 */
+	: ;
 }
 .fuzzyoutlineBlack.input:focus {
-    box-shadow: 0 0 6px rgba(0,0,0,1);
-    -webkit-box-shadow: 0 0 6px rgba(0,0,0,1);
-    -moz-box-shadow: 0 0 6px rgba(0,0,0,1);
-    -moz-transition: all 0.3s;
-    /* FF3.7+ */: ;
-    -o-transition: all 0.3s;
-    /* Opera 10.5 */: ;
-    -webkit-transition: all 0.3s;
+	-webkit-box-shadow: 0 0 6px rgba(0,0,0,1);
+	-moz-box-shadow: 0 0 6px rgba(0,0,0,1);
+	box-shadow: 0 0 6px rgba(0,0,0,1);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	transition: all 0.3s;
+	/* FF3.7+ */
+	: ;
+	/* Opera 10.5 */
+	: ;
 }
 .popImageSmall {
-    height: 100px;
-    width: 100px;
-    display: block;
-    float: left;
-    -webkit-background-size: 100px;
-    -o-background-size: 100px;
-    -moz-background-size: 100px;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-} 
+	height: 100px;
+	width: 100px;
+	display: block;
+	float: left;
+	-webkit-background-size: 100px;
+	-moz-background-size: 100px;
+	-o-background-size: 100px;
+	background-size: 100px;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
 .popImageSmall:hover {
-    height: 300px;
-    width: 300px;
-    z-index: 100;
-    -webkit-background-size: 300px;
-    -o-background-size: 300px;
-    -moz-background-size: 300px;
+	height: 300px;
+	width: 300px;
+	z-index: 100;
+	-webkit-background-size: 300px;
+	-moz-background-size: 300px;
+	-o-background-size: 300px;
+	background-size: 300px;
 }
 .popImageLarge {
-    height: auto;
-    width: auto;
-    position: fixed;
-    display: block;
-    z-index: 10000;
-    box-shadow: 2px 2px 5px rgba(0,0,0,.60);
-    -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
-    -moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
+	height: auto;
+	width: auto;
+	position: fixed;
+	display: block;
+	z-index: 10000;
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
+	box-shadow: 2px 2px 5px rgba(0,0,0,.60);
 }
-.ticketPadding3{padding:3px;}
-.ticketButton,
-.ticketButton:visited,
-.ticketButtonNoShadow,
-.ticketButtonNoShadow:visited {
-    display: block;
-    padding: 2px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-    position: relative;
-    cursor: pointer;
-    text-decoration: none !important;
-    text-align: center;
-    zoom: 1;
-    margin-right: 5px;
+.ticketPadding3 {
+	padding: 3px;
 }
-.ticketButton,
-.ticketButton:visited {
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+.ticketButton, .ticketButton:visited, .ticketButtonNoShadow, .ticketButtonNoShadow:visited {
+	display: block;
+	padding: 2px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	border-radius: 5px;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+	text-decoration: none !important;
+	text-align: center;
+	zoom: 1;
+	margin-right: 5px;
+}
+.ticketButton, .ticketButton:visited {
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 #purr-container {
-    position: fixed;
-    top: 0;
-    right: 0;
+	position: fixed;
+	top: 0;
+	right: 0;
 }
 .notice {
-    position: relative;
-    width: 300px;
-    margin-bottom: 10px;
-    top: 12px;
-    right: 12px;
+	position: relative;
+	width: 300px;
+	margin-bottom: 10px;
+	top: 12px;
+	right: 12px;
 }
-.notice 
-    .close {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    display: block;
-    width: 18px;
-    height: 17px;
+.notice .close {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	display: block;
+	width: 18px;
+	height: 17px;
 }
 .notice-body {
-    text-align: left;
-    min-height: 50px;
-    padding: 12px 12px 0 12px;
+	text-align: left;
+	min-height: 50px;
+	padding: 12px 12px 0 12px;
 }
 .notice-body img {
-    width: 32px;
-    height: 32px;
-    margin: 0 10px 0 0;
+	width: 32px;
+	height: 32px;
+	margin: 0 10px 0 0;
 }
 .notice-body h3 {
-    margin: 0;
-    font-size: 1.1em;
+	margin: 0;
+	font-size: 1.1em;
 }
 .notice-bottom {
-    height: 22px
+	height: 22px;
 }
 /* JQuery UI stuff that needed to be saved*/
 .ui-helper-hidden {
-    display: none
+	display: none;
 }
 .ui-helper-hidden-accessible {
-    position: absolute;
-    left: -99999999px;
+	position: absolute;
+	left: -99999999px;
 }
 .ui-helper-reset {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    line-height: 1.3;
-    text-decoration: none;
-    font-size: 100%;
-    list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	line-height: 1.3;
+	text-decoration: none;
+	font-size: 100%;
+	list-style: none;
 }
 .ui-helper-clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
 }
 .ui-helper-clearfix {
-    display: inline-block
+	display: inline-block;
 }
 .ui-helper-clearfix {
-    display: block
+	display: block;
 }
-ul,
-ol {
-    padding-left: 20px
+ul, ol {
+	padding-left: 20px;
 }
-ul li,
-ol li {
-    padding-left: 5px
+ul li, ol li {
+	padding-left: 5px;
 }
 input:focus {
-
 }
-.transformTL {
-    transform-origin: 0 0;
-    -moz-transform-origin: top left;
-    -o-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
+-webkit-transformTL {
+	transform-origin: 0 0;
+	-moz-transformtl {
+transform-origin: 0 0;
+	-o-transformtl {
+transform-origin: 0 0;
+	-ms-transformtl {
+transform-origin: 0 0;
+	transformtl {
+transform-origin: 0 0;
+	-webkit-transform-origin: top left;
+	-moz-transform-origin: top left;
+	-o-transform-origin: top left;
+	-ms-transform-origin: top left;
+	transform-origin: top left;
+	-webkit-transform-origin: 0 0;
+	-moz-transform-origin: 0 0;
+	-o-transform-origin: 0 0;
+	-ms-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform-origin: 0 0;
+	-moz-transform-origin: 0 0;
+	-o-transform-origin: 0 0;
+	-ms-transform-origin: 0 0;
+	transform-origin: 0 0;
 }
 .rotate90 {
-    transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
 }
 .rotate45 {
-    transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 .rotate180 {
-    transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 #ticketarea {
-    display: table-cell;
-    width: 300px;
-    height: 500px;
-    min-width: 300px;
+	display: table-cell;
+	width: 300px;
+	height: 500px;
+	min-width: 300px;
 }
 textarea {
-    resize: none;
+	-webkit-resize: none;
+	-moz-resize: none;
+	resize: none;
 }
-.inside-border
-{
-  box-sizing: border-box;
-  moz-box-sizing: border-box;
-  webkit-box-sizing: border-box;
+.inside-border {
+	box-sizing: border-box;
+	moz-box-sizing: border-box;
+	webkit-box-sizing: border-box;
 }
-.fontBold
-{
-  font-weight: bold;
+.fontBold {
+	font-weight: bold;
 }
-.font-italic
-{
-  font-style: italic;
+.font-italic {
+	font-style: italic;
 }
-.fake-link
-{
-  cursor: pointer;
+.fake-link {
+	cursor: pointer;
 }
-
-.topMenuItem{
-	padding:0 4px 0 4px;
+.topMenuItem {
+	padding: 0 4px 0 4px;
 }
 @media screen and (min-width: 901px) {
-    /** Full display  */
-	.ticketSideLeft,.ticketSideRight{display:table-cell;width:auto;}
-	.ticketSideLeft {width:300px;}
-
+	/** Full display  */
+	.ticketSideLeft, .ticketSideRight {
+		display: table-cell;
+		width: auto;
+		}
+	.ticketSideLeft {
+		width: 300px;
+		}
 }
 @media screen and (max-width: 900px) {
-    /*Droid Customizations*/
-	.ticketSideLeft,.ticketSideRight{display:block;width:auto}
-	.border-right-Main-4{border-right:0px}
-   
-    .topMenuItem > a > span,.tab > a > span,.ticketProjectLocation,.ticketCreatedBy{
-    	display:none;
-    }
-    .tab > a{
-    	width:20px;
-    }
-    
-    .mobile {
-        display: inline-block
-    }
-    #replyToggle,
-    #topperStart,
-    #sideArea,
-    .topperText {
-        display: none
-    }
-    #mainArea {
-        margin-left: 5px
-    }
-    #headerPadding {
-        height: 50px
-    }
-    #sideArea {
-        position: absolute;
-        top: 3px;
-        left: 2px;
-        width: 0px;
-    }
-    .actionButtons {
-        font-size: 16px
-    }
+	/*Droid Customizations*/
+	.ticketSideLeft, .ticketSideRight {
+		display: block;
+		width: auto;
+		}
+	.border-right-Main-4 {
+		border-right: 0px;
+		}
+	.topMenuItem > a > span, .tab > a > span, .ticketProjectLocation, .ticketCreatedBy {
+		display: none;
+		}
+	.tab > a {
+		width: 20px;
+		}
+	.mobile {
+		display: inline-block;
+		}
+	#replyToggle, #topperStart, #sideArea, .topperText {
+		display: none;
+		}
+	#mainArea {
+		margin-left: 5px;
+		}
+	#headerPadding {
+		height: 50px;
+		}
+	#sideArea {
+		position: absolute;
+		top: 3px;
+		left: 2px;
+		width: 0px;
+		}
+	.actionButtons {
+		font-size: 16px;
+		}
 }
