@@ -1066,7 +1066,7 @@ function loadUserPage(userId){
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
 		Tlb.find("#userType").append(data.userInfo.type);
-		Tlb.find("#userSecondaryEmail").val(data.userInfo.tickets.email);
+		Tlb.find("#userSecondaryEmail").val(data.userInfo.email_address);
 		
 		Tlb
 			.find("#totalTickets")
