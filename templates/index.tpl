@@ -9,6 +9,11 @@
         <title>Tickets - The tracking system</title>
         <link href='http://fonts.googleapis.com/css?family=Snippet|Stardos+Stencil|Open+Sans+Condensed:300|Inconsolata|Ubuntu|Droid+Sans|Droid+Sans+Mono|Droid+Serif&v2' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/resetStyle.css?v=1">
+
+		<link type="text/css" href="/js/jquery-ui/css/ui-lightness/jquery-ui-1.8.15.custom.css" rel="stylesheet" />	
+
+
+
         <link rel="stylesheet" media="screen" href="/css/tickets.css?v=22"  /> 
         <link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"  />
         <link rel="shortcut icon" href="/bug.png">
@@ -29,9 +34,14 @@
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/Graph.line.js" ></script>
+		<script type="text/javascript" src="/js/jquery-ui/js/jquery-ui-1.8.15.custom.min.js"></script>
         <script src="/js/tickets.js"></script>
         <script src="/js/jquery.purr.js"></script>
         <script src="/js/globalFunctions.js"></script>
+
+
+
+
         
       </head>
     <body >
