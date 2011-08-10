@@ -11,10 +11,9 @@ if(isset($_SESSION["user"])){$usr = unserialize($_SESSION["user"]);}
 ?>
 <html>
 	<head>
-	 	<link id="themegencss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
-        <link rel="stylesheet" media="screen" href="/css/buttons.css?v=21"  /> 
+	 	<link id="themegencss" href="http://<?Php echo $_SERVER['SERVER_NAME'];?>/css/themes/default/style.css" rel="stylesheet" />
         <link rel="stylesheet" media="screen" href="/css/tickets.css?v=22"  /> 
-        <link rel="shortcut icon" href="/tickets/bug.png">
+        <link rel="shortcut icon" href="http://<?Php echo $_SERVER['SERVER_NAME'];?>/bug.png">
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
