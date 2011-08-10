@@ -409,6 +409,9 @@ function displayStatus(jsonData, Selector) {
  */
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
+  if($("#replyuserid").val()==""){
+  	$("#replyuserid").val(localStorage.userId);
+  }
   $("#modifyButton").show();
   $(".ticketData").remove();
   $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
