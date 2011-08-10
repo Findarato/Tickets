@@ -294,7 +294,7 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 	}
 	foreach ($idsToEmail as $key=>$ite){
 		$email = id2Email($ite); 
-		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets",$body,$headers);
+		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets ($ticketTitle)",$body,$headers);
 		}else{
 			switch($key){
 				case "created":
