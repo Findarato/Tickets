@@ -1302,6 +1302,8 @@ jQuery(document).ready(function () {
     Params.Content.find("#ticketAssignBox").show();
     Params.Content.find("#newTicketType").val("new");
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
+    Params.Content.find("#newTicketDueDate").datepicker();
+    
   });
   $("#topperNewBug").live("click",function(){
     Params.LastArea = "newBug";
