@@ -79,6 +79,7 @@ try {
 					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$usr->User_id.",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
 					if(count($db->Error==2)){//There was an error
 						echo "There was an error trying to link your accounts.";
+						print_R($db->Error);
 					}else{
 						echo "Your account is now linked with your google account";
 					}
