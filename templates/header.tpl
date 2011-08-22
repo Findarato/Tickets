@@ -1,11 +1,10 @@
 <div class="fontMain" style="width:100%;padding:0px 0px 4px 0;position:relative;text-align:right;" id="topper" title="Header of document">
 	<div class="" id="areaBar" style="width:100%;display:block">
 		<div style="display:table;width:100%;text-align:right;">
-			<div class="border-bottom-Main-1" style="display:table-cell;height:auto;width:250px;text-align:left"> <!-- Logo stuff -->
+			<div class="border-bottom-Main-1" style="display:table-cell;height:auto;width:150px;text-align:left"> <!-- Logo stuff -->
 				<div style="height:30px;display:inline-block">
 					<a class="left fakelink ticket_link" href="#start" style="margin-left:5px;">
-						<img src="http://tickets.lapcat.org/css/tree.svg" style="border:none;height:40px;width:40px;">
-						
+						<img src="/css/tree.png" style="border:none;height:40px;width:40px;">
 					</a>
 				</div>
 				<div style="width:auto;height:30px;display:inline-block;text-align:left;">
