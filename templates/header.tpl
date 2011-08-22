@@ -4,7 +4,8 @@
 			<div class="border-bottom-Main-1" style="display:table-cell;height:auto;width:250px;text-align:left"> <!-- Logo stuff -->
 				<div style="height:30px;display:inline-block">
 					<a class="left fakelink ticket_link" href="#start" style="margin-left:5px;">
-						<img src="/css/tree.svg" style="border:none;height:40px;width:40px;">
+						<img src="http://tickets.lapcat.org/css/tree.svg" style="border:none;height:40px;width:40px;">
+						
 					</a>
 				</div>
 				<div style="width:auto;height:30px;display:inline-block;text-align:left;">
