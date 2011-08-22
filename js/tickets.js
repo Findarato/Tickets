@@ -511,24 +511,24 @@ function loadTicketBody(inputData, container) {
      );
   
   
-  container
-   .find("#ticketAssignedTo")
-   .addClass("ilb")
-   .append(
-     $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-       .html(
-         $("<div/>",{id:"ticketAssignedToDisplay",html:data.firstname + " " + data.lastname,data:data.assigned_id})
-       )
-   );				
-		container
-		  .find("#ticketLocation")
-		    .addClass("ilb")
-		    .append(
-		      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"}})
-		        .html(
-		          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
-		        )
-		    );
+	container
+		.find("#ticketAssignedTo")
+			.addClass("ilb")
+				.append(
+					$("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+						.html(
+							$("<div/>",{id:"ticketAssignedToDisplay","class":"highLight",html:data.firstname + " " + data.lastname,data:data.assigned_id})
+						)
+				);				
+	container
+	  .find("#ticketLocation")
+	    .addClass("ilb")
+	    .append(
+	      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"}})
+	        .html(
+	          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
+	        )
+	    );
 	}
 	//Global stuff for bugs and tickets
 
