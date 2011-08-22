@@ -5,15 +5,20 @@
 
 jQuery(document).ready(function () {
 	$("#yesLink").live("click",function(){
-		$.getJSON("/ajax/login.php",{"openId":"1","userId":"1"},function(json){
-			window.opener.window.login(json);
-			window.close();
+		$.getJSON("/ajax/login.php",{"openId":"1","userId":"1"},function(data){
+			window.opener.window.login(data);
+			if(data.error==""){
+				window.close();	
+			}else{
+				alert("Please email the following to automation: "+JSON.stringify(data));
+			}
+			
 		});
 	});
 	
 	$("#newUser").live("click",function(){
-		$.getJSON("/ajax/login.php",{"openId":"1","userId":"2"},function(json){
-			window.opener.window.login(json);
+		$.getJSON("/ajax/login.php",{"openId":"1","userId":"2"},function(data){
+			window.opener.window.login(data);
 			window.close();
 		});
 	});
