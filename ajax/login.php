@@ -11,7 +11,7 @@
 				if(count($res) == 0 || $res == 0){ // lets just make sure that we are not entering in a lot of values
 					$db->Query("INSERT INTO tickets.openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
 				}
-					//Lets do some cryptic database and data manip. 
+					//Lets do some cryptic database and data manipulation. 
 				$password = $db->Query("SELECT password FROM tickets.users WHERE id=".$_SESSION["openID"]["user_id"],false,"row");
 				$response = login($_SESSION["openID"]["user_id"],$password,$response,true);
 			}elseif($_GET["userId"] == 2){ // this will be a new user in tickets

@@ -52,7 +52,7 @@ try {
 			$_SESSION["openID"]["identity"] = $identity;
 			$_SESSION["openID"]["first_name"] = $first_name;
 			$_SESSION["openID"]["last_name"] = $last_name;
-			$userId = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"assoc");
+			$userId = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' LIMIT 1",false,"assoc");
 			$_SESSION["openID"]["user_id"] = $userId["id"];
 			// This needs its own if statement to make sure its actually ran.
 			if(is_array($userId)){ // There is a matching email address
@@ -71,8 +71,8 @@ try {
 					echo '<script type="text/javascript">window.opener.window.login('.json_encode($response).');window.close();</script>';
 				}else{// there is a matching email but no openid link
 					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
-					echo "<button class='minimal ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
-					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>No</button>";
+					echo "<button class='ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
+					echo "<button class='ticketPadding3' id='noLink' style='width:100px;'>No</button>";
 				}
 			}else{ // there is no matching email address 
 				if(isset($usr) && isset($usr->User_id)){ // this is a logged in user lets do some stuff

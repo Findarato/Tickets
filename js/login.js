@@ -10,7 +10,7 @@ jQuery(document).ready(function () {
 			if(data.error==""){
 				window.close();	
 			}else{
-				alert("Please email the following to automation: "+JSON.stringify(data));
+				alert("Please email the following to automation: "+data.error);
 			}
 			
 		});
