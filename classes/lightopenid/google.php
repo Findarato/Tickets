@@ -80,6 +80,7 @@ try {
 					if(count($db->Error==2)){//There was an error
 						echo "There was an error trying to link your accounts.";
 						print_r($db->Error);
+						print_r($_SESSION);
 					}else{
 						echo "Your account is now linked with your google account";
 					}
