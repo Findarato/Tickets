@@ -155,9 +155,7 @@
 			</div><!-- End Body of the ticket -->
 			<div class="colorWhite-1 " id="replyareabody" style="">
 			</div>
-		</div>
-	</div>
-	<div style="width:100%;margin-bottom:10px" id="bottomReplyArea">
+				<div style="width:100%;margin-bottom:10px" id="bottomReplyArea">
 		<div class="colorMain-1" style="width:auto;height:90px;position:relative;" title="Reply Box">
 			<div id="1replyareabody" style="padding:3px;">
 				<form name="newReplyForm" id="newReplyForm">
@@ -177,6 +175,8 @@
 			<div style="height:24px;position:absolute;top:2px;right:3px;">
 				<button class="button" id="replyButton" style="width:auto;" title="Add Reply"><span class="">Add Reply</span></button>
 			</div>
+		</div>
+	</div>
 		</div>
 	</div>
 </div>
