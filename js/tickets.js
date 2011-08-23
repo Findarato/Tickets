@@ -826,7 +826,7 @@ function loadTicketList(pageNumber,queryObj) {
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Location</td><td>Priority</td><td>Category</td><td class='ticketCreatedBy'>Created By</td><td>Due On</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Location</td><td>Priority</td><td>Category</td><td class='ticketCreatedBy'>Created By</td><td class='ticketListDueOn'>Due On</td><td class='ticketListAssigned'>Assigned</td></tr>");
 		}		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
@@ -903,7 +903,11 @@ function loadTicketList(pageNumber,queryObj) {
     		        function(i,html){
     		         if(item.priority>0){
     		           if(item.priority>5){item.priority = item.priority-5;}
-    		           result = Params.Priority_string[item.priority].name;}
+    		           	
+    		           //result = Params.Priority_string[item.priority].name;
+    		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
+    		           
+    		           }
     		         else{result = Params.Priority_string[0].name;}
     		           return result;
     		        }
@@ -932,7 +936,7 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 		          if(!bugs){
-		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain");
+		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain ticketListDueOn");
 		          }  
 		        }
 		        

@@ -124,3 +124,41 @@ body, html {
 .highlight{
 	
 }
+.ticketListDueOn{
+	display:none;
+}
+
+/**
+ * Square setup for the important levels
+ */
+.pSquare{
+	display:block;
+	border: 1px solid white;
+	height:13px;
+	width:13px;
+}
+.pVeryLow{
+	background-color: #8cbf40;
+	border-color:#6a0;
+}
+.pLow{
+	background-color:#bfbf4d;
+	border-color:#aa1;
+	width:26px;
+}
+.pTolerable{
+	background-color:#e0c240;
+	border-color:#d6ae00;
+	width:39px;
+}
+.pImportant{
+	background-color:#f2a640;
+	border-color:#e80;
+	width:52px;
+}
+.pMissionCritical{
+	background-color:#e6804d;
+	border-color:#d51;
+	width:65px;
+}
+
