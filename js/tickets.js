@@ -826,7 +826,7 @@ function loadTicketList(pageNumber,queryObj) {
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Location</td><td>Priority</td><td>Category</td><td class='ticketCreatedBy'>Created By</td><td class='ticketListDueOn'>Due On</td><td class='ticketListAssigned'>Assigned</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:35px;'>ID</td><td style='width:56px;'></td><td style='width:400px'>Priority</td><td class='ticketProjectLocation'>Location</td><td>Category</td><td class='ticketCreatedBy'>Created By</td><td class='ticketListDueOn'>Due On</td><td class='ticketListAssigned'>Assigned</td></tr>");
 		}		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
@@ -881,7 +881,25 @@ function loadTicketList(pageNumber,queryObj) {
 		          return html;
 		        }
 		         
-		      ) 
+		      )
+		      .append( 
+		        $("<td/>")
+		          .addClass("borderBottomBlack fontMain ticketPriority")
+		          .css({"width":"70px","text-align":"right"})
+		          .html(
+    		        function(i,html){
+    		         if(item.priority>0){
+    		           if(item.priority>5){item.priority = item.priority-5;}
+    		           	
+    		           //result = Params.Priority_string[item.priority].name;
+    		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
+    		           
+    		           }
+    		         else{result = Params.Priority_string[0].name;}
+    		           return result;
+    		        }
+    		      )
+    		   )		      
 		      .append($("<td/>")
 		        .addClass("borderBottomBlack",{"class":"ticketTitle"})
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontBold fontMain").html(item.subject).attr({"id": "subject" + item.id }))
@@ -896,23 +914,7 @@ function loadTicketList(pageNumber,queryObj) {
 		          }
 		        }
 		      )
-		      .append( 
-		        $("<td/>")
-		          .addClass("borderBottomBlack fontMain ticketPriority")
-		          .html(
-    		        function(i,html){
-    		         if(item.priority>0){
-    		           if(item.priority>5){item.priority = item.priority-5;}
-    		           	
-    		           //result = Params.Priority_string[item.priority].name;
-    		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
-    		           
-    		           }
-    		         else{result = Params.Priority_string[0].name;}
-    		           return result;
-    		        }
-    		      )
-    		   )
+
 		      .append(
 		        function(){
 		          if(bugs){
@@ -1165,11 +1167,9 @@ function loadUserPage(userId){
 	}
 
 }
-
 function loadLoginPage(){ 
 	Params.Content.load("templates/login.tpl");
 }
-
 function changeArea(area){
 	var location = $("#subAreaBar"); 
 	switch(area){
@@ -1193,7 +1193,6 @@ function changeArea(area){
 		break;
 	}
 }
-
 function loadLocalStorage(clear){
   //if(clear){localStorage.clear();}
   
