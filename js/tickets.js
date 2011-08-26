@@ -933,8 +933,17 @@ function loadTicketList(pageNumber,queryObj) {
 		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy")
 		          } 
 		        }
-		        
 		       )
+		      .append(
+		        function(i,html){
+		          if(bugs){
+		            return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn")
+		          }else{
+		            return $("<td/>").html(item.firstname+" "+item.lastname).addClass("borderBottomBlack fontMain ticketAssigned")
+		          } 
+		        }
+		       )
+		       
 		      .append(
 		        function(){
 		          if(!bugs){
