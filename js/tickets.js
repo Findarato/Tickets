@@ -826,7 +826,7 @@ function loadTicketList(pageNumber,queryObj) {
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:35px;'>ID</td><td style='width:56px;'>Priority</td><td style='width:400px'>Title</td><td class='ticketProjectLocation'>Location</td><td>Category</td><td class='ticketListSortable ticketCreatedBy'>Created By</td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'>Assigned</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:35px;'>ID</td><td style='width:56px;'>Priority</td><td style='width:400px'>Title</td><td class='ticketProjectLocation'>Location</td><td>Category</td><td class='ticketListSortable ticketCreatedBy'>Created By</td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'>Assigned</td><td class='ticketListSortable ticketListCreatedOn'>Created On</td></tr>");
 		}		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
@@ -950,8 +950,14 @@ function loadTicketList(pageNumber,queryObj) {
 		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain ticketListDueOn");
 		          }  
 		        }
-		        
 		      )
+		      .append(
+		        function(){
+		        	if(!bugs){
+		            	return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketListCreatedOn");
+		           }
+		        }
+		      )		      
 		    )
 		});
 		
