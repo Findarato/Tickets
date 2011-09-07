@@ -11,7 +11,7 @@
           <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-performance-semantics-storage.png" width="115" height="32" alt="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
         </a>
 		  </div>
-      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Live Ticket Update XXIII</span>
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Tickets Hotfix</span>
       <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r600</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
@@ -23,6 +23,7 @@
         <li>If tickets is behaving strangly or you are just not getting the result you are looking for now you can "reset tickets". Simply load up your user page by clicking on your name in the top right corner and then click reset tickets.
         <li>Importants of a ticket is now shown in a graphical display on the ticket list. This enables for faster and easier view of what is the most important ticket.</li>
         <li>Ticket lists now show when a ticket was created.</li>
+        <li>Entering a url into a ticket or response in the form of http://www.google.com will no be converted to a link</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
