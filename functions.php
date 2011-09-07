@@ -76,26 +76,16 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			case "user":
 				$userinfo = id2Username($match[1]);
 				if($email){
-					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
+					$formated1 = '<a href="http://tickets.lapcat.org/#ticketlist/created_by/'.$match[1].'" class="ticket_sprite user">'.$userinfo['firstname']." ".$userinfo['lastname'].'</a>';
 				}else{
-					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user fakelink ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
-					
-				}
+					$formated1 = '<a href="#ticketlist/created_by/'.$match[1].'" class="user fakelink ticket_button ticket_sprite">'.$userinfo['firstname']." ".$userinfo['lastname'].'</a>';
+				} 
 			break;
-			case "url":
-				if($email){
-					$formated1 = '<a href="'.$match[1].'" class="ticket_sprite globe">'.$match[1]."</a>";
-				}else{
-					$formated1 = '<a href="'.$match[1].'" class="globe fakelink ticket_button ticket_sprite">'.$match[1]."</a>";
-				}
-				
-				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
-				
-				break;
 			default:
 				
 			break;
 		}
+		$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);
 	}
 	if($escape){return mysql_escape_string($formated);
 	}else{return $formated;}

@@ -1,10 +1,5 @@
-<div class="colorWhite-1" style="width:auto;margin-left:5px;font-size:90%;line-height:10px" title="Update Notes">
+<div class="colorWhite-1" style="width:auto;margin-left:5px;font-size:100%;line-height:10px" title="Update Notes">
 	<div class="" id="" >
-		<div class="corners-bottom-2 corners-top-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">
-			Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above.
-    		<br>
-			<span> More detailed update notes can be found <a class="ticket_sprite global_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite global_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
-		</div>
 		<div style="padding:5px;margin:5px; ; overflow:auto;position:relative;background-color:#FFF" class="roundAll4 border-all-A-1">
 		  <div style="position:absolute;top:0px;right:20px">
 		    <a href="http://www.w3.org/html/logo/" title="Link to HTML5 logo">
@@ -12,7 +7,7 @@
         </a>
 		  </div>
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Tickets Hotfix</span>
-      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r600</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r700</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
 		<li>Fixed the [url=http://www.google.com] not translating to the correct URL bug.  It should be working properly now.</li>
