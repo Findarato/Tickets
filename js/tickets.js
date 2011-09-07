@@ -1067,9 +1067,11 @@ function loadUserPage(userId){
 						//openIdLinks
 						return $("<button>",{
 							"class":"button ticketPadding3",
-							id:"resetTickets",
 							"css":{"width":"auto","margin-left":"3px"},
-							html:"Reset Tickets"							
+							html:"Reset Tickets",
+							click:function(){
+								localStorage.clear();
+							}							
 						});
 					})
 			} 
@@ -1212,8 +1214,7 @@ function changeArea(area){
 	}
 }
 function loadLocalStorage(clear){
-  //if(clear){localStorage.clear();}
-  
+ 
   if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
@@ -1249,7 +1250,6 @@ function loadLocalStorage(clear){
 			localStorage.setItem("userId",data.user_id);
     	});	
 	}
-  
 }
 
 /**
