@@ -53,10 +53,13 @@ function aTcode($array,$id='description'){
 function Tcode($text,$escape=false,$loop = false,$email=false){
 	$formated = toLink($text);
 	$formated1 = "";
+	$formated =  preg_replace("/#([A-Za-z0-9_]+)(?=\s|\Z)/ ", "<a href='/#ticketList/$1'>$0</a>", $formated);
 	$start = strpos($text,"[");
 	$end =  strpos($text,"]");
 	preg_match_all('(\[[^]]+\])', $text, $matches);
 	$matches = $matches[0];
+	
+	
 	foreach($matches as $match){
 		$orig = $match;
 		$match=str_replace(" ","",$match);
