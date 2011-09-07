@@ -826,7 +826,7 @@ function loadTicketList(pageNumber,queryObj) {
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:35px;'>ID</td><td style='width:56px;'>Priority</td><td style='width:400px'>Title</td><td class='ticketProjectLocation'>Location</td><td>Category</td><td class='ticketCreatedBy'>Created By</td><td class='ticketListDueOn'>Due On</td><td class='ticketListAssigned'>Assigned</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:35px;'>ID</td><td style='width:56px;'>Priority</td><td style='width:400px'>Title</td><td class='ticketProjectLocation'>Location</td><td>Category</td><td class='ticketListSortable ticketCreatedBy'>Created By</td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'>Assigned</td></tr>");
 		}		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
@@ -1061,6 +1061,15 @@ function loadUserPage(userId){
 							id:"changeTheme",
 							"css":{"width":"auto"},
 							html:"Change Theme"							
+						});
+					})
+					.append(function(){
+						//openIdLinks
+						return $("<button>",{
+							"class":"button ticketPadding3",
+							id:"resetTickets",
+							"css":{"width":"auto","margin-left":"3px"},
+							html:"Reset Tickets"							
 						});
 					})
 			} 
