@@ -409,6 +409,9 @@ function displayStatus(jsonData, Selector) {
  */
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
+  if($("#replyuserid").val()==""){
+  	$("#replyuserid").val(localStorage.userId);
+  }
   $("#modifyButton").show();
   $(".ticketData").remove();
   $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
@@ -508,24 +511,24 @@ function loadTicketBody(inputData, container) {
      );
   
   
-  container
-   .find("#ticketAssignedTo")
-   .addClass("ilb")
-   .append(
-     $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-       .html(
-         $("<div/>",{id:"ticketAssignedToDisplay",html:data.firstname + " " + data.lastname,data:data.assigned_id})
-       )
-   );				
-		container
-		  .find("#ticketLocation")
-		    .addClass("ilb")
-		    .append(
-		      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"}})
-		        .html(
-		          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
-		        )
-		    );
+	container
+		.find("#ticketAssignedTo")
+			.addClass("ilb")
+				.append(
+					$("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+						.html(
+							$("<div/>",{id:"ticketAssignedToDisplay","class":"highLight",html:data.firstname + " " + data.lastname,data:data.assigned_id})
+						)
+				);				
+	container
+	  .find("#ticketLocation")
+	    .addClass("ilb")
+	    .append(
+	      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"}})
+	        .html(
+	          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
+	        )
+	    );
 	}
 	//Global stuff for bugs and tickets
 
@@ -823,7 +826,7 @@ function loadTicketList(pageNumber,queryObj) {
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Location</td><td>Priority</td><td>Category</td><td class='ticketCreatedBy'>Created By</td><td>Due On</td></tr>");
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:35px;'>ID</td><td style='width:56px;'>Priority</td><td style='width:400px'>Title</td><td class='ticketProjectLocation'>Location</td><td>Category</td><td class='ticketListSortable ticketCreatedBy'>Created By</td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'>Assigned</td><td class='ticketListSortable ticketListCreatedOn'>Created On</td></tr>");
 		}		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
@@ -878,7 +881,25 @@ function loadTicketList(pageNumber,queryObj) {
 		          return html;
 		        }
 		         
-		      ) 
+		      )
+		      .append( 
+		        $("<td/>")
+		          .addClass("borderBottomBlack fontMain ticketPriority")
+		          .css({"width":"70px","text-align":"right"})
+		          .html(
+    		        function(i,html){
+    		         if(item.priority>0){
+    		           if(item.priority>5){item.priority = item.priority-5;}
+    		           	
+    		           //result = Params.Priority_string[item.priority].name;
+    		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
+    		           
+    		           }
+    		         else{result = Params.Priority_string[0].name;}
+    		           return result;
+    		        }
+    		      )
+    		   )		      
 		      .append($("<td/>")
 		        .addClass("borderBottomBlack",{"class":"ticketTitle"})
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontBold fontMain").html(item.subject).attr({"id": "subject" + item.id }))
@@ -893,19 +914,7 @@ function loadTicketList(pageNumber,queryObj) {
 		          }
 		        }
 		      )
-		      .append( 
-		        $("<td/>")
-		          .addClass("borderBottomBlack fontMain ticketPriority")
-		          .html(
-    		        function(i,html){
-    		         if(item.priority>0){
-    		           if(item.priority>5){item.priority = item.priority-5;}
-    		           result = Params.Priority_string[item.priority].name;}
-    		         else{result = Params.Priority_string[0].name;}
-    		           return result;
-    		        }
-    		      )
-    		   )
+
 		      .append(
 		        function(){
 		          if(bugs){
@@ -924,16 +933,31 @@ function loadTicketList(pageNumber,queryObj) {
 		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy")
 		          } 
 		        }
-		        
 		       )
+		      .append(
+		        function(i,html){
+		          if(bugs){
+		            return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn")
+		          }else{
+		            return $("<td/>").html(item.firstname+" "+item.lastname).addClass("borderBottomBlack fontMain ticketAssigned")
+		          } 
+		        }
+		       )
+		       
 		      .append(
 		        function(){
 		          if(!bugs){
-		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain");
+		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain ticketListDueOn");
 		          }  
 		        }
-		        
 		      )
+		      .append(
+		        function(){
+		        	if(!bugs){
+		            	return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketListCreatedOn");
+		           }
+		        }
+		      )		      
 		    )
 		});
 		
@@ -1045,6 +1069,20 @@ function loadUserPage(userId){
 							html:"Change Theme"							
 						});
 					})
+					.append(function(){
+						//openIdLinks
+						return $("<button>",{
+							"class":"button ticketPadding3",
+							"css":{"width":"auto","margin-left":"3px"},
+							html:"Reset Tickets",
+							click:function(){
+								localStorage.clear();
+								loadLocalStorage();
+								setHash("#ticketList/all_tickets");
+								checkHash();
+							}							
+						});
+					})
 			} 
 		)
 		.appendTo(Tlb);
@@ -1066,7 +1104,8 @@ function loadUserPage(userId){
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
 		Tlb.find("#userType").append(data.userInfo.type);
-		Tlb.find("#userSecondaryEmail").val(data.userInfo.tickets.altEmail);
+		Tlb.find("#userSecondaryEmail").val(data.userInfo.email_address);
+		
 		Tlb
 			.find("#totalTickets")
 				.append(data.tickets.byMe)
@@ -1157,11 +1196,9 @@ function loadUserPage(userId){
 	}
 
 }
-
 function loadLoginPage(){ 
 	Params.Content.load("templates/login.tpl");
 }
-
 function changeArea(area){
 	var location = $("#subAreaBar"); 
 	switch(area){
@@ -1185,10 +1222,8 @@ function changeArea(area){
 		break;
 	}
 }
-
 function loadLocalStorage(clear){
-  //if(clear){localStorage.clear();}
-  
+ 
   if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
@@ -1224,7 +1259,6 @@ function loadLocalStorage(clear){
 			localStorage.setItem("userId",data.user_id);
     	});	
 	}
-  
 }
 
 /**
@@ -1298,6 +1332,8 @@ jQuery(document).ready(function () {
     Params.Content.find("#ticketAssignBox").show();
     Params.Content.find("#newTicketType").val("new");
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
+    Params.Content.find("#newTicketDueDate").datepicker();
+    
   });
   $("#topperNewBug").live("click",function(){
     Params.LastArea = "newBug";

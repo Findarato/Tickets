@@ -23,7 +23,14 @@ function id2Username($user_id,$userTable="users",$userDatabase="tickets" ){
 	}
 	return $Userinfo;
 }
-
+function toLink($text){
+	$text = html_entity_decode($text);
+	$text = " ".$text;
+	$text = eregi_replace('(((f|ht){1}tp://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink ticket_button ticket_sprite" href="\\1">\\1</a>', $text);
+	$text = eregi_replace('(((f|ht){1}tps://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink ticket_button ticket_sprite" href="\\1">\\1</a>', $text);
+	$text = eregi_replace('([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&//=]+)','\\1<a class="globe fakelink ticket_button ticket_sprite" href="http://\\2">\\2</a>', $text);
+	return $text;
+}
 function aTcode($array,$id='description'){
 	$a_fixed = $array;
 	foreach($array as $k => $a){
@@ -44,7 +51,7 @@ function aTcode($array,$id='description'){
  * @return string The text that has been formated 
  */
 function Tcode($text,$escape=false,$loop = false,$email=false){
-	$formated = $text;
+	$formated = toLink($text);
 	$formated1 = "";
 	$start = strpos($text,"[");
 	$end =  strpos($text,"]");
@@ -60,7 +67,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 		switch($match[0]){
 			case "ticket":
 				if($email){
-					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
 				}else{
 					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
 				}
@@ -69,11 +76,19 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			case "user":
 				$userinfo = id2Username($match[1]);
 				if($email){
-					$formated1 = "<a href=\"http://dev.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
+					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
 				}else{
 					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user fakelink ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
 					
 				}
+			break;
+			case "url":
+				if($email){
+					$formated1 = '<a href="'.$match[1].'" class="ticket_sprite globe">'.$match[1]."</a>";
+				}else{
+					$formated1 = '<a href="'.$match[1].'" class="globe fakelink ticket_button ticket_sprite">'.$match[1]."</a>";
+				}
+				
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
 				
 				break;
@@ -294,7 +309,7 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 	}
 	foreach ($idsToEmail as $key=>$ite){
 		$email = id2Email($ite); 
-		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets",$body,$headers);
+		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets ($ticketTitle)",$body,$headers);
 		}else{
 			switch($key){
 				case "created":

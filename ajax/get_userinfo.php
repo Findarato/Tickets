@@ -37,6 +37,7 @@ SELECT
 	u.lastname,
 	u.username,
 	DATE_FORMAT(u.joined	, '%M %e, %Y') AS joined,
+	u.email_address,
 	u.type 
 FROM 
 	users AS u 
