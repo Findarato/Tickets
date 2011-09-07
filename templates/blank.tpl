@@ -12,6 +12,29 @@
         </a>
 		  </div>
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Live Ticket Update XXIII</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r600</span>
+      <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+      <ol>
+		<li>Fixed the [url=http://www.google.com] not translating to the correct URL bug.  It should be working properly now.</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">New Features</span>
+      <ol>
+        <li>If tickets is behaving strangly or you are just not getting the result you are looking for now you can "reset tickets". Simply load up your user page by clicking on your name in the top right corner and then click reset tickets.
+        <li>Importants of a ticket is now shown in a graphical display on the ticket list. This enables for faster and easier view of what is the most important ticket.</li>
+        <li>Ticket lists now show when a ticket was created.</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">Known Issues</span>
+      <ol>
+        <li>Searching By project does not work</li>
+        <li>Page indicators in a search result do not currently work.</li>
+        <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
+        <li>Commenting on a ticket that was closed or reopened will generate extra replies.</li>
+      </ol>
+      <br>
+      <br>
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Live Ticket Update XXIII</span>
       <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.0.r582</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
