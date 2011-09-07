@@ -1071,6 +1071,9 @@ function loadUserPage(userId){
 							html:"Reset Tickets",
 							click:function(){
 								localStorage.clear();
+								loadLocalStorage();
+								setHash("#ticketList/all_tickets");
+								checkHash();
 							}							
 						});
 					})
