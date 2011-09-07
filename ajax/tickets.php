@@ -98,6 +98,7 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 	$usr = unserialize($_SESSION['user']);
 	switch ($type) {
 		case "favorite":
+			$fIds = getFavoriteIds($usr->User_id);
 			$sc[]="t.description AS description";
 			$sc[]="t.status";
 			$sc[]="t.tickettype_id";
@@ -107,7 +108,7 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 			TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago,
 			TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,			
 			TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining 
-			FROM tcview AS t JOIN favorite AS f ON (t.id=f.ticket_id) WHERE f.user_id=".$user_id." ORDER BY  created_on  LIMIT 0,$amount";
+			FROM tickets AS t WHERE t.id IN(".join(",",$sc).") ORDER BY  created_on  LIMIT 0,$amount";
 		break;
 		case "search":
 			foreach ($search as $k=>$s){
