@@ -96,7 +96,7 @@ p {
     margin-right: 4px;
     width: 70px;
 }
-/* New ticket image sprites*/
+/* New ticket image sprite*/
 .ticket_button,
 .ticket_button_no_pad,
 .ticket_button_right {
@@ -314,8 +314,8 @@ textarea {
 .inside-border
 {
   box-sizing: border-box;
-  moz-box-sizing: border-box;
-  webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .fontBold
 {
