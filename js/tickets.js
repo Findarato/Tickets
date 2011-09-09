@@ -154,10 +154,10 @@ function checkHash() {
 		//alert("blah");
 		if(localStorage.userId > 0){
 			setHash("#ticketList/all_tickets");
-			checkHash();
+			/*checkHash*/
 		}else{
 			setHash("#login");
-			checkHash();
+			/*checkHash*/
 		}
 	}
 }
@@ -1079,7 +1079,7 @@ function loadUserPage(userId){
 								localStorage.clear();
 								loadLocalStorage();
 								setHash("#ticketList/all_tickets");
-								checkHash();
+								/*checkHash*/
 							}							
 						});
 					})
@@ -1288,20 +1288,29 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
 		setHash("#ticketList/all_tickets");
-		checkHash();
+		/*checkHash*/
 		$("#userSecondaryEmail").val(data.altEmail);
 		$("#depOk").show();
 		$("#depError").hide();
 	}
 }
-
+window.onpopstate = function(event) {
+  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+  checkHash();
+  alert("popstats");
+};
 
 jQuery(document).ready(function () {
 
+
+
+//history.pushState({page: 1}, "title 1", "?page=1");
+//history.pushState({page: 2}, "title 2", "?page=2");
+//history.replaceState({page: 3}, "title 3", "?page=3");
   //localStorage.clear();
 	loadLocalStorage(true);
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
-	$("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
+	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
   	if(Params.UserId>0){
 	  	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});	
   	}
@@ -1426,7 +1435,7 @@ jQuery(document).ready(function () {
 	// Events that need to happen late in the page rendering
 	//
 	if ($("#topperUserInfo").text().length > 10) {
-		checkHash();
+		/*checkHash*/
 		if (localStorage.userId  > 0) {
 			$("#rss1").attr("href", "ticketsrss.php?id=" + localStorage.userId );
 			$("#rss2").attr("href", "ticketsrss.php?id=" + localStorage.userId  + "&bookmark=1");
@@ -1441,7 +1450,7 @@ jQuery(document).ready(function () {
 	$(".actionButtons").live("click", function () {
 		if(localStorage.userId == 0){
 			setHash("#login");
-    		checkHash();
+    		/*checkHash*/
     		return;
 		}
 		var queryObj = {};
@@ -1498,7 +1507,7 @@ jQuery(document).ready(function () {
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		pageTracker._trackPageview($(this).attr("href"));
 		setHash($(this).attr("href"));
-    	checkHash();
+    	/*checkHash*/
 		return false; //to make sure the a isnt clicked
 	});
 });
