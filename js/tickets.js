@@ -1294,8 +1294,8 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		$("#depError").hide();
 	}
 }
-window.onpopstate = function(event) {
-  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+window.onpopstate = function(event) { 
+  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
   checkHash();  
 };
 
