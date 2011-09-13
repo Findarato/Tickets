@@ -319,11 +319,6 @@ function loadLargeStats() {
 		});
 	});
 }
-/**
- * Loads the status ticket list for a specified area, or all areas if none is passed
- * @param String Area
- */
-
 function populateAllBugs(Area) {
 	var cnt,html,Ttype;
 	$.getJSON(uri + "ajax/get_bugs.php", {"all": "1","small":"1"},function (data, text) {
@@ -745,10 +740,6 @@ function loadTicketBody(inputData, container) {
     me.toggleClass("bookmark-off").toggleClass("bookmark");
 	});
 }
-
-/**
- * Function to Load the whole ticket including the display.
- */
 function loadTicket(ticketId,update) {
 	if(Params.LastArea != "ticket"){
 	  Params.Content.html($("#ticketTpl").html());
@@ -769,7 +760,6 @@ function loadTicket(ticketId,update) {
 		loadResponsesBody(ticketId, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
-
 function loadTicketList(pageNumber,queryObj) {
 	Tlb = Params.Content.find("#ticketListbody");
 	Params.LastArea = "ticketList";
@@ -1260,13 +1250,6 @@ function loadLocalStorage(clear){
     	});	
 	}
 }
-
-/**
- * 
- * Lets run some code that needs to be ran after the page loads
- */
-
-
 function login(data){ //We need a json array, probably need to parse it, who knows
 	//alert(data.message);
 	if (data.error.length > 0) {
@@ -1300,15 +1283,14 @@ window.onpopstate = function(event) {
 };
 
 jQuery(document).ready(function () {
-
-
-
 //history.pushState({page: 1}, "title 1", "?page=1");
 //history.pushState({page: 2}, "title 2", "?page=2");
 //history.replaceState({page: 3}, "title 3", "?page=3");
   //localStorage.clear();
+	
 	loadLocalStorage(true);
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
+	
 	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
   	if(Params.UserId>0){
 	  	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});	
@@ -1333,6 +1315,9 @@ jQuery(document).ready(function () {
 			}
 		}, "json");
 	});
+
+	
+
   
   $("#topperNew").live("click",function(){
     Params.LastArea = "newTicket";
@@ -1509,4 +1494,9 @@ jQuery(document).ready(function () {
     	/*checkHash*/
 		return false; //to make sure the a isnt clicked
 	});
+	
+	// Last but not least after all the rest of the code is run lets make sure that something gets loaded
+	
+	checkHash();
+	
 });
