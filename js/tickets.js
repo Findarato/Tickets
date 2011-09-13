@@ -4,6 +4,8 @@
 var UploadCnt = 0;
 //Setup the global variables for selectors
 var Tlb = "";
+var uri = window.location.toString();
+uri = uri.replace(window.location.hash, "");
 //End global selectors
 var Params = {
 	"FadeTime": 0,
@@ -33,37 +35,13 @@ var Params = {
 	"NavArea":""
 };
 
-var navgationMenu = {
-	"tickets":{
-		0:{
-			"name":"To Me",
-			"link":"sOpen"
-		},
-		1:{
-			"name":"By Me",
-			"link":"sAssigned"
-		},
-		2:{
-			"name":"To My Dep.",
-			"link":"sOdepartment"
-		},		
-	},
-	"Bugs":{
-		0:{
-		"name":"Open Bugs",
-		"link":"bugs_open"
-		},
-	}
-}
-
 function alertTest(tst){alert(tst);}
 
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
 }
-var uri = window.location.toString();
-uri = uri.replace(window.location.hash, "");
+
 function oc(a)
 {
   var o = {};
@@ -399,9 +377,6 @@ function displayStatus(jsonData, Selector) {
 		}
 	});
 }
-/**
- * Lots the contents of the ticket to the screen.  All of the display elements should already be there
- */
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
   if($("#replyuserid").val()==""){
@@ -1287,6 +1262,14 @@ jQuery(document).ready(function () {
 //history.pushState({page: 2}, "title 2", "?page=2");
 //history.replaceState({page: 3}, "title 3", "?page=3");
   //localStorage.clear();
+
+	Modernizr.load({
+		test: Modernizr.inputtypes.date,
+		yep : '',
+		nope: '/js/jquery-ui/js/jquery-ui-1.8.15.custom.min.js'
+	});
+
+
 	
 	loadLocalStorage(true);
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
@@ -1325,7 +1308,12 @@ jQuery(document).ready(function () {
     Params.Content.find("#ticketAssignBox").show();
     Params.Content.find("#newTicketType").val("new");
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
-    Params.Content.find("#newTicketDueDate").datepicker();
+    
+    try{
+    	Params.Content.find("#newTicketDueDate").datepicker();
+    }catch(e){
+    	alert(e);
+    }
     
   });
   $("#topperNewBug").live("click",function(){
@@ -1381,7 +1369,7 @@ jQuery(document).ready(function () {
 					notice("Error", "You must enter a Due date", false);
 					return false;
 				}else if($("#newTicketAssign").val()==0 && this.id=="ticketAddButton"){
-          notice("Error", "You must select a user!", false);
+          		notice("Error", "You must select a user!", false);
           return false;
 				}else {
 					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
