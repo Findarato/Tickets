@@ -27,18 +27,14 @@
         </script>
         
         <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+        
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/Graph.line.js" ></script>
-		<script type="text/javascript" src="/js/jquery-ui/js/jquery-ui-1.8.15.custom.min.js"></script>
+		<script type="text/javascript" src="/js/modernizr.custom.43877.js"></script>
         <script src="/js/tickets.js"></script>
         <script src="/js/jquery.purr.js"></script>
         <script src="/js/globalFunctions.js"></script>
-
-
-
-
-        
       </head>
     <body >
    

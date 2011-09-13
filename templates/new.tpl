@@ -29,7 +29,7 @@
 						</tr>
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Due Date:</span></td>
-							<td style="text-align:left;"><input type="date" name="newTicketDueDate" id="newTicketDueDate" class=" Ticketform" maxlength="50" style="width:8em" value="" /><img src="http://cdn1.lapcat.org/famfamfam/silk/calendar.png" title="calendar" id="newTicketCalendar"></td>
+							<td style="text-align:left;"><input type="date" name="newTicketDueDate" id="newTicketDueDate" class=" Ticketform" maxlength="50" style="width:8em" value="" /></td>
 						</tr>
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Problem Location:</span></td>
