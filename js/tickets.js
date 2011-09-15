@@ -1167,24 +1167,30 @@ function loadLoginPage(){
 function changeArea(area){
 	var location = $("#subAreaBar"); 
 	switch(area){
+		case "admin":
+			$("#adminTab").trigger("click");	
+			location.load("templates/top_admin.tpl");
+			Params.NavArea="admin";
+		break;
 		case "tickets":
 			$("#ticketTab").trigger("click");
-			location.load("templates/ticket_top.tpl");
+			location.load("templates/top_ticket.tpl");
 			Params.NavArea="tickets";
 		break;
 		case "bugs":
 			$("#bugTab").trigger("click");	
-			location.load("templates/bug_top.tpl");
+			location.load("templates/top_bug.tpl");
 			Params.NavArea="bugs";
 		break;
 		case "search":
 			$("#searchTab").trigger("click");	
-			location.load("templates/search_top.tpl");
+			location.load("templates/top_search.tpl");
 		break;
 		case "stats":
 			$("#statsTab").trigger("click");	
 			location.html("");
 		break;
+		default:break;
 	}
 }
 function loadLocalStorage(clear){
