@@ -6,6 +6,30 @@
           <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-performance-semantics-storage.png" width="115" height="32" alt="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
         </a>
 		  </div>
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Ticket Update XXIV</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r700</span>
+      <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+      <ol>
+		<li></li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">New Features</span>
+      <ol>
+        <li>links in the form of http://www.google.com will transform into clickable links</li>
+        <li>There is a new admin section for users who have access to it.  It is listed on the tab bar.  If you see it you have access</li>
+        <li>Ticket list is now sortable</li>
+        
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">Known Issues</span>
+      <ol>
+        <li>Searching By project does not work</li>
+        <li>Page indicators in a search result do not currently work.</li>
+        <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
+        <li>Commenting on a ticket that was closed or reopened will generate extra replies.</li>
+      </ol>
+      <br>
+      <br>
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Tickets Hotfix</span>
       <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r700</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
@@ -15,7 +39,7 @@
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
       <ol>
-        <li>If tickets is behaving strangly or you are just not getting the result you are looking for now you can "reset tickets". Simply load up your user page by clicking on your name in the top right corner and then click reset tickets.
+        <li>If tickets is behaving strangly or you are just not getting the result you are looking for now you can "reset tickets". Simply load up your user page by clicking on your name in the top right corner and then click reset tickets.</li>
         <li>Importants of a ticket is now shown in a graphical display on the ticket list. This enables for faster and easier view of what is the most important ticket.</li>
         <li>Ticket lists now show when a ticket was created.</li>
         <li>Entering a url into a ticket or response in the form of http://www.google.com will no be converted to a link</li>
