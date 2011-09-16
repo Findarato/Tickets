@@ -32,22 +32,22 @@
 		<div class="ticketSideRight ticket-divider colorWhite-1" style="vertical-align:top;width:300px">
 			<!-- Left Side ticket information -->
 			<div id="rightSideFloater">
-				<div style="display:none;height:16px;" class="closedTicket" id="ticketClosedOn">
+				<div style="display:none;" class="closedTicket" id="ticketClosedOn">
 					<div class="fontMain2" id="ticketClosedOnDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >
 						Closed On
 					</div>
 				</div>
 				<div id="categoryBox" style="display:none;">
-					<div class="fontMain2" id="ticketCategory" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
+					<div class="fontMain2" id="ticketCategory" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Category
 					</div>
 				</div>
-				<div id="priorityBox" style="display:block;height:16px;">
-					<div class="fontMain" id="ticketPriority" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
+				<div id="priorityBox" style="display:block;">
+					<div class="fontMain" id="ticketPriority" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Priority
 					</div>
 				</div>
-				<div id="projectBox" style="height:16px;">
+				<div id="projectBox" style="">
 					<div class="fontMain2" id="ticketProject" style="font-weight:bold;padding-left:2px;padding-right:3px">
 						Project
 					</div>
@@ -57,73 +57,73 @@
 				Created By
 				</div>
 				-->
-				<div id="assignedToBox" style="display:none;height:16px;">
-					<div class="fontMain2" id="ticketAssignedTo" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
+				<div id="assignedToBox" style="display:none;">
+					<div class="fontMain2" id="ticketAssignedTo" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Assigned To
 					</div>
 				</div>
-				<div id="dueOnBox" style="display:none;height:16px;">
+				<div id="dueOnBox" style="display:none;">
 					<div class="fontMain2" id="ticketDueDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >
 						Due On
 					</div>
 				</div>
-				<div id="locationBox" style="display:none;height:16px;">
-					<div class="fontMain2" id="ticketLocation" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
+				<div id="locationBox" style="display:none;">
+					<div class="fontMain2" id="ticketLocation" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Location
 					</div>
 				</div>
-				<div id="" style="display:none;height:16px;">
-					<div class="fontMain2" id="replyareaTitle" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
+				<div id="" style="display:none;">
+					<div class="fontMain2" id="replyareaTitle" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Replies
 					</div>
 				</div>
-				<div id="" style="height:16px;">
-					<div class="fontMain2" id="" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
+				<div id="" style="">
+					<div class="fontMain2" id="" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						<a href="javascript:focusMe('#replyTitleBox')">Add Reply Below</a>
 					</div>
 				</div>
 				<!--		<span id="replyareaTitle" style="margin-left:10px;margin:5px;" title="Reply Title">Replies (0)</span> -->
 				<!-- Modification Buttons -->
-				<div class="" id="ticketFooterArea" style="height:27px;margin-top:40px;overflow:hidden;vertical-align:baseline;">
+				<div class="" id="ticketFooterArea" style="height:37px;overflow:hidden; ">
 					<div class="box_transition" id="reassignBox" style="overflow:hidden;width:100%;height:0px">
 						<div style="overflow:hidden;height:auto;padding:3px;">
-							<div class="textLeft">
+							<div class="textLeft" style='height:auto;'>
 								<span>Assign:</span>
-								<select style="width:150px" id="TicketAssign" name="TicketAssign">
+								
+								<button style="width:150px" id="TicketAssign" name="TicketAssign" dataSelect='{json_encode($assign)}' class="selectButton">Select</button>
+								{*
+								<button style="width:16px" id="TicketAssignDrop" name="TicketAssignDrop"class="right">&nbsp;<div style="position:relative"><div class="triangleDown"></div></div></button>
+								
+								
+								<select style="width:150px" id="TicketAssign" name="TicketAssign" class="selectButton">
 									{html_options options=$assign}
 								</select>
-								<div class="ticket_sprite cross fakelink" id="ReAssignCancelButton" style="display:inline-block"></div>
-								<div id="reAssignAcceptButton" class="ticket_sprite tick fakelink" style="display:inline-block"></div>
+								*}
+								<button class="" id="ReAssignCancelButton" style="display:inline-block">Cancel</button>
+								<button id="reAssignAcceptButton" class="" style="display:inline-block">Save</button>
 							</div>
 						</div>
 					</div>
-					<div class="box_transition" id="" style="overflow:hidden;width:100%;background-color:#FFF"></div>
-					<button class="openTicket button" id="reAssignButton" style="width:auto;">
-						<span class="ticket_button ticket_sprite user-pencil">Reassign</span>
-					</button>
-					<button class="openTicket button " id="modifyButton" style="width:auto;">
-						<span class="ticket_button ticket_sprite pencil">Modify</span>
-					</button>
-					<button class="button " id="ticketModifySaveButton" style="width:auto;display:none;">
-						<span class="ticket_button ticket_sprite tick">Save</span>
-					</button>
-					<button class="button negative " id="ticketModifyCancelButton" style="width:auto;display:none;">
-						<span class="ticket_button ticket_sprite cross">Cancel</span>
-					</button>
-					<button class="openTicket negative button actionButtons closeLink " id="closeButton" style="width:auto;">
-						<span class="ticket_button ticket_sprite door" style="margin-right:5px">Close</span>
-					</button>
-					<button class="closedTicket button actionButtons openLink" id="reOpenButton" style="width:auto;display:none;">
-						<span style="margin-right:5px">Open</span>
-					</button>
-					<div class="td" style="width:75px;display:none">
-						<!-- Locked Area -->
-						<div class="fontMain openTicket hold actionButtons holdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton " id="Holdlink" style="width:auto;m5px;">
-							<span>Lock</span>
-						</div>
-						<div class="fontMain openTicket hold actionButtons unholdLink roundAll4 background-alpha-4 border-all-D-1 lapcatButton " id="unHoldlink" style="width:auto;margin-right:5one;">
-							<span>unlock</span>
-						</div>
+					
+					<div id="buttonBox" style="">
+						<button class="openTicket button" id="reAssignButton" style="width:auto;">
+							<span class="ticket_button ticket_sprite user-pencil">Reassign</span>
+						</button>
+						<button class="openTicket button " id="modifyButton" style="width:auto;">
+							<span class="ticket_button ticket_sprite pencil">Modify</span>
+						</button>
+						<button class="button " id="ticketModifySaveButton" style="width:auto;display:none;">
+							<span class="ticket_button ticket_sprite tick">Save</span>
+						</button>
+						<button class="button negative " id="ticketModifyCancelButton" style="width:auto;display:none;">
+							<span class="ticket_button ticket_sprite cross">Cancel</span>
+						</button>
+						<button class="openTicket negative button actionButtons closeLink " id="closeButton" style="width:auto;">
+							<span class="ticket_button ticket_sprite door" style="margin-right:5px">Close</span>
+						</button>
+						<button class="closedTicket button actionButtons openLink" id="reOpenButton" style="width:auto;display:none;">
+							<span style="margin-right:5px">Open</span>
+						</button>
 					</div>
 				</div>
 				<div id="pageAnator" style=""></div>

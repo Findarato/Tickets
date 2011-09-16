@@ -389,10 +389,23 @@ function selectBoxReplace(target,value,possibleValues){
       
   );
 }
-function textBoxReplace(target,value){
-   target.data("prevValue",value).html(
-    $("<input type='text' name='"+target.parent().attr('id')+"' class='ticketModifyForm'/>").val(value).data("editedItem",target.attr("id"))
-  );
+function textBoxReplace(target,value,type){
+	if(type){inputType = type;}else{inputType = "text";}
+	if(value == "" || value == undefined){
+		value = target.text();
+	}
+	target
+		.data("prevValue",value)
+		.html(
+			function(){
+				ret = $("<input type='"+inputType+"' name='"+target.parent().attr('id')+"' class='ticketModifyForm' value='"+value+"'/>")
+					.data("editedItem",target.attr("id"));
+				
+				if(type == "date"){ret.datepicker();}
+				return ret;
+			}
+		)  		
+  		//alert(target.data("prevValue"));
 }
 function textAreaReplace(target,value){
    target.data("prevValue",value).html(

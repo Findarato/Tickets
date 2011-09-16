@@ -45,7 +45,7 @@
 			</div>	
 			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top"><!-- Start of User info -->
 				{if isset($firstname)}
-				<a class="right ticket_button ticket_sprite user nolink fontMain" href="#userPage/" id="topperUserInfo" style="padding-right:5px;width:auto;text-decoration:none;">{$firstname} {$lastname} ({$username})</a>
+				<a class="right ticket_button ticket_sprite user nolink fontMain" href="#userPage/" id="topperUserInfo" style="padding-right:5px;width:auto;text-decoration:none;">{$firstname} {$lastname}</a>
 				{else}
 				<a class="right ticket_button ticket_sprite user nolink fontMain" href="#login" id="topperUserInfo" style="padding-right:5px;width:auto;text-decoration:none;">No User (Please Log in) </a>
 				{/if}
