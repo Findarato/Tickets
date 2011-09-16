@@ -177,9 +177,4 @@ body, html {
 	border-left: 6px solid transparent; 
 	border-right: 6px solid transparent; 
 	border-top: 10px solid rgba(0,0,0,.6);
-	position:absolute;
-	top:-12px;
-	left:-4px;
-	
-	
 }
