@@ -379,6 +379,7 @@ function displayStatus(jsonData, Selector) {
 }
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
+  
   if($("#replyuserid").val()==""){
   	$("#replyuserid").val(localStorage.userId);
   }
@@ -474,12 +475,8 @@ function loadTicketBody(inputData, container) {
      .find("#ticketDueDate")
      .addClass("ilb")
      .append(
-       $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-         .html(
-           $("<div/>",{id:"ticketDueDateDisplay",html:data.due_on})
-         )
+       $("<div/>",{id:"ticketDueDateDisplay","class":"ilb ticketData contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"},"html":data.due_on})
      );
-  
   
 	container
 		.find("#ticketAssignedTo")
@@ -595,6 +592,8 @@ function loadTicketBody(inputData, container) {
     }else{
       selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
       selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
+      //dueOn = container.find("#ticketDueDate").find(".contentEdit");
+      textBoxReplace(container.find("#ticketDueDate").find(".contentEdit"),"","date");
     }
    //textBoxReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
   });
@@ -658,9 +657,11 @@ function loadTicketBody(inputData, container) {
    
 	 $('#reAssignButton').click(function(){
 	   $("#reassignBox").css("height","30px");
+	   changeSelect($("#TicketAssign"));
 	 });
 	 $("#ReAssignCancelButton").click(function(){
     $("#reassignBox").css({"height":"0px"});
+    
    });
   $('#reAssignAcceptButton').click(function () {
     var reassignVal = $("#TicketAssign").val();
@@ -1263,6 +1264,24 @@ window.onpopstate = function(event) {
   checkHash();  
 };
 
+function changeSelect(selector,selectValues){
+	
+	newSelectName = selector.attr("name");
+	selector.attr("name") = newSelectName+"Button"; 
+	selector.append("<select name='"+newSelectName+"'/>");
+	
+	/*
+	oldSelector = selector.clone(true);
+	
+	alert(oldSelector.html());
+	selector.replaceWith(
+		$("<button id='"+selector.attr("id")+"' class='ilb'>"+selector.val()+"</button>")
+		
+	);
+	*/
+	//alert(oldSelector.html());
+}
+
 jQuery(document).ready(function () {
 //history.pushState({page: 1}, "title 1", "?page=1");
 //history.pushState({page: 2}, "title 2", "?page=2");
@@ -1316,6 +1335,7 @@ jQuery(document).ready(function () {
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
     
     try{
+    	//$("input[type=date]").live(datepicker());
     	Params.Content.find("#newTicketDueDate").datepicker();
     }catch(e){
     	alert(e);

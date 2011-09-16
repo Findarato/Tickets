@@ -10,7 +10,7 @@
       <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r700</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
-		<li></li>
+		<li>Fixed a 404 error when trying to link to a js library</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
