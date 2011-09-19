@@ -657,7 +657,7 @@ function loadTicketBody(inputData, container) {
    
 	 $('#reAssignButton').click(function(){
 	   $("#reassignBox").css("height","30px");
-	   changeSelect($("#TicketAssign"));
+	   createSelect($("#TicketAssign"))
 	 });
 	 $("#ReAssignCancelButton").click(function(){
     $("#reassignBox").css({"height":"0px"});
@@ -1264,22 +1264,39 @@ window.onpopstate = function(event) {
   checkHash();  
 };
 
-function changeSelect(selector,selectValues){
-	
-	newSelectName = selector.attr("name");
-	selector.attr("name") = newSelectName+"Button"; 
-	selector.append("<select name='"+newSelectName+"'/>");
-	
-	/*
-	oldSelector = selector.clone(true);
-	
-	alert(oldSelector.html());
-	selector.replaceWith(
-		$("<button id='"+selector.attr("id")+"' class='ilb'>"+selector.val()+"</button>")
+function createSelect(selector){
+	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
+		return false;
+	}
+	selector.click(function(){
+		me = $(this);
+		selectData = $.parseJSON(me.attr('data-select-items'));
+		pos = me.offset();
+		pos.top = pos.top + me.outerHeight();
+		$("body")
+			.append(
+				$("<div/>",{css:{"position":"absolute","top":pos.top,"left":pos.left},"classes":"fakeDropDown"})
+					.append(
+						function(){
+							var ret = $("<div/>");
+							$.each(selectData,function(key,item){
+								ret
+									.append(
+										$("<div/>",{html:key,"classes":"categorySelect"})
+									)
+									$.each(item,function(key2,item2){
+										ret
+											.append(
+												$("<div/>",{html:item2,css:{"padding-left":"3px"},"classes":"selectable"})
+											)
+									});
+							})
+							return ret;
+						}
+					)
+			)
 		
-	);
-	*/
-	//alert(oldSelector.html());
+	});
 }
 
 jQuery(document).ready(function () {
