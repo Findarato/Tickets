@@ -1,3 +1,12 @@
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+
 /**
  * Simple global variables that are needed everywhere
  */
@@ -1281,6 +1290,7 @@ function createSelect(selector){
 						function(){
 							var ret = $("<div/>");
 							$.each(selectData,function(key,item){
+								if(Object.keys(item).length > 0){
 								ret
 									.append(
 										$("<div/>",{html:key,"class":"categorySelect"})
@@ -1291,6 +1301,12 @@ function createSelect(selector){
 												$("<div/>",{html:item2,css:{"padding-left":"3px"},"class":"selectable"})
 											)
 									});
+								}else{
+									ret
+										.append(
+											$("<div/>",{html:key,"class":"selectable"})
+										)
+								}
 							})
 							return ret;
 						}
