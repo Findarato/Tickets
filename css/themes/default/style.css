@@ -182,13 +182,18 @@ body, html {
 	font-weight: bold;
 }
 .selectable{
-	padding-left:3px;
+	padding-left:15px;
 	background-color:white;
 }
 .selectable:hover{
 	cursor: pointer;
-	background-color:rgba(255,0,0,.5);
+	background-color:rgba(0,0,0,.2);
 }
 .fakeDropDown{
-	background-color:red;
+	background-color:white;
+}
+.shadow{
+	-moz-box-shadow: 5px 5px 2px #888;
+	-webkit-box-shadow: 5px 5px 2px #888;
+	box-shadow: 5px 5px 2px #888;
 }

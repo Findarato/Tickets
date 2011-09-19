@@ -1269,25 +1269,26 @@ function createSelect(selector){
 		return false;
 	}
 	selector.click(function(){
+		if($(".dropDown").html()){alert("a")	}
 		me = $(this);
 		selectData = $.parseJSON(me.attr('data-select-items'));
 		pos = me.offset();
 		pos.top = pos.top + me.outerHeight();
 		$("body")
 			.append(
-				$("<div/>",{css:{"position":"absolute","top":pos.top,"left":pos.left},"classes":"fakeDropDown"})
+				$("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth()},"class":"fakeDropDown shadow"})
 					.append(
 						function(){
 							var ret = $("<div/>");
 							$.each(selectData,function(key,item){
 								ret
 									.append(
-										$("<div/>",{html:key,"classes":"categorySelect"})
+										$("<div/>",{html:key,"class":"categorySelect"})
 									)
 									$.each(item,function(key2,item2){
 										ret
 											.append(
-												$("<div/>",{html:item2,css:{"padding-left":"3px"},"classes":"selectable"})
+												$("<div/>",{html:item2,css:{"padding-left":"3px"},"class":"selectable"})
 											)
 									});
 							})
@@ -1305,6 +1306,11 @@ jQuery(document).ready(function () {
 //history.replaceState({page: 3}, "title 3", "?page=3");
   //localStorage.clear();
 
+	$("body").live("mousedown",function(){
+		if($(".fakeDropDown")){
+			$(".fakeDropDown").replaceWith();
+		}
+	});
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
 		yep : '',
