@@ -167,7 +167,6 @@ body, html {
 	border-right: 6px solid transparent; 
 	border-top: 10px solid rgba(0,0,0,.6);
 	position:absolute;
-	top:2px;
 	right:7px;
 }
 .triangleDown,{
@@ -177,4 +176,19 @@ body, html {
 	border-left: 6px solid transparent; 
 	border-right: 6px solid transparent; 
 	border-top: 10px solid rgba(0,0,0,.6);
+}
+.categorySelect{
+	font-size:14px;
+	font-weight: bold;
+}
+.selectable{
+	padding-left:3px;
+	background-color:white;
+}
+.selectable:hover{
+	cursor: pointer;
+	background-color:rgba(255,0,0,.5);
+}
+.fakeDropDown{
+	background-color:red;
 }
