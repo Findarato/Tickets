@@ -25,8 +25,7 @@
 				$smarty->assign('lastname',$usr->A_U['last-name']);
 				$smarty->assign('user_id',$usr->User_id);
 				$depart = getDepartment_by_userid($usr->User_id);
-				$db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id);
-				$altE = $db->Fetch("row");
+				$smarty->assign('gravatar',$usr->A_U['emailHash']);
 			}
 		}else{$smarty -> assign('content','login.tpl');	}
 	}else{$smarty-> assign("content","empty.tpl"); 	
@@ -36,10 +35,8 @@
 		$smarty->assign('lastname',$usr->A_U['last-name']);
 		$smarty->assign('user_id',$usr->User_id);
 		$depart = getDepartment_by_userid($usr->User_id);
-		$db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id);
-		$altE = $db->Fetch("row");
+		$smarty->assign('gravatar',$usr->A_U['emailHash']);
 	}
-
 	$db->Query("SELECT * FROM category");
 	$cate = array();
 	$dep = array();
@@ -73,7 +70,6 @@
 				break;
 		}
 	}
-	//$a_res = $o_db->Query("SELECT id,name,serial,model,ram_id,os_id,location_id,manufacturer FROM inventory.hardware WHERE os_id='".$_GET["paramater"]."'  ORDER BY name;",false,"assoc");
 	$projects = $db -> Query("SELECT id,name FROM tickets.projects",false,"assoc");
 	$projTemp = array();
 	foreach($projects as $proj){
@@ -90,7 +86,6 @@
   $blankPage = $smarty->createTemplate("blank.tpl");
   $blankPage = Tcode($blankPage -> Fetch());
   $smarty -> assign('blankDisplay',$blankPage);
-	$smarty -> assign('altEmail',$altE);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
 	$smarty -> assign('locationJSON',json_encode($locJson));

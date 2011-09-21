@@ -18,6 +18,7 @@
         <li>links in the form of http://www.google.com will transform into clickable links</li>
         <li>There is a new admin section for users who have access to it.  It is listed on the tab bar.  If you see it you have access</li>
         <li>Ticket list is now sortable</li>
+        <li>Users are now given a http://www.gravatar.com Icon</li>
         
       </ol>
       <br>

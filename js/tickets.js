@@ -333,27 +333,28 @@ function loadResponsesBody(ticketId, container, page) {
 		var resCont = $("<div id=\"responseContainer\" />");
 		if(data!==undefined){ //need to make sure there are responses
   		$.each(data.reply, function (i, item) {
-        resCont.append($("#responsestpl").html());
-        resCont.find("#ticketListDueDate").hide();
-        resCont.find("#changemeColor").addClass("").attr({ 
-          id: "userid" + item.id
-        });
-        resCont.find("#changemeUserid").html(item.firstname + " " + item.lastname).attr({
-          id: "userid" + item.id
-        });
-        resCont.find("#changemeSubject").html(item.subject).css({
-          fontWeight: "bold"
-        }).attr({
-          id: "subject" + item.id
-        });
-        resCont.find("#changemeBody").html(stripslashes(item.body)).attr({
-          id: "body" + item.id
-        });
-        resCont.find("#changemeDay").html(sec2readable(item.ddt)).attr({
-          id: "created" + item.id
-        });
-        $("#replyticketid").val(ticketId);
-        cnt++;
+	        resCont.append($("#responsestpl").html());
+	        resCont.find("#ticketListDueDate").hide();
+	        resCont.find("#changemeColor").addClass("").attr({ 
+	          id: "userid" + item.id
+	        });
+	        resCont.find("#changemeUserid").html(item.firstname + " " + item.lastname).attr({
+	          id: "userid" + item.id
+	        });
+	        resCont.find("#changemeSubject").html(item.subject).css({
+	          fontWeight: "bold"
+	        }).attr({
+	          id: "subject" + item.id
+	        });
+	        resCont.find("#changemeBody").html(stripslashes(item.body)).attr({
+	          id: "body" + item.id
+	        });
+	        resCont.find("#changemeDay").html(sec2readable(item.ddt)).attr({
+	          id: "created" + item.id
+	        });
+	        $("#replyticketid").val(ticketId);
+	        resCont.find("#replyIcon").attr({id: "icon" + item.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+item.mdEmail+"?s=32&d=identicon&r=g)"});
+	        cnt++;
       });  
 		}
 		
@@ -441,6 +442,7 @@ function loadTicketBody(inputData, container) {
       bmClass = "bookmark";
     }
   }
+   container.find("#replyIcon").attr({id: "icon" + data.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+data.mdEmail+"?s=32&d=identicon&r=g)"});
 	container
 	 .find("#ticketTitle")
 	   .html(data.subject)
@@ -966,13 +968,13 @@ function loadUserPage(userId){
 							}
 						}
 					)
-						.append(
-							$("<div/>",{
-								html:"ID:"+userId,
-								css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "25px"},
-								"class":"fontBold fontMain rotate90 transformTL"
-							})
-						)
+					.append(
+						$("<div/>",{
+							html:"ID:"+userId,
+							css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "25px"},
+							"class":"fontBold fontMain rotate90 transformTL"
+						})
+					)
 				)
 		)
 		.append(
@@ -1067,6 +1069,8 @@ function loadUserPage(userId){
 
 
 	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
+		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.emailAddressHash+"?s=100&d=identicon&r=g)"});
+		
 		Tlb.find("#userDepartment").append($("<div/>",{"class":"ilb contentEdit",html:data.userInfo.tickets.departmentName}));
 		addEditControls(localStorage.userId,$("#userDepartment"),"select",data.userInfo.departments,function(userId,value,item){
 			$.getJSON("ajax/login.php",{"user_id":userId,"department_id":value})
@@ -1247,7 +1251,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		checkResponse(data);
 	} else {
 		Params.LastLogon = data.lastlogon;
-		$("#topperUserInfo").html(data.firstname + " " + data.lastname + " (" + data.username + ")").attr("href","#userPage/"+data.userid);
+		$("#topperUserInfo").html(data.firstname + " " + data.lastname ).attr("href","#userPage/"+data.userid);
 		checkResponse(data);
 		loadLocalStorage();
 		localStorage.userId = data.userid;

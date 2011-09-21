@@ -376,3 +376,14 @@ textarea {
         font-size: 16px
     }
 }
+/*
+.user:after{
+	content:url(http://www.gravatar.com/avatar/?f=y&d=identicon&s=16&r=g);
+	position: relative;
+	top:2px;
+}
+*/
+.inlineUser{
+	background:none;
+	font-weight: bold;
+}

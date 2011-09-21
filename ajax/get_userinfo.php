@@ -45,7 +45,7 @@ WHERE
 	id=".$_GET["userId"]
 ,false,"assoc");
 
-$json["userInfo"]["email_address_hash"] =md5( strtolower( trim( $json["userInfo"]["email_address"] ) ) ); 
+$json["userInfo"]["emailAddressHash"] = md5( strtolower( trim( $json["userInfo"]["email_address"] ) ) ); 
 
 $json["userInfo"]["tickets"] = $db->Query("
 SELECT
