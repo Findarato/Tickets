@@ -135,6 +135,9 @@
 			<div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" class="border-all-B-1 WhitetoLightBlue">
 				<!-- Body of the ticket -->
 				<div style="display:table-row;width:100%">
+					<div style="display:table-cell; padding:6px; width:24px;vertical-align: top">
+						<div id="replyIcon" class="" style="width:32px;height:32px;"></div>
+					</div>
 					<div style="display:table-cell; padding:6px; width:100px;vertical-align:top;">
 						<div class="font-X2" id="ticketCreatedBy" style="width:100px;vertical-align:top;"></div>
 						<div id="ticketDate" class="font-L font-bold" style="vertical-align:top;"></div>

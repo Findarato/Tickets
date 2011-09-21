@@ -14,8 +14,24 @@
 	$count = 0;
 	if(isset($_GET['ticket_id'])){//This is a ticket request
 		$ticketid = intval($_GET['ticket_id']);
-		$sql = 'SELECT tr.id,tr.user_id,tr.parent_id,tr.subject,tr.body,tr.created_on,lhu.username,lhu.firstname,lhu.lastname, TIMESTAMPDIFF(SECOND ,tr.created_on, now( ) ) AS ddt	
-		FROM responses AS tr JOIN users AS lhu ON (tr.user_id=lhu.id) WHERE tr.ticket_id='.$ticketid.' ORDER BY ddt ASC';
+		$sql = 'SELECT tr.id,
+		tr.user_id,
+		tr.parent_id,
+		tr.subject,
+		tr.body,
+		tr.created_on,
+		u.username,
+		u.firstname,
+		u.lastname,
+		u.email_Address,
+		MD5(u.email_Address) AS mdEmail,
+		
+		TIMESTAMPDIFF(SECOND ,tr.created_on, now( ) ) AS ddt	
+		FROM responses AS tr 
+		JOIN tickets.users AS u 
+		ON (tr.user_id=u.id) 
+		WHERE tr.ticket_id='.$ticketid.' ORDER BY ddt ASC';
+		
 		$db->Query($sql);
 		if(isset($_GET['page'])){
 			$page = $_GET['page'];

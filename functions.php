@@ -78,10 +78,11 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				break;
 			case "user":
 				$userinfo = id2Username($match[1]);
+				$gravatar = md5( strtolower( trim( id2Email($match[1]) ) ) ); 
 				if($email){
-					$formated1 = '<a href="http://tickets.lapcat.org/#ticketlist/created_by/'.$match[1].'" class="ticket_sprite user">'.$userinfo['firstname']." ".$userinfo['lastname'].'</a>';
+					$formated1 = '<a href="http://tickets.lapcat.org/#ticketlist/created_by/'.$match[1].'" class="inlineUser">'.$userinfo['firstname']." ".$userinfo['lastname'].'</a>';
 				}else{
-					$formated1 = '<a href="#ticketlist/created_by/'.$match[1].'" class="user fakelink ticket_button ticket_sprite">'.$userinfo['firstname']." ".$userinfo['lastname'].'</a>';
+					$formated1 = '<a href="#ticketlist/created_by/'.$match[1].'" class="inlineUser fakelink" style="">'.$userinfo['firstname']." ".$userinfo['lastname'].'</a>';
 				} 
 			break;
 			default:
