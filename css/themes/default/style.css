@@ -159,6 +159,9 @@ body, html {
 #rightSideFloater div{
 	/*height:20px;*/
 }
+.selectButton{
+	text-align: left;
+}
 .selectButton:after{
 	content:'';
 	width: 0; 
@@ -169,7 +172,7 @@ body, html {
 	position:absolute;
 	right:7px;
 }
-.triangleDown,{
+.triangleDown{
 	content:'';
 	width: 0; 
 	height: 0;
@@ -177,6 +180,15 @@ body, html {
 	border-right: 6px solid transparent; 
 	border-top: 10px solid rgba(0,0,0,.6);
 }
+.triangleUp{
+	content:'';
+	width: 0; 
+	height: 0;
+	border-left: 6px solid transparent; 
+	border-right: 6px solid transparent; 
+	border-bottom: 10px solid rgba(0,0,0,.6);
+}
+
 .categorySelect{
 	font-size:14px;
 	font-weight: bold;
