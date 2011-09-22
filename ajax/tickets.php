@@ -219,8 +219,8 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						FROM tickets AS t 
 						JOIN category AS c ON (c.id=t.category_id)
 						JOIN library_names AS ln ON (ln.ID=t.location)
-						JOIN lapcat.hex_users AS lhu ON (t.assigned_id=lhu.id)
-						JOIN lapcat.hex_users AS lhu2 ON (t.created_by_id=lhu2.id)
+						JOIN tickets.users AS lhu ON (t.assigned_id=lhu.id)
+						JOIN tickets.users AS lhu2 ON (t.created_by_id=lhu2.id)
 						WHERE '.join(" AND ",$wc).' GROUP BY t.id ORDER BY t.priority DESC,t.due_on ';	
 			}
 			
