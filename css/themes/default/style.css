@@ -209,3 +209,11 @@ body, html {
 	-webkit-box-shadow: 5px 5px 2px #888;
 	box-shadow: 5px 5px 2px #888;
 }
+.closedTicket{
+	
+}
+.closedTicket:after{
+	content: "closed!";
+	margin-left:4px;
+	color:#00769E;
+}
