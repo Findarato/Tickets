@@ -78,7 +78,6 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 					if($ticketTitle["open"] == 0){
 						$classes .= " closedTicket";				
 					}
-					print_r($ticketTitle);
 					$formated1 = "<a href=\"#ticket/".$match[1]."\" class='".$classes."'>".$ticketTitle["subject"]."</a>";
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			

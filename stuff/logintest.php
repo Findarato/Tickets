@@ -1,86 +1,4 @@
 <?
-
-/*
-
-echo "<!--";
-print_r(post_it($data,"catalog.lapcat.org/patroninfo"));
-echo "-->";
-print_r(post_it($data,"catalog.lapcat.org/patroninfo/1060648/top","GET"));
-*/
-/*
-//$data = http_build_query($data);
-
-function httpsPost($Url, $strRequest)
-{
-   // Initialisation
-   $ch=curl_init();
-   // Set parameters
-   curl_setopt($ch, CURLOPT_URL, $Url);
-   // Return a variable instead of posting it directly
-   //curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-   // Active the POST method
-  
-   curl_setopt($ch, CURLOPT_POST, 1) ;
-  
-   // Request
-   curl_setopt($ch, CURLOPT_POSTFIELDS, $strRequest);
-   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-   // execute the connexion
-   $result = curl_exec($ch);
-   // Close it
-   curl_close($ch);
-   return $result;
-}
-$url0 = 'https://catalog.lapcat.org:444/patroninfo/';
-$url = 'https://catalog.lapcat.org:444/patroninfo/1060648/top/';
-$logout ='https://catalog.lapcat.org:444/logout?';
-$strRequest = utf8_encode('<request name="'.$name.'"
-              code="'.$card.'"
-			  pin="'.$pin.'"
-/>');
-print_r(httpsPost($url, $strRequest));
-//print_r(httpsPost($logout, $strRequest));
-
-
-function post_it($datastream, $url,$type="POST") {
-
-$url = preg_replace("@^https://@i", "", $url);
-$host = substr($url, 0, strpos($url, "/"));
-$uri = strstr($url, "/");
-echo $url."|".$host."|".$uri;
-      $reqbody = "";
-      foreach($datastream as $key=>$val) {
-          if (!empty($reqbody)) $reqbody.= "&";
-      $reqbody.= $key."=".urlencode($val);
-      }
-
-$contentlength = strlen($reqbody);
-     $reqheader =  $type." $uri HTTP/1.1\r\n".
-                   "Host: $host\n". "User-Agent: PostIt\r\n".
-     "Content-Type: application/x-www-form-urlencoded\r\n".
-     "Content-Length: $contentlength\r\n\r\n".
-     "$reqbody\r\n";
-
-$socket = fsockopen($host, 80, $errno, $errstr);
-
-if (!$socket) {
-   $result["errno"] = $errno;
-   $result["errstr"] = $errstr;
-   return $result;
-}
-
-fputs($socket, $reqheader);
-
-while (!feof($socket)) {
-   $result[] = fgets($socket, 4096);
-}
-
-fclose($socket);
-
-return $result;
-}
-*/
 class cURL {
 var $headers;
 var $user_agent;
@@ -156,6 +74,8 @@ $logout ='https://catalog.lapcat.org:444/logout?';
 $cc = new cURL();
 $document = $cc->post('https://catalog.lapcat.org:444/patroninfo/','name=harry,joe&code=1201101207390&pin=1982');
 $cc->get('https://catalog.lapcat.org:444/logout?');
+
+print_r($document);die();
 
 $document = str_replace("http://catalog.lapcat.org:2082/feeds~S12/pat/","<boom>",$document);
 $document = str_replace(".xml","<boom>",$document);

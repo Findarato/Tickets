@@ -169,7 +169,7 @@ function loadNew(timestamp){
 
 function loadBlank() {
 	Params.LastArea = "UpdateNotes";
-	Params.Content.html($("#blankTpl").html());
+	Params.Content.load("ajax/updateNotes.php");
 }
 
 function loadLargeBarGraph(selectorId,data,lables) {
@@ -1071,10 +1071,18 @@ function loadUserPage(userId){
 	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
 		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.emailAddressHash+"?s=100&d=identicon&r=g)"});
 		
-		Tlb.find("#userDepartment").append($("<div/>",{"class":"ilb contentEdit",html:data.userInfo.tickets.departmentName}));
+		Tlb
+			.find("#userDepartment")
+			.append(
+				$("<button style='width:150px;' id='ticketDepartment' name='ticketDepartment' data-select-items='"+JSON.stringify(data.userInfo.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</button>")
+				//$("<div/>",{"class":"ilb contentEdit",html:data.userInfo.tickets.departmentName})
+			);
+			createSelect(Tlb.find("#ticketDepartment"));
+		/*
 		addEditControls(localStorage.userId,$("#userDepartment"),"select",data.userInfo.departments,function(userId,value,item){
 			$.getJSON("ajax/login.php",{"user_id":userId,"department_id":value})
 		});
+		*/
 		if(data.userInfo.openIdLinks > 0){
 			Tlb.find("#googleLogin").before("Linked with "+ data.userInfo.openIdLinks + " Google account(s)<br>");
 			//Tlb.find("#googleLogin").remove();
@@ -1277,46 +1285,62 @@ window.onpopstate = function(event) {
   checkHash();  
 };
 
-function createSelect(selector){
+function createSelect(selector,callback){
+	callback = "test";
+	var callBackFn = "";
+	if(selector.html() == null){return false;}
+	callBackFn = callback ? callback : false;
 	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
 		return false;
 	}
-	selector.click(function(){
-		if($(".dropDown").html()){alert("a")	}
+	
+	selector
+	.click(function(){
 		me = $(this);
 		selectData = $.parseJSON(me.attr('data-select-items'));
 		pos = me.offset();
 		pos.top = pos.top + me.outerHeight();
+		var ddData = $("<div/>");
+		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth()},"class":"fakeDropDown shadow"});
 		$("body")
 			.append(
-				$("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth()},"class":"fakeDropDown shadow"})
-					.append(
-						function(){
-							var ret = $("<div/>");
-							$.each(selectData,function(key,item){
-								if(Object.keys(item).length > 0){
-								ret
+				dropDown
+					.append(function(){
+						$.each(selectData,function(key,item){
+							if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
+								if(typeof key == 'string'){
+								ddData
 									.append(
 										$("<div/>",{html:key,"class":"categorySelect"})
 									)
-									$.each(item,function(key2,item2){
-										ret
-											.append(
-												$("<div/>",{html:item2,css:{"padding-left":"3px"},"class":"selectable"})
-											)
-									});
-								}else{
-									ret
-										.append(
-											$("<div/>",{html:key,"class":"selectable"})
-										)
 								}
-							})
-							return ret;
-						}
-					)
+								ddData
+									.append(function(){
+										$.each(item,function(key2,item2){
+											ddData
+												.append(
+													$("<div/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable"})
+													.click(function(){
+														alert("3:"+callBackFn);
+															if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+													})
+												)
+										});	
+									})
+							}else{// this is not an array
+								ddData
+									.append(
+										$("<div/>",{html:item,"class":"selectable"})
+											.click(function(){
+												alert("4:"+callBackFn);
+												if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+											})
+									)
+							}
+						})
+					return ddData;
+				})
 			)
-		
 	});
 }
 
@@ -1326,11 +1350,14 @@ jQuery(document).ready(function () {
 //history.replaceState({page: 3}, "title 3", "?page=3");
   //localStorage.clear();
 
-	$("body").live("mousedown",function(){
+/*
+	$("body").live("mousedown :not(.categorySelect)",function(){
+		//alert('!')
 		if($(".fakeDropDown")){
 			$(".fakeDropDown").replaceWith();
 		}
 	});
+*/
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
 		yep : '',
