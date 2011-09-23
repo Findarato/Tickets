@@ -280,7 +280,8 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 
 	$emailIds['created'] = getDepartmentMembers_by_userid($user_id,1);//created by
 	$emailIds['assigned'] = getDepartmentMembers_by_userid($assigned_id,1); //assigned to
-	$emailIds[] = $assigned_id;
+	$emailIds['assigned_id'] = $assigned_id;
+	$emailIds['createdBy_id'] = $user_id;
 	$idsToEmail = uniqueArray(array_implode($emailIds));
 	$email = array();
 	$replyMessageLocation = "There is a new reply to ($ticketTitle)";
