@@ -73,7 +73,7 @@ class User {
 				$this->A_U['logged-in']=3;
 				$this->A_U['validated']=true;
 				$this->A_U['email'] = $row["emailAddress"];
-				$this->A_U['emailHash'] = md5( strtolower( trim( $row["emailAddress"] ) ) );;
+				$this->A_U['mdEmail'] = md5( strtolower( trim( $row["emailAddress"] ) ) );;
 				$this->UserInfo["openID"]="";
 				$this->Permissions = $this->LoadPermissions($row['ID']);
 			}
