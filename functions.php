@@ -89,7 +89,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				}else{
 					$classes = "ticket_link ticket_button ticket_sprite";
 					if($ticketTitle["open"] == 0){
-						$classes .= " closedTicket";				
+						$classes .= " closedTicketDisplay";				
 					}
 					$formated1 = "<a href=\"#ticket/".$match[1]."\" class='".$classes."'>".$ticketTitle["subject"]."</a>";
 				}

@@ -668,7 +668,7 @@ function loadTicketBody(inputData, container) {
    
 	 $('#reAssignButton').click(function(){
 	   $("#reassignBox").css("height","30px");
-	   createSelect($("#TicketAssign"))
+	   createSelect($("#TicketAssign"),function(id){})
 	 });
 	 $("#ReAssignCancelButton").click(function(){
     $("#reassignBox").css({"height":"0px"});
@@ -993,7 +993,7 @@ function loadUserPage(userId){
 		.append(
 			function(index,html){
 				if(!localUser){	return "";} // this is blocking the view of other user's page
-				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"250px"}})
+				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"300px"}})
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
 						.append(
@@ -1072,20 +1072,26 @@ function loadUserPage(userId){
 		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.emailAddressHash+"?s=100&d=identicon&r=g)"});
 		
 		Tlb
-			.find("#userDepartment")
+			.find("#userDepartment").css("white-space","nowrap")
 			.append(
 				$("<button style='width:150px;' id='ticketDepartment' name='ticketDepartment' data-select-items='"+JSON.stringify(data.userInfo.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</button>")
-				//$("<div/>",{"class":"ilb contentEdit",html:data.userInfo.tickets.departmentName})
+			)
+			.append(
+				$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
 			);
-			createSelect(Tlb.find("#ticketDepartment"));
-		/*
-		addEditControls(localStorage.userId,$("#userDepartment"),"select",data.userInfo.departments,function(userId,value,item){
-			$.getJSON("ajax/login.php",{"user_id":userId,"department_id":value})
-		});
-		*/
+			createSelect(Tlb.find("#ticketDepartment"),function(value){
+				$.getJSON("ajax/login.php",{"user_id":localStorage.userId,"department_id":value},function(data){
+					if(data.error != "")
+						$("#userDepartmentStatus").text(data.error);
+					else
+						$("#userDepartmentStatus").text(data.message);
+					
+					$("#userDepartmentStatus").fadeIn().fadeOut(1500);
+				});
+					
+			});
 		if(data.userInfo.openIdLinks > 0){
 			Tlb.find("#googleLogin").before("Linked with "+ data.userInfo.openIdLinks + " Google account(s)<br>");
-			//Tlb.find("#googleLogin").remove();
 		}
 		Tlb.find("#userName").append(data.userInfo.username);
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
@@ -1141,7 +1147,6 @@ function loadUserPage(userId){
 							});
 							loadLargeBarGraph("graphDisplay",graphData,lables);
 						})
-						
 				);
 		Tlb.find("#openBugs").append(data.bugs.byMeOpen);
 	});
@@ -1286,7 +1291,7 @@ window.onpopstate = function(event) {
 };
 
 function createSelect(selector,callback){
-	callback = "test";
+	
 	var callBackFn = "";
 	if(selector.html() == null){return false;}
 	callBackFn = callback ? callback : false;
@@ -1301,7 +1306,7 @@ function createSelect(selector,callback){
 		pos = me.offset();
 		pos.top = pos.top + me.outerHeight();
 		var ddData = $("<div/>");
-		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth()},"class":"fakeDropDown shadow"});
+		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth(),"background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
 		$("body")
 			.append(
 				dropDown
@@ -1321,8 +1326,9 @@ function createSelect(selector,callback){
 												.append(
 													$("<div/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable"})
 													.click(function(){
-														alert("3:"+callBackFn);
-															if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+														selector.text(item2).val(key2);
+														if(callBackFn)callBackFn(key2);
+														if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
 													})
 												)
 										});	
@@ -1332,7 +1338,8 @@ function createSelect(selector,callback){
 									.append(
 										$("<div/>",{html:item,"class":"selectable"})
 											.click(function(){
-												alert("4:"+callBackFn);
+												selector.text(item).val(key);
+												if(callBackFn)callBackFn(key);
 												if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
 											})
 									)
