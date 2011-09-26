@@ -3,7 +3,7 @@
 		<div style="padding:5px;margin:5px; ; overflow:auto;position:relative;background-color:#FFF" class="roundAll4 border-all-A-1">
 
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Ticket Update XXIV</span>
-      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r700</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.6.0.r730</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
 		<li>Fixed a 404 error when trying to link to a js library</li>
@@ -13,8 +13,8 @@
       <span style="font-size: 150%; line-height: normal;">New Features</span>
       <ol>
         <li>links in the form of http://www.google.com will transform into clickable links</li>
-        <li>There is a new admin section for users who have access to it.  It is listed on the tab bar.  If you see it you have access</li>
-        <li>Ticket list is now sortable</li>
+        <li><del>There is a new admin section for users who have access to it.  It is listed on the tab bar.  If you see it you have access</del>Will be included in the next update</li>
+        <li><del>Ticket list is now sortable</del> Will be included in the next update</li>
         <li>Users are now given a http://www.gravatar.com Icon</li>
         
       </ol>
