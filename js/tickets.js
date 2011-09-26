@@ -804,7 +804,8 @@ function loadTicketList(pageNumber,queryObj) {
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
 			displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:45px;'><button style='width:45px;' id='ticketListIdSort' name='ticketListIdSort' data-select-items='' class='selectButton'>ID</button></td><td style='width:56px;'><button style='width:75px;' id='ticketListPrioritySort' name='ticketListPrioritySort' data-select-items='' class='selectButton'>Priority</button></td><td style='width:400px'><button style='width:75px;' id='ticketListTitleSort' name='ticketListTitleSort' data-select-items='' class='selectButton'>Title</button></td><td class='ticketProjectLocation'><button style='width:75px;' id='ticketListLocationSort' name='ticketListLocationSort' data-select-items='' class='selectButton'>Location</button></td><td><button style='width:105px;' id='ticketListCategorySort' name='ticketListCategorySort' data-select-items='' class='selectButton'>Category</button></td><td class='ticketListSortable ticketCreatedBy'>Created By</td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'>Assigned</td><td class='ticketListSortable ticketListCreatedOn'><button style='width:95px;' id='ticketListCreatedOnSort' name='ticketListCreatedOnSort' data-select-items='' class='selectButton'>Created On</button></td></tr>"); 
-		}		
+		}
+		createSelect($(".selectButton"),function(id){alert(id)});
     var display = 
       $("<div/>",{css:{"width":"100%"}})
         .html(
@@ -1274,7 +1275,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		}
 		$("#newTicketUser_id").val(Params.UserId);
 		if (data.departmentname === "") {
-			notice("Error", "No Department");
+			loadUserPage(data.userid);
 		}
 		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
@@ -1293,14 +1294,20 @@ window.onpopstate = function(event) {
 function createSelect(selector,callback){
 	
 	var callBackFn = "";
+	alert(selector.html())
 	if(selector.html() == null){return false;}
 	callBackFn = callback ? callback : false;
 	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
 		return false;
 	}
-	
+	/*
+	$.each(selector,function(key,vals){
+		alert(vals.val());
+	})
+	*/
 	selector
 	.click(function(){
+		alert("tst");
 		me = $(this);
 		selectData = $.parseJSON(me.attr('data-select-items'));
 		pos = me.offset();
