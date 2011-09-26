@@ -1224,9 +1224,12 @@ function changeArea(area){
 	}
 }
 function loadLocalStorage(clear){
- if(localStorage.ticketsVersion != $("#Version")){
- 	localStorage.clear();
- }
+	if(localStorage.getItem("ticketsVersion") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
+		localStorage.clear();
+		localStorage.setItem("ticketsVersion",$("#version").html());
+		loadLocalStorage();
+		return; 
+	}
  
  
   if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
@@ -1254,10 +1257,7 @@ function loadLocalStorage(clear){
   }else{
     Params.Projects = $.parseJSON(localStorage.getItem("ticketsProjects"));
   }
-	if(localStorage.getItem("ticketsVersion") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
-		localStorage.clear();
-		localStorage.setItem("ticketsVersion",$("#version").html()); 
-	}
+
 	
  	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
