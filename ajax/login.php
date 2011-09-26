@@ -13,13 +13,14 @@
 				}
 					//Lets do some cryptic database and data manipulation. 
 				$password = $db->Query("SELECT password FROM tickets.users WHERE id=".$_SESSION["openID"]["user_id"],false,"row");
+				$response["mdEmail"] = md5( strtolower( trim( id2Email($_SESSION["openID"]["user_id"]) ) ) ); 
 				$response = login($_SESSION["openID"]["user_id"],$password,$response,true);
+				
 			}elseif($_GET["userId"] == 2){ // this will be a new user in tickets
 				$pass = '!#4$#$%%^jDkksDFUISPSD453Ddded'; 
 				// Ok lets make a ticket user
 				$un = explode("@",$_SESSION["openID"]["email"]);
 				$unTest = $db->Query("SELECT id FROM tickets.users WHERE email_address='".$_SESSION["openID"]["email"]."' LIMIT 1;",false,"row");
-				//$response["newid"] = $unTest;
 				
 				if($unTest == 0){  // lets just make sure some one is not spamming the button.  This kinda helps development as well
 					$res = $db->Query('INSERT INTO tickets.users (type,joined,firstname,lastname,username,password,email_address) VALUES (
@@ -35,9 +36,11 @@
 					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$res.",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
 					$password = $db->Query("SELECT password FROM tickets.users WHERE id=".$res,false,"row");
 					$response["pw"] = $password;
-					$response = login($res,$password,$response,true);					
+					$response = login($res,$password,$response,true);
+					$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) ); 
 				}
 			}
+			
 		}	
 	}elseif(isset($_GET["department_id"]) && isset($_GET["user_id"])){ 
 		$db->Query("INSERT INTO department_members (department_id,user_id) VALUES(".$db->Clean($_GET["department_id"]).",".$db->Clean($_GET["user_id"]).");");
@@ -55,6 +58,7 @@
 		$usr = unserialize($_SESSION['user']);
 		$db->Query("UPDATE users SET email_address='".$_POST["altEmail"]."' WHERE id=".$usr->User_id);
 		$alt = $db->Query ("SELECT email_address FROM tickets.users WHERE id=".$usr->User_id,false,"row");
+		$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) ); 
 		if(count($db->Error)==2){
 			$response['message']=$db->Error;
 		}
@@ -68,8 +72,9 @@
 		$response["message"]="Successfully Logged out of Tickets";
 	}elseif(isset($_GET["userIdFetch"])){// Just give me the user id.  More of a problem has happened and I lost the user id
 		$usr = unserialize($_SESSION['user']);	
-		$response["user_id"]=$usr->User_id;
-		$response["message"]="Successfully Returned User ID";
+		$response["user_id"] = $usr->User_id;
+		$response["message"] = "Successfully Returned User ID";
+		$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) ); 
 	}else{
 		$response["error"]=="Invalid Username or password";
 		echo json_encode($response);

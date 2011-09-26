@@ -422,9 +422,8 @@ function login($un,$pw,$response,$openid=false){
 		$_SESSION["lastlogon"] = $llo;
 		$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
 		if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
-		$db->Query("SELECT email_address FROM tickets.users WHERE id=".$response["userid"]);
-		$altE = $db->Fetch("row");
-		$response["altEmail"] = $altE;
+		$response["altEmail"] = $db->Query("SELECT email_address FROM tickets.users WHERE id=".$response["userid"],false,"row");
+		$response["mdEmail"] = md5( strtolower( trim( $response["altEmail"] ) ) ); 
 	}
 	return $response;
 } 

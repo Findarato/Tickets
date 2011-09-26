@@ -35,7 +35,7 @@
 		$smarty->assign('lastname',$usr->A_U['last-name']);
 		$smarty->assign('user_id',$usr->User_id);
 		$depart = getDepartment_by_userid($usr->User_id);
-		$smarty->assign('gravatar',$usr->A_U['emailHash']);
+		$smarty->assign('gravatar',$usr->A_U['mdEmail']);
 	}
 	$db->Query("SELECT * FROM category");
 	$cate = array();

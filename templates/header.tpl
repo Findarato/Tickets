@@ -46,7 +46,8 @@
 			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right"><!-- Start of User info -->
 				<div style="width:100%">
 					{if isset($firstname)}
-					<a class="right nolink fontMain" href="#userPage/" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname}</a><img src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="position:relative;top:2px;height:24px;width:24px;border:none;">
+					<a class="right nolink fontMain" href="#userPage/" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname}</a>
+					<img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="position:relative;top:2px;height:24px;width:24px;border:none;">
 					{else}
 					<a class="right nolink fontMain" href="#login" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;width:auto;text-decoration:none;">No User (Please Log in) </a>
 					{/if}
