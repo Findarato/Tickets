@@ -1224,6 +1224,10 @@ function changeArea(area){
 	}
 }
 function loadLocalStorage(clear){
+ if(localStorage.ticketsVersion != $("#Version")){
+ 	localStorage.clear();
+ }
+ 
  
   if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
