@@ -45,12 +45,10 @@ var Params = {
 };
 
 function alertTest(tst){alert(tst);}
-
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
 }
-
 function oc(a)
 {
   var o = {};
@@ -148,11 +146,9 @@ function checkHash() {
 		}
 	}
 }
-
 function updateFavorites(){
   localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
 }
-
 function checkResponse(json) {
 	if (json.error !== null && json.error.length > 2) {
 		notice("Error", json.error, false);
@@ -161,17 +157,14 @@ function checkResponse(json) {
 		notice("Notice", json.message, false);
 	}
 }
-
 function loadNew(timestamp){
 	loadTicketList(0,{"area":"new","dateTime":timestamp});
 	$("#ticketListtitle").html("Tickets with activity since your last visit");
 }
-
 function loadBlank() {
 	Params.LastArea = "UpdateNotes";
 	Params.Content.load("ajax/updateNotes.php");
 }
-
 function loadLargeBarGraph(selectorId,data,lables) {
 	var Bar = new RGraph.Bar(selectorId, data);
 	RGraph.Clear(Bar.canvas); 
@@ -201,7 +194,6 @@ function loadLargeLineGraph(selectorId,data,lables) {
     line.Set('chart.colors', ['rgba(0,0,0,.60)']);
     line.Draw();
 }
-
 function checkNotify(dt) {
 	var display = "";
 	var disp = false;
@@ -1068,10 +1060,16 @@ function loadUserPage(userId){
 		infoBox.find("#ticketListtitle").attr({id:"infoBoxTitle"}).html("Tickets Created");
 		infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"730px\" height=\"300px\" id=\"graphDisplay\">Please use a browser that supports canvas</canvas>"));
 
-
+	if(userId == undefined){
+		alert("test")
+		userId = localStorage.userId;
+	}
 	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
-		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.emailAddressHash+"?s=100&d=identicon&r=g)"});
-		
+		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.mdEmail+"?s=100&d=identicon&r=g)"});
+
+		if(data.userInfo.tickets.departmentName == undefined){
+			data.userInfo.tickets.departmentName = "None!";
+		}		
 		Tlb
 			.find("#userDepartment").css("white-space","nowrap")
 			.append(
@@ -1080,6 +1078,9 @@ function loadUserPage(userId){
 			.append(
 				$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
 			);
+			if(data.userInfo.tickets.departmentName == "None!"){
+				Tlb.find("#ticketDepartment").addClass("errorPulse");
+			}
 			createSelect(Tlb.find("#ticketDepartment"),function(value){
 				$.getJSON("ajax/login.php",{"user_id":localStorage.userId,"department_id":value},function(data){
 					if(data.error != "")
@@ -1257,34 +1258,52 @@ function loadLocalStorage(clear){
  	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
 			localStorage.setItem("userId",data.user_id);
+		//	localStorage.setItem("mdEmail",data.mdEmail);
     	});	
 	}
 }
 function login(data){ //We need a json array, probably need to parse it, who knows
 	//alert(data.message);
+	loadLocalStorage();
+	
+	$.getJSON("ajax/login.php",{"userIdFetch":1},function(data2){
+		//alert(data2.mdEmail);
+		//localStorage.setItem("userId",data2.user_id);
+		localStorage.setItem("mdEmail",data2.mdEmail);
+	});
+	
 	if (data.error.length > 0) {
 		checkResponse(data);
 	} else {
 		Params.LastLogon = data.lastlogon;
-		$("#topperUserInfo").html(data.firstname + " " + data.lastname ).attr("href","#userPage/"+data.userid);
+		$("#topperUserInfo")
+			.html(data.firstname + " " + data.lastname ).attr("href","#userPage/"+data.userid);
+		
+		if($("#headerAvatar").html() != null){
+			$("#headerAvatar").css("background-color","#F00").attr("src","http://www.gravatar.com/avatar/"+localStorage.mdEmail+"?s=24&d=identicon&r=g");	
+		}else{
+			$("#topperUserInfo").append(
+				$("<img/>").attr("src","http://www.gravatar.com/avatar/"+localStorage.mdEmail+"?s=24&d=identicon&r=g")
+			)	
+		}
+		
+		
 		checkResponse(data);
-		loadLocalStorage();
 		localStorage.userId = data.userid;
 		if(localStorage.tickets = true){
 			localStorage.setItem("userId",data.userid);
-			//alert(localStorage.userId);
 		}
+		
 		$("#newTicketUser_id").val(Params.UserId);
-		if (data.departmentname === "") {
-			loadUserPage(data.userid);
+		if (data.departmentname === "" || data.departmentname == "None!") {
+			setHash("#userPage/"+data.userid);
+		}else{
+			setHash("#ticketList/all_tickets");
 		}
 		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
-		setHash("#ticketList/all_tickets");
-		/*checkHash*/
-		$("#userSecondaryEmail").val(data.altEmail);
-		$("#depOk").show();
-		$("#depError").hide();
+
+		//alert(localStorage.mdEmail);
 	}
 }
 window.onpopstate = function(event) { 
@@ -1383,6 +1402,7 @@ jQuery(document).ready(function () {
 
 	
 	loadLocalStorage(true);
+	//localStorage.clear();
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
 	
 	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});

@@ -54,6 +54,7 @@ try {
 			$_SESSION["openID"]["last_name"] = $last_name;
 			$userId = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' LIMIT 1",false,"assoc");
 			$_SESSION["openID"]["user_id"] = $userId["id"];
+			$_SESSION["openID"]["mdEmail"] = md5( strtolower( trim( $email ) ) ); 
 			// This needs its own if statement to make sure its actually ran.
 			if(is_array($userId)){ // There is a matching email address
 				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$userId["id"]."'AND open_id='".$identity."';",false,"row");
@@ -68,6 +69,7 @@ try {
 					echo "Thank you for logging into ticket with a google account.  We will now fully log you into tickets<br>"; 
 					$password = $db->Query("SELECT password FROM users WHERE id=".$userId["id"],false,"row");
 					$response = login($userId["id"],$password,$response,true);
+					//print_r($response);die();
 					echo '<script type="text/javascript">window.opener.window.login('.json_encode($response).');window.close();</script>';
 				}else{// there is a matching email but no openid link
 					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
