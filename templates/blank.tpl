@@ -3,7 +3,7 @@
 		<div style="padding:5px;margin:5px; ; overflow:auto;position:relative;background-color:#FFF" class="roundAll4 border-all-A-1">
 
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Ticket Update XXIV</span>
-      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.6.0.r730</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.6.0.r738</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
 		<li>Fixed a 404 error when trying to link to a js library</li>
