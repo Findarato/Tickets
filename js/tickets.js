@@ -803,7 +803,7 @@ function loadTicketList(pageNumber,queryObj) {
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-			displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:45px;'><button style='width:45px;' id='ticketListIdSort' name='ticketListIdSort' data-select-items='' class='selectButton'>ID</button></td><td style='width:56px;'><button style='width:75px;' id='ticketListPrioritySort' name='ticketListPrioritySort' data-select-items='' class='selectButton'>Priority</button></td><td style='width:400px'><button style='width:75px;' id='ticketListTitleSort' name='ticketListTitleSort' data-select-items='' class='selectButton'>Title</button></td><td class='ticketProjectLocation'><button style='width:75px;' id='ticketListLocationSort' name='ticketListLocationSort' data-select-items='' class='selectButton'>Location</button></td><td><button style='width:105px;' id='ticketListCategorySort' name='ticketListCategorySort' data-select-items='' class='selectButton'>Category</button></td><td class='ticketListSortable ticketCreatedBy'>Created By</td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'>Assigned</td><td class='ticketListSortable ticketListCreatedOn'><button style='width:95px;' id='ticketListCreatedOnSort' name='ticketListCreatedOnSort' data-select-items='' class='selectButton'>Created On</button></td></tr>"); 
+			displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:45px;'><button style='width:45px;' id='ticketListIdSort' name='ticketListIdSort' data-select-items='' class='selectButton'>ID</button></td><td style='width:56px;'><button style='width:75px;' id='ticketListPrioritySort' name='ticketListPrioritySort' data-select-items='' class='selectButton'>Priority</button></td><td style='width:400px'><button style='width:75px;' id='ticketListTitleSort' name='ticketListTitleSort' data-select-items='' class='selectButton'>Title</button></td><td class='ticketProjectLocation'><button style='width:75px;' id='ticketListLocationSort' name='ticketListLocationSort' data-select-items='' class='selectButton'>Location</button></td><td><button style='width:105px;' id='ticketListCategorySort' name='ticketListCategorySort' data-select-items='' class='selectButton'>Category</button></td><td class='ticketListSortable ticketCreatedBy'><button style='width:95px;' id='ticketListCreatedBySort' name='ticketListCreatedBySort' data-select-items='' class='selectButton'>Created By</button></td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'><button style='width:95px;' id='ticketListAssignedSort' name='ticketListAssignedSort' data-select-items='' class='selectButton'>Assigned</button></td><td class='ticketListSortable ticketListCreatedOn'><button style='width:95px;' id='ticketListCreatedOnSort' name='ticketListCreatedOnSort' data-select-items='' class='selectButton'>Created On</button></td></tr>"); 
 		}
 		createSelect($(".selectButton"),function(id){alert(id)});
     var display = 
@@ -1193,7 +1193,8 @@ function loadLoginPage(){
 	Params.Content.load("templates/login.tpl");
 }
 function changeArea(area){
-	var location = $("#subAreaBar"); 
+	var location = $("#subAreaBar");
+	if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 	switch(area){
 		case "admin":
 			$("#adminTab").trigger("click");	
@@ -1288,13 +1289,14 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 }
 window.onpopstate = function(event) { 
   //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
-  checkHash();  
+  checkHash(); 
+  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 };
 
 function createSelect(selector,callback){
 	
 	var callBackFn = "";
-	alert(selector.html())
+	//alert(selector.html())
 	if(selector.html() == null){return false;}
 	callBackFn = callback ? callback : false;
 	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
@@ -1307,7 +1309,7 @@ function createSelect(selector,callback){
 	*/
 	selector
 	.click(function(){
-		alert("tst");
+		//alert("tst");
 		me = $(this);
 		selectData = $.parseJSON(me.attr('data-select-items'));
 		pos = me.offset();
