@@ -12,7 +12,7 @@
 	include "header.php";
 	$smarty->assign('theme_id',2);
 	$_SESSION['uploadCnt']=0;
-	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1|| unserialize($_SESSION['user'])->A_U['type']<4) {//there is not a valid session
+	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$usr = new user(true);
 			$usr->UserLogin($db->Clean($_POST['un']),$db->Clean($_POST['pw']));
