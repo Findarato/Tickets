@@ -8,6 +8,7 @@ class User {
 	public $User_id = -1;//adding compatability to Joe's coding style
 	public $Permissions = array();
 	public $debug = array();
+	public $gravatar = ""; // image link to gravatar image
 	
 	//Private stuff
 	private $openID = "";
@@ -25,7 +26,8 @@ class User {
 					u.username, 
 					u.type, 
 					u.firstname,
-					u.lastname
+					u.lastname,
+					u.email_address AS emailAddress
 				FROM 
 					tickets.users AS u 
 				WHERE';
@@ -42,7 +44,8 @@ class User {
 					u.username, 
 					u.type, 
 					u.firstname,
-					u.lastname
+					u.lastname,
+					u.email_address AS emailAddress
 				FROM 
 					tickets.users AS u 
 				WHERE 
@@ -69,6 +72,8 @@ class User {
 				$this->A_P['username']=$row['username'];
 				$this->A_U['logged-in']=3;
 				$this->A_U['validated']=true;
+				$this->A_U['email'] = $row["emailAddress"];
+				$this->A_U['mdEmail'] = md5( strtolower( trim( $row["emailAddress"] ) ) );;
 				$this->UserInfo["openID"]="";
 				$this->Permissions = $this->LoadPermissions($row['ID']);
 			}

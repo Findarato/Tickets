@@ -1,16 +1,57 @@
-<div class="colorWhite-1" style="width:auto;margin-left:5px;font-size:90%;line-height:10px" title="Update Notes">
+<div class="colorWhite-1" style="width:auto;margin-left:5px;font-size:100%;line-height:20px" title="Update Notes">
 	<div class="" id="" >
-		<div class="corners-bottom-2 corners-top-2 border-all-B-1" style="text-align:left;text-align:left;margin:4px;padding:2px;height:auto;position:relative">
-			Thank you for logging into tickets. Click on a ticket from the list on the left, or create a new ticket above.
-    		<br>
-			<span> More detailed update notes can be found <a class="ticket_sprite global_link ticket_button" href="http://forum.lapcat.org/viewforum.php?f=66">On the forums</a> or On the <a class="ticket_sprite global_link ticket_button" href="http://auto.lapcat.org/wiki/Ticket_Update_Notes">Wiki</a></span>		
-		</div>
 		<div style="padding:5px;margin:5px; ; overflow:auto;position:relative;background-color:#FFF" class="roundAll4 border-all-A-1">
-		  <div style="position:absolute;top:0px;right:20px">
-		    <a href="http://www.w3.org/html/logo/" title="Link to HTML5 logo">
-          <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-performance-semantics-storage.png" width="115" height="32" alt="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with CSS3 / Styling, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
-        </a>
-		  </div>
+
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Ticket Update XXIV</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.6.0.r730</span>
+      <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+      <ol>
+		<li>Fixed a 404 error when trying to link to a js library</li>
+		<li>Fixed [ticket=1109]</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">New Features</span>
+      <ol>
+        <li>links in the form of http://www.google.com will transform into clickable links</li>
+        <li><del>There is a new admin section for users who have access to it.  It is listed on the tab bar.  If you see it you have access</del>Will be included in the next update</li>
+        <li><del>Ticket list is now sortable</del> Will be included in the next update</li>
+        <li>Users are now given a http://www.gravatar.com Icon</li>
+        
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">Known Issues</span>
+      <ol>
+        <li>Searching By project does not work</li>
+        <li>Page indicators in a search result do not currently work.</li>
+        <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
+        <li>Commenting on a ticket that was closed or reopened will generate extra replies.</li>
+      </ol>
+      <br>
+      <br>
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Tickets Hotfix</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.2.r700</span>
+      <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+      <ol>
+		<li>Fixed the [url=http://www.google.com] not translating to the correct URL bug.  It should be working properly now.</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">New Features</span>
+      <ol>
+        <li>If tickets is behaving strangly or you are just not getting the result you are looking for now you can "reset tickets". Simply load up your user page by clicking on your name in the top right corner and then click reset tickets.</li>
+        <li>Importants of a ticket is now shown in a graphical display on the ticket list. This enables for faster and easier view of what is the most important ticket.</li>
+        <li>Ticket lists now show when a ticket was created.</li>
+        <li>Entering a url into a ticket or response in the form of http://www.google.com will no be converted to a link</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">Known Issues</span>
+      <ol>
+        <li>Searching By project does not work</li>
+        <li>Page indicators in a search result do not currently work.</li>
+        <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
+        <li>Commenting on a ticket that was closed or reopened will generate extra replies.</li>
+      </ol>
+      <br>
+      <br>
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Live Ticket Update XXIII</span>
       <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.5.0.r582</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>

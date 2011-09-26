@@ -12,7 +12,7 @@
 	include "header.php";
 	$smarty->assign('theme_id',2);
 	$_SESSION['uploadCnt']=0;
-	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1|| unserialize($_SESSION['user'])->A_U['type']<4) {//there is not a valid session
+	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$usr = new user(true);
 			$usr->UserLogin($db->Clean($_POST['un']),$db->Clean($_POST['pw']));
@@ -25,8 +25,7 @@
 				$smarty->assign('lastname',$usr->A_U['last-name']);
 				$smarty->assign('user_id',$usr->User_id);
 				$depart = getDepartment_by_userid($usr->User_id);
-				$db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id);
-				$altE = $db->Fetch("row");
+				$smarty->assign('gravatar',$usr->A_U['emailHash']);
 			}
 		}else{$smarty -> assign('content','login.tpl');	}
 	}else{$smarty-> assign("content","empty.tpl"); 	
@@ -36,10 +35,8 @@
 		$smarty->assign('lastname',$usr->A_U['last-name']);
 		$smarty->assign('user_id',$usr->User_id);
 		$depart = getDepartment_by_userid($usr->User_id);
-		$db->Query("SELECT email FROM alt_email WHERE user_id=".$usr->User_id);
-		$altE = $db->Fetch("row");
+		$smarty->assign('gravatar',$usr->A_U['mdEmail']);
 	}
-
 	$db->Query("SELECT * FROM category");
 	$cate = array();
 	$dep = array();
@@ -73,7 +70,6 @@
 				break;
 		}
 	}
-	//$a_res = $o_db->Query("SELECT id,name,serial,model,ram_id,os_id,location_id,manufacturer FROM inventory.hardware WHERE os_id='".$_GET["paramater"]."'  ORDER BY name;",false,"assoc");
 	$projects = $db -> Query("SELECT id,name FROM tickets.projects",false,"assoc");
 	$projTemp = array();
 	foreach($projects as $proj){
@@ -87,10 +83,8 @@
 	  $smarty -> assign('userId',-1);
 	}
 
-  $blankPage = $smarty->createTemplate("blank.tpl");
-  $blankPage = Tcode($blankPage -> Fetch());
+
   $smarty -> assign('blankDisplay',$blankPage);
-	$smarty -> assign('altEmail',$altE);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
 	$smarty -> assign('locationJSON',json_encode($locJson));

@@ -1,9 +1,20 @@
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+
 /**
  * Simple global variables that are needed everywhere
  */
 var UploadCnt = 0;
 //Setup the global variables for selectors
 var Tlb = "";
+var uri = window.location.toString();
+uri = uri.replace(window.location.hash, "");
 //End global selectors
 var Params = {
 	"FadeTime": 0,
@@ -33,37 +44,11 @@ var Params = {
 	"NavArea":""
 };
 
-var navgationMenu = {
-	"tickets":{
-		0:{
-			"name":"To Me",
-			"link":"sOpen"
-		},
-		1:{
-			"name":"By Me",
-			"link":"sAssigned"
-		},
-		2:{
-			"name":"To My Dep.",
-			"link":"sOdepartment"
-		},		
-	},
-	"Bugs":{
-		0:{
-		"name":"Open Bugs",
-		"link":"bugs_open"
-		},
-	}
-}
-
 function alertTest(tst){alert(tst);}
-
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
 }
-var uri = window.location.toString();
-uri = uri.replace(window.location.hash, "");
 function oc(a)
 {
   var o = {};
@@ -154,18 +139,16 @@ function checkHash() {
 		//alert("blah");
 		if(localStorage.userId > 0){
 			setHash("#ticketList/all_tickets");
-			checkHash();
+			/*checkHash*/
 		}else{
 			setHash("#login");
-			checkHash();
+			/*checkHash*/
 		}
 	}
 }
-
 function updateFavorites(){
   localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
 }
-
 function checkResponse(json) {
 	if (json.error !== null && json.error.length > 2) {
 		notice("Error", json.error, false);
@@ -174,17 +157,14 @@ function checkResponse(json) {
 		notice("Notice", json.message, false);
 	}
 }
-
 function loadNew(timestamp){
 	loadTicketList(0,{"area":"new","dateTime":timestamp});
 	$("#ticketListtitle").html("Tickets with activity since your last visit");
 }
-
 function loadBlank() {
 	Params.LastArea = "UpdateNotes";
-	Params.Content.html($("#blankTpl").html());
+	Params.Content.load("ajax/updateNotes.php");
 }
-
 function loadLargeBarGraph(selectorId,data,lables) {
 	var Bar = new RGraph.Bar(selectorId, data);
 	RGraph.Clear(Bar.canvas); 
@@ -214,7 +194,6 @@ function loadLargeLineGraph(selectorId,data,lables) {
     line.Set('chart.colors', ['rgba(0,0,0,.60)']);
     line.Draw();
 }
-
 function checkNotify(dt) {
 	var display = "";
 	var disp = false;
@@ -319,11 +298,6 @@ function loadLargeStats() {
 		});
 	});
 }
-/**
- * Loads the status ticket list for a specified area, or all areas if none is passed
- * @param String Area
- */
-
 function populateAllBugs(Area) {
 	var cnt,html,Ttype;
 	$.getJSON(uri + "ajax/get_bugs.php", {"all": "1","small":"1"},function (data, text) {
@@ -351,27 +325,28 @@ function loadResponsesBody(ticketId, container, page) {
 		var resCont = $("<div id=\"responseContainer\" />");
 		if(data!==undefined){ //need to make sure there are responses
   		$.each(data.reply, function (i, item) {
-        resCont.append($("#responsestpl").html());
-        resCont.find("#ticketListDueDate").hide();
-        resCont.find("#changemeColor").addClass("").attr({ 
-          id: "userid" + item.id
-        });
-        resCont.find("#changemeUserid").html(item.firstname + " " + item.lastname).attr({
-          id: "userid" + item.id
-        });
-        resCont.find("#changemeSubject").html(item.subject).css({
-          fontWeight: "bold"
-        }).attr({
-          id: "subject" + item.id
-        });
-        resCont.find("#changemeBody").html(stripslashes(item.body)).attr({
-          id: "body" + item.id
-        });
-        resCont.find("#changemeDay").html(sec2readable(item.ddt)).attr({
-          id: "created" + item.id
-        });
-        $("#replyticketid").val(ticketId);
-        cnt++;
+	        resCont.append($("#responsestpl").html());
+	        resCont.find("#ticketListDueDate").hide();
+	        resCont.find("#changemeColor").addClass("").attr({ 
+	          id: "userid" + item.id
+	        });
+	        resCont.find("#changemeUserid").html(item.firstname + " " + item.lastname).attr({
+	          id: "userid" + item.id
+	        });
+	        resCont.find("#changemeSubject").html(item.subject).css({
+	          fontWeight: "bold"
+	        }).attr({
+	          id: "subject" + item.id
+	        });
+	        resCont.find("#changemeBody").html(stripslashes(item.body)).attr({
+	          id: "body" + item.id
+	        });
+	        resCont.find("#changemeDay").html(sec2readable(item.ddt)).attr({
+	          id: "created" + item.id
+	        });
+	        $("#replyticketid").val(ticketId);
+	        resCont.find("#replyIcon").attr({id: "icon" + item.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+item.mdEmail+"?s=32&d=identicon&r=g)"});
+	        cnt++;
       });  
 		}
 		
@@ -404,11 +379,12 @@ function displayStatus(jsonData, Selector) {
 		}
 	});
 }
-/**
- * Lots the contents of the ticket to the screen.  All of the display elements should already be there
- */
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
+  
+  if($("#replyuserid").val()==""){
+  	$("#replyuserid").val(localStorage.userId);
+  }
   $("#modifyButton").show();
   $(".ticketData").remove();
   $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
@@ -458,6 +434,7 @@ function loadTicketBody(inputData, container) {
       bmClass = "bookmark";
     }
   }
+   container.find("#replyIcon").attr({id: "icon" + data.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+data.mdEmail+"?s=32&d=identicon&r=g)"});
 	container
 	 .find("#ticketTitle")
 	   .html(data.subject)
@@ -501,31 +478,27 @@ function loadTicketBody(inputData, container) {
      .find("#ticketDueDate")
      .addClass("ilb")
      .append(
-       $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-         .html(
-           $("<div/>",{id:"ticketDueDateDisplay",html:data.due_on})
-         )
+       $("<div/>",{id:"ticketDueDateDisplay","class":"ilb ticketData contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"},"html":data.due_on})
      );
   
-  
-  container
-   .find("#ticketAssignedTo")
-   .addClass("ilb")
-   .append(
-     $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-       .html(
-         $("<div/>",{id:"ticketAssignedToDisplay",html:data.firstname + " " + data.lastname,data:data.assigned_id})
-       )
-   );				
-		container
-		  .find("#ticketLocation")
-		    .addClass("ilb")
-		    .append(
-		      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"}})
-		        .html(
-		          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
-		        )
-		    );
+	container
+		.find("#ticketAssignedTo")
+			.addClass("ilb")
+				.append(
+					$("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+						.html(
+							$("<div/>",{id:"ticketAssignedToDisplay","class":"highLight",html:data.firstname + " " + data.lastname,data:data.assigned_id})
+						)
+				);				
+	container
+	  .find("#ticketLocation")
+	    .addClass("ilb")
+	    .append(
+	      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"}})
+	        .html(
+	          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
+	        )
+	    );
 	}
 	//Global stuff for bugs and tickets
 
@@ -622,6 +595,8 @@ function loadTicketBody(inputData, container) {
     }else{
       selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
       selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
+      //dueOn = container.find("#ticketDueDate").find(".contentEdit");
+      textBoxReplace(container.find("#ticketDueDate").find(".contentEdit"),"","date");
     }
    //textBoxReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
   });
@@ -685,9 +660,11 @@ function loadTicketBody(inputData, container) {
    
 	 $('#reAssignButton').click(function(){
 	   $("#reassignBox").css("height","30px");
+	   createSelect($("#TicketAssign"),function(id){})
 	 });
 	 $("#ReAssignCancelButton").click(function(){
     $("#reassignBox").css({"height":"0px"});
+    
    });
   $('#reAssignAcceptButton').click(function () {
     var reassignVal = $("#TicketAssign").val();
@@ -742,10 +719,6 @@ function loadTicketBody(inputData, container) {
     me.toggleClass("bookmark-off").toggleClass("bookmark");
 	});
 }
-
-/**
- * Function to Load the whole ticket including the display.
- */
 function loadTicket(ticketId,update) {
 	if(Params.LastArea != "ticket"){
 	  Params.Content.html($("#ticketTpl").html());
@@ -766,7 +739,6 @@ function loadTicket(ticketId,update) {
 		loadResponsesBody(ticketId, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
-
 function loadTicketList(pageNumber,queryObj) {
 	Tlb = Params.Content.find("#ticketListbody");
 	Params.LastArea = "ticketList";
@@ -823,8 +795,9 @@ function loadTicketList(pageNumber,queryObj) {
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:40px;'>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Location</td><td>Priority</td><td>Category</td><td class='ticketCreatedBy'>Created By</td><td>Due On</td></tr>");
-		}		
+			displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:45px;'><button style='width:45px;' id='ticketListIdSort' name='ticketListIdSort' data-select-items='' class='selectButton'>ID</button></td><td style='width:56px;'><button style='width:75px;' id='ticketListPrioritySort' name='ticketListPrioritySort' data-select-items='' class='selectButton'>Priority</button></td><td style='width:400px'><button style='width:75px;' id='ticketListTitleSort' name='ticketListTitleSort' data-select-items='' class='selectButton'>Title</button></td><td class='ticketProjectLocation'><button style='width:75px;' id='ticketListLocationSort' name='ticketListLocationSort' data-select-items='' class='selectButton'>Location</button></td><td><button style='width:105px;' id='ticketListCategorySort' name='ticketListCategorySort' data-select-items='' class='selectButton'>Category</button></td><td class='ticketListSortable ticketCreatedBy'><button style='width:95px;' id='ticketListCreatedBySort' name='ticketListCreatedBySort' data-select-items='' class='selectButton'>Created By</button></td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'><button style='width:95px;' id='ticketListAssignedSort' name='ticketListAssignedSort' data-select-items='' class='selectButton'>Assigned</button></td><td class='ticketListSortable ticketListCreatedOn'><button style='width:95px;' id='ticketListCreatedOnSort' name='ticketListCreatedOnSort' data-select-items='' class='selectButton'>Created On</button></td></tr>"); 
+		}
+		createSelect($(".selectButton"),function(id){alert(id)});
     var display = 
       $("<div/>",{css:{"width":"100%"}})
         .html(
@@ -878,7 +851,25 @@ function loadTicketList(pageNumber,queryObj) {
 		          return html;
 		        }
 		         
-		      ) 
+		      )
+		      .append( 
+		        $("<td/>")
+		          .addClass("borderBottomBlack fontMain ticketPriority")
+		          .css({"width":"70px","text-align":"right"})
+		          .html(
+    		        function(i,html){
+    		         if(item.priority>0){
+    		           if(item.priority>5){item.priority = item.priority-5;}
+    		           	
+    		           //result = Params.Priority_string[item.priority].name;
+    		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
+    		           
+    		           }
+    		         else{result = Params.Priority_string[0].name;}
+    		           return result;
+    		        }
+    		      )
+    		   )		      
 		      .append($("<td/>")
 		        .addClass("borderBottomBlack",{"class":"ticketTitle"})
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontBold fontMain").html(item.subject).attr({"id": "subject" + item.id }))
@@ -893,19 +884,7 @@ function loadTicketList(pageNumber,queryObj) {
 		          }
 		        }
 		      )
-		      .append( 
-		        $("<td/>")
-		          .addClass("borderBottomBlack fontMain ticketPriority")
-		          .html(
-    		        function(i,html){
-    		         if(item.priority>0){
-    		           if(item.priority>5){item.priority = item.priority-5;}
-    		           result = Params.Priority_string[item.priority].name;}
-    		         else{result = Params.Priority_string[0].name;}
-    		           return result;
-    		        }
-    		      )
-    		   )
+
 		      .append(
 		        function(){
 		          if(bugs){
@@ -924,16 +903,31 @@ function loadTicketList(pageNumber,queryObj) {
 		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy")
 		          } 
 		        }
-		        
 		       )
+		      .append(
+		        function(i,html){
+		          if(bugs){
+		            return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn")
+		          }else{
+		            return $("<td/>").html(item.firstname+" "+item.lastname).addClass("borderBottomBlack fontMain ticketAssigned")
+		          } 
+		        }
+		       )
+		       
 		      .append(
 		        function(){
 		          if(!bugs){
-		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain");
+		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain ticketListDueOn");
 		          }  
 		        }
-		        
 		      )
+		      .append(
+		        function(){
+		        	if(!bugs){
+		            	return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketListCreatedOn");
+		           }
+		        }
+		      )		      
 		    )
 		});
 		
@@ -967,13 +961,13 @@ function loadUserPage(userId){
 							}
 						}
 					)
-						.append(
-							$("<div/>",{
-								html:"ID:"+userId,
-								css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "25px"},
-								"class":"fontBold fontMain rotate90 transformTL"
-							})
-						)
+					.append(
+						$("<div/>",{
+							html:"ID:"+userId,
+							css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "25px"},
+							"class":"fontBold fontMain rotate90 transformTL"
+						})
+					)
 				)
 		)
 		.append(
@@ -992,7 +986,7 @@ function loadUserPage(userId){
 		.append(
 			function(index,html){
 				if(!localUser){	return "";} // this is blocking the view of other user's page
-				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"250px"}})
+				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"300px"}})
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
 						.append(
@@ -1045,6 +1039,20 @@ function loadUserPage(userId){
 							html:"Change Theme"							
 						});
 					})
+					.append(function(){
+						//openIdLinks
+						return $("<button>",{
+							"class":"button ticketPadding3",
+							"css":{"width":"auto","margin-left":"3px"},
+							html:"Reset Tickets",
+							click:function(){
+								localStorage.clear();
+								loadLocalStorage();
+								setHash("#ticketList/all_tickets");
+								/*checkHash*/
+							}							
+						});
+					})
 			} 
 		)
 		.appendTo(Tlb);
@@ -1052,21 +1060,47 @@ function loadUserPage(userId){
 		infoBox.find("#ticketListtitle").attr({id:"infoBoxTitle"}).html("Tickets Created");
 		infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"730px\" height=\"300px\" id=\"graphDisplay\">Please use a browser that supports canvas</canvas>"));
 
-
+	if(userId == undefined){
+		alert("test")
+		userId = localStorage.userId;
+	}
 	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
-		Tlb.find("#userDepartment").append($("<div/>",{"class":"ilb contentEdit",html:data.userInfo.tickets.departmentName}));
-		addEditControls(localStorage.userId,$("#userDepartment"),"select",data.userInfo.departments,function(userId,value,item){
-			$.getJSON("ajax/login.php",{"user_id":userId,"department_id":value})
-		});
+		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.mdEmail+"?s=100&d=identicon&r=g)"});
+
+		if(data.userInfo.tickets.departmentName == undefined){
+			data.userInfo.tickets.departmentName = "None!";
+		}		
+		Tlb
+			.find("#userDepartment").css("white-space","nowrap")
+			.append(
+				$("<button style='width:150px;' id='ticketDepartment' name='ticketDepartment' data-select-items='"+JSON.stringify(data.userInfo.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</button>")
+			)
+			.append(
+				$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
+			);
+			if(data.userInfo.tickets.departmentName == "None!"){
+				Tlb.find("#ticketDepartment").addClass("errorPulse");
+			}
+			createSelect(Tlb.find("#ticketDepartment"),function(value){
+				$.getJSON("ajax/login.php",{"user_id":localStorage.userId,"department_id":value},function(data){
+					if(data.error != "")
+						$("#userDepartmentStatus").text(data.error);
+					else
+						$("#userDepartmentStatus").text(data.message);
+					
+					$("#userDepartmentStatus").fadeIn().fadeOut(1500);
+				});
+					
+			});
 		if(data.userInfo.openIdLinks > 0){
 			Tlb.find("#googleLogin").before("Linked with "+ data.userInfo.openIdLinks + " Google account(s)<br>");
-			//Tlb.find("#googleLogin").remove();
 		}
 		Tlb.find("#userName").append(data.userInfo.username);
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
 		Tlb.find("#userType").append(data.userInfo.type);
-		Tlb.find("#userSecondaryEmail").val(data.userInfo.tickets.altEmail);
+		Tlb.find("#userSecondaryEmail").val(data.userInfo.email_address);
+		
 		Tlb
 			.find("#totalTickets")
 				.append(data.tickets.byMe)
@@ -1115,7 +1149,6 @@ function loadUserPage(userId){
 							});
 							loadLargeBarGraph("graphDisplay",graphData,lables);
 						})
-						
 				);
 		Tlb.find("#openBugs").append(data.bugs.byMeOpen);
 	});
@@ -1157,38 +1190,41 @@ function loadUserPage(userId){
 	}
 
 }
-
 function loadLoginPage(){ 
 	Params.Content.load("templates/login.tpl");
 }
-
 function changeArea(area){
-	var location = $("#subAreaBar"); 
+	var location = $("#subAreaBar");
+	if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 	switch(area){
+		case "admin":
+			$("#adminTab").trigger("click");	
+			location.load("templates/top_admin.tpl");
+			Params.NavArea="admin";
+		break;
 		case "tickets":
 			$("#ticketTab").trigger("click");
-			location.load("templates/ticket_top.tpl");
+			location.load("templates/top_ticket.tpl");
 			Params.NavArea="tickets";
 		break;
 		case "bugs":
 			$("#bugTab").trigger("click");	
-			location.load("templates/bug_top.tpl");
+			location.load("templates/top_bug.tpl");
 			Params.NavArea="bugs";
 		break;
 		case "search":
 			$("#searchTab").trigger("click");	
-			location.load("templates/search_top.tpl");
+			location.load("templates/top_search.tpl");
 		break;
 		case "stats":
 			$("#statsTab").trigger("click");	
 			location.html("");
 		break;
+		default:break;
 	}
 }
-
 function loadLocalStorage(clear){
-  //if(clear){localStorage.clear();}
-  
+ 
   if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
     $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
       Params.FavoriteObject = data.favIds;
@@ -1222,52 +1258,154 @@ function loadLocalStorage(clear){
  	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
 			localStorage.setItem("userId",data.user_id);
+		//	localStorage.setItem("mdEmail",data.mdEmail);
     	});	
 	}
-  
 }
-
-/**
- * 
- * Lets run some code that needs to be ran after the page loads
- */
-
-
 function login(data){ //We need a json array, probably need to parse it, who knows
 	//alert(data.message);
+	loadLocalStorage();
+	
+	$.getJSON("ajax/login.php",{"userIdFetch":1},function(data2){
+		//alert(data2.mdEmail);
+		//localStorage.setItem("userId",data2.user_id);
+		localStorage.setItem("mdEmail",data2.mdEmail);
+	});
+	
 	if (data.error.length > 0) {
 		checkResponse(data);
 	} else {
 		Params.LastLogon = data.lastlogon;
-		$("#topperUserInfo").html(data.firstname + " " + data.lastname + " (" + data.username + ")").attr("href","#userPage/"+data.userid);
+		$("#topperUserInfo")
+			.html(data.firstname + " " + data.lastname ).attr("href","#userPage/"+data.userid);
+		
+		if($("#headerAvatar").html() != null){
+			$("#headerAvatar").css("background-color","#F00").attr("src","http://www.gravatar.com/avatar/"+localStorage.mdEmail+"?s=24&d=identicon&r=g");	
+		}else{
+			$("#topperUserInfo").append(
+				$("<img/>").attr("src","http://www.gravatar.com/avatar/"+localStorage.mdEmail+"?s=24&d=identicon&r=g")
+			)	
+		}
+		
+		
 		checkResponse(data);
-		loadLocalStorage();
 		localStorage.userId = data.userid;
 		if(localStorage.tickets = true){
 			localStorage.setItem("userId",data.userid);
-			//alert(localStorage.userId);
 		}
+		
 		$("#newTicketUser_id").val(Params.UserId);
-		if (data.departmentname === "") {
-			notice("Error", "No Department");
+		if (data.departmentname === "" || data.departmentname == "None!") {
+			setHash("#userPage/"+data.userid);
+		}else{
+			setHash("#ticketList/all_tickets");
 		}
 		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
-		setHash("#ticketList/all_tickets");
-		checkHash();
-		$("#userSecondaryEmail").val(data.altEmail);
-		$("#depOk").show();
-		$("#depError").hide();
+
+		//alert(localStorage.mdEmail);
 	}
 }
+window.onpopstate = function(event) { 
+  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
+  checkHash(); 
+  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
+};
 
+function createSelect(selector,callback){
+	
+	var callBackFn = "";
+	//alert(selector.html())
+	if(selector.html() == null){return false;}
+	callBackFn = callback ? callback : false;
+	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
+		return false;
+	}
+	/*
+	$.each(selector,function(key,vals){
+		alert(vals.val());
+	})
+	*/
+	selector
+	.click(function(){
+		//alert("tst");
+		me = $(this);
+		selectData = $.parseJSON(me.attr('data-select-items'));
+		pos = me.offset();
+		pos.top = pos.top + me.outerHeight();
+		var ddData = $("<div/>");
+		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth(),"background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
+		$("body")
+			.append(
+				dropDown
+					.append(function(){
+						$.each(selectData,function(key,item){
+							if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
+								if(typeof key == 'string'){
+								ddData
+									.append(
+										$("<div/>",{html:key,"class":"categorySelect"})
+									)
+								}
+								ddData
+									.append(function(){
+										$.each(item,function(key2,item2){
+											ddData
+												.append(
+													$("<div/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable"})
+													.click(function(){
+														selector.text(item2).val(key2);
+														if(callBackFn)callBackFn(key2);
+														if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+													})
+												)
+										});	
+									})
+							}else{// this is not an array
+								ddData
+									.append(
+										$("<div/>",{html:item,"class":"selectable"})
+											.click(function(){
+												selector.text(item).val(key);
+												if(callBackFn)callBackFn(key);
+												if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+											})
+									)
+							}
+						})
+					return ddData;
+				})
+			)
+	});
+}
 
 jQuery(document).ready(function () {
-
+//history.pushState({page: 1}, "title 1", "?page=1");
+//history.pushState({page: 2}, "title 2", "?page=2");
+//history.replaceState({page: 3}, "title 3", "?page=3");
   //localStorage.clear();
+
+/*
+	$("body").live("mousedown :not(.categorySelect)",function(){
+		//alert('!')
+		if($(".fakeDropDown")){
+			$(".fakeDropDown").replaceWith();
+		}
+	});
+*/
+	Modernizr.load({
+		test: Modernizr.inputtypes.date,
+		yep : '',
+		nope: '/js/jquery-ui/js/jquery-ui-1.8.15.custom.min.js'
+	});
+
+
+	
 	loadLocalStorage(true);
+	//localStorage.clear();
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
-	$("#UpdateNotes").click(function(){setHash("#updateNotes");checkHash();});
+	
+	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
   	if(Params.UserId>0){
 	  	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});	
   	}
@@ -1291,6 +1429,9 @@ jQuery(document).ready(function () {
 			}
 		}, "json");
 	});
+
+	
+
   
   $("#topperNew").live("click",function(){
     Params.LastArea = "newTicket";
@@ -1298,6 +1439,14 @@ jQuery(document).ready(function () {
     Params.Content.find("#ticketAssignBox").show();
     Params.Content.find("#newTicketType").val("new");
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
+    
+    try{
+    	//$("input[type=date]").live(datepicker());
+    	Params.Content.find("#newTicketDueDate").datepicker();
+    }catch(e){
+    	alert(e);
+    }
+    
   });
   $("#topperNewBug").live("click",function(){
     Params.LastArea = "newBug";
@@ -1352,7 +1501,7 @@ jQuery(document).ready(function () {
 					notice("Error", "You must enter a Due date", false);
 					return false;
 				}else if($("#newTicketAssign").val()==0 && this.id=="ticketAddButton"){
-          notice("Error", "You must select a user!", false);
+          		notice("Error", "You must select a user!", false);
           return false;
 				}else {
 					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
@@ -1390,7 +1539,7 @@ jQuery(document).ready(function () {
 	// Events that need to happen late in the page rendering
 	//
 	if ($("#topperUserInfo").text().length > 10) {
-		checkHash();
+		/*checkHash*/
 		if (localStorage.userId  > 0) {
 			$("#rss1").attr("href", "ticketsrss.php?id=" + localStorage.userId );
 			$("#rss2").attr("href", "ticketsrss.php?id=" + localStorage.userId  + "&bookmark=1");
@@ -1405,7 +1554,7 @@ jQuery(document).ready(function () {
 	$(".actionButtons").live("click", function () {
 		if(localStorage.userId == 0){
 			setHash("#login");
-    		checkHash();
+    		/*checkHash*/
     		return;
 		}
 		var queryObj = {};
@@ -1462,7 +1611,12 @@ jQuery(document).ready(function () {
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		pageTracker._trackPageview($(this).attr("href"));
 		setHash($(this).attr("href"));
-    	checkHash();
+    	/*checkHash*/
 		return false; //to make sure the a isnt clicked
 	});
+	
+	// Last but not least after all the rest of the code is run lets make sure that something gets loaded
+	
+	checkHash();
+	
 });

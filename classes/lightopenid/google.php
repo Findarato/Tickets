@@ -11,10 +11,9 @@ if(isset($_SESSION["user"])){$usr = unserialize($_SESSION["user"]);}
 ?>
 <html>
 	<head>
-	 	<link id="themegencss" href="/tickets/css/themes/default/style.css" rel="stylesheet" />
-        <link rel="stylesheet" media="screen" href="/css/buttons.css?v=21"  /> 
+	 	<link id="themegencss" href="http://<?Php echo $_SERVER['SERVER_NAME'];?>/css/themes/default/style.css" rel="stylesheet" />
         <link rel="stylesheet" media="screen" href="/css/tickets.css?v=22"  /> 
-        <link rel="shortcut icon" href="/tickets/bug.png">
+        <link rel="shortcut icon" href="http://<?Php echo $_SERVER['SERVER_NAME'];?>/bug.png">
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -53,8 +52,9 @@ try {
 			$_SESSION["openID"]["identity"] = $identity;
 			$_SESSION["openID"]["first_name"] = $first_name;
 			$_SESSION["openID"]["last_name"] = $last_name;
-			$userId = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' ",false,"assoc");
+			$userId = $db->Query("SELECT id,firstname,lastname,username FROM tickets.users WHERE email_address ='".$email."' LIMIT 1",false,"assoc");
 			$_SESSION["openID"]["user_id"] = $userId["id"];
+			$_SESSION["openID"]["mdEmail"] = md5( strtolower( trim( $email ) ) ); 
 			// This needs its own if statement to make sure its actually ran.
 			if(is_array($userId)){ // There is a matching email address
 				$openIdtoUserID = $db->Query("SELECT user_id,open_id FROM tickets.openId_users WHERE user_id ='".$userId["id"]."'AND open_id='".$identity."';",false,"row");
@@ -69,17 +69,20 @@ try {
 					echo "Thank you for logging into ticket with a google account.  We will now fully log you into tickets<br>"; 
 					$password = $db->Query("SELECT password FROM users WHERE id=".$userId["id"],false,"row");
 					$response = login($userId["id"],$password,$response,true);
+					//print_r($response);die();
 					echo '<script type="text/javascript">window.opener.window.login('.json_encode($response).');window.close();</script>';
 				}else{// there is a matching email but no openid link
 					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
-					echo "<button class='minimal ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
-					echo "<button class='minimal ticketPadding3' id='noLink' style='width:100px;'>No</button>";
+					echo "<button class='ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
+					echo "<button class='ticketPadding3' id='noLink' style='width:100px;'>No</button>";
 				}
 			}else{ // there is no matching email address 
 				if(isset($usr) && isset($usr->User_id)){ // this is a logged in user lets do some stuff
 					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$usr->User_id.",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
 					if(count($db->Error==2)){//There was an error
 						echo "There was an error trying to link your accounts.";
+						print_r($db->Error);
+						print_r($_SESSION);
 					}else{
 						echo "Your account is now linked with your google account";
 					}

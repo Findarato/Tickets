@@ -19,9 +19,11 @@ header("Cache-Control: max-age=60, must-revalidate");
   $wc = array();
   $count = 40; // The amount of records returned
   $page = 0; // the default page to return incase one is not passed
+  $sort = false;
 
   if(isset($_GET["count"])){ $count = $_GET["count"]; }
   if(isset($_GET["page"])){ $page = $_GET["page"];  }  
+  if(isset($_GET["sort"])){ $sort = $_GET["sort"];}
   
   if($page>0){
     $page = $page*$count+1;
@@ -248,8 +250,7 @@ if(isset($_GET["area"]) ){
 	$wc.=" OR t.location LIKE '%".$_GET["search"]."%'";
 	$wc.=")";
 	$response["ticketCount"] = $db->Query("SELECT count(t.id) FROM tickets AS t WHERE ".$wc,false,"row");
-	//die($db->Lastsql);
-	//echo $wc;die();
+
   }else{$response["ticketCount"] = $db->ResultsCount;}
   
       $sql = '
@@ -291,8 +292,14 @@ if(isset($_GET["area"]) ){
       JOIN tickets.users AS u2 ON (t.created_by_id=u2.id)
       WHERE '.$wc.' 
       GROUP BY t.id 
-      ORDER BY t.id,t.priority DESC,t.due_on 
-      LIMIT '.$page.','.$amount.';';
+      ORDER BY ';
+	  if($sort){
+	  	$sql .= ""; 
+	  }else{
+	  	$sql .= "t.id,t.priority DESC,t.due_on"; 
+	  }
+      
+      $sql.=' LIMIT '.$page.','.$amount.';';
 	  //die($sql);
       $response["tickets"] = $db->Query($sql,false,"assoc_array");
 	  

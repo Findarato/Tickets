@@ -9,8 +9,8 @@
         <title>Tickets - The tracking system</title>
         <link href='http://fonts.googleapis.com/css?family=Snippet|Stardos+Stencil|Open+Sans+Condensed:300|Inconsolata|Ubuntu|Droid+Sans|Droid+Sans+Mono|Droid+Serif&v2' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/resetStyle.css?v=1">
-        <link rel="stylesheet" media="screen" href="css/buttons.css?v=21"  /> 
-        <link rel="stylesheet" media="screen" href="css/tickets.css?v=22"  /> 
+		<link type="text/css" href="/js/jquery-ui/css/redmond/jquery-ui-1.8.15.custom.css" rel="stylesheet" />	
+        <link rel="stylesheet" media="screen" href="/css/tickets.css?v=22"  /> 
         <link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"  />
         <link rel="shortcut icon" href="/bug.png">
         <link rel="apple-touch-icon" href="/bug.png">
@@ -27,18 +27,16 @@
         </script>
         
         <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
-        <script src="http://dev.lapcat.org/dateter/dateter.min.js"></script>
+        
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
-        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/Graph.line.js" ></script>
+		<script type="text/javascript" src="/js/modernizr.custom.43877.js"></script>
         <script src="/js/tickets.js"></script>
         <script src="/js/jquery.purr.js"></script>
         <script src="/js/globalFunctions.js"></script>
-        
-       <!-- <script>Params.UserId = {if isset($user_id)}{$user_id} {else} "-1" {/if};Params.Locations = {$locationJSON};</script> -->
-    </head>
+      </head>
     <body >
-        <!--<![endif]-->
+   
         <header class="header1" style="height:70px;margin-bottom:20px;">
             {include file="header.tpl"}
         </header>

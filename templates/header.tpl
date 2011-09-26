@@ -1,12 +1,14 @@
 <div class="fontMain" style="width:100%;padding:0px 0px 4px 0;position:relative;text-align:right;" id="topper" title="Header of document">
 	<div class="" id="areaBar" style="width:100%;display:block">
 		<div style="display:table;width:100%;text-align:right;">
-			<div class="border-bottom-Main-1" style="display:table-cell;height:auto;width:250px;text-align:left"> <!-- Logo stuff -->
+			<div class="border-bottom-Main-1" style="display:table-cell;height:auto;width:150px;text-align:left"> <!-- Logo stuff -->
 				<div style="height:30px;display:inline-block">
-					<a class="left fakelink ticket_link" href="#start" style="display:inline-block;background:url(/css/tickets-logo.png) no-repeat scroll 0% 0% transparent;height:40px;width:59px;-moz-background-size:100% 100%;-webkit-background-size:100% 100%;-o-background-size:100% 100%;background-size:100% 100%;"></a>
+					<a class="left fakelink ticket_link" href="#start" style="margin-left:5px;">
+						<img src="/css/tree.png" style="border:none;height:40px;width:40px;">
+					</a>
 				</div>
 				<div style="width:auto;height:30px;display:inline-block;text-align:left;">
-					<div class="" style="width:auto;height:16px">The issue tracking system</div>
+					<div class="" style="width:auto;height:16px;font-size: 16px">Tickets</div>
 					<div class="fontMain fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
 						<span class="" id="UpdateNotes">
 							<a class="fontMain fakelink " href="#updateNotes" >
@@ -36,12 +38,20 @@
 					<a class=" ticket_button ticket_sprite chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Stats</span></a>
 				</div>
 			</div>				
-			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top"><!-- Start of User info -->
-				{if isset($firstname)}
-				<a class="right ticket_button ticket_sprite user nolink fontMain" href="#userPage/" id="topperUserInfo" style="padding-right:5px;width:auto;text-decoration:none;">{$firstname} {$lastname} ({$username})</a>
-				{else}
-				<a class="right ticket_button ticket_sprite user nolink fontMain" href="#login" id="topperUserInfo" style="padding-right:5px;width:auto;text-decoration:none;">No User (Please Log in) </a>
-				{/if}
+			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 4 -->
+				<div id="adminTab" class="tab border-bottom-Main-1 roundTop4">
+					<a class=" ticket_button ticket_sprite fire nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Admin</span></a>
+				</div>
+			</div>	
+			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right"><!-- Start of User info -->
+				<div style="width:100%">
+					{if isset($firstname)}
+					<a class="right nolink fontMain" href="#userPage/" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname}</a>
+					<img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="position:relative;top:2px;height:24px;width:24px;border:none;">
+					{else}
+					<a class="right nolink fontMain" href="#login" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;width:auto;text-decoration:none;">No User (Please Log in) </a>
+					{/if}
+				</div>
 			</div>	<!-- End of User info -->
 		</div>		
 	</div>	

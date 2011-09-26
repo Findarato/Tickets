@@ -37,6 +37,7 @@ SELECT
 	u.lastname,
 	u.username,
 	DATE_FORMAT(u.joined	, '%M %e, %Y') AS joined,
+	u.email_address,
 	u.type 
 FROM 
 	users AS u 
@@ -44,9 +45,11 @@ WHERE
 	id=".$_GET["userId"]
 ,false,"assoc");
 
+$json["userInfo"]["mdEmail"] = md5( strtolower( trim( $json["userInfo"]["email_address"] ) ) ); 
+
 $json["userInfo"]["tickets"] = $db->Query("
 SELECT
-	dm.department_id,
+	dm.department_id AS id,
 	dm.notify,
 	d.name AS departmentName
 FROM 
@@ -59,6 +62,7 @@ WHERE
 	user_id=".$_GET["userId"]
 ,false,"assoc");
 
+
 $json["userInfo"]["tickets"]["altEmail"] = $db->Query("
 
 SELECT
@@ -69,12 +73,20 @@ WHERE
 	user_id=".$_GET["userId"]
 ,false,"row");
 
+
 $json["userInfo"]["departments"] = $db->Query("
 SELECT
 	id,name
 FROM 
 	tickets.department;" 
 ,false,"assoc");
+
+$holderArray = array();
+foreach ($json["userInfo"]["departments"] as $key => $data){
+	$holderArray[intval($data["id"])] = $data["name"];
+}
+$json["userInfo"]["departments"] = $holderArray;
+
 $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
 $monthLables = array();
 for($a=1;$a<13;$a++){

@@ -23,7 +23,14 @@ function id2Username($user_id,$userTable="users",$userDatabase="tickets" ){
 	}
 	return $Userinfo;
 }
-
+function toLink($text){
+	$text = html_entity_decode($text);
+	$text = " ".$text;
+	$text = eregi_replace('(((f|ht){1}tp://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink ticket_button ticket_sprite" href="\\1">\\1</a>', $text);
+	$text = eregi_replace('(((f|ht){1}tps://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink ticket_button ticket_sprite" href="\\1">\\1</a>', $text);
+	$text = eregi_replace('([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&//=]+)','\\1<a class="globe fakelink ticket_button ticket_sprite" href="http://\\2">\\2</a>', $text);
+	return $text;
+}
 function aTcode($array,$id='description'){
 	$a_fixed = $array;
 	foreach($array as $k => $a){
@@ -44,12 +51,16 @@ function aTcode($array,$id='description'){
  * @return string The text that has been formated 
  */
 function Tcode($text,$escape=false,$loop = false,$email=false){
-	$formated = $text;
+	$db = db::getInstance();
+	$formated = toLink($text);
 	$formated1 = "";
+	$formated =  preg_replace("/#([A-Za-z0-9_]+)(?=\s|\Z)/ ", "<a href='/#ticketList/$1'>$0</a>", $formated);
 	$start = strpos($text,"[");
 	$end =  strpos($text,"]");
 	preg_match_all('(\[[^]]+\])', $text, $matches);
 	$matches = $matches[0];
+	
+	
 	foreach($matches as $match){
 		$orig = $match;
 		$match=str_replace(" ","",$match);
@@ -58,29 +69,46 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 		$match = explode("=",$match);
 		//print_r($match);
 		switch($match[0]){
-			case "ticket":
+			case "bug":
+				$ticketTitle = $db->Query("SELECT subject,open FROM tickets WHERE id=".$match[1]." LIMIT 1;",false,"assoc");
 				if($email){
-					$formated1 = "<a href=\"http://www.lapcat.org/tickets/#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
 				}else{
-					$formated1 = "<a href=\"#ticket/".$match[1]."\" class=\"ticket_link ticket_button ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+					$classes = "bug_link ticket_button ticket_sprite";
+					if($ticketTitle["open"] == 0){
+						$classes .= " closedTicket";				
+					}
+					$formated1 = "<a href=\"#ticket/".$match[1]."\" class='".$classes."'>".$ticketTitle["subject"]."</a>";
+				}
+				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
+				break;
+			case "ticket":
+				$ticketTitle = $db->Query("SELECT subject,open FROM tickets WHERE id=".$match[1]." LIMIT 1;",false,"assoc");
+				if($email){
+					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket_link ticket_sprite\">".$match[0]." ".$match[1]."</a>";
+				}else{
+					$classes = "ticket_link ticket_button ticket_sprite";
+					if($ticketTitle["open"] == 0){
+						$classes .= " closedTicketDisplay";				
+					}
+					$formated1 = "<a href=\"#ticket/".$match[1]."\" class='".$classes."'>".$ticketTitle["subject"]."</a>";
 				}
 				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
 				break;
 			case "user":
 				$userinfo = id2Username($match[1]);
+				$gravatar = md5( strtolower( trim( id2Email($match[1]) ) ) ); 
 				if($email){
-					$formated1 = "<a href=\"http://dev.lapcat.org/tickets/#ticketlist/created_by/".$match[1]."\" class=\"ticket_sprite user\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
+					$formated1 = '<a href="http://tickets.lapcat.org/#ticketlist/created_by/'.$match[1].'" class="inlineUser">'.$userinfo['firstname']." ".$userinfo['lastname'].'</a>';
 				}else{
-					$formated1 = "<a href=\"#ticketlist/created_by/".$match[1]."\" class=\"user fakelink ticket_button ticket_sprite\">".$userinfo['firstname']." ".$userinfo['lastname']."</a>";
-					
-				}
-				$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);			
-				
-				break;
+					$formated1 = '<a href="#ticketlist/created_by/'.$match[1].'" class="inlineUser fakelink" style="">'.$userinfo['firstname']." ".$userinfo['lastname'].'</a>';
+				} 
+			break;
 			default:
 				
 			break;
 		}
+		$formated = str_replace("[".$match[0]."=".$match[1]."]", $formated1,$formated);
 	}
 	if($escape){return mysql_escape_string($formated);
 	}else{return $formated;}
@@ -271,7 +299,8 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 
 	$emailIds['created'] = getDepartmentMembers_by_userid($user_id,1);//created by
 	$emailIds['assigned'] = getDepartmentMembers_by_userid($assigned_id,1); //assigned to
-	$emailIds[] = $assigned_id;
+	$emailIds['assigned_id'] = $assigned_id;
+	$emailIds['createdBy_id'] = $user_id;
 	$idsToEmail = uniqueArray(array_implode($emailIds));
 	$email = array();
 	$replyMessageLocation = "There is a new reply to ($ticketTitle)";
@@ -294,7 +323,7 @@ function generateEmail($user_id,$assigned_id,$ticketId,$body,$ticketTitle,$close
 	}
 	foreach ($idsToEmail as $key=>$ite){
 		$email = id2Email($ite); 
-		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets",$body,$headers);
+		if($reply && !$closed){mail($email,"There has been a reply to a one of your tickets ($ticketTitle)",$body,$headers);
 		}else{
 			switch($key){
 				case "created":
@@ -358,45 +387,44 @@ function indentJson($json) {
     return $result;
 }
 
-	function login($un,$pw,$response,$openid=false){
-		$db = db::getInstance();
-		if($openid){
-			$usr = new user($un,$pw,true,true);
+function login($un,$pw,$response,$openid=false){
+	$db = db::getInstance();
+	if($openid){
+		$usr = new user($un,$pw,true,true);
+	}else{
+		$usr = new user($un,$pw);
+	}
+	if($usr->User_id==-1){
+		$response['error']="Invalid Username or Password";
+	}else{  
+		$_SESSION["user"] = serialize($usr);
+		$response["username"]=$usr->A_P['username'];
+		$response["firstname"]=$usr->A_U['first-name'];
+		$response["lastname"]=$usr->A_U['last-name'];
+		$response["userid"]=$usr->User_id;
+		$dep = getDepartment_by_userid($usr->User_id); 
+		$dep = array_implode($dep);
+		if(count($dep)!=2 || $dep===false){
+			$response["departmentid"]=-1; 
+			$response["departmentname"] = "None!";
 		}else{
-			$usr = new user($un,$pw);
+			$response["departmentid"] = $dep[0];
+			$response["departmentname"] = $dep[1];
 		}
-		if($usr->User_id==-1){
-			$response['error']="Invalid Username or Password";
-		}else{  
-			$_SESSION["user"] = serialize($usr);
-			$response["username"]=$usr->A_P['username'];
-			$response["firstname"]=$usr->A_U['first-name'];
-			$response["lastname"]=$usr->A_U['last-name'];
-			$response["userid"]=$usr->User_id;
-			$dep = getDepartment_by_userid($usr->User_id); 
-			$dep = array_implode($dep);
-			if(count($dep)!=2 || $dep===false){
-				$response["departmentid"]=-1; 
-				$response["departmentname"] = "None!";
-			}else{
-				$response["departmentid"] = $dep[0];
-				$response["departmentname"] = $dep[1];
-			}
-			$db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
-			$res = $db->Fetch("row");
-			$response["opt"] = $res;
-			$dt = date("U");
-			$response['message'] = "Login Successful";
-			$db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
-			$llo = $db->Fetch("row");
-			$response['lastlogon'] = $llo;
-			$_SESSION["lastlogon"] = $llo;
-			$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
-			if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
-			$db->Query("SELECT email_address FROM tickets.users WHERE id=".$response["userid"]);
-			$altE = $db->Fetch("row");
-			$response["altEmail"] = $altE;
-		}
-		return $response;
-	} 
+		$db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
+		$res = $db->Fetch("row");
+		$response["opt"] = $res;
+		$dt = date("U");
+		$response['message'] = "Login Successful";
+		$db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
+		$llo = $db->Fetch("row");
+		$response['lastlogon'] = $llo;
+		$_SESSION["lastlogon"] = $llo;
+		$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
+		if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
+		$response["altEmail"] = $db->Query("SELECT email_address FROM tickets.users WHERE id=".$response["userid"],false,"row");
+		$response["mdEmail"] = md5( strtolower( trim( $response["altEmail"] ) ) ); 
+	}
+	return $response;
+} 
 ?>

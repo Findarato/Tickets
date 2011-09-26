@@ -98,6 +98,7 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 	$usr = unserialize($_SESSION['user']);
 	switch ($type) {
 		case "favorite":
+			$fIds = getFavoriteIds($usr->User_id);
 			$sc[]="t.description AS description";
 			$sc[]="t.status";
 			$sc[]="t.tickettype_id";
@@ -107,7 +108,7 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 			TIMESTAMPDIFF(SECOND ,t.created_on, now( ) ) AS dago,
 			TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,			
 			TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining 
-			FROM tcview AS t JOIN favorite AS f ON (t.id=f.ticket_id) WHERE f.user_id=".$user_id." ORDER BY  created_on  LIMIT 0,$amount";
+			FROM tickets AS t WHERE t.id IN(".join(",",$sc).") ORDER BY  created_on  LIMIT 0,$amount";
 		break;
 		case "search":
 			foreach ($search as $k=>$s){
@@ -218,8 +219,8 @@ function getTickets($user_id,$type,$amount=100,$style=1,$search=array()){
 						FROM tickets AS t 
 						JOIN category AS c ON (c.id=t.category_id)
 						JOIN library_names AS ln ON (ln.ID=t.location)
-						JOIN lapcat.hex_users AS lhu ON (t.assigned_id=lhu.id)
-						JOIN lapcat.hex_users AS lhu2 ON (t.created_by_id=lhu2.id)
+						JOIN tickets.users AS lhu ON (t.assigned_id=lhu.id)
+						JOIN tickets.users AS lhu2 ON (t.created_by_id=lhu2.id)
 						WHERE '.join(" AND ",$wc).' GROUP BY t.id ORDER BY t.priority DESC,t.due_on ';	
 			}
 			
@@ -361,18 +362,16 @@ if(isset($_SESSION["user"])){ //the session is set
 								$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));
 								$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));								
 								$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));
-                $response["message"]="All Ticket lists generated Successfully";
+              				  	$response["message"]="All Ticket lists generated Successfully";
 							break;
-              case "o":$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));break;
-              case "c":$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));break;
-              case "a":$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));break;
-              case "od":$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));break;
-              case "ad":$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));break;
-              case "f":$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));break;
-              case "flist":$response["favIds"] = array_implode($db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id,false,"row",false,false));break;                 
-							default:
-								$response["error"]="The wrong type index is being passed!";
-							break;								
+							case "o":$response["ticket"]['O']=array("type"=>"sOpen","Count"=>countTickets($usr->User_id,"open"));break;
+							case "c":$response["ticket"]['C']=array("type"=>"sClosed","Count"=>countTickets($usr->User_id,"closed"));break;
+							case "a":$response["ticket"]['A']=array("type"=>"sAssigned","Count"=>countTickets($usr->User_id,"assigned"));break;
+							case "od":$response["ticket"]['OD']=array("type"=>"sOdepartment","Count"=>countTickets($usr->User_id,"Odepartment"));break;
+							case "ad":$response["ticket"]['AD']=array("type"=>"sAdepartment","Count"=>countTickets($usr->User_id,"Adepartment"));break;
+							case "f":$response["ticket"]['F']=array("type"=>"sFavorite","Count"=>countTickets($usr->User_id,"favorite"));break;
+							case "flist":$response["favIds"] = array_implode($db->Query("SELECT ticket_id FROM favorite WHERE user_id=".$usr->User_id,false,"row",false,false));break;                 
+							default: $response["error"]="The wrong type index is being passed!";break; // error								
 						}
 				} 
 			break;
