@@ -52,7 +52,7 @@ if(isset($_GET['ticket_id'])){
 	u.firstname,
 	u.lastname,
 	u.email_address,
-	MD5(u.email_address) AS mdEmail,
+	MD5(u2.email_address) AS mdEmail,
 	u2.username as username2,
 	u2.firstname AS firstname2,
 	u2.lastname AS lastname2,
