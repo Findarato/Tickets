@@ -172,7 +172,7 @@ body, html {
 	position:absolute;
 	right:7px;
 }
-.triangleDown{
+.triangleDown:after{
 	content:'';
 	width: 0; 
 	height: 0;
@@ -180,7 +180,7 @@ body, html {
 	border-right: 6px solid transparent; 
 	border-top: 10px solid rgba(0,0,0,.6);
 }
-.triangleUp{
+.triangleUp:after{
 	content:'';
 	width: 0; 
 	height: 0;
@@ -208,6 +208,24 @@ body, html {
 	-moz-box-shadow: 5px 5px 2px #888;
 	-webkit-box-shadow: 5px 5px 2px #888;
 	box-shadow: 5px 5px 2px #888;
+}
+.replyBox{
+	 width:100%; 
+	 margin-bottom:2px;
+	 overflow:hidden;
+	 background-color:white;
+	 border: solid #CCC 1px;
+	 -moz-transition: all .5s ease-out;
+     -o-transition: all .5s ease-in;
+     -webkit-transition: all .5s ease-out;
+     position: relative;
+}
+.replyBox:hover{
+	background-color:rgba(255,255,0,.5)
+}
+#replyControlls{
+	height:16px;
+	width:100%;
 }
 .closedTicketDisplay{
 	
@@ -244,4 +262,59 @@ body, html {
 	
      0% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,0) }
     100% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
+}
+@media screen and (min-width: 1101px) {
+    /** Full display  */
+	.ticketSideLeft,.ticketSideRight{display:table-cell;width:auto;}
+	.ticketSideLeft {width:300px;}
+
+}
+@media screen and (max-width: 1100px) {
+    /*Droid Customizations*/
+	.ticketSideLeft,.ticketSideRight{display:block;width:auto}
+	.border-right-Main-4{border-right:0px}
+	.ticket-divider{border-right:0px;}
+   
+    .topMenuItem > a > span,.tab > a > span,.ticketProjectLocation,.ticketCreatedBy{
+    	display:none;
+    }
+    .tab > a{
+    	width:20px;
+    }
+    
+    .mobile {
+        display: inline-block
+    }
+    #replyToggle,
+    #topperStart,
+    #sideArea,
+    .topperText {
+        display: none
+    }
+    #mainArea {
+        margin-left: 5px
+    }
+    #headerPadding {
+        height: 50px
+    }
+    #sideArea {
+        position: absolute;
+        top: 3px;
+        left: 2px;
+        width: 0px;
+    }
+    .actionButtons {
+        font-size: 16px
+    }
+}
+/*
+.user:after{
+	content:url(http://www.gravatar.com/avatar/?f=y&d=identicon&s=16&r=g);
+	position: relative;
+	top:2px;
+}
+*/
+.inlineUser{
+	background:none;
+	font-weight: bold;
 }

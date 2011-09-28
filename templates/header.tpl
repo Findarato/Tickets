@@ -55,7 +55,8 @@
 			</div>	<!-- End of User info -->
 		</div>		
 	</div>	
-	<div class="WhitetoLightOff border-bottom-Main-1" id="subAreaBar" style="width:100%;height:30px;display:block">
-		
+	<div class="WhitetoLightOff border-bottom-Main-1" style="width:100%;height:30px;display:table">
+		<div id="subAreaBar" style="display:table-cell"></div>
+		<div id="tldPageAnator"  style="display:table-cell;width:300px;"></div>
 	</div>	
 </div>
