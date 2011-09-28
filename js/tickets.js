@@ -799,15 +799,15 @@ function loadTicketList(pageNumber,queryObj) {
 				.html(
 					$("<tr/>")
 						.append("<td class='ticketListSortable' style='width:20px;'>&nbsp;</td>")
-						.append("<td class='ticketListSortable' style='width:45px;'><a href='' style='width:45px;' id='ticketListIdSort' data-value='id' class='nolink'>id</a><div id='test' style='width:20px;height:20px;' class='triangleUp ilb'></div></td>")
-						.append("<td class='ticketListSortable' style='width:56px;'><a href='' style='width:75px;' id='ticketListPrioritySort' data-value='' class='nolink'>Priority</a></td>")
-						.append("<td class='ticketListSortable' style='width:auto'><a href='' style='width:75px;' id='ticketListTitleSort' data-select-items='' class='nolink'>Title</a></td>")
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:75px;id='ticketListLocationSort'  data-select-items='' class='nolink'>Location</a></td>")
-						.append("<td class='ticketListSortable' style='width:130px;'><a href='' style='width:130px;'id='ticketListCategorySort' data-select-items='' class='nolink'>Category</a></td>")
-						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;' id='ticketListCreatedBySort'  data-select-items='' class='nolink'>Created By</a></td>")
+						.append("<td class='ticketListSortable' style='width:45px;'><a href='' style='width:45px;position:relative;' id='ticketListIdSort' data-value='id' class='nolink triangleDown'>id</a></div></td>")
+						.append("<td class='ticketListSortable' style='width:56px;'><a href='' style='width:75px;position:relative;' id='ticketListPrioritySort' data-value='' class='nolink triangleDown'>Priority</a></td>")
+						.append("<td class='ticketListSortable' style='width:auto'><a href='' style='width:75px;position:relative;' id='ticketListTitleSort' data-value='' class='nolink triangleDown'>Title</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:75px;position:relative;' id='ticketListLocationSort'  data-value='' class='nolink triangleDown'>Location</a></td>")
+						.append("<td class='ticketListSortable' style='width:130px;'><a href='' style='width:130px;position:relative;'id='ticketListCategorySort' data-value='' class='nolink triangleDown'>Category</a></td>")
+						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListCreatedBySort'  data-value='' class='nolink triangleDown'>Created By</a></td>")
 						/*.append("<td class='ticketListSortable' style='width:100px;'>Due On</td>")*/
-						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;' id='ticketListAssignedSort'  data-select-items='' class='nolink'>Assigned</a></td>")
-						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;' id='ticketListCreatedOnSort' data-select-items='' class='nolink'>Created On</a></td>")
+						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListAssignedSort'  data-value='' class='nolink triangleDown'>Assigned</a></td>")
+						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListCreatedOnSort' data-value='' class='nolink triangleDown'>Created On</a></td>")
 				)
 		}
 		displayTable
@@ -815,15 +815,17 @@ function loadTicketList(pageNumber,queryObj) {
 				.click(function(){
 					alert(getHash())
 				})
+				/*
 				.hover(
 					function(){
-						$('#test').show();
+						$(this).toggleClass("triangleUp").toggleClass("triangleDown");
 					},
 					function(){
-						$('#test').hide();
+						$(this).toggleClass("triangleUp").toggleClass("triangleDown");
 					}
-					
 				)
+					*/
+
 		displayTable
 			.find(".ticketListSortable")
 			
