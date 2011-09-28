@@ -758,7 +758,7 @@ function loadTicketList(pageNumber,queryObj) {
 	    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	    }				
 	}else{ //this happens when there is no query object being sent.  Also when the tabs are clicked, as a specific query is being used by the tabs
-		$("#ticketListtitle").html("Tickets search Result");
+		//$("#ticketListtitle").html("Tickets search Result");
 		
 		O_search = {
 			"page": pageNumber,
@@ -795,9 +795,39 @@ function loadTicketList(pageNumber,queryObj) {
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
-			displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td style='width:45px;'><button style='width:45px;' id='ticketListIdSort' name='ticketListIdSort' data-select-items='' class='selectButton'>ID</button></td><td style='width:56px;'><button style='width:75px;' id='ticketListPrioritySort' name='ticketListPrioritySort' data-select-items='' class='selectButton'>Priority</button></td><td style='width:400px'><button style='width:75px;' id='ticketListTitleSort' name='ticketListTitleSort' data-select-items='' class='selectButton'>Title</button></td><td class='ticketProjectLocation'><button style='width:75px;' id='ticketListLocationSort' name='ticketListLocationSort' data-select-items='' class='selectButton'>Location</button></td><td><button style='width:105px;' id='ticketListCategorySort' name='ticketListCategorySort' data-select-items='' class='selectButton'>Category</button></td><td class='ticketListSortable ticketCreatedBy'><button style='width:95px;' id='ticketListCreatedBySort' name='ticketListCreatedBySort' data-select-items='' class='selectButton'>Created By</button></td><td class='ticketListSortable ticketListDueOn'>Due On</td><td class='ticketListSortable ticketListAssigned'><button style='width:95px;' id='ticketListAssignedSort' name='ticketListAssignedSort' data-select-items='' class='selectButton'>Assigned</button></td><td class='ticketListSortable ticketListCreatedOn'><button style='width:95px;' id='ticketListCreatedOnSort' name='ticketListCreatedOnSort' data-select-items='' class='selectButton'>Created On</button></td></tr>"); 
+			displayTable
+				.html(
+					$("<tr/>")
+						.append("<td class='ticketListSortable' style='width:20px;'>&nbsp;</td>")
+						.append("<td class='ticketListSortable' style='width:45px;'><a href='' style='width:45px;' id='ticketListIdSort' data-value='id' class='nolink'>id</a><div id='test' style='width:20px;height:20px;' class='triangleUp ilb'></div></td>")
+						.append("<td class='ticketListSortable' style='width:56px;'><a href='' style='width:75px;' id='ticketListPrioritySort' data-value='' class='nolink'>Priority</a></td>")
+						.append("<td class='ticketListSortable' style='width:auto'><a href='' style='width:75px;' id='ticketListTitleSort' data-select-items='' class='nolink'>Title</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:75px;id='ticketListLocationSort'  data-select-items='' class='nolink'>Location</a></td>")
+						.append("<td class='ticketListSortable' style='width:130px;'><a href='' style='width:130px;'id='ticketListCategorySort' data-select-items='' class='nolink'>Category</a></td>")
+						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;' id='ticketListCreatedBySort'  data-select-items='' class='nolink'>Created By</a></td>")
+						/*.append("<td class='ticketListSortable' style='width:100px;'>Due On</td>")*/
+						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;' id='ticketListAssignedSort'  data-select-items='' class='nolink'>Assigned</a></td>")
+						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;' id='ticketListCreatedOnSort' data-select-items='' class='nolink'>Created On</a></td>")
+				)
 		}
-		createSelect($(".selectButton"),function(id){alert(id)});
+		displayTable
+			.find(".ticketListSortable a")
+				.click(function(){
+					alert(getHash())
+				})
+				.hover(
+					function(){
+						$('#test').show();
+					},
+					function(){
+						$('#test').hide();
+					}
+					
+				)
+		displayTable
+			.find(".ticketListSortable")
+			
+				
     var display = 
       $("<div/>",{css:{"width":"100%"}})
         .html(
@@ -821,7 +851,7 @@ function loadTicketList(pageNumber,queryObj) {
 		      .html(
 		        $("<td/>",{"class":"bookmark"})
 		          .html(
-                $("<div/>",{id:"bookmark"+item.id,css:{},"class":" ticket_sprite fakelink "+bmClass})
+                $("<div/>",{id:"bookmark"+item.id,css:{},"class":" ticket_sprite nolink "+bmClass})
                 .click(function(){
                   me = $(this);
                   if(me.hasClass("bookmark-off")){favVal = 1;}else{favVal = 0;}
@@ -942,9 +972,12 @@ function loadTicketList(pageNumber,queryObj) {
 	});
 }
 function loadUserPage(userId){
+	//alert(userId)
 	Params.Content.html($("#generic").html());
 	Tlb = Params.Content.find("#ticketListbody");
+	/*
 	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
+	*/
 	var localUser = false;
 	if (localStorage.userId == userId){localUser = true;}
 	
@@ -985,7 +1018,7 @@ function loadUserPage(userId){
 		)
 		.append(
 			function(index,html){
-				if(!localUser){	return "";} // this is blocking the view of other user's page
+				if(!localUser){	alert("broke");return "";} // this is blocking the view of other user's page
 				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"300px"}})
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
@@ -1066,7 +1099,6 @@ function loadUserPage(userId){
 	}
 	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
 		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.mdEmail+"?s=100&d=identicon&r=g)"});
-
 		if(data.userInfo.tickets.departmentName == undefined){
 			data.userInfo.tickets.departmentName = "None!";
 		}		
@@ -1384,10 +1416,7 @@ function createSelect(selector,callback){
 }
 
 jQuery(document).ready(function () {
-//history.pushState({page: 1}, "title 1", "?page=1");
-//history.pushState({page: 2}, "title 2", "?page=2");
-//history.replaceState({page: 3}, "title 3", "?page=3");
-  //localStorage.clear();
+
 
 /*
 	$("body").live("mousedown :not(.categorySelect)",function(){
