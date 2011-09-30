@@ -1315,7 +1315,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 	} else {
 		Params.LastLogon = data.lastlogon;
 		$("#topperUserInfo")
-			.html(data.firstname + " " + data.lastname ).attr("href","#userPage/"+data.userid);
+			.html(data.firstname + " " + data.lastname ).attr("href","#");
 		
 		if($("#headerAvatar").html() != null){
 			$("#headerAvatar").css("background-color","#F00").attr("src","http://www.gravatar.com/avatar/"+localStorage.mdEmail+"?s=24&d=identicon&r=g");	
@@ -1419,6 +1419,16 @@ function createSelect(selector,callback){
 
 jQuery(document).ready(function () {
 
+
+	//this should make the logout button in the drop down work.
+	$("#popUpLogout")
+		.attr({"href":"/ajax/login.php?logout&id="+localStorage.userId})
+		.click(function(){
+			$.getJSON(this.href,function(){ window.location = "/";})
+			localStorage.userId = 0; // lets make sure they can not sneak back in
+			return false;
+		});
+	
 
 /*
 	$("body").live("mousedown :not(.categorySelect)",function(){
@@ -1640,9 +1650,24 @@ jQuery(document).ready(function () {
 		$("#oldLogin").css({"height":"50px"});
 	});
 	$(".ticket_link,.nolink,.bug_link").live("click", function () {
+		me = $(this);
 		var pageTracker = _gat._getTracker('UA-8067208-4');
-		pageTracker._trackPageview($(this).attr("href"));
-		setHash($(this).attr("href"));
+		switch(me.attr("id")){
+			case "topperUserInfo":
+				if(me.attr("href")=="#"){
+					//me.toggleClass("colorMain-2")
+					$("#idBox").toggleClass("colorMain-2");
+					$("#userPopup").toggle();
+				}
+			break;
+			default:
+				$("#userPopup").hide();
+				$("#idBox").removeClass("colorMain-2");
+				pageTracker._trackPageview($(this).attr("href"));
+				setHash(me.attr("href"));
+			break;
+		}
+
     	/*checkHash*/
 		return false; //to make sure the a isnt clicked
 	});
