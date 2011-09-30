@@ -76,7 +76,8 @@ function pageAnator(container, count, perPage,curPage) {
         width: "auto",
         padding: "1px",
         textAlign: "center",
-        textDecoration: "none"
+        textDecoration: "none",
+        "float":"left"
     }).html($("<font/>").html("Pages:")));
     if (count === 0) {
         container.append($("<button/>").addClass("minimal nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
@@ -84,7 +85,8 @@ function pageAnator(container, count, perPage,curPage) {
             padding: "1px",
             marginRight:"2px",
             textAlign: "center",
-            textDecoration: "none"
+            textDecoration: "none",
+            "float":"left"
         }).html(1));
     } else {
         var pages = count / perPage;
