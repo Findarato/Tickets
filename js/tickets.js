@@ -1464,9 +1464,6 @@ jQuery(document).ready(function () {
 			}
 		}, "json");
 	});
-
-	
-
   
   $("#topperNew").live("click",function(){
     Params.LastArea = "newTicket";

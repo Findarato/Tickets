@@ -43,16 +43,7 @@
 					<a class=" ticket_button ticket_sprite fire nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Admin</span></a>
 				</div>
 			</div>	
-			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right"><!-- Start of User info -->
-				<div style="width:100%">
-					{if isset($firstname)}
-					<a class="right nolink fontMain" href="#userPage/" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname}</a>
-					<img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="position:relative;top:2px;height:24px;width:24px;border:none;">
-					{else}
-					<a class="right nolink fontMain" href="#login" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;width:auto;text-decoration:none;">No User (Please Log in) </a>
-					{/if}
-				</div>
-			</div>	<!-- End of User info -->
+			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right"></div>
 		</div>		
 	</div>	
 	<div class="WhitetoLightOff border-bottom-Main-1" style="width:100%;height:30px;display:table">
@@ -60,3 +51,30 @@
 		<div id="tldPageAnator"  style="display:table-cell;width:300px;"></div>
 	</div>	
 </div>
+	<div style="display:block;width:auto;height:auto;vertical-algin:top;text-align: right;z-index: 1000;position:absolute;top:3px;right:13px;background-color: #FFF"><!-- Start of User info -->
+			{if isset($firstname)}
+			<a class="right nolink fontMain" href="#userPage/" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname}</a>
+			<img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="position:relative;top:2px;height:24px;width:24px;border:none;">
+			{else}
+			<a class="right nolink fontMain" href="#login" id="topperUserInfo" style="height:24px;padding:0 5px 12px 0px; line-height:24px;width:auto;text-decoration:none;">No User (Please Log in) </a>
+			{/if}
+		</div>
+	</div>	<!-- End of User info -->
+	
+	<div class="smallShadow" id="userPopup" style="background-color:white;position:absolute;top:36px;right:13px;z-index:999;"> <!-- popup Userinfo box -->
+		<div style="padding:3px;width:250px;">
+			<ul>
+				<li>Stuf</li>
+				<li>Stuf</li>
+				<li>Stuf</li>
+				<li>Stuf</li>
+				<li>Stuf</li>
+			</ul>
+		</div>
+		<div style="border-top:solid rgba(0,0,0,.3) 1px;width:250px;padding:3px;">
+			<ul style="width:250px;">
+				<li style="display:inline-block;float:left;margin:3px;"><a href="#">More Info</a></li>
+				<li style="display:inline-block;float:right;margin:3px;"><a href="#">Log Out</a></li>
+			</ul>
+		</div>
+	</div>
