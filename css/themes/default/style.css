@@ -162,6 +162,14 @@ body, html {
 .selectButton{
 	text-align: left;
 }
+ul{
+	margin:0px;
+	padding:0px;
+	list-style: none;
+}
+ul li{
+	
+}
 .selectButton:after{
 	content:'';
 	width: 0; 
@@ -214,6 +222,11 @@ body, html {
 	-moz-box-shadow: 5px 5px 2px #888;
 	-webkit-box-shadow: 5px 5px 2px #888;
 	box-shadow: 5px 5px 2px #888;
+}
+.smallShadow{
+	box-shadow: 0 1px 5px #ccc;
+	-moz-box-shadow: 0 1px 5px #ccc;
+	-webkit-box-shadow: 0 1px 5px #ccc;
 }
 .replyBox{
 	 width:100%; 
