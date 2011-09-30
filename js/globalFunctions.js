@@ -73,19 +73,19 @@ function pageAnator(container, count, perPage,curPage) {
     var totalPages = 0;
     container.html(
     $("<span/>").addClass("roundAll4 lapcatButton").css({
-        width: "auto",
-        padding: "1px",
-        textAlign: "center",
-        textDecoration: "none",
+        "width": "auto",
+        "padding": "1px",
+        "textAlign": "center",
+        "textDecoration": "none",
         "float":"left"
     }).html($("<font/>").html("Pages:")));
     if (count === 0) {
         container.append($("<button/>").addClass("minimal nolink").attr("href", hash[0] + "/" + hash[1] + "/page/" + 0).css({
-            width: "20px",
-            padding: "1px",
-            marginRight:"2px",
-            textAlign: "center",
-            textDecoration: "none",
+            "width": "20px",
+            "padding": "1px",
+            "marginRight":"2px",
+            "textAlign": "center",
+            "textDecoration": "none",
             "float":"left"
         }).html(1));
     } else {
@@ -123,7 +123,8 @@ function pageAnator(container, count, perPage,curPage) {
                 padding: "1px",
                 marginRight:"2px",
                 textAlign: "center",
-                textDecoration: "none"
+                textDecoration: "none",
+                "float":"left"
             }).html(a));
         } // end of for loop
 
@@ -135,7 +136,8 @@ function pageAnator(container, count, perPage,curPage) {
 	                padding: "1px",
 	                marginRight:"2px",
 	                textAlign: "center",
-	                textDecoration: "none"
+	                textDecoration: "none",
+	                "float":"left"
 	            }).html(totalPages));			
 			}
 
