@@ -803,10 +803,10 @@ function loadTicketList(pageNumber,queryObj) {
 						.append("<td class='ticketListSortable' style='width:56px;'><a href='' style='width:75px;position:relative;' id='ticketListPrioritySort' data-value='' class='nolink triangleDown'>Priority</a></td>")
 						.append("<td class='ticketListSortable' style='width:auto'><a href='' style='width:75px;position:relative;' id='ticketListTitleSort' data-value='' class='nolink triangleDown'>Title</a></td>")
 						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:75px;position:relative;' id='ticketListLocationSort'  data-value='' class='nolink triangleDown'>Location</a></td>")
-						.append("<td class='ticketListSortable' style='width:130px;'><a href='' style='width:130px;position:relative;'id='ticketListCategorySort' data-value='' class='nolink triangleDown'>Category</a></td>")
-						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListCreatedBySort'  data-value='' class='nolink triangleDown'>Created By</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;'id='ticketListCategorySort' data-value='' class='nolink triangleDown'>Category</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;' id='ticketListCreatedBySort'  data-value='' class='nolink triangleDown'>Created By</a></td>")
 						/*.append("<td class='ticketListSortable' style='width:100px;'>Due On</td>")*/
-						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListAssignedSort'  data-value='' class='nolink triangleDown'>Assigned</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;' id='ticketListAssignedSort'  data-value='' class='nolink triangleDown'>Assigned</a></td>")
 						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListCreatedOnSort' data-value='' class='nolink triangleDown'>Created On</a></td>")
 				)
 		}
