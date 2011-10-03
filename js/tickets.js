@@ -81,21 +81,19 @@ function checkHash() {
   			break;
 		case "#ticketList":
 			changeArea("tickets");
-//			loadTicketList(0,{"search":"","area":"all_tickets"});
-
-      switch (hash[2]) {
-        case "page": // ticket with a page number selected
-          loadTicketList(hash[3]);
-          break;
-        default: // ticket with out a page
-          loadTicketList(0);
-         break;
-        }
+			switch (hash[2]) {
+				case "page": // ticket with a page number selected
+					loadTicketList(hash[3]);
+				break;
+			
+				default: // ticket with out a page
+					loadTicketList(0);
+				break;
+			}
         break;
 			break;
 		case "#search":
 			changeArea("search");
-			//loadSearch();
 			break;
 		case "#largestats": case "#stats":
 			changeArea("stats");
@@ -131,7 +129,15 @@ function checkHash() {
 			changeArea("bugs");
 			loadTicketList(0,{"search":"","area":"all_bugs"});
 		break;
-		
+		case "#admin": // this triggers when the tab tickets is clicked
+			Modernizr.load({
+				test: adminLoaded,
+				nope: 'js/admin.js'
+			});		
+			changeArea("admin");
+			Params.LastArea = "admin";
+			Params.Content.load("templates/email.tpl");
+		break;		
 		}
 		//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets"}
 	} else {
@@ -1230,16 +1236,12 @@ function loadLoginPage(){
 function changeArea(area){
 	var location = $("#subAreaBar");
 	if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
-	switch(area){
-		case "admin":
-			$("#adminTab").trigger("click");	
-			location.load("templates/top_admin.tpl");
-			Params.NavArea="admin";
-		break;
+		switch(area){
 		case "tickets":
 			$("#ticketTab").trigger("click");
 			location.load("templates/top_ticket.tpl");
 			Params.NavArea="tickets";
+			$("#tldPageAnator").show();
 		break;
 		case "bugs":
 			$("#bugTab").trigger("click");	
@@ -1249,10 +1251,18 @@ function changeArea(area){
 		case "search":
 			$("#searchTab").trigger("click");	
 			location.load("templates/top_search.tpl");
+			$("#tldPageAnator").hide();
 		break;
 		case "stats":
 			$("#statsTab").trigger("click");	
 			location.html("");
+			$("#tldPageAnator").hide();
+		break;
+		case "admin":
+			$("#adminTab").trigger("click");	
+			location.load("templates/top_admin.tpl");
+			Params.NavArea="admin";
+			$("#tldPageAnator").hide();
 		break;
 		default:break;
 	}
@@ -1428,7 +1438,6 @@ jQuery(document).ready(function () {
 			localStorage.userId = 0; // lets make sure they can not sneak back in
 			return false;
 		});
-	
 
 /*
 	$("body").live("mousedown :not(.categorySelect)",function(){
@@ -1663,7 +1672,7 @@ jQuery(document).ready(function () {
 			default:
 				$("#userPopup").hide();
 				$("#idBox").removeClass("colorMain-2");
-				pageTracker._trackPageview($(this).attr("href"));
+				pageTracker._trackPageview(me.attr("href"));
 				setHash(me.attr("href"));
 			break;
 		}
