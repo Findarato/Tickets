@@ -130,10 +130,7 @@ function checkHash() {
 			loadTicketList(0,{"search":"","area":"all_bugs"});
 		break;
 		case "#admin": // this triggers when the tab tickets is clicked
-			Modernizr.load({
-				test: adminLoaded,
-				nope: 'js/admin.js'
-			});		
+			Modernizr.load('js/admin.js');		
 			changeArea("admin");
 			Params.LastArea = "admin";
 			Params.Content.load("templates/email.tpl");
