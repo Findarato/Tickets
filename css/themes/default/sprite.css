@@ -1,0 +1,18 @@
+.ticketSprite{	background: url(csg-4e8c85ab2fcfa.png) no-repeat top left;}
+
+.bookmark{ background-position: 0 0; width: 16px; height: 16px; } 
+.bug{ background-position: 0 -21px; width: 16px; height: 16px; } 
+.calendar{ background-position: 0 -42px; width: 16px; height: 16px; } 
+.chart{ background-position: 0 -63px; width: 16px; height: 16px; } 
+.closed{ background-position: 0 -84px; width: 16px; height: 16px; } 
+.folder{ background-position: 0 -105px; width: 16px; height: 16px; } 
+.gear{ background-position: 0 -126px; width: 16px; height: 16px; } 
+.group{ background-position: 0 -147px; width: 16px; height: 16px; } 
+.heart{ background-position: 0 -168px; width: 16px; height: 16px; } 
+.infocard{ background-position: 0 -189px; width: 16px; height: 16px; } 
+.mail{ background-position: 0 -210px; width: 16px; height: 16px; } 
+.pencil{ background-position: 0 -231px; width: 16px; height: 16px; } 
+.star{ background-position: 0 -252px; width: 16px; height: 16px; } 
+.ticket{ background-position: 0 -273px; width: 16px; height: 16px; } 
+.user{ background-position: 0 -294px; width: 16px; height: 16px; } 
+.warning{ background-position: 0 -315px; width: 16px; height: 16px; } 
