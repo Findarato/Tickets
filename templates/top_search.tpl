@@ -2,7 +2,7 @@
 	<div style=display:table>
 		<div class=td>
 			<div class=topMenuItem>
-				<span class="ticket_button ticket_sprite magnifier">Type in a keyword to search</span>
+				<span class="ticket_button ticketSprite magnifier">Type in a keyword to search</span>
 			</div>
 		</div>
 		<div class=td>

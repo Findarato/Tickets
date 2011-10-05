@@ -286,7 +286,7 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
 	var idSelector = selector.attr("id");
   selector
     .append(
-      $("<div/>",{id:idSelector+"Edit","class":"ticket_sprite pencil fakelink",css:{"display":"inline-block"}})
+      $("<div/>",{id:idSelector+"Edit","class":"ticketSprite pencil fakelink",css:{"display":"inline-block"}})
         .click(function(){
           var me = $(this);
           var myParent = me.parent();
@@ -299,15 +299,15 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
               );
             break;
             default:case "text":
-              myParent.find(".ticket_sprite.cross").css("display","inline-block");
-              myParent.find(".ticket_sprite.tick").css("display","inline-block");
+              myParent.find(".ticketSprite.cross").css("display","inline-block");
+              myParent.find(".ticketSprite.tick").css("display","inline-block");
               edit = myParent.find(".contentEdit").attr("contentEditable","true").focus();
             break;
 
             case "select":
               edit = myParent.find(".contentEdit").text();
-              myParent.find(".ticket_sprite.cross").css("display","inline-block");
-              myParent.find(".ticket_sprite.tick").css("display","inline-block");
+              myParent.find(".ticketSprite.cross").css("display","inline-block");
+              myParent.find(".ticketSprite.tick").css("display","inline-block");
               myParent.find(".contentEdit").html(
                 $("<select/>")
                   .append(function(){
@@ -330,7 +330,7 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
         })
     )
     .append(
-      $("<div/>",{id:idSelector+"Accept","class":"ticket_sprite tick fakelink",css:{"display":"none"}})
+      $("<div/>",{id:idSelector+"Accept","class":"ticketSprite tick fakelink",css:{"display":"none"}})
         .click(function(){
           var me = $(this);
           var myParent = me.parent();
@@ -356,20 +356,20 @@ function addEditControls(itemEdit,selector,type,obj,callBack){
               myParent.find(".contentEdit").html(myParent.find("select option:selected").text());
             break;
           }
-          myParent.find(".ticket_sprite.pencil").css("display","inline-block");
+          myParent.find(".ticketSprite.pencil").css("display","inline-block");
           me.css("display","none");
-          myParent.find(".ticket_sprite.cross").css("display","none");
+          myParent.find(".ticketSprite.cross").css("display","none");
         })
     )
     .append(
-      $("<div/>",{id:idSelector+"Cancel","class":"ticket_sprite cross fakelink",css:{"display":"none"}})
+      $("<div/>",{id:idSelector+"Cancel","class":"ticketSprite cross fakelink",css:{"display":"none"}})
         .click(function(){
           var me = $(this);
           var myParent = me.parent();
-          myParent.find(".ticket_sprite.pencil").css("display","inline-block");
+          myParent.find(".ticketSprite.pencil").css("display","inline-block");
           myParent.find(".contentEdit").attr("contentEditable","false");
           me.css("display","none");
-          myParent.find(".ticket_sprite.tick").css("display","none");
+          myParent.find(".ticketSprite.tick").css("display","none");
           myParent.find(".contentEdit").text(localStorage.getItem(myParent.attr("id")));
           localStorage.removeItem(myParent.attr("id"));
         })

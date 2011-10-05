@@ -20,27 +20,27 @@
 			</div> <!-- End of logo Stuff -->
 			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 1 -->
 				<div id="ticketTab" class="tab border-bottom-Main-1 roundTop4" >
-					<a class="ticket_button ticket_sprite ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Tickets</span></a>
+					<a class="ticket_button ticketSprite ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Tickets</span></a>
 				</div>
 			</div>	
 			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 2 -->
 				<div id="bugTab" class="tab border-bottom-Main-1 roundTop4">
-					<a class=" ticket_button ticket_sprite bug nolink fontMain " href="#bugs" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Bugs</span></a>
+					<a class=" ticket_button ticketSprite bug nolink fontMain " href="#bugs" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Bugs</span></a>
 				</div>
 			</div>	
 			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 3 -->
 				<div id="searchTab" class="tab border-bottom-Main-1 roundTop4">
-					<a class=" ticket_button ticket_sprite magnifier nolink fontMain" href="#search" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Search</span></a>
+					<a class=" ticket_button ticketSprite magnifier nolink fontMain" href="#search" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Search</span></a>
 				</div>
 			</div>
 			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 4 -->
 				<div id="statsTab" class="tab border-bottom-Main-1 roundTop4">
-					<a class=" ticket_button ticket_sprite chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Stats</span></a>
+					<a class=" ticket_button ticketSprite chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Stats</span></a>
 				</div>
 			</div>				
 			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 5 -->
 				<div id="adminTab" class="tab border-bottom-Main-1 roundTop4">
-					<a class=" ticket_button ticket_sprite fire nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Admin</span></a>
+					<a class=" ticket_button ticketSprite fire nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Admin</span></a>
 				</div>
 			</div>	
 			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right">&nbsp;</div>
@@ -65,14 +65,14 @@
 	<div class="smallShadow colorMain-2" id="userPopup" style="position:absolute;top:27px;right:13px;z-index:999;display:none;"> <!-- popup Userinfo box -->
 		<div style="padding:3px;width:250px;">
 			<ul>
-				<li style="padding:5px"><a class="ticket_button ticket_sprite ticket-plus fakelink" id=topperNew><span>New Ticket</span></a></li>
-				<li style="padding:5px"><a class="nolink ticket_button ticket_sprite user fontBold" href="#ticketList/sOpen"><span>To Me</span></a></li>
-				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticket_sprite pencil fontBold" href="#ticketList/sAssigned"><span>By Me</span></a></li>
-				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticket_sprite users fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept."><span>To My Dep.</span></a></li>
-				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticket_sprite user--pencil fontBold" href="#ticketList/sAdepartment" id=byMyDepartment><span>By My Dep.</span></a></li>
-				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticket_sprite bookmark fontBold" href="#ticketList/sFavorite"><span>Bookmarks</span></a></li>
-				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticket_sprite door fontBold" href="#ticketList/sClosed"><span>My Closed</span></a></li>
-				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticket_sprite door fontBold" href="#ticketList/closedDepartment"><span>Dep. Closed</span></a></li>
+				<li style="padding:5px"><a class="ticket_button ticketSprite ticket-plus fakelink" id=topperNew><span>New Ticket</span></a></li>
+				<li style="padding:5px"><a class="nolink ticket_button ticketSprite user fontBold" href="#ticketList/sOpen"><span>To Me</span></a></li>
+				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticketSprite pencil fontBold" href="#ticketList/sAssigned"><span>By Me</span></a></li>
+				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticketSprite users fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept."><span>To My Dep.</span></a></li>
+				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticketSprite user--pencil fontBold" href="#ticketList/sAdepartment" id=byMyDepartment><span>By My Dep.</span></a></li>
+				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticketSprite bookmark fontBold" href="#ticketList/sFavorite"><span>Bookmarks</span></a></li>
+				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticketSprite door fontBold" href="#ticketList/sClosed"><span>My Closed</span></a></li>
+				<li style="padding:5px"><a class="smallTicketL nolink ticket_button ticketSprite door fontBold" href="#ticketList/closedDepartment"><span>Dep. Closed</span></a></li>
 			</ul>
 		</div>
 		<div style="border-top:solid rgba(0,0,0,.3) 1px;width:250px;padding:3px;">

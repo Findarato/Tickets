@@ -40,7 +40,7 @@
         <div class="table textLeft">
             <div class="td">
                 <button class="fontMain fontBold minimal" id="searchButton" style="width:auto;padding:3px" id="ticketSearchBtn" >
-                    <span class="ticket_button ticket_sprite magnifier">Search</span>
+                    <span class="ticket_button ticketSprite magnifier">Search</span>
                 </button>
             </div>
         </div>
