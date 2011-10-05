@@ -1,5 +1,6 @@
 @import url("buttons.css");
 @import url("roundCorners.css");
+@import url("sprite.css");
 .border-all-B-1, .border-all-Main-1 {
 	border:1px solid #85aaa5
 }
