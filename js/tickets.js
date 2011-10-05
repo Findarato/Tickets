@@ -133,7 +133,7 @@ function checkHash() {
 			Modernizr.load('js/admin.js');		
 			changeArea("admin");
 			Params.LastArea = "admin";
-			Params.Content.load("templates/email.tpl");
+			//Params.Content.load("templates/email.tpl");
 		break;		
 		}
 		//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets"}
@@ -856,7 +856,7 @@ function loadTicketList(pageNumber,queryObj) {
 		      .html(
 		        $("<td/>",{"class":"bookmark"})
 		          .html(
-                $("<div/>",{id:"bookmark"+item.id,css:{},"class":" ticket_sprite nolink "+bmClass})
+                $("<div/>",{id:"bookmark"+item.id,css:{},"class":" ticketSprite nolink "+bmClass})
                 .click(function(){
                   me = $(this);
                   if(me.hasClass("bookmark-off")){favVal = 1;}else{favVal = 0;}
@@ -1043,8 +1043,8 @@ function loadUserPage(userId){
 						)
 					)
 					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
-					.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
-					.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticket_sprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
+					.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
+					.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
 					.append( 
 						$("<div>",
 							{id:"",
@@ -1142,7 +1142,7 @@ function loadUserPage(userId){
 			.find("#totalTickets")
 				.append(data.tickets.byMe)
 				.append(
-					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticket_sprite chart"})
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticketSprite chart"})
 						.click(function(){
 							$("#infoBoxTitle").html(data.tickets.graph.byMe.title);
 							graphData = [];
@@ -1159,7 +1159,7 @@ function loadUserPage(userId){
 			.find("#totalResponses")
 				.append(data.responses.created)
 				.append(
-					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticket_sprite chart"})
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticketSprite chart"})
 						.click(function(){
 							$("#infoBoxTitle").html(data.responses.graph.byMe.title);
 							graphData = [];
@@ -1175,7 +1175,7 @@ function loadUserPage(userId){
 			.find("#totalBugs")
 				.append(data.bugs.byMe)
 				.append(
-					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticket_sprite chart"})
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticketSprite chart"})
 						.click(function(){
 							$("#infoBoxTitle").html(data.bugs.graph.byMe.title);
 							graphData = [];

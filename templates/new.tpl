@@ -51,16 +51,16 @@
 			</div>
 			<div class=" fontMain message_head roundBottom4 color-B-2 border-all-B-1" id="" style="height:24px">
 				<button class="button Cancel" id="replyCancelBtn" style="width:auto;" title="Cancel">
-					<span class="ticket_button ticket_sprite cross"></span>
+					<span class="ticket_button ticketSprite cross"></span>
 					<span>Cancel</span>
 				</button>
 
 				<button class="button Cancel" id="ticketAddButton" style="width:auto;" title="Add Ticket">
-					<span class="ticket_button ticket_sprite tick"></span>
+					<span class="ticket_button ticketSprite tick"></span>
 					<span>Add Ticket</span>
 				</button>
 				<button class="button" id="createForButton" style="width:auto;">
-					<span class="ticket_button ticket_sprite door" style="margin-right:5px">Create for</span>
+					<span class="ticket_button ticketSprite door" style="margin-right:5px">Create for</span>
 				</button>
 			</div>
 		</div>

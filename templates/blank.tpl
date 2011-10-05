@@ -129,7 +129,7 @@
       <ol>
         <li>Creating a new ticket, or a new bug report now shows up inside of the ticket display instead of as a popup.</li>
         <li>Adding a reply now follows the same look and feel of new tickets and bug reports.</li>
-        <li>Closed tickets that are linked using the [ticket=###] link style will now look like [bug=693]<del><a class="bug_link ticket_button ticket_sprite" href="#ticket/693">#693</a></del></li>
+        <li>Closed tickets that are linked using the [ticket=###] link style will now look like [bug=693]<del><a class="bug_link ticket_button ticketSprite" href="#ticket/693">#693</a></del></li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
@@ -171,7 +171,7 @@
          <li>Recent Tickets has been removed from this version of tickets. Its going to be handled differently than before.</li>
          <li>Implemented [bug=601].</li>
          <li>Tickets are now sorted by priority then due date</li>
-         <li>Bookmarks are now done in line vs though a toolbar button.  You can click the (<div class="ilb bookmark-off ticket_sprite"></div>/<div class="ilb bookmark ticket_sprite"></div>) icon anywhere it is on the page, and it will toggle the book mark for the ticket you have selected.</li>
+         <li>Bookmarks are now done in line vs though a toolbar button.  You can click the (<div class="ilb bookmark-off ticketSprite"></div>/<div class="ilb bookmark ticketSprite"></div>) icon anywhere it is on the page, and it will toggle the book mark for the ticket you have selected.</li>
          <li></li>
       </ol>
       <br>
@@ -327,7 +327,7 @@
 			<br>1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
 			<br>2. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
 			<br>3. Fixed a bug with the start page not showing tickets if they were old and got a new response since your last visit.
-			<br>4. Fixed the bug from <a class="ticket_link ticket_button ticket_sprite" href="ticket/434">ticket 434</a>.
+			<br>4. Fixed the bug from <a class="ticket_link ticket_button ticketSprite" href="ticket/434">ticket 434</a>.
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">New Features</span>
@@ -353,7 +353,7 @@
 			<br>
 			<br>
 			<span style="font-size: 150%; line-height: normal;">New Features</span>
-			<br>1. Ticket types are now in.  They are <span class="bug ticket_sprite ticket_button">bug tickets</span> and <span class="error ticket_sprite ticket_button">trouble tickets</span>.
+			<br>1. Ticket types are now in.  They are <span class="bug ticketSprite ticket_button">bug tickets</span> and <span class="error ticketSprite ticket_button">trouble tickets</span>.
 			<br><blockquote>be sure to choose the proper type of ticket.  Bug reports should be fixed for web code and things that can be fixed, but probably not related to computers.  While trouble tickets are for everything that is not a bug.</blockquote>	
 			<br>2. Recent tickets should now be working properly.
 			<br>
@@ -380,7 +380,7 @@
 			<br>2. Tickets now uses the newest version of <a href="http://www.jquery.com">Jquery</a>!
 			<br>3. Dater is now part of tickets!
 			<br>3.1 Enjoy selecting due dates with a new popup date selector.
-			<br>4. Url links are now in.  [url=http://www.google.com] would create a URL link looking like <a class="ticket_sprite global_link ticket_button" href="http://www.google.com">http://www.google.com</a>
+			<br>4. Url links are now in.  [url=http://www.google.com] would create a URL link looking like <a class="ticketSprite global_link ticket_button" href="http://www.google.com">http://www.google.com</a>
 			<br>5. Moving to a new naming convention for ticket updates. They will be numbered instead of just putting in the date
 			<br>
 			<br>

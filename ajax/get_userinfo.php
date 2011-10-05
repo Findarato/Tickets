@@ -30,6 +30,12 @@ function formatData($graphData,$monthData){
 	return $displayData;
 }
 
+if(isset($_GET["allUsers"])){
+
+	
+	die(json_encode($json));	
+}
+
 $json = array();
 $json["userInfo"] = $db->Query("
 SELECT 
