@@ -10,8 +10,10 @@
 .heart{ background-position: 0 -207px; width: 24px; height: 21px; } 
 .infocard{ background-position: 0 -230px; width: 24px; height: 17px; } 
 .lock{ background-position: 0 -249px; width: 20px; height: 24px; } 
-.pencil{ background-position: 0 -275px; width: 23px; height: 23px; } 
-.star{ background-position: 0 -300px; width: 26px; height: 26px; } 
-.ticket{ background-position: 0 -328px; width: 22px; height: 22px; } 
-.user{ background-position: 0 -352px; width: 24px; height: 21px; } 
-.warning{ background-position: 0 -375px; width: 24px; height: 19px; } 
+.magnifier{ background-position: 0 -275px; width: 24px; height: 24px; } 
+.pencil{ background-position: 0 -301px; width: 23px; height: 23px; } 
+.star{ background-position: 0 -326px; width: 26px; height: 26px; } 
+.ticket{ background-position: 0 -354px; width: 22px; height: 22px; } 
+.user{ background-position: 0 -378px; width: 24px; height: 21px; } 
+.warning{ background-position: 0 -401px; width: 24px; height: 19px; } 
+
