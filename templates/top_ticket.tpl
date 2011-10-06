@@ -2,7 +2,7 @@
 	<div style=display:table>
 		<div class=td>
 			<div class=""topMenuItem"">
-				<a class="ticket_button ticketSprite ticket-plus fakelink" id=topperNew><span>New Ticket</span></a>
+				<a class="ticket_button ticketSprite ticket fakelink" id=topperNew><span>New Ticket</span></a>
 			</div>
 		</div>
 		<div class=td>
@@ -19,13 +19,13 @@
 		</div>
 		<div class=td>
 			<div class="topMenuItem">
-				<a class="smallTicketL nolink ticket_button ticketSprite users fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept."><span>To My Dep.</span></a>
+				<a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept."><span>To My Dep.</span></a>
 				<span id=csOdepartment></span>
 			</div>
 		</div>
 		<div class=td>
 			<div class="topMenuItem">
-				<a class="smallTicketL nolink ticket_button ticketSprite user--pencil fontBold" href="#ticketList/sAdepartment" id=byMyDepartment><span>By My Dep.</span></a>
+				<a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sAdepartment" id=byMyDepartment><span>By My Dep.</span></a>
 				<span id=csAdepartment></span>
 			</div>
 		</div>
@@ -37,13 +37,13 @@
 		</div>
 		<div class=td>
 			<div class="topMenuItem">
-				<a class="smallTicketL nolink ticket_button ticketSprite door fontBold" href="#ticketList/sClosed"><span>My Closed</span></a>
+				<a class="smallTicketL nolink ticket_button ticketSprite closed fontBold" href="#ticketList/sClosed"><span>My Closed</span></a>
 				<span id=csClosed></span>
 			</div>
 		</div>
 		<div class=td>
 			<div class="topMenuItem">
-				<a class="smallTicketL nolink ticket_button ticketSprite door fontBold" href="#ticketList/closedDepartment"><span>Dep. Closed</span></a>
+				<a class="smallTicketL nolink ticket_button ticketSprite closed fontBold" href="#ticketList/closedDepartment"><span>Dep. Closed</span></a>
 				<span id=cclosedDepartment></span>
 			</div>
 		</div>
