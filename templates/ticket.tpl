@@ -12,8 +12,7 @@
 					<div class="lapcatButton" style="width:auto;padding:2px;">
 						<div class="statusImage ticket_left ticketSprite pencil" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
 						<div class="statusImage ticket_left ticketSprite user-pencil" style="display:none;height:15px;" id="imgReassigned" title="Reassigned"></div>
-						<div class="statusImage ticket_left ticketSprite door" style="display:none;height:15px;" id="imgClosed" title="Closed"></div>
-						<div class="statusImage ticket_left ticketSprite wall" style="display:none;height:15px;" id="imgBlocked" title="Blocked"></div>
+						<div class="statusImage ticket_left ticketSprite closed" style="display:none;height:15px;" id="imgClosed" title="Closed"></div>
 						<div class="statusImage ticket_left ticketSprite lock" style="display:none;height:15px;" id="imgLock" title="Locked"></div>
 						<div class="ticket_left ticketSprite ticket" id="imgTicketTrouble" style="height:15px;display:none;" title="Trouble Ticket"></div>
 						<div class="ticket_left ticketSprite bug" id="imgTicketBug" style="height:15px;display:none;" title="Bug Report"></div>
@@ -108,19 +107,19 @@
 					
 					<div id="buttonBox" style="">
 						<button class="openTicket button" id="reAssignButton" style="width:auto;">
-							<span class="ticket_button ticketSprite user-pencil">Reassign</span>
+							<span class="">Reassign</span>
 						</button>
 						<button class="openTicket button " id="modifyButton" style="width:auto;">
-							<span class="ticket_button ticketSprite pencil">Modify</span>
+							<span class="">Modify</span>
 						</button>
 						<button class="button " id="ticketModifySaveButton" style="width:auto;display:none;">
-							<span class="ticket_button ticketSprite tick">Save</span>
+							<span class="">Save</span>
 						</button>
 						<button class="button negative " id="ticketModifyCancelButton" style="width:auto;display:none;">
-							<span class="ticket_button ticketSprite cross">Cancel</span>
+							<span class="">Cancel</span>
 						</button>
 						<button class="openTicket negative button actionButtons closeLink " id="closeButton" style="width:auto;">
-							<span class="ticket_button ticketSprite door" style="margin-right:5px">Close</span>
+							<span class="" style="margin-right:5px">Close</span>
 						</button>
 						<button class="closedTicket button actionButtons openLink" id="reOpenButton" style="width:auto;display:none;">
 							<span style="margin-right:5px">Open</span>

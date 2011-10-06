@@ -10,10 +10,10 @@
 .heart{ background-position: 0 -144px; width: 16px; height: 16px; } 
 .infocard{ background-position: 0 -162px; width: 16px; height: 16px; } 
 .lock{ background-position: 0 -180px; width: 16px; height: 16px; } 
-.mail{ background-position: 0 -198px; width: 16px; height: 16px; } 
-.pencil{ background-position: 0 -216px; width: 16px; height: 16px; } 
-.star{ background-position: 0 -234px; width: 16px; height: 16px; } 
-.ticket{ background-position: 0 -252px; width: 16px; height: 16px; } 
-.user{ background-position: 0 -270px; width: 16px; height: 16px; } 
-.warning{ background-position: 0 -288px; width: 16px; height: 16px; } 
-
+.magnifier{ background-position: 0 -198px; width: 16px; height: 16px; } 
+.mail{ background-position: 0 -216px; width: 16px; height: 16px; } 
+.pencil{ background-position: 0 -234px; width: 16px; height: 16px; } 
+.star{ background-position: 0 -252px; width: 16px; height: 16px; } 
+.ticket{ background-position: 0 -270px; width: 16px; height: 16px; } 
+.user{ background-position: 0 -288px; width: 16px; height: 16px; } 
+.warning{ background-position: 0 -306px; width: 16px; height: 16px; }
