@@ -431,7 +431,7 @@ function loadTicketBody(inputData, container) {
 	Params.TicketId = ticketId = data.id; //set the global
 	Params.TicketJSON = data;
 		
-	bmClass = "bookmark-off";
+	bmClass = "bookmarkOff";
   for(var a in Params.FavoriteObject){
     if(Params.FavoriteObject[a]==data.id){
       bmClass = "bookmark";
@@ -439,10 +439,12 @@ function loadTicketBody(inputData, container) {
   }
    container.find("#replyIcon").attr({id: "icon" + data.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+data.mdEmail+"?s=32&d=identicon&r=g)"});
 	container
-	 .find("#ticketTitle")
-	   .html(data.subject)
-	   .addClass(bmClass)
-	   .attr({"name":"bookmark"+data.id});
+	 .find("#ticketTitle").html(data.subject)
+	
+	alert(data.id)
+	container
+		.find("#ticketBookmark").addClass(bmClass)
+	   		.attr({"name":"bookmark"+data.id});
 	
 	container
    .find("#ticketDate")
@@ -629,7 +631,7 @@ function loadTicketBody(inputData, container) {
              $("<div/>",{id:"ticketClosedOnDateDisplay",html:data.closed_on})
            )
        );
-		if (data.dagoc < 604800 || data.open == 1) { //newly closed
+		if (data.dagoc <  31536000 || data.open == 1) { //newly closed
 			container.find(".openTicket").hide();
 			container.find(".closedTicket").show();
 		} else { //very old closed 
@@ -704,7 +706,7 @@ function loadTicketBody(inputData, container) {
 	
 	$("#ticketTitle").click(function(){
 	  me = $(this)
-    if(me.hasClass("bookmark-off")){favVal = 1;}else{favVal = 0;}
+    if(me.hasClass("bookmarkOff")){favVal = 1;}else{favVal = 0;}
     bookmarkId = me.attr("name").replace("bookmark","");
     $.getJSON("ajax/tickets.php",{"type":"favorite","ticket_id":bookmarkId,"favorite":favVal},function(data){
       checkResponse(data);
@@ -719,7 +721,7 @@ function loadTicketBody(inputData, container) {
       }
       updateFavorites();
     });
-    me.toggleClass("bookmark-off").toggleClass("bookmark");
+    me.toggleClass("bookmarkOff").toggleClass("bookmark");
 	});
 }
 function loadTicket(ticketId,update) {
@@ -843,7 +845,7 @@ function loadTicketList(pageNumber,queryObj) {
             .append(displayTable)
         );
 		$.each(data.tickets, function (i, item) {
-		  bmClass = "bookmark-off";
+		  bmClass = "bookmarkOff";
 		  for(var a in Params.FavoriteObject){
 		    if(Params.FavoriteObject[a]==item.id){
 		      bmClass = "bookmark";
@@ -859,7 +861,7 @@ function loadTicketList(pageNumber,queryObj) {
                 $("<div/>",{id:"bookmark"+item.id,css:{},"class":" ticketSprite nolink "+bmClass})
                 .click(function(){
                   me = $(this);
-                  if(me.hasClass("bookmark-off")){favVal = 1;}else{favVal = 0;}
+                  if(me.hasClass("bookmarkOff")){favVal = 1;}else{favVal = 0;}
                   bookmarkId = this.id.replace("bookmark","");
                   $.getJSON("ajax/tickets.php",{"type":"favorite","ticket_id":bookmarkId,"favorite":favVal},function(data){
                     checkResponse(data);

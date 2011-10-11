@@ -8,6 +8,7 @@
       <ol>
 		<li>Fixed a 404 error when trying to link to a js library</li>
 		<li>Fixed [ticket=1109]</li>
+		<li>Fixed [ticket=1162] #1162</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
