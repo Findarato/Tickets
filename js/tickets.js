@@ -1004,7 +1004,7 @@ function loadUserPage(userId){
 					.append(
 						$("<div/>",{
 							html:"ID:"+userId,
-							css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(100,100,100,.75)","position": "absolute","left": "25px"},
+							css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(255,255,255,.75)","position": "absolute","left": "25px"},
 							"class":"fontBold fontMain rotate90 transformTL"
 						})
 					)
@@ -1045,21 +1045,8 @@ function loadUserPage(userId){
 						)
 					)
 					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
-					.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
-					.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
-					.append( 
-						$("<div>",
-							{id:"",
-							"class":"",
-							css:{"display":"block","margin":"5px","width":"auto"},
-							html:$("<a class=\"button ticketPadding3\" id=logOut href=\"ajax/login.php?logout&id="+localStorage.userId+"\" title=\"Log out of Tickets\">Log Out</aS>")
-								.click(function(){
-									$.getJSON(this.href,function(){ window.location = "/";})
-									localStorage.userId = 0; // lets make sure they can not sneak back in
-									return false;
-								})
-							})	
-					)
+					//.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
+					//.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
 					.append(function(){
 						//openIdLinks
 						return $("<button>",{
@@ -1071,7 +1058,6 @@ function loadUserPage(userId){
 					})
 					.append("<br><br>")
 					.append(function(){
-						//openIdLinks
 						return $("<button>",{
 							"class":"button ticketPadding3",
 							id:"changeTheme",
@@ -1080,7 +1066,6 @@ function loadUserPage(userId){
 						});
 					})
 					.append(function(){
-						//openIdLinks
 						return $("<button>",{
 							"class":"button ticketPadding3",
 							"css":{"width":"auto","margin-left":"3px"},
