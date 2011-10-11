@@ -17,3 +17,9 @@
 .ticket{ background-position: 0 -270px; width: 16px; height: 16px; } 
 .user{ background-position: 0 -288px; width: 16px; height: 16px; } 
 .warning{ background-position: 0 -306px; width: 16px; height: 16px; }
+
+
+/* The shadow version of some of the icons */
+
+.bookmarkOff{ background-position: 0 0; width: 16px; height: 16px; opacity:.3}
+

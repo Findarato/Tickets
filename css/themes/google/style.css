@@ -1,29 +1,31 @@
+@import url("sprite.css");
 @import url("buttons.css");
 @import url("roundCorners.css");
+
 .border-all-B-1, .border-all-Main-1 {
-	border:1px solid hsl(212,43%,53%)
+	border:1px solid #85aaa5
 }
 .border-all-B-2, .border-all-Main-2 {
-	border:2px solid hsl(212,43%,53%)
+	border:2px solid #85aaa5
 }
 .border-bottom-B-1, .border-bottom-Main-1 {
-	border-bottom:1px solid hsl(212,43%,53%)
+	border-bottom:1px solid #85aaa5
 }
 .border-left-B-1, .border-left-Main-1 {
-	border-left:1px solid hsl(212,43%,53%)
+	border-left:1px solid #85aaa5
 }
 .border-right-B-1, .border-right-Main-1 {
-	border-right:1px solid hsl(212,43%,53%)
+	border-right:1px solid #85aaa5
 }
-.border-right-Main-4 {
-	border-right:4px solid rgb(112,176,224)
+.ticket-divider {
+	border-right:4px solid #ccc
 }
 .border-sides-B-1, .border-sides-Main-1 {
-	border-left:1px solid hsl(212,43%,53%);
-	border-right:1px solid hsl(212,43%,53%)
+	border-left:1px solid #85aaa5
+	border-right:1px solid #85aaa5
 }
 .border-top-B-1, .border-top-Main-1 {
-	border-top:1px solid hsl(212,43%,53%)
+	border-top:1px solid #85aaa5
 }
 .color-B-1, .colorMain-1 {
 	background: rgb(112,176,224); /* old browsers */
@@ -33,8 +35,7 @@
 	background: -o-linear-gradient(top, rgb(136,191,232) 0%,rgb(112,176,224) 100%); /* opera */
 }
 .color-B-2, .colorMain-2 {
-	background-color:hsl(212,43%,53%);
-	background-color:hsla(212,43%,53%,0.8)
+	background-color:#F1F1F1;
 }
 .color-B-3, .colorMain-3 {
 	background-color:hsl(212,43%,53%);
@@ -43,10 +44,6 @@
 .color-B-4, .colorMain-4 {
 	background-color:hsl(212,43%,53%);
 	background-color:hsla(212,43%,53%,0.3)
-}
-.LAPCAT-image {
-	background-image:url(/lapcat/images/100-18-1.png);
-	background-repeat:no-repeat
 }
 .colorWhite-1 {
 	background-color:hsl(0,0%,100%)
@@ -88,7 +85,7 @@
 	background:hsl(0,0,30%)
 }
 body, html {
-	font-family:'Ubuntu',sans-serif;
+	font-family:'Droid Sans', sans-serif;
 	height:100%;
 	min-height:100%;
 }
@@ -121,6 +118,13 @@ body, html {
 .topMenuItem {
 	margin-right:4px
 }
+.highlight{
+	
+}
+.ticketListDueOn{
+	display:none;
+}
+
 /**
  * Square setup for the important levels
  */
@@ -153,4 +157,185 @@ body, html {
 	background-color:#e6804d;
 	border-color:#d51;
 	width:65px;
+}
+#rightSideFloater div{
+	/*height:20px;*/
+}
+.selectButton{
+	text-align: left;
+}
+ul{
+	margin:0px;
+	padding:0px;
+	list-style: none;
+}
+ul li{
+	
+}
+.selectButton:after{
+	content:'';
+	width: 0; 
+	height: 0;
+	border-left: 6px solid transparent; 
+	border-right: 6px solid transparent; 
+	border-top: 10px solid rgba(0,0,0,.6);
+	position:absolute;
+	right:7px;
+}
+.triangleDown:after{
+	content:'';
+	width: 0; 
+	height: 0;
+	border-left: 4px solid transparent; 
+	border-right: 4px solid transparent; 
+	border-top: 10px solid rgba(0,0,0,.6);
+	position:absolute;
+	
+	top:0px;
+}
+.triangleUp:after{
+	content:'';
+	width: 0; 
+	height: 0;
+	border-left: 4px solid transparent; 
+	border-right: 4px solid transparent; 
+	border-bottom: 10px solid rgba(0,0,0,.6);
+	position:absolute;
+	
+	top:0px;
+}
+
+.categorySelect{
+	font-size:14px;
+	font-weight: bold;
+}
+.selectable{
+	padding-left:15px;
+	background-color:white;
+}
+.selectable:hover{
+	cursor: pointer;
+	background-color:rgba(0,0,0,.2);
+}
+.fakeDropDown{
+	background-color:white;
+}
+.shadow{
+	-moz-box-shadow: 5px 5px 2px #888;
+	-webkit-box-shadow: 5px 5px 2px #888;
+	box-shadow: 5px 5px 2px #888;
+}
+.smallShadow{
+	box-shadow: 0 1px 5px #ccc;
+	-moz-box-shadow: 0 1px 5px #ccc;
+	-webkit-box-shadow: 0 1px 5px #ccc;
+}
+.replyBox{
+	 width:100%; 
+	 margin-bottom:2px;
+	 overflow:hidden;
+	 background-color:white;
+	 border: solid #CCC 1px;
+	 -moz-transition: all .5s ease-out;
+     -o-transition: all .5s ease-in;
+     -webkit-transition: all .5s ease-out;
+     position: relative;
+}
+.replyBox:hover{
+	background-color:rgba(255,255,0,.5)
+}
+#replyControlls{
+	height:16px;
+	width:100%;
+}
+.closedTicketDisplay{
+	
+}
+.closedTicketDisplay:after{
+	content: "closed!";
+	margin-left:4px;
+	color:#00769E;
+}
+
+.flash {
+    -webkit-animation: target-fade 3s 1;
+    -moz-animation: target-fade 3s 1;
+}
+
+@-webkit-keyframes target-fade {
+     0% { color: rgba(0,0,0,1); }
+    100% { color: rgba(0,0,0,0); }
+}
+@-moz-keyframes target-fade {
+     0% { color: rgba(0,0,0,1); }
+    100% { color: rgba(0,0,0,0); }
+}
+.errorPulse {
+    -webkit-animation: error-fade 3s 1;
+    -moz-animation: error-fade 3s 1;
+}
+
+@-webkit-keyframes error-fade {
+     0% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,0); }
+    100% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
+}
+@-moz-keyframes error-fade {
+	
+     0% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,0) }
+    100% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
+}
+@media screen and (min-width: 1101px) {
+    /** Full display  */
+	.ticketSideLeft,.ticketSideRight{display:table-cell;width:auto;}
+	.ticketSideLeft {width:300px;}
+
+}
+@media screen and (max-width: 1100px) {
+    /*Droid Customizations*/
+	.ticketSideLeft,.ticketSideRight{display:block;width:auto}
+	.border-right-Main-4{border-right:0px}
+	.ticket-divider{border-right:0px;}
+   
+    .topMenuItem > a > span,.tab > a > span,.ticketProjectLocation,.ticketCreatedBy{
+    	display:none;
+    }
+    .tab > a{
+    	width:20px;
+    }
+    
+    .mobile {
+        display: inline-block
+    }
+    #replyToggle,
+    #topperStart,
+    #sideArea,
+    .topperText {
+        display: none
+    }
+    #mainArea {
+        margin-left: 5px
+    }
+    #headerPadding {
+        height: 50px
+    }
+    #sideArea {
+        position: absolute;
+        top: 3px;
+        left: 2px;
+        width: 0px;
+    }
+    .actionButtons {
+        font-size: 16px
+    }
+}
+/*
+.user:after{
+	content:url(http://www.gravatar.com/avatar/?f=y&d=identicon&s=16&r=g);
+	position: relative;
+	top:2px;
+}
+*/
+.inlineUser{
+	background:none;
+	font-weight: bold;
 }

@@ -5,7 +5,13 @@
 				<div class="fontMain2" id="ticketId" style="font-weight:bold;padding-left:2px;padding-right:3px">
 					Ticket ID
 				</div>
-				<h3 class="fontMain ticketSprite ticket_button fakelink" id="ticketTitle" name="bookmark" style="width:auto;height:auto;word-wrap: break-word;overflow: hidden;text-overflow: ellipsis;font-size:15px"></h3><!-- Ticket Title area -->
+				<div class="td">
+					<div id="ticketBookmark" class="ticketSprite fakelink"  name="bookmark"></div>
+				</div>
+				<div class="td">
+					<h3 class="fontMain" id="ticketTitle" style="width:auto;height:auto;font-size:15px">
+				</div>
+				</h3><!-- Ticket Title area -->
 			</div>
 			<div style="display:table-cell;width:50%;text-align:right;">
 				<div class="colorWhite" id="ticketStatusImage" style="height:15px;float:right;">
