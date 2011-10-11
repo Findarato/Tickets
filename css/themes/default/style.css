@@ -88,6 +88,7 @@ body, html {
 	font-family:'Droid Sans', sans-serif;
 	height:100%;
 	min-height:100%;
+	background-color:#FFF;
 }
 .WhitetoLightBlue {
 	background: #DDF1F1; /* old browsers */
