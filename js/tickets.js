@@ -441,7 +441,7 @@ function loadTicketBody(inputData, container) {
 	container
 	 .find("#ticketTitle").html(data.subject)
 	
-	alert(data.id)
+	//alert(data.id)
 	container
 		.find("#ticketBookmark").addClass(bmClass)
 	   		.attr({"name":"bookmark"+data.id});
@@ -770,18 +770,29 @@ function loadTicketList(pageNumber,queryObj) {
 			"search": {}
 		};
 		if (hash[1]) { //there is something other than #ticketlist
-			for (a = 1; a <= hash.length; a++) { //we will now loop though search
-				if (a == hash.length) {} else {
+			alert(hash.length)
+			for (a = 1; a < hash.length; a++) { //we will now loop though search
+				if (a == hash.length) {alert("Something is broke :Error #775A2")
+				} else {
+					/*
 					var holder = a + 1;
-					if (!hash[holder]) {
-						hash[holder] = "1";
+					if (!hash[holder]) {hash[holder] = "1";	}
+					*/
+					switch (a){
+						case 1: //this should always be the category
+							O_search["area"] = hash[1]; 
+						break;
+						case 2:
+							O_search["sort"] = hash[2];
+						break;
+						case 3:
+							O_search["direction"] = hash[3];
+						break;						
+						default:break;
 					}
-					if(a==1){//this should be the first value
-					  O_search["area"] = hash[a];
-					}
-					a++;
 				}
-			}
+			} // end for loop
+			
 		    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1 || hash[1]=="bugs"){
 		    	if(Params.NavArea!="bugs"){changeArea("bugs");Params.NavArea=="bugs";}
 		    }else{
@@ -804,21 +815,30 @@ function loadTicketList(pageNumber,queryObj) {
 				.html(
 					$("<tr/>")
 						.append("<td class='ticketListSortable' style='width:20px;'>&nbsp;</td>")
-						.append("<td class='ticketListSortable' style='width:45px;'><a href='' style='width:45px;position:relative;' id='ticketListIdSort' data-value='id' class='nolink triangleDown'>id</a></div></td>")
-						.append("<td class='ticketListSortable' style='width:56px;'><a href='' style='width:75px;position:relative;' id='ticketListPrioritySort' data-value='' class='nolink triangleDown'>Priority</a></td>")
-						.append("<td class='ticketListSortable' style='width:auto'><a href='' style='width:75px;position:relative;' id='ticketListTitleSort' data-value='' class='nolink triangleDown'>Title</a></td>")
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:75px;position:relative;' id='ticketListLocationSort'  data-value='' class='nolink triangleDown'>Location</a></td>")
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;'id='ticketListCategorySort' data-value='' class='nolink triangleDown'>Category</a></td>")
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;' id='ticketListCreatedBySort'  data-value='' class='nolink triangleDown'>Created By</a></td>")
+						.append("<td class='ticketListSortable' style='width:45px;'><a href='' style='width:45px;position:relative;' id='ticketListIdSort' data-order='asc' data-value='id' class='nolink triangleDown'>id</a></div></td>")
+						.append("<td class='ticketListSortable' style='width:56px;'><a href='' style='width:75px;position:relative;' id='ticketListPrioritySort' data-order='asc' data-value='priority' class='nolink triangleDown'>Priority</a></td>")
+						.append("<td class='ticketListSortable' style='width:auto'><a href='' style='width:75px;position:relative;' id='ticketListTitleSort' data-order='asc' data-value='title' class='nolink triangleDown'>Title</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:75px;position:relative;' id='ticketListLocationSort' data-order='asc'  data-value='location' class='nolink triangleDown'>Location</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;'id='ticketListCategorySort' data-order='asc' data-value='category' class='nolink triangleDown'>Category</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;' id='ticketListCreatedBySort' data-order='asc'  data-value='createdBy' class='nolink triangleDown'>Created By</a></td>")
 						/*.append("<td class='ticketListSortable' style='width:100px;'>Due On</td>")*/
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;' id='ticketListAssignedSort'  data-value='' class='nolink triangleDown'>Assigned</a></td>")
-						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListCreatedOnSort' data-value='' class='nolink triangleDown'>Created On</a></td>")
+						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;' id='ticketListAssignedSort' data-order='asc' data-value='assigned' class='nolink triangleDown'>Assigned</a></td>")
+						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListCreatedOnSort' data-order='asc' data-value='createdOn' class='nolink triangleDown'>Created On</a></td>")
 				)
 		}
 		displayTable
 			.find(".ticketListSortable a")
 				.click(function(){
-					alert(getHash())
+					me = $(this);
+					var curHash = getHashArray();
+					//alert(me.attr("data-order"));
+					setHash(curHash[0]+"/"+curHash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order'));
+					if(me.attr("data-order")=="desc" || me.attr("data-order")==undefined){
+						me.attr("data-order","asc");
+					}else{
+						me.attr("data-order","desc");
+					}
+					return false;
 				})
 				/*
 				.hover(
@@ -1086,7 +1106,7 @@ function loadUserPage(userId){
 		infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"730px\" height=\"300px\" id=\"graphDisplay\">Please use a browser that supports canvas</canvas>"));
 
 	if(userId == undefined){
-		alert("test")
+		//alert("test")
 		userId = localStorage.userId;
 	}
 	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
@@ -1343,73 +1363,6 @@ window.onpopstate = function(event) {
   checkHash(); 
   if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 };
-
-function createSelect(selector,callback){
-	
-	var callBackFn = "";
-	//alert(selector.html())
-	if(selector.html() == null){return false;}
-	callBackFn = callback ? callback : false;
-	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
-		return false;
-	}
-	/*
-	$.each(selector,function(key,vals){
-		alert(vals.val());
-	})
-	*/
-	selector
-	.click(function(){
-		//alert("tst");
-		me = $(this);
-		selectData = $.parseJSON(me.attr('data-select-items'));
-		pos = me.offset();
-		pos.top = pos.top + me.outerHeight();
-		var ddData = $("<div/>");
-		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth(),"background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
-		$("body")
-			.append(
-				dropDown
-					.append(function(){
-						$.each(selectData,function(key,item){
-							if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
-								if(typeof key == 'string'){
-								ddData
-									.append(
-										$("<div/>",{html:key,"class":"categorySelect"})
-									)
-								}
-								ddData
-									.append(function(){
-										$.each(item,function(key2,item2){
-											ddData
-												.append(
-													$("<div/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable"})
-													.click(function(){
-														selector.text(item2).val(key2);
-														if(callBackFn)callBackFn(key2);
-														if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
-													})
-												)
-										});	
-									})
-							}else{// this is not an array
-								ddData
-									.append(
-										$("<div/>",{html:item,"class":"selectable"})
-											.click(function(){
-												selector.text(item).val(key);
-												if(callBackFn)callBackFn(key);
-												if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
-											})
-									)
-							}
-						})
-					return ddData;
-				})
-			)
-	});
-}
 
 jQuery(document).ready(function () {
 

@@ -619,3 +619,69 @@ var MD5 = function (string) {
 
         return temp.toLowerCase();
 }
+function createSelect(selector,callback){
+	
+	var callBackFn = "";
+	//alert(selector.html())
+	if(selector.html() == null){return false;}
+	callBackFn = callback ? callback : false;
+	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
+		return false;
+	}
+	/*
+	$.each(selector,function(key,vals){
+		alert(vals.val());
+	})
+	*/
+	selector
+	.click(function(){
+		//alert("tst");
+		me = $(this);
+		selectData = $.parseJSON(me.attr('data-select-items'));
+		pos = me.offset();
+		pos.top = pos.top + me.outerHeight();
+		var ddData = $("<div/>");
+		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth(),"background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
+		$("body")
+			.append(
+				dropDown
+					.append(function(){
+						$.each(selectData,function(key,item){
+							if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
+								if(typeof key == 'string'){
+								ddData
+									.append(
+										$("<div/>",{html:key,"class":"categorySelect"})
+									)
+								}
+								ddData
+									.append(function(){
+										$.each(item,function(key2,item2){
+											ddData
+												.append(
+													$("<div/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable"})
+													.click(function(){
+														selector.text(item2).val(key2);
+														if(callBackFn)callBackFn(key2);
+														if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+													})
+												)
+										});	
+									})
+							}else{// this is not an array
+								ddData
+									.append(
+										$("<div/>",{html:item,"class":"selectable"})
+											.click(function(){
+												selector.text(item).val(key);
+												if(callBackFn)callBackFn(key);
+												if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+											})
+									)
+							}
+						})
+					return ddData;
+				})
+			)
+	});
+}

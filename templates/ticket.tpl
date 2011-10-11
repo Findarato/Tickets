@@ -102,7 +102,6 @@
 								
 								<select style="width:150px" id="TicketAssign" name="TicketAssign" class="selectButton">
 									{html_options options=$assign}
-									
 								</select>
 								*}
 								<button class="" id="ReAssignCancelButton" style="display:inline-block">Cancel</button>
