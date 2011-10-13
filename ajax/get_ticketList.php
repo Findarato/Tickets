@@ -293,11 +293,38 @@ if(isset($_GET["area"]) ){
       WHERE '.$wc.' 
       GROUP BY t.id 
       ORDER BY ';
-	  if($sort){
-	  	$sql .= ""; 
-	  }else{
-	  	$sql .= "t.id,t.priority DESC,t.due_on"; 
+	  
+	  
+	  if(isset($_GET['direction']) && ($_GET['direction'] == "asc" || $_GET['direction'] == "desc"))
+	  {$dir = $_GET['direction'];}else{$dir='DESC';}
+	  switch($sort){
+	  	case 'title':
+			$sql .= "t.subject ".$dir.",t.priority DESC,t.due_on";
+		break;
+		case 'priority':
+			$sql .= "t.priority ".$dir.",t.priority DESC,t.due_on";
+		break;
+		case 'location':
+			$sql .= "t.location ".$dir.",t.priority DESC,t.due_on";
+		break;
+		case 'createdOn':
+			$sql .= "t.created_on ".$dir.",t.priority DESC,t.due_on";
+		break;
+		case 'assigned':
+			$sql .= "t.assigned_id ".$dir.",t.priority DESC,t.due_on";
+		break;
+		case 'createdBy':
+			$sql .= "t.created_by_id ".$dir.",t.priority DESC,t.due_on";
+		break;
+		case 'id':
+			$sql .= "t.id ".$dir.",t.priority DESC,t.due_on";
+		break;
+		
+	  	default:
+			$sql .= "t.id,t.priority DESC,t.due_on";
+		break;
 	  }
+
       
       $sql.=' LIMIT '.$page.','.$amount.';';
 	  //die($sql);

@@ -770,7 +770,6 @@ function loadTicketList(pageNumber,queryObj) {
 			"search": {}
 		};
 		if (hash[1]) { //there is something other than #ticketlist
-			alert(hash.length)
 			for (a = 1; a < hash.length; a++) { //we will now loop though search
 				if (a == hash.length) {alert("Something is broke :Error #775A2")
 				} else {
