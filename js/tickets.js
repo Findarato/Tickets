@@ -745,13 +745,100 @@ function loadTicket(ticketId,update) {
 }
 function loadTicketList(pageNumber,queryObj) {
 	Tlb = Params.Content.find("#ticketListbody");
-	Params.LastArea = "ticketList";
 	var html = "";
 	var bugs = false;
 	var ticketCount = 0;
 	if (pageNumber < 0) {	pageNumber = 0;}
 	var hash = getHashArray();
-	$("#ticketListbody").empty();
+	//
+	//alert(Params.LastArea);
+	alert($("#ticketListbody").text());
+	if(Params.LastArea == "ticketList"){ // This is a new display of data, not a change of locations
+		displayTable = $("#displayTable");
+	}else{ // this just needs to be repopulated with out replacing the headers
+		Params.LastArea = "ticketList";	
+		$("#ticketListbody").empty();
+		displayTable = $("<table/>",{"id":"displayTable","class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
+		displayTable
+			.html(
+				$("<tr/>")
+					.append(function(){
+						var testColmns = [
+							['','',"20px",true],
+							['id','ID',"45px",true],
+							['priority','Priority',"56px",true],
+							['title','Title',"auto",true],
+							['location','Location',"150px",true],
+							['category','Category',"150px",true],
+							['createdBy','Created By',"150px",true],
+							['dueOn','Due On',"150px",false],
+							['assigned','Assigned By',"150px",true],
+							['createdOn','Created On',"100px",true]
+						];
+						toolBar = "";
+						$.each(testColmns,function(index,value){
+							if(value[3]==true){ // the colmn is being displayed. this will be useful when you can turn off colmns
+								
+								toolBar +="<td class='ticketListSortable' style='width:"+value[2]+"'><a href='' style='width:"+value[2]+";position:relative;' data-order='asc' data-value='"+value[0]+"' class=' '>"+value[1]+"</a></td>";	
+							}
+						});
+						return toolBar;
+					})
+					
+			)
+			
+			var curHash = getHashArray();
+			displayTable
+				.find(".ticketListSortable a")
+					.attr("href",function(){
+						//this is when the code does not work properly lets fix it
+						//$(this).attr('data-order',"desc")
+						//return "sortDisplayDesc";
+
+						if(curHash[2]==$(this).attr('data-value')){
+							if(curHash[3]!=$(this).attr('data-order')){// lets make some quick adjustments
+								$(this).attr('data-order','desc')
+							}
+						}
+						return curHash[0]+"/"+curHash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order')
+					})
+					.addClass(function(){
+						if(curHash[2]==$(this).attr('data-value')){
+							if(curHash[3]==$(this).attr('data-order')){
+								if(curHash[3] == "asc"){
+									return "sortDisplayAsc";
+								}else{
+									return "sortDisplayDesc";
+								}
+							}
+						}
+					})
+					.click(function(){
+						me = $(this);
+						var curHash = getHashArray();
+						me.attr("href",curHash[0]+"/"+curHash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order'));
+						
+						if(me.attr("data-order")=="desc"){
+							me.attr("data-order","asc");
+						}else{
+							me.attr("data-order","desc");
+						}
+						
+						pageTracker._trackPageview(me.attr("href"));
+						setHash(me.attr("href"));
+						//return false;
+					});
+				
+	}
+	/*
+		if(bugs == 1){ //bugs display
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
+		}else{ //tickets display
+		}
+		*/	
+
+	
+	
 	if(queryObj){
 		O_search = queryObj;
 		O_search.type = "search";
@@ -798,6 +885,8 @@ function loadTicketList(pageNumber,queryObj) {
 		    }		
 		}	
 	}
+	
+	
 	//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
 		var s_ocd; //string open closed display
@@ -805,54 +894,7 @@ function loadTicketList(pageNumber,queryObj) {
     if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
     	ticketCount = data.ticketCount;
 		var tlistHolder = $("<div/>");
-		 displayTable = $("<table/>",{"class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
-		if(bugs == 1){ //bugs display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
-		}else{ //tickets display
-			displayTable
-				.html(
-					$("<tr/>")
-						.append("<td class='ticketListSortable' style='width:20px;'>&nbsp;</td>")
-						.append("<td class='ticketListSortable' style='width:45px;'><a href='' style='width:45px;position:relative;' id='ticketListIdSort' data-order='asc' data-value='id' class='nolink triangleDown'>id</a></div></td>")
-						.append("<td class='ticketListSortable' style='width:56px;'><a href='' style='width:75px;position:relative;' id='ticketListPrioritySort' data-order='asc' data-value='priority' class='nolink triangleDown'>Priority</a></td>")
-						.append("<td class='ticketListSortable' style='width:auto'><a href='' style='width:75px;position:relative;' id='ticketListTitleSort' data-order='asc' data-value='title' class='nolink triangleDown'>Title</a></td>")
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:75px;position:relative;' id='ticketListLocationSort' data-order='asc'  data-value='location' class='nolink triangleDown'>Location</a></td>")
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;'id='ticketListCategorySort' data-order='asc' data-value='category' class='nolink triangleDown'>Category</a></td>")
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;' id='ticketListCreatedBySort' data-order='asc'  data-value='createdBy' class='nolink triangleDown'>Created By</a></td>")
-						/*.append("<td class='ticketListSortable' style='width:100px;'>Due On</td>")*/
-						.append("<td class='ticketListSortable' style='width:150px;'><a href='' style='width:150px;position:relative;' id='ticketListAssignedSort' data-order='asc' data-value='assigned' class='nolink triangleDown'>Assigned</a></td>")
-						.append("<td class='ticketListSortable' style='width:100px;'><a href='' style='width:95px;position:relative;' id='ticketListCreatedOnSort' data-order='asc' data-value='createdOn' class='nolink triangleDown'>Created On</a></td>")
-				)
-		}
-		displayTable
-			.find(".ticketListSortable a")
-				.click(function(){
-					me = $(this);
-					var curHash = getHashArray();
-					//alert(me.attr("data-order"));
-					setHash(curHash[0]+"/"+curHash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order'));
-					if(me.attr("data-order")=="desc" || me.attr("data-order")==undefined){
-						me.attr("data-order","asc");
-					}else{
-						me.attr("data-order","desc");
-					}
-					return false;
-				})
-				/*
-				.hover(
-					function(){
-						$(this).toggleClass("triangleUp").toggleClass("triangleDown");
-					},
-					function(){
-						$(this).toggleClass("triangleUp").toggleClass("triangleDown");
-					}
-				)
-					*/
-
-		displayTable
-			.find(".ticketListSortable")
-			
-				
+		// This part just adds creates teh table and puts the results in it		
     var display = 
       $("<div/>",{css:{"width":"100%"}})
         .html(
@@ -986,11 +1028,6 @@ function loadTicketList(pageNumber,queryObj) {
 		    )
 		});
 		
-    
-    if(Tlb.html() === null || Tlb.html()==""){ //they came from a different paged
-      Params.Content.html($("#generic").html());
-      Tlb = Params.Content.find("#ticketListbody");
-    }
 		Tlb.html(display);
 		pageAnator($("#tldPageAnator"), ticketCount, 30,pageNumber);
 		

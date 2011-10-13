@@ -252,6 +252,17 @@ ul li{
 	margin-left:4px;
 	color:#00769E;
 }
+.sortDisplayDesc:after{
+	content: "D";
+	margin-left:4px;
+	color:#00769E;
+}
+
+.sortDisplayAsc:after{
+	content: "A";
+	margin-left:4px;
+	color:#00769E;
+}
 
 .flash {
     -webkit-animation: target-fade 3s 1;
