@@ -135,24 +135,19 @@ body, html {
 	height:13px;
 	width:13px;
 }
-.pVeryLow{
+.pLow{
 	background-color: #8cbf40;
 	border-color:#6a0;
 }
-.pLow{
+.pMedium{
 	background-color:#bfbf4d;
 	border-color:#aa1;
 	width:26px;
 }
-.pTolerable{
+.pHigh{
 	background-color:#e0c240;
 	border-color:#d6ae00;
 	width:39px;
-}
-.pImportant{
-	background-color:#f2a640;
-	border-color:#e80;
-	width:52px;
 }
 .pMissionCritical{
 	background-color:#e6804d;

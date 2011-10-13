@@ -28,11 +28,10 @@ var Params = {
 	"Departments":{},
 	"UserId":0,
 	"Priority_string":{
-		1:{"id":1,"name":"Very Low"},
-		2:{"id":2,"name":"Low"},
-		3:{"id":3,"name":"Tolerable"},
-		4:{"id":4,"name":"Important"},
-		5:{"id":5,"name":"Mission Critical"}
+		1:{"id":1,"name":"Low"},
+		2:{"id":2,"name":"Medium"},
+		3:{"id":3,"name":"High"},
+		4:{"id":4,"name":"Mission Critical"}
 	 },
 	"Projects":{
 		1:{"id":1,"name":"Test 1"},
@@ -916,7 +915,7 @@ function loadTicketList(pageNumber,queryObj) {
     		        function(i,html){
     		         if(item.priority>0){
     		           if(item.priority>5){item.priority = item.priority-5;}
-    		           	
+    		           //alert(item.priority);
     		           //result = Params.Priority_string[item.priority].name;
     		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
     		           
