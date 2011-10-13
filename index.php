@@ -84,7 +84,7 @@
 	}
 
 
-  $smarty -> assign('blankDisplay',$blankPage);
+    $smarty -> assign('blankDisplay',$blankPage);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
 	$smarty -> assign('locationJSON',json_encode($locJson));
@@ -96,7 +96,7 @@
 	$smarty -> assign('assign',$dep);
 	$smarty -> assign('projects',$projTemp);
 	$smarty -> assign('type',"new");
-	$smarty -> assign('priority',array(0=>"Very Low",1=>"Low",2=>"Tolerable",3=>"Important",4=>"Mission Critical"));
+	$smarty -> assign('priority',array(0=>"Low",1=>"Medium",2=>"High",3=>"Mission Critical"));
 	$smarty -> display('index.tpl');
 
 
