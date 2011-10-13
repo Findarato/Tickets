@@ -72,9 +72,9 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			case "bug":
 				$ticketTitle = $db->Query("SELECT subject,open FROM tickets WHERE id=".$match[1]." LIMIT 1;",false,"assoc");
 				if($email){
-					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket_link ticketSprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket ticketSprite\">".$match[0]." ".$match[1]."</a>";
 				}else{
-					$classes = "bug_link ticket_button ticketSprite";
+					$classes = "bug ticket_button ticketSprite";
 					if($ticketTitle["open"] == 0){
 						$classes .= " closedTicket";				
 					}
@@ -87,7 +87,7 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 				if($email){
 					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket_link ticketSprite\">".$match[0]." ".$match[1]."</a>";
 				}else{
-					$classes = "ticket_link ticket_button ticketSprite";
+					$classes = "ticket ticket_button ticketSprite";
 					if($ticketTitle["open"] == 0){
 						$classes .= " closedTicketDisplay";				
 					}
