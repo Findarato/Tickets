@@ -744,26 +744,30 @@ function loadTicket(ticketId,update) {
 	} //load the responses page 0
 }
 function loadTicketList(pageNumber,queryObj) {
-	Tlb = Params.Content.find("#ticketListbody");
 	var html = "";
 	var bugs = false;
 	var ticketCount = 0;
 	if (pageNumber < 0) {	pageNumber = 0;}
 	var hash = getHashArray();
-	//
-	//alert(Params.LastArea);
-	alert($("#ticketListbody").text());
 	if(Params.LastArea == "ticketList"){ // This is a new display of data, not a change of locations
+		//alert(Params.Content.html());
+		if($("#displayTable").html() == null){
+			Params.LastArea = ""; // this is a bug and needs to be reset to keep working;
+			//alert("There was an error :255AA Could not find table")
+			loadTicketList(pageNumber,queryObj); // lets just take what was passed to this function and recall it 
+			return false; // lets get out of the function already
+		}
 		displayTable = $("#displayTable");
 	}else{ // this just needs to be repopulated with out replacing the headers
 		Params.LastArea = "ticketList";	
-		$("#ticketListbody").empty();
+		Params.Content.html($("#generic").html());
+		Tlb = $("#ticketListbody").empty();
 		displayTable = $("<table/>",{"id":"displayTable","class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
 		displayTable
 			.html(
 				$("<tr/>")
 					.append(function(){
-						var testColmns = [
+						var defaultColmns = [
 							['','',"20px",true],
 							['id','ID',"45px",true],
 							['priority','Priority',"56px",true],
@@ -776,7 +780,7 @@ function loadTicketList(pageNumber,queryObj) {
 							['createdOn','Created On',"100px",true]
 						];
 						toolBar = "";
-						$.each(testColmns,function(index,value){
+						$.each(defaultColmns,function(index,value){
 							if(value[3]==true){ // the colmn is being displayed. this will be useful when you can turn off colmns
 								
 								toolBar +="<td class='ticketListSortable' style='width:"+value[2]+"'><a href='' style='width:"+value[2]+";position:relative;' data-order='asc' data-value='"+value[0]+"' class=' '>"+value[1]+"</a></td>";	
@@ -784,10 +788,7 @@ function loadTicketList(pageNumber,queryObj) {
 						});
 						return toolBar;
 					})
-					
 			)
-			
-			var curHash = getHashArray();
 			displayTable
 				.find(".ticketListSortable a")
 					.attr("href",function(){
@@ -795,17 +796,17 @@ function loadTicketList(pageNumber,queryObj) {
 						//$(this).attr('data-order',"desc")
 						//return "sortDisplayDesc";
 
-						if(curHash[2]==$(this).attr('data-value')){
-							if(curHash[3]!=$(this).attr('data-order')){// lets make some quick adjustments
+						if(hash[2]==$(this).attr('data-value')){
+							if(hash[3]!=$(this).attr('data-order')){// lets make some quick adjustments
 								$(this).attr('data-order','desc')
 							}
 						}
-						return curHash[0]+"/"+curHash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order')
+						return hash[0]+"/"+hash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order')
 					})
 					.addClass(function(){
-						if(curHash[2]==$(this).attr('data-value')){
-							if(curHash[3]==$(this).attr('data-order')){
-								if(curHash[3] == "asc"){
+						if(hash[2]==$(this).attr('data-value')){
+							if(hash[3]==$(this).attr('data-order')){
+								if(hash[3] == "asc"){
 									return "sortDisplayAsc";
 								}else{
 									return "sortDisplayDesc";
@@ -815,30 +816,28 @@ function loadTicketList(pageNumber,queryObj) {
 					})
 					.click(function(){
 						me = $(this);
-						var curHash = getHashArray();
-						me.attr("href",curHash[0]+"/"+curHash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order'));
+						
 						
 						if(me.attr("data-order")=="desc"){
 							me.attr("data-order","asc");
 						}else{
 							me.attr("data-order","desc");
 						}
-						
+						me.attr("href",hash[0]+"/"+hash[1]+"/"+me.attr('data-value')+"/"+me.attr('data-order'));
 						pageTracker._trackPageview(me.attr("href"));
 						setHash(me.attr("href"));
 						//return false;
 					});
+
 				
 	}
+	Tlb.html(displayTable); // lets make sure something gets on the page
 	/*
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
 		}else{ //tickets display
 		}
 		*/	
-
-	
-	
 	if(queryObj){
 		O_search = queryObj;
 		O_search.type = "search";
@@ -849,8 +848,6 @@ function loadTicketList(pageNumber,queryObj) {
 	    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	    }				
 	}else{ //this happens when there is no query object being sent.  Also when the tabs are clicked, as a specific query is being used by the tabs
-		//$("#ticketListtitle").html("Tickets search Result");
-		
 		O_search = {
 			"page": pageNumber,
 			"search": {}
@@ -886,24 +883,13 @@ function loadTicketList(pageNumber,queryObj) {
 		}	
 	}
 	
-	
 	//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
     if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
-    	ticketCount = data.ticketCount;
-		var tlistHolder = $("<div/>");
-		// This part just adds creates teh table and puts the results in it		
-    var display = 
-      $("<div/>",{css:{"width":"100%"}})
-        .html(
-          $("<div/>",{"class":"rountTop4 color-B-2",css:{"width":"100%"}})
-        )
-        .append(
-          $("<div/>",{css:{"width":"100%"}})
-            .append(displayTable)
-        );
+		pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
+		// This part just adds creates the table and puts the results in it		
 		$.each(data.tickets, function (i, item) {
 		  bmClass = "bookmarkOff";
 		  for(var a in Params.FavoriteObject){
@@ -1026,10 +1012,9 @@ function loadTicketList(pageNumber,queryObj) {
 		        }
 		      )		      
 		    )
-		});
+		});// end of each loop
 		
-		Tlb.html(display);
-		pageAnator($("#tldPageAnator"), ticketCount, 30,pageNumber);
+	//	displayTable.append(display);
 		
 	});
 }
@@ -1043,7 +1028,7 @@ function loadUserPage(userId){
 	var localUser = false;
 	if (localStorage.userId == userId){localUser = true;}
 	
-	$("<div/>",{id:"userInfoBox","class":"",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
+	$("<div/>",{id:"userInfoBox","class":" ",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
 		.append(
 			$("<div>",{css:{"display":"table-cell","width":"110px"}})
 				.append(
