@@ -10,7 +10,7 @@ header('Content-type: application/json');
 $usr = unserialize($_SESSION['user']);
 $_GET = $db->Clean($_GET);
 
-$cate = $db->Query("SELECT id,name FROM tickets.category;",false,"assoc");
+$cate = $db->Query("SELECT id,name FROM tickets.category WHERE display=1;",false,"assoc");
 
 echo json_encode(array("categories"=>$cate));
 ?>
