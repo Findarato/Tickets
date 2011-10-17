@@ -37,7 +37,7 @@
 		$depart = getDepartment_by_userid($usr->User_id);
 		$smarty->assign('gravatar',$usr->A_U['mdEmail']);
 	}
-	$db->Query("SELECT * FROM category");
+	$db->Query("SELECT * FROM category WHERE display=1 ORDER by name");
 	$cate = array();
 	$dep = array();
 	$checkN = false;
