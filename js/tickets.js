@@ -770,7 +770,7 @@ function loadTicketList(pageNumber,queryObj) {
 						var defaultColmns = [
 							['','',"20px",true],
 							['id','ID',"45px",true],
-							['priority','Priority',"56px",true],
+							['priority','Priority',"70px",true],
 							['title','Title',"auto",true],
 							['location','Location',"150px",true],
 							['category','Category',"150px",true],
@@ -792,10 +792,6 @@ function loadTicketList(pageNumber,queryObj) {
 			displayTable
 				.find(".ticketListSortable a")
 					.attr("href",function(){
-						//this is when the code does not work properly lets fix it
-						//$(this).attr('data-order',"desc")
-						//return "sortDisplayDesc";
-
 						if(hash[2]==$(this).attr('data-value')){
 							if(hash[3]!=$(this).attr('data-order')){// lets make some quick adjustments
 								$(this).attr('data-order','desc')
@@ -828,8 +824,6 @@ function loadTicketList(pageNumber,queryObj) {
 						setHash(me.attr("href"));
 						//return false;
 					});
-
-				
 	}
 	Tlb.html(displayTable); // lets make sure something gets on the page
 	/*
@@ -882,8 +876,6 @@ function loadTicketList(pageNumber,queryObj) {
 		    }		
 		}	
 	}
-	
-	//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
