@@ -1522,10 +1522,7 @@ jQuery(document).ready(function () {
 	//$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
 	
 	$("#ticketSearchButton").live("click",function(){
-
 		loadTicketList(0,{"search":$("#ticketSearch").val(),"area":"all_tickets"});//			loadTicketList(0,{"search":"","area":"all_tickets"});
-		
-		
 	});
 
 	$(".tab").bind("click",function(){
