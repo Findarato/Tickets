@@ -782,7 +782,6 @@ function loadTicketList(pageNumber,queryObj) {
 						toolBar = "";
 						$.each(defaultColmns,function(index,value){
 							if(value[3]==true){ // the colmn is being displayed. this will be useful when you can turn off colmns
-								
 								toolBar +="<td class='ticketListSortable' style='width:"+value[2]+"'><a href='' style='width:"+value[2]+";position:relative;' data-order='asc' data-value='"+value[0]+"' class=' '>"+value[1]+"</a></td>";	
 							}
 						});
@@ -883,6 +882,7 @@ function loadTicketList(pageNumber,queryObj) {
 		pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
 		// This part just adds creates the table and puts the results in it		
 		$.each(data.tickets, function (i, item) {
+			alert(item.id)
 		  bmClass = "bookmarkOff";
 		  for(var a in Params.FavoriteObject){
 		    if(Params.FavoriteObject[a]==item.id){
