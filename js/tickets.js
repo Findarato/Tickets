@@ -935,7 +935,7 @@ function loadTicketList(pageNumber,queryObj) {
     		        function(i,html){
     		         if(item.priority>0){
     		           if(item.priority>5){item.priority = item.priority-5;}
-    		           //alert(item.priority);
+    		           alert(item.priority);
     		           //result = Params.Priority_string[item.priority].name;
     		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
     		           
@@ -968,7 +968,6 @@ function loadTicketList(pageNumber,queryObj) {
 		            return $("<td/>").html(item.category).addClass("borderBottomBlack fontMain ticketCategory");    
 		          }
 		        }
-		        
 		      )
 		      .append(
 		        function(i,html){
@@ -988,7 +987,6 @@ function loadTicketList(pageNumber,queryObj) {
 		          } 
 		        }
 		       )
-		       
 		      .append(
 		        function(){
 		          if(!bugs){
