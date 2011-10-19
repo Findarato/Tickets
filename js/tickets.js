@@ -935,6 +935,7 @@ function loadTicketList(pageNumber,queryObj) {
     		        function(i,html){
     		         if(item.priority>0){
     		           if(item.priority>5){item.priority = item.priority-5;}
+    		           item.priority --;
     		           alert(item.priority);
     		           //result = Params.Priority_string[item.priority].name;
     		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
