@@ -882,7 +882,6 @@ function loadTicketList(pageNumber,queryObj) {
 		pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
 		// This part just adds creates the table and puts the results in it		
 		$.each(data.tickets, function (i, item) {
-			alert(item.id)
 		  bmClass = "bookmarkOff";
 		  for(var a in Params.FavoriteObject){
 		    if(Params.FavoriteObject[a]==item.id){
@@ -936,8 +935,7 @@ function loadTicketList(pageNumber,queryObj) {
     		         if(item.priority>0){
     		           if(item.priority>5){item.priority = item.priority-5;}
     		           if(item.priority>0)item.priority --;
-    		           
-    		           alert(Params.Priority_string[item.priority].name);
+    		           if(item.priority == 0)item.priority = 1;
     		           //result = Params.Priority_string[item.priority].name;
     		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
     		           
