@@ -77,8 +77,8 @@
 		</div>
 		<div style="border-top:solid rgba(0,0,0,.3) 1px;width:250px;padding:3px;">
 			<ul style="width:250px;">
-				<li style="display:inline-block;float:left;margin:3px;"><a class="nolink fontMain" href="#userPage/">More Info</a></li>
-				<li style="display:inline-block;float:right;margin:3px;"><a id="popUpLogout" class="fakelink" href="/">Log Out</a></li>
+				<li style="display:inline-block;float:left;margin:3px;padding:5px;"><a id="popUpLogout" class="fakelink" href="/">Log Out</a></li>
+				<li style="display:inline-block;float:right;margin:3px;padding:5px;"><a class="nolink fontMain" href="#userPage/">More Info</a></li>
 			</ul>
 		</div>
 	</div>
