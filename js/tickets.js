@@ -59,6 +59,8 @@ function oc(a)
 }
 function checkHash() {
 	var hash = getHashArray();
+	if(localStorage.userId == null || localStorage.userId  == undefined || localStorage.userId  == "undefined" && hash[0] != "#login"){setHash("#login");return;}
+	
 	if (window.location.hash.length > 1) {
 		//This checks for a url passed hash, otherwise its just going to go in there.
 		switch (hash[0]) {
@@ -84,7 +86,6 @@ function checkHash() {
 				case "page": // ticket with a page number selected
 					loadTicketList(hash[3]);
 				break;
-			
 				default: // ticket with out a page
 					loadTicketList(0);
 				break;
@@ -139,7 +140,7 @@ function checkHash() {
 	} else {
 		//loadNew(Params.LastLogon);
 		//alert("blah");
-		if(localStorage.userId > 0){
+		if(localStorage.userId > 0 || localStorage.userId==null || localStorage.userId==undefined || localStorage.userId=="undefined"){
 			setHash("#ticketList/all_tickets");
 			/*checkHash*/
 		}else{
