@@ -1,5 +1,5 @@
 <div class=" " style="height:500px;width:auto;margin-left:5px;">
-	<div class="fontMain head message_head colorMain-1 border-all-B-1" id="" style="">
+	<div class="fontMain colorMain-1 border-all-B-1 headerBox" id="" style="">
 		Please Login
 	</div>
 	<div class="message_body colorWhite-1 corners-bottom-2" id="" style="height:451px;border:#fff solid thin">
@@ -83,4 +83,9 @@
 			<div style="float:left;margin-left:10px"></div>
 		</div>
 	</div>
+</div>
+
+<div id="ticketLoginNewBox">
+	<div class="colorMain-1 insideBorder headerBox" style="width:100%;position:absolute;top:0px;left:0px;">New Tickets</div>
+	<div class="border-all-Main-1 insideBorder headerBox" style="width:100%;position:absolute;top:25px;left:0px;"></div>
 </div>
