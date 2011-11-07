@@ -4,6 +4,12 @@ body,html {
     height: 100%;
     font-family: 'Ubuntu', sans-serif;
 }
+*{
+	-moz-transition: top 1s, right 1s, left 1s linear;
+    -o-transition: top 1s, right 1s, left 1s linear;
+    -webkit-transition: top 1s, right 1s, left 1s linear;
+    transition: top 1s, right 1s, left 1s linear;
+}
 .ilb {
     display: inline-block
 }
@@ -196,44 +202,7 @@ p {
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
-#purr-container {
-    position: fixed;
-    top: 0;
-    right: 0;
-}
-.notice {
-    position: relative;
-    width: 300px;
-    margin-bottom: 10px;
-    top: 12px;
-    right: 12px;
-}
-.notice 
-    .close {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    display: block;
-    width: 18px;
-    height: 17px;
-}
-.notice-body {
-    text-align: left;
-    min-height: 50px;
-    padding: 12px 12px 0 12px;
-}
-.notice-body img {
-    width: 32px;
-    height: 32px;
-    margin: 0 10px 0 0;
-}
-.notice-body h3 {
-    margin: 0;
-    font-size: 1.1em;
-}
-.notice-bottom {
-    height: 22px
-}
+
 /* JQuery UI stuff that needed to be saved*/
 .ui-helper-hidden {
     display: none
@@ -309,7 +278,7 @@ input:focus {
 textarea {
     resize: none;
 }
-.inside-border
+.insideBorder
 {
   box-sizing: border-box;
   -moz-box-sizing: border-box;

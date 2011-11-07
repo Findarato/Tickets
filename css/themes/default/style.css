@@ -200,7 +200,10 @@ ul li{
 	
 	top:0px;
 }
-
+.headerBox{
+	padding:5px;
+	margin:3px;
+}
 .categorySelect{
 	font-size:14px;
 	font-weight: bold;
@@ -291,13 +294,33 @@ ul li{
      0% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,0) }
     100% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
 }
-@media screen and (min-width: 1101px) {
+
+@media screen and (min-width: 901px) {
     /** Full display  */
 	.ticketSideLeft,.ticketSideRight{display:table-cell;width:auto;}
 	.ticketSideLeft {width:300px;}
-
+#ticketLoginNewBox{
+	position: absolute;
+	right:0px;
+	top:150px;
+	margin-left:30px;
+	margin-right:10px;
+	background:white;
+	height:300px;
+	width:300px;
 }
-@media screen and (max-width: 1100px) {
+}
+@media screen and (max-width: 900px) {
+	    #ticketLoginNewBox{
+		position: absolute;
+		top:250px;
+		right:100%;
+		margin-left:30px;
+		margin-right:-330px;
+		background:white;
+		height:300px;
+		width:300px;
+	}
     /*Droid Customizations*/
 	.ticketSideLeft,.ticketSideRight{display:block;width:auto}
 	.border-right-Main-4{border-right:0px}

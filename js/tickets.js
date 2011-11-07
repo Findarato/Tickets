@@ -1375,8 +1375,6 @@ window.onpopstate = function(event) {
 };
 
 jQuery(document).ready(function () {
-
-
 	//this should make the logout button in the drop down work.
 	$("#popUpLogout")
 		.attr({"href":"/ajax/login.php?logout&id="+localStorage.userId})
