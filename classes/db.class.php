@@ -17,14 +17,14 @@
 		public $Prefix	= "";
 		public $Cache_all = false; //This will force all selects to be cache queries.
 		public $ResultsCount = 0;
+		private $dbase = "";
+		private $user =	""; 
+		private $password =	"";
+		private $host =	"";
 		//Define the database connection information
 		private $prefixString = "{prefix}";
 		private $config = array(); //config values in associat
 		private $linkid = 0; //store the link id.
-		private $dbase = "tickets";
-		private $user =	"tickets"; 
-		private $password =	"GY8AWC5WrsMyJFY2";//GY8AWC5WrsMyJFY2
-		private $host =	"localhost";
 		private $storeResults = array(); //Store query results for later in the rendering.
 		function getInstance(){
 			static $instance;
@@ -40,9 +40,16 @@
 		 * @return 
 		 */				
 		function db(){//connection object
+			include("dbConnection.inc.php");
+			$this->dbase = $dbase;
+			$this->user = $user;
+			$this->password = $password;
+			$this->host = $host;
+
 			$this -> linkid = mysql_connect($this->host,$this->user,$this->password);
 				mysql_select_db($this->dbase,$this -> linkid);	
 			//$this -> connect();
+			
 		}
 		/**
 		 * 
