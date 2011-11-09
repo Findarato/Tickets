@@ -1252,21 +1252,23 @@ function loadLoginPage(){
 	var newTicketTpl = 
 		$("<div/>",{css:{"width":"98%","padding":"5px","margin":"3px"},"class":"insideBorder roundAll4 border-all-Main-1"})
 			.html(
-				$("<div/>",{"class":"td leftSide"})
+				$("<div/>",{"class":"t item"})
 					.append(
-						$("<div/>",{css:{"height":"32px","width":"32px"},"class":"small-shadow-black-1 color-B-2 border-all-B-1 roundAll4",id:"userPic"})
-					)
-			)
-			.append(
-				$("<div/>",{"class":"td rightSide"})
-					.append(
-						$("<div/>",{css:{"width":"100%","padding-left":"7px"},"class":"",id:"title"}).html("Title of the ticket")
+						$("<div/>",{"class":"td leftSide"})
+							.append(
+								$("<div/>",{css:{"height":"32px","width":"32px"},"class":"small-shadow-black-1 color-B-2 border-all-B-1 roundAll4",id:"userPic"})
+							)	
 					)
 					.append(
-						$("<div/>",{css:{"width":"100%","padding-left":"7px"},"class":"",id:"body"}).html("Body of the ticket<br>stuff asddddddd<br>")
+						$("<div/>",{"class":"td rightSide"})
+						.append(
+							$("<div/>",{css:{"width":"100%","padding-left":"7px"},"class":"",id:"title"}).html("Title of the ticket")
+						)
+						.append(
+							$("<div/>",{css:{"width":"100%","padding-left":"7px"},"class":"",id:"body"}).html("Body of the ticket<br>stuff asddddddd<br>")
+						)
 					)
-			)
-			;
+			);
 		//alert("test")
 		loginNewBox.html(newTicketTpl)
 		loginNewBox.append(newTicketTpl);
