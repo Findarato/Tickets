@@ -88,5 +88,5 @@
 	<div class="colorMain-1 insideBorder headerBox" style="width:100%;position:absolute;top:0px;left:0px;">
 		New Tickets
 	</div>
-	<div class="border-all-Main-1 insideBorder headerBox" style="width:100%;position:absolute;top:25px;left:0px;"></div>
+	<div class="border-all-Main-1 insideBorder headerBox" id="ticketLoginList" style="width:100%;position:absolute;top:25px;left:0px;"></div>
 </div>

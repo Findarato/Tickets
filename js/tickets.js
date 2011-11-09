@@ -164,6 +164,8 @@ function loadNew(timestamp){
 	loadTicketList(0,{"area":"new","dateTime":timestamp});
 	$("#ticketListtitle").html("Tickets with activity since your last visit");
 }
+function loadLoginNew(){
+}
 function loadBlank() {
 	Params.LastArea = "UpdateNotes";
 	Params.Content.load("ajax/updateNotes.php");
@@ -1245,7 +1247,29 @@ function loadUserPage(userId){
 
 }
 function loadLoginPage(){ 
-	Params.Content.load("templates/login.tpl");
+	//Params.Content.load("templates/login.tpl");
+	var loginNewBox = Params.Content.find("#ticketLoginList");
+	var newTicketTpl = 
+		$("<div/>",{css:{"width":"98%","padding":"5px","margin":"3px"},"class":"insideBorder roundAll4 border-all-Main-1"})
+			.html(
+				$("<div/>",{"class":"td leftSide"})
+					.append(
+						$("<div/>",{css:{"height":"32px","width":"32px"},"class":"small-shadow-black-1 color-B-2 border-all-B-1 roundAll4",id:"userPic"})
+					)
+			)
+			.append(
+				$("<div/>",{"class":"td rightSide"})
+					.append(
+						$("<div/>",{css:{"width":"100%","padding-left":"7px"},"class":"",id:"title"}).html("Title of the ticket")
+					)
+					.append(
+						$("<div/>",{css:{"width":"100%","padding-left":"7px"},"class":"",id:"body"}).html("Body of the ticket<br>stuff asddddddd<br>")
+					)
+			)
+			;
+		//alert("test")
+		loginNewBox.html(newTicketTpl)
+		loginNewBox.append(newTicketTpl);
 }
 function changeArea(area){
 	var location = $("#subAreaBar");
@@ -1397,8 +1421,6 @@ jQuery(document).ready(function () {
 		yep : '',
 		nope: '/js/jquery-ui/js/jquery-ui-1.8.15.custom.min.js'
 	});
-
-
 	
 	loadLocalStorage(true);
 	//localStorage.clear();
@@ -1429,7 +1451,7 @@ jQuery(document).ready(function () {
 		}, "json");
 	});
   
-  $("#topperNew").live("click",function(){
+  	$("#topperNew").live("click",function(){
     Params.LastArea = "newTicket";
     Params.Content.html($("#newTicketdialog").html());
     Params.Content.find("#ticketAssignBox").show();
@@ -1444,7 +1466,7 @@ jQuery(document).ready(function () {
     }
     
   });
-  $("#topperNewBug").live("click",function(){
+  	$("#topperNewBug").live("click",function(){
     Params.LastArea = "newBug";
     Params.Content.html($("#newBugdialog").html());
     Params.Content.find("#ticketAssignBox").show();
@@ -1452,11 +1474,11 @@ jQuery(document).ready(function () {
     Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
   });  
   	//Clicking login with google button
-  	$("#googleLogin").live("click",function(){
-  		//window.location = "classes/lightopenid/google.php?login";
- 		URL = "classes/lightopenid/google.php?login";
+	$("#googleLogin").live("click",function(){
+		//window.location = "classes/lightopenid/google.php?login";
+		URL = "classes/lightopenid/google.php?login";
 		window.open(URL, '" + id + "', 'toolbar=0,scrollbars=0,location=1,statusbar=0,menubar=0,resizable=0,width=350,height=400,left = 810,top = 290');
-  	}); 
+	}); 
 	$("#loginButton").live("click",function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
 			notice("Error", "Please enter a username", false);

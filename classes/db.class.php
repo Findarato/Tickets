@@ -84,7 +84,6 @@
 		 * @return int
 		 */
 		public function Count_res(){return mysql_num_rows($this -> Resid);	}
-
 		/**
 		 * Runs the query passed to it.
 		 * @since 1.0
