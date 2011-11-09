@@ -299,16 +299,14 @@ ul li{
     /** Full display  */
 	.ticketSideLeft,.ticketSideRight{display:table-cell;width:auto;}
 	.ticketSideLeft {width:300px;}
-#ticketLoginNewBox{
-	position: absolute;
-	right:0px;
-	top:150px;
-	margin-left:30px;
-	margin-right:10px;
-	background:white;
-	height:300px;
-	width:300px;
-}
+	#ticketLoginNewBox{
+		position: absolute;
+		right:0px;
+		top:150px;
+		margin-left:30px;
+		margin-right:10px;
+		width:300px;
+	}
 }
 @media screen and (max-width: 900px) {
 	    #ticketLoginNewBox{
@@ -317,8 +315,6 @@ ul li{
 		right:100%;
 		margin-left:30px;
 		margin-right:-330px;
-		background:white;
-		height:300px;
 		width:300px;
 	}
     /*Droid Customizations*/
