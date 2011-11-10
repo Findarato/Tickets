@@ -125,6 +125,11 @@ body, html {
 .ticketListDueOn{
 	display:none;
 }
+.ticketTitle{
+	font-weight:bold;
+	font-size:13px;
+	color:#000;
+}
 
 /**
  * Square setup for the important levels
@@ -301,20 +306,18 @@ ul li{
 	.ticketSideLeft {width:300px;}
 	#ticketLoginNewBox{
 		position: absolute;
-		right:0px;
 		top:150px;
-		margin-left:30px;
-		margin-right:10px;
+		right:10px;
+		margin-right:0px;
 		width:300px;
 	}
 }
 @media screen and (max-width: 900px) {
-	    #ticketLoginNewBox{
+	#ticketLoginNewBox{
 		position: absolute;
 		top:250px;
 		right:100%;
-		margin-left:30px;
-		margin-right:-330px;
+		margin-right:-310px;
 		width:300px;
 	}
     /*Droid Customizations*/
