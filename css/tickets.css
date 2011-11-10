@@ -178,6 +178,7 @@ p {
     -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
     -moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
 }
+.ticketAbsolute{position:absolute;}
 .ticketPadding3{padding:3px;}
 .ticketButton,
 .ticketButton:visited,
