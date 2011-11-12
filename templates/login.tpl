@@ -82,7 +82,7 @@
 	</div>
 </div>
 <div class="insideBorder" id="ticketLoginNewBox">
-	<div class="colorMain-1 insideBorder headerBox" style="width:100%;">New Tickets</div>
+	<div class="colorMain-1 insideBorder headerBox" style="width:100%;">Newest Tickets</div>
 	<div class="border-all-Main-1 insideBorder headerBox ticketAbsolute" style="width:100%;top:25px">
 		<div class="insideBorder" id="ticketLoginList" style="width:100%;position:relative"></div>
 	</div>
