@@ -13,6 +13,7 @@
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
       <ol>
+		<li>The login page now shows the most recent 5 tickets created, that are still open.</li>
         <li>links in the form of http://www.google.com will transform into clickable links</li>
         <li><del>There is a new admin section for users who have access to it.  It is listed on the tab bar.  If you see it you have access</del>Will be included in the next update</li>
         <li>Ticket list is now sortable</li>

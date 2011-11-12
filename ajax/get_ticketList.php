@@ -210,7 +210,7 @@ if(isset($_GET["area"]) ){
 		if(isset($_GET["count"])){
 			$count = $_GET["count"];
 		}
- 		$sql = "SELECT id FROM tickets.tickets ORDER BY id DESC LIMIT ".$count;
+ 		$sql = "SELECT id FROM tickets.tickets WHERE open=1 ORDER BY id DESC LIMIT ".$count;
  		$Ids = $db->Query($sql,false,"row");
 		if(is_array($Ids)){
 			$Ids = array_implode($Ids);
