@@ -281,7 +281,8 @@ if(isset($_GET["area"]) ){
         t.closed_on,
         t.project_id,
         t.category_id,
-        t.created_by_id, 
+        t.created_by_id,
+         
         DATE_FORMAT(t.created_on,"%c.%d.%Y") AS created_on,
         DATE_FORMAT(t.due_on,"%c.%d.%Y") AS due_on,
         ln.name AS locationName,
@@ -295,18 +296,20 @@ if(isset($_GET["area"]) ){
         u2.lastname AS lastname2,
         u2.username AS username2,
 
+        MD5(u2.email_address) AS md5Email,
+        
         TIMESTAMPDIFF(SECOND ,t.due_on, now( ) ) AS timeRemaining,
         TIMESTAMPDIFF(SECOND ,t.created_on, t.closed_on ) AS timeTaken,
         TIMESTAMPDIFF(SECOND ,t.created_on, t.due_on ) AS timeAllowed
 
-      FROM tickets.tickets AS t 
-      JOIN tickets.category AS c ON (c.id=t.category_id)
-      JOIN tickets.library_names AS ln ON (ln.ID=t.location)
-      JOIN tickets.users AS u ON (t.assigned_id=u.id)
-      JOIN tickets.users AS u2 ON (t.created_by_id=u2.id)
-      WHERE '.$wc.' 
-      GROUP BY t.id 
-      ORDER BY ';
+		FROM tickets.tickets AS t 
+		JOIN tickets.category AS c ON (c.id=t.category_id)
+		JOIN tickets.library_names AS ln ON (ln.ID=t.location)
+		JOIN tickets.users AS u ON (t.assigned_id=u.id)
+		JOIN tickets.users AS u2 ON (t.created_by_id=u2.id)
+		WHERE '.$wc.' 
+		GROUP BY t.id 
+		ORDER BY ';
 	  
 	  
 	  if(isset($_GET['direction']) && ($_GET['direction'] == "asc" || $_GET['direction'] == "desc"))
