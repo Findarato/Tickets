@@ -43,7 +43,7 @@
             {include file="header.tpl"}
         </header>
         <div class="" style="display:table;width:100%">
-            <div id="mainArea1" class="roundAll4"  style="display:table-cell;min-height:400px;text-align:left;padding:0 5px 0 5px;margin-right:5px">
+            <div id="mainArea1 insideBorder" class="roundAll4"  style="min-height:400px;text-align:left;padding:0 5px 0 5px;margin-right:5px">
                 <div style="width:100%;" class="roundBottom4" id="content">
                     {include file="$content"}
                 </div>

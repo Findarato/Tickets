@@ -1,12 +1,9 @@
-<div class=" " style="height:500px;width:auto;margin-left:5px;">
-	<div class="fontMain colorMain-1 border-all-B-1 headerBox" id="" style="">
-		Please Login
-	</div>
-	<div class="message_body colorWhite-1 corners-bottom-2" id="" style="height:451px;border:#fff solid thin">
+<div class=" insideBorder" style="height:500px;width:auto;padding-left:5px;">
+	<div class="colorWhite-1 corners-bottom-2" id="" style="height:451px;border:#fff solid thin;width:100%">
 		<form id="frm_login" action="javascript:void(none);" name="login">
-			<div style="display:table;margin-bottom:15px;">
-				<div class="box_transition" id="oldLogin" style="height:0px; overflow: hidden">
-					<div style="display:table-cell">
+			<div style="margin-bottom:15px;">
+				<div class="box_transition" id="oldLogin" style="height:0px; overflow: hidden;width:100%">
+					<div class="ticket_left" style="display:block">
 						<div class="fontMain" style="height:20px">
 							Username:
 						</div>
@@ -14,7 +11,7 @@
 							<input class="roundAll4 border-all-B-2 fontMain" id="un" name="un" placeholder="Enter Username" style="padding:5px;" type="text"/>
 						</div>
 					</div>
-					<div style="display:table-cell">
+					<div class="ticket_left" style="display:block">
 						<div class="fontMain " style="height:20px">
 							Password:
 						</div>
@@ -22,7 +19,7 @@
 							<input class="roundAll4 border-all-B-2 fontMain" id="loginpassword" name="pw" placeholder="Enter Password" style="padding:5px; margin-left:10px" type="password"/>
 						</div>
 					</div>
-					<div style="display:table-cell">
+					<div class="ticket_left" style="display:block">
 						<div class="fontMain " style="height:20px">
 							&nbsp;
 						</div>
@@ -32,7 +29,7 @@
 							</button>
 						</div>
 					</div>
-					<div style="display:table-cell">
+					<div class="ticket_left" style="display:block">
 						<div class="fontMain " style="height:20px">
 							&nbsp;
 						</div>
@@ -46,7 +43,7 @@
 			</div>
 		</form>
 		<button class="button" id="showOldLoginButton" style="width:auto;">
-			old Login
+			Local Ticket Login
 		</button>
 		<button class="button" id="googleLogin" style="width:auto;">
 			<span class="ticket_button ticketSprite google">Login with Google</span>
@@ -84,9 +81,9 @@
 		</div>
 	</div>
 </div>
-<div id="ticketLoginNewBox">
-	<div class="colorMain-1 insideBorder headerBox" style="width:100%;position:absolute;top:0px;left:0px;">
-		New Tickets
+<div class="insideBorder" id="ticketLoginNewBox">
+	<div class="colorMain-1 insideBorder headerBox" style="width:100%;">New Tickets</div>
+	<div class="border-all-Main-1 insideBorder headerBox ticketAbsolute" style="width:100%;top:25px">
+		<div class="insideBorder" id="ticketLoginList" style="width:100%;position:relative"></div>
 	</div>
-	<div class="border-all-Main-1 insideBorder headerBox ticketAbsolute" id="ticketLoginList" style="width:100%;top:25px;left:0px;"></div>
 </div>
