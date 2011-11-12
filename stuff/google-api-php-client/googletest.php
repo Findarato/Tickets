@@ -1,9 +1,6 @@
 <?php
-session_start();
-
-// In a real application this would use a database, and not a session!
-require_once '/stuff/google-api-php-client/src/apiClient.php';
-require_once '/stuff/google-api-php-client/src/contrib/apiPlusService.php';
+require_once 'src/apiClient.php';
+require_once 'src/contrib/apiPlusService.php';
 session_start();
 
 $client = new apiClient();
@@ -12,7 +9,7 @@ $client->setApplicationName('Google+ PHP Starter Application');
 // client id, client secret, and to register your redirect uri.
 $client->setClientId('750669202824.apps.googleusercontent.com');
 $client->setClientSecret('bxVPjPk2M6Gm8Ys0mRE8QUTC');
-$client->setRedirectUri('http://devtickets.lapcat.org/oauth2callback.php');
+$client->setRedirectUri('http://tickets.lapcat.org/oauth2callback');
 $client->setDeveloperKey('AIzaSyCFh5oGRPL3J15oi08tUMqITBKeBtEFzyw');
 $plus = new apiPlusService($client);
 
