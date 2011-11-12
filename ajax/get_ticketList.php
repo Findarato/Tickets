@@ -1,15 +1,14 @@
 <?Php
-
 include_once("../small_header.php");
 include_once("../smarty.inc.php");
-//header('Content-type: application/json');
+header('Content-type: application/json');
 header("Cache-Control: max-age=60, must-revalidate");
   $offset = 3600 * 24;  
   $expire = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT"; // calc the string in GMT not localtime and add the offset
   Header($expire); //output the HTTP header
 
   // Define some global variables
-  if(isset($_SESSION['user'])){
+  if(isset($_SESSION['user']) || $_GET["login"]==1){
   	$usr = unserialize($_SESSION['user']);	
   }else {die("borke user");}
   
@@ -204,7 +203,22 @@ if(isset($_GET["area"]) ){
 	  	$wc = "t.id IN(".join(",",$Ids).")";
 	  }else{
 	  	$wc = "t.id =".$Ids;
-	  }reak;
+	  }
+	break;
+	case "recent":
+		$count = 5;
+		if(isset($_GET["count"])){
+			$count = $_GET["count"];
+		}
+ 		$sql = "SELECT id FROM tickets.tickets ORDER BY id DESC LIMIT ".$count;
+ 		$Ids = $db->Query($sql,false,"row");
+		if(is_array($Ids)){
+			$Ids = array_implode($Ids);
+			$wc = "t.id IN(".join(",",$Ids).")";
+		}else{
+			$wc = "t.id =".$Ids;
+		}
+	break;
 	case "new":
 		if(isset($_SESSION["lastlogon"]) && $_SESSION["lastlogon"]>0 ){
 			$dt = date("Y-m-d H:m:s",$_SESSION["lastlogon"]);
