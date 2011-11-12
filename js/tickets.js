@@ -164,8 +164,6 @@ function loadNew(timestamp){
 	loadTicketList(0,{"area":"new","dateTime":timestamp});
 	$("#ticketListtitle").html("Tickets with activity since your last visit");
 }
-function loadLoginNew(){
-}
 function loadBlank() {
 	Params.LastArea = "UpdateNotes";
 	Params.Content.load("ajax/updateNotes.php");
@@ -1247,15 +1245,18 @@ function loadUserPage(userId){
 
 }
 function loadLoginPage(){ 
-	//Params.Content.load("templates/login.tpl");
 	var loginNewBox = Params.Content.find("#ticketLoginList");
+	if(loginNewBox.html()==null){
+		Params.Content.load("templates/login.tpl");
+		loginNewBox = Params.Content.find("#ticketLoginList");
+	}
 	var blankId = 9999999;
 	var newTicketTpl = 
-		$("<div/>",{css:{"max-height":"400px","width":"98%","padding":"5px","margin":"3px","position":"relative"},"class":"insideBorder roundAll4 border-all-Main-1"})
+		$("<div/>",{css:{"max-height":"400px","width":"98%","padding":"5px 0 5px 5px","margin":"3px","position":"relative"},"class":"insideBorder roundAll4 border-all-Main-1"})
 			.html(
-				$("<div/>",{"class":"t item"})
+				$("<div/>",{"class":"item"})
 					.append( // User Icon Box
-						$("<div/>",{css:{"height":"32px","width":"32px","background-image":"url(http://www.gravatar.com/avatar/?s=32&d=identicon&r=g)"},"class":"colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
+						$("<div/>",{css:{"height":"32px","width":"32px","background-image":"url(http://www.gravatar.com/avatar/{hash}?s=32&d=identicon&r=g)"},"class":"colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
 					)	
 					.append( // Ticket ID
 						$("<div/>",{css:{"height":"15px","width":"32px","margin-top":"4px","text-align":"center","font-size":"11px","padding-top":"2px"},"html":blankId.toString(16),"class":"colorMain-2 border-all-B-1 roundAll2",id:"ticketId"})
@@ -1266,25 +1267,38 @@ function loadLoginPage(){
 					.append( // Ticket Body
 						$("<div/>",{css:{"max-width":"230px","height":"30px","overflow":"hidden","padding-left":"7px","top":"20px","left":"50px"},"class":"ticketAbsolute",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 					)
-					.append( // Ticket Created By
-						$("<div/>",{css:{"padding":"1px","bottom":"0","left":"50px","text-align":"left","font-size":"8px","overflow":"hidden"},"class":" ticketAbsolute colorMain-2 border-all-B-1",id:"tickCreatedBy"}).html("By: John Doe")
-					)
 					.append( // Ticket Created On
-						$("<div/>",{css:{"bottom":"0","right":"0","text-align":"right","font-size":"8px","padding":"1px","overflow":"hidden","border-right":"none","border-bottom":"none"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedBy"}).html("On: Aug. 8, 1982")
+						$("<div/>",{css:{"bottom":"7px","text-align":"right","font-size":"8px","padding":"1px","position":"relative","border-left":"none","border-right":"none","border-bottom":"none","float":"right"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
 					)
+					.append( // Ticket Created By
+						$("<div/>",{css:{"padding":"1px","bottom":"7px","float":"right","text-align":"left","font-size":"8px","position":"relative"},"class":" ticketAbsolute colorMain-2 border-all-B-1",id:"tickCreatedBy"}).html("By: John Doe")
+					)
+
 					.append( // Ticket Bookmark
-						$("<div/>",{css:{"top":"0","right":"0","padding":"1px","overflow":"hidden","border-right":"none","top-bottom":"none"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"ticketFavorite"}).html()
+						$("<div/>",{css:{"top":"0","right":"0","padding":"1px","overflow":"hidden","border-right":"none","border-top":"none"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundTopRight4 ticketSprite nolink bookmarkOff",id:"ticketFavorite"})
 					)
 			);
 
+		$.getJSON(uri + "ajax/get_ticketList.php", {"area":"recent","login":1,"count":5}, function (data) {
+			loginNewBox.empty();
+			$.each(data.tickets.reverse(),function(index,value){
+				smallTicket = newTicketTpl.clone()
+				smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
+				smallTicket.find("#title").attr("id","title-"+value.id).html(value.subject);
+				smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
+				smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
+				smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
+				smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
+				loginNewBox.append(smallTicket);
+			});
+		});
 		
 		
-		
-		testone = newTicketTpl.clone()
-		testone2 = newTicketTpl.clone()
-		testone.find("#title").html("cool beans")
-		loginNewBox.append(testone);
-		loginNewBox.append(testone2);
+		//testone = newTicketTpl.clone()
+		//testone2 = newTicketTpl.clone()
+		//testone.find("#title").html("cool beans")
+		//loginNewBox.append(testone);
+		//loginNewBox.append(testone2);
 }
 function changeArea(area){
 	var location = $("#subAreaBar");
