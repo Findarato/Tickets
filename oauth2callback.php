@@ -11,32 +11,38 @@ print_r($_GET);
 
 
 require_once '/stuff/google-api-php-client/src/apiClient.php';
-require_once '/stuff/google-api-php-client/src/contrib/apiBuzzService.php';
+require_once '/stuff/google-api-php-client/src/contrib/apiPlusService.php';
+session_start();
 
 $client = new apiClient();
-// Visit https://code.google.com/apis/console to generate your
-// oauth2_client_id, oauth2_client_secret, and to register your oauth2_redirect_uri.
-// $client->setClientId('insert_your_oauth2_client_id');
-// $client->setClientSecret('insert_your_oauth2_client_secret');
-// $client->setRedirectUri('http://example.com/path/to/myapp.php');
-// $client->setApplicationName("OAuth2_Example_App");
-$buzz = new apiBuzzService($client);
-
-if (isset($_SESSION['access_token'])) {
-  $client->setAccessToken($_SESSION['access_token']);
-} else {
-  $client->setAccessToken($client->authenticate());
-}
-$_SESSION['access_token'] = $client->getAccessToken();
+$client->setApplicationName('Google+ PHP Starter Application');
+// Visit https://code.google.com/apis/console?api=plus to generate your
+// client id, client secret, and to register your redirect uri.
+$client->setClientId('750669202824.apps.googleusercontent.com');
+$client->setClientSecret('bxVPjPk2M6Gm8Ys0mRE8QUTC');
+$client->setRedirectUri('http://tickets.lapcat.org/oauth2callback');
+$client->setDeveloperKey('AIzaSyCFh5oGRPL3J15oi08tUMqITBKeBtEFzyw');
+$plus = new apiPlusService($client);
 
 if (isset($_GET['code'])) {
+  $client->authenticate();
+  $_SESSION['token'] = $client->getAccessToken();
   header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
 }
 
-// Make an authenticated request to the Buzz API.
-if ($client->getAccessToken()) {
-  $me = $buzz->getPeople('@me');
-  $ident = '<img src="%s"> <a href="%s">%s</a>';
-  printf($ident, $me['thumbnailUrl'], $me['profileUrl'], $me['displayName']);
+if (isset($_SESSION['token'])) {
+  $client->setAccessToken($_SESSION['token']);
 }
-?>
+
+if ($client->getAccessToken()) {
+  $optParams = array('maxResults' => 100);
+  $activities = $plus->activities->listActivities('me', 'public', $optParams);
+
+  print 'Your Activities: <pre>' . print_r($activities, true) . '</pre>';
+
+  // The access token may have been updated lazily.
+  $_SESSION['token'] = $client->getAccessToken();
+} else {
+  $authUrl = $client->createAuthUrl();
+  print "<a class='login' href='$authUrl'>Connect Me!</a>";
+}
