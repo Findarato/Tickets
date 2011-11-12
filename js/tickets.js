@@ -1251,7 +1251,7 @@ function loadLoginPage(){
 	var loginNewBox = Params.Content.find("#ticketLoginList");
 	var blankId = 9999999;
 	var newTicketTpl = 
-		$("<div/>",{css:{"width":"98%","padding":"5px","margin":"3px","position":"relative"},"class":"insideBorder roundAll4 border-all-Main-1"})
+		$("<div/>",{css:{"max-height":"400px","width":"98%","padding":"5px","margin":"3px","position":"relative"},"class":"insideBorder roundAll4 border-all-Main-1"})
 			.html(
 				$("<div/>",{"class":"t item"})
 					.append( // User Icon Box
@@ -1261,16 +1261,19 @@ function loadLoginPage(){
 						$("<div/>",{css:{"height":"15px","width":"32px","margin-top":"4px","text-align":"center","font-size":"11px","padding-top":"2px"},"html":blankId.toString(16),"class":"colorMain-2 border-all-B-1 roundAll2",id:"ticketId"})
 					)
 					.append( //Ticket Title
-						$("<div/>",{css:{"width":"100%","padding-left":"7px","top":"4px","left":"50px"},"class":"ticketTitle ticketAbsolute",id:"title"}).html("Title of the ticket")
+						$("<div/>",{css:{"padding-left":"7px","top":"4px","left":"50px"},"class":"ticketTitle ticketAbsolute",id:"title"}).html("Title of the ticket")
 					)
 					.append( // Ticket Body
-						$("<div/>",{css:{"width":"100%","max-width":"230px","height":"30px","overflow":"hidden","padding-left":"7px","top":"20px","left":"50px"},"class":"ticketAbsolute",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
+						$("<div/>",{css:{"max-width":"230px","height":"30px","overflow":"hidden","padding-left":"7px","top":"20px","left":"50px"},"class":"ticketAbsolute",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 					)
 					.append( // Ticket Created By
 						$("<div/>",{css:{"padding":"1px","bottom":"0","left":"50px","text-align":"left","font-size":"8px","overflow":"hidden"},"class":" ticketAbsolute colorMain-2 border-all-B-1",id:"tickCreatedBy"}).html("By: John Doe")
 					)
 					.append( // Ticket Created On
-						$("<div/>",{css:{"bottom":"0","right":"0px","text-align":"right","font-size":"8px","padding":"1px","overflow":"hidden","border-right":"none","border-bottom":"none"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedBy"}).html("On: Aug. 8, 1982")
+						$("<div/>",{css:{"bottom":"0","right":"0","text-align":"right","font-size":"8px","padding":"1px","overflow":"hidden","border-right":"none","border-bottom":"none"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedBy"}).html("On: Aug. 8, 1982")
+					)
+					.append( // Ticket Bookmark
+						$("<div/>",{css:{"top":"0","right":"0","padding":"1px","overflow":"hidden","border-right":"none","top-bottom":"none"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"ticketFavorite"}).html()
 					)
 			);
 
