@@ -26,7 +26,7 @@ if(isset($_GET['id'])){
 		$rssTitle = "All tickets involving you";
 		$rssDescription = "All tickets open for you,your department,or created by your department.";
 	}
-echo '
+echo ' 
 <rss version="2.0">
   <channel>
     <title>'.$rssTitle.'</title>
