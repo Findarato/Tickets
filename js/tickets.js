@@ -825,6 +825,9 @@ function loadTicketList(pageNumber,queryObj) {
 						//return false;
 					});
 	}
+	
+	
+	
 	Tlb.html(displayTable); // lets make sure something gets on the page
 	/*
 		if(bugs == 1){ //bugs display
@@ -1035,7 +1038,7 @@ function loadUserPage(userId){
 						$("<div/>",{
 							html:"ID:"+userId,
 							css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(255,255,255,.75)","position": "absolute","left": "25px"},
-							"class":"fontBold fontMain rotate90 transformTL"
+							"class":"fontBold fontMain rotate90 transformTopLeft"
 						})
 					)
 				)
@@ -1252,30 +1255,29 @@ function loadLoginPage(){
 	}
 	var blankId = 9999999;
 	var newTicketTpl = 
-		$("<div/>",{css:{"max-height":"400px","width":"98%","padding":"5px 0 5px 5px","margin":"3px","position":"relative"},"class":"insideBorder roundAll4 border-all-Main-1"})
+		$("<div/>",{"class":"ticketBox insideBorder roundAll4 border-all-Main-1"})
 			.html(
 				$("<div/>",{"class":"item"})
 					.append( // User Icon Box
-						$("<div/>",{css:{"height":"32px","width":"32px","background-image":"url(http://www.gravatar.com/avatar/{hash}?s=32&d=identicon&r=g)"},"class":"colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
+						$("<div/>",{"class":"ticketUserIconBox colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
 					)	
 					.append( // Ticket ID
-						$("<div/>",{css:{"height":"15px","width":"32px","margin-top":"4px","text-align":"center","font-size":"11px","padding-top":"2px"},"html":blankId.toString(16),"class":"colorMain-2 border-all-B-1 roundAll2",id:"ticketId"})
+						$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":blankId.toString(16),id:"ticketId"})
 					)
 					.append( //Ticket Title
-						$("<div/>",{css:{"padding-left":"7px","top":"4px","left":"50px"},"class":"ticketTitle ticketAbsolute",id:"title"}).html("Title of the ticket")
+						$("<div/>",{"class":"ticketTitleBox ticketTitle ticketAbsolute",id:"title"}).html("Title of the ticket")
 					)
 					.append( // Ticket Body
-						$("<div/>",{css:{"max-width":"230px","height":"30px","overflow":"hidden","padding-left":"7px","top":"20px","left":"50px"},"class":"ticketAbsolute",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
+						$("<div/>",{"class":"ticketBodyBox ticketAbsolute",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 					)
 					.append( // Ticket Created On
-						$("<div/>",{css:{"bottom":"7px","text-align":"right","font-size":"8px","padding":"1px","position":"relative","border-left":"none","border-right":"none","border-bottom":"none","float":"right"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+						$("<div/>",{"class":"ticketCreatedOnBox ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
 					)
 					.append( // Ticket Created By
-						$("<div/>",{css:{"padding":"1px","bottom":"7px","float":"right","text-align":"left","font-size":"8px","position":"relative"},"class":" ticketAbsolute colorMain-2 border-all-B-1",id:"tickCreatedBy"}).html("By: John Doe")
+						$("<div/>",{"class":"ticketCreatedByBox ticketAbsolute colorMain-2 border-all-B-1",id:"tickCreatedBy"}).html("By: John Doe")
 					)
-
 					.append( // Ticket Bookmark
-						$("<div/>",{css:{"top":"0","right":"0","padding":"1px","overflow":"hidden","border-right":"none","border-top":"none"},"class":" ticketAbsolute colorMain-2 border-all-B-1 roundTopRight4 ticketSprite nolink bookmarkOff",id:"ticketFavorite"})
+						$("<div/>",{"class":"ticketBookmarkBox ticketAbsolute colorMain-2 border-all-B-1 roundTopRight4 ticketSprite nolink bookmarkOff",id:"ticketFavorite"})
 					)
 			);
 

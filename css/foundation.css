@@ -16,6 +16,9 @@ a:hover {text-decoration: underline}
 .ilb {display: inline-block}
 .ticketAbsolute{position:absolute;}
 .ticketPadding3{padding:3px;}
+.fontBold{font-weight: bold;}
+.font-italic{font-style: italic;}
+.fake-link{cursor: pointer;}
 
 /* New ticket image sprite*/
 .ticket_button {
@@ -77,6 +80,64 @@ ul li,ol li {padding-left: 5px}
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-.fontBold{font-weight: bold;}
-.font-italic{font-style: italic;}
-.fake-link{cursor: pointer;}
+
+.ticketBox{
+	max-height:400px;
+	width:98%;
+	padding:5px 0 5px 5px;
+	margin:3px;
+	position:relative;
+}
+.ticketUserIconBox{
+	height:32px;
+	width:32px;
+	background-image:url(http://www.gravatar.com/avatar/{hash}?s=32&d=identicon&r=g);
+}
+.ticketIdBox{
+	height:15px;
+	width:32px;
+	margin-top:4px;
+	text-align:center;
+	font-size:11px;
+	padding-top:2px;
+}
+.ticketTitleBox{
+	padding-left:7px;
+	top:4px;
+	left:50px;
+}
+.ticketBodyBox{
+	max-width:230px;
+	height:30px;
+	overflow:hidden;
+	padding-left:7px;
+	top:20px;
+	left:50px;
+}
+.ticketCreatedOnBox{
+	bottom:7px;
+	text-align:right;
+	font-size:8px;
+	padding:1px;
+	position:relative;
+	border-left:none;
+	border-right:none;
+	border-bottom:none;
+	float:right;
+}
+.ticketCreatedByBox{
+	padding:1px;
+	bottom:7px;
+	float:right;
+	text-align:left;
+	font-size:8px;
+	position:relative;
+}
+.ticketBookmarkBox{
+	top:0;
+	right:0;
+	padding:1px;
+	overflow:hidden;
+	border-right:none;
+	border-top:none;
+}
