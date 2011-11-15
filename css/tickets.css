@@ -1,18 +1,9 @@
-a {text-decoration: none;}
-a:hover {text-decoration: underline}
 body,html {
     height: 100%;
     font-family: 'Ubuntu', sans-serif;
 }
-*{
-	-moz-transition: top 1s, right 1s, left 1s,width 1s linear;
-    -o-transition: top 1s, right 1s, left 1s,width 1s linear;
-    -webkit-transition: top 1s, right 1s, left 1s,width 1s linear;
-    transition: top 1s, right 1s, left 1s,width 1s linear;
-}
-.ilb {
-    display: inline-block
-}
+
+
 .whiteBackground {
     background-color: #FFF 
 }
@@ -196,9 +187,6 @@ p {
     text-align: center;
     zoom: 1;
     margin-right: 5px;
-}
-.ticketButton,
-.ticketButton:visited {
     -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     box-shadow: 0 1px 3px rgba(0,0,0,0.5);
