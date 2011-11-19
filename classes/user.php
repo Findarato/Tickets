@@ -1,18 +1,17 @@
 <?Php
 class User {
 	//Public Arrays
-	public $a_User=array(
-		'logged-in'=>false,
-	);
+	public $a_User=array('logged-in'=>false);
 	public $A_U = array();
 	public $User_id = -1;//adding compatability to Joe's coding style
-	public $Permissions = array();
+	
 	public $debug = array();
 	public $gravatar = ""; // image link to gravatar image
 	
 	//Private stuff
 	private $openID = "";
-
+	private $Permissions = array();
+	private $md5Email = "";
 	function UserLogin($name,$pass){ // just a wrapper to make sure that older stuff works
 		$this->User($name,$pass); 
 	}
@@ -56,8 +55,6 @@ class User {
 					$SQL.=' (u.id="'.$name.'" AND u.password=MD5("'.$pass.'"));';
 				}
 		}
-		
-		
 		$rows = $db->Query($SQL,false,"assoc_array");
 		
 		if($db->Count_res()>0){
@@ -65,7 +62,7 @@ class User {
 				$this->a_User['logged-in']=true;
 				
 				// Valid Log-In and Password 
-				$this->User_id=$row['ID']; //adding compatability to Joe's coding style
+				$this->User_id = $row['ID']; //adding compatability to Joe's coding style
 				$this->A_U['type']=$row['type'];
 				$this->A_U['first-name']=$row['firstname'];
 				$this->A_U['last-name']=$row['lastname']; //adding compatability to Joe's coding style
@@ -73,23 +70,17 @@ class User {
 				$this->A_U['logged-in']=3;
 				$this->A_U['validated']=true;
 				$this->A_U['email'] = $row["emailAddress"];
-				$this->A_U['mdEmail'] = md5( strtolower( trim( $row["emailAddress"] ) ) );;
+				$this->A_U['mdEmail'] = md5( strtolower( trim( $row["emailAddress"] ) ) );
+				$this->md5Email =  md5( strtolower( trim( $row["emailAddress"] ) ) );
 				$this->UserInfo["openID"]="";
-				$this->Permissions = $this->LoadPermissions($row['ID']);
-				if(count($this->Permissions) == 0){// There is no permissions on this user
-					
-				}else{// this user has permissions
-					if(in_array("NO_ACCESS",$this->Permissions)){ // this user is blocked
-						$this->LogUserOut();
-					}
+				$this->LoadPermissions();
+				if(in_array("NO_ACCESS",$this->Permissions)){ // this user is blocked
+					$this->LogUserOut();
 				}
 			}
-		}else{//Lets check to see if there is a valid openID but no user account information			
-			
 		}
 		return array('success'=>0);
 	}
-	
 	
 	
 	/* Function - Log User Out */
@@ -99,40 +90,27 @@ class User {
 		$this->A_U = array();
 	}
 	
-	/* Function - Patron API */
-	function patAPI($cardno) { //take validated card information and get values.
-		$bad = array("<HTML>","</HTML>","<BODY>","</BODY>");
-		$oldTags = array('REC INFO[p!]','EXP DATE[p43]','PCODE1[p44]','PCODE2[p45]','PCODE3[p46]','P TYPE[p47]','TOT CHKOUT[p48]','TOT RENWAL[p49]','CUR CHKOUT[p50]','BIRTH DATE[p51]','HOME LIBR[p53]','PMESSAGE[p54]','MBLOCK[p56]','REC TYPE[p80]','RECORD #[p81]','REC LENG[p82]','CREATED[p83]','UPDATED[p84]','REVISIONS[p85]','AGENCY[p86]','CL RTRND[p95]','MONEY OWED[p96]','CUR ITEMA[p102]','CUR ITEMB[p103]','CUR ITEMC[p124]','CIRCACTIVE[p163]','NOTICE PREF[p268]','PATRN NAME[pn]','ADDRESS[pa]','TELEPHONE[pt]','UNIQUE ID[pu]','P BARCODE[pb]','PIN[p=]','EMAIL ADDR[pz]','LINK REC[p^]','');
-		$newTags = array('RECINFO','EXPDATE','PCODE1','PCODE2','PCODE3','PTYPE','TOTCHKOUT','TOTRENWAL','CURCHKOUT','BIRTHDATE','HOMELIBR','PMESSAGE','MBLOCK','RECTYPE','RECORD','RECLENG','CREATED','UPDATED','REVISIONS','AGENCY','CLRTRND','MONEYOWED','CURITEMA','CURITEMB','CURITEMC','CIRCACTIVE','NOTICEPREF','PATRNNAME','ADDRESS','TELEPHONE','UNIQUEID','PBARCODE','PIN','EMAILADDR','LINKREC','EMPTY');
-		$url = "http://10.1.1.2:4500/PATRONAPI/".$cardno."/dump";
-		$info = array();
-		$data = str_replace("\n","",@file_get_contents($url));
-		$data = str_replace($bad,"",$data); 
-		$data = str_replace($oldTags,$newTags,$data);
-		$data = explode("<BR>",$data);
-	
-		foreach($data as $value)	{
-			$holdvalue = explode("=",$value);
-			if($holdvalue[0]!="" && $holdvalue[0]!="UNIQUEID" && $holdvalue[0]!="PIN"){
-				$info[$holdvalue[0] ]= $holdvalue[1];
-			}
-		}
-	
-		return $info["BIRTHDATE"];
-	}
-
-	public function LoadPermissions($user_id){ //Load the permissions into the object and return true on success and false on fail
+	public function LoadPermissions(){ //Load the permissions into the object and return true on success and false on fail
 		$permissions = array();
-		$db=db::getInstance();
-		$sql = "SELECT permission_id FROM user_permissions WHERE user_id=$user_id";
+		$db = db::getInstance();
+		$sql = "SELECT permission_id FROM user_permissions WHERE user_id=".$this->User_id;
 		$permissions = $db->Query($sql,false,"assoc_array");
 		if($permissions==0){
+			$sql = "SELECT id FROM permissions WHERE permission='VIEW'";
+			$view = $db->Query($sql,false,"assoc_array");
+			$sql = "INSERT INTO user_permissions VALUES(".$this->User_id.",".$view.")";
+			$this->LoadPermissions();
 			return false;	
 		}else{
 			$this->Permissions = $permissions;
 			return true;
 		}
 	}
-
+	/*
+	 * Setters and getters
+	 * 
+	 */
+	public function getPermissions(){ return $this->Permissions; }
+	public function getMD5email(){ return $this->md5Email; }
 }
 ?>
