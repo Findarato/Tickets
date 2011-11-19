@@ -53,6 +53,21 @@ WHERE
 
 $json["userInfo"]["mdEmail"] = md5( strtolower( trim( $json["userInfo"]["email_address"] ) ) ); 
 
+$json["userInfo"]["permissions"] = $db->Query("
+SELECT
+	up.user_id,
+	up.permission_id,
+	p.display
+FROM 
+	tickets.user_permissions up  
+JOIN
+	tickets.permissions AS p
+ON 
+	(p.id=up.permission_id) 
+WHERE 
+	up.user_id=".$_GET["userId"]
+,false,"assoc");
+
 $json["userInfo"]["tickets"] = $db->Query("
 SELECT
 	dm.department_id AS id,
