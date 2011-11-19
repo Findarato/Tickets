@@ -76,6 +76,14 @@ class User {
 				$this->A_U['mdEmail'] = md5( strtolower( trim( $row["emailAddress"] ) ) );;
 				$this->UserInfo["openID"]="";
 				$this->Permissions = $this->LoadPermissions($row['ID']);
+				if(count($this->Permissions) == 0){// There is no permissions on this user
+					
+				}else{// this user has permissions
+					if(in_array("NO_ACCESS")){ // this user is blocked
+						$this->LogUserOut();
+					}
+					
+				}
 			}
 		}else{//Lets check to see if there is a valid openID but no user account information			
 			
