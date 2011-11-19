@@ -37,12 +37,14 @@
 				<div id="statsTab" class="tab border-bottom-Main-1 roundTop4">
 					<a class=" ticket_button ticketSprite chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Stats</span></a>
 				</div>
-			</div>				
+			</div>
+			{if in_array("ADMIN",$permissions)}
 			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 5 -->
 				<div id="adminTab" class="tab border-bottom-Main-1 roundTop4">
 					<a class=" ticket_button ticketSprite warning nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Admin</span></a>
 				</div>
-			</div>	
+			</div>
+			{/if}
 			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right">&nbsp;</div>
 		</div>		
 	</div>	
