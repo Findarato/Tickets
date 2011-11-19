@@ -85,6 +85,8 @@
 
 
 
+	$smarty -> assign('permissions',$usr->Permissions);
+	echo "adsfadfasdfasdf";
     $smarty -> assign('blankDisplay',$blankPage);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
