@@ -1,4 +1,4 @@
-<?
+<?Php
 class User {
 	//Public Arrays
 	public $a_User=array(
