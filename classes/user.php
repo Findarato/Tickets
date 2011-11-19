@@ -79,10 +79,9 @@ class User {
 				if(count($this->Permissions) == 0){// There is no permissions on this user
 					
 				}else{// this user has permissions
-					if(in_array("NO_ACCESS")){ // this user is blocked
+					if(in_array("NO_ACCESS",$this->Permissions)){ // this user is blocked
 						$this->LogUserOut();
 					}
-					
 				}
 			}
 		}else{//Lets check to see if there is a valid openID but no user account information			
