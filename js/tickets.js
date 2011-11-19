@@ -148,6 +148,7 @@ function checkHash() {
 			/*checkHash*/
 		}
 	}
+	
 }
 function updateFavorites(){
   localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
@@ -1048,7 +1049,7 @@ function loadUserPage(userId){
 				.append( $("<div>",{id:"userName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Username: "})	)
 				.append( $("<div>",{id:"realName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Real Name: "})	)
 				.append( $("<div>",{id:"joinedOn","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Joined On: "})	)
-				.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Type: "})	)
+				.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Permissions: "})	)
 				.append( $("<div>",{id:"totalTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Tickets Created: "})	)
 				.append( $("<div>",{id:"openTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Tickets: "})	)
 				.append( $("<div>",{id:"avgTicketsTime","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Average Ticket Duration: "})	)
@@ -1155,7 +1156,15 @@ function loadUserPage(userId){
 		Tlb.find("#userName").append(data.userInfo.username);
 		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
 		Tlb.find("#joinedOn").append(data.userInfo.joined);
-		Tlb.find("#userType").append(data.userInfo.type);
+		Tlb.find("#userType").append(
+			function(){
+				var returnData = "";
+				$.each(data.userInfo.permissions,function(key,value){
+					returnData += "<a class='nolink' href='#permissions/"+value.permission_id+"'>"+value.display+"</a> ";
+				})
+				return returnData;
+			}
+		);
 		Tlb.find("#userSecondaryEmail").val(data.userInfo.email_address);
 		
 		Tlb
@@ -1375,6 +1384,7 @@ function loadLocalStorage(clear){
  	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
 			localStorage.setItem("userId",data.user_id);
+			localStorage.setItem("permissions",data.permissions);
 		//	localStorage.setItem("mdEmail",data.mdEmail);
     	});	
 	}
