@@ -83,8 +83,7 @@
 	  $smarty -> assign('userId',-1);
 	}
 
-	$smarty -> assign('permissions',$usr->getPermissions());
-    $smarty -> assign('blankDisplay',$blankPage);
+	$smarty -> assign('blankDisplay',$blankPage);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
 	$smarty -> assign('locationJSON',json_encode($locJson));

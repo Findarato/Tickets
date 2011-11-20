@@ -52,9 +52,9 @@ $json["userInfo"]["mdEmail"] = md5( strtolower( trim( $json["userInfo"]["email_a
 
 $json["userInfo"]["permissions"] = $db->Query("
 SELECT
-	up.user_id,
 	up.permission_id,
-	p.display
+	p.display,
+	p.permission
 FROM 
 	tickets.user_permissions up  
 JOIN

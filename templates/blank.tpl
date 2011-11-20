@@ -1,7 +1,27 @@
 <div class="colorWhite-1" style="width:auto;margin-left:5px;font-size:100%;line-height:20px" title="Update Notes">
 	<div class="" id="" >
 		<div style="padding:5px;margin:5px; ; overflow:auto;position:relative;background-color:#FFF" class="roundAll4 border-all-A-1">
-
+      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Ticket Update XXV</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.7.0.r738</span>
+      <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
+      <ol>
+		<li>Fixed a 404 error when trying to link to a js library</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">New Features</span>
+      <ol>
+		<li>A basic permissions system is working.  It will grow, but to start with it is very basic to lock out users, and grant others more control.</li>
+      </ol>
+      <br>
+      <span style="font-size: 150%; line-height: normal;">Known Issues</span>
+      <ol>
+        <li>Searching By project does not work</li>
+        <li>Page indicators in a search result do not currently work.</li>
+        <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
+        <li>Commenting on a ticket that was closed or reopened will generate extra replies.</li>
+      </ol>
+      <br>
+      <br>
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Ticket Update XXIV</span>
       <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.6.0.r738</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
