@@ -1346,59 +1346,65 @@ function changeArea(area){
 	}
 }
 function loadLocalStorage(clear){
+
+	//Clear every version update
 	if(localStorage.getItem("ticketsVersion") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
 		localStorage.clear();
 		localStorage.setItem("ticketsVersion",$("#version").html());
 		loadLocalStorage();
 		return; 
 	}
- 
- 
-  if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
-    $.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
-      Params.FavoriteObject = data.favIds;
-      updateFavorites();
-    })
-  }else{
-    Params.FavoriteObject = $.parseJSON(localStorage.getItem("ticketsFavorite"));
-  }
-  //lets make sure there are categories in the localStorage. Remember to assume localStorage does not work, or is not available
-  if(!localStorage.getItem("ticketsCategories")){
-    $.getJSON("ajax/get_categories.php",{},function(data){
-      localStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
-      Params.Categories = data.categories;
-    })
-  }else{
-    Params.Categories = $.parseJSON(localStorage.getItem("ticketsCategories"));
-  }
-  if(!localStorage.getItem("ticketsProjects")){
-    $.getJSON("ajax/get_projects.php",{},function(data){
-      localStorage.setItem("ticketsProjects",JSON.stringify(data.projects));
-      Params.Projects = data.projects;
-    })
-  }else{
-    Params.Projects = $.parseJSON(localStorage.getItem("ticketsProjects"));
-  }
 
-	
- 	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
+	// Userid
+	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
 			localStorage.setItem("userId",data.user_id);
-			localStorage.setItem("permissions",data.permissions);
-		//	localStorage.setItem("mdEmail",data.mdEmail);
-    	});	
+		});	
 	}
+ 
+	// Favorites 
+	if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
+		$.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
+			Params.FavoriteObject = data.favIds;
+			updateFavorites(); //Update localStorage in a centeral way so that it can be done in other places
+		});
+	}else{
+    	Params.FavoriteObject = $.parseJSON(localStorage.getItem("ticketsFavorite"));
+	}
+
+  	//Categories
+	if(!localStorage.getItem("ticketsCategories")){
+    	$.getJSON("ajax/get_categories.php",{},function(data){
+      		localStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
+      		Params.Categories = data.categories;
+    	});
+  	}else{
+    	Params.Categories = $.parseJSON(localStorage.getItem("ticketsCategories"));
+  	}
+	
+	//Projects for bugs
+  	if(!localStorage.getItem("ticketsProjects")){
+    	$.getJSON("ajax/get_projects.php",{},function(data){
+      		localStorage.setItem("ticketsProjects",JSON.stringify(data.projects));
+     	 	Params.Projects = data.projects;
+    	});
+  	}else{
+    	Params.Projects = $.parseJSON(localStorage.getItem("ticketsProjects"));
+  	}
+	//User info
+	if(!localStorage.userInfo && !localStorage.userInfo){
+		$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
+			Params.userInfo = data.userInfo;
+		//	alert(JSON.stringify(data.userInfo))
+			localStorage.setItem("userInfo",JSON.stringify(data.userInfo));
+		});	
+	}
+
 }
 function login(data){ //We need a json array, probably need to parse it, who knows
 	//alert(data.message);
-	loadLocalStorage();
-	
-	$.getJSON("ajax/login.php",{"userIdFetch":1},function(data2){
-		//alert(data2.mdEmail);
-		//localStorage.setItem("userId",data2.user_id);
-		localStorage.setItem("mdEmail",data2.mdEmail);
-	});
-	
+
+	loadLocalStorage(); // Lets make sure that we load up localStorage
 	if (data.error.length > 0) {
 		checkResponse(data);
 	} else {
@@ -1432,6 +1438,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 
 		//alert(localStorage.mdEmail);
 	}
+	
 }
 window.onpopstate = function(event) { 
   //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
@@ -1440,16 +1447,17 @@ window.onpopstate = function(event) {
 };
 
 jQuery(document).ready(function () {
+	
 	//this should make the logout button in the drop down work.
 	$("#popUpLogout")
 		.attr({"href":"/ajax/login.php?logout&id="+localStorage.userId})
 		.click(function(){
 			$.getJSON(this.href,function(){ window.location = "/";})
-			localStorage.userId = 0; // lets make sure they can not sneak back in
+			localStorage.clear(); // Lets just clear the localStorage to clear out all of the data
 			return false;
 		});
 
-/*
+	/*
 	$("body").live("mousedown :not(.categorySelect)",function(){
 		//alert('!')
 		if($(".fakeDropDown")){
@@ -1463,8 +1471,21 @@ jQuery(document).ready(function () {
 		nope: '/js/jquery-ui/js/jquery-ui-1.8.15.custom.min.js'
 	});
 	
-	loadLocalStorage(true);
+
 	//localStorage.clear();
+	loadLocalStorage();
+
+	if(localStorage.userId > 0){ // Lets make sure that there is a user 
+		uI = $.parseJSON(localStorage.userInfo);
+		alert(localStorage.userId);
+		alert(JSON.stringify(localStorage.userInfo.permissions));
+		$.each(uI,function(key,value){
+			//value
+		});		
+	}
+/*
+
+	*/	
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
 	
 	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
@@ -1493,18 +1514,18 @@ jQuery(document).ready(function () {
 	});
   
   	$("#topperNew").live("click",function(){
-    Params.LastArea = "newTicket";
-    Params.Content.html($("#newTicketdialog").html());
-    Params.Content.find("#ticketAssignBox").show();
-    Params.Content.find("#newTicketType").val("new");
-    Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
+	    Params.LastArea = "newTicket";
+	    Params.Content.html($("#newTicketdialog").html());
+	    Params.Content.find("#ticketAssignBox").show();
+	    Params.Content.find("#newTicketType").val("new");
+	    Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
     
-    try{
-    	//$("input[type=date]").live(datepicker());
-    	Params.Content.find("#newTicketDueDate").datepicker();
-    }catch(e){
-    	alert(e);
-    }
+	    try{
+	    	//$("input[type=date]").live(datepicker());
+	    	Params.Content.find("#newTicketDueDate").datepicker();
+	    }catch(e){
+	    	alert(e);
+	    }
     
   });
   	$("#topperNewBug").live("click",function(){
