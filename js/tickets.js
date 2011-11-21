@@ -960,7 +960,7 @@ function loadTicketList(pageNumber,queryObj) {
 		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("borderBottomBlack fontMain ticketProjectLocation")
 		          }else{
 		            return $("<td/>").html(item.locationName).addClass("borderBottomBlack fontMain ticketProjectLocation")
-		          }
+		          } 
 		        }
 		      )
 
