@@ -17,7 +17,7 @@
 				$response = login($_SESSION["openID"]["user_id"],$password,$response,true);
 				
 			}elseif($_GET["userId"] == 2){ // this will be a new user in tickets
-				$pass = '!#4$#$%%^jDkksDFUISPSD453Ddded'; 
+				$pass = md5(rand(88,1982)); 
 				// Ok lets make a ticket user
 				$un = explode("@",$_SESSION["openID"]["email"]);
 				$unTest = $db->Query("SELECT id FROM tickets.users WHERE email_address='".$_SESSION["openID"]["email"]."' LIMIT 1;",false,"row");
