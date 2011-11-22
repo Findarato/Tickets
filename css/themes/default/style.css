@@ -9,6 +9,8 @@ body, html {
 	background-color:#FFF;
 }
 
+
+
 .border-all-B-1, .border-all-Main-1 {
 	border:1px solid #85aaa5
 }
@@ -236,14 +238,7 @@ ul li{
 	height:16px;
 	width:100%;
 }
-.closedTicketDisplay{
-	
-}
-.closedTicketDisplay:after{
-	content: "closed!";
-	margin-left:4px;
-	color:#00769E;
-}
+
 .sortDisplayDesc:after{
 	content: "D";
 	margin-left:4px;

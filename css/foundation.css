@@ -5,7 +5,7 @@
     transition: top 1s, right 1s, left 1s,width 1s linear;
 }
 a {text-decoration: none;}
-a:hover {text-decoration: underline}
+a:hover {text-decoration: bold;color:#0087D5}
 
 /* Utility */
 .tr {display: table-row}

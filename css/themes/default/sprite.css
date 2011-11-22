@@ -34,9 +34,15 @@
 	font-family:"WebSymbolsRegular";
 }
 
-.bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil{background:none transparent;}
+.bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil,.globe{background:none transparent;}
 .magnifier:before{
 	content:"L ";
+	color:rgb(0,0,0);
+	font-family:"WebSymbolsRegular";
+	font-size:12px;
+}
+.globe:before{
+	content:"K ";
 	color:rgb(0,0,0);
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
@@ -85,4 +91,11 @@
 	font-family:"WebSymbolsRegular";
 	text-shadow:0 0 1px rgba(0,0,0,.60);
 	font-size:12px
+}
+.closedTicketDisplay:after{
+	content:" .";
+	font-family:"WebSymbolsRegular";
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	font-size:12px	
+	color:#00769E;
 }

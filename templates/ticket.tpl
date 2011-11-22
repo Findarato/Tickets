@@ -152,7 +152,7 @@
 				</div>
 			</div><!-- End Body of the ticket -->
 			<div class="colorWhite-1 " id="replyareabody" style=""></div>
-			<div style="width:100%;margin-bottom:10px" id="bottomReplyArea">
+			<div style="width:100%;margin-top:10px" id="bottomReplyArea">
 				<div class="colorMain-1" style="width:auto;height:90px;position:relative;" title="Reply Box">
 					<div id="1replyareabody" style="padding:3px;">
 						<form name="newReplyForm" id="newReplyForm">

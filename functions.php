@@ -26,9 +26,9 @@ function id2Username($user_id,$userTable="users",$userDatabase="tickets" ){
 function toLink($text){
 	$text = html_entity_decode($text);
 	$text = " ".$text;
-	$text = eregi_replace('(((f|ht){1}tp://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink ticket_button ticketSprite" href="\\1">\\1</a>', $text);
-	$text = eregi_replace('(((f|ht){1}tps://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink ticket_button ticketSprite" href="\\1">\\1</a>', $text);
-	$text = eregi_replace('([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&//=]+)','\\1<a class="globe fakelink ticket_button ticketSprite" href="http://\\2">\\2</a>', $text);
+	$text = eregi_replace('(((f|ht){1}tp://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink" href="\\1">\\1</a>', $text);
+	$text = eregi_replace('(((f|ht){1}tps://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink" href="\\1">\\1</a>', $text);
+	$text = eregi_replace('([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&//=]+)','\\1<a class="globe fakelink" href="http://\\2">\\2</a>', $text);
 	return $text;
 }
 function aTcode($array,$id='description'){
@@ -72,11 +72,11 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			case "bug":
 				$ticketTitle = $db->Query("SELECT subject,open FROM tickets WHERE id=".$match[1]." LIMIT 1;",false,"assoc");
 				if($email){
-					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket ticketSprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket\">".$match[0]." ".$match[1]."</a>";
 				}else{
-					$classes = "bug ticket_button ticketSprite";
+					$classes = "bug ";
 					if($ticketTitle["open"] == 0){
-						$classes .= " closedTicket";				
+						$classes .= " closedTicketDisplay";				
 					}
 					$formated1 = "<a href=\"#ticket/".$match[1]."\" class='".$classes."'>".$ticketTitle["subject"]."</a>";
 				}
@@ -85,9 +85,9 @@ function Tcode($text,$escape=false,$loop = false,$email=false){
 			case "ticket":
 				$ticketTitle = $db->Query("SELECT subject,open FROM tickets WHERE id=".$match[1]." LIMIT 1;",false,"assoc");
 				if($email){
-					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket_link ticketSprite\">".$match[0]." ".$match[1]."</a>";
+					$formated1 = "<a href=\"http://tickets.lapcat.org/#ticket/".$match[1]."\" class=\"ticket\">".$match[0]." ".$match[1]."</a>";
 				}else{
-					$classes = "ticket ticket_button ticketSprite";
+					$classes = "ticket";
 					if($ticketTitle["open"] == 0){
 						$classes .= " closedTicketDisplay";				
 					}
