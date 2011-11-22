@@ -15,13 +15,13 @@
 			</div>
 			<div style="display:table-cell;width:50%;text-align:right;">
 				<div class="colorWhite" id="ticketStatusImage" style="height:15px;float:right;">
-					<div class="lapcatButton" style="width:auto;padding:2px;">
-						<div class="statusImage ticket_left ticketSprite pencil" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
-						<div class="statusImage ticket_left ticketSprite user-pencil" style="display:none;height:15px;" id="imgReassigned" title="Reassigned"></div>
-						<div class="statusImage ticket_left ticketSprite closed" style="display:none;height:15px;" id="imgClosed" title="Closed"></div>
-						<div class="statusImage ticket_left ticketSprite lock" style="display:none;height:15px;" id="imgLock" title="Locked"></div>
-						<div class="ticket_left ticketSprite ticket" id="imgTicketTrouble" style="height:15px;display:none;" title="Trouble Ticket"></div>
-						<div class="ticket_left ticketSprite bug" id="imgTicketBug" style="height:15px;display:none;" title="Bug Report"></div>
+					<div style="width:auto;padding:2px;">
+						<div class="statusImage ticketLeft pencil" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
+						<div class="statusImage ticketLeft user" style="display:none;height:15px;" id="imgReassigned" title="Reassigned"></div>
+						<div class="statusImage ticketLeft closed" style="display:none;height:15px;" id="imgClosed" title="Closed"></div>
+						<div class="statusImage ticketLeft lock" style="display:none;height:15px;" id="imgLock" title="Locked"></div>
+						<div class="ticketLeft ticket" id="imgTicketTrouble" style="height:15px;display:none;" title="Trouble Ticket"></div>
+						<div class="ticketLeft bug" id="imgTicketBug" style="height:15px;display:none;" title="Bug Report"></div>
 					</div>
 				</div>
 				<div id="" style="display:block;height:16px;">
