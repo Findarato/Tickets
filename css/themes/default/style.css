@@ -2,6 +2,13 @@
 @import url("buttons.css");
 @import url("roundCorners.css");
 
+body, html {
+	font-family:'Droid Sans', sans-serif;
+	height:100%;
+	min-height:100%;
+	background-color:#FFF;
+}
+
 .border-all-B-1, .border-all-Main-1 {
 	border:1px solid #85aaa5
 }
@@ -84,12 +91,7 @@
 .noticeBackgroundDefault { 
 	background:hsl(0,0,30%)
 }
-body, html {
-	font-family:'Droid Sans', sans-serif;
-	height:100%;
-	min-height:100%;
-	background-color:#FFF;
-}
+
 .WhitetoLightBlue {
 	background: #DDF1F1; /* old browsers */
 	background: -moz-linear-gradient(top, #FFFFFF 0, #DDF1F1 96%); /* firefox */
@@ -104,17 +106,19 @@ body, html {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F1F1F1',GradientType=0 ); /* ie */
 	background: -o-linear-gradient(top, #FFFFFF 0,#F1F1F1 96%); /* opera */
 }
-.selectedTab, .tab {
-	height:25px;
-	padding-top:10px;
+.tab {
+	padding-top:16px;
 	padding-left:5px;
 	padding-right:5px;
-	bottom:-1px
 }
 .selectedTab {
+	padding-bottom:8px;
+	padding-top:12px;
+	position:relative;
 	background:#fff;
 	border:1px solid hsl(212,43%,53%);
-	border-bottom:none
+	border-bottom:none;
+	bottom:-4px;
 }
 .topMenuItem {
 	margin-right:4px
@@ -183,28 +187,6 @@ ul li{
 	position:absolute;
 	right:7px;
 }
-.triangleDown:after{
-	content:'';
-	width: 0; 
-	height: 0;
-	border-left: 4px solid transparent; 
-	border-right: 4px solid transparent; 
-	border-top: 10px solid rgba(0,0,0,.6);
-	position:absolute;
-	
-	top:0px;
-}
-.triangleUp:after{
-	content:'';
-	width: 0; 
-	height: 0;
-	border-left: 4px solid transparent; 
-	border-right: 4px solid transparent; 
-	border-bottom: 10px solid rgba(0,0,0,.6);
-	position:absolute;
-	
-	top:0px;
-}
 .headerBox{
 	padding:5px;
 	margin:3px;
@@ -229,6 +211,11 @@ ul li{
 	-webkit-box-shadow: 5px 5px 2px #888;
 	box-shadow: 5px 5px 2px #888;
 }
+.shadowUp{
+	-moz-box-shadow: -0px -2px 2px #888;
+	-webkit-box-shadow: 0px -2px 2px #888;
+	box-shadow: 0px -2px 2px #888;
+}
 .smallShadow{
 	box-shadow: 0 1px 5px #ccc;
 	-moz-box-shadow: 0 1px 5px #ccc;
@@ -244,9 +231,6 @@ ul li{
      -o-transition: all .5s ease-in;
      -webkit-transition: all .5s ease-out;
      position: relative;
-}
-.replyBox:hover{
-	background-color:rgba(255,255,0,.5)
 }
 #replyControlls{
 	height:16px;

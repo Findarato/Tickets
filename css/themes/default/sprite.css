@@ -1,5 +1,6 @@
-.ticketSprite{	background: url(iconSprite.png) no-repeat top left;}
-.bookmark{ background-position: 0 0; width: 16px; height: 16px; } 
+.bookmark,.bookmarkOff,.bug,.calendar,.chart,.closed,.folder,.gear,.group,.heart,.infocard,.lock,.magnifier,.pencil,.star,.user,.warning{background: url(iconSprite.png) no-repeat top left;}
+
+.bookmark{ background-position: 0 0; width: 16px; height: 16px;} 
 .bug{ background-position: 0 -18px; width: 16px; height: 16px; } 
 .calendar{ background-position: 0 -36px; width: 16px; height: 16px; } 
 .chart{ background-position: 0 -54px; width: 16px; height: 16px; } 
@@ -23,3 +24,59 @@
 
 .bookmarkOff{ background-position: 0 0; width: 16px; height: 16px; opacity:.3}
 
+.ticket:before,.bug:before{
+	content:", ";
+	font-family:"WebSymbolsRegular";	
+}
+.google:before{
+	content:"g ";
+	color:maroon;
+	font-family:"WebSymbolsRegular";
+}
+
+.bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart{background:none transparent;}
+.magnifier:before{
+	content:"L ";
+	color:rgb(0,0,0);
+	font-family:"WebSymbolsRegular";
+	font-size:12px;
+}
+.group:before{
+	content:"F ";
+	color:rgb(0,0,0);
+	font-family:"WebSymbolsRegular";
+	font-size:12px;
+}
+.user:before{
+	content:"U ";
+	color:rgb(0,0,0);
+	font-family:"WebSymbolsRegular";
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	font-size:12px;
+}
+.closed:before{
+	content:"Z ";
+	color:rgb(0,0,0);
+	font-family:"WebSymbolsRegular";
+	font-size:12px;
+}
+.chart:before{
+	content:"u ";
+	color:black;
+	font-family:"WebSymbolsRegular";
+	font-size:12px
+}
+.bookmark:before{
+	content:"R ";
+	color:rgb(255,255,0);
+	font-family:"WebSymbolsRegular";
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	font-size:12px;
+}
+.bookmarkOff:before{
+	content:"R ";
+	color:black;
+	font-family:"WebSymbolsRegular";
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	font-size:12px
+}

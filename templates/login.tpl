@@ -46,7 +46,7 @@
 			Local Ticket Login
 		</button>
 		<button class="button" id="googleLogin" style="width:auto;">
-			<span class="ticket_button ticketSprite google">Login with Google</span>
+			<span class="google">Login with Google</span>
 		</button>
 		<div class="box_transition textMessages" style="opacity:0;color:#f00;font-weight:bold;display:inline-block;" id="requestSent">
 			Request Sent, Check your inbox.

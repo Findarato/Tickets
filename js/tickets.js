@@ -898,9 +898,9 @@ function loadTicketList(pageNumber,queryObj) {
 		     $("<tr/>")
 		      .css({"padding":"3px","margin":"3px"})
 		      .html(
-		        $("<td/>",{"class":"bookmark"})
+		        $("<td/>")
 		          .html(
-                $("<div/>",{id:"bookmark"+item.id,css:{},"class":" ticketSprite nolink "+bmClass})
+                $("<div/>",{id:"bookmark"+item.id,css:{},"class":"nolink "+bmClass})
                 .click(function(){
                   me = $(this);
                   if(me.hasClass("bookmarkOff")){favVal = 1;}else{favVal = 0;}
@@ -1218,7 +1218,6 @@ function loadUserPage(userId){
 				);
 		Tlb.find("#openBugs").append(data.bugs.byMeOpen);
 	});
-	
 	if (localUser) {
 		Tlb.find("#follow").click(function(){
 			jQuery.post(uri + "ajax/login.php", {
@@ -1234,7 +1233,6 @@ function loadUserPage(userId){
 				opt: 1
 			}, function(data){
 				checkResponse(data);
-
 			}, "json");
 		});
 		Tlb.find("#userSecondaryEmail").blur(function(){
@@ -1477,8 +1475,8 @@ jQuery(document).ready(function () {
 
 	if(localStorage.userId > 0){ // Lets make sure that there is a user 
 		uI = $.parseJSON(localStorage.userInfo);
-		alert(localStorage.userId);
-		alert(JSON.stringify(localStorage.userInfo.permissions));
+		//alert(localStorage.userId);
+		//alert(JSON.stringify(localStorage.userInfo.permissions));
 		$.each(uI,function(key,value){
 			//value
 		});		
@@ -1606,9 +1604,9 @@ jQuery(document).ready(function () {
 	});
 
 	$(".tab").bind("click",function(){
-		$(".tab").removeClass("selectedTab");
+		$(".tab").removeClass("selectedTab shadowUp");
 		me = $(this);
-		me.addClass("selectedTab").blur();
+		me.addClass("selectedTab shadowUp").blur();
 		//me.find(":first-child").trigger("click");
 	});
 
