@@ -34,9 +34,15 @@
 	font-family:"WebSymbolsRegular";
 }
 
-.bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart{background:none transparent;}
+.bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil{background:none transparent;}
 .magnifier:before{
 	content:"L ";
+	color:rgb(0,0,0);
+	font-family:"WebSymbolsRegular";
+	font-size:12px;
+}
+.pencil:before{
+	content:"e ";
 	color:rgb(0,0,0);
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
