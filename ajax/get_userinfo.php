@@ -1,4 +1,4 @@
-<?php
+<?Php
 
 include "../small_header.php";
 header('Content-type: application/json');
@@ -7,6 +7,8 @@ $json = array();
 
 //print_r($usr);
 $_GET = $db->Clean($_GET,true);
+if(!isset($_GET["userId"])) die("no user id passed");
+
 
 function formatData($graphData,$monthData){
 	$displayData = array();
@@ -39,7 +41,7 @@ SELECT
 	u.firstname,
 	u.lastname,
 	u.username,
-	DATE_FORMAT(u.joined	, '%M %e, %Y') AS joined,
+	DATE_FORMAT(u.joined, '%M %e, %Y') AS joined,
 	u.email_address,
 	u.type 
 FROM 
@@ -47,7 +49,6 @@ FROM
 WHERE 
 	id=".$_GET["userId"]
 ,false,"assoc");
-
 $json["userInfo"]["mdEmail"] = md5( strtolower( trim( $json["userInfo"]["email_address"] ) ) ); 
 
 $json["userInfo"]["permissions"] = $db->Query("
@@ -80,9 +81,7 @@ WHERE
 	user_id=".$_GET["userId"]
 ,false,"assoc");
 
-
 $json["userInfo"]["tickets"]["altEmail"] = $db->Query("
-
 SELECT
 	email
 FROM 
@@ -92,7 +91,7 @@ WHERE
 ,false,"row");
 
 
-$json["userInfo"]["departments"] = $db->Query("
+$json["departments"] = $db->Query("
 SELECT
 	id,name
 FROM 
@@ -100,10 +99,10 @@ FROM
 ,false,"assoc");
 
 $holderArray = array();
-foreach ($json["userInfo"]["departments"] as $key => $data){
+foreach ($json["departments"] as $key => $data){
 	$holderArray[intval($data["id"])] = $data["name"];
 }
-$json["userInfo"]["departments"] = $holderArray;
+$json["departments"] = $holderArray;
 
 $months = array(1,2,3,4,5,6,7,8,9,10,11,12);
 $monthLables = array();
@@ -152,4 +151,3 @@ $json["responses"]["graph"]["byMe"]["title"] = "Responses Added";
 $json["userInfo"]["openIdLinks"] = $db->Query("SELECT count(user_id) FROM tickets.openId_users WHERE user_id=".$_GET["userId"],false,"row"); 
 
 echo json_encode($json);
-?>    

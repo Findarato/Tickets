@@ -19,6 +19,8 @@ a:hover {text-decoration: underline}
 .fontBold{font-weight: bold;}
 .font-italic{font-style: italic;}
 .fake-link{cursor: pointer;}
+.ticketLeft{float:left;}
+.ticketRight{float:right;}
 
 /* New ticket image sprite*/
 .ticket_button {

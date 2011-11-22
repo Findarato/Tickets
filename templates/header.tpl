@@ -18,29 +18,21 @@
 					</div>
 				</div>
 			</div> <!-- End of logo Stuff -->
-			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 1 -->
-				<div id="ticketTab" class="tab border-bottom-Main-1 roundTop4" >
-					<a class="ticket_button ticketSprite ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Tickets</span></a>
+			<div class="border-bottom-Main-1" style="width:350px;display:table-cell">
+				<div id="ticketTab" class="tab roundTop4 insideBorder ticketLeft "><!-- Start of Tab 1 -->
+					<a class="ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;">Tickets</a>
 				</div>
-			</div>	
-			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 2 -->
-				<div id="bugTab" class="tab border-bottom-Main-1 roundTop4">
-					<a class=" ticket_button ticketSprite bug nolink fontMain " href="#bugs" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Bugs</span></a>
+				<div id="bugTab" class="tab roundTop4 insideBorder ticketLeft"><!-- Start of Tab 2 -->
+					<a class="bug nolink fontMain " href="#bugs" id="" style="padding-right:5px;width:auto;text-decoration:none;">Bugs</a>
 				</div>
-			</div>	
-			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 3 -->
-				<div id="searchTab" class="tab border-bottom-Main-1 roundTop4">
-					<a class=" ticket_button ticketSprite magnifier nolink fontMain" href="#search" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Search</span></a>
+				<div id="searchTab" class="tab roundTop4 insideBorder ticketLeft"><!-- Start of Tab 3 -->
+					<a class="magnifier nolink fontMain" href="#search" id="" style="padding-right:5px;width:auto;text-decoration:none;">Search</a>
 				</div>
-			</div>
-			<div style="display:table-cell;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 4 -->
-				<div id="statsTab" class="tab border-bottom-Main-1 roundTop4">
-					<a class=" ticket_button ticketSprite chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Stats</span></a>
+				<div id="statsTab" class="tab roundTop4 insideBorder ticketLeft"><!-- Start of Tab 4 -->
+					<a class="chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;">Stats</a>
 				</div>
-			</div>
-			<div class="ADMIN" style="display:none;width:30px;height:auto;vertical-algin:top;position:relative;"><!-- Start of Tab 5 -->
-				<div id="adminTab" class="tab border-bottom-Main-1 roundTop4">
-					<a class=" ticket_button ticketSprite warning nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;"><span>Admin</span></a>
+				<div id="adminTab" class="ADMIN tab roundTop4 insideBorder ticketLeft" style="display:none"><!-- Start of Tab 5 -->
+					<a class="warning nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;">Admin</a>
 				</div> 
 			</div>
 			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right">&nbsp;</div>

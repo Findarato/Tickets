@@ -1,4 +1,4 @@
-.ticketSprite{	background: url(iconSprite.png) no-repeat top left;}
+.bookmark,.bookmarkOff,.bug,.calendar,.chart,.closed,.folder,.gear,.group,.heart,.infocard,.lock,.magnifier,.pencil,.star,.user,.warning{background: url(iconSprite.png) no-repeat top left;}
 .bookmark{ background-position: 0 0; width: 10px; height: 26px; } 
 .bug{ background-position: 0 -28px; width: 22px; height: 23px; } 
 .calendar{ background-position: 0 -53px; width: 23px; height: 25px; } 
