@@ -82,18 +82,19 @@ ul li,ol li {padding-left: 5px}
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-
 .ticketBox{
 	max-height:400px;
-	width:98%;
+	width:600px;
 	padding:5px 0 5px 5px;
 	margin:3px;
 	position:relative;
+	display:table-row;
 }
 .ticketUserIconBox{
 	height:32px;
 	width:32px;
 	background-image:url(http://www.gravatar.com/avatar/{hash}?s=32&d=identicon&r=g);
+	display:none;
 }
 .ticketIdBox{
 	height:15px;
@@ -102,11 +103,11 @@ ul li,ol li {padding-left: 5px}
 	text-align:center;
 	font-size:11px;
 	padding-top:2px;
+	display:table-cell;
 }
 .ticketTitleBox{
 	padding-left:7px;
-	top:4px;
-	left:50px;
+	display:table-cell;
 }
 .ticketBodyBox{
 	max-width:230px;
@@ -115,6 +116,7 @@ ul li,ol li {padding-left: 5px}
 	padding-left:7px;
 	top:20px;
 	left:50px;
+	display:none;
 }
 .ticketCreatedOnBox{
 	bottom:7px;
@@ -126,6 +128,7 @@ ul li,ol li {padding-left: 5px}
 	border-right:none;
 	border-bottom:none;
 	float:right;
+	display:none;
 }
 .ticketCreatedByBox{
 	padding:1px;
@@ -134,12 +137,18 @@ ul li,ol li {padding-left: 5px}
 	text-align:left;
 	font-size:8px;
 	position:relative;
+	display:none;
 }
 .ticketBookmarkBox{
 	top:0;
 	right:0;
 	padding:1px;
 	overflow:hidden;
-	border-right:none;
-	border-top:none;
+	display:table-cell;
+	position: relative;
+}
+.ticketItem{
+	width:100%;
+	display:table;
+	height:20px;
 }

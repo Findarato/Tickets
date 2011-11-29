@@ -13,8 +13,9 @@
 		<link href='/css/WebSymbols-Font-Pack/stylesheet.css' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/js/jquery-ui/css/redmond/jquery-ui-1.8.15.custom.css" rel="stylesheet" />	
         <link rel="stylesheet" media="screen" href="/css/foundation.css?v=1"  />
-        <link rel="stylesheet" media="screen and (max-width: 900px) " href="/css/handheld.css?v=1"  />
         <link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"/>
+        <link rel="stylesheet" media="screen and (max-width: 900px) " href="/css/handheld.css?v=1"  />
+        
         
         <link rel="shortcut icon" href="/bug.png">
         <link rel="apple-touch-icon" href="/bug.png">

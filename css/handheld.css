@@ -1,10 +1,5 @@
 
-* {
-  float: none;       /* Screens are not big enough to account for floats */
-  font-size: 80%;    /* Slightly reducing font size to reduce need to scroll */ 
-  background: #fff;  /*  As much contrast as possible */
-  color: #000;
-}
+body{background-color:#0F0}
 	.ticketSideLeft,.ticketSideRight{display:block;width:auto}
 	.border-right-Main-4{border-right:0px}
 	.ticket-divider{border-right:0px;}
@@ -51,19 +46,21 @@
 	margin-left:10px;
 	margin-right:10px;
 	width:96%;
+	display:block;
 }
-
 .ticketBox{
 	max-height:400px;
 	width:98%;
 	padding:5px 0 5px 5px;
 	margin:3px;
 	position:relative;
+	display:block;
 }
 .ticketUserIconBox{
 	height:32px;
 	width:32px;
 	background-image:url(http://www.gravatar.com/avatar/{hash}?s=32&d=identicon&r=g);
+	display:block;
 }
 .ticketIdBox{
 	height:15px;
@@ -72,11 +69,14 @@
 	text-align:center;
 	font-size:11px;
 	padding-top:2px;
+	display:block;
 }
 .ticketTitleBox{
 	padding-left:7px;
 	top:4px;
 	left:50px;
+	display:block;
+	position:absolute;
 }
 .ticketBodyBox{
 	max-width:230px;
@@ -85,6 +85,8 @@
 	padding-left:7px;
 	top:20px;
 	left:50px;
+	display:block;
+	position:absolute;
 }
 .ticketCreatedOnBox{
 	bottom:7px;
@@ -96,6 +98,7 @@
 	border-right:none;
 	border-bottom:none;
 	float:right;
+	display:block;
 }
 .ticketCreatedByBox{
 	padding:1px;
@@ -104,6 +107,7 @@
 	text-align:left;
 	font-size:8px;
 	position:relative;
+	display:block;
 }
 .ticketBookmarkBox{
 	top:0;
@@ -112,5 +116,11 @@
 	overflow:hidden;
 	border-right:none;
 	border-top:none;
+	display:block;
+	position:absolute;
 }
-
+.ticketItem{
+	width:100%;
+	display:block;
+	height:auto;
+}
