@@ -764,16 +764,19 @@ function loadTicketList(pageNumber,queryObj) {
 		Params.LastArea = "ticketList";	
 		Params.Content.html($("#generic").html());
 		Tlb = $("#ticketListbody").empty();
-		displayTable = $("<table/>",{"id":"displayTable","class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
+		//displayTable = $("<table/>",{"id":"displayTable","class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
+		
+		displayTable = $("<div/>",{"id":"ticketListTable","class":"t fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"}});
 		displayTable
 			.html(
-				$("<tr/>")
-					.append(function(){
+				$("<div/>",{id:"tableHeader","class":"tr",css:{"width":"100%","display":"block","background-color":"#f00"}})
+					.html(function(){
 						var defaultColmns = [
-							['','',"20px",true],
+							['&nbsp;','&nbsp;',"0px",true,],
+							['&nbsp;','&nbsp;',"20px",true,],
 							['id','ID',"45px",true],
-							['priority','Priority',"70px",true],
-							['title','Title',"auto",true],
+							['priority','Priority',"85px",true],
+							['title','Title',"600px",true],
 							['location','Location',"150px",true],
 							['category','Category',"150px",true],
 							['createdBy','Created By',"150px",true],
@@ -784,52 +787,17 @@ function loadTicketList(pageNumber,queryObj) {
 						toolBar = "";
 						$.each(defaultColmns,function(index,value){
 							if(value[3]==true){ // the colmn is being displayed. this will be useful when you can turn off colmns
-								toolBar +="<td class='ticketListSortable' style='width:"+value[2]+"'><a href='' style='width:"+value[2]+";position:relative;' data-order='asc' data-value='"+value[0]+"' class=' '>"+value[1]+"</a></td>";	
+								toolBar +="<div class='td ticketListSortable' style='width:"+value[2]+"'><a href='' style='width:"+value[2]+";position:relative;' data-order='asc' data-value='"+value[0]+"' class=' '>"+value[1]+"</a></div>";	
 							}
 						});
 						return toolBar;
 					})
-			)
-			displayTable
-				.find(".ticketListSortable a")
-					.attr("href",function(){
-						if(hash[2]==$(this).attr('data-value')){
-							if(hash[3]!=$(this).attr('data-order')){// lets make some quick adjustments
-								$(this).attr('data-order','desc')
-							}
-						}
-						return hash[0]+"/"+hash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order')
-					})
-					.addClass(function(){
-						if(hash[2]==$(this).attr('data-value')){
-							if(hash[3]==$(this).attr('data-order')){
-								if(hash[3] == "asc"){
-									return "sortDisplayAsc";
-								}else{
-									return "sortDisplayDesc";
-								}
-							}
-						}
-					})
-					.click(function(){
-						me = $(this);
-						
-						
-						if(me.attr("data-order")=="desc"){
-							me.attr("data-order","asc");
-						}else{
-							me.attr("data-order","desc");
-						}
-						me.attr("href",hash[0]+"/"+hash[1]+"/"+me.attr('data-value')+"/"+me.attr('data-order'));
-						pageTracker._trackPageview(me.attr("href"));
-						setHash(me.attr("href"));
-						//return false;
-					});
+			).append($("<div/>",{id:"tableBody","class":"t",css:{"width":"100%","clear":"both"}}))
 	}
 	
 	
-	
-	Tlb.html(displayTable); // lets make sure something gets on the page
+	Tlb.html(displayTable) // lets make sure something gets on the page
+	var tableBody = displayTable.find("#tableBody"); 
 	/*
 		if(bugs == 1){ //bugs display
 		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
@@ -893,14 +861,11 @@ function loadTicketList(pageNumber,queryObj) {
 		      bmClass = "bookmark";
 		    }
 		  }
-		  displayTable
+		  tableBody
 		    .append(
-		     $("<tr/>")
-		      .css({"padding":"3px","margin":"3px"})
+		     $("<div/>",{id:"row"+item.id,"class":"ticketBox"}) // Row of the table
 		      .html(
-		        $("<td/>")
-		          .html(
-                $("<div/>",{id:"bookmark"+item.id,css:{},"class":"nolink "+bmClass})
+                $("<div/>",{id:"bookmark"+item.id,css:{"width":"20px"},"class":"ticketBookmarkBox nolink "+bmClass})
                 .click(function(){
                   me = $(this);
                   if(me.hasClass("bookmarkOff")){favVal = 1;}else{favVal = 0;}
@@ -920,20 +885,15 @@ function loadTicketList(pageNumber,queryObj) {
                   });
                   me.toggleClass("bookmark-off").toggleClass("bookmark");
                 })
-              )
 		      )
 		      .append(
-		        function(){
-	            html = $("<td/>",{"class":"ticketId"})
+	            $("<div/>",{"class":"ticketId td",css:{"width":"45px"}})
                 .addClass("borderBottomBlack")
                 .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontMain").html(item.id).attr({"id": "ID" + item.id }))
-		          return html;
-		        }
-		         
 		      )
 		      .append( 
-		        $("<td/>")
-		          .addClass("borderBottomBlack fontMain ticketPriority")
+		        $("<div/>") // Priority
+		          .addClass("borderBottomBlack fontMain ticketPriority td")
 		          .css({"width":"70px","text-align":"right"})
 		          .html(
     		        function(i,html){
@@ -949,17 +909,16 @@ function loadTicketList(pageNumber,queryObj) {
     		        }
     		      )
     		   )		      
-		      .append($("<td/>")
-		        .addClass("borderBottomBlack",{"class":"ticketTitle"})
+		      .append($("<div/>",{css:{"width":"600px","overflow":"hidden"},"class":"ticketTitle ticketTitleBox borderBottomBlack"})
 		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontBold fontMain").html(item.subject).attr({"id": "subject" + item.id }))
 		      )
 		      .append(
 		        function(){
 		          if(bugs){
 		            if(item.project_id === undefined || item.project_id == 0){ item.project_id = 1; } // fix bugs that do not have a project.  Default them to the first project
-		            return $("<td/>").html(Params.Projects[item.project_id-1].name).addClass("borderBottomBlack fontMain ticketProjectLocation")
+		            return $("<div/>").html(Params.Projects[item.project_id-1].name).addClass("borderBottomBlack fontMain ticketProjectLocation td")
 		          }else{
-		            return $("<td/>").html(item.locationName).addClass("borderBottomBlack fontMain ticketProjectLocation")
+		            return $("<div/>").html(item.locationName).addClass("borderBottomBlack fontMain ticketProjectLocation td")
 		          } 
 		        }
 		      )
@@ -967,41 +926,41 @@ function loadTicketList(pageNumber,queryObj) {
 		      .append(
 		        function(){
 		          if(bugs){
-		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy")
+		            return $("<div/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy td")
 		          }else{
-		            return $("<td/>").html(item.category).addClass("borderBottomBlack fontMain ticketCategory");    
+		            return $("<div/>").html(item.category).addClass("borderBottomBlack fontMain ticketCategory td");    
 		          }
 		        }
 		      )
 		      .append(
 		        function(i,html){
 		          if(bugs){
-		            return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn")
+		            return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn td")
 		          }else{
-		            return $("<td/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy")
+		            return $("<div/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy td")
 		          } 
 		        }
 		       )
 		      .append(
 		        function(i,html){
 		          if(bugs){
-		            return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn")
+		            return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn td")
 		          }else{
-		            return $("<td/>").html(item.firstname+" "+item.lastname).addClass("borderBottomBlack fontMain ticketAssigned")
+		            return $("<div/>").html(item.firstname+" "+item.lastname).addClass("borderBottomBlack fontMain ticketAssigned td")
 		          } 
 		        }
 		       )
 		      .append(
 		        function(){
 		          if(!bugs){
-		            return $("<td/>").html(item.due_on).addClass("borderBottomBlack fontMain ticketListDueOn");
+		            return $("<div/>").html(item.due_on).addClass("borderBottomBlack fontMain ticketListDueOn ticketLeft");
 		          }  
 		        }
 		      )
 		      .append(
 		        function(){
 		        	if(!bugs){
-		            	return $("<td/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketListCreatedOn");
+		            	return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketListCreatedOn ticketLeft");
 		           }
 		        }
 		      )		      
@@ -1262,9 +1221,12 @@ function loadLoginPage(){
 	}
 	var blankId = 9999999;
 	var newTicketTpl = 
-		$("<div/>",{"class":"ticketBox insideBorder roundAll4 border-all-Main-1"})
+		$("<div/>",{"class":"ticketBox insideBorder roundAll4 border-all-Main-1 newTicketTpl"})
 			.html(
-				$("<div/>",{"class":"item"})
+				$("<div/>",{"class":"ticketItem"})
+					.append( // Ticket Bookmark
+						$("<div/>",{"class":"ticketBookmarkBox colorMain-2 roundTopRight4 ticketSprite nolink bookmarkOff",id:"ticketFavorite"})
+					)
 					.append( // User Icon Box
 						$("<div/>",{"class":"ticketUserIconBox colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
 					)	
@@ -1272,26 +1234,24 @@ function loadLoginPage(){
 						$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":blankId.toString(16),id:"ticketId"})
 					)
 					.append( //Ticket Title
-						$("<div/>",{"class":"ticketTitleBox ticketTitle ticketAbsolute",id:"title"}).html("Title of the ticket")
+						$("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
 					)
 					.append( // Ticket Body
-						$("<div/>",{"class":"ticketBodyBox ticketAbsolute",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
+						$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 					)
 					.append( // Ticket Created On
-						$("<div/>",{"class":"ticketCreatedOnBox ticketAbsolute colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+						$("<div/>",{"class":"ticketCreatedOnBox colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
 					)
 					.append( // Ticket Created By
-						$("<div/>",{"class":"ticketCreatedByBox ticketAbsolute colorMain-2 border-all-B-1",id:"tickCreatedBy"}).html("By: John Doe")
+						$("<div/>",{"class":"ticketCreatedByBox colorMain-2 border-all-B-1",id:"tickCreatedBy"}).html("By: John Doe")
 					)
-					.append( // Ticket Bookmark
-						$("<div/>",{"class":"ticketBookmarkBox ticketAbsolute colorMain-2 border-all-B-1 roundTopRight4 ticketSprite nolink bookmarkOff",id:"ticketFavorite"})
-					)
+
 			);
 
 		$.getJSON(uri + "ajax/get_ticketList.php", {"area":"recent","login":1,"count":5}, function (data) {
 			loginNewBox.empty();
 			$.each(data.tickets.reverse(),function(index,value){
-				smallTicket = newTicketTpl.clone()
+				smallTicket = newTicketTpl.clone();
 				smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
 				smallTicket.find("#title").attr("id","title-"+value.id).html(value.subject);
 				smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
