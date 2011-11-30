@@ -42,7 +42,40 @@ var Params = {
 	"FavoriteObject":[],
 	"NavArea":""
 };
+var blankId = 9999999;
+var newTicketTpl = 
+	$("<div/>",{"class":"ticketBox insideBorder roundAll4 border-all-Main-1 newTicketTpl"})
+		.html(
+			$("<div/>",{"class":"ticketItem"})
+				.append( // Ticket Bookmark
+					$("<div/>",{"class":"ticketBookmarkBox colorMain-2 roundTopRight4 ticketSprite nolink bookmarkOff",id:"ticketFavorite"})
+				)
+				.append( // User Icon Box
+					$("<div/>",{"class":"ticketUserIconBox colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
+				)	
+				.append( // Ticket ID
+					$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":blankId.toString(16),id:"ticketId"})
+				)
+				.append( // Ticket Priority
+					$("<div/>",{"class":"ticketPriorityBox colorMain-2 border-all-B-1 roundAll2","html":"",id:"ticketPriority"})
+				)
+				.append( //Ticket Title
+					$("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
+				)
+				.append( // Ticket Body
+					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
+				)
+				.append( // Ticket Created On
+					$("<div/>",{"class":" colorMain-2 border-all-B-1 roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+				)
+				.append( // Ticket Created By
+					$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
+				)
+				.append( // Ticket Category
+					$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketCategoryBox",id:"tickCategory"}).html("Cool Beans")
+				)
 
+		);
 function alertTest(tst){alert(tst);}
 function focusMe(id){
 	window.scrollBy(0,5000);
@@ -848,6 +881,25 @@ function loadTicketList(pageNumber,queryObj) {
 		    }		
 		}	
 	}
+	
+	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
+		pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
+		tableBody.empty();
+		$.each(data.tickets,function(index,value){
+			smallTicket = newTicketTpl.clone();
+			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
+			smallTicket.find("#title").attr("id","title-"+value.id).html(
+				$("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(value.subject).attr({"id": "subject" + value.id })
+			);
+			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
+			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
+			smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
+			smallTicket.find("#tickCategory").attr("id","tickCategory-"+value.id).html(value.category);
+			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
+			tableBody.append(smallTicket);
+		});
+	});
+	/*
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
 		var s_ocd; //string open closed display
 		var s_tr; // string time remaining
@@ -970,6 +1022,7 @@ function loadTicketList(pageNumber,queryObj) {
 	//	displayTable.append(display);
 		
 	});
+	*/
 }
 function loadUserPage(userId){
 	//alert(userId)
@@ -1219,48 +1272,19 @@ function loadLoginPage(){
 		Params.Content.load("templates/login.tpl");
 		loginNewBox = Params.Content.find("#ticketLoginList");
 	}
-	var blankId = 9999999;
-	var newTicketTpl = 
-		$("<div/>",{"class":"ticketBox insideBorder roundAll4 border-all-Main-1 newTicketTpl"})
-			.html(
-				$("<div/>",{"class":"ticketItem"})
-					.append( // Ticket Bookmark
-						$("<div/>",{"class":"ticketBookmarkBox colorMain-2 roundTopRight4 ticketSprite nolink bookmarkOff",id:"ticketFavorite"})
-					)
-					.append( // User Icon Box
-						$("<div/>",{"class":"ticketUserIconBox colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
-					)	
-					.append( // Ticket ID
-						$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":blankId.toString(16),id:"ticketId"})
-					)
-					.append( //Ticket Title
-						$("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
-					)
-					.append( // Ticket Body
-						$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
-					)
-					.append( // Ticket Created On
-						$("<div/>",{"class":" colorMain-2 border-all-B-1 roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
-					)
-					.append( // Ticket Created By
-						$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
-					)
-
-			);
-
-		$.getJSON(uri + "ajax/get_ticketList.php", {"area":"recent","login":1,"count":5}, function (data) {
-			loginNewBox.empty();
-			$.each(data.tickets.reverse(),function(index,value){
-				smallTicket = newTicketTpl.clone();
-				smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
-				smallTicket.find("#title").attr("id","title-"+value.id).html(value.subject);
-				smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
-				smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
-				smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
-				smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
-				loginNewBox.append(smallTicket);
-			});
+	$.getJSON(uri + "ajax/get_ticketList.php", {"area":"recent","login":1,"count":5}, function (data) {
+		loginNewBox.empty();
+		$.each(data.tickets.reverse(),function(index,value){
+			smallTicket = newTicketTpl.clone();
+			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
+			smallTicket.find("#title").attr("id","title-"+value.id).html(value.subject);
+			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
+			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
+			smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
+			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
+			loginNewBox.append(smallTicket);
 		});
+	});
 		
 		
 		//testone = newTicketTpl.clone()
