@@ -79,6 +79,7 @@ body{background-color:#0F0}
 	padding-left:7px;
 	top:4px;
 	left:50px;
+	width:auto;
 	display:block;
 	position:absolute;
 }
@@ -93,19 +94,30 @@ body{background-color:#0F0}
 	position:absolute;
 }
 .ticketCreatedOnBox{
-	
 	text-align:right;
 	font-size:8px;
 	padding:1px;
 	position:relative;
-	border-left:none;
 	border-right:none;
 	border-bottom:none;
 	float:right;
 	display:block;
-	border-right:auto;
 	height:auto;
 	width:auto;
+	margin-right:0px;
+}
+.ticketCategoryBox{
+	text-align:right;
+	font-size:8px;
+	padding:1px;
+	position:relative;
+	border-right:none;
+	border-bottom:none;
+	float:right;
+	display:block;
+	height:auto;
+	width:auto;
+	margin-right:0px;
 }
 .ticketCreatedByBox{
 	padding:1px;
@@ -115,7 +127,6 @@ body{background-color:#0F0}
 	font-size:8px;
 	position:relative;
 	display:block;
-
 	height:auto;
 	width:auto;
 }
