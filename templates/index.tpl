@@ -12,8 +12,9 @@
         <link href='http://fonts.googleapis.com/css?family=Snippet|Stardos+Stencil|Open+Sans+Condensed:300|Inconsolata|Ubuntu|Droid+Sans|Droid+Sans+Mono|Droid+Serif&v2' rel='stylesheet' type='text/css'>
 		<link href='/css/WebSymbols-Font-Pack/stylesheet.css' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/js/jquery-ui/css/redmond/jquery-ui-1.8.15.custom.css" rel="stylesheet" />	
-        <link rel="stylesheet" media="screen" href="/css/foundation.css?v=1"  />
+        
         <link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"/>
+        <link rel="stylesheet" media="screen" href="/css/foundation.css?v=1"  />
         <link rel="stylesheet" media="screen and (max-width: 900px) " href="/css/handheld.css?v=1"  />
         
         
