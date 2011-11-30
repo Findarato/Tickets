@@ -1240,10 +1240,10 @@ function loadLoginPage(){
 						$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 					)
 					.append( // Ticket Created On
-						$("<div/>",{"class":"ticketCreatedOnBox colorMain-2 border-all-B-1 roundBottomRight4",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+						$("<div/>",{"class":" colorMain-2 border-all-B-1 roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
 					)
 					.append( // Ticket Created By
-						$("<div/>",{"class":"ticketCreatedByBox colorMain-2 border-all-B-1",id:"tickCreatedBy"}).html("By: John Doe")
+						$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
 					)
 
 			);

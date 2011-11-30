@@ -280,14 +280,6 @@ ul li{
 /** Full display  */
 .ticketSideLeft,.ticketSideRight{display:table-cell;width:auto;}
 .ticketSideLeft {width:300px;}
-#ticketLoginNewBox{
-	position: absolute;
-	top:150px;
-	left:100%;
-	margin-left:-450px;
-	width:400px;
-}
-
 
 .inlineUser{
 	background:none;
