@@ -72,7 +72,10 @@ var newTicketTpl =
 					$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
 				)
 				.append( // Ticket Category
-					$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketCategoryBox",id:"tickCategory"}).html("Cool Beans")
+					$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
+				)
+				.append( // Ticket Location
+					$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketLocationBox",id:"tickLocation"}).html("Cool Location")
 				)
 
 		);
@@ -920,9 +923,7 @@ function loadTicketList(pageNumber,queryObj) {
 		$.each(data.tickets,function(index,value){
 			smallTicket = newTicketTpl.clone();
 			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
-			smallTicket.find("#title").attr("id","title-"+value.id).html(
-				$("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(value.subject).attr({"id": "subject" + value.id })
-			);
+			smallTicket.find("#title").attr("id","title-"+value.id).html($("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(value.subject).attr({"id": "subject" + value.id }));
 			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
 			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
 			smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
