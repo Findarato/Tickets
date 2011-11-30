@@ -827,7 +827,39 @@ function loadTicketList(pageNumber,queryObj) {
 					})
 			).append($("<div/>",{id:"tableBody","class":"t",css:{"width":"100%","clear":"both"}}))
 	}
-	
+	displayTable
+		.find(".ticketListSortable a")
+			.attr("href",function(){
+				if(hash[2]==$(this).attr('data-value')){
+					if(hash[3]!=$(this).attr('data-order')){// lets make some quick adjustments
+						$(this).attr('data-order','desc')
+					}
+				}
+				return hash[0]+"/"+hash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order')
+			})
+			.addClass(function(){
+				if(hash[2]==$(this).attr('data-value')){
+					if(hash[3]==$(this).attr('data-order')){
+						if(hash[3] == "asc"){
+							return "sortDisplayAsc";
+						}else{
+							return "sortDisplayDesc";
+						}
+					}
+				}
+			})
+			.click(function(){
+				me = $(this);
+				if(me.attr("data-order")=="desc"){
+					me.attr("data-order","asc");
+				}else{
+					me.attr("data-order","desc");
+				}
+				me.attr("href",hash[0]+"/"+hash[1]+"/"+me.attr('data-value')+"/"+me.attr('data-order'));
+				pageTracker._trackPageview(me.attr("href"));
+				setHash(me.attr("href"));
+				//return false;
+			}); 
 	
 	Tlb.html(displayTable) // lets make sure something gets on the page
 	var tableBody = displayTable.find("#tableBody"); 
