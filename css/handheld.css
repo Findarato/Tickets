@@ -78,7 +78,8 @@ body{background-color:#0F0}
 }
 .ticketPriorityBox{
 	position:relative;
-	left:-3px;
+	margin-left:0;
+	padding:0px;
 }
 .ticketTitleBox{
 	padding-left:7px;

@@ -805,7 +805,7 @@ function loadTicketList(pageNumber,queryObj) {
 		displayTable = $("<div/>",{"id":"ticketListTable","class":"t fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"}});
 		displayTable
 			.html(
-				$("<div/>",{id:"tableHeader","class":"tr",css:{"width":"100%","display":"block","background-color":"#f00"}})
+				$("<div/>",{id:"tableHeader","class":"tr",css:{"width":"100%","display":"block"}})
 					.html(function(){
 						var defaultColmns = [
 							['&nbsp;','&nbsp;',"0px",true,],
@@ -817,7 +817,7 @@ function loadTicketList(pageNumber,queryObj) {
 							['category','Category',"150px",true],
 							['createdBy','Created By',"150px",true],
 							['dueOn','Due On',"150px",false],
-							['assigned','Assigned By',"150px",true],
+							['assigned','Assigned By',"150px",false],
 							['createdOn','Created On',"100px",true]
 						];
 						toolBar = "";
@@ -923,6 +923,18 @@ function loadTicketList(pageNumber,queryObj) {
 		$.each(data.tickets,function(index,value){
 			smallTicket = newTicketTpl.clone();
 			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
+			smallTicket.find("#ticketPriority").attr("id","ticketPriority-"+value.id).html(
+
+    		        		function(i,html){
+    		         			if(value.priority>0){
+    		           				if(value.priority>5){value.priority = value.priority-5;}
+    		           				if(value.priority == 5)value.priority --;
+    		           				//result = Params.Priority_string[item.priority].name;
+    		           				result = $("<div/>",{title:Params.Priority_string[value.priority].name}).addClass("pSquare p"+Params.Priority_string[value.priority].name.replace(" ",""));
+								}else{result = Params.Priority_string[0].name;}
+								return result;
+    		        		})	
+
 			smallTicket.find("#title").attr("id","title-"+value.id).html($("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(value.subject).attr({"id": "subject" + value.id }));
 			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
 			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
@@ -932,6 +944,9 @@ function loadTicketList(pageNumber,queryObj) {
 			tableBody.append(smallTicket);
 		});
 	});
+	
+
+	
 	/*
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
 		var s_ocd; //string open closed display

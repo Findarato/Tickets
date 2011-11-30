@@ -140,28 +140,29 @@ body, html {
  */
 .pSquare{
 	display:block;
-	border: 1px solid white;
-	height:13px;
+	/*border: 1px solid white;*/
+	height:16px;
 	width:13px;
 }
 .pLow{
 	background-color: #8cbf40;
-	border-color:#6a0;
+	/*border-color:#6a0;*/
+	width:25%;
 }
 .pMedium{
 	background-color:#bfbf4d;
-	border-color:#aa1;
-	width:26px;
+	/*border-color:#aa1;*/
+	width:50%;
 }
 .pHigh{
 	background-color:#e0c240;
-	border-color:#d6ae00;
-	width:39px;
+	/*border-color:#d6ae00;*/
+	width:75%;
 }
 .pMissionCritical{
 	background-color:#e6804d;
-	border-color:#d51;
-	width:65px;
+	/*border-color:#d51;*/
+	width:100%;
 }
 #rightSideFloater div{
 	/*height:20px;*/
