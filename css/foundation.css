@@ -103,9 +103,7 @@ ul li,ol li {padding-left: 5px}
 	background-image:url(http://www.gravatar.com/avatar/{hash}?s=32&d=identicon&r=g);
 	display:none;
 }
-.ticketPriorityBox{
-	margin-left:3px;	
-}
+
 .ticketIdBox,.ticketPriorityBox{
 	height:15px;
 	width:32px;
@@ -115,6 +113,14 @@ ul li,ol li {padding-left: 5px}
 	padding-top:2px;
 	display:inline-block;
 	vertical-align:top;
+}
+.ticketPriorityBox{
+	margin-left:3px;
+	overflow:hidden;
+	padding:0px;
+}
+.ticketIdBox{
+	padding:0px;
 }
 .ticketTitleBox{
 	padding-left:7px;
