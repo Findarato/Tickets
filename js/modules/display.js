@@ -413,3 +413,313 @@ function loadTicketBody(inputData, container) {
     me.toggleClass("bookmarkOff").toggleClass("bookmark");
 	});
 }
+function loadTicket(ticketId,update) {
+	if(Params.LastArea != "ticket"){
+	  Params.Content.html($("#ticketTpl").html());
+	  Params.LastArea = "ticket";
+	}
+	if(data = $.parseJSON(localStorage.getItem("TicketId"+ticketId))){
+  	loadTicketBody(data,Params.Content);
+	}else{
+		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {
+  		loadTicketBody(data,Params.Content);
+  		localStorage.setItem("TicketId"+ticketId,JSON.stringify(data)); // lets stick it inside of the storage.  
+		});
+	}
+	var hash = getHashArray();
+	if (hash[2] == "page" && hash[3] > -1) {
+		loadResponsesBody(ticketId, $("#replyareabody"), hash[3]); //load the selected response page
+	} else {
+		loadResponsesBody(ticketId, $("#replyareabody"), 0);
+	} //load the responses page 0
+}
+function loadTicketList(pageNumber,queryObj) {
+	var html = "";
+	var bugs = false;
+	var ticketCount = 0;
+	if (pageNumber < 0) {	pageNumber = 0;}
+	var hash = getHashArray();
+	if(Params.LastArea == "ticketList"){ // This is a new display of data, not a change of locations
+		//alert(Params.Content.html());
+		if($("#displayTable").html() == null){
+			Params.LastArea = ""; // this is a bug and needs to be reset to keep working;
+			//alert("There was an error :255AA Could not find table")
+			loadTicketList(pageNumber,queryObj); // lets just take what was passed to this function and recall it 
+			return false; // lets get out of the function already
+		}
+		displayTable = $("#displayTable");
+	}else{ // this just needs to be repopulated with out replacing the headers
+		Params.LastArea = "ticketList";	
+		Params.Content.html($("#generic").html());
+		Tlb = $("#ticketListbody").empty();
+		//displayTable = $("<table/>",{"id":"displayTable","class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
+		
+		displayTable = $("<div/>",{"id":"ticketListTable","class":"t fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"}});
+		displayTable
+			.html(
+				$("<div/>",{id:"tableHeader","class":"tr",css:{"width":"100%","display":"block"}})
+					.html(function(){
+						var defaultColmns = [
+							['&nbsp;','&nbsp;',"0px",true,],
+							['&nbsp;','&nbsp;',"20px",true,],
+							['id','ID',"45px",true],
+							['priority','Priority',"85px",true],
+							['title','Title',"600px",true],
+							['location','Location',"150px",true],
+							['category','Category',"150px",true],
+							['createdBy','Created By',"150px",true],
+							['dueOn','Due On',"150px",false],
+							['assigned','Assigned By',"150px",false],
+							['createdOn','Created On',"100px",true]
+						];
+						toolBar = "";
+						$.each(defaultColmns,function(index,value){
+							if(value[3]==true){ // the colmn is being displayed. this will be useful when you can turn off colmns
+								toolBar +="<div class='td ticketListSortable' style='width:"+value[2]+"'><a href='' style='width:"+value[2]+";position:relative;' data-order='asc' data-value='"+value[0]+"' class=' '>"+value[1]+"</a></div>";	
+							}
+						});
+						return toolBar;
+					})
+			).append($("<div/>",{id:"tableBody","class":"t",css:{"width":"100%","clear":"both"}}))
+	}
+	displayTable
+		.find(".ticketListSortable a")
+			.attr("href",function(){
+				if(hash[2]==$(this).attr('data-value')){
+					if(hash[3]!=$(this).attr('data-order')){// lets make some quick adjustments
+						$(this).attr('data-order','desc')
+					}
+				}
+				return hash[0]+"/"+hash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order')
+			})
+			.addClass(function(){
+				if(hash[2]==$(this).attr('data-value')){
+					if(hash[3]==$(this).attr('data-order')){
+						if(hash[3] == "asc"){
+							return "sortDisplayAsc";
+						}else{
+							return "sortDisplayDesc";
+						}
+					}
+				}
+			})
+			.click(function(){
+				me = $(this);
+				if(me.attr("data-order")=="desc"){
+					me.attr("data-order","asc");
+				}else{
+					me.attr("data-order","desc");
+				}
+				me.attr("href",hash[0]+"/"+hash[1]+"/"+me.attr('data-value')+"/"+me.attr('data-order'));
+				pageTracker._trackPageview(me.attr("href"));
+				setHash(me.attr("href"));
+				//return false;
+			}); 
+	
+	Tlb.html(displayTable) // lets make sure something gets on the page
+	var tableBody = displayTable.find("#tableBody"); 
+	/*
+		if(bugs == 1){ //bugs display
+		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
+		}else{ //tickets display
+		}
+		*/	
+	if(queryObj){
+		O_search = queryObj;
+		O_search.type = "search";
+		O_search.page = pageNumber;	
+	    if(hash[0]=="#bugs"){
+	    	if(Params.NavArea!="bugs"){changeArea("bugs");Params.NavArea=="bugs";}
+	    }else{
+	    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
+	    }				
+	}else{ //this happens when there is no query object being sent.  Also when the tabs are clicked, as a specific query is being used by the tabs
+		O_search = {
+			"page": pageNumber,
+			"search": {}
+		};
+		if (hash[1]) { //there is something other than #ticketlist
+			for (a = 1; a < hash.length; a++) { //we will now loop though search
+				if (a == hash.length) {alert("Something is broke :Error #775A2")
+				} else {
+					/*
+					var holder = a + 1;
+					if (!hash[holder]) {hash[holder] = "1";	}
+					*/
+					switch (a){
+						case 1: //this should always be the category
+							O_search["area"] = hash[1]; 
+						break;
+						case 2:
+							O_search["sort"] = hash[2];
+						break;
+						case 3:
+							O_search["direction"] = hash[3];
+						break;						
+						default:break;
+					}
+				}
+			} // end for loop
+			
+		    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1 || hash[1]=="bugs"){
+		    	if(Params.NavArea!="bugs"){changeArea("bugs");Params.NavArea=="bugs";}
+		    }else{
+		    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
+		    }		
+		}	
+	}
+	
+	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
+		pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
+		tableBody.empty();
+		$.each(data.tickets,function(index,value){
+			smallTicket = newTicketTpl.clone();
+			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
+			smallTicket.find("#ticketPriority").attr("id","ticketPriority-"+value.id).html(
+	    		function(i,html){
+	     			if(value.priority>0){
+	       				if(value.priority>5){value.priority = value.priority-5;}
+	       				if(value.priority == 5)value.priority --;
+	       				//result = Params.Priority_string[item.priority].name;
+	       				result = $("<div/>",{title:Params.Priority_string[value.priority].name}).addClass("pSquare p"+Params.Priority_string[value.priority].name.replace(" ",""));
+					}else{result = Params.Priority_string[0].name;}
+					return result;
+	    		})	
+			smallTicket.find("#title").attr("id","title-"+value.id).html($("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(value.subject).attr({"id": "subject" + value.id }));
+			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
+			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
+			smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
+			smallTicket.find("#tickCategory").attr("id","tickCategory-"+value.id).html(value.category);
+			smallTicket.find("#tickLocation").attr("id","tickLocation-"+value.id).html(value.locationName);
+			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
+			tableBody.append(smallTicket);
+		});
+	});
+	
+
+	
+	/*
+	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
+		var s_ocd; //string open closed display
+		var s_tr; // string time remaining
+    if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
+		pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
+		// This part just adds creates the table and puts the results in it		
+		$.each(data.tickets, function (i, item) {
+		  bmClass = "bookmarkOff";
+		  for(var a in Params.FavoriteObject){
+		    if(Params.FavoriteObject[a]==item.id){
+		      bmClass = "bookmark";
+		    }
+		  }
+		  tableBody
+		    .append(
+		     $("<div/>",{id:"row"+item.id,"class":"ticketBox"}) // Row of the table
+		      .html(
+                $("<div/>",{id:"bookmark"+item.id,css:{"width":"20px"},"class":"ticketBookmarkBox nolink "+bmClass})
+                .click(function(){
+                  me = $(this);
+                  if(me.hasClass("bookmarkOff")){favVal = 1;}else{favVal = 0;}
+                  bookmarkId = this.id.replace("bookmark","");
+                  $.getJSON("ajax/tickets.php",{"type":"favorite","ticket_id":bookmarkId,"favorite":favVal},function(data){
+                    checkResponse(data);
+                    if(favVal ==0){//removing a favorite
+                      for(var i in Params.FavoriteObject){
+                        if(Params.FavoriteObject[i]==bookmarkId){
+                          delete Params.FavoriteObject[i];
+                        }
+                      }
+                    }else{
+                      Params.FavoriteObject[Params.FavoriteObject.length+1] = bookmarkId;
+                    }
+                    updateFavorites();
+                  });
+                  me.toggleClass("bookmark-off").toggleClass("bookmark");
+                })
+		      )
+		      .append(
+	            $("<div/>",{"class":"ticketId td",css:{"width":"45px"}})
+                .addClass("borderBottomBlack")
+                .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontMain").html(item.id).attr({"id": "ID" + item.id }))
+		      )
+		      .append( 
+		        $("<div/>") // Priority
+		          .addClass("borderBottomBlack fontMain ticketPriority td")
+		          .css({"width":"70px","text-align":"right"})
+		          .html(
+    		        function(i,html){
+    		         if(item.priority>0){
+    		           if(item.priority>5){item.priority = item.priority-5;}
+    		           if(item.priority == 5)item.priority --;
+    		           //result = Params.Priority_string[item.priority].name;
+    		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
+    		           
+    		           }
+    		         else{result = Params.Priority_string[0].name;}
+    		           return result;
+    		        }
+    		      )
+    		   )		      
+		      .append($("<div/>",{css:{"width":"600px","overflow":"hidden"},"class":"ticketTitle ticketTitleBox borderBottomBlack"})
+		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontBold fontMain").html(item.subject).attr({"id": "subject" + item.id }))
+		      )
+		      .append(
+		        function(){
+		          if(bugs){
+		            if(item.project_id === undefined || item.project_id == 0){ item.project_id = 1; } // fix bugs that do not have a project.  Default them to the first project
+		            return $("<div/>").html(Params.Projects[item.project_id-1].name).addClass("borderBottomBlack fontMain ticketProjectLocation td")
+		          }else{
+		            return $("<div/>").html(item.locationName).addClass("borderBottomBlack fontMain ticketProjectLocation td")
+		          } 
+		        }
+		      )
+
+		      .append(
+		        function(){
+		          if(bugs){
+		            return $("<div/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy td")
+		          }else{
+		            return $("<div/>").html(item.category).addClass("borderBottomBlack fontMain ticketCategory td");    
+		          }
+		        }
+		      )
+		      .append(
+		        function(i,html){
+		          if(bugs){
+		            return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn td")
+		          }else{
+		            return $("<div/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy td")
+		          } 
+		        }
+		       )
+		      .append(
+		        function(i,html){
+		          if(bugs){
+		            return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn td")
+		          }else{
+		            return $("<div/>").html(item.firstname+" "+item.lastname).addClass("borderBottomBlack fontMain ticketAssigned td")
+		          } 
+		        }
+		       )
+		      .append(
+		        function(){
+		          if(!bugs){
+		            return $("<div/>").html(item.due_on).addClass("borderBottomBlack fontMain ticketListDueOn ticketLeft");
+		          }  
+		        }
+		      )
+		      .append(
+		        function(){
+		        	if(!bugs){
+		            	return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketListCreatedOn ticketLeft");
+		           }
+		        }
+		      )		      
+		    )
+		});// end of each loop
+		
+	//	displayTable.append(display);
+		
+	});
+	*/
+}
