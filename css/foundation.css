@@ -5,7 +5,6 @@
     -webkit-transition: top 1s, right 1s, left 1s,width 1s, bottom 1s, height 1s linear;
     transition: top 1s, right 1s, left 1s,width 1s, bottom 1s, height 1s linear;
     
-    
     -webkit-transition: all 500ms cubic-bezier(0.600, 0, 0.735, 0.045); /* older webkit */
 	-webkit-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
 	-moz-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
