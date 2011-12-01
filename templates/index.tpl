@@ -15,7 +15,7 @@
         
         <link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"/>
         <link rel="stylesheet" media="screen" href="/css/foundation.css?v=1"  />
-        <link rel="stylesheet" media="screen and (max-width: 900px) " href="/css/handheld.css?v=1"  />
+        <link rel="stylesheet" media="screen and (max-width: 1024px) " href="/css/handheld.css?v=1"  />
         
         
         <link rel="shortcut icon" href="/bug.png">
@@ -37,8 +37,8 @@
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
 		<script type="text/javascript" src="/js/modernizr.custom.43877.js"></script>
+        <script src="/js/modules/display.js"></script>
         <script src="/js/tickets.js"></script>
-        <script src="/js/jquery.purr.js"></script>
         <script src="/js/globalFunctions.js"></script>
       </head>
     <body >

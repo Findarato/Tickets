@@ -2,32 +2,38 @@
 /*
 body{background-color:#0F0}
 */
-	.ticketSideLeft,.ticketSideRight{display:block;width:auto}
-	.border-right-Main-4{border-right:0px}
-	.ticket-divider{border-right:0px;}
+.ticketSideLeft,.ticketSideRight{display:block;width:auto}
+.border-right-Main-4{border-right:0px}
+.ticket-divider{border-right:0px;}
    
-    .topMenuItem > a > span,.tab > a > span,.ticketProjectLocation,.ticketCreatedBy{
-    	display:none;
-    }
-    .tab > a{
-    	width:20px;
-    }
-    
-    .mobile {
-        display: inline-block
-    }
-    #replyToggle,
-    #topperStart,
-    #sideArea,
-    .topperText {
-        display: none
-    }
-    #mainArea {
-        margin-left: 5px
-    }
-    #headerPadding {
-        height: 50px
-    }
+.topMenuItem ,.tab > a{
+    	/*display:none;*/
+	width:16px;
+	overflow:hidden;
+}
+.topMenuItem:hover{
+	width:auto;
+	text-align:left;
+}
+.tab > a{
+	width:20px;
+}
+
+.mobile {
+    display: inline-block
+}
+#replyToggle,
+#topperStart,
+#sideArea,
+.topperText {
+    display: none
+}
+#mainArea {
+    margin-left: 5px
+}
+#headerPadding {
+    height: 50px
+}
 
 #sideArea {
     position: absolute;
