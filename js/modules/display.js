@@ -270,7 +270,7 @@ function loadTicketBody(inputData, container) {
         default:alert(this.tagName);break;
       }
     });
-    $.getJSON("/tickets/ajax/edit_ticket.php",values,function(data){
+    $.getJSON("/ajax/edit_ticket.php",values,function(data){
       localStorage.removeItem("TicketId"+data.modifiedTicket);
       loadResponsesBody(data.modifiedTicket, $("#replyareabody"), 0);
      // ticketBodyBox.html(data.modifiedTicketBody);

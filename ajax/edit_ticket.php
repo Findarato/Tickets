@@ -7,6 +7,12 @@
  */
 include("../small_header.php");
 include("../smarty.inc.php");
+
+if(!in_array_r("ADMIN",$usr->getPermissions())){
+	$response["error"] = "No Access";
+	$response["message"] = "Only Admins can modify tickets";
+	die( json_encode($response) );
+}
 header('Content-type: application/json');
 $usr = unserialize($_SESSION['user']);
 $_GET = $db->Clean($_GET,true);
@@ -30,6 +36,9 @@ if(isset($_GET["edit"]) && $_GET["edit"]==1){
      break;
      case "ticketBody":
        $setArray[] = " description='".$val."'";
+     break;      
+     case "ticketDueDate":
+       $setArray[] = " due_on='".date("Y-m-d H:i:s",strtotime($val))."'";
      break;      
      default:break;
     }  

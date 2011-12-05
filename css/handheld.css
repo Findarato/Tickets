@@ -97,7 +97,8 @@ body{background-color:#0F0}
 }
 .ticketBodyBox{
 	max-width:230px;
-	height:30px;
+	width:auto;
+	height:75px;
 	overflow:hidden;
 	padding-left:7px;
 	top:20px;
