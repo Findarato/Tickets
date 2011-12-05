@@ -56,8 +56,8 @@
 		$response["opt"] = $_POST["opt"];
 	}elseif(isset($_POST["altEmail"])){ // this should be where the alternate email is set
 		$usr = unserialize($_SESSION['user']);
-		$db->Query("UPDATE users SET email_address='".$_POST["altEmail"]."' WHERE id=".$usr->User_id);
-		$alt = $db->Query ("SELECT email_address FROM tickets.users WHERE id=".$usr->User_id,false,"row");
+		$db->Query("UPDATE users SET email_address='".$_POST["altEmail"]."' WHERE id=".$usr->getUserId());
+		$alt = $db->Query ("SELECT email_address FROM tickets.users WHERE id=".$usr->getUserId(),false,"row");
 		$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) ); 
 		if(count($db->Error)==2){
 			$response['message']=$db->Error;
@@ -72,9 +72,10 @@
 		$response["message"]="Successfully Logged out of Tickets";
 	}elseif(isset($_GET["userIdFetch"])){// Just give me the user id.  More of a problem has happened and I lost the user id
 		$usr = unserialize($_SESSION['user']);	
-		$response["user_id"] = $usr->User_id;
+		$response["user_id"] = $usr->getUserId();
 		$response["message"] = "Successfully Returned User ID";
 		$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) ); 
+		$response["permissions"] = $usr->getPermissions();
 	}else{
 		$response["error"]=="Invalid Username or password";
 		echo json_encode($response);
