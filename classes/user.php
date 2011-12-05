@@ -112,4 +112,5 @@ class User {
 	 */
 	public function getPermissions(){ return $this->Permissions; }
 	public function getMD5email(){ return $this->md5Email; }
+	public function getUserId(){return $this->User_id;}
 }
