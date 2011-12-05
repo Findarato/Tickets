@@ -93,8 +93,8 @@ class User {
 	public function LoadPermissions(){ //Load the permissions into the object and return true on success and false on fail
 		$permissions = array();
 		$db = db::getInstance();
-		$sql = "SELECT up.permission_id,p.permission,p.display FROM user_permissions AS up JOIN permissions AS p ON (up.permission_id=p.id) WHERE up.user_id=".$this->User_id;
-		$permissions = $db->Query($sql,false,"assoc_array");
+		$sql = "SELECT p.permission FROM user_permissions AS up JOIN permissions AS p ON (up.permission_id=p.id) WHERE up.user_id=".$this->User_id;
+		$permissions = array_implode($db->Query($sql,false,"assoc_array"));
 		if($permissions==0){
 			$sql = "SELECT id FROM permissions WHERE permission='VIEW'";
 			$view = $db->Query($sql,false,"assoc_array");
