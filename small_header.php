@@ -47,11 +47,12 @@ if(isset($_SESSION['user'])){
 	if($usr->User_id > 1000){
 		if(isset($usr)){
 			//die(in_array_r(array("ADMIN","STAFF","USER","VIEW"),$usr->getPermissions()));
+			//print_r($usr->getPermissions());die();
 			if(count($usr->getPermissions()) == 0 ){  // This is to make sure that your user has permissions
 				$usr->LoadPermissions();
 			}
 			if(in_array_r(array("ADMIN","STAFF","USER","VIEW"),$usr->getPermissions())){
-				if(in_array_r("NO_ACCESS", $usr->getPermissions)){
+				if(in_array_r("NO_ACCESS", $usr->getPermissions())){
 					die("no access");
 				}
 			}else{

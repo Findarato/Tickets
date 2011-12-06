@@ -606,40 +606,7 @@ function loadLoginPage(){
 		});
 	});
 }
-function changeArea(area){
-	var location = $("#subAreaBar");
-	if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
-		switch(area){
-		case "tickets":
-			$("#ticketTab").trigger("click");
-			location.load("templates/top_ticket.tpl");
-			Params.NavArea="tickets";
-			$("#tldPageAnator").show();
-		break;
-		case "bugs":
-			$("#bugTab").trigger("click");	
-			location.load("templates/top_bug.tpl");
-			Params.NavArea="bugs";
-		break;
-		case "search":
-			$("#searchTab").trigger("click");	
-			location.load("templates/top_search.tpl");
-			$("#tldPageAnator").hide();
-		break;
-		case "stats":
-			$("#statsTab").trigger("click");	
-			location.html("");
-			$("#tldPageAnator").hide();
-		break;
-		case "admin":
-			$("#adminTab").trigger("click");	
-			location.load("templates/top_admin.tpl");
-			Params.NavArea="admin";
-			$("#tldPageAnator").hide();
-		break;
-		default:break;
-	}
-}
+
 function loadLocalStorage(clear){
 
 	//Clear every version update
