@@ -16,6 +16,7 @@
 				<li>It will help tickets load faster</li>
 				<li>The changes also make generating new icon themes easier</li>
 			</ol>
+		<li>The top menu only shows categories which you have tickets in, if you do not have a ticket in by me it will not show up for you.</li>
 		</li>
       </ol>
       <br>

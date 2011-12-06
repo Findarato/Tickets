@@ -10,7 +10,7 @@
 
 include_once $_SERVER["DOCUMENT_ROOT"]."/header.php"; 
 
-$count = array();
+
 
 function countTickets($user_id,$type="open"){
 	$db = db::getInstance();
@@ -58,6 +58,7 @@ if(!isset($_GET["menu"])){  // Nothing should happen if the menu is not requeste
 }
 switch ($_GET["menu"]){
 	case "tickets":
+		$count = array();
 		$count["open"] = countTickets($usr->User_id,"open");
 		$count["assigned"] = countTickets($usr->User_id,"assigned");
 		$count["myDept"] = countTickets($usr->User_id,"byMyDepartment");
@@ -70,6 +71,13 @@ switch ($_GET["menu"]){
 		break;
 	case "search":
 		$smarty -> display("../templates/top_search.tpl");
+	break; 
+	case "admin":
+		if(in_array_r("ADMIN",$usr->getPermissions())){ // yeah specific permission required
+			$smarty -> display("../templates/top_admin.tpl");
+		}else{
+			echo "You do not have access";
+		}
 	break; 
 	default:break;
 }

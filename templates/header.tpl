@@ -22,7 +22,7 @@
 				<div id="ticketTab" class="tab roundTop4 insideBorder ticketLeft "><!-- Start of Tab 1 -->
 					<a class="ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;">Tickets</a>
 				</div>
-				<div id="bugTab" class="tab roundTop4 insideBorder ticketLeft"><!-- Start of Tab 2 -->
+				<div id="bugTab" class="tab roundTop4 insideBorder ticketLeft" style="display:none;"><!-- Start of Tab 2 -->
 					<a class="bug nolink fontMain " href="#bugs" id="" style="padding-right:5px;width:auto;text-decoration:none;">Bugs</a>
 				</div>
 				<div id="searchTab" class="tab roundTop4 insideBorder ticketLeft"><!-- Start of Tab 3 -->
@@ -31,9 +31,11 @@
 				<div id="statsTab" class="tab roundTop4 insideBorder ticketLeft"><!-- Start of Tab 4 -->
 					<a class="chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;">Stats</a>
 				</div>
-				<div id="adminTab" class="ADMIN tab roundTop4 insideBorder ticketLeft" style="display:none"><!-- Start of Tab 5 -->
+				{if isset($permissions) && in_array_r("ADMIN",$permissions)}
+				<div id="adminTab" class="tab roundTop4 insideBorder ticketLeft" ><!-- Start of Tab 5 -->
 					<a class="warning nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;">Admin</a>
-				</div> 
+				</div>
+				{/if} 
 			</div>
 			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right">&nbsp;</div>
 		</div>		
