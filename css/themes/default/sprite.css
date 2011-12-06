@@ -34,10 +34,16 @@
 	font-family:"WebSymbolsRegular";
 }
 
-.bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil,.globe{background:none transparent;}
+.bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil,.globe,.warning{background:none transparent;}
 .magnifier:before{
 	content:"L ";
 	color:rgb(0,0,0);
+	font-family:"WebSymbolsRegular";
+	font-size:12px;
+}
+.warning:before{
+	content:"W ";
+	color:rgb(150,0,0);
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
 }
