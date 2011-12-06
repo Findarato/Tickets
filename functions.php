@@ -143,11 +143,7 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	"date"=>$res2['created_on'],					
 	"body"=>nl2br(Tcode($res2['body'],false,false,true)));
 	if(!isset($smarty)){
-		$smarty = new Smarty();
-		$smarty->template_dir = '/www/tickets/templates'; 
-		$smarty->compile_dir = '/www/tickets/templates_c';
-		$smarty->cache_dir = '/www/tickets/cache';
-		$smarty->config_dir = '/www/tickets/configs';
+		include_once("/smarty.inc.php");
 	}
 	$smarty -> assign('email_ticket_id',$ticket_id);
 	$smarty -> assign('email_created_on',$res1['created_on']);

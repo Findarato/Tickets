@@ -1,4 +1,4 @@
-<?
+<?Php
 /**
  * Main index page.  Used for loging handeling as well as displaying the tickets. 
  * Tied directly into the smarty template engin

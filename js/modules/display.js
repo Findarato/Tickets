@@ -1,3 +1,32 @@
+function changeArea(area){
+	var location = $("#subAreaBar");
+	if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
+		switch(area){
+		case "tickets":
+			$("#ticketTab").trigger("click");
+			location.load("/ajax/subMenuRender.php?menu=tickets");
+			Params.NavArea="tickets";
+			$("#tldPageAnator").show();
+		break;
+		case "search":
+			$("#searchTab").trigger("click");	
+			location.load("/ajax/subMenuRender.php?menu=search");
+			$("#tldPageAnator").hide();
+		break;
+		case "stats":
+			$("#statsTab").trigger("click");	
+			location.html("");
+			$("#tldPageAnator").hide();
+		break;
+		case "admin":
+			$("#adminTab").trigger("click");	
+			location.load("/ajax/subMenuRender.php?menu=admin");
+			Params.NavArea="admin";
+			$("#tldPageAnator").hide();
+		break;
+		default:break;
+	}
+}
 function loadNew(timestamp){
 	loadTicketList(0,{"area":"new","dateTime":timestamp});
 	$("#ticketListtitle").html("Tickets with activity since your last visit");
