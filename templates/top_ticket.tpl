@@ -2,7 +2,7 @@
 	<div style=display:table>
 		<div class=td>
 			<div class=topMenuItem>
-				<a class="ticket fakelink" id=topperNew>New</a>
+				<a class="ticket fakelink" style="cursor: pointer;" id=topperNew>New</a>
 			</div>
 		</div>
 		{if $count["open"]>0}
