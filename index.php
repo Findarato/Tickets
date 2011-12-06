@@ -10,6 +10,7 @@
 	$depart = "";
 	$altE = "";
 	include "header.php";
+	$blankPage = "";
 	$smarty->assign('theme_id',2);
 	$_SESSION['uploadCnt']=0;
 	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1) {//there is not a valid session
@@ -26,6 +27,7 @@
 				$smarty->assign('user_id',$usr->User_id);
 				$depart = getDepartment_by_userid($usr->User_id);
 				$smarty->assign('gravatar',$usr->A_U['emailHash']);
+				$smarty -> assign('permissions',$usr->getPermissions());
 			}
 		}else{$smarty -> assign('content','login.tpl');	}
 	}else{$smarty-> assign("content","empty.tpl"); 	
@@ -36,6 +38,7 @@
 		$smarty->assign('user_id',$usr->User_id);
 		$depart = getDepartment_by_userid($usr->User_id);
 		$smarty->assign('gravatar',$usr->A_U['mdEmail']);
+		$smarty -> assign('permissions',$usr->getPermissions());
 	}
 	$db->Query("SELECT * FROM category WHERE display=1 ORDER by name");
 	$cate = array();
@@ -83,7 +86,6 @@
 	  $smarty -> assign('userId',-1);
 	}
 	
-	$smarty -> assign('permissions',$usr->getPermissions());
 	$smarty -> assign('blankDisplay',$blankPage);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);

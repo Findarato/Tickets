@@ -463,7 +463,7 @@ function loadUserPage(userId){
 		Tlb
 			.find("#userDepartment").css("white-space","nowrap")
 			.append(
-				$("<button style='width:150px;' id='ticketDepartment' name='ticketDepartment' data-select-items='"+JSON.stringify(data.userInfo.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</button>")
+				$("<button style='width:150px;' id='ticketDepartment' name='ticketDepartment' data-select-items='"+JSON.stringify(data.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</button>")
 			)
 			.append(
 				$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
@@ -478,7 +478,7 @@ function loadUserPage(userId){
 					else
 						$("#userDepartmentStatus").text(data.message);
 					
-					$("#userDepartmentStatus").fadeIn().fadeOut(1500);
+					$("#userDepartmentStatus").show();
 				});
 					
 			});
@@ -606,7 +606,6 @@ function loadLoginPage(){
 		});
 	});
 }
-
 function loadLocalStorage(clear){
 
 	//Clear every version update

@@ -81,16 +81,6 @@ WHERE
 	user_id=".$_GET["userId"]
 ,false,"assoc");
 
-$json["userInfo"]["tickets"]["altEmail"] = $db->Query("
-SELECT
-	email
-FROM 
-	tickets.alt_email 
-WHERE 
-	user_id=".$_GET["userId"]
-,false,"row");
-
-
 $json["departments"] = $db->Query("
 SELECT
 	id,name
