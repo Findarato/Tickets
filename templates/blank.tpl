@@ -6,6 +6,7 @@
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
 		<li>Fixed a 404 error when trying to link to a js library</li>
+		<li>New ticket once again looks and acts like a real link</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
