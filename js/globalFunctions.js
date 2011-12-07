@@ -628,11 +628,6 @@ function createSelect(selector,callback){
 	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
 		return false;
 	}
-	/*
-	$.each(selector,function(key,vals){
-		alert(vals.val());
-	})
-	*/
 	selector
 	.click(function(){
 		//alert("tst");
