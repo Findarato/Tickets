@@ -483,76 +483,31 @@ function loadTicketList(pageNumber,queryObj) {
 		Tlb = $("#ticketListbody").empty();
 		//displayTable = $("<table/>",{"id":"displayTable","class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
 		
-		displayTable = $("<div/>",{"id":"ticketListTable","class":"t fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"}});
+		displayTable = $("<div/>",{"id":"ticketListTable","class":" fontMain",css:{"width":"100%","position":"relative"}});
+		
 		displayTable
-			.html(
-				$("<div/>",{id:"tableHeader","class":"tr",css:{"width":"100%","display":"block"}})
-					.html(function(){
-						var defaultColmns = [
-							['&nbsp;','&nbsp;',"0px",true,],
-							['&nbsp;','&nbsp;',"20px",true,],
-							['id','ID',"45px",true],
-							['priority','Priority',"85px",true],
-							['title','Title',"600px",true],
-							['location','Location',"150px",true],
-							['category','Category',"150px",true],
-							['createdBy','Created By',"150px",true],
-							['dueOn','Due On',"150px",false],
-							['assigned','Assigned By',"150px",false],
-							['createdOn','Created On',"100px",true]
-						];
-						toolBar = "";
-						$.each(defaultColmns,function(index,value){
-							if(value[3]==true){ // the colmn is being displayed. this will be useful when you can turn off colmns
-								toolBar +="<div class='td ticketListSortable' style='width:"+value[2]+"'><a href='' style='width:"+value[2]+";position:relative;' data-order='asc' data-value='"+value[0]+"' class=' '>"+value[1]+"</a></div>";	
-							}
-						});
-						return toolBar;
-					})
-			).append($("<div/>",{id:"tableBody","class":"t",css:{"width":"100%","clear":"both"}}))
-	}
-	displayTable
-		.find(".ticketListSortable a")
-			.attr("href",function(){
-				if(hash[2]==$(this).attr('data-value')){
-					if(hash[3]!=$(this).attr('data-order')){// lets make some quick adjustments
-						$(this).attr('data-order','desc')
+			.append(function(){
+					var selectValue = "Sort";
+					if(hash[2]){
+						selectValue = hash[2];		
 					}
-				}
-				return hash[0]+"/"+hash[1]+"/"+$(this).attr('data-value')+"/"+$(this).attr('data-order')
+					return $("<button/>",{html:selectValue,id:"tableSort","class":"selectButton",css:{"width":"100px","right":"10px","position":"relative"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
 			})
-			.addClass(function(){
-				if(hash[2]==$(this).attr('data-value')){
-					if(hash[3]==$(this).attr('data-order')){
-						if(hash[3] == "asc"){
-							return "sortDisplayAsc";
-						}else{
-							return "sortDisplayDesc";
-						}
-					}
-				}
-			})
-			.click(function(){
-				me = $(this);
-				if(me.attr("data-order")=="desc"){
-					me.attr("data-order","asc");
+			.append($("<div/>",{id:"tableBody","class":"t",css:{"width":"100%","clear":"both"}}));
+			
+			createSelect(displayTable.find("#tableSort"),function(value){
+				var newHash = "";
+				if(hash[2]==value && hash[3]=="asc"){
+					newHash = hash[0]+"/"+hash[1]+"/"+value+"/desc";
 				}else{
-					me.attr("data-order","desc");
+					newHash = hash[0]+"/"+hash[1]+"/"+value+"/asc";	
 				}
-				me.attr("href",hash[0]+"/"+hash[1]+"/"+me.attr('data-value')+"/"+me.attr('data-order'));
-				pageTracker._trackPageview(me.attr("href"));
-				setHash(me.attr("href"));
-				//return false;
-			}); 
-	
+				setHash(newHash);
+				pageTracker._trackPageview(newHash);
+			});
+	}
 	Tlb.html(displayTable) // lets make sure something gets on the page
 	var tableBody = displayTable.find("#tableBody"); 
-	/*
-		if(bugs == 1){ //bugs display
-		 displayTable.html("<tr><td style='width:20px;'>&nbsp;</td><td>ID</td><td style='width:350px;'>Title</td><td class='ticketProjectLocation'>Project</td><td>Priority</td><td class='ticketCreatedBy'>Created By</td><td>Created On</td></tr>");
-		}else{ //tickets display
-		}
-		*/	
 	if(queryObj){
 		O_search = queryObj;
 		O_search.type = "search";
@@ -624,131 +579,246 @@ function loadTicketList(pageNumber,queryObj) {
 			tableBody.append(smallTicket);
 		});
 	});
-	
-
-	
+}
+function loadUserPage(userId){
+	//alert(userId)
+	Params.Content.html($("#generic").html());
+	Tlb = Params.Content.find("#ticketListbody");
 	/*
-	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
-		var s_ocd; //string open closed display
-		var s_tr; // string time remaining
-    if(O_search.bugs_open == 1 || O_search.bugs_closed == 1){bugs = true}else{bugs = false}
-		pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
-		// This part just adds creates the table and puts the results in it		
-		$.each(data.tickets, function (i, item) {
-		  bmClass = "bookmarkOff";
-		  for(var a in Params.FavoriteObject){
-		    if(Params.FavoriteObject[a]==item.id){
-		      bmClass = "bookmark";
-		    }
-		  }
-		  tableBody
-		    .append(
-		     $("<div/>",{id:"row"+item.id,"class":"ticketBox"}) // Row of the table
-		      .html(
-                $("<div/>",{id:"bookmark"+item.id,css:{"width":"20px"},"class":"ticketBookmarkBox nolink "+bmClass})
-                .click(function(){
-                  me = $(this);
-                  if(me.hasClass("bookmarkOff")){favVal = 1;}else{favVal = 0;}
-                  bookmarkId = this.id.replace("bookmark","");
-                  $.getJSON("ajax/tickets.php",{"type":"favorite","ticket_id":bookmarkId,"favorite":favVal},function(data){
-                    checkResponse(data);
-                    if(favVal ==0){//removing a favorite
-                      for(var i in Params.FavoriteObject){
-                        if(Params.FavoriteObject[i]==bookmarkId){
-                          delete Params.FavoriteObject[i];
-                        }
-                      }
-                    }else{
-                      Params.FavoriteObject[Params.FavoriteObject.length+1] = bookmarkId;
-                    }
-                    updateFavorites();
-                  });
-                  me.toggleClass("bookmark-off").toggleClass("bookmark");
-                })
-		      )
-		      .append(
-	            $("<div/>",{"class":"ticketId td",css:{"width":"45px"}})
-                .addClass("borderBottomBlack")
-                .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontMain").html(item.id).attr({"id": "ID" + item.id }))
-		      )
-		      .append( 
-		        $("<div/>") // Priority
-		          .addClass("borderBottomBlack fontMain ticketPriority td")
-		          .css({"width":"70px","text-align":"right"})
-		          .html(
-    		        function(i,html){
-    		         if(item.priority>0){
-    		           if(item.priority>5){item.priority = item.priority-5;}
-    		           if(item.priority == 5)item.priority --;
-    		           //result = Params.Priority_string[item.priority].name;
-    		           result = $("<div/>",{title:Params.Priority_string[item.priority].name}).addClass("pSquare p"+Params.Priority_string[item.priority].name.replace(" ",""));
-    		           
-    		           }
-    		         else{result = Params.Priority_string[0].name;}
-    		           return result;
-    		        }
-    		      )
-    		   )		      
-		      .append($("<div/>",{css:{"width":"600px","overflow":"hidden"},"class":"ticketTitle ticketTitleBox borderBottomBlack"})
-		        .html($("<a/>").attr({"href": "#ticket/" + item.id}).addClass("nolink fontBold fontMain").html(item.subject).attr({"id": "subject" + item.id }))
-		      )
-		      .append(
-		        function(){
-		          if(bugs){
-		            if(item.project_id === undefined || item.project_id == 0){ item.project_id = 1; } // fix bugs that do not have a project.  Default them to the first project
-		            return $("<div/>").html(Params.Projects[item.project_id-1].name).addClass("borderBottomBlack fontMain ticketProjectLocation td")
-		          }else{
-		            return $("<div/>").html(item.locationName).addClass("borderBottomBlack fontMain ticketProjectLocation td")
-		          } 
-		        }
-		      )
-
-		      .append(
-		        function(){
-		          if(bugs){
-		            return $("<div/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy td")
-		          }else{
-		            return $("<div/>").html(item.category).addClass("borderBottomBlack fontMain ticketCategory td");    
-		          }
-		        }
-		      )
-		      .append(
-		        function(i,html){
-		          if(bugs){
-		            return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn td")
-		          }else{
-		            return $("<div/>").html(item.firstname2+" "+item.lastname2).addClass("borderBottomBlack fontMain ticketCreatedBy td")
-		          } 
-		        }
-		       )
-		      .append(
-		        function(i,html){
-		          if(bugs){
-		            return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketCreatedOn td")
-		          }else{
-		            return $("<div/>").html(item.firstname+" "+item.lastname).addClass("borderBottomBlack fontMain ticketAssigned td")
-		          } 
-		        }
-		       )
-		      .append(
-		        function(){
-		          if(!bugs){
-		            return $("<div/>").html(item.due_on).addClass("borderBottomBlack fontMain ticketListDueOn ticketLeft");
-		          }  
-		        }
-		      )
-		      .append(
-		        function(){
-		        	if(!bugs){
-		            	return $("<div/>").html(item.created_on).addClass("borderBottomBlack fontMain ticketListCreatedOn ticketLeft");
-		           }
-		        }
-		      )		      
-		    )
-		});// end of each loop
-		
-	//	displayTable.append(display);
-		
-	});
+	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
 	*/
+	var localUser = false;
+	if (localStorage.userId == userId){localUser = true;}
+	
+	$("<div/>",{id:"userInfoBox","class":" ",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
+		.append(
+			$("<div>",{css:{"display":"table-cell","width":"110px"}})
+				.append(
+					$("<div>",
+						{
+							id:"userIconBox",
+							"class":"small-shadow-black-1 color-B-2 border-all-B-1 roundAll4",
+							css:{
+								"overflow":"hidden","display":"block","height":"100px","width":"100px","margin":"5px","position":"relative"
+							}
+						}
+					)
+					.append(
+						$("<div/>",{
+							html:"ID:"+userId,
+							css:{"font-size":"20px","text-shadow":"2px 2px 2px rgba(255,255,255,.75)","position": "absolute","left": "25px"},
+							"class":"fontBold fontMain rotate90 transformTopLeft"
+						})
+					)
+				)
+		)
+		.append(
+			$("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"250px","text-align":"left"}})
+				.append( $("<div>",{id:"userName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Username: "})	)
+				.append( $("<div>",{id:"realName","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Real Name: "})	)
+				.append( $("<div>",{id:"joinedOn","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Joined On: "})	)
+				.append( $("<div>",{id:"userType","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Permissions: "})	)
+				.append( $("<div>",{id:"totalTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Tickets Created: "})	)
+				.append( $("<div>",{id:"openTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Tickets: "})	)
+				.append( $("<div>",{id:"avgTicketsTime","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Average Ticket Duration: "})	)
+				.append( $("<div>",{id:"totalResponses","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Responses: "})	)
+				.append( $("<div>",{id:"totalBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Bugs Filed: "})	)
+				.append( $("<div>",{id:"openBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Bugs: "})	)
+		)
+		.append(
+			function(index,html){
+				if(!localUser){	alert("broke");return "";} // this is blocking the view of other user's page
+				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"300px"}})
+					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
+					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
+						.append(
+							$("<button>",{
+							"class":"button left ",
+							id:"follow",
+							"css":{"width":"40px"},
+							html:"Yes"})						
+						)
+						.append(
+							$("<button>",{
+							"class":"button right negative ",
+							id:"unfollow",
+							"css":{"width":"40px"},
+							html:"No"})						
+						)
+					)
+					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
+					//.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
+					//.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
+					.append(function(){
+						//openIdLinks
+						return $("<button>",{
+							"class":"button ticketPadding3",
+							id:"googleLogin",
+							"css":{"width":"auto"},
+							html:"Link to Google Account"
+						});
+					})
+					.append("<br><br>")
+					.append(function(){
+						return $("<button>",{
+							"class":"button ticketPadding3",
+							id:"changeTheme",
+							"css":{"width":"auto"},
+							html:"Change Theme"							
+						});
+					})
+					.append(function(){
+						return $("<button>",{
+							"class":"button ticketPadding3",
+							"css":{"width":"auto","margin-left":"3px"},
+							html:"Reset Tickets",
+							click:function(){
+								localStorage.clear();
+								loadLocalStorage();
+								setHash("#ticketList/all_tickets");
+								/*checkHash*/
+							}							
+						});
+					})
+			} 
+		)
+		.appendTo(Tlb);
+		infoBox = $("<div/>",{"class": "message_body",id:"infoBox"}).html($("#generic").html()).appendTo(Tlb);
+		infoBox.find("#ticketListtitle").attr({id:"infoBoxTitle"}).html("Tickets Created");
+		infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"730px\" height=\"300px\" id=\"graphDisplay\">Please use a browser that supports canvas</canvas>"));
+
+	if(userId == undefined){
+		//alert("test")
+		userId = localStorage.userId;
+	}
+	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
+		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.mdEmail+"?s=100&d=identicon&r=g)"});
+		if(data.userInfo.tickets.departmentName == undefined){
+			data.userInfo.tickets.departmentName = "None!";
+		}		
+		Tlb
+			.find("#userDepartment").css("white-space","nowrap")
+			.append(
+				$("<button style='width:150px;' id='ticketDepartment' name='ticketDepartment' data-select-items='"+JSON.stringify(data.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</button>")
+			)
+			.append(
+				$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
+			);
+			if(data.userInfo.tickets.departmentName == "None!"){
+				Tlb.find("#ticketDepartment").addClass("errorPulse");
+			}
+			createSelect(Tlb.find("#ticketDepartment"),function(value){
+				$.getJSON("ajax/login.php",{"user_id":localStorage.userId,"department_id":value},function(data){
+					if(data.error != "")
+						$("#userDepartmentStatus").text(data.error);
+					else
+						$("#userDepartmentStatus").text(data.message);
+					
+					$("#userDepartmentStatus").show();
+				});
+					
+			});
+		if(data.userInfo.openIdLinks > 0){
+			Tlb.find("#googleLogin").before("Linked with "+ data.userInfo.openIdLinks + " Google account(s)<br>");
+		}
+		Tlb.find("#userName").append(data.userInfo.username);
+		Tlb.find("#realName").append(data.userInfo.firstname+" "+data.userInfo.lastname);
+		Tlb.find("#joinedOn").append(data.userInfo.joined);
+		Tlb.find("#userType").append(
+			function(){
+				var returnData = "";
+				$.each(data.userInfo.permissions,function(key,value){
+					returnData += "<a class='nolink' href='#permissions/"+value.permission_id+"'>"+value.display+"</a> ";
+				})
+				return returnData;
+			}
+		);
+		Tlb.find("#userSecondaryEmail").val(data.userInfo.email_address);
+		
+		Tlb
+			.find("#totalTickets")
+				.append(data.tickets.byMe)
+				.append(
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticketSprite chart"})
+						.click(function(){
+							$("#infoBoxTitle").html(data.tickets.graph.byMe.title);
+							graphData = [];
+							lables = [];
+							$.each(data.tickets.graph.byMe.data,function(i,item){
+								graphData.push(parseInt(item.total));
+								lables.push(data.tickets.graph.monthLables[item.month-1]);
+							});
+							loadLargeBarGraph("graphDisplay",graphData,lables);
+						}).trigger("click")
+				);
+		Tlb.find("#openTickets").append(data.tickets.toMe);
+		Tlb
+			.find("#totalResponses")
+				.append(data.responses.created)
+				.append(
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticketSprite chart"})
+						.click(function(){
+							$("#infoBoxTitle").html(data.responses.graph.byMe.title);
+							graphData = [];
+							lables = [];
+							$.each(data.responses.graph.byMe.data,function(i,item){
+								graphData.push(parseInt(item.total));
+								lables.push(data.tickets.graph.monthLables[item.month-1]);
+							});
+							loadLargeBarGraph("graphDisplay",graphData,lables);
+						})
+				);
+		Tlb
+			.find("#totalBugs")
+				.append(data.bugs.byMe)
+				.append(
+					$("<div/>",{css:{"display":"inline-block","margin-left":"2px"},"class":"fakelink ticketSprite chart"})
+						.click(function(){
+							$("#infoBoxTitle").html(data.bugs.graph.byMe.title);
+							graphData = [];
+							lables = [];
+							$.each(data.bugs.graph.byMe.data,function(i,item){
+								graphData.push(parseInt(item.total));
+								lables.push(data.tickets.graph.monthLables[item.month-1]);
+							});
+							loadLargeBarGraph("graphDisplay",graphData,lables);
+						})
+				);
+		Tlb.find("#openBugs").append(data.bugs.byMeOpen);
+	});
+	if (localUser) {
+		Tlb.find("#follow").click(function(){
+			jQuery.post(uri + "ajax/login.php", {
+				user_id: localStorage.userId,
+				opt: 2
+			}, function(data){
+				checkResponse(data);
+			}, "json");
+		});
+		Tlb.find("#unfollow").click(function(){
+			jQuery.post(uri + "ajax/login.php", {
+				user_id: localStorage.userId,
+				opt: 1
+			}, function(data){
+				checkResponse(data);
+			}, "json");
+		});
+		Tlb.find("#userSecondaryEmail").blur(function(){
+			jQuery.post(uri + "ajax/login.php", {
+				"altEmail": $(this).val()
+			}, function(data){
+				checkResponse(data);
+				if (data.error.length === 0) {
+					$("#depOk").show();
+					$("#depError").hide();
+				}
+				else {
+					$("#depOk").hide();
+					$("#depError").show();
+				}
+			}, "json");
+			
+		});
+	}
+
 }

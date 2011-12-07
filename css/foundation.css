@@ -11,6 +11,11 @@
     -ms-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
 	-o-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
 	transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */
+	
+	-moz-transition: background-position 0s linear;
+    -o-transition: background-position 0s linear;
+    -webkit-transition: background-position 0s linear;
+    transition: background-position 0s linear;
     
 }
 a {text-decoration: none;}
