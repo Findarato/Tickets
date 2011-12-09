@@ -12,7 +12,7 @@ function getUser($id="all"){
 	$db = db::getInstance();
 	$json = array();
 	if($id=="all"){
-		$json["users"] = $db->Query("SELECT * FROM users",false,"assoc_array"); 
+		$json["users"] = $db->Query("SELECT *, MD5(email_address) AS md5Email FROM users",false,"assoc_array"); 
 		$json["permissions"] = $db->Query("SELECT up.user_id,up.permission_id,p.display FROM user_permissions AS up JOIN permissions AS p ON (up.permission_id=p.id)",false,"assoc_array");
 		
 	}else{

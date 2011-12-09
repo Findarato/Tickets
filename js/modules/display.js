@@ -817,8 +817,6 @@ function loadUserPage(userId){
 					$("#depError").show();
 				}
 			}, "json");
-			
 		});
 	}
-
 }
