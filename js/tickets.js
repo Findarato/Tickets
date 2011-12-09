@@ -75,7 +75,6 @@ var newTicketTpl =
 				.append( // Ticket Location
 					$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketLocationBox",id:"tickLocation"}).html("Cool Location")
 				)
-
 		);
 function alertTest(tst){alert(tst);}
 function focusMe(id){
@@ -164,9 +163,21 @@ function checkHash() {
 			loadTicketList(0,{"search":"","area":"all_bugs"});
 		break;
 		case "#admin": // this triggers when the tab tickets is clicked
-			Modernizr.load('js/admin.js');		
-			changeArea("admin");
-			Params.LastArea = "admin";
+			if(Params.LastArea != "admin"){
+				changeArea("admin");
+				Params.LastArea = "admin";
+				Modernizr.load('/js/modules/admin.js');		
+			}
+			
+			switch (hash[2]) {
+				case "users": // ticket with a page number selected
+					alert("users");
+					admin.loadAllUsers();
+				break;
+				default:
+				break;
+			}
+			
 			//Params.Content.load("templates/email.tpl");
 		break;		
 		}
