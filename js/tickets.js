@@ -344,7 +344,6 @@ function updateTickets() {
 	//populateAllTickets();
 	//populateAllBugs();
 }
-
 function loadLoginPage(){ 
 	var loginNewBox = Params.Content.find("#ticketLoginList");
 	if(loginNewBox.html()==null){
@@ -439,8 +438,6 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 				$("<img/>").attr("src","http://www.gravatar.com/avatar/"+localStorage.mdEmail+"?s=24&d=identicon&r=g")
 			)	
 		}
-		
-		
 		checkResponse(data);
 		localStorage.userId = data.userid;
 		if(localStorage.tickets = true){
@@ -457,6 +454,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
 
 		//alert(localStorage.mdEmail);
+		window.document.location="/";
 	}
 	
 }
