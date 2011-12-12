@@ -505,15 +505,7 @@ jQuery(document).ready(function () {
 
 	if(localStorage.userId > 0){ // Lets make sure that there is a user 
 		uI = $.parseJSON(localStorage.userInfo);
-		//alert(localStorage.userId);
-		//alert(JSON.stringify(localStorage.userInfo.permissions));
-		$.each(uI,function(key,value){
-			//value
-		});		
 	}
-/*
-
-	*/	
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
 	
 	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
