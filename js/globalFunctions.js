@@ -619,7 +619,7 @@ var MD5 = function (string) {
 
         return temp.toLowerCase();
 }
-function createSelect(selector,callback){
+function createSelect(selector,callback,displayText){
 	
 	var callBackFn = "";
 	//alert(selector.html())
@@ -636,7 +636,7 @@ function createSelect(selector,callback){
 		pos = me.offset();
 		pos.top = pos.top + me.outerHeight();
 		var ddData = $("<div/>");
-		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":me.outerWidth(),"background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
+		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":"auto","background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
 		$("body")
 			.append(
 				dropDown
@@ -668,7 +668,12 @@ function createSelect(selector,callback){
 									.append(
 										$("<div/>",{html:item,"class":"selectable"})
 											.click(function(){
-												selector.text(item).val(key);
+												if(displayText){
+													selector.text(displayText).val(key);
+												}else{
+													selector.text(item).val(key);	
+												}
+												
 												if(callBackFn)callBackFn(key);
 												if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
 											})

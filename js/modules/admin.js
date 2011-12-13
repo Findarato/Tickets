@@ -39,7 +39,7 @@ admin = {
 					);
 					addPerm = newPermissionTpl.clone();
 					addPerm.attr("id",data.id+"addPerm").html(
-						$("<button/>",{"html":"Add Permission","id":"permAdd"+data.id,"class":"selectButton","css":{"padding":"0px","width":"105px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.allPermissions)})
+						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"padding":"0px","width":"105px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.allPermissions)})
 					);
 					createSelect(addPerm.find("#permAdd"+data.id),function(value){
 						//alert(Params.allPermissions[value]);
@@ -53,7 +53,7 @@ admin = {
 						
 						//alert(value)
 						//alert(data.id)
-					});
+					},"+");
 					userDisplay.find("#userDisplay"+data.id).append(addPerm);
 				
 										
