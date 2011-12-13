@@ -8,6 +8,7 @@ include "../../small_header.php";
 include "adminHeader.php";
 
 
+
 function getUser($id="all"){
 	$db = db::getInstance();
 	$json = array();
@@ -31,5 +32,13 @@ function getUser($id="all"){
 }
 
 	
+if(count($_GET) > 1){
+	if($_GET[userId] == $usr->getUserId()){
+		$response["message"] = "You can not modify your own permissions";
+		$response["error"] = "Permission Denied";	
+	}
+	echo json_encode($response);
+}else{
+	echo json_encode(getUser());	
+}
 
-echo json_encode(getUser());
