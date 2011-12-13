@@ -11,9 +11,4 @@ if(!in_array("ADMIN",$usr->getPermissions())){
 		return json_encode($response);
 		die("no access");
 	}
-}else{
-	$response["error"] = "Permission Denied";
-	$response["message"] = "You do not have permission to view this file";
-	return json_encode($response);
-	die("no Access"); 
 }

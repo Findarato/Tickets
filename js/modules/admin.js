@@ -39,20 +39,23 @@ admin = {
 					);
 					addPerm = newPermissionTpl.clone();
 					addPerm.css("width","20px").attr("id",data.id+"addPerm").html(
-						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"cursor":"pointer","padding":"0px","width":"20px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.allPermissions)})
+						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"font-size":"20px","cursor":"pointer","padding":"0px","width":"20px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.allPermissions)})
 					);
 					createSelect(addPerm.find("#permAdd"+data.id),function(value){
 						//alert(Params.allPermissions[value]);
-						var Tlb = Params.Content.find("#ticketListbody");
-						var paramName = Params.allPermissions[value];
-						if($("#permInfo_"+data.id+"_"+value).html() == null){
-							perm = newPermissionTpl.clone();
-							perm.attr("id","permInfo_"+data.id+"_"+value).html(paramName);
-							Tlb.find("#userDisplay"+data.id).append(perm);
-						}
+							var Tlb = Params.Content.find("#ticketListbody");
+							var paramName = Params.allPermissions[value];
+							if($("#permInfo_"+data.id+"_"+value).html() == null){
+								$.getJSON("ajax/admin/users.php",{"adjustPerms":1,"userId":data.id,"perm":value},function(data){
+									if(data.error.length > 0 ){
+										alert(data.error)
+									}
+								});
+								perm = newPermissionTpl.clone();
+								perm.attr("id","permInfo_"+data.id+"_"+value).html(paramName);
+								Tlb.find("#userDisplay"+data.id).append(perm);
+							}
 						
-						//alert(value)
-						//alert(data.id)
 					},"+");
 					userDisplay.find("#userDisplay"+data.id).append(addPerm);
 				
