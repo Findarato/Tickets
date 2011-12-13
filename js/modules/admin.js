@@ -38,8 +38,8 @@ admin = {
 						data.email_address+"<br/>"+data.joined
 					);
 					addPerm = newPermissionTpl.clone();
-					addPerm.attr("id",data.id+"addPerm").html(
-						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"padding":"0px","width":"105px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.allPermissions)})
+					addPerm.css("width","20px").attr("id",data.id+"addPerm").html(
+						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"cursor":"pointer","padding":"0px","width":"20px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.allPermissions)})
 					);
 					createSelect(addPerm.find("#permAdd"+data.id),function(value){
 						//alert(Params.allPermissions[value]);
