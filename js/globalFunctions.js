@@ -689,9 +689,7 @@ function createSelect(selector,callback,displayText){
 						dropDown.css("width",topWidth);
 						if(topWidth+pos.left > $(window).width()){
 							leftAdjustment = pos.left - ((topWidth+pos.left) - $(window).width());
-							alert(leftAdjustment);
 							dropDown.css("left",leftAdjustment )  
-							
 						}
 					return ddData;
 				})
