@@ -635,15 +635,20 @@ function createSelect(selector,callback,displayText){
 		selectData = $.parseJSON(me.attr('data-select-items'));
 		pos = me.offset();
 		pos.top = pos.top + me.outerHeight();
+		var topWidth = 0;
 		var ddData = $("<div/>");
-		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"width":"auto","background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
+		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","width":"15em","top":pos.top,"left":pos.left,"background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
 		$("body")
 			.append(
 				dropDown
 					.append(function(){
 						$.each(selectData,function(key,item){
+						//	alert(dropDown.outerWidth())
+						//	alert($(window).width())
+
 							if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
 								if(typeof key == 'string'){
+								if(key.length > topWidth){topWidth = key.length;}
 								ddData
 									.append(
 										$("<div/>",{html:key,"class":"categorySelect"})
@@ -662,8 +667,9 @@ function createSelect(selector,callback,displayText){
 													})
 												)
 										});	
-									})
+									});
 							}else{// this is not an array
+								if(item.length > topWidth){topWidth = item.length;}
 								ddData
 									.append(
 										$("<div/>",{html:item,"class":"selectable"})
@@ -673,13 +679,20 @@ function createSelect(selector,callback,displayText){
 												}else{
 													selector.text(item).val(key);	
 												}
-												
 												if(callBackFn)callBackFn(key);
 												if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
 											})
 									)
 							}
 						})
+						topWidth = topWidth*10;
+						dropDown.css("width",topWidth);
+						if(topWidth+pos.left > $(window).width()){
+							leftAdjustment = pos.left - ((topWidth+pos.left) - $(window).width());
+							alert(leftAdjustment);
+							dropDown.css("left",leftAdjustment )  
+							
+						}
 					return ddData;
 				})
 			)
