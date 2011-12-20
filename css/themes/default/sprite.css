@@ -35,6 +35,7 @@
 }
 
 .bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil,.globe,.warning{background:none transparent;}
+
 .magnifier:before{
 	content:"L ";
 	color:rgb(0,0,0);
@@ -102,6 +103,19 @@
 	content:" .";
 	font-family:"WebSymbolsRegular";
 	text-shadow:0 0 1px rgba(0,0,0,.60);
-	font-size:12px	
+	font-size:12px;
 	color:#00769E;
+}
+.remove:before{
+	cursor:pointer;
+	content:"X";
+	padding-right:3px;
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	font-size:12px;
+	color:#000;
+	00769E
+}
+.remove:hover:before{
+	color:#00769E;
+	
 }

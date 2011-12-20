@@ -108,20 +108,17 @@ body{background-color:#0F0}
 }
 
 .ticketCreatedOnBox,.ticketCategoryBox,.ticketCreatedByBox,.ticketLocationBox{
-	text-align:right;
+	text-align:left;
 	font-size:11px;
-	padding:1px;
+	padding:1px 3px;
 	position:relative;
 	border-right:none;
 	border-bottom:none;
 	float:right;
-	display:block;
-	height:auto;
-	width:auto;
+	display:inline-block;
+	height:20px;
+	width:100px;
 	margin-right:0px;
-}
-.ticketCreatedByBox,.ticketLocationBox{
-	text-align:left;
 }
 .ticketBookmarkBox{
 	top:0;
