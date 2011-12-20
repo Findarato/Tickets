@@ -31,14 +31,49 @@ function getUser($id="all"){
 	return $json;
 }
 
-	
-if(count($_GET) > 1){
-	if($_GET[userId] == $usr->getUserId()){
-		$response["message"] = "You can not modify your own permissions";
-		$response["error"] = "Permission Denied";	
+function adjustPerms($toggle = 1,$userId = 0, $permId = 0){
+	$db = db::getInstance();
+	if($toggle == 1){  //add permission
+		$res = $db->Query("INSERT INTO user_permissions (user_id,permission_id) VALUES (".$userId.",".$permId.");",false,"row");
+		if(count($db->Error) == 2){
+			$response["error"] = $db->Error[1];
+			return $db->Error;
+		}else{
+			$response["message"] = "The permssion was successfully added!";
+			return true;
+		}
+	}else{ // remove permission
+		$res = $db->Query("DELETE FROM user_permissions WHERE (user_id = ".$userId." AND permission_id = ".$permId.");",false,"row");
+		if(count($db->Error) == 2){
+			return $db->Error[1]; 
+		}else{
+			return true;			
+		}
 	}
-	echo json_encode($response);
-}else{
-	echo json_encode(getUser());	
 }
+if(count($_GET) > 0){
+	if($_GET["userId"] == $usr->getUserId()){
+		$response["message"] = "You can not modify your own permissions";
+		$response["error"] = "Permission Denied";
+		echo json_encode($response);
+		die();	
+	}
+	switch($_GET["type"]){
+		case "adjustPerms":
+			$response["data"] = adjustPerms($_GET["value"],$_GET["userId"],$_GET["perm"]);
+			$response["message"] = "The permssion was successfully adjusted!";			
+			break;
+		case "allUsers":
+			$response["data"] = getUser();		
+			break;
+		default:
+			$response["message"] = "You requested data that could not be found";
+			$response["error"] = "Format request error";
+		break;
+	}
+}else{
+
+}
+
+echo json_encode($response);
 

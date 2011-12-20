@@ -22,10 +22,10 @@ admin = {
 	"loadAllUsers":function(){
 			Params.Content.html($("#generic").html());
 			Tlb = Params.Content.find("#ticketListbody");
-			$.getJSON("ajax/admin/users.php",{"allUsers":1},function(json){
-				Params.allPermissions = json.allPermissions;
+			$.getJSON("ajax/admin/users.php",{"type":"allUsers"},function(json){
+				Params.allPermissions = json.data.allPermissions;
 				var display = $("<div/>");
-				$.each(json.users,function(i,data){
+				$.each(json.data.users,function(i,data){
 					var userDisplay = newUserTpl.clone();
 					userDisplay.find("#userDisplay").attr("id","userDisplay"+data.id)
 					userDisplay.find("#ticketId").attr("id","userId-"+data.id).html(data.id);
@@ -38,50 +38,59 @@ admin = {
 						data.email_address+"<br/>"+data.joined
 					);
 					addPerm = newPermissionTpl.clone();
-					addPerm.css("width","20px").attr("id",data.id+"addPerm").html(
-						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"font-size":"20px","cursor":"pointer","padding":"0px","width":"20px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.allPermissions)})
+					addPerm.css("width","20px").attr("id",data.id+"addPerm").removeClass("roundBottomRight4").addClass("roundBottomRight8").html(
+						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"font-size":"20px","cursor":"pointer","padding":"0px","width":"20px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.data.allPermissions)})
 					);
 					createSelect(addPerm.find("#permAdd"+data.id),function(value){
-						//alert(Params.allPermissions[value]);
 							var Tlb = Params.Content.find("#ticketListbody");
 							var paramName = Params.allPermissions[value];
 							if($("#permInfo_"+data.id+"_"+value).html() == null){
-								$.getJSON("ajax/admin/users.php",{"adjustPerms":1,"userId":data.id,"perm":value},function(data){
+								$.getJSON("ajax/admin/users.php",{"type":"adjustPerms","value":1,"userId":data.id,"perm":value},function(data){
 									if(data.error.length > 0 ){
 										alert(data.error)
 									}
 								});
 								perm = newPermissionTpl.clone();
-								perm.attr("id","permInfo_"+data.id+"_"+value).html(paramName);
+								perm.attr("id","permInfo_"+data.id+"_"+value).html(
+									$("<span/>",{"class":"remove","html":paramName})
+										.click(function(){
+											$.getJSON("ajax/admin/users.php",{"type":"adjustPerms","value":0,"userId":data.id,"perm":value},function(result){
+												if(result.error.length > 0 ){
+													alert(result.error)
+												}else{													
+													$("#permInfo_"+data.id+"_"+value).animate({"width":0},"fast",function(){
+														$(this).replaceWith("");
+													});
+												}
+											});
+										})
+									);
 								Tlb.find("#userDisplay"+data.id).append(perm);
 							}
 						
 					},"+");
 					userDisplay.find("#userDisplay"+data.id).append(addPerm);
-				
-										
-					/*
-					userDisplay.find("#tickCreatedBy").attr("id","user-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
-					userDisplay.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
-					userDisplay.find("#tickCategory").attr("id","tickCategory-"+value.id).html(value.category);
-					userDisplay.find("#tickLocation").attr("id","tickLocation-"+value.id).html(value.locationName);
-					*/
 					display.append(userDisplay);
 				}); // End of creating the user boxes
 				
-				$.each(json.permissions,function(i,data){
+				$.each(json.data.permissions,function(i,data){
 					perm = newPermissionTpl.clone();
-					perm.attr("id","permInfo."+data.user_id+"."+data.display.replace(/ /g,"_")).html(data.display);
+					perm.attr("id","permInfo_"+data.user_id+"_"+data.permission_id).html(
+						$("<span/>",{"class":"remove","html":data.display})
+							.click(function(){
+								$.getJSON("ajax/admin/users.php",{"type":"adjustPerms","value":0,"userId":data.user_id,"perm":data.permission_id},function(result){
+									if(result.error.length > 0 ){
+										alert(result.error)
+									}else{
+										$("#permInfo_"+data.user_id+"_"+data.permission_id).animate({"width":0},"fast",function(){
+											$(this).replaceWith("");
+										});
+									}
+								});
+							})
+					);
 					display.find("#userDisplay"+data.user_id).append(perm);
 				});// end of displaying the permissions
-				
-				
-
-				/*
-				display.find("#userDisplay"+data.user_id).append(addPerm);
-				*/
-				
-				
 				Tlb.append(display);		
 			});	
 	},"test":"cool"
