@@ -7,7 +7,4 @@
 
 if($usr->User_id>1){
 	addReply($_POST['ticket_id'], $_POST['user_id'], $_POST['title'], stripslashes($_POST['description']));
-}
-
-?> 
-   
+}  
