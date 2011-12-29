@@ -85,7 +85,12 @@
 	}else{
 	  $smarty -> assign('userId',-1);
 	}
-	
+	$ticketDefault = $db->Query("SELECT user_id FROM user_permissions WHERE permission_id IN (SELECT id FROM permissions WHERE permission = 'DEFAULT_ASSIGN') ORDER BY user_id LIMIT 1;",false,"row");
+	if($ticketDefault > 0){
+		$smarty -> assign('ticketDefault',$ticketDefault);	
+	}else{
+		$smarty -> assign('ticketDefault',0);
+	}
 	$smarty -> assign('blankDisplay',$blankPage);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
@@ -100,6 +105,3 @@
 	$smarty -> assign('type',"new");
 	$smarty -> assign('priority',array(0=>"Low",1=>"Medium",2=>"High",3=>"Mission Critical"));
 	$smarty -> display('index.tpl');
-
-
-?>

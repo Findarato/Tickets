@@ -393,6 +393,7 @@ function loadLocalStorage(clear){
 	}
  
 	// Favorites 
+	/*
 	if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
 		$.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
 			Params.FavoriteObject = data.favIds;
@@ -401,7 +402,7 @@ function loadLocalStorage(clear){
 	}else{
     	Params.FavoriteObject = $.parseJSON(localStorage.getItem("ticketsFavorite"));
 	}
-
+*/
   	//Categories
 	if(!localStorage.getItem("ticketsCategories")){
     	$.getJSON("ajax/get_categories.php",{},function(data){
