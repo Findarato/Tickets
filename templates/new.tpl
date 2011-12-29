@@ -1,9 +1,4 @@
 <div id="newTicketdialog">
-	<div class="roundAll4 small-shadow-black-1" style="width:auto;vertical-align:top;">
-		<div class="roundAll4 " style="width:auto;height:auto;">
-			<div class=" fontMain head message_head roundTop4 color-B-2 border-all-B-1" id="" style="height:16px;">
-				Add new Ticket
-			</div>
 			<div class=" color-X-1" id="replyareabody" style="overflow:auto;height:auto;padding:3px;">
 				<form name="newTicketForm" action="#" method="post" id="newTicketForm">
 					<table border="0" cellpadding="0" cellspacing="0">
@@ -17,7 +12,7 @@
 						</tr>
 						<tr id="ticketAssignBox">
 							<td style="text-align:left;"><span class="font-X">Assign:</span></td>
-							<td style="text-align:left;"><select class=" Ticketform " id="newTicketAssign" name="newTicketAssign"><option value="">Select User</option>{html_options options=$assign}</select></td>
+							<td style="text-align:left;"><select class=" Ticketform " id="newTicketAssign" name="newTicketAssign"><option value="">Select User</option>{html_options options=$assign selected=$ticketDefault}</select></td>
 						</tr>
 						<tr id="ticketCreateForBox" style="display:none;">
 							<td style="text-align:left;"><span class="font-X">Created For:</span></td>
@@ -49,7 +44,6 @@
 					</table>
 				</form>
 			</div>
-			<div class=" fontMain message_head roundBottom4 color-B-2 border-all-B-1" id="" style="height:24px">
 				<button class="button Cancel" id="replyCancelBtn" style="width:auto;" title="Cancel">
 					<span class="ticket_button ticketSprite cross"></span>
 					<span>Cancel</span>
@@ -62,7 +56,5 @@
 				<button class="button" id="createForButton" style="width:auto;">
 					<span class="ticket_button ticketSprite door" style="margin-right:5px">Create for</span>
 				</button>
-			</div>
-		</div>
-	</div>
+
 </div>

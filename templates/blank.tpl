@@ -11,7 +11,14 @@
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>
       <ol>
-		<li>A basic permissions system is working.  It will grow, but to start with it is very basic to lock out users, and grant others more control.</li>
+		<li>A basic permissions system is working.  It will grow, but to start with it is very basic to lock out users, and grant others more control.
+		<ol>
+		<li>Users can not be hidden from tickets though the correct permission values</li>
+		<li>A default assign is now set though the permission system</li>
+			
+		</ol>
+		</li>
+		
 		<li>Tickets is now using a new font based icon system.
 			<ol>
 				<li>It will help tickets load faster</li>
