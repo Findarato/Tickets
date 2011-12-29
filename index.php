@@ -46,8 +46,8 @@
 	$checkN = false;
 	$line = $db->Fetch("assoc_array");
 	foreach ($line as $l){$cate[$l["id"]] = $l["name"];}
-	$db->Query("SELECT d.name,dm.user_id,d.id,dm.notify FROM department AS d JOIN department_members AS dm ON (dm.department_id=d.id)");
-	$line2 = $db->Fetch("row_array");
+	$noUser = array_implode($db->Query("SELECT user_id from user_permissions WHERE permission_id IN (SELECT id FROM permissions WHERE permission='HIDE')",true,"row"));
+	$line2 = $db->Query("SELECT d.name,dm.user_id,d.id,dm.notify FROM department AS d JOIN department_members AS dm ON (dm.department_id=d.id) WHERE dm.user_id NOT IN(".join(',',$noUser).")",false,"row_array");
 	foreach($line2 as $line){$userInfo = id2Username($line[1]);
 		if(isset($usr)){if($line2[1]==$usr->User_id){if($line[3]==2||$line[3]==1){$checkN="checked";}else{$checkN="none";}}}//checks the notify box on a refresh
 		$name = ucwords($userInfo['firstname'])." ".ucwords($userInfo['lastname']);
