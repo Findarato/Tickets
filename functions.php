@@ -188,7 +188,8 @@ function id2Email($user_id,$userTable="users",$userDatabase="tickets" ){
 }
 function getDepartmentMembers($dep_id,$notify=0){
 	$db = db::getInstance();
-	$sql = "SELECT user_id FROM department_members WHERE department_id=$dep_id";
+	$noUser = array_implode($db->Query("SELECT user_id from user_permissions WHERE permission_id IN (SELECT id FROM permissions WHERE permission='HIDE')",true,"row"));
+	$sql = "SELECT user_id FROM department_members WHERE user_id NOT IN(".join(',',$noUser).") AND department_id=$dep_id";
 	if($notify ==1){$sql .= " AND (notify=2 OR notify=1)";}
 	$db->Query($sql);
 	return $db->Fetch("row_array");
@@ -196,7 +197,8 @@ function getDepartmentMembers($dep_id,$notify=0){
 function getUsers(){
 	$return = array();
 	$db = db::getInstance();
-	$sql = "SELECT id,firstname,lastname FROM tickets.users";
+	$noUser = array_implode($db->Query("SELECT user_id from user_permissions WHERE permission_id IN (SELECT id FROM permissions WHERE permission='HIDE')",true,"row"));
+	$sql = "SELECT id,firstname,lastname FROM tickets.users user_id NOT IN(".join(',',$noUser).") ";
 	$db->Query($sql);
 	$res = $db->Fetch("row_array");
 	foreach ($res as $r){$return[$r[0]]= array("firstname"=>$r[1],"lastname"=>$r[2]);}
