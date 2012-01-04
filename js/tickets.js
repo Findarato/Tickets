@@ -52,7 +52,7 @@ var newTicketTpl =
 					$("<div/>",{"class":"ticketUserIconBox colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
 				)	
 				.append( // Ticket ID
-					$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":blankId.toString(16),id:"ticketId"})
+					$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":8888,id:"ticketId"})
 				)
 				.append( // Ticket Priority
 					$("<div/>",{"class":"ticketPriorityBox colorMain-2 border-all-B-1 roundAll2","html":"",id:"ticketPriority"})
@@ -76,7 +76,6 @@ var newTicketTpl =
 					$("<div/>",{"class":" colorMain-2 border-all-B-1 ticketLocationBox",id:"tickLocation"}).html("Cool Location")
 				)
 		);
-function alertTest(tst){alert(tst);}
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
