@@ -85,7 +85,7 @@
 	font-family:"WebSymbolsRegular";
 	font-size:12px
 }
-.bookmark:before{
+.bookmarkOn:before{
 	content:"R ";
 	color:rgb(255,255,0);
 	font-family:"WebSymbolsRegular";
