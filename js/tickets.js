@@ -46,7 +46,7 @@ var newTicketTpl =
 		.html(
 			$("<div/>",{"class":"ticketItem"})
 				.append( // Ticket Bookmark
-					$("<div/>",{"class":"ticketBookmarkBox colorMain-2 roundTopRight4 ticketSprite nolink bookmarkOff",id:"ticketFavorite"})
+					$("<div/>",{"class":"ticketBookmarkBox fake-link roundTopRight4 ticketSprite",id:"ticketFavorite"})
 				)
 				.append( // User Icon Box
 					$("<div/>",{"class":"ticketUserIconBox colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
@@ -195,7 +195,10 @@ function checkHash() {
 	
 }
 function updateFavorites(){
-  localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
+	$.getJSON("ajax/bookmark.php",{"list":"1"},function(data){
+		Params.FavoriteObject = data.favIds;
+		localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
+	});
 }
 function checkResponse(json) {
 	if (json.error !== null && json.error.length > 2) {
@@ -392,16 +395,11 @@ function loadLocalStorage(clear){
 	}
  
 	// Favorites 
-	/*
 	if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
-		$.getJSON("ajax/tickets.php",{"type":"small","index":"flist","style":1},function(data){
-			Params.FavoriteObject = data.favIds;
-			updateFavorites(); //Update localStorage in a centeral way so that it can be done in other places
-		});
+		updateFavorites(); //Update localStorage in a centeral way so that it can be done in other places
 	}else{
     	Params.FavoriteObject = $.parseJSON(localStorage.getItem("ticketsFavorite"));
 	}
-*/
   	//Categories
 	if(!localStorage.getItem("ticketsCategories")){
     	$.getJSON("ajax/get_categories.php",{},function(data){

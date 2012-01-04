@@ -36,7 +36,7 @@
 		{if $count["favorite"]>0}
 		<div class=td>
 			<div class="topMenuItem">
-				<a class="nolink bookmark fontBold" href="#ticketList/sFavorite">Bookmarks</a>
+				<a class="nolink bookmarkOff fontBold" href="#ticketList/sFavorite" style="opacity: 1;font-size: 12px">Bookmarks</a>
 			</div>
 		</div>
 		{/if}
