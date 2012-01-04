@@ -472,7 +472,6 @@ function loadTicketList(pageNumber,queryObj) {
 		//alert(Params.Content.html());
 		if($("#displayTable").html() == null){
 			Params.LastArea = ""; // this is a bug and needs to be reset to keep working;
-			//alert("There was an error :255AA Could not find table")
 			loadTicketList(pageNumber,queryObj); // lets just take what was passed to this function and recall it 
 			return false; // lets get out of the function already
 		}
@@ -481,10 +480,7 @@ function loadTicketList(pageNumber,queryObj) {
 		Params.LastArea = "ticketList";	
 		Params.Content.html($("#generic").html());
 		Tlb = $("#ticketListbody").empty();
-		//displayTable = $("<table/>",{"id":"displayTable","class":"fontMain","cellpadding":"2px","cellspacing":"0",css:{"width":"100%"},id:"ticketListTable"});
-		
 		displayTable = $("<div/>",{"id":"ticketListTable","class":" fontMain",css:{"width":"100%","position":"relative"}});
-		
 		displayTable
 			.append(function(){
 					var selectValue = "Sort";
@@ -558,6 +554,24 @@ function loadTicketList(pageNumber,queryObj) {
 		tableBody.empty();
 		$.each(data.tickets,function(index,value){
 			smallTicket = newTicketTpl.clone();
+			smallTicket.find("#ticketFavorite").addClass(function(){
+				if($.inArray(value.id,Params.FavoriteObject) != -1){
+					return "bookmarkOn";
+				}else{
+					return "bookmarkOff";
+				}
+			}).attr("id","ticketFavorite"+value.id).click(function(){
+				var me = $(this);
+				me.toggleClass("bookmarkOff").toggleClass("bookmarkOn");
+				var toggle = "on";
+				if(me.hasClass("bookmarkOff")){	toggle = "off";	}
+				$.getJSON("ajax/bookmark.php",{"toggle":toggle,"ticket":value.id},function(data){
+					if(data.error.length == 0){
+						updateFavorites();
+					}
+				});
+			});
+			//alert(value.id)			
 			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
 			smallTicket.find("#ticketPriority").attr("id","ticketPriority-"+value.id).html(
 	    		function(i,html){

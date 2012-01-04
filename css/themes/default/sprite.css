@@ -22,7 +22,8 @@
 
 /* The shadow version of some of the icons */
 
-.bookmarkOff{ background-position: 0 0; width: 16px; height: 16px; opacity:.3}
+.bookmarkOff,.bookmarkOn{ background-position: 0 0; width: 16px; height: 16px; opacity:.3}
+.bookmarkOn{opacity:1;}
 
 .ticket:before,.bug:before{
 	content:", ";
@@ -34,7 +35,7 @@
 	font-family:"WebSymbolsRegular";
 }
 
-.bookmark,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil,.globe,.warning{background:none transparent;}
+.bookmarkOn,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil,.globe,.warning{background:none transparent;}
 
 .magnifier:before{
 	content:"L ";
@@ -89,15 +90,15 @@
 	content:"R ";
 	color:rgb(255,255,0);
 	font-family:"WebSymbolsRegular";
-	text-shadow:0 0 1px rgba(0,0,0,.60);
-	font-size:12px;
+	text-shadow:0 0 1px rgba(180,0,0,.80);
+	font-size:14px;
 }
 .bookmarkOff:before{
 	content:"R ";
-	color:black;
+	color:rgb(0,0,0);
 	font-family:"WebSymbolsRegular";
 	text-shadow:0 0 1px rgba(0,0,0,.60);
-	font-size:12px
+	font-size:14px
 }
 .closedTicketDisplay:after{
 	content:" .";
@@ -113,9 +114,7 @@
 	text-shadow:0 0 1px rgba(0,0,0,.60);
 	font-size:12px;
 	color:#000;
-	00769E
 }
 .remove:hover:before{
 	color:#00769E;
-	
 }
