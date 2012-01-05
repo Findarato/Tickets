@@ -3,6 +3,7 @@
 		<style>{$styleCode}</style>
 	</head>
 	<body class="image-background color-background">
+		{$debug}
 		<table cellpadding="0" cellspacing="0" style="width:100%" border="0">
 			<tr>
 				<td style="width:50%;vertical-align:top;padding-right:1px;" class=""><!--Ticket -->
