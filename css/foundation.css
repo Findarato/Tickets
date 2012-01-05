@@ -12,14 +12,14 @@
 	-o-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
 	transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */
 	
-	-moz-transition: background-position 0s linear;
-    -o-transition: background-position 0s linear;
-    -webkit-transition: background-position 0s linear;
-    transition: background-position 0s linear;
+	-moz-transition: background-position 0 linear;
+    -o-transition: background-position 0 linear;
+    -webkit-transition: background-position 0 linear;
+    transition: background-position 0 linear;
     
 }
 a {text-decoration: none;}
-a:hover {text-decoration: bold;color:#0087D5}
+a:hover {font-weight:bold;color:#0087D5}
 
 /* Utility */
 .tr {display: table-row}
@@ -59,10 +59,9 @@ a:hover {text-decoration: bold;color:#0087D5}
     -webkit-box-shadow: 0 0 6px rgba(255,0,0,1);
     -moz-box-shadow: 0 0 6px rgba(255,0,0,1);
     -moz-transition: all 0.3s;
-    /* FF3.7+ */: ;
     -o-transition: all 0.3s;
-    /* Opera 10.5 */: ;
     -webkit-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
 ul li,ol li {padding-left: 5px}
@@ -73,27 +72,27 @@ ul li,ol li {padding-left: 5px}
     -webkit-transform-origin: 0 0;
 }
 .rotate45 {
-    transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 .rotate90 {
-    transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     -o-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 .rotate180 {
-    transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     -o-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 .insideBorder{
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .topMenuItem {
@@ -134,7 +133,7 @@ ul li,ol li {padding-left: 5px}
 .ticketIdBox,.ticketPriorityBox{
 	height:15px;
 	width:32px;
-	margin-top:0px;
+	margin-top:0;
 	text-align:center;
 	font-size:11px;
 	padding-top:2px;
@@ -144,10 +143,10 @@ ul li,ol li {padding-left: 5px}
 .ticketPriorityBox{
 	margin-left:3px;
 	overflow:hidden;
-	padding:0px;
+	padding:0;
 }
 .ticketIdBox{
-	padding:0px;
+	padding:0;
 }
 .ticketTitleBox{
 	padding-left:7px;
@@ -160,14 +159,14 @@ ul li,ol li {padding-left: 5px}
 }
 .ticketBodyBox{
 	display:inline-block;
-	width:0px;
-	height:0px;
+	width:0;
+	height:0;
 	overflow:hidden;
 	padding-left:7px;
 	white-space:nowrap;
 }
 .ticketCreatedOnBox,.ticketCreatedByBox,.ticketCategoryBox,.ticketLocationBox{
-	bottom:0px;
+	bottom:0;
 	text-align:right;
 	font-size:11px;
 	width:14%;
