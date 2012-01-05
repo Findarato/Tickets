@@ -197,8 +197,7 @@ function getDepartmentMembers($dep_id,$notify=0){
 function getUsers(){
 	$return = array();
 	$db = db::getInstance();
-	$noUser = array_implode($db->Query("SELECT user_id from user_permissions WHERE permission_id IN (SELECT id FROM permissions WHERE permission='HIDE')",true,"row"));
-	$sql = "SELECT id,firstname,lastname FROM tickets.users user_id NOT IN(".join(',',$noUser).") ";
+	$sql = "SELECT id,firstname,lastname FROM tickets.users user_id ";
 	$db->Query($sql);
 	$res = $db->Fetch("row_array");
 	foreach ($res as $r){$return[$r[0]]= array("firstname"=>$r[1],"lastname"=>$r[2]);}

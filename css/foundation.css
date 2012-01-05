@@ -36,14 +36,6 @@ a:hover {font-weight:bold;color:#0087D5}
 .ticketLeft{float:left;}
 .ticketRight{float:right;}
 
-/* New ticket image sprite*/
-.ticket_button {
-    height: 16px;
-    padding: 0 0 0 19px;
-}
-.ticket_button_right {
-    padding: 0 19px 0 0
-}
 .box_transition,input {
     -moz-transition: all .5s ease-out;
     -o-transition: all .5s ease-in;
