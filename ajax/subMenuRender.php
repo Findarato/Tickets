@@ -15,9 +15,9 @@ include_once $_SERVER["DOCUMENT_ROOT"]."/header.php";
 function countTickets($user_id,$type="open"){
 	$db = db::getInstance();
 	if($type=="favorite"){$sql = "SELECT count(ticket_id) FROM favorite WHERE user_id=".$user_id.";";}
-	if(!isset($sql)){$sql = "SELECT COUNT(id) FROM tcview WHERE ".getWhereClause($user_id,$type)." ;";}	
+	if(!isset($sql)){$sql = "SELECT COUNT(id) FROM tickets WHERE ".getWhereClause($user_id,$type)." ;";}	
 	$db->Query($sql);
-	$res = $db->Fetch("row",false,false);
+	$res = $db->Fetch("row",true,false);
 	return $res;
 }
 function getWhereClause($user_id,$type){
