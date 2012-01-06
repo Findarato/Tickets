@@ -38,7 +38,8 @@ var Params = {
 	"Categories":{},
 	"Locations":{},
 	"FavoriteObject":[],
-	"NavArea":""
+	"NavArea":"",
+	"Features":[]
 };
 var blankId = 9999999;
 var newTicketTpl = 
@@ -579,6 +580,7 @@ jQuery(document).ready(function () {
 		}
 	});
 	$("#ticketAddButton,#bugAddButton").live("click",function () {
+		alert("clicked");
 		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
 		var ticketDesc = $("#newTicketDescription");

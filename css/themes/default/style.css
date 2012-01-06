@@ -6,7 +6,20 @@ body, html {
 	font-family:'Droid Sans', sans-serif;
 	height:100%;
 	min-height:100%;
-	background-color:#FFF;
+	background: rgb(192,251,254); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(192,251,254,1) 0%, rgba(255,255,255,1) 61%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(192,251,254,1)), color-stop(61%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(192,251,254,1) 0%,rgba(255,255,255,1) 61%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(192,251,254,1) 0%,rgba(255,255,255,1) 61%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, rgba(192,251,254,1) 0%,rgba(255,255,255,1) 61%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0fbfe', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, rgba(192,251,254,1) 0%,rgba(255,255,255,1) 61%); /* W3C */
+	background-color: rgb(255,255,255);
+	background-size:100% 350px;
+	background-position:left top;
+	background-repeat:no-repeat;
+	height:100%;
+	width:100%;
 }
 
 .border-all-B-1, .border-all-Main-1 {
@@ -91,8 +104,10 @@ body, html {
 .noticeBackgroundDefault { 
 	background:hsl(0,0,30%)
 }
-
-.WhitetoLightBlue {
+.ticketBox{
+	background:#FFF;
+}
+.WhitetoLightBlue,.ticketBox:hover {
 	background: #DDF1F1; /* old browsers */
 	background: -moz-linear-gradient(top, #FFFFFF 0, #DDF1F1 96%); /* firefox */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#FFFFFF), color-stop(96%,#DDF1F1)); /* webkit */
@@ -283,3 +298,4 @@ ul li{
 	background:none;
 	font-weight: bold;
 }
+

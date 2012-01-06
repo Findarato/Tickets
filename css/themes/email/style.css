@@ -1,98 +1,103 @@
-.bookmarkOff,.bookmarkOn{ background-position: 0 0; width: 16px; height: 16px; opacity:.3}
-.bookmarkOn{opacity:1;}
+/* Based on The MailChimp Reset INLINE: Yes. */  
+		/* Client-specific Styles */
+		body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;} 
+		/* Prevent Webkit and Windows Mobile platforms from changing default font sizes.*/ 
+		.ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */  
+		.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+		/* Forces Hotmail to display normal line spacing.  More on that: http://www.emailonacid.com/forum/viewthread/43/ */ 
+		/* End reset */
 
-.ticket:before,.bug:before{
-	content:", ";
-	font-family:"WebSymbolsRegular";	
-}
-.google:before{
-	content:"g ";
-	color:maroon;
-	font-family:"WebSymbolsRegular";
-}
+		/* Some sensible defaults for images
+		Bring inline: Yes. */
+		img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;} 
+		a img {border:none;} 
+		.image_fix {display:block;}
 
-.magnifier:before{
-	content:"L ";
-	color:rgb(0,0,0);
-	font-family:"WebSymbolsRegular";
-	font-size:12px;
-}
-.warning:before{
-	content:"W ";
-	color:rgb(150,0,0);
-	font-family:"WebSymbolsRegular";
-	font-size:12px;
-}
-.globe:before{
-	content:"K ";
-	color:rgb(0,0,0);
-	font-family:"WebSymbolsRegular";
-	font-size:12px;
-}
-.pencil:before{
-	content:"e ";
-	color:rgb(0,0,0);
-	font-family:"WebSymbolsRegular";
-	font-size:12px;
-}
-.group:before{
-	content:"F ";
-	color:rgb(0,0,0);
-	font-family:"WebSymbolsRegular";
-	font-size:12px;
-}
-.user:before{
-	content:"U ";
-	color:rgb(0,0,0);
-	font-family:"WebSymbolsRegular";
-	text-shadow:0 0 1px rgba(0,0,0,.60);
-	font-size:12px;
-}
-.closed:before{
-	content:"Z ";
-	color:rgb(0,0,0);
-	font-family:"WebSymbolsRegular";
-	font-size:12px;
-}
-.chart:before{
-	content:"u ";
-	color:black;
-	font-family:"WebSymbolsRegular";
-	font-size:12px
-}
-.bookmarkOn:before{
-	content:"R ";
-	color:rgb(255,255,0);
-	font-family:"WebSymbolsRegular";
-	text-shadow:0 0 1px rgba(180,0,0,.80);
-	font-size:14px;
-}
-.bookmarkOff:before{
-	content:"R ";
-	color:rgb(0,0,0);
-	font-family:"WebSymbolsRegular";
-	text-shadow:0 0 1px rgba(0,0,0,.60);
-	font-size:14px
-}
-.closedTicketDisplay:after{
-	content:" .";
-	font-family:"WebSymbolsRegular";
-	text-shadow:0 0 1px rgba(0,0,0,.60);
-	font-size:12px;
-	color:#00769E;
-}
-.remove:before{
-	cursor:pointer;
-	content:"X";
-	padding-right:3px;
-	text-shadow:0 0 1px rgba(0,0,0,.60);
-	font-size:12px;
-	color:#000;
-}
-.remove:hover:before{
-	color:#00769E;
-}
+		/* Yahoo paragraph fix
+		Bring inline: Yes. */
+		p {margin: 1em 0;}
 
+		/* Hotmail header color reset
+		Bring inline: Yes. */
+		h1, h2, h3, h4, h5, h6 {color: black !important;}
+
+		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: blue !important;}
+
+		h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {
+		color: red !important; /* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email clients, this was added just for good measure. */
+		}
+
+		h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {
+		color: purple !important; /* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email clients, this was added just for good measure. */
+		}
+
+		/* Outlook 07, 10 Padding issue fix
+		Bring inline: No.*/
+		table td {border-collapse: collapse;}
+
+		/* Styling your links has become much simpler with the new Yahoo.  In fact, it falls in line with the main credo of styling in email and make sure to bring your styles inline.  Your link colors will be uniform across clients when brought inline.
+		Bring inline: Yes. */
+		a {color: orange;}
+
+
+		/***************************************************
+		****************************************************
+		MOBILE TARGETING
+		****************************************************
+		***************************************************/
+		@media only screen and (max-device-width: 480px) {
+			/* Part one of controlling phone number linking for mobile. */
+			a[href^="tel"], a[href^="sms"] {
+						text-decoration: none;
+						color: blue; /* or whatever your want */
+						pointer-events: none;
+						cursor: default;
+					}
+
+			.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+						text-decoration: default;
+						color: orange !important;
+						pointer-events: auto;
+						cursor: default;
+					}
+
+		}
+
+		/* More Specific Targeting */
+
+		@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+		/* You guessed it, ipad (tablets, smaller screens, etc) */
+			/* repeating for the ipad */
+			a[href^="tel"], a[href^="sms"] {
+						text-decoration: none;
+						color: blue; /* or whatever your want */
+						pointer-events: none;
+						cursor: default;
+					}
+
+			.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+						text-decoration: default;
+						color: orange !important;
+						pointer-events: auto;
+						cursor: default;
+					}
+		}
+
+		@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+		/* Put your iPhone 4g styles in here */ 
+		}
+
+		/* Android targeting */
+		@media only screen and (-webkit-device-pixel-ratio:.75){
+		/* Put CSS for low density (ldpi) Android layouts in here */
+		}
+		@media only screen and (-webkit-device-pixel-ratio:1){
+		/* Put CSS for medium density (mdpi) Android layouts in here */
+		}
+		@media only screen and (-webkit-device-pixel-ratio:1.5){
+		/* Put CSS for high density (hdpi) Android layouts in here */
+		}
+		/* end Android targeting */
 
 
 .roundAll2 {
@@ -107,44 +112,11 @@ border-radius:4px;
 webkit-border-radius:4px;
 }
 
-.roundAll6 {
-border-radius:6px;
--moz-border-radius:6px;
-webkit-border-radius:6px;
-}
 
-.roundAll8 {
-border-radius:8px;
--moz-border-radius:8px;
-webkit-border-radius:8px;
-}
 
-.roundBottom2 {
-border-bottom-left-radius:2px;
-border-bottom-right-radius:2px;
--moz-border-radius-bottomleft:2px;
--moz-border-radius-bottomright:2px;
-webkit-border-bottom-left-radius:2px;
-webkit-border-bottom-right-radius:2px;
-}
 
-.roundBottom4 {
-border-bottom-left-radius:4px;
-border-bottom-right-radius:4px;
--moz-border-radius-bottomleft:4px;
--moz-border-radius-bottomright:4px;
-webkit-border-bottom-left-radius:4px;
-webkit-border-bottom-right-radius:4px;
-}
 
-.roundBottom6 {
-border-bottom-left-radius:6px;
-border-bottom-right-radius:6px;
--moz-border-radius-bottomleft:6px;
--moz-border-radius-bottomright:6px;
-webkit-border-bottom-left-radius:6px;
-webkit-border-bottom-right-radius:6px;
-}
+
 
 .roundBottomLeft2 {
 border-bottom-left-radius:2px;
@@ -158,11 +130,6 @@ border-bottom-left-radius:4px;
 webkit-border-bottom-left-radius:4px;
 }
 
-.roundBottomLeft6 {
-border-bottom-left-radius:6px;
--moz-border-radius-bottomleft:6px;
-webkit-border-bottom-left-radius:6px;
-}
 
 .roundLeft2 {
 border-bottom-left-radius:2px;
@@ -182,14 +149,7 @@ webkit-border-bottom-left-radius:4px;
 webkit-border-top-left-radius:4px;
 }
 
-.roundLeft6 {
-border-bottom-left-radius:6px;
-border-top-left-radius:6px;
--moz-border-radius-bottomleft:6px;
--moz-border-radius-topleft:6px;
-webkit-border-bottom-left-radius:6px;
-webkit-border-top-left-radius:6px;
-}
+
 
 .roundRight2 {
 -moz-border-radius-bottomright:2px;
@@ -247,41 +207,7 @@ webkit-border-top-left-radius:2px;
 webkit-border-top-right-radius:2px;
 }
 
-.roundTop4 {
-border-top-left-radius:4px;
-border-top-right-radius:4px;
--moz-border-radius-topleft:4px;
--moz-border-radius-topright:4px;
-webkit-border-top-left-radius:4px;
-webkit-border-top-right-radius:4px;
-}
 
-.roundTop6 {
-border-top-left-radius:6px;
-border-top-right-radius:6px;
--moz-border-radius-topleft:6px;
--moz-border-radius-topright:6px;
-webkit-border-top-left-radius:6px;
-webkit-border-top-right-radius:6px;
-}
-
-.corners-top-left-1 {
-border-top-left-radius:2px;
--moz-border-radius-topleft:2px;
-webkit-border-top-left-radius:2px;
-}
-
-.corners-top-left-2 {
-border-top-left-radius:4px;
--moz-border-radius-topleft:4px;
-webkit-border-top-left-radius:4px;
-}
-
-.corners-top-left-3 {
-border-top-left-radius:6px;
--moz-border-radius-topleft:6px;
-webkit-border-top-left-radius:6px;
-}
 
 .corners-top-right-1 {
 border-top-right-radius:2px;
@@ -305,7 +231,22 @@ body, html {
 	font-family:'Droid Sans', sans-serif;
 	height:100%;
 	min-height:100%;
-	background-color:#FFF;
+	background: rgb(192,251,254); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(192,251,254,1) 0%, rgba(255,255,255,1) 61%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(192,251,254,1)), color-stop(61%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(192,251,254,1) 0%,rgba(255,255,255,1) 61%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(192,251,254,1) 0%,rgba(255,255,255,1) 61%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, rgba(192,251,254,1) 0%,rgba(255,255,255,1) 61%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0fbfe', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, rgba(192,251,254,1) 0%,rgba(255,255,255,1) 61%); /* W3C */
+	background-color: rgb(255,255,255);
+	background-size:100% 350px;
+	background-position:left top;
+	background-repeat:no-repeat;
+  height:100%;
+  width:100%;
+
+	
 }
 
 .border-all-B-1, .border-all-Main-1 {
@@ -314,22 +255,7 @@ body, html {
 .border-all-B-2, .border-all-Main-2 {
 	border:2px solid #85aaa5;
 }
-.border-bottom-B-1, .border-bottom-Main-1 {
-	border-bottom:1px solid #85aaa5;
-}
-.border-left-B-1, .border-left-Main-1 {
-	border-left:1px solid #85aaa5;
-}
-.border-right-B-1, .border-right-Main-1 {
-	border-right:1px solid #85aaa5;
-}
-.ticket-divider {
-	border-right:4px solid #ccc;
-}
-.border-sides-B-1, .border-sides-Main-1 {
-	border-left:1px solid #85aaa5;
-	border-right:1px solid #85aaa5;
-}
+
 .border-top-B-1, .border-top-Main-1 {
 	border-top:1px solid #85aaa5;
 }
@@ -340,85 +266,10 @@ body, html {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88bfe8', endColorstr='#70b0e0',GradientType=0 ); /* ie */
 	background: -o-linear-gradient(top, rgb(136,191,232) 0%,rgb(112,176,224) 100%); /* opera */
 }
-.color-B-2, .colorMain-2 {
-	background-color:#F1F1F1;
-}
-.color-B-3, .colorMain-3 {
-	background-color:hsl(212,43%,53%);
-	background-color:hsla(212,43%,53%,0.6)
-}
-.color-B-4, .colorMain-4 {
-	background-color:hsl(212,43%,53%);
-	background-color:hsla(212,43%,53%,0.3)
-}
-.colorWhite-1 {
-	background-color:hsl(0,0%,100%)
-}
-.colorWhite-2 {
-	background-color:hsla(0,0%,100%,0.8)
-}
-.colorWhite-3 {
-	background-color:hsla(0,0%,100%,0.6)
-}
-.colorWhite-4 {
-	background-color:hsla(0,0%,100%,0.3)
-}
-.colorBlack-1 {
-	background-color:hsl(0,0%,2%)
-}
-.colorBlack80 {
-	background-color:hsla(0,0%,2%,0.8)
-}
-.colorBlack60 {
-	background-color:hsla(0,0%,2%,0.6)
-}
-.colorBlack30 {
-	background-color:hsla(0,0%,2%,0.3)
-}
-.borderBottomBlack {
-	border-bottom:1px solid hsla(0,0%,0%,0.3)
-}
-.fontMain, a, a:active, a:visited {
-	color:hsl(0,0%,2%)
-}
-.fontMain2 {
-	color:hsl(0,0%,27%)
-}
-.fontReverse, a.fontReverse {
-	color:hsl(0,0%,100%)
-}
-.noticeBackgroundDefault { 
-	background:hsl(0,0,30%)
-}
 
-.WhitetoLightBlue {
-	background: #DDF1F1; /* old browsers */
-	background: -moz-linear-gradient(top, #FFFFFF 0, #DDF1F1 96%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#FFFFFF), color-stop(96%,#DDF1F1)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#DDF1F1',GradientType=0 ); /* ie */
-	background: -o-linear-gradient(top, #FFFFFF 0,#DDF1F1 96%); /* opera */
-}
-.WhitetoLightOff {
-	background: #F1F1F1; /* old browsers */
-	background: -moz-linear-gradient(top, #FFFFFF 0, #F1F1F1 96%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#FFFFFF), color-stop(96%,#F1F1F1)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F1F1F1',GradientType=0 ); /* ie */
-	background: -o-linear-gradient(top, #FFFFFF 0,#F1F1F1 96%); /* opera */
-}
-.tab {
-	padding-top:16px;
-	padding-left:5px;
-	padding-right:5px;
-}
-.selectedTab {
-	padding-bottom:8px;
-	padding-top:12px;
-	position:relative;
-	background:#fff;
-	border:1px solid hsl(212,43%,53%);
-	border-bottom:none;
-	bottom:-4px;
-}
+
+
+
 .highlight{
 	
 }
@@ -459,119 +310,6 @@ body, html {
 	background-color:#e6804d;
 	/*border-color:#d51;*/
 	width:100%;
-}
-#rightSideFloater div{
-	/*height:20px;*/
-}
-.selectButton{
-	text-align: left;
-}
-ul{
-	margin:0px;
-	padding:0px;
-	list-style: none;
-}
-ul li{
-	
-}
-.selectButton:after{
-	content:'';
-	width: 0; 
-	height: 0;
-	border-left: 6px solid transparent; 
-	border-right: 6px solid transparent; 
-	border-top: 10px solid rgba(0,0,0,.6);
-	position:absolute;
-	right:7px;
-}
-.headerBox{
-	padding:5px;
-	margin:3px;
-}
-.categorySelect{
-	font-size:14px;
-	font-weight: bold;
-}
-.selectable{
-	padding-left:15px;
-	background-color:white;
-}
-.selectable:hover{
-	cursor: pointer;
-	background-color:rgba(0,0,0,.2);
-}
-.fakeDropDown{
-	background-color:white;
-}
-.shadow{
-	-moz-box-shadow: 5px 5px 2px #888;
-	-webkit-box-shadow: 5px 5px 2px #888;
-	box-shadow: 5px 5px 2px #888;
-}
-.shadowUp{
-	-moz-box-shadow: -0px -2px 2px #888;
-	-webkit-box-shadow: 0px -2px 2px #888;
-	box-shadow: 0px -2px 2px #888;
-}
-.smallShadow{
-	box-shadow: 0 1px 5px #ccc;
-	-moz-box-shadow: 0 1px 5px #ccc;
-	-webkit-box-shadow: 0 1px 5px #ccc;
-}
-.replyBox{
-	 width:100%; 
-	 margin-bottom:2px;
-	 overflow:hidden;
-	 background-color:white;
-	 border: solid #CCC 1px;
-	 -moz-transition: all .5s ease-out;
-     -o-transition: all .5s ease-in;
-     -webkit-transition: all .5s ease-out;
-     position: relative;
-}
-#replyControlls{
-	height:16px;
-	width:100%;
-}
-
-.sortDisplayDesc:after{
-	content: "D";
-	margin-left:4px;
-	color:#00769E;
-}
-
-.sortDisplayAsc:after{
-	content: "A";
-	margin-left:4px;
-	color:#00769E;
-}
-
-.flash {
-    -webkit-animation: target-fade 3s 1;
-    -moz-animation: target-fade 3s 1;
-}
-
-@-webkit-keyframes target-fade {
-     0% { color: rgba(0,0,0,1); }
-    100% { color: rgba(0,0,0,0); }
-}
-@-moz-keyframes target-fade {
-     0% { color: rgba(0,0,0,1); }
-    100% { color: rgba(0,0,0,0); }
-}
-.errorPulse {
-    -webkit-animation: error-fade 3s 1;
-    -moz-animation: error-fade 3s 1;
-}
-
-@-webkit-keyframes error-fade {
-     0% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,0); }
-    100% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
-}
-@-moz-keyframes error-fade {
-	
-     0% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,0) }
-    100% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
 }
 
 /** Full display  */

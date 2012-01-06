@@ -1,5 +1,5 @@
+/*
 .bookmark,.bookmarkOff,.bug,.calendar,.chart,.closed,.folder,.gear,.group,.heart,.infocard,.lock,.magnifier,.pencil,.star,.user,.warning{background: url(iconSprite.png) no-repeat top left;}
-
 .bookmark{ background-position: 0 0; width: 16px; height: 16px;} 
 .bug{ background-position: 0 -18px; width: 16px; height: 16px; } 
 .calendar{ background-position: 0 -36px; width: 16px; height: 16px; } 
@@ -19,7 +19,7 @@
 .user{ background-position: 0 -288px; width: 16px; height: 16px; } 
 .warning{ background-position: 0 -306px; width: 16px; height: 16px; }
 
-
+.bookmarkOn,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil,.globe,.warning{background:none transparent;}
 /* The shadow version of some of the icons */
 
 .bookmarkOff,.bookmarkOn{ background-position: 0 0; width: 16px; height: 16px; opacity:.3}
@@ -34,8 +34,6 @@
 	color:maroon;
 	font-family:"WebSymbolsRegular";
 }
-
-.bookmarkOn,.ticket,.bookmarkOff,.bug,.user,.closed,.magnifier,.group,.chart,.pencil,.globe,.warning{background:none transparent;}
 
 .magnifier:before{
 	content:"L ";
@@ -63,6 +61,12 @@
 }
 .group:before{
 	content:"F ";
+	color:rgb(0,0,0);
+	font-family:"WebSymbolsRegular";
+	font-size:12px;
+}
+.gear:before{
+	content:"S ";
 	color:rgb(0,0,0);
 	font-family:"WebSymbolsRegular";
 	font-size:12px;

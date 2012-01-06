@@ -161,6 +161,9 @@ function addReply($ticket_id,$user_id,$title,$description,$email=true,$closed=fa
 	$smarty -> assign('email_location',$locationEmail[2]);
 	$smarty -> assign('email_description',nl2br($res1['description']));
 	$smarty -> assign('respon',$respon);
+	$styleCode = join("", file($_SERVER["DOCUMENT_ROOT"]."/css/themes/email/style.css"));
+	$smarty -> assign('styleCode', $styleCode);
+	$smarty -> assign("messageTitle",$res1['subject']);
 	$body = $smarty->fetch('email.tpl');
 	if($email){generateEmail($res1['created_by_id'],$res1['assigned_id'],$res1['id'],$body,$res1['subject'],$closed,$locationEmail[1],true);}
 }

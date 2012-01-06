@@ -7,7 +7,7 @@ var newUserTpl =
 					$("<div/>",{"class":"ticketUserIconBox colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
 				)	
 				.append( // Ticket ID
-					$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":blankId.toString(16),id:"ticketId"})
+					$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":"C0FFEE",id:"ticketId"})
 				)
 				.append( //Ticket Title
 					$("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
@@ -19,6 +19,13 @@ var newUserTpl =
 var newPermissionTpl = $("<div/>",{"class":" colorMain-2 border-all-B-1 roundBottomRight4 ticketCategoryBox",id:"permInfo"}).html("On: Aug. 8, 1982")
 
 admin = {
+	"loadFeatures":function(){
+		Params.Content.html($("#generic").html());
+		Tlb = Params.Content.find("#ticketListbody");
+		$.getJSON("ajax/admin/features.php",{"list":"all"},function(json){
+			
+		});
+	},
 	"loadAllUsers":function(){
 			Params.Content.html($("#generic").html());
 			Tlb = Params.Content.find("#ticketListbody");
