@@ -93,7 +93,7 @@ if (isset($_GET['nagiosTicket']) && $_GET['nagiosTicket'] == 881234123 || $_GET[
 		$tempName = "emailBug.tpl";
 	}
 	
-	$smarty -> assign("debug",join("||||",$res));
+	//$smarty -> assign("debug",join("||||",$res));
 	
 	$smarty -> assign('email_ticket_id', $res1['id']);
 	$smarty -> assign('email_title', $res1['subject']);
@@ -107,9 +107,9 @@ if (isset($_GET['nagiosTicket']) && $_GET['nagiosTicket'] == 881234123 || $_GET[
 
 	$smarty -> assign('email_description', nl2br(Tcode($res1['description'], false, false, true)));
 	$smarty -> assign('showRes', "0");
-	$styleCode .= join("", file("http://tickets.lapcat.org/css/themes/default/style.css"));
-	$styleCode .= join("", file("http://tickets.lapcat.org/css/foundation.css"));
+	$styleCode = join("", file($_SERVER["DOCUMENT_ROOT"]."/css/themes/email/style.css"));
 	$smarty -> assign('styleCode', $styleCode);
+	$smarty -> assign("messageTitle",$res1['subject']);
 	$body = $smarty -> fetch($tempName);
 	if (isset($respon)) {	$smarty -> assign('respon', $respon);
 	}
