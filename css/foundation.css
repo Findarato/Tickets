@@ -152,8 +152,8 @@ ul li,ol li {padding-left: 5px}
 }
 .ticketBodyBox{
 	display:inline-block;
-	width:0;
-	height:0;
+	width:0px;
+	height:0px;
 	overflow:hidden;
 	padding-left:7px;
 	white-space:nowrap;
