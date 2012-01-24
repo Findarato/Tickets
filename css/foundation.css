@@ -145,7 +145,7 @@ ul li,ol li {padding-left: 5px}
 	padding-left:7px;
 	display:inline-block;
 	height:22px;
-	width:45%;
+	width:auto;
 	overflow:hidden;
 	white-space:nowrap;
 	vertical-align:top;
