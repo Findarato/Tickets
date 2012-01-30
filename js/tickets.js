@@ -561,14 +561,7 @@ jQuery(document).ready(function () {
   });  
   	//Clicking login with google button
 	$("#googleLogin").live("click",function(){
-		//window.location = "classes/lightopenid/google.php?login";
-		URL = "classes/lightopenid/google.php?login";
-		window.location =URL;
-		//$("body").append(
-		//	$("<iframe/>",{src:URL,id:"loginWithGoogle"}).dialog()
-		//)
-		
-		
+		window.location = "classes/lightopenid/google.php?login";
 	}); 
 	$("#loginButton").live("click",function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
