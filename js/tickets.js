@@ -468,11 +468,16 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 	}
 	
 }
-window.onpopstate = function(event) { 
-  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
-  checkHash(); 
-  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
-};
+if(window.history && window.history.pushState){
+	window.onpopstate = function(event) { 
+	  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
+	  checkHash(); 
+	  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
+	};
+}else{
+	window.onhashchange = function(){checkHash();}
+}
+
 jQuery(document).ready(function () {
 	
 	//this should make the logout button in the drop down work.
