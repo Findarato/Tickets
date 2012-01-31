@@ -468,7 +468,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 	}
 	
 }
-if(window.history && window.history.pushState){
+if(window.history && window.history.pushState && !jQuery.browser.opera){
 	window.onpopstate = function(event) { 
 	  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
 	  checkHash(); 
