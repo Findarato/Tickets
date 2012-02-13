@@ -108,8 +108,8 @@ function checkHash() {
   				}
   				break;
   			default: // ticket with out a page
-          loadTicket(hash[1]);
-          loadResponsesBody(hash[1], $("#replyareabody"), 0);
+	          loadTicket(hash[1]);
+	          loadResponsesBody(hash[1], $("#replyareabody"), 0);
   			 break;
   			}
   			break;
@@ -151,7 +151,9 @@ function checkHash() {
 			}
 		break;
 		case "#login":
-			loadLoginPage();
+			if(localStorage.userId >0){
+				
+			}else{loadLoginPage();}
 		break;
 		case "#tickets":// this triggers when the tab tickets is clicked
 			changeArea("tickets");
@@ -431,6 +433,7 @@ function loadLocalStorage(clear){
 
 }
 function login(data){ //We need a json array, probably need to parse it, who knows
+
 	//alert(data.message);
 
 	loadLocalStorage(); // Lets make sure that we load up localStorage
@@ -468,6 +471,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 	}
 	
 }
+
 if(window.history && window.history.pushState && !jQuery.browser.opera){
 	window.onpopstate = function(event) { 
 	  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
