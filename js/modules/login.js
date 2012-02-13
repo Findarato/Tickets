@@ -6,7 +6,7 @@
 jQuery(document).ready(function () {
 	$("#yesLink").live("click",function(){
 		$.getJSON("/ajax/login.php",{"openId":"1","userId":"1"},function(data){
-			window.location = "/";
+			window.location = "/#ticketList/all_tickets";
 			/*window.opener.window.login(data);*/
 			if(data.error==""){
 				window.close();	
@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
 	
 	$("#newUser").live("click",function(){
 		$.getJSON("/ajax/login.php",{"openId":"1","userId":"2"},function(data){
-			window.location = "/";
+			window.location = "/#ticketList/all_tickets";
 			/*window.opener.window.login(data);*/
 			window.close();
 		});
