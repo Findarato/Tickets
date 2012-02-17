@@ -139,6 +139,7 @@ function checkHash() {
 			loadBlank();
 			break;
 		default: case "#start":
+			setHash("#ticketList/all_tickets");
 			loadNew(Params.LastLogon);
 			break;
 		case "#userPage":
@@ -152,7 +153,7 @@ function checkHash() {
 		break;
 		case "#login":
 			if(localStorage.userId >0){
-				
+				setHash("#ticketList/all_tickets");
 			}else{loadLoginPage();}
 		break;
 		case "#tickets":// this triggers when the tab tickets is clicked

@@ -572,7 +572,7 @@ function loadTicketList(pageNumber,queryObj) {
 				});
 			});
 			//alert(value.id)			
-			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
+			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id);
 			smallTicket.find("#ticketPriority").attr("id","ticketPriority-"+value.id).html(
 	    		function(i,html){
 	     			if(value.priority>0){
