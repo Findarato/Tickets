@@ -575,12 +575,15 @@ function loadTicketList(pageNumber,queryObj) {
 			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id);
 			smallTicket.find("#ticketPriority").attr("id","ticketPriority-"+value.id).html(
 	    		function(i,html){
+	    			if(value.priority == undefined){
+	    				value.priority = 1;
+	    			}
 	     			if(value.priority>0){
 	       				if(value.priority>5){value.priority = value.priority-5;}
 	       				if(value.priority == 5)value.priority --;
 	       				//result = Params.Priority_string[item.priority].name;
 	       				result = $("<div/>",{title:Params.Priority_string[value.priority].name}).addClass("pSquare p"+Params.Priority_string[value.priority].name.replace(" ",""));
-					}else{result = Params.Priority_string[0].name;}
+					}else{$("<div/>",{title:Params.Priority_string[value.priority].name}).addClass("pSquare p"+Params.Priority_string[value.priority].name.replace(" ",""));}
 					return result;
 	    		})	
 			smallTicket.find("#title").attr("id","title-"+value.id).html($("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(value.subject).attr({"id": "subject" + value.id }));

@@ -140,7 +140,7 @@ function checkHash() {
 			break;
 		default: case "#start":
 			setHash("#ticketList/all_tickets");
-			loadNew(Params.LastLogon);
+			//loadNew(Params.LastLogon);
 			break;
 		case "#userPage":
 			if(hash[1] == 0 || hash[1] == ""){ // There is some strange bug we need to fix, but lets just call it good for now

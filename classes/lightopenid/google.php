@@ -23,7 +23,9 @@ if(isset($_SESSION["user"])){$usr = unserialize($_SESSION["user"]);}
             pageTracker._trackPageview();
         </script>
 		<script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+		<script type="text/javascript" src="http://<?Php echo $_SERVER['SERVER_NAME'];?>/js/scrpt.js"></script>
 		<script type="text/javascript" src="http://<?Php echo $_SERVER['SERVER_NAME'];?>/js/modules/login.js"></script>
+		
 		
 	</head>
 	<body>
@@ -70,7 +72,9 @@ try {
 					$password = $db->Query("SELECT password FROM users WHERE id=".$userId["id"],false,"row");
 					$response = login($userId["id"],$password,$response,true);
 					//print_r($response);die();
-					echo '<script type="text/javascript">window.location = "/"</script>';
+					
+					echo '<script type="text/javascript">window.location = "/#start"</script>';
+					
 				}else{// there is a matching email but no openid link
 					echo "There is an account with the same email address found. Do you want to link it to this Google ID?<br>";
 					echo "<button class='ticketPadding3' id='yesLink' style='width:100px;'>Yes</button>";
