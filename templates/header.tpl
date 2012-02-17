@@ -32,8 +32,8 @@
 		    {/if}
 		</ul>
 	</menu>
-	<div class="pageBranding rotate45n">
-		<div class="" style="width:30px;;height:16px;font-size: 16px">Tickets</div>
+	<div class="pageBranding rotate45n color5 outSideBoxShadow">
+		<div class="" style="height:16px;font-size: 13px;text-align:center;margin:2px;">Tickets</div>
 		<div class="fontMain fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
 			<span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
 		</div>	
@@ -49,15 +49,7 @@
 			</div>
 		</div>
 	</nav>
-	<nav class="secondNav color2" style="width:100%">
-		<div class="topNav" style="text-align:center;margin:0 auto;">
-			<div class="td ">
-				<div class="menuSelect smoothAnimate">
-					<a href="https://catalog.lapcat.org/patroninfo">My Account</a>
-				</div>
-			</div>
 
-	</nav>
 <menu class="smallShadow colorMain-2" id="userPopup" style="position:absolute;top:27px;right:13px;z-index:999;display:none;">
 	<!-- popup Userinfo box -->
 	<div style="padding:3px;width:250px;">

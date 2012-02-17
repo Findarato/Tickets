@@ -65,10 +65,12 @@ h3 {
 }
 .pageBranding{
 	position:absolute;
-	top:22px;
-	left:15px;
+	top:10px;
+	left:-20px;
 	font-weight:bold;
-	
+	height:20px;
+	width:80px;
+	text-shadow: black 0em 0em 0.1em;
 }
 /** Old UI code **/
 
