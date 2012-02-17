@@ -6,9 +6,13 @@
 jQuery(document).ready(function () {
 	$("#yesLink").live("click",function(){
 		$.getJSON("/ajax/login.php",{"openId":"1","userId":"1"},function(data){
-			loadLocalStorage();
-			window.location = "/#ticketList/all_tickets";
-			/*window.opener.window.login(data);*/
+			// Userid
+			if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
+				$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
+					localStorage.setItem("userId",data.user_id);
+					//window.location = "/#ticketList/all_tickets";
+				});	
+			}
 			if(data.error==""){
 				window.close();	
 			}else{
@@ -20,9 +24,13 @@ jQuery(document).ready(function () {
 	
 	$("#newUser").live("click",function(){
 		$.getJSON("/ajax/login.php",{"openId":"1","userId":"2"},function(data){
-			loadLocalStorage();
-			window.location = "/#ticketList/all_tickets";
-			/*window.opener.window.login(data);*/
+			// Userid
+			if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
+				$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
+					localStorage.setItem("userId",data.user_id);
+					//window.location = "/#ticketList/all_tickets";
+				});	
+			}
 			window.close();
 		});
 	});
