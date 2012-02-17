@@ -503,7 +503,13 @@ jQuery(document).ready(function () {
 			localStorage.clear(); // Lets just clear the localStorage to clear out all of the data
 			return false;
 		});
-
+		
+			$("li").click(function(e) {
+			  e.preventDefault();
+			  $("li").removeClass("selected");
+			  $(this).addClass("selected");
+			});
+		
 	/*
 	$("body").live("mousedown :not(.categorySelect)",function(){
 		//alert('!')
