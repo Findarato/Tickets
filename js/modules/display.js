@@ -467,7 +467,6 @@ function loadTicketList(pageNumber,queryObj) {
 	var bugs = false;
 	var ticketCount = 0;
 	if (pageNumber < 0) {	pageNumber = 0;}
-	alert(localStorage.userId)
 	var hash = getHashArray();
 	if(Params.LastArea == "ticketList"){ // This is a new display of data, not a change of locations
 		//alert(Params.Content.html());
