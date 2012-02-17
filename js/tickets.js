@@ -371,7 +371,7 @@ function updateTickets() {
 	//populateAllBugs();
 }
 function loadLoginPage(){ 
-	alert("login local: "+localStorage.userId)
+	//alert("login local: "+localStorage.userId)
 	var loginNewBox = Params.Content.find("#ticketLoginList");
 	if(loginNewBox.html()==null){
 		Params.Content.load("templates/login.tpl");
