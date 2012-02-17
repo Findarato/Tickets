@@ -13,7 +13,7 @@
 
 .magnifier:before{
 	content:"L ";
-	color:rgb(0,0,0);
+	
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
 }
@@ -25,38 +25,38 @@
 }
 .globe:before{
 	content:"K ";
-	color:rgb(0,0,0);
+	
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
 }
 .pencil:before{
 	content:"e ";
-	color:rgb(0,0,0);
+	
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
 }
 .group:before{
 	content:"F ";
-	color:rgb(0,0,0);
+	
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
 }
 .gear:before{
 	content:"S ";
-	color:rgb(0,0,0);
+	
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
 }
 .user:before{
 	content:"U ";
-	color:rgb(0,0,0);
+	
 	font-family:"WebSymbolsRegular";
 	text-shadow:0 0 1px rgba(0,0,0,.60);
 	font-size:12px;
 }
 .closed:before{
 	content:"Z ";
-	color:rgb(0,0,0);
+	
 	font-family:"WebSymbolsRegular";
 	font-size:12px;
 }
@@ -75,7 +75,7 @@
 }
 .bookmarkOff:before{
 	content:"R ";
-	color:rgb(0,0,0);
+	
 	font-family:"WebSymbolsRegular";
 	text-shadow:0 0 1px rgba(0,0,0,.60);
 	font-size:14px
