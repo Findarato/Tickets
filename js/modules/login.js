@@ -14,7 +14,7 @@ jQuery(document).ready(function () {
 				});	
 			}
 			if(data.error==""){
-				window.close();	
+
 			}else{
 				alert("Please email the following to automation: "+data.error);
 			}
@@ -31,7 +31,7 @@ jQuery(document).ready(function () {
 					//window.location = "/#ticketList/all_tickets";
 				});	
 			}
-			window.close();
+			
 		});
 	});
 	$("#noLink").live("click",function(){window.close();});
