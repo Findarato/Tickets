@@ -32,8 +32,8 @@
 		    {/if}
 		</ul>
 	</menu>
-	<div class="pageBranding rotate45n color5 outSideBoxShadow">
-		<div class="" style="height:16px;font-size: 13px;text-align:center;margin:2px;">Tickets</div>
+	<div class="pageBranding rotate45n color560 outSideBoxShadow">
+		<a href="/" style="height:16px;font-size: 13px;text-align:center;margin:2px;display:block;text-decoration:none;">Tickets</a>
 		<div class="fontMain fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
 			<span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
 		</div>	
@@ -44,7 +44,7 @@
 				<a href="/"><img src="images/tree.png" alt="Lpcpls" width="68px" height="75px" border="0" style="display:inline-block"></a>
 			</div>
 			<div class="td" style="position:relative;">
-				<h1><a href="/">La Porte County Public Library System</a></h1>
+				<h1><a href="/" style="text-decoration: none;">La Porte County Public Library System</a></h1>
 				<h3>learn, enrich, enjoy</h3>
 			</div>
 		</div>
@@ -91,4 +91,14 @@
 		</ul>
 	</div>
 </menu>
+	<div id="idBox" class="" style="display:block;width:auto;height:24px;;vertical-algin:middle;text-align: right;z-index: 1000;position:absolute;top:3px;right:13px;padding-left:5px;"><!-- Start of User info -->
+			{if isset($firstname)}
+			<a class="right nolink fontMain" href="#" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname}
+				<img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="vertical-align:middle;height:24px;width:24px;border:none;">
+			</a>
+			{else}
+			<a class="right nolink fontMain" href="#login" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
+			{/if}
+		</div>
+	</div>	<!-- End of User info -->
 </header>

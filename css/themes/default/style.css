@@ -8,6 +8,8 @@ body,html {
 	height:100%;
 	color:#000;
 }
+a,a:hover,a:visited,a:focus { color: #5F3E12; text-decoration:none; font-weight:bold;}
+a:hover{text-decoration: underline;}
 .color1{
 	background: #ccffff	
 }
@@ -35,12 +37,11 @@ body,html {
 	color:#F1F1F1;
 	background:rgba(95, 62, 18,.6);
 }
-.color560 a:hover,.color5 a:hover,.color560:hover,.color5:hover{
+.color560 a:hover,.color5 a:hover,.color560:hover,.color5:hover,.color560 a{
 	color:#F1F1F1;
 }
 
-a,a:hover,a:visited,a:focus { color: #5F3E12; text-decoration:none; font-weight:bold;}
-a:hover{text-decoration: underline;}
+
 
 h1,h2,h3{
 	margin:2px;
@@ -144,7 +145,7 @@ h3 {
 .borderBottomBlack {
 	border-bottom:1px solid hsla(0,0%,0%,0.3)
 }
-.fontMain, a, a:active, a:visited {
+.fontMain {
 	color:hsl(0,0%,2%)
 }
 .fontMain2 {
