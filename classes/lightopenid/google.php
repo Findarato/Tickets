@@ -77,7 +77,6 @@ if (isset($_SESSION["user"])) {$usr = unserialize($_SESSION["user"]);
 										localStorage.setItem("userId",data.user_id);
 											//window.location = "/#ticketList/all_tickets";
 									});	
-								}
 								window.location = "/#start"
 								</script>';
 
