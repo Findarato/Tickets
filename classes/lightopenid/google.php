@@ -24,7 +24,6 @@ if (isset($_SESSION["user"])) {$usr = unserialize($_SESSION["user"]);
 
 		</script>
 		<script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
-		<script type="text/javascript" src="http://<?Php echo $_SERVER['SERVER_NAME'];?>/js/scrpt.js"></script>
 		<script type="text/javascript" src="http://<?Php echo $_SERVER['SERVER_NAME'];?>/js/modules/login.js"></script>
 	</head>
 	<body>
