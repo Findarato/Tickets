@@ -92,7 +92,9 @@ function oc(a)
 }
 function checkHash() {
 	var hash = getHashArray();
-	if(localStorage.userId == null || localStorage.userId  == undefined || localStorage.userId  == "undefined" && hash[0] != "#login"){setHash("#login");return;}
+	loadLocalStorage();
+	//alert("checkHashUserid"+localStorage.userId);
+	//if(localStorage.userId == null || localStorage.userId  == undefined || localStorage.userId  == "undefined" && hash[0] != "#login"){setHash("#login");return;}
 	
 	if (window.location.hash.length > 1) {
 		//This checks for a url passed hash, otherwise its just going to go in there.
@@ -114,14 +116,21 @@ function checkHash() {
   			}
   			break;
 		case "#ticketList":
-			changeArea("tickets");
-			switch (hash[2]) {
-				case "page": // ticket with a page number selected
-					loadTicketList(hash[3]);
-				break;
-				default: // ticket with out a page
-					loadTicketList(0);
-				break;
+			//alert("I tried to load the ticket list")
+			loadLocalStorage();
+			if(localStorage.userId >1){
+				changeArea("tickets");
+				switch (hash[2]) {
+					case "page": // ticket with a page number selected
+						loadTicketList(hash[3]);
+					break;
+					default: // ticket with out a page
+						loadTicketList(0);
+					break;
+				}
+			}else{
+				//alert("I failed and loaded the login page")
+				setHash("#login")					
 			}
         break;
 			break;
@@ -362,6 +371,7 @@ function updateTickets() {
 	//populateAllBugs();
 }
 function loadLoginPage(){ 
+	alert("login local: "+localStorage.userId)
 	var loginNewBox = Params.Content.find("#ticketLoginList");
 	if(loginNewBox.html()==null){
 		Params.Content.load("templates/login.tpl");
