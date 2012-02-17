@@ -483,9 +483,10 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 	
 }
 
-if(window.history && window.history.pushState && !jQuery.browser.opera){
+
+if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
-	  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state)); 
+	  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
 	  checkHash(); 
 	  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 	};

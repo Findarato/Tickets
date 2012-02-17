@@ -1,57 +1,59 @@
-{literal}<nav style=padding-top:5px;margin-left:5px>{/literal}
+{literal}
+<nav style=padding-top:5px;margin-left:5px>
+	{/literal}
 	<div style=display:table>
 		<div class=td>
-			<div class=topMenuItem>
-				<a class="ticket fakelink" style="cursor: pointer;" id=topperNew>New</a>
-			</div>
+			<button class="ticket fakelink" style="cursor: pointer;" id=topperNew>
+				New
+			</button>
 		</div>
 		{if $count["open"]>0}
 		<div class=td>
-			<div class=topMenuItem>
-				<a class="nolink user fontBold" href="#ticketList/sOpen">To Me</a>
-			</div>
+			<button class="nolink user fontBold menuOpen" href="#ticketList/sOpen">
+				To Me
+			</button>
 		</div>
 		{/if}
 		{if $count["assigned"]>0}
 		<div class=td>
-			<div class="topMenuItem">
-				<a class="nolink pencil fontBold" href="#ticketList/sAssigned">By Me</a>
-			</div>
+			<button class="nolink pencil fontBold menuAssigned" href="#ticketList/sAssigned">
+				By Me
+			</button>
 		</div>
 		{/if}
 		{if $count["myDept"]>0}
 		<div class=td>
-			<div class="topMenuItem">
-				<a class="nolink group fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept.">To My Dep.</a>
-			</div>
+			<button class="nolink group fontBold menuToMyDepartment" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept.">
+				To My Dep.
+			</button>
 		</div>
 		{/if}
 		{if $count["byDept"]>0}
 		<div class=td>
-			<div class="topMenuItem">
-				<a class="nolink group fontBold" href="#ticketList/sAdepartment" id=byMyDepartment>By My Dep.</a>
-			</div>
+			<button class="nolink group fontBold menuByMyDepartment" href="#ticketList/sAdepartment" id=byMyDepartment>
+				By My Dep.
+			</button>
 		</div>
 		{/if}
 		{if $count["favorite"]>0}
 		<div class=td>
-			<div class="topMenuItem">
-				<a class="nolink bookmarkOff fontBold" href="#ticketList/sFavorite" style="opacity: 1;font-size: 12px">Bookmarks</a>
-			</div>
+			<button class="nolink bookmarkOff fontBold menuFavorite" href="#ticketList/sFavorite" style="opacity: 1;">
+				Bookmarks
+			</button>
 		</div>
 		{/if}
 		{if $count["closed"]>0}
 		<div class=td>
-			<div class="topMenuItem">
-				<a class="nolink closed fontBold" href="#ticketList/sClosed">Closed</a>
-			</div>
+			<button class="nolink closed fontBold menuClosed" href="#ticketList/sClosed">
+				Closed
+			</button>
 		</div>
 		{/if}
 		{if $count["deptClosed"]>0}
 		<div class=td>
-			<div class="topMenuItem">
-				<a class="nolink closed fontBold" href="#ticketList/closedDepartment">Dep.Closed</a>
-			</div>
+			<button class="nolink closed fontBold menuDepartmentClosed" href="#ticketList/closedDepartment">
+				Dep.Closed
+			</button>
 		</div>
 		{/if}
 	</div>

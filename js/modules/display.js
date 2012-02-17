@@ -482,13 +482,21 @@ function loadTicketList(pageNumber,queryObj) {
 		Tlb = $("#ticketListbody").empty();
 		displayTable = $("<div/>",{"id":"ticketListTable","class":" fontMain",css:{"width":"100%","position":"relative"}});
 		displayTable
-			.append(function(){
-					var selectValue = "Sort";
-					if(hash[2]){
-						selectValue = hash[2];		
-					}
-					return $("<button/>",{html:selectValue,id:"tableSort","class":"selectButton",css:{"width":"100px","right":"10px","position":"relative"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
-			})
+			.append(
+				$("<nav/>")
+					.append(function(){
+						var selectValue = "Sort";
+						if(hash[2])
+							selectValue = hash[2];		
+						return $("<button/>",{html:selectValue,id:"tableSort","class":"selectButton",css:{"width":"100px","right":"10px","position":"relative"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
+					})
+					.append(
+						$("<div/>",{"id":"subAreaBar"})
+							.load("/ajax/subMenuRender.php?menu=tickets")
+					)
+					
+			)
+
 			.append($("<div/>",{id:"tableBody","class":"t",css:{"width":"100%","clear":"both"}}));
 			
 			createSelect(displayTable.find("#tableSort"),function(value){
