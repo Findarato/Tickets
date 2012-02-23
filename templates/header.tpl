@@ -28,7 +28,7 @@
 		    {*<li id="searchTab"><a class="magnifier nolink fontMain" href="#search" id="" style="padding-right:5px;width:auto;text-decoration:none;">Search</a></li>*}
 		    <li id="statsTab" ><a class="chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;">Stats</a></li>
 		    {if isset($permissions) && in_array_r("ADMIN",$permissions)}
-		    <li><a class="warning nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;">Admin</a></li>
+		    <li id="adminTab"><a class="warning nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;">Admin</a></li>
 		    {/if}
 		</ul>
 	</menu>
