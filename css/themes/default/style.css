@@ -7,6 +7,7 @@ body,html {
 	padding:0px;
 	height:100%;
 	color:#000;
+	background-color:#FFF;
 }
 a,a:hover,a:visited,a:focus { color: #5F3E12; text-decoration:none; font-weight:bold;}
 a:hover{text-decoration: underline;}
@@ -14,7 +15,11 @@ a:hover{text-decoration: underline;}
 	background: #ccffff	
 }
 .color2{
-	background: #ddeecc;
+	background: rgb(221, 238, 204);
+}
+.color260{
+	background: rgba(221, 238, 204);
+	background: rgba(221, 238, 204,.60);
 }
 .color2 a{
 	color: #1F1F1F;
@@ -29,19 +34,23 @@ a:hover{text-decoration: underline;}
 .color4{
 	background:#556644;
 }
+.color4Border1{
+	border:1px solid #556644;
+}
 .color5{
 	color:#F1F1F1;
-	background:rgba(95, 62, 18,1);
+	background:rgb(95, 62, 18);
 }
 .color560{
 	color:#F1F1F1;
+	background:rgb(95, 62, 18);
 	background:rgba(95, 62, 18,.6);
 }
 .color560 a:hover,.color5 a:hover,.color560:hover,.color5:hover,.color560 a{
 	color:#F1F1F1;
 }
 .color5Soft{
-	background: rgb(38,24,6); /* Old browsers */
+	background: rgba(95, 62, 18,1); /* Old browsers */
 	background: -moz-linear-gradient(left,  rgb(38,24,6) 5%, rgb(95,62,18) 20%, rgb(95,62,18) 60%, rgb(95,62,18) 80%, rgb(38,24,6) 95%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, right top, color-stop(5%,rgb(38,24,6)), color-stop(20%,rgb(95,62,18)), color-stop(60%,rgb(95,62,18)), color-stop(80%,rgb(95,62,18)), color-stop(95%,rgb(38,24,6))); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(left,  rgb(38,24,6) 5%,rgb(95,62,18) 20%,rgb(95,62,18) 60%,rgb(95,62,18) 80%,rgb(38,24,6) 95%); /* Chrome10+,Safari5.1+ */
@@ -184,20 +193,6 @@ h3 {
 }
 .ticketBox{
 	background:#FFF;
-}
-.WhitetoLightBlue,.ticketBox:hover {
-	background: #DDF1F1; /* old browsers */
-	background: -moz-linear-gradient(top, #FFFFFF 0, #DDF1F1 96%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#FFFFFF), color-stop(96%,#DDF1F1)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#DDF1F1',GradientType=0 ); /* ie */
-	background: -o-linear-gradient(top, #FFFFFF 0,#DDF1F1 96%); /* opera */
-}
-.WhitetoLightOff {
-	background: #F1F1F1; /* old browsers */
-	background: -moz-linear-gradient(top, #FFFFFF 0, #F1F1F1 96%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#FFFFFF), color-stop(96%,#F1F1F1)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F1F1F1',GradientType=0 ); /* ie */
-	background: -o-linear-gradient(top, #FFFFFF 0,#F1F1F1 96%); /* opera */
 }
 .tab {
 	padding-top:16px;
