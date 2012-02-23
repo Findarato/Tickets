@@ -32,12 +32,6 @@
 		    {/if}
 		</ul>
 	</menu>
-	<div class="pageBranding rotate45n color560 outSideBoxShadow">
-		<a href="/" style="height:16px;font-size: 13px;text-align:center;margin:2px;display:block;text-decoration:none;">Tickets</a>
-		<div class="fontMain fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
-			<span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
-		</div>	
-	</div>
 	<nav title="top Navagation" class="firstNav color1 " style="text-align: center;margin:0;margin-bottom:10px;top:0;left:0;">
 		<div class="topNav " style="text-align:center;margin:0 auto;">
 			<div class="td">
@@ -48,6 +42,14 @@
 				<h3>learn, enrich, enjoy</h3>
 			</div>
 		</div>
+		<div class="pageBranding color5Soft rotate45n">
+			<a href="/">Tickets</a>
+			<div class="fontMain fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
+				<span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
+			</div>	
+		</div>
+
+
 	</nav>
 
 <menu class="smallShadow colorMain-2" id="userPopup" style="position:absolute;top:27px;right:13px;z-index:999;display:none;">
