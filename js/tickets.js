@@ -43,20 +43,20 @@ var Params = {
 };
 var blankId = 9999999;
 var newTicketTpl = 
-	$("<div/>",{"class":"ticketBox insideBorder roundAll4 color4Border1 newTicketTpl"})
+	$("<div/>",{"class":"ticketBox insideBorder roundAll4 insideBoxShadow newTicketTpl"})
 		.html(
 			$("<div/>",{"class":"ticketItem"})
 				.append( // Ticket Bookmark
 					$("<div/>",{"class":"ticketBookmarkBox fake-link roundTopRight4 ticketSprite",id:"ticketFavorite"})
 				)
 				.append( // User Icon Box
-					$("<div/>",{"class":"ticketUserIconBox color260 color4Border1 roundAll4",id:"userPic"})
+					$("<div/>",{"class":"ticketUserIconBox color260 insideBoxShadow roundAll4",id:"userPic"})
 				)	
 				.append( // Ticket ID
-					$("<div/>",{"class":"ticketIdBox color260 color4Border1 roundAll2","html":8888,id:"ticketId"})
+					$("<div/>",{"class":"ticketIdBox color260 insideBoxShadow roundAll2","html":8888,id:"ticketId"})
 				)
 				.append( // Ticket Priority
-					$("<div/>",{"class":"ticketPriorityBox color260 color4Border1 roundAll2","html":"",id:"ticketPriority"})
+					$("<div/>",{"class":"ticketPriorityBox color260 insideBoxShadow roundAll2","html":"",id:"ticketPriority"})
 				)
 				.append( //Ticket Title
 					$("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
@@ -65,16 +65,16 @@ var newTicketTpl =
 					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 				)
 				.append( // Ticket Created On
-					$("<div/>",{"class":" color260 color4Border1 roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+					$("<div/>",{"class":" color260 insideBoxShadow roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
 				)
 				.append( // Ticket Created By
-					$("<div/>",{"class":" color260 color4Border1 ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
+					$("<div/>",{"class":" color260 insideBoxShadow ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
 				)
 				.append( // Ticket Category
-					$("<div/>",{"class":" color260 color4Border1 ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
+					$("<div/>",{"class":" color260 insideBoxShadow ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
 				)
 				.append( // Ticket Location
-					$("<div/>",{"class":" color260 color4Border1 ticketLocationBox",id:"tickLocation"}).html("Cool Location")
+					$("<div/>",{"class":" color260 insideBoxShadow ticketLocationBox",id:"tickLocation"}).html("Cool Location")
 				)
 		);
 function focusMe(id){
