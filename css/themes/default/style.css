@@ -139,6 +139,19 @@ h3 {
 	        transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220); /* easeInQuart */
 }
 
+
+.insideBoxShadow{
+	-moz-box-shadow: inset 0 0 1px 1px rgb(136, 136, 136);
+	-webkit-box-shadow: inset 0 0 1px 1px rgb(136, 136, 136);
+	box-shadow: inset 0 0 1px 1px rgb(136, 136, 136);
+}
+.outSideBoxShadow{
+	-moz-box-shadow: 0 0 1px 1px rgb(136, 136, 136);
+	-webkit-box-shadow: 0 0 1px 1px rgb(136, 136, 136);
+	box-shadow: 0 0 1px 1px rgb(136, 136, 136);
+}
+
+
 /*  End of theme related CSS */
 
 

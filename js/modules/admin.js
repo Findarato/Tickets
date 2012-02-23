@@ -1,6 +1,6 @@
 var adminLoaded = true;
 var newUserTpl = 
-	$("<div/>",{"class":"ticketBox insideBorder roundAll4 color4Border1 newTicketTpl"})
+	$("<div/>",{"class":"ticketBox roundAll4  newTicketTpl insideBoxShadow"})
 		.html(
 			$("<div/>",{id:"userDisplay","class":"ticketItem"})
 				.append( // User Icon Box
