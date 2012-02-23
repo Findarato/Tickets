@@ -18,6 +18,39 @@ var newUserTpl =
 		);
 var newPermissionTpl = $("<div/>",{"class":" color260 color4Border1 roundBottomRight4 ticketCategoryBox",id:"permInfo"}).html("On: Aug. 8, 1982")
 
+var menu = $("<nav/>")
+	.html(
+		$("<div/>",{css:{"display":"table"}})
+			.html( // manage users
+				$("<div/>",{css:{"display":"table-cell"}})
+					.html(
+						$("<div/>",{"class":"topMenuItem"})
+							.html(
+								$("<button/>",{"class":"user nolink",href:"#admin/users",id:"topperManageUsers",html:"Manage Users"})
+							)
+					)
+			)
+			.append( // manage departments
+				$("<div/>",{css:{"display":"table-cell"}})
+					.html(
+						$("<div/>",{"class":"topMenuItem"})
+							.html(
+								$("<button/>",{"class":"group nolink",href:"#admin/departments",id:"topperManageDepartments",html:"Manage Departments"})
+							)
+					)
+			)
+			.append( // manage departments
+				$("<div/>",{css:{"display":"table-cell"}})
+					.html(
+						$("<div/>",{"class":"topMenuItem"})
+							.html(
+								$("<button/>",{"class":"gear nolink",href:"#admin/features",id:"topperManageFeatures",html:"Manage Features"})
+							)
+					)
+			)
+			
+	)
+
 admin = {
 	"loadFeatures":function(){
 		Params.Content.html($("#generic").html());
@@ -29,6 +62,7 @@ admin = {
 	"loadAllUsers":function(){
 			Params.Content.html($("#generic").html());
 			Tlb = Params.Content.find("#ticketListbody");
+			Tlb.html(menu)
 			$.getJSON("ajax/admin/users.php",{"type":"allUsers"},function(json){
 				Params.allPermissions = json.data.allPermissions;
 				var display = $("<div/>");

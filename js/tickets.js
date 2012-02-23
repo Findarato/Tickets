@@ -736,15 +736,16 @@ jQuery(document).ready(function () {
 			case "topperUserInfo":
 				if(me.attr("href")=="#"){
 					//me.toggleClass("colorMain-2")
-					$("#idBox").toggleClass("colorMain-2");
+					$("#idBox").toggleClass("color2");
 					$("#userPopup").toggle();
 				}
 			break;
 			default:
 				$("#userPopup").hide();
-				$("#idBox").removeClass("colorMain-2");
+				$("#idBox").removeClass("color2");
 				pageTracker._trackPageview(me.attr("href"));
 				setHash(me.attr("href"));
+				
 			break;
 		}
 
