@@ -65,16 +65,16 @@ var newTicketTpl =
 					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 				)
 				.append( // Ticket Created On
-					$("<div/>",{"class":" color260 insideBoxShadow roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+					$("<div/>",{"class":" color260 color4Border1 roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
 				)
 				.append( // Ticket Created By
-					$("<div/>",{"class":" color260 insideBoxShadow ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
+					$("<div/>",{"class":" color260 color4Border1 ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
 				)
 				.append( // Ticket Category
-					$("<div/>",{"class":" color260 insideBoxShadow ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
+					$("<div/>",{"class":" color260 color4Border1 ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
 				)
 				.append( // Ticket Location
-					$("<div/>",{"class":" color260 insideBoxShadow ticketLocationBox",id:"tickLocation"}).html("Cool Location")
+					$("<div/>",{"class":" color260 color4Border1 ticketLocationBox",id:"tickLocation"}).html("Cool Location")
 				)
 		);
 function focusMe(id){
