@@ -41,10 +41,6 @@ body{background-color:#0F0}
     width: 0px;
 }
 
-.actionButtons {
-    font-size: 16px
-}
-
 /*Lets make tickets actually look good now */
 
 #ticketLoginNewBox{

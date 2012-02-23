@@ -1,4 +1,5 @@
-.bookmarkOff,.bookmarkOn{ background-position: 0 0; width: 16px; height: 16px; opacity:.3}
+/* .bookmarkOff,.bookmarkOn{ background-position: 0 0; width: 16px; height: 16px; opacity:.3} */
+
 .bookmarkOn{opacity:1;}
 
 .ticket:before,.bug:before{
@@ -71,14 +72,14 @@
 	color:rgb(255,255,0);
 	font-family:"WebSymbolsRegular";
 	text-shadow:0 0 1px rgba(180,0,0,.80);
-	font-size:14px;
+	font-size:12px;
 }
 .bookmarkOff:before{
 	content:"R ";
 	
 	font-family:"WebSymbolsRegular";
 	text-shadow:0 0 1px rgba(0,0,0,.60);
-	font-size:14px
+	font-size:12px
 }
 .closedTicketDisplay:after{
 	content:" .";
