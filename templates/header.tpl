@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div class="pageBranding color5Soft rotate45n">
-			<a href="/">Tickets</a>
+			<a href="#updateNotes" id="ticketsBrand" title="Tickets Version: ">Tickets</a>
 			<div class="fontMain fakelink" style="width:auto;height:16px" id="updateNotesContainer" title="Update Notes">
 				<span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
 			</div>	
