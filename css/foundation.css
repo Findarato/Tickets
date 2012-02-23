@@ -274,7 +274,7 @@ ul li, ol li {
 }
 .ticketCreatedOnBox, .ticketCreatedByBox, .ticketCategoryBox, .ticketLocationBox {
 	bottom: 0;
-	text-align: right;
+	text-align: left;
 	font-size: 11px;
 	width: 14%;
 	max-width: 100px;
@@ -287,8 +287,9 @@ ul li, ol li {
 	line-height: 18px;
 	overflow: hidden;
 }
-.ticketCreatedByBox, .ticketCategoryBox, .ticketLocationBox {
+.ticketCreatedByBox, .ticketCategoryBox, .ticketLocationBox,.ticketCreatedOnBox {
 	border-right: none;
+	border-bottom:none;
 	padding-right: 5px;
 }
 .ticketCategoryBox, .ticketLocationBox {

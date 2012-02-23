@@ -22,7 +22,7 @@
 </div>
 *}
 <header class="topHeader" style="background-color:#FFF;margin:0;padding:0;">
-	<menu class="" style="position:absolute;top:53px;right:0px;z-index:102;width:100%;">
+	<menu class="" style="position:absolute;top:36px;right:0px;z-index:102;width:100%;">
 		<ul class="tabrow">
 		    <li id="ticketTab" class="selected"><a class="ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;">Tickets</a></li>
 		    {*<li id="searchTab"><a class="magnifier nolink fontMain" href="#search" id="" style="padding-right:5px;width:auto;text-decoration:none;">Search</a></li>*}

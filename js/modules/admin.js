@@ -1,13 +1,13 @@
 var adminLoaded = true;
 var newUserTpl = 
-	$("<div/>",{"class":"ticketBox insideBorder roundAll4 border-all-Main-1 newTicketTpl"})
+	$("<div/>",{"class":"ticketBox insideBorder roundAll4 color4Border1 newTicketTpl"})
 		.html(
 			$("<div/>",{id:"userDisplay","class":"ticketItem"})
 				.append( // User Icon Box
-					$("<div/>",{"class":"ticketUserIconBox colorMain-2 border-all-B-1 roundAll4",id:"userPic"})
+					$("<div/>",{"class":"ticketUserIconBox color260 color4Border1 roundAll4",id:"userPic"})
 				)	
 				.append( // Ticket ID
-					$("<div/>",{"class":"ticketIdBox colorMain-2 border-all-B-1 roundAll2","html":"C0FFEE",id:"ticketId"})
+					$("<div/>",{"class":"ticketIdBox color260 color4Border1 roundAll2","html":"C0FFEE",id:"ticketId"})
 				)
 				.append( //Ticket Title
 					$("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
@@ -16,7 +16,7 @@ var newUserTpl =
 					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 				)
 		);
-var newPermissionTpl = $("<div/>",{"class":" colorMain-2 border-all-B-1 roundBottomRight4 ticketCategoryBox",id:"permInfo"}).html("On: Aug. 8, 1982")
+var newPermissionTpl = $("<div/>",{"class":" color260 color4Border1 roundBottomRight4 ticketCategoryBox",id:"permInfo"}).html("On: Aug. 8, 1982")
 
 admin = {
 	"loadFeatures":function(){
@@ -59,7 +59,7 @@ admin = {
 								});
 								perm = newPermissionTpl.clone();
 								perm.attr("id","permInfo_"+data.id+"_"+value).html(
-									$("<span/>",{"class":"remove","html":paramName})
+									$("<span/>",{"class":"remove","html":paramName,css:{"cursor":"pointer"}})
 										.click(function(){
 											$.getJSON("ajax/admin/users.php",{"type":"adjustPerms","value":0,"userId":data.id,"perm":value},function(result){
 												if(result.error.length > 0 ){

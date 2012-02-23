@@ -2,6 +2,10 @@
 @import url("buttons.css");
 @import url("roundCorners.css");
 
+/*  Start of theme related CSS 
+ This is the css that will flow around all of the projects to keep them feeling like they are part of a larger collection
+ * */
+
 body,html {
 	margin:0px;
 	padding:0px;
@@ -11,9 +15,12 @@ body,html {
 }
 a,a:hover,a:visited,a:focus { color: #5F3E12; text-decoration:none; font-weight:bold;}
 a:hover{text-decoration: underline;}
+/* Color 1 related items */
 .color1{
 	background: #ccffff	
 }
+
+/* Color 2 related items */
 .color2{
 	background: rgb(221, 238, 204);
 }
@@ -24,6 +31,8 @@ a:hover{text-decoration: underline;}
 .color2 a{
 	color: #1F1F1F;
 }
+
+/* Color 3 related items */
 .color3{
 	background: #556644;
 	color: #F1F1F1;
@@ -31,12 +40,24 @@ a:hover{text-decoration: underline;}
 .color3 a{
 	color: #F1F1F1;
 }
+.color3Circle{
+	border:2px solid rgba(85, 102, 68,.6);
+	height:20px;
+	width:20px;
+	content:"?";
+	text-align:center;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+}
+/* Color 4 related items */
 .color4{
 	background:#556644;
 }
 .color4Border1{
 	border:1px solid #556644;
 }
+/* Color 5 related items */
 .color5{
 	color:#F1F1F1;
 	background:rgb(95, 62, 18);
@@ -61,7 +82,6 @@ a:hover{text-decoration: underline;}
 
 /* http://www.colorzilla.com/gradient-editor/#261806+5,5f3e12+20,5f3e12+60,5f3e12+80,261806+95;Custom */
 }
-
 
 h1,h2,h3{
 	margin:2px;
@@ -104,6 +124,22 @@ h3 {
 	display:block;
 	text-decoration:none;
 }
+
+.smoothAnimate{
+	-webkit-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+	   -moz-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+	    -ms-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+	     -o-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+	        transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220); /* easeInQuart */
+	
+	-webkit-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+	   -moz-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+	    -ms-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+	     -o-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+	        transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220); /* easeInQuart */
+}
+
+/*  End of theme related CSS */
 
 
 
