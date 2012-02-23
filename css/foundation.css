@@ -119,7 +119,7 @@ ul li, ol li {
 }
 .topMenuItem {
 	margin: 0 4px 0 4px;
-	height: 15px;
+	height: auto;
 	width: auto;
 	overflow: hidden;
 	white-space: nowrap;

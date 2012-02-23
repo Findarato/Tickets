@@ -1,5 +1,5 @@
 <div style="height:100%;position:relative">
-	<div class="colorMain-1" id="ticketTitlearea" style="width:100%;height:40px;">
+	<div class="color2" id="ticketTitlearea" style="width:100%;height:40px;">
 		<div style="display:table;width:100%;height:100%">
 			<div style="display:table-cell;width:50%;text-align:left;">
 				<div class="fontMain2" id="ticketId" style="font-weight:bold;padding-left:2px;padding-right:3px">
@@ -9,9 +9,9 @@
 					<div id="ticketBookmark" class="ticketSprite fakelink"  name="bookmark"></div>
 				</div>
 				<div class="td">
-					<h3 class="fontMain" id="ticketTitle" style="width:auto;height:auto;font-size:15px">
+					<h1 class="fontMain" id="ticketTitle" style="width:auto;height:auto;font-size:15px" /><!-- Ticket Title area -->
 				</div>
-				</h3><!-- Ticket Title area -->
+				
 			</div>
 			<div style="display:table-cell;width:50%;text-align:right;">
 				<div class="colorWhite" id="ticketStatusImage" style="height:15px;float:right;">
@@ -90,7 +90,7 @@
 				<!--		<span id="replyareaTitle" style="margin-left:10px;margin:5px;" title="Reply Title">Replies (0)</span> -->
 				<!-- Modification Buttons -->
 				<div class="" id="ticketFooterArea" style="height:37px;overflow:hidden; ">
-					<div class="box_transition" id="reassignBox" style="overflow:hidden;width:100%;height:0px">
+					<div class="smoothAnimate" id="reassignBox" style="overflow:hidden;width:100%;height:0px">
 						<div style="overflow:hidden;height:auto;padding:3px;">
 							<div class="textLeft" style='height:auto;'>
 								<span>Assign:</span>
@@ -153,15 +153,15 @@
 			</div><!-- End Body of the ticket -->
 			<div class="colorWhite-1 " id="replyareabody" style=""></div>
 			<div style="width:100%;margin-top:10px" id="bottomReplyArea">
-				<div class="colorMain-1" style="width:auto;height:90px;position:relative;" title="Reply Box">
+				<div class="color2" style="width:auto;height:90px;position:relative;" title="Reply Box">
 					<div id="1replyareabody" style="padding:3px;">
 						<form name="newReplyForm" id="newReplyForm">
 							<div class="textLeft">
 								<span class="" title="Reply Title">Title:</span>
-								<input type="text" name="title" autocomplete="off" maxlength="100" id="replyTitleBox" class="Ticketform roundAll4 border-all-B-2 fontMain" style="padding:2px;width:400px;"/>
+								<input type="text" name="title" autocomplete="off" maxlength="100" id="replyTitleBox" class="Ticketform roundAll4 color4Border1 fontMain" style="padding:2px;width:400px;"/>
 								<br>
 								<div style="width:auto;border:none;margin:5px;padding-right:10px;height:100%">
-									<textarea name="description" id="replyDescriptionTextArea" autocomplete="off"  class="Ticketform roundAll4 border-all-B-2 fontMain" style="padding:2px;width:100%;height:100%"></textarea>
+									<textarea name="description" id="replyDescriptionTextArea" autocomplete="off"  class="Ticketform roundAll4 color4Border1 fontMain" style="padding:2px;width:100%;height:100%"></textarea>
 								</div>
 								<INPUT type="hidden" id="replyuserid" name="user_id" value="{$user_id}">
 								<INPUT type="hidden" id="replyticketid" name="ticket_id"  value="{$ticket_id}" >
