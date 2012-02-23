@@ -87,6 +87,7 @@
 	font-size:12px;
 	color:#00769E;
 }
+.remove{cursor:pointer;}
 .remove:before{
 	cursor:pointer;
 	content:"X";
