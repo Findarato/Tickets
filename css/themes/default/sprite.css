@@ -89,6 +89,26 @@
 	color:#00769E;
 }
 .remove{cursor:pointer;}
+
+.cancel:before{
+	font-family:"IconicFill";
+	cursor:pointer;
+	content:"✗";
+	padding:3px;
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	font-size:12px;
+	color:#000;
+}
+.check:before{
+	font-family:"IconicFill";
+	cursor:pointer;
+	content:"✓";
+	padding:3px;
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	font-size:12px;
+	color:#000;
+}
+
 .remove:before{
 	cursor:pointer;
 	content:"X";
