@@ -6,10 +6,12 @@
 							<td style="width:150px;text-align:left;"><span class="font-X">Title of Ticket:</span></td>
 							<td style="text-align:left;"><input type="text" name="newTicketTitle" id="newTicketTitle"  class=" Ticketform " maxlength="35" /></td>
 						</tr>
-						<tr>
+						{if $features["Categories"] eq 1}
+						<tr class="ticketCategoryBox">
 							<td style="text-align:left;"><span class="font-X">Category:</span></td>
 							<td style="text-align:left;"><select class=" Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate}</select></td>
 						</tr>
+						{/if}
 						<tr id="ticketAssignBox">
 							<td style="text-align:left;"><span class="font-X">Assign:</span></td>
 							<td style="text-align:left;"><select class=" Ticketform " id="newTicketAssign" name="newTicketAssign"><option value="">Select User</option>{html_options options=$assign selected=$ticketDefault}</select></td>
@@ -22,14 +24,18 @@
 							<td style="text-align:left;"><span class="font-X">Priority:</span></td>
 							<td style="text-align:left;"><select class=" Ticketform " id="newTicketPriority" name="newTicketPriority">{html_options options=$priority}</select></td>
 						</tr>
+						{if $features["Due Date"] eq 1}
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Due Date:</span></td>
 							<td style="text-align:left;"><input type="date" name="newTicketDueDate" id="newTicketDueDate" class=" Ticketform" maxlength="50" style="width:8em" value="" /></td>
 						</tr>
-						<tr>
+						{/if}
+						{if $features["Location"] eq 1}
+						<tr class="ticketLocationBox">
 							<td style="text-align:left;"><span class="font-X">Problem Location:</span></td>
 							<td style="text-align:left;"><select name="newTicketLocation" id="newTicketLocation" class=" Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location}</select></td>
 						</tr>
+						{/if}
 						<tr>
 							<td colspan="2" style="text-align:left;"><span class="font-X">Ticket Description</span><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class=" Ticketform "></textarea></td>
 						</tr>

@@ -1,4 +1,4 @@
-var adminLoaded = true;
+var pageTracker = _gat._getTracker('UA-8067208-4');
 var newUserTpl = 
 	$("<div/>",{"class":"ticketBox roundAll4  newTicketTpl insideBoxShadow"})
 		.html(
@@ -17,6 +17,11 @@ var newUserTpl =
 				)
 		);
 var newPermissionTpl = $("<div/>",{"class":" color260 color4Border1 roundBottomRight4 ticketCategoryBox",id:"permInfo"}).html("On: Aug. 8, 1982")
+
+var newFeature = $("<div/>")
+					.html(
+						$("<button/>",{"classes":"ui-button ui-button-text-only ui-widget ui-state-default"})
+					);
 
 var menu = $("<nav/>")
 	.html(
@@ -52,17 +57,64 @@ var menu = $("<nav/>")
 	)
 
 admin = {
-	"loadFeatures":function(){
-		Params.Content.html($("#generic").html());
-		Tlb = Params.Content.find("#ticketListbody");
-		$.getJSON("ajax/admin/features.php",{"list":"all"},function(json){
-			
-		});
-	},
-	"loadAllUsers":function(){
+	"startAdmin":function(){
+		if($("#generic").html() != null){
 			Params.Content.html($("#generic").html());
 			Tlb = Params.Content.find("#ticketListbody");
 			Tlb.html(menu)
+		}
+	},
+	"loadFeatures":function(){
+		pageTracker._trackPageview("admin/loadFeatures");
+		Tlb.html(menu)
+		var display = $("<div/>");
+		if(sessionStorage.features == "undefined"){
+			loadLocalStorage();
+		}
+		var siteFeatures = $.parseJSON(sessionStorage.features);
+		$.each(siteFeatures,function(i,item){
+			display.append(
+				$("<div/>",{css:{"padding":"3px","margin":"5px","height":"30px"},"class":"ticketBox roundAll4 insideBoxShadow"})
+					.html(
+						$("<div/>",{html:item.name,css:{"display":"table-cell","width":"100%"}})
+					)
+					.append(
+						$("<div/>",{html:function(){
+							if(item.status == 1){ // this feature is turned on
+								return $("<button>",{"html":"On","value":1}).click(function(){
+									var me = $(this);
+									if(me.val() == 1)
+										me.text("Off").val(0)
+									else
+										me.text("On").val(1)
+									
+									$.getJSON("/ajax/admin/features.php",{"changeFeat":item.id},function(data){
+										sessionStorage.features = JSON.stringify(data.features)
+									})
+								});
+								
+							}else{ // this feature is turned off
+								return $("<button>",{"html":"Off","value":0}).click(function(){
+									var me = $(this);
+									if(me.val() == 1)
+										me.text("Off").val(0)
+									else
+										me.text("On").val(1)
+									
+									$.getJSON("/ajax/admin/features.php",{"changeFeat":item.id},function(data){
+										sessionStorage.features = JSON.stringify(data.features)
+									})
+								});
+							}
+						},css:{"display":"table-cell"}})
+					)
+			)
+		});
+		Tlb.append(display);
+	},
+	"loadAllUsers":function(){
+			Tlb.html(menu)
+			pageTracker._trackPageview("admin/loadAllUsers");
 			$.getJSON("ajax/admin/users.php",{"type":"allUsers"},function(json){
 				Params.allPermissions = json.data.allPermissions;
 				var display = $("<div/>");
@@ -132,9 +184,7 @@ admin = {
 					);
 					display.find("#userDisplay"+data.user_id).append(perm);
 				});// end of displaying the permissions
-				Tlb.append(display);		
+				Tlb.append(display);	
 			});	
-	},"test":"cool"
+	}
 };
-
-admin.loadAllUsers()

@@ -175,22 +175,22 @@ function checkHash() {
 			loadTicketList(0,{"search":"","area":"all_bugs"});
 		break;
 		case "#admin": // this triggers when the tab tickets is clicked
-			if(Params.LastArea != "admin"){
+			if(Params.LastArea != "admin" || typeof admin == "undefined"){
 				changeArea("admin");
 				Params.LastArea = "admin";
-				Modernizr.load('/js/modules/admin.js');		
+				admin.startAdmin();
 			}
 			
-			switch (hash[2]) {
+			switch (hash[1]) {
 				case "users": // ticket with a page number selected
-					alert("users");
 					admin.loadAllUsers();
 				break;
-				default:
+				case "features":
+					admin.loadFeatures();
 				break;
 			}
 			
-			//Params.Content.load("templates/email.tpl");
+			
 		break;		
 		}
 		//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets"}
@@ -367,8 +367,6 @@ function populateAllBugs(Area) {
 }
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
-	//populateAllTickets();
-	//populateAllBugs();
 }
 function loadLoginPage(){ 
 	//alert("login local: "+localStorage.userId)
@@ -377,6 +375,16 @@ function loadLoginPage(){
 		Params.Content.load("templates/login.tpl");
 		loginNewBox = Params.Content.find("#ticketLoginList");
 	}
+	loadLocalStorage(); // Lets make sure that we load up localStorage
+	var feat = $.parseJSON(sessionStorage.features);
+	$.each(feat,function(i,item){
+		if(item.name=="Local Login" && item.status==0){
+			$("#showOldLoginButton").hide();
+		}else if(item.name=="Local Login" && item.status==1){
+			$("#showOldLoginButton").show();
+		}
+	})
+	
 	$.getJSON(uri + "ajax/get_ticketList.php", {"area":"recent","login":1,"count":5}, function (data) {
 		loginNewBox.empty();
 		$.each(data.tickets.reverse(),function(index,value){
@@ -403,9 +411,9 @@ function loadLocalStorage(clear){
 
 
 	//Features Enabled
-	if(!sessionStorage.features || sessionStorage.features == "undefined" || typeof localStorage.features !="string"){
-		$.getJSON("ajax/login.php",{"features":"all"},function(data){
-			sessionStorage.setItem("features",JSON.stringify(data))
+	if(!sessionStorage.features || sessionStorage.features == "undefined" ){
+		$.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
+			sessionStorage.setItem("features",JSON.stringify(data.features))
 		});
 	}
 
@@ -454,7 +462,6 @@ function loadLocalStorage(clear){
 function login(data){ //We need a json array, probably need to parse it, who knows
 
 	//alert(data.message);
-
 	loadLocalStorage(); // Lets make sure that we load up localStorage
 	if (data.error.length > 0) {
 		checkResponse(data);
@@ -482,7 +489,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		}else{
 			setHash("#ticketList/all_tickets");
 		}
-		alert(data.features);
+		//alert(data.features);
 		sessionStorage.setItem("features",JSON.stringify(data.features));
 		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");

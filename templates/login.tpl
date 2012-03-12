@@ -42,9 +42,11 @@
 				</div>
 			</div>
 		</form>
-		<button class="button" id="showOldLoginButton" style="width:auto;">
+		
+		<button class="button" id="showOldLoginButton" style="width:auto;display:none;">
 			Local Ticket Login
 		</button>
+		
 		<button class="button" id="googleLogin" style="width:auto;">
 			<span class="google">Login with Google</span>
 		</button>
