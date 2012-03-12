@@ -39,7 +39,7 @@
 		 * Simple constructor
 		 * @return 
 		 */				
-		function db(){//connection object
+		function __construct(){//connection object
 			include("dbConnection.inc.php");
 			$this->dbase = $dbase;
 			$this->user = $user;

@@ -15,6 +15,7 @@ class Ticket {
 	
 	//Constructor
 	public function __construct($id){
+		if($id <0 || $id === undefined || $id==NULL){return false;}
 		$db=db::getInstance();
 		$user = $db->Query("SELECT * FROM tickets WHERE id=".$id." LIMIT 1;",false,"assoc");
 		$this->assignedById = $user["assigned_by_id"];

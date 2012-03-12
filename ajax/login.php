@@ -1,5 +1,10 @@
-<?php	
+<?Php	
 	include_once $_SERVER["DOCUMENT_ROOT"]."/small_header.php"; 
+	
+	function getFeatures(){
+		$db = db::getInstance();
+		return $db->Query("SELECT id,name,status FROM features",false,"assoc_array");
+	}
 	
 	$_POST = $db->Clean($_POST);//clean out the post before it can be used
 	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ) {//there is not a valid session
@@ -13,9 +18,10 @@
 				}
 					//Lets do some cryptic database and data manipulation. 
 				$password = $db->Query("SELECT password FROM tickets.users WHERE id=".$_SESSION["openID"]["user_id"],false,"row");
-				$response["mdEmail"] = md5( strtolower( trim( id2Email($_SESSION["openID"]["user_id"]) ) ) ); 
+				$response["mdEmail"] = md5( strtolower( trim( id2Email($_SESSION["openID"]["user_id"]) ) ) );
 				$response = login($_SESSION["openID"]["user_id"],$password,$response,true);
-				
+				$response["features"] = getFeatures();
+					
 			}elseif($_GET["userId"] == 2){ // this will be a new user in tickets
 				$pass = md5(rand(88,881982)*time()); 
 				// Ok lets make a ticket user
@@ -37,11 +43,15 @@
 					$password = $db->Query("SELECT password FROM tickets.users WHERE id=".$res,false,"row");
 					$response["pw"] = $password;
 					$response = login($res,$password,$response,true);
-					$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) ); 
+					$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) );
+					$response["features"] = getFeatures();
 				}
 			}
 			
-		}	
+		}
+	}elseif(isset($_GET["features"])){ 
+		$response["features"] = getFeatures($_GET["features"]);
+		$response["message"] = "Successfully Returned Features";
 	}elseif(isset($_GET["department_id"]) && isset($_GET["user_id"])){ 
 		$db->Query("INSERT INTO department_members (department_id,user_id) VALUES(".$db->Clean($_GET["department_id"]).",".$db->Clean($_GET["user_id"]).");");
 		if(count($db->Error)==2){$db->Query("UPDATE department_members SET department_id=".$db->Clean($_GET["department_id"])." WHERE user_id=".$db->Clean($_GET["user_id"]).";");}

@@ -4,19 +4,18 @@ class User {
 	public $a_User=array('logged-in'=>false);
 	public $A_U = array();
 	public $User_id = -1;//adding compatability to Joe's coding style
-	
 	public $debug = array();
 	public $gravatar = ""; // image link to gravatar image
-	
 	//Private stuff
 	private $openID = "";
 	private $Permissions = array();
 	private $md5Email = "";
+	
 	function UserLogin($name,$pass){ // just a wrapper to make sure that older stuff works
 		$this->User($name,$pass); 
 	}
 
-	function User($name,$pass,$openID=false,$md5Pass=false){
+	function __construct($name,$pass,$openID=false,$md5Pass=false){
 		$db=db::getInstance();			
 		if(!$openID){//Not a openID login
 			$SQL='
@@ -84,12 +83,11 @@ class User {
 	
 	
 	/* Function - Log User Out */
-	function LogUserOut(){
+	public function LogUserOut(){
 		$this->a_User['logged-in']=false;
 		$this->User_id = -1; //adding compatability to Joe's coding style
 		$this->A_U = array();
 	}
-	
 	public function LoadPermissions(){ //Load the permissions into the object and return true on success and false on fail
 		$permissions = array();
 		$db = db::getInstance();

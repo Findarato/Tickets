@@ -401,6 +401,14 @@ function loadLocalStorage(clear){
 		return; 
 	}
 
+
+	//Features Enabled
+	if(!sessionStorage.features || sessionStorage.features == "undefined" || typeof localStorage.features !="string"){
+		$.getJSON("ajax/login.php",{"features":"all"},function(data){
+			sessionStorage.setItem("features",JSON.stringify(data))
+		});
+	}
+
 	// Userid
 	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
@@ -474,6 +482,8 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		}else{
 			setHash("#ticketList/all_tickets");
 		}
+		alert(data.features);
+		sessionStorage.setItem("features",JSON.stringify(data.features));
 		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
 
