@@ -26,9 +26,9 @@ function id2Username($user_id,$userTable="users",$userDatabase="tickets" ){
 function toLink($text){
 	$text = html_entity_decode($text);
 	$text = " ".$text;
-	$text = eregi_replace('(((f|ht){1}tp://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink" href="\\1">\\1</a>', $text);
-	$text = eregi_replace('(((f|ht){1}tps://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink" href="\\1">\\1</a>', $text);
-	$text = eregi_replace('([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&//=]+)','\\1<a class="globe fakelink" href="http://\\2">\\2</a>', $text);
+	$text = preg_replace('(((f|ht){1}tp://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink" href="\\1">\\1</a>', $text);
+	$text = preg_replace('(((f|ht){1}tps://)[-a-zA-Z0-9@:%_\+.~#?&//=]+)','<a class="globe fakelink" href="\\1">\\1</a>', $text);
+	$text = preg_replace('([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&//=]+)','\\1<a class="globe fakelink" href="http://\\2">\\2</a>', $text);
 	return $text;
 }
 function aTcode($array,$id='description'){
