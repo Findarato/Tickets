@@ -20,8 +20,8 @@ function changeArea(area){
 		break;
 		case "admin":
 			$("#adminTab").trigger("click");	
-			location.load("/ajax/subMenuRender.php?menu=admin");
 			Params.NavArea="admin";
+			location.html("");
 			$("#tldPageAnator").hide();
 		break;
 		default:break;

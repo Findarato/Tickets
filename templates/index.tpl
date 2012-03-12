@@ -14,7 +14,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Buda:light' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Calligraffitti' rel='stylesheet' type='text/css' />
 		<link href='/css/WebSymbols-Font-Pack/stylesheet.css' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="/js/jquery-ui/css/redmond/jquery-ui-1.8.15.custom.css" rel="stylesheet" />	
+		<link rel="stylesheet" type="text/css" href="/js/jquery-ui/css/smoothness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
         
         <link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"/>
         <link rel="stylesheet" media="screen" href="/css/foundation.css?v=1"  />
@@ -39,9 +39,10 @@
         
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
         <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
-		<script type="text/javascript" src="/js/modernizr.custom.43877.js"></script>
+		<script type="text/javascript" src="/js/modernizr.custom.04865.js"></script>
         <script src="/js/modules/display.js"></script>
         <script src="/js/tickets.js"></script>
+        <script src="/js/modules/admin.js"></script>
         <script src="/js/globalFunctions.js"></script>
       </head>
     <body >

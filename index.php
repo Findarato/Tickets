@@ -91,6 +91,20 @@
 	}else{
 		$smarty -> assign('ticketDefault',0);
 	}
+	
+	function getFeatures(){
+		$holderArray = array();
+		$db = db::getInstance();
+		$feat = $db->Query("SELECT id,name,status FROM features",false,"assoc_array");
+		foreach($feat as $k=>$f){
+			$holderArray[$f["name"]] = $f["status"];
+		}
+		return $holderArray;
+	}
+	$feat = getFeatures();
+	$_SESSION["features"] = json_encode($feat);
+	//print_r($_SESSION["features"]);
+	$smarty -> assign("features",$feat);
 	$smarty -> assign('blankDisplay',$blankPage);
 	$smarty -> assign('notifyCheck',$checkN);
 	$smarty -> assign('location',$location);
