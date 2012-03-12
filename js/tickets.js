@@ -76,6 +76,9 @@ var newTicketTpl =
 				.append( // Ticket Location
 					$("<div/>",{"class":" color260 color4Border1 ticketLocationBox",id:"tickLocation"}).html("Cool Location")
 				)
+				.append( // Ticket Assign
+					$("<div/>",{"class":" color260 color4Border1 ticketAssignBox ticketItemBox",id:"tickAssign"}).html("To: John Doe")
+				)
 		);
 function focusMe(id){
 	window.scrollBy(0,5000);

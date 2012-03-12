@@ -597,13 +597,37 @@ function loadTicketList(pageNumber,queryObj) {
 			smallTicket.find("#title").attr("id","title-"+value.id).html($("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(value.subject).attr({"id": "subject" + value.id }));
 			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
 			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
+			smallTicket.find("#tickAssign").attr("id","tickAssign-"+value.id).html("To: "+value.firstname+ " " + value.lastname );
 			smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
 			smallTicket.find("#tickCategory").attr("id","tickCategory-"+value.id).html(value.category);
 			smallTicket.find("#tickLocation").attr("id","tickLocation-"+value.id).html(value.locationName);
 			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
 			tableBody.append(smallTicket);
 		});
+		var feat = $.parseJSON(sessionStorage.features);
+		$.each(feat,function(i,item){
+			switch(item.name){
+				case "Categories":
+					if(item.status==0)
+						$(".ticketCategoryBox").css({"display":"none"});
+				break;
+				case "Location":
+					if(item.status==0)
+						$(".ticketLocationBox").css({"display":"none"});
+				break;
+				case "Due Date":
+					if(item.status==0)
+						$(".ticketLocationBox").css({"display":"none"});
+				break;
+				case "Assigned Box":
+					if(item.status==0)
+						$(".ticketAssignBox").css({"display":"none"});
+				break;
+				default:break;
+			}
+		});
 	});
+
 }
 function loadUserPage(userId){
 	//alert(userId)
