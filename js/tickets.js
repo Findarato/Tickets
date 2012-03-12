@@ -542,7 +542,7 @@ jQuery(document).ready(function () {
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
 		yep : '',
-		nope: '/js/jquery-ui/js/jquery-ui-1.8.15.custom.min.js'
+		nope: '/js/jquery-ui/js/jquery-ui-1.8.18.custom.min.js'
 	});
 	
 
