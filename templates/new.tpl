@@ -7,7 +7,7 @@
 							<td style="text-align:left;"><input type="text" name="newTicketTitle" id="newTicketTitle"  class=" Ticketform " maxlength="35" /></td>
 						</tr>
 						{if $features["Categories"] eq 1}
-						<tr class="ticketCategoryBox">
+						<tr class="">
 							<td style="text-align:left;"><span class="font-X">Category:</span></td>
 							<td style="text-align:left;"><select class=" Ticketform " id="newTicketCategory" name="newTicketCategory">{html_options  options=$cate}</select></td>
 						</tr>
@@ -31,7 +31,7 @@
 						</tr>
 						{/if}
 						{if $features["Location"] eq 1}
-						<tr class="ticketLocationBox">
+						<tr class="">
 							<td style="text-align:left;"><span class="font-X">Problem Location:</span></td>
 							<td style="text-align:left;"><select name="newTicketLocation" id="newTicketLocation" class=" Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location}</select></td>
 						</tr>
