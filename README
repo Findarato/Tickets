@@ -1,387 +1,404 @@
-      <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Ticket Update XXVI</span>
-      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.9.0.r900</span>
-      <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
-      <ol>
-		<li>Fixed a bug relating to the admin section not showing any options other than user edit</li>
-		<li>Fixed a bug that was causing the title title text to use the wrong font</li>
-		<li>Fixed the bookmark button. It was not displaying properly</li>
-		<li>Fixed the button size issue, this was a result of some reset CSS code and me not taking into account this.</li>
-		<li>Tickets was not working very well at all with some small screen devices (Smart Phones) and this has been mostly resolved. This is something that will forever be tweeked as new features get added and the layout improves</li>
-      </ol>
-      <br>
-      <span style="font-size: 150%; line-height: normal;">New Features</span>
-      <ol>
-		<li>Working on making tickets fit with the new website colors and feel. When the new website launches tickets should already feel right at home</li>
-		<li>Tickets is now using a new font based icon system.
-			<ol>
-				<li>It will help tickets load faster</li>
-				<li>The changes also make generating new icon themes easier</li>
-			</ol>
-		</li>
-		<li>The top menu only shows categories which you have tickets in, if you do not have a ticket in by me it will not show up for you.</li>
-		<li>The tabs have been reworked to flow better with the layout.</li>
-      </ol>
-      <br>
-      <span style="font-size: 150%; line-height: normal;">Known Issues</span>
-      <ol>
-        <li>Searching By project does not work</li>
-        <li>Page indicators in a search result do not currently work.</li>
-        <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
-        <li>Commenting on a ticket that was closed or reopened will generate extra replies.</li>
-        <li>Search is currently missing from the layout. I am working on a location to put it so that it fits</li>
-      </ol>
-
-
-
-This is just for table definitions
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
---
--- Database: `tickets`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `alt_email`
---
-
-CREATE TABLE IF NOT EXISTS `alt_email` (
-  `user_id` int(11) NOT NULL,
-  `email` text NOT NULL,
-  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `blockers`
---
-
-CREATE TABLE IF NOT EXISTS `blockers` (
-  `ticket_id` int(11) NOT NULL,
-  `blocker_id` int(11) NOT NULL,
-  `comment` text NOT NULL,
-  KEY `ticket_id` (`ticket_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `category`
---
-
-CREATE TABLE IF NOT EXISTS `category` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `name` text NOT NULL,
-  `display` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `department`
---
-
-CREATE TABLE IF NOT EXISTS `department` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY  (`id`),
-  KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `department_members`
---
-
-CREATE TABLE IF NOT EXISTS `department_members` (
-  `department_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `notify` int(11) NOT NULL,
-  UNIQUE KEY `user_id` (`user_id`),
-  KEY `department_id` (`department_id`,`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `equipment`
---
-
-CREATE TABLE IF NOT EXISTS `equipment` (
-  `eqipment_id` int(11) NOT NULL,
-  `ticket_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `favorite`
---
-
-CREATE TABLE IF NOT EXISTS `favorite` (
-  `ticket_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  KEY `ticket_id` (`ticket_id`,`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `features`
---
-
-CREATE TABLE IF NOT EXISTS `features` (
-  `id` int(11) NOT NULL auto_increment,
-  `name` text NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `id` (`id`),
-  KEY `status` (`status`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lastlogon`
---
-
-CREATE TABLE IF NOT EXISTS `lastlogon` (
-  `id` int(11) NOT NULL auto_increment,
-  `user_id` int(11) NOT NULL,
-  `dt` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `library_names`
---
-
-CREATE TABLE IF NOT EXISTS `library_names` (
-  `ID` tinyint(4) NOT NULL auto_increment,
-  `name` tinytext NOT NULL,
-  `email` text NOT NULL,
-  PRIMARY KEY  (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `multi_assigned`
---
-
-CREATE TABLE IF NOT EXISTS `multi_assigned` (
-  `ticket_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  KEY `ticket_id` (`ticket_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `openId_users`
---
-
-CREATE TABLE IF NOT EXISTS `openId_users` (
-  `user_id` int(11) NOT NULL,
-  `open_id` varchar(1000) NOT NULL,
-  UNIQUE KEY `open_id` (`open_id`),
-  UNIQUE KEY `open_id_2` (`open_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `permissions`
---
-
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` int(11) NOT NULL auto_increment,
-  `display` text NOT NULL,
-  `permission` text NOT NULL,
-  PRIMARY KEY  (`id`),
-  KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `projects`
---
-
-CREATE TABLE IF NOT EXISTS `projects` (
-  `id` int(11) NOT NULL auto_increment,
-  `name` text NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Table to store each of the projects that could have bugs.' AUTO_INCREMENT=5 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `recent_tickets`
---
-
-CREATE TABLE IF NOT EXISTS `recent_tickets` (
-  `user_id` int(11) NOT NULL,
-  `ticket_id` int(11) NOT NULL,
-  `ticket_name` text NOT NULL,
-  `dt` datetime NOT NULL,
-  KEY `user_id` (`user_id`),
-  KEY `ticket_id` (`ticket_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `responses`
---
-
-CREATE TABLE IF NOT EXISTS `responses` (
-  `id` int(11) NOT NULL auto_increment,
-  `ticket_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `parent_id` int(11) NOT NULL default '0',
-  `subject` text NOT NULL,
-  `body` text NOT NULL,
-  `created_on` timestamp NOT NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`id`),
-  KEY `ticket_id` (`ticket_id`,`user_id`,`created_on`),
-  KEY `parent_id` (`parent_id`),
-  KEY `user_id` (`user_id`),
-  KEY `ticket_id_2` (`ticket_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3299 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `status`
---
-
-CREATE TABLE IF NOT EXISTS `status` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `status` text NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `tcview`
---
-CREATE TABLE IF NOT EXISTS `tcview` (
-`id` int(10) unsigned
-,`tickettype_id` int(11)
-,`created_by_id` int(11)
-,`assigned_by_id` int(11)
-,`assigned_id` int(11)
-,`category_id` int(11)
-,`subject` text
-,`description` longtext
-,`status` text
-,`priority` int(11)
-,`created_on` datetime
-,`closed_on` datetime
-,`attachment` text
-,`due_on` datetime
-,`category` text
-,`open` int(11)
-,`locationId` tinyint(4)
-,`locationName` tinytext
-);
--- --------------------------------------------------------
-
---
--- Table structure for table `tickets`
---
-
-CREATE TABLE IF NOT EXISTS `tickets` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `assigned_by_id` int(11) NOT NULL,
-  `assigned_id` int(11) NOT NULL,
-  `project_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `created_by_id` int(11) NOT NULL,
-  `tickettype_id` int(11) NOT NULL default '1',
-  `subject` text NOT NULL,
-  `description` longtext NOT NULL,
-  `location` int(11) NOT NULL default '1',
-  `status` text NOT NULL,
-  `priority` int(11) NOT NULL default '0',
-  `created_on` datetime NOT NULL,
-  `modified_on` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `due_on` datetime NOT NULL,
-  `closed_on` datetime NOT NULL,
-  `open` int(11) NOT NULL default '1',
-  `attachment` text NOT NULL COMMENT 'Array of attachments',
-  PRIMARY KEY  (`id`),
-  KEY `assigned_by_id` (`assigned_by_id`,`assigned_id`,`category_id`,`created_by_id`),
-  KEY `priority` (`priority`),
-  FULLTEXT KEY `subject` (`subject`,`description`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2527 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tickets_hold`
---
-
-CREATE TABLE IF NOT EXISTS `tickets_hold` (
-  `ticket_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `dt` date NOT NULL,
-  PRIMARY KEY  (`ticket_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `previouslogin` date NOT NULL,
-  `type` tinyint(4) NOT NULL default '3',
-  `password` varchar(64) NOT NULL,
-  `joined` date NOT NULL,
-  `firstname` text NOT NULL,
-  `lastname` text NOT NULL,
-  `username` tinytext NOT NULL,
-  `email_address` text NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2875 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_permissions`
---
-
-CREATE TABLE IF NOT EXISTS `user_permissions` (
-  `user_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY  (`user_id`,`permission_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
-
-
-INSERT INTO `permissions` (`id`, `display`, `permission`) VALUES
-(1, 'Administrator', 'ADMIN'),
-(2, 'Staff', 'STAFF'),
-(3, 'Basic User', 'USER'),
-(4, 'Department Head', 'MANAGER'),
-(5, 'No Access', 'NO_ACCESS'),
-(6, 'View', 'VIEW'),
-(7, 'Hide User', 'HIDE'),
-(8, 'Default Assign', 'DEFAULT_ASSIGN');
+Ticket Update XXVI v.3.9.0.r900
+Bug Fixes
+
+    Fixed a bug relating to the admin section not showing any options other than user edit
+    Fixed a bug that was causing the title title text to use the wrong font
+    Fixed the bookmark button. It was not displaying properly
+    Fixed the button size issue, this was a result of some reset CSS code and me not taking into account this.
+    Tickets was not working very well at all with some small screen devices (Smart Phones) and this has been mostly resolved. This is something that will forever be tweeked as new features get added and the layout improves
+
+
+New Features
+
+    Working on making tickets fit with the new website colors and feel. When the new website launches tickets should already feel right at home
+    Tickets is now using a new font based icon system.
+        It will help tickets load faster
+        The changes also make generating new icon themes easier
+    The top menu only shows categories which you have tickets in, if you do not have a ticket in by me it will not show up for you.
+    The tabs have been reworked to flow better with the layout.
+
+
+Known Issues
+
+    Searching By project does not work
+    Page indicators in a search result do not currently work.
+    There are some issues with editing that have been around since editing was in place. All of the ticket code links are not working as intended with the new editing system.
+    Commenting on a ticket that was closed or reopened will generate extra replies.
+    Search is currently missing from the layout. I am working on a location to put it so that it fits
+
+
+
+Ticket Update XXV v.3.7.0.r738
+Bug Fixes
+
+    Fixed a 404 error when trying to link to a js library
+    New ticket once again looks and acts like a real link
+
+
+New Features
+
+    A basic permissions system is working. It will grow, but to start with it is very basic to lock out users, and grant others more control.
+        Users can not be hidden from tickets though the correct permission values
+        A default assign is now set though the permission system
+    Tickets is now using a new font based icon system.
+        It will help tickets load faster
+        The changes also make generating new icon themes easier
+    The top menu only shows categories which you have tickets in, if you do not have a ticket in by me it will not show up for you.
+
+
+Known Issues
+
+    Searching By project does not work
+    Page indicators in a search result do not currently work.
+    There are some issues with editing that have been around since editing was in place. All of the ticket code links are not working as intended with the new editing system.
+    Commenting on a ticket that was closed or reopened will generate extra replies.
+
+
+
+Ticket Update XXIV v.3.6.0.r738
+Bug Fixes
+
+    Fixed a 404 error when trying to link to a js library
+    Fixed OpenDNS Server 1/PING is WARNING
+    Fixed Development Web server/Check Users is WARNING
+
+
+New Features
+
+    The login page now shows the most recent 5 tickets created, that are still open.
+    links in the form of http://www.google.com will transform into clickable links
+    There is a new admin section for users who have access to it. It is listed on the tab bar. If you see it you have accessWill be included in the next update
+    Ticket list is now sortable
+    Users are now given a http://www.gravatar.com Icon
+
+
+Known Issues
+
+    Searching By project does not work
+    Page indicators in a search result do not currently work.
+    There are some issues with editing that have been around since editing was in place. All of the ticket code links are not working as intended with the new editing system.
+    Commenting on a ticket that was closed or reopened will generate extra replies.
+
+
+
+Tickets Hotfix v.3.5.2.r700
+Bug Fixes
+
+    Fixed the [url=http://www.google.com] not translating to the correct URL bug. It should be working properly now.
+
+
+New Features
+
+    If tickets is behaving strangly or you are just not getting the result you are looking for now you can "reset tickets". Simply load up your user page by clicking on your name in the top right corner and then click reset tickets.
+    Importants of a ticket is now shown in a graphical display on the ticket list. This enables for faster and easier view of what is the most important ticket.
+    Ticket lists now show when a ticket was created.
+    Entering a url into a ticket or response in the form of http://www.google.com will no be converted to a link
+
+
+Known Issues
+
+    Searching By project does not work
+    Page indicators in a search result do not currently work.
+    There are some issues with editing that have been around since editing was in place. All of the ticket code links are not working as intended with the new editing system.
+    Commenting on a ticket that was closed or reopened will generate extra replies.
+
+
+
+Live Ticket Update XXIII v.3.5.0.r582
+Bug Fixes
+
+    Clicking on the "No User (Please Login) link correctly takes you to the login window. (Finally)
+    Trying to take an action on a ticket when you are not logged in will now force you to login. Before events were seeming to happen when a person was not logged in, but where blocked by the server and not shown to the user. This lead to confusion.
+    Fixed a TON of bugs related to the login process.
+    You can once again change your email address by clicking on your name
+    Fixed the posting 4 replies bug
+
+
+New Features
+
+    New Ticket layout. Tickets has separated from the website and is once again a separate product. Some of the same feel is in the new look, but much is new.
+        Tickets has become more HTML 5 friendly. Future updates where made to the styles to improve load times.
+        New Layout is more friendly with any width of screen/window. All of the navagation is done in the header of the page.
+        You can now see up to 30 tickets per screen instead of the normal 20.
+        The body of a ticket now shows up as the first reply
+        Tickets works much better on Smart phones. You can now check and interact will all of the ticket features straight from your phone. There may be bugs in how it work in the initial release, and it will be improved over time.
+    You can login to tickets with a Google account. More OpenID providers will be enabled in the future, but for now its just google.
+    Searching works. It is now a keyword search that searches the title, body, and id of the ticket.
+
+
+Known Issues
+
+    Searching By project does not work
+    Page indicators in a search result do not currently work.
+    There are some issues with editing that have been around since editing was in place. All of the ticket code links are not working as intended with the new editing system.
+    Commenting on a ticket that was closed or reopened will generate extra replies.
+
+
+
+Live Ticket Update XXII (The its not dead Update) v.3.2.0.r412
+Bug Fixes
+
+    Fixed asdfasdf.
+    Fixed a regression that was causing some text to be white, thus making it un readable
+    Fixed a few bugs relating to adding tickets
+    Converted more of the old theme bugs to the new CSS
+    Updated some buttons
+
+
+New Features
+
+    Do to popular request after the add reply box is showing clicking on the "Add Reply" button will add the reply. The green check mark still does the same thing, and will continue to. This is just an added feature as many people were requesting.
+    Tickets has been updated to work with the newest version of jQuery, 1.5.0.
+    Tickets has been updated to work with the newest version of RGraph.
+    Pageanation should be working in all areas.
+    Closed tickets are now separated into two areas, to better explain what each one did.
+
+
+Known Issues
+
+    Searching By project does not work
+    Searching is slated for the next update to tickets.
+    There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+    There are some issues with editing that have been around since editing was in place. All of the ticket code links are not working as intended with the new editing system.
+    Closed tickets are not showing up for some people. Even though a number shows up next to Closed Tickets.
+
+
+
+Live Ticket Update XXI v.3.1.0.r314
+Bug Fixes
+
+    Fixed Main Library Comcast Line/PING is WARNING.
+    Fixed RECOVERY Host Alert: CS is UP.
+
+
+New Features
+
+    Creating a new ticket, or a new bug report now shows up inside of the ticket display instead of as a popup.
+    Adding a reply now follows the same look and feel of new tickets and bug reports.
+    Closed tickets that are linked using the T link style will now look like RECOVERY Host Alert: CS is UP#693
+
+
+Known Issues
+
+    Searching By project does not work
+    There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+    There are some issues with editing that have been around since editing was in place. All of the ticket code links are not working as intended with the new editing system.
+    Closed tickets are not showing up for some people. Even though a number shows up next to Closed Tickets.
+
+
+
+Live Ticket Update XX v.3.0.0.r301
+Bug Fixes
+
+    Fixed OpendDNS Server 2/PING is WARNING.
+    Fixed RECOVERY Host Alert: RPCirc is UP.
+    Fixed Main Internet Router/PING is OK.
+    Fixed The Internet/PING is OK.
+    Fixed OpendDNS Server 2/PING is WARNING.
+    Fixed a javascript uncaught TypeError bug that would happen when there were no responses on a ticket.
+
+
+New Features
+
+    New tickets and new bugs are now closer linked to the areas they are for. The menu bar is going to be for global adjustments not just for links.
+    Launch of mobile tickets
+        This is basically a media query based shiv to make tickets work better on a smaller screen.
+        This will also work on a desktop, just resize your browser window down and see the results.
+    Editing is totally revamped.
+        Tickets is now using the markitup editor that the main site is using This will be included at a later date.
+        Tickets are now edited in line. When the modify button is clicked the editing interface will show up. Click save to make the changes, or cancel to undo any adjustments that were made.
+    Recent Tickets has been removed from this version of tickets. Its going to be handled differently than before.
+    Implemented Main Internet Router/PING is WARNING.
+    Tickets are now sorted by priority then due date
+    Bookmarks are now done in line vs though a toolbar button. You can click the (
+    /
+    ) icon anywhere it is on the page, and it will toggle the book mark for the ticket you have selected.
+
+
+Known Issues
+
+    Searching By project does not work
+    Going directly to the user Page in Firefox can result in odd placement of the yes/no selector. This is a result of how Firefox renders report @font-face fonts.
+    There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+    Going directly to a ticketlist search result can lead to a broken page.
+    There are some issues with editing that have been around since editing was in place. All of the ticket code links are not working as intended with the new editing system.
+    Closed tickets are not showing up for some people. Even though a number shows up next to Closed Tickets.
+    New tickets / bugs and new replies are not in their final form. These will be integrated into the new look in a later version.
+
+
+
+Live Ticket Update XIX v.2.14.21.r217
+Bug Fixes
+
+    Large Graphs are finally working properly again. Not all of the graphs are back in place.
+    All ticket lists, and responses should now display in the same order on all browsers
+    Departments dropdown no longer looks cluttered. This was introduced with the last update. This has been solved by moving the adjustments to a new user page.
+    Ticket email was showing too much information thus making looking at tickets less important. This has been fixed
+    Fixed a bookmark bug that was introduced with ticket update XVIII
+
+
+
+New Features
+
+    User Pages are in place.
+        This is a very early version. More features to this page will be added with time.
+        The prime goal of user pages is to allow other people to see basic stats on tickets, based on the user they have selected.
+        User pages will eventually take user name,user id, as well as real name as a parameter. Currently they only support user id.
+        User pages are the first location of the new graphs.
+    Bugs are now separated out into their own area. No longer will bugs show up in the ticket list.
+
+
+
+Known Issues
+
+    Large Graphs are still not working properly
+    Searching By project does not work
+    Some themes do not work 100%
+    Going directly to the user Page in Firefox can result in odd placement of the yes/no selector. This is a result of how Firefox renders report @font-face fonts.
+    There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+    Problem or bug icons do not show up in the ticket list. No longer relative
+    Going directly to a ticketlist search result can lead to a broken page.
+
+
+
+Live Ticket Update XVIII v.2.12.16.r175
+Bug Fixes
+
+    Fixed a bug that was causing tickets to show the wrong replies.
+    Fixed many bugs relating to the theme generator.
+    Making a new ticket will once again take you to the ticket you just created
+    Notice text was too hard to read as a result of this update. This has been fixed.
+
+
+
+New Features
+
+    Tickets now uses localStorage. If your browser supports it tickets that you have recently viewed will load up much faster.
+    Bug reports are now separated out into their own section. This will make it easier to file a bug report and see the progress associated with it.
+        Bug reports do not have a due date, nor do they have a department. Bug reports will have a Priority level and a product. They will look a lot like a ticket, but will be missing some of the components that are not needed in a bug report.
+        This is just a framework release. The bug tickets are not out yet, and the button does not currently do anything.
+    All of the notifications now have their own icon. The icons are more descriptive of what the notification is actually telling you.
+    Along with the new notification icons comes new icons for tickets. Tickets should look more like the website again.
+
+
+
+Known Issues
+
+    Large Graphs are still not working properly
+    Some themes do not work 100%
+    There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+    Problem or bug icons do not show up in the ticket list.
+    Going directly to a ticketlist search result can lead to a broken page.
+
+
+
+Live Ticket Update XVII v.2.8.13.r161
+Bug Fixes
+1. The Update notes page was using the old theme. This has been fixed.
+2. Fixed a bug that was causing bookmarked checks to apear on replies.
+
+New Features
+1. Navagation has been made dramatically easier, and more to the point. All tickets are selected though the ticket list. This will reducde the amount of CSS needed, as well as allow for the reduction in a lot of the javascript as well.
+2. Look and feak of tickets has changed. No longer are the areas separated from their headers.
+3. CSS3 has attacked tickets. There are now lots of cool new CSS3 tags running rampant around tickets. If you see square corners and no drop shadows you are using an old browser.
+4. there is now an [ img ] tag. it allows for linking to offsite images within tickets. No matter what size it is, it will work.
+
+Known Issues
+1. Large Graphs are still not working properly
+2. Some themes do not work 100%
+3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+4. Problem or bug icons do not show up in the ticket list.
+
+Live Ticket Update XVI v.2.5.12
+Bug Fixes
+
+New Features
+1. Tickets now uses the Droid-serif font. If your browser supports the new css3 font face it will automaticlly switch to that font.
+
+Known Issues
+1. Large Graphs are still not working properly
+2. Some themes do not work 100%
+3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+
+Live Ticket Update XV v.2.4.12
+Bug Fixes
+1. Fixed some spelling problems.
+2. Closing and reopening of tickets should be a lot faster.
+3. Fixed the bug from Development Web server/LAPCAT is CRITICAL.
+4. The ticket list is now the same height as the ticket area.
+5. Fixed the bug from Live Web Server/tickets is OK.
+6. Fixed some theme issues relating to fonts.
+7. Ticket lists now fit inside the default window height. There is a scroll bar inside the page to see tickets that can not be seen.
+8. Ticket list now shows more relavant information about each of the tickets. Including due on, completed on, and over dy by. This was always intended and was not working properly.
+
+New Features
+1. Ticket lists now show the same icons as the normal ticket view.
+2. Ticket lists have been reorganized a bit. The created by link is now on the right instead of the left.
+
+Known Issues
+1. Large Graphs are still not working properly
+2. Some themes do not work 100%
+3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+
+Live Ticket Update XIV v.2.2.4
+Bug Fixes
+1. Fixed a bug that was causing tickets that you reassigned to be shown in the side area as if you created them.
+2. Fixed a long standing bug that was not filtering some of the show all areas by the logged in user
+3. Fixed a bug with the start page not showing tickets if they were old and got a new response since your last visit.
+4. Fixed the bug from ticket 434.
+
+New Features
+1. New start page.
+1.1 Tickets that have been worked on since your last visit are now shown instead of the update notes. Update notes are still accessable though the link in the top right corner.
+1.2 Ticket lists have been reworked along side the crusade to banish the table tag.
+2. Tickets is using the rounded corner CSS from the theme generator now. This will insure that the corners look correct.
+3. New look to tickets and replies. More table tags squashed!
+4. Ticket lists now show the same icons as the normal ticket view.
+
+Known Issues
+1. Large Graphs are still not working properly
+2. Some themes do not work 100%
+3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+
+Live Ticket Update XIII v.2.1.0
+Bug Fixes
+1. Fixed a bug that was preventing any favorite tickets from showing the proper icon.
+1. Tickets is now working in Opera, as well as versions of Firefox prior to 3.1.
+
+New Features
+1. Ticket types are now in. They are bug tickets and trouble tickets.
+
+    be sure to choose the proper type of ticket. Bug reports should be fixed for web code and things that can be fixed, but probably not related to computers. While trouble tickets are for everything that is not a bug.
+
+
+2. Recent tickets should now be working properly.
+
+Known Issues
+1. Large Graphs are still not working properly
+2. Some themes do not work 100%
+3. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
+
+Live Ticket Update XII
+Bug Fixes
+1. Fixed some bugs relating to the new theme definitions.
+2. Removed uploads as they were not being used and caused lots of bugs.
+3. Fixed some email issues that crept up.
+4. Fixed some small graphical issues relating to the sprite.
+5. Fixed a javascript mistake that was preventing favorites from working properly.
+6. Fixed a bug that was causing the buttons to disapear on a ticket.
+7. Fixed the javascript error relating to tick.status.
+
+New Features
+1. User links. You can now link to a search of all tickets created by a user with Joseph Harry
+2. Tickets now uses the newest version of http://www.jquery.com"Jquery!
+3. Dater is now part of tickets!
+3.1 Enjoy selecting due dates with a new popup date selector.
+4. Url links are now in. [url=http://www.google.com] would create a URL link looking like http://www.google.com">http://www.google.com
+5. Moving to a new naming convention for ticket updates. They will be numbered instead of just putting in the date
+
+Known Issues
+1. Tickets is currently having issues in Opera
+2. Large Graphs are still not working properly
+3. Recent Tickets are not updating like they should
+4. Some themes do not work 100%
+5. There are no page numbers, nor any way to show more then the default amount of tickets in the list view.
