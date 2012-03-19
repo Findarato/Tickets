@@ -466,6 +466,7 @@ function loadTicketList(pageNumber,queryObj) {
 	var html = "";
 	var bugs = false;
 	var ticketCount = 0;
+	var feat = $.parseJSON(sessionStorage.features);
 	if (pageNumber < 0) {	pageNumber = 0;}
 	var hash = getHashArray();
 	if(Params.LastArea == "ticketList"){ // This is a new display of data, not a change of locations
@@ -549,11 +550,8 @@ function loadTicketList(pageNumber,queryObj) {
 				}
 			} // end for loop
 			
-		    if(hash[1] == "bugs_open" || hash[1] == "bugs_closed" || O_search.bugs_open == 1 || hash[1]=="bugs"){
-		    	if(Params.NavArea!="bugs"){changeArea("bugs");Params.NavArea=="bugs";}
-		    }else{
-		    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
-		    }		
+	    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
+	
 		}	
 	}
 	
@@ -594,7 +592,19 @@ function loadTicketList(pageNumber,queryObj) {
 					}else{$("<div/>",{title:Params.Priority_string[value.priority].name}).addClass("pSquare p"+Params.Priority_string[value.priority].name.replace(" ",""));}
 					return result;
 	    		})	
-			smallTicket.find("#title").attr("id","title-"+value.id).html($("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(value.subject).attr({"id": "subject" + value.id }));
+			smallTicket.find("#title").attr("id","title-"+value.id).html($("<a/>").attr({"href": "#ticket/" + value.id}).addClass("nolink fontBold fontMain").html(
+				function(){
+					var returnValue ="";
+					$.each(feat,function(i,item){
+						if(item.status==0)
+							returnValue = value.subject;
+						else
+							returnValue = "["+value.category+"] "+value.subject;
+					});
+					return returnValue;
+				}
+				
+				).attr({"id": "subject" + value.id }));
 			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
 			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
 			smallTicket.find("#tickAssign").attr("id","tickAssign-"+value.id).html("To: "+value.firstname+ " " + value.lastname );
@@ -604,8 +614,9 @@ function loadTicketList(pageNumber,queryObj) {
 			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
 			tableBody.append(smallTicket);
 		});
-		var feat = $.parseJSON(sessionStorage.features);
+		$(".ticketCategoryBox").css({"display":"none"});
 		$.each(feat,function(i,item){
+			
 			switch(item.name){
 				case "Categories":
 					if(item.status==0)
