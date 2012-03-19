@@ -10,6 +10,8 @@
 		<li>Fixed the bookmark button. It was not displaying properly</li>
 		<li>Fixed the button size issue, this was a result of some reset CSS code and me not taking into account this.</li>
 		<li>Tickets was not working very well at all with some small screen devices (Smart Phones) and this has been mostly resolved. This is something that will forever be tweeked as new features get added and the layout improves</li>
+		<li>The login page should now always show when you click the login link at the top of the page</li>
+		<li>When you log into tickets after first viewing a ticket it will now take you back to that ticket.  Barring you do not close the window between.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>

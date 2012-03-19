@@ -96,9 +96,6 @@ function oc(a)
 function checkHash() {
 	var hash = getHashArray();
 	loadLocalStorage();
-	//alert("checkHashUserid"+localStorage.userId);
-	//if(localStorage.userId == null || localStorage.userId  == undefined || localStorage.userId  == "undefined" && hash[0] != "#login"){setHash("#login");return;}
-	
 	if (window.location.hash.length > 1) {
 		//This checks for a url passed hash, otherwise its just going to go in there.
 		switch (hash[0]) {
@@ -151,7 +148,12 @@ function checkHash() {
 			loadBlank();
 			break;
 		default: case "#start":
-			setHash("#ticketList/all_tickets");
+			if(sessionStorage.currentTicket >0){
+				setHash("#ticket/"+sessionStorage.currentTicket);
+			}else{
+				setHash("#ticketList/all_tickets");	
+			}
+			
 			//loadNew(Params.LastLogon);
 			break;
 		case "#userPage":
@@ -173,10 +175,6 @@ function checkHash() {
 			case "#search":
 			loadTicketList(0,{"search":"","area":"all_tickets"});
 		break;
-		case "#bugs": // this triggers when the tab tickets is clicked
-			changeArea("bugs");
-			loadTicketList(0,{"search":"","area":"all_bugs"});
-		break;
 		case "#admin": // this triggers when the tab tickets is clicked
 			if(Params.LastArea != "admin" || typeof admin == "undefined"){
 				changeArea("admin");
@@ -196,10 +194,7 @@ function checkHash() {
 			
 		break;		
 		}
-		//if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets"}
 	} else {
-		//loadNew(Params.LastLogon);
-		//alert("blah");
 		if(localStorage.userId > 0 || localStorage.userId==null || localStorage.userId==undefined || localStorage.userId=="undefined"){
 			setHash("#ticketList/all_tickets");
 			/*checkHash*/
@@ -490,7 +485,13 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		if (data.departmentname === "" || data.departmentname == "None!") {
 			setHash("#userPage/"+data.userid);
 		}else{
-			setHash("#ticketList/all_tickets");
+			alert(sessionStorage.currentTicket);
+			if(sessionStorage.currentTicket >0){
+				setHash("#ticket/"+sessionStorage.currentTicket);
+			}else{
+				setHash("#ticketList/all_tickets");	
+			}
+			
 		}
 		//alert(data.features);
 		sessionStorage.setItem("features",JSON.stringify(data.features));
@@ -498,7 +499,12 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
 
 		//alert(localStorage.mdEmail);
-		window.document.location="/";
+		if(sessionStorage.currentTicket >0){
+			window.document.location = "/#ticket/"+sessionStorage.currentTicket
+		}else{
+			window.document.location="/";	
+		}
+		
 	}
 	
 }
@@ -535,6 +541,8 @@ jQuery(document).ready(function () {
 		yep : '',
 		nope: '/js/jquery-ui/js/jquery-ui-1.8.18.custom.min.js'
 	});
+	
+
 	//localStorage.clear();
 	loadLocalStorage();
 
