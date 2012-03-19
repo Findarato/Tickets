@@ -2,7 +2,7 @@
 	<menu class="" style="position:absolute;top:36px;right:0px;z-index:102;width:110%;">
 		<ul class="tabrow">
 		    <li id="ticketTab" class="selected"><a class="ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;">Tickets</a></li>
-		    {*<li id="searchTab"><a class="magnifier nolink fontMain" href="#search" id="" style="padding-right:5px;width:auto;text-decoration:none;">Search</a></li>*}
+		    <li id="searchTab"><a class="magnifier nolink fontMain" href="#search" id="" style="padding-right:5px;width:auto;text-decoration:none;">Adv. Search</a></li>
 		    <li id="statsTab" ><a class="chart nolink fontMain" href="#stats" id="" style="padding-right:5px;width:auto;text-decoration:none;">Stats</a></li>
 		    {if isset($permissions) && in_array_r("ADMIN",$permissions)}
 		    <li id="adminTab"><a class="warning nolink fontMain" href="#admin" id="" style="padding-right:5px;width:auto;text-decoration:none;">Admin</a></li>
@@ -75,6 +75,8 @@
 			{else}
 			<a class="right fontMain" href="#login" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
 			{/if}
-		</div>
+			<span data-icon="L" title="Search" alt="Search" style="cursor: pointer"></span>
+	</div>
+	
 	</div>	<!-- End of User info -->
 </header>

@@ -29,7 +29,6 @@
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>
       <ol>
-        <li>Searching By project does not work</li>
         <li>Page indicators in a search result do not currently work.</li>
         <li>There are some issues with editing that have been around since editing was in place.  All of the ticket code links are not working as intended with the new editing system.</li>
         <li>Commenting on a ticket that was closed or reopened will generate extra replies.</li>

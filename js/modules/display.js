@@ -600,7 +600,7 @@ function loadTicketList(pageNumber,queryObj) {
 						if(item.status==0)
 							returnValue = value.subject;
 						else
-							returnValue = "["+value.category+"] "+value.subject;
+							returnValue = "<span style='font-size:.7em'>["+value.category+"]</span> "+value.subject;
 					});
 					return returnValue;
 				}
