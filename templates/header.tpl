@@ -1,26 +1,3 @@
-{*
-<div class="fontMain" style="width:100%;padding:0px 0px 4px 0;position:relative;text-align:right;" id="topper" title="Header of document">
-	<div class="" id="areaBar" style="width:100%;display:block">
-		<div style="display:table;width:100%;text-align:right;">
-			<div class="border-bottom-Main-1" style="display:table-cell;height:auto;width:150px;text-align:left">
-				<!-- Logo stuff -->
-				<div style="height:30px;display:inline-block">
-					<a class="left fakelink ticket_link" href="#start" style="margin-left:5px;"> <img src="/css/tree.png" style="border:none;height:40px;width:40px;"> </a>
-				</div>
-				<div style="width:auto;height:30px;display:inline-block;text-align:left;"></div>
-			</div>
-			<!-- End of logo Stuff -->
-			<div class="border-bottom-Main-1" style="display:table-cell;width:auto;height:auto;vertical-algin:top;text-align: right">
-				&nbsp;
-			</div>
-		</div>
-	</div>
-	<div class="WhitetoLightOff border-bottom-Main-1" style="width:100%;height:30px;display:table">
-		<div id="subAreaBar" style="display:table-cell"></div>
-		<div id="tldPageAnator"  style="display:table-cell;width:300px;"></div>
-	</div>
-</div>
-*}
 <header class="topHeader" style="background-color:#FFF;margin:0;padding:0;">
 	<menu class="" style="position:absolute;top:36px;right:0px;z-index:102;width:110%;">
 		<ul class="tabrow">
@@ -48,10 +25,7 @@
 				<span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
 			</div>	
 		</div>
-
-
 	</nav>
-
 <menu class="smallShadow colorMain-2" id="userPopup" style="position:absolute;top:27px;right:13px;z-index:999;display:none;">
 	<!-- popup Userinfo box -->
 	<div style="padding:3px;width:250px;">
@@ -99,7 +73,7 @@
 				<img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="vertical-align:middle;height:24px;width:24px;border:none;">
 			</a>
 			{else}
-			<a class="right nolink fontMain" href="#login" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
+			<a class="right fontMain" href="#login" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
 			{/if}
 		</div>
 	</div>	<!-- End of User info -->
