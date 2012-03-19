@@ -530,22 +530,11 @@ jQuery(document).ready(function () {
 			  $("li").removeClass("selected");
 			  $(this).addClass("selected");
 			});
-		
-	/*
-	$("body").live("mousedown :not(.categorySelect)",function(){
-		//alert('!')
-		if($(".fakeDropDown")){
-			$(".fakeDropDown").replaceWith();
-		}
-	});
-*/
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
 		yep : '',
 		nope: '/js/jquery-ui/js/jquery-ui-1.8.18.custom.min.js'
 	});
-	
-
 	//localStorage.clear();
 	loadLocalStorage();
 
