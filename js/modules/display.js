@@ -447,12 +447,13 @@ function loadTicket(ticketId,update) {
 	  Params.Content.html($("#ticketTpl").html());
 	  Params.LastArea = "ticket";
 	}
-	if(data = $.parseJSON(localStorage.getItem("TicketId"+ticketId))){
-  	loadTicketBody(data,Params.Content);
+	sessionStorage.setItem("currentTicket",ticketId);
+	if(data = $.parseJSON(sessionStorage.getItem("TicketId"+ticketId))){
+  		loadTicketBody(data,Params.Content);
 	}else{
 		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {
   		loadTicketBody(data,Params.Content);
-  		localStorage.setItem("TicketId"+ticketId,JSON.stringify(data)); // lets stick it inside of the storage.  
+  		sessionStorage.setItem("TicketId"+ticketId,JSON.stringify(data)); // lets stick it inside of the storage.  
 		});
 	}
 	var hash = getHashArray();
