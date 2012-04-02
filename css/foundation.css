@@ -11,11 +11,15 @@
 	     -o-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
 	        transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220); /* easeInQuart */
 }
-.idBox{
+.idBox,.signInBox{
 	text-align:right;
 	cursor:pointer;
 }
-.idBox li{
+.signInBox li ul{
+	height:0;
+	overflow:hidden;
+}
+.idBox li,.signInBox li{
 	cursor:pointer;
 	margin:0px;
 	padding:3px;
@@ -26,7 +30,6 @@
 	width:250px;
 	text-align:left;
 	background: rgb(221, 238, 204);
-	
 	height:0;
 	overflow:hidden;
 }

@@ -34,48 +34,49 @@
 			</div>
 		</div>
 	</nav>
-	<div id="idBox" class="idBox" style="display:block;width:auto;height:24px;vertical-algin:middle;z-index: 1000;position:absolute;top:3px;right:13px;padding-left:5px;">
+	<div id="idBox" class="{if isset($firstname)}idBox{else}signInBox{/if}" style="display:block;width:auto;height:24px;vertical-algin:middle;z-index: 1000;position:absolute;top:3px;right:13px;padding-left:5px;">
 		<!-- Start of User info -->
 		<ul>
 			<li>
-				{if isset($firstname)} <span class="right fontMain" href="#" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname} <img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="vertical-align:middle;height:24px;width:24px;border:none;"> </span>
-				{else} <a class="right fontMain" href="#login" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
+				{if isset($firstname)} 
+				<span class="right fontMain" href="#" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname} <img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="vertical-align:middle;height:24px;width:24px;border:none;"> </span>
+				{else}
+				<a class="right fontMain" href="#login" id="topperSignIn" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
 				{/if}
 					<!-- popup Userinfo box -->
-					<div style="position:absolute;right:0;">
-						<ul class="smallShadow color2 smoothAnimate" id="userPopup" >
-							<li>
-								<a class="ticket_button ticketSprite ticket fakelink" id=topperNew><span>New Ticket</span></a>
-							</li>
-							<li>
-								<a class="nolink ticket_button ticketSprite user fontBold" href="#ticketList/sOpen"><span>To Me</span></a>
-							</li>
-							<li>
-								<a class="smallTicketL nolink ticket_button ticketSprite pencil fontBold" href="#ticketList/sAssigned"><span>By Me</span></a>
-							</li>
-							<li>
-								<a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept."><span>To My Dep.</span></a>
-							</li>
-							<li>
-								<a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sAdepartment" id=byMyDepartment><span>By My Dep.</span></a>
-							</li>
-							<li>
-								<a class="smallTicketL nolink ticket_button ticketSprite bookmarkOff fontBold" href="#ticketList/sFavorite"  style="opacity:1;"><span>Bookmarks</span></a>
-							</li>
-							<li>
-								<a class="smallTicketL nolink ticket_button ticketSprite closed fontBold" href="#ticketList/sClosed"><span>My Closed</span></a>
-							</li>
-							<li>
-								<a class="smallTicketL nolink ticket_button ticketSprite closed fontBold" href="#ticketList/closedDepartment"><span>Dep. Closed</span></a>
-							</li>
-							<li>
-								<div style="display:table-cell;"><a class="fakelink" id="popUpLogout" href="/">Log Out</a></div>
-								<div style="float:right;"><a class="nolink fontMain" href="#userPage/" >More Info</a></div>
-							</li>
-						
-						</ul>
-					</div>
-
+				<div style="position:absolute;right:0;">
+					<ul class="smallShadow color2 smoothAnimate" id="userPopup" >
+						<li>
+							<a class="ticket_button ticketSprite ticket fakelink" id=topperNew><span>New Ticket</span></a>
+						</li>
+						<li>
+							<a class="nolink ticket_button ticketSprite user fontBold" href="#ticketList/sOpen"><span>To Me</span></a>
+						</li>
+						<li>
+							<a class="smallTicketL nolink ticket_button ticketSprite pencil fontBold" href="#ticketList/sAssigned"><span>By Me</span></a>
+						</li>
+						<li>
+							<a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept."><span>To My Dep.</span></a>
+						</li>
+						<li>
+							<a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sAdepartment" id=byMyDepartment><span>By My Dep.</span></a>
+						</li>
+						<li>
+							<a class="smallTicketL nolink ticket_button ticketSprite bookmarkOff fontBold" href="#ticketList/sFavorite"  style="opacity:1;"><span>Bookmarks</span></a>
+						</li>
+						<li>
+							<a class="smallTicketL nolink ticket_button ticketSprite closed fontBold" href="#ticketList/sClosed"><span>My Closed</span></a>
+						</li>
+						<li>
+							<a class="smallTicketL nolink ticket_button ticketSprite closed fontBold" href="#ticketList/closedDepartment"><span>Dep. Closed</span></a>
+						</li>
+						<li style="vertical-align: top;">
+							<div style="display:table-cell;"><a class="fakelink" id="popUpLogout" href="/">Log Out</a></div>
+							<div style="float:right;"><a class="nolink fontMain" href="#userPage/" >More Info</a></div>
+						</li>
+					
+					</ul>
+				</div>
 			</li>
 			<li>
 				<span data-icon="L" title="Search" alt="Search" style="cursor: pointer"></span>
