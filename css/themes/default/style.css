@@ -150,6 +150,11 @@ h3 {
 	-webkit-box-shadow: 0 0 1px 1px rgb(136, 136, 136);
 	box-shadow: 0 0 1px 1px rgb(136, 136, 136);
 }
+.downRightShadow{
+	-moz-box-shadow: 3px 3px 1px 1px rgb(136, 136, 136);
+	-webkit-box-shadow: 0 0 1px 1px rgb(136, 136, 136);
+	box-shadow: 0 0 1px 1px rgb(136, 136, 136);
+}
 
 
 /*  End of theme related CSS */

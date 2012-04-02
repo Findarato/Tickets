@@ -11,6 +11,13 @@
 	     -o-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
 	        transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220); /* easeInQuart */
 }
+.fastAnimate{
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
 .idBox,.signInBox{
 	text-align:right;
 	cursor:pointer;
@@ -29,9 +36,16 @@
 .idBox li ul{
 	width:250px;
 	text-align:left;
-	background: rgb(221, 238, 204);
-	height:0;
+	background: white;
+	height:0px;
 	overflow:hidden;
+	background: white;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-box-shadow: 0px 0px 0px 0px rgb(136, 136, 136);
+	-webkit-box-shadow: 0 0 0px 0px rgb(136, 136, 136);
+	box-shadow: 0 0 0px 0px rgb(136, 136, 136);	
 }
 .idBox li ul li{
 	padding:5px;
@@ -39,19 +53,15 @@
 	vertical-align:top;
 }
 .idBox li:hover ul{
-	
-	height:auto;
+	height:240px;
 	display:block;
-	background: rgb(221, 238, 204);
+	background: white;
+	-moz-box-shadow: 3px 3px 1px 1px rgb(136, 136, 136);
+	-webkit-box-shadow: 3px 3px 3px 1px rgb(136, 136, 136);
+	box-shadow: 3px 3px 3px 1px rgb(136, 136, 136);
 }
 .idBox li:hover{
-	background: rgb(221, 238, 204);
-	border-top-left-radius:2px;
-	border-top-right-radius:2px;
-	-moz-border-radius-topleft:2px;
-	-moz-border-radius-topright:2px;
-	webkit-border-top-left-radius:2px;
-	webkit-border-top-right-radius:2px;	
+	background: white;
 }
 
 a {
