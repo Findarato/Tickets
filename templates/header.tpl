@@ -44,8 +44,8 @@
 				<a class="right fontMain" href="#login" id="topperSignIn" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
 				{/if}
 					<!-- popup Userinfo box -->
-				<div style="position:absolute;right:0;">
-					<ul class="smallShadow color2 smoothAnimate" id="userPopup" >
+				<div class="roundAll4" style="position:absolute;right:0;">
+					<ul class="downRightShadow color2 fastAnimate roundAll8" id="userPopup" >
 						<li>
 							<a class="ticket_button ticketSprite ticket fakelink" id=topperNew><span>New Ticket</span></a>
 						</li>
