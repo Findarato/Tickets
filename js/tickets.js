@@ -674,16 +674,6 @@ jQuery(document).ready(function () {
 		//me.find(":first-child").trigger("click");
 	});
 
-	//
-	// Events that need to happen late in the page rendering
-	//
-	if ($("#topperUserInfo").text().length > 10) {
-		/*checkHash*/
-		if (localStorage.userId  > 0) {
-			$("#rss1").attr("href", "ticketsrss.php?id=" + localStorage.userId );
-			$("#rss2").attr("href", "ticketsrss.php?id=" + localStorage.userId  + "&bookmark=1");
-		}		
-	} //disables running with out being logged in
 
 	//
 	//Live items
@@ -750,15 +740,8 @@ jQuery(document).ready(function () {
 		me = $(this);
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		switch(me.attr("id")){
-			case "topperUserInfo":
-				if(me.attr("href")=="#"){
-					//me.toggleClass("colorMain-2")
-					$("#idBox").toggleClass("color2");
-					$("#userPopup").toggle();
-				}
-			break;
 			default:
-				$("#userPopup").hide();
+				
 				$("#idBox").removeClass("color2");
 				pageTracker._trackPageview(me.attr("href"));
 				setHash(me.attr("href"));
