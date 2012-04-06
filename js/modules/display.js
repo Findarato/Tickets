@@ -762,7 +762,7 @@ function loadUserPage(userId){
 		Tlb
 			.find("#userDepartment").css("white-space","nowrap")
 			.append(
-				$("<button style='width:150px;' id='ticketDepartment' name='ticketDepartment' data-select-items='"+JSON.stringify(data.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</button>")
+				$("<a style='width:150px;' id='ticketDepartment' href='#' name='ticketDepartment' data-select-items='"+JSON.stringify(data.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</a>")
 			)
 			.append(
 				$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
