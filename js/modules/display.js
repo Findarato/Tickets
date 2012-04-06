@@ -720,6 +720,7 @@ function loadUserPage(userId){
 						});
 					})
 					.append("<br><br>")
+					/*
 					.append(function(){
 						return $("<button>",{
 							"class":"button ticketPadding3",
@@ -728,6 +729,7 @@ function loadUserPage(userId){
 							html:"Change Theme"							
 						});
 					})
+					*/
 					.append(function(){
 						return $("<button>",{
 							"class":"button ticketPadding3",
