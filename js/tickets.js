@@ -531,11 +531,11 @@ jQuery(document).ready(function () {
 			return false;
 		});
 		
-			$("li").click(function(e) {
-			  e.preventDefault();
-			  $("li").removeClass("selected");
-			  $(this).addClass("selected");
-			});
+	$("li").click(function(e) {
+	  e.preventDefault();
+	  $("li").removeClass("selected");
+	  $(this).addClass("selected");
+	});
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
 		yep : '',
@@ -552,9 +552,6 @@ jQuery(document).ready(function () {
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
 	
 	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
-  	if(Params.UserId>0){
-	  	$("#topperUserInfo").attr({"href":"#userPage/"+Params.UserId});	
-  	}
 	
 	$("title").html($("title").html()+"  "+$("#version").html());
 	$("#Version").text($("#version").text()); //to make sure the version on tickets is always updated
@@ -741,11 +738,8 @@ jQuery(document).ready(function () {
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		switch(me.attr("id")){
 			default:
-				
-				$("#idBox").removeClass("color2");
 				pageTracker._trackPageview(me.attr("href"));
 				setHash(me.attr("href"));
-				
 			break;
 		}
 

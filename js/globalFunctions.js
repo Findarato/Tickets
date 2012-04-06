@@ -1,6 +1,6 @@
 /**
  * Started November 19, 2009
- * @author joe
+ * @author Joseph Harry
  */
 var uri = window.location.toString();
 uri = uri.replace(window.location.hash, "");
@@ -153,100 +153,6 @@ function stripslashes(str) {
     return str;
 }
 
-function addBr(obj) {
-    if (typeof obj != "object") {
-        obj = this;
-    }
-    obj.append("<br>");
-}
-
-function notice(title, body, sticky, ticketid,icon) {
-	return false;
-    var noticeClass,image;
-	if(icon){
-		image = icon;
-	}else{//we set a default icon
-		//image = "http://www.lapcat.org/lapcat/images/101-58-1.png";
-		image = "http://cdn1.lapcat.org/fugue/icons/bug.png";
-	}
-    var fontClass = "fontReverse";
-    
-    switch (title) {
-    case "Error":
-		noticeClass = "minimal";
-		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/exclamation.png";
-		fontClass = "fontMain";
-    break;
-    case "Debug":
-        noticeClass = "button-purple";
-		image = "http://cdn1.lapcat.org/fugue/bonus/icons-24/fire.png";
-		fontClass = "fontReverse";
-    break;
-    case "Notice":
-        noticeClass = "minimal";
-		image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/information.png";
-		fontClass = "fontMain";
-    break;
-    case "Achievement":
-        noticeClass = "minimal";
-		    fontClass = "fontMain";
-        image = "";
-    break;
-	case "New Response!":
-        noticeClass = "minimal";
-        image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/document-text.png";
-		fontClass = "fontMain";
-    break;
-	case "New Ticket!":
-        noticeClass = "minimal";
-		fontClass = "fontMain";
-        image = "http://cdn1.lapcat.org/fugue/bonus/icons-32/balloon.png";
-    break;
-    default:
-        noticeClass = "minimal ";
-        break;
-    }
-    var noticeBox = '<div class="notice fakelink ticketlink border-B-1 ui-corner-all box_transition " >'+ 
-			 '<div class="notice-body ' + noticeClass + '" style="width:auto"">'+ 
-				'<div style="float:left;width:40px;padding-right:5px;">'	+ 
-					'<img src="' + image + '" alt="" />'+
-				'</div>'+
-				 '<div style="float:left;width:200px;">'+
-					'<h3><font class="' + fontClass + '">' + title + '</font></h3>'+ 
-					'<font class="' + fontClass + '">' + body + '</font></div>' + '</div>' + '</div>';
-    if (sticky) {
-        if (parseInt(ticketid, 10) > 0) {
-            $(noticeBox).click(function () {
-                loadTicket(ticketid);
-            }).purr({
-                isSticky: true
-            });
-        } else {
-            $(noticeBox).removeClass("fakelink").purr({
-                isSticky: true
-            });
-        }
-    } else {
-        if (parseInt(ticketid, 10) > 0) {
-            $(notice).click(function () {
-                loadTicket(ticketid);
-            }).purr({
-                isSticky: false
-            });
-        } else {
-            $(noticeBox).removeClass("fakelink").purr({
-                isSticky: false
-            });
-        }
-    }
-    $(".close").addClass("color-E-1");
-}
-/**
- * 
- * o_data accepts compled objects as well as very basic ones
- * Basic:{0:["1","2","3","4","5","6","7"],1:["1","2","3","4","5","6","7"]};
- * Complex:
- */
 function buildTable(o_data,o_target){
 	var table = $("<div/>",{css:{"display":"table","width":"100%"}}).addClass("generated");
 	var lables = {};
@@ -625,58 +531,63 @@ function createSelect(selector,callback){
 	//alert(selector.html())
 	if(selector.html() == null){return false;}
 	callBackFn = callback ? callback : false;
-	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){
-		return false;
-	}
-	selector
-	.click(function(){
-		//alert("tst");
-		me = $(this);
-		selectData = $.parseJSON(me.attr('data-select-items'));
-		pos = me.offset();
-		pos.top = pos.top + me.outerHeight();
-		var ddData = $("<div/>");
-		var dropDown = $("<div/>",{id:"",css:{"position":"absolute","top":pos.top,"left":pos.left,"background-color":"#ECECEC"},"class":"fakeDropDown shadow"});
-		$("body")
-			.append(
-				dropDown
-					.append(function(){
-						$.each(selectData,function(key,item){
-							if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
-								if(typeof key == 'string'){
+	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){return false;}
+	
+	
+	var dropDown = $("<ul/>",{id:"",css:{"background-color":"#ECECEC"},"class":"shadow  dropDown"});
+	var container = $("<div/>",{"class":"button ddBox",css:{"position":"relative"}});
+	var newSelector = selector.clone();
+	selector.replaceWith(container);
+
+	dropDown
+		.append(function(){
+			selectData = $.parseJSON(selector.attr('data-select-items'));
+			ddData = $("<div/>");
+			$.each(selectData,function(key,item){
+				if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
+					if(typeof key == 'string'){
+					ddData
+						.append(
+							$("<li/>",{html:key,"class":"categorySelect"})
+						)
+					}
+					ddData
+						.append(function(){
+							$.each(item,function(key2,item2){
 								ddData
 									.append(
-										$("<div/>",{html:key,"class":"categorySelect"})
+										$("<li/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable"})
+										.click(function(){
+											selector.text(item2).val(key2);
+											if(callBackFn)callBackFn(key2);
+											if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+										})
 									)
-								}
-								ddData
-									.append(function(){
-										$.each(item,function(key2,item2){
-											ddData
-												.append(
-													$("<div/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable"})
-													.click(function(){
-														selector.text(item2).val(key2);
-														if(callBackFn)callBackFn(key2);
-														if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
-													})
-												)
-										});	
-									})
-							}else{// this is not an array
-								ddData
-									.append(
-										$("<div/>",{html:item,"class":"selectable"})
-											.click(function(){
-												selector.text(item).val(key);
-												if(callBackFn)callBackFn(key);
-												if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
-											})
-									)
-							}
+							});	
 						})
-					return ddData;
-				})
-			)
-	});
+				}else{// this is not an array
+					ddData
+						.append(
+							$("<li/>",{html:item,"class":"selectable"})
+								.click(function(){
+									selector.text(item).val(key);
+									if(callBackFn)callBackFn(key);
+									if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
+								})
+						)
+				}
+			})
+		return ddData.html();
+	})
+	container
+		.append(
+			$("<ul/>")
+				.append(
+					$("<li/>")
+						.html(newSelector)
+						.append(
+							dropDown
+						)
+				)
+		)
 }

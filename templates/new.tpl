@@ -4,7 +4,7 @@
 					<table border="0" cellpadding="0" cellspacing="0">
 						<tr>
 							<td style="width:150px;text-align:left;"><span class="font-X">Title of Ticket:</span></td>
-							<td style="text-align:left;"><input type="text" name="newTicketTitle" id="newTicketTitle"  class=" Ticketform " maxlength="35" /></td>
+							<td style="text-align:left;"><input type="text" name="newTicketTitle" id="newTicketTitle"  required="required" class=" Ticketform " maxlength="35" /></td>
 						</tr>
 						{if $features["Categories"] eq 1}
 						<tr class="">
@@ -27,7 +27,7 @@
 						{if $features["Due Date"] eq 1}
 						<tr>
 							<td style="text-align:left;"><span class="font-X">Due Date:</span></td>
-							<td style="text-align:left;"><input type="date" name="newTicketDueDate" id="newTicketDueDate" class=" Ticketform" maxlength="50" style="width:8em" value="" /></td>
+							<td style="text-align:left;"><input type="date" name="newTicketDueDate" id="newTicketDueDate" required="required" class=" Ticketform" maxlength="50" style="width:8em" value="" /></td>
 						</tr>
 						{/if}
 						{if $features["Location"] eq 1}
@@ -37,7 +37,7 @@
 						</tr>
 						{/if}
 						<tr>
-							<td colspan="2" style="text-align:left;"><span class="font-X">Ticket Description</span><br /> <textarea id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class=" Ticketform "></textarea></td>
+							<td colspan="2" style="text-align:left;"><span class="font-X">Ticket Description</span><br /> <textarea  required="required" id="newTicketDescription"  name="newTicketDescription" cols="30" rows="10" class=" Ticketform "></textarea></td>
 						</tr>
 						<tr>
 							<td>

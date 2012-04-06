@@ -18,6 +18,8 @@
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
+
+/* User info / sign in box code */
 .idBox,.signInBox{
 	text-align:right;
 	cursor:pointer;
@@ -26,6 +28,7 @@
 	height:0;
 	overflow:hidden;
 }
+
 .idBox li,.signInBox li{
 	cursor:pointer;
 	margin:0px;
@@ -38,31 +41,46 @@
 	text-align:left;
 	background: white;
 	height:0px;
-	overflow:hidden;
 	background: white;
 	border-radius:2px;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;
-	-moz-box-shadow: 0px 0px 0px 0px rgb(136, 136, 136);
-	-webkit-box-shadow: 0 0 0px 0px rgb(136, 136, 136);
-	box-shadow: 0 0 0px 0px rgb(136, 136, 136);	
+	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 .idBox li ul li{
+	background:rgb(255,255,255);
 	padding:5px;
 	width:100%;
 	vertical-align:top;
 }
-.idBox li:hover ul{
-	height:240px;
-	display:block;
-	background: white;
-	-moz-box-shadow: 3px 3px 1px 1px rgb(136, 136, 136);
-	-webkit-box-shadow: 3px 3px 3px 1px rgb(136, 136, 136);
-	box-shadow: 3px 3px 3px 1px rgb(136, 136, 136);
+.dropDown{
+	background:white;
+	position:absolute;
+	left:-9999px;
 }
-.idBox li:hover{
-	background: white;
+.ddBox li a:active + ul.dropDown, 
+.ddBox li a:focus + ul.dropDown, 
+.ddBox li ul.dropDown:hover,
+
+.ddBox a:active + ul.dropDown, 
+.ddBox a:focus + ul.dropDown, 
+.ddBox ul.dropDown:hover
+{
+    left: -50px;
+    background:rgb(255,255,255);
+    background:rgb(255,0,0);
 }
+
+.idBox .menuBottom{
+	vertical-align: top;
+	height:30px;
+}
+
+
+/* User info / sign in box code END */
+
 
 a {
 	text-decoration: none;
