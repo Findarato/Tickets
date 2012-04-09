@@ -537,6 +537,7 @@ function createSelect(selector,callback){
 	var dropDown = $("<ul/>",{id:"",css:{"background-color":"#ECECEC"},"class":"shadow  dropDown"});
 	var container = $("<div/>",{"class":"button ddBox",css:{"position":"relative"}});
 	var newSelector = selector.clone();
+	newSelector.click(function(){return false;})
 	selector.replaceWith(container);
 
 	dropDown
@@ -586,7 +587,11 @@ function createSelect(selector,callback){
 					$("<li/>")
 						.html(newSelector)
 						.append(
-							dropDown
+							function(){
+								alert(dropDown.width());
+								return dropDown;	
+							}
+							
 						)
 				)
 		)

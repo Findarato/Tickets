@@ -649,7 +649,7 @@ function loadUserPage(userId){
 	Params.Content.find("#ticketListtitle").html("UserPage for "+userId);
 	*/
 	var localUser = false;
-	if (localStorage.userId == userId){localUser = true;}
+	if (sessionStorage.userId == userId){localUser = true;}
 	
 	$("<div/>",{id:"userInfoBox","class":" ",css:{"width":"auto","height":"auto","display":"table","margin-bottom":"3px"}})
 		.append(
@@ -752,9 +752,9 @@ function loadUserPage(userId){
 
 	if(userId == undefined){
 		//alert("test")
-		userId = localStorage.userId;
+		userId = sessionStorage.userId;
 	}
-	$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
+	$.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
 		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.mdEmail+"?s=100&d=identicon&r=g)"});
 		if(data.userInfo.tickets.departmentName == undefined){
 			data.userInfo.tickets.departmentName = "None!";
@@ -771,7 +771,7 @@ function loadUserPage(userId){
 				Tlb.find("#ticketDepartment").addClass("errorPulse");
 			}
 			createSelect(Tlb.find("#ticketDepartment"),function(value){
-				$.getJSON("ajax/login.php",{"user_id":localStorage.userId,"department_id":value},function(data){
+				$.getJSON("ajax/login.php",{"user_id":sessionStorage.userId,"department_id":value},function(data){
 					if(data.error != "")
 						$("#userDepartmentStatus").text(data.error);
 					else
