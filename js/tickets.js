@@ -118,7 +118,7 @@ function checkHash() {
 		case "#ticketList":
 			//alert("I tried to load the ticket list")
 			loadLocalStorage();
-			if(localStorage.userId >1){
+			if(sessionStorage.userId >1){
 				changeArea("tickets");
 				switch (hash[2]) {
 					case "page": // ticket with a page number selected
@@ -158,15 +158,15 @@ function checkHash() {
 			break;
 		case "#userPage":
 			if(hash[1] == 0 || hash[1] == ""){ // There is some strange bug we need to fix, but lets just call it good for now
-				if(localStorage.userId > 0){ // lets just be sure we are not causing more trouble
-					loadUserPage(localStorage.userId); // just load the local user's info page
+				if(sessionStorage.userId > 0){ // lets just be sure we are not causing more trouble
+					loadUserPage(sessionStorage.userId); // just load the local user's info page
 				}
 			}else{ // this is when everything works properly.
 				loadUserPage(hash[1]); // load the userpage that is requested.
 			}
 		break;
 		case "#login":
-			if(localStorage.userId >0){
+			if(sessionStorage.userId >0){
 				setHash("#ticketList/all_tickets");
 			}else{loadLoginPage();}
 		break;
@@ -195,7 +195,7 @@ function checkHash() {
 		break;		
 		}
 	} else {
-		if(localStorage.userId > 0 || localStorage.userId==null || localStorage.userId==undefined || localStorage.userId=="undefined"){
+		if(sessionStorage.userId > 0 || sessionStorage.userId==null || sessionStorage.userId==undefined || sessionStorage.userId=="undefined"){
 			setHash("#ticketList/all_tickets");
 			/*checkHash*/
 		}else{
@@ -208,7 +208,7 @@ function checkHash() {
 function updateFavorites(){
 	$.getJSON("ajax/bookmark.php",{"list":"1"},function(data){
 		Params.FavoriteObject = data.favIds;
-		localStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
+		sessionStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
 	});
 }
 function checkResponse(json) {
@@ -367,7 +367,7 @@ function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
 function loadLoginPage(){ 
-	//alert("login local: "+localStorage.userId)
+	//alert("login local: "+sessionStorage.userId)
 	var loginNewBox = Params.Content.find("#ticketLoginList");
 	if(loginNewBox.html()==null){
 		Params.Content.load("templates/login.tpl");
@@ -399,15 +399,6 @@ function loadLoginPage(){
 }
 function loadLocalStorage(clear){
 
-	//Clear every version update
-	if(localStorage.getItem("ticketsVersion") != $("#version").html()){ //Lets just go ahead and clear out the localStorage every time there is a version change.
-		localStorage.clear();
-		localStorage.setItem("ticketsVersion",$("#version").html());
-		loadLocalStorage();
-		return; 
-	}
-
-
 	//Features Enabled
 	if(!sessionStorage.features || sessionStorage.features == "undefined" ){
 		$.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
@@ -416,43 +407,43 @@ function loadLocalStorage(clear){
 	}
 
 	// Userid
-	if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
+	if(!sessionStorage.userId || sessionStorage.userId == 0 || typeof sessionStorage.userId=="undefined" || typeof sessionStorage.userId=="string"){// something broke lets take care of it
 		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
-			localStorage.setItem("userId",data.user_id);
+			sessionStorage.setItem("userId",data.user_id);
 		});	
 	}
  
 	// Favorites 
-	if(!localStorage.getItem("ticketsFavorite") || localStorage.getItem("ticketsFavorite") =="false" || localStorage.getItem("ticketsFavorite") == "undefined"){
-		updateFavorites(); //Update localStorage in a centeral way so that it can be done in other places
+	if(!sessionStorage.getItem("ticketsFavorite") || sessionStorage.getItem("ticketsFavorite") =="false" || sessionStorage.getItem("ticketsFavorite") == "undefined"){
+		updateFavorites(); //Update sessionStorage in a centeral way so that it can be done in other places
 	}else{
-    	Params.FavoriteObject = $.parseJSON(localStorage.getItem("ticketsFavorite"));
+    	Params.FavoriteObject = $.parseJSON(sessionStorage.getItem("ticketsFavorite"));
 	}
   	//Categories
-	if(!localStorage.getItem("ticketsCategories")){
+	if(!sessionStorage.getItem("ticketsCategories")){
     	$.getJSON("ajax/get_categories.php",{},function(data){
-      		localStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
+      		sessionStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
       		Params.Categories = data.categories;
     	});
   	}else{
-    	Params.Categories = $.parseJSON(localStorage.getItem("ticketsCategories"));
+    	Params.Categories = $.parseJSON(sessionStorage.getItem("ticketsCategories"));
   	}
 	
 	//Projects for bugs
-  	if(!localStorage.getItem("ticketsProjects")){
+  	if(!sessionStorage.getItem("ticketsProjects")){
     	$.getJSON("ajax/get_projects.php",{},function(data){
-      		localStorage.setItem("ticketsProjects",JSON.stringify(data.projects));
+      		sessionStorage.setItem("ticketsProjects",JSON.stringify(data.projects));
      	 	Params.Projects = data.projects;
     	});
   	}else{
-    	Params.Projects = $.parseJSON(localStorage.getItem("ticketsProjects"));
+    	Params.Projects = $.parseJSON(sessionStorage.getItem("ticketsProjects"));
   	}
 	//User info
-	if(!localStorage.userInfo && !localStorage.userInfo){
-		$.getJSON("ajax/get_userinfo.php",{"userId":localStorage.userId},function(data){
+	if(!sessionStorage.userInfo && !sessionStorage.userInfo){
+		$.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
 			Params.userInfo = data.userInfo;
 		//	alert(JSON.stringify(data.userInfo))
-			localStorage.setItem("userInfo",JSON.stringify(data.userInfo));
+			sessionStorage.setItem("userInfo",JSON.stringify(data.userInfo));
 		});	
 	}
 
@@ -478,7 +469,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		checkResponse(data);
 		localStorage.userId = data.userid;
 		if(localStorage.tickets = true){
-			localStorage.setItem("userId",data.userid);
+			sessionStorage.setItem("userId",data.userid);
 		}
 		
 		$("#newTicketUser_id").val(Params.UserId);
@@ -530,12 +521,12 @@ jQuery(document).ready(function () {
 			localStorage.clear(); // Lets just clear the localStorage to clear out all of the data
 			return false;
 		});
-		
 	$("li").click(function(e) {
 	  e.preventDefault();
 	  $("li").removeClass("selected");
 	  $(this).addClass("selected");
 	});
+
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
 		yep : '',
@@ -546,8 +537,8 @@ jQuery(document).ready(function () {
 	//localStorage.clear();
 	loadLocalStorage();
 
-	if(localStorage.userId > 0){ // Lets make sure that there is a user 
-		uI = $.parseJSON(localStorage.userInfo);
+	if(sessionStorage.userId > 0){ // Lets make sure that there is a user 
+		uI = $.parseJSON(sessionStorage.userInfo);
 	}
 	Params.Content = $("#content"); //lets stop searching for it a hundred times
 	
@@ -647,7 +638,7 @@ jQuery(document).ready(function () {
 						if(data.error==""){	
 						  setHash("#ticket/"+data.newTicketId); 
 						  loadTicket(data.newTicketId);
-						  localStorage.removeItem("TicketId"+data.newTicketId);
+						  sessionStorage.removeItem("TicketId"+data.newTicketId);
 						}else{}
 					});
 					$(".Ticketform").attr({
@@ -678,7 +669,7 @@ jQuery(document).ready(function () {
 	
 	//Ticket display live items
 	$(".actionButtons").live("click", function () {
-		if(localStorage.userId == 0){
+		if(sessionStorage.userId == 0){
 			setHash("#login");
     		/*checkHash*/
     		return;
@@ -690,7 +681,7 @@ jQuery(document).ready(function () {
 			queryObj = {type:"close",ticket_id: Params.TicketId};
 			var closeResponse = prompt("Why are you closing this ticket","");
 			if (closeResponse!=null && closeResponse!=""){
-				$.post(uri + "/ajax/add_reply.php", {"title":"Ticket Finished","description":closeResponse,"ticket_id":Params.TicketId,"type":"new","user_id":localStorage.userId},function(){});
+				$.post(uri + "/ajax/add_reply.php", {"title":"Ticket Finished","description":closeResponse,"ticket_id":Params.TicketId,"type":"new","user_id":sessionStorage.userId},function(){});
 			}else{
 				return;
 			}	
@@ -699,7 +690,7 @@ jQuery(document).ready(function () {
 		$.getJSON(uri + "ajax/tickets.php", queryObj,
 		function (data) {
 			checkResponse(data);
-			localStorage.removeItem("TicketId"+Params.TicketId);
+			sessionStorage.removeItem("TicketId"+Params.TicketId);
 			loadTicket(Params.TicketId);
 		});
 	});
