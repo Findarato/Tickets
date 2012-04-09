@@ -12,7 +12,6 @@ body,html {
 	height:100%;
 	color:#000;
 	background-color:#FFF;
-	overflow:hidden;
 }
 a,a:hover,a:visited,a:focus { color: #5F3E12; text-decoration:none; font-weight:bold;}
 a:hover{text-decoration: underline;}
@@ -152,9 +151,9 @@ h3 {
 	box-shadow: 0 0 1px 1px rgb(136, 136, 136);
 }
 .downRightShadow{
-	-moz-box-shadow: 3px 3px 1px 1px rgb(136, 136, 136);
-	-webkit-box-shadow: 0 0 1px 1px rgb(136, 136, 136);
-	box-shadow: 0 0 1px 1px rgb(136, 136, 136);
+	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 

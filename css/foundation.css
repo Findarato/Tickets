@@ -40,14 +40,11 @@
 	width:250px;
 	text-align:left;
 	background: white;
-	height:0px;
 	background: white;
 	border-radius:2px;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;
-	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+
 }
 .idBox li ul li{
 	background:rgb(255,255,255);
@@ -62,13 +59,9 @@
 }
 .ddBox li a:active + ul.dropDown, 
 .ddBox li a:focus + ul.dropDown, 
-.ddBox li ul.dropDown:hover,
-
-.ddBox a:active + ul.dropDown, 
-.ddBox a:focus + ul.dropDown, 
-.ddBox ul.dropDown:hover
+.ddBox li ul.dropDown:hover
 {
-    left: -50px;
+    left: -80px;
     background:rgb(255,255,255);
     background:rgb(255,0,0);
 }
@@ -135,11 +128,7 @@ a:hover {
 	-o-transition: all .5s ease-in;
 	-webkit-transition: all .5s ease-out;
 }
-.small-shadow-black-1 {
-	box-shadow: 2px 2px 5px rgba(0,0,0,.60);
-	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
-	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,.60);
-}
+
 .fuzzyoutline, input:focus {
 	box-shadow: 0 0 6px rgba(255,0,0,1);
 	-webkit-box-shadow: 0 0 6px rgba(255,0,0,1);
