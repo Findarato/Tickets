@@ -460,18 +460,15 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 			.html(data.firstname + " " + data.lastname ).attr("href","#");
 		
 		if($("#headerAvatar").html() != null){
-			$("#headerAvatar").css("background-color","#F00").attr("src","http://www.gravatar.com/avatar/"+localStorage.mdEmail+"?s=24&d=identicon&r=g");	
+			$("#headerAvatar").css("background-color","#F00").attr("src","http://www.gravatar.com/avatar/"+sessionStorage.mdEmail+"?s=24&d=identicon&r=g");	
 		}else{
 			$("#topperUserInfo").append(
-				$("<img/>").attr("src","http://www.gravatar.com/avatar/"+localStorage.mdEmail+"?s=24&d=identicon&r=g")
+				$("<img/>").attr("src","http://www.gravatar.com/avatar/"+sessionStorage.mdEmail+"?s=24&d=identicon&r=g")
 			)	
 		}
 		checkResponse(data);
-		localStorage.userId = data.userid;
-		if(localStorage.tickets = true){
-			sessionStorage.setItem("userId",data.userid);
-		}
-		
+		sessionStorage.userId = data.userid;
+	
 		$("#newTicketUser_id").val(Params.UserId);
 		if (data.departmentname === "" || data.departmentname == "None!") {
 			setHash("#userPage/"+data.userid);
