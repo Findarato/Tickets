@@ -534,10 +534,10 @@ function createSelect(selector,callback){
 	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){return false;}
 	
 	
-	var dropDown = $("<ul/>",{id:"","class":"downRightShadow dropDown roundAll8"});
-	var container = $("<div/>",{"class":"selectBox roundAll8",css:{"position":"relative"}});
+	var dropDown = $("<ul/>",{id:"","class":"downRightShadow dropDown"});
+	var container = $("<div/>",{"class":"selectBox ",css:{"position":"relative"}});
 	var newSelector = selector.clone();
-	newSelector.click(function(){return false;})
+	newSelector.click(function(){return false;}).css({"padding":"5px"})
 	selector.replaceWith(container);
 
 	dropDown
@@ -557,7 +557,7 @@ function createSelect(selector,callback){
 							$.each(item,function(key2,item2){
 								ddData
 									.append(
-										$("<li/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable fastAnimate"})
+										$("<li/>",{html:item2,css:{"padding":"1px 1px 1px 1px"},"class":"selectable fastAnimate"})
 										.click(function(){
 											selector.text(item2).val(key2);
 											if(callBackFn)callBackFn(key2);
@@ -569,7 +569,7 @@ function createSelect(selector,callback){
 				}else{// this is not an array
 					ddData
 						.append(
-							$("<li/>",{html:item,"class":"selectable fastAnimate"})
+							$("<li/>",{html:item,css:{"padding":"1px 1px 1px 1px"},"class":"selectable fastAnimate"})
 								.click(function(){
 									selector.text(item).val(key);
 									if(callBackFn)callBackFn(key);
@@ -581,14 +581,19 @@ function createSelect(selector,callback){
 		return ddData.html();
 	})
 	var conPos = container.position();
+	//alert(newSelector.width())
+	//alert(newSelector.outerWidth())
 	container
-		.css({"display":"inline-block","width":"130px"})
+		.css({"display":"inline-block"})
 		.append(
 			$("<ul/>")
+				.css({"width":newSelector.outerWidth()})
 				.html(
 					$("<li/>")
 						.html(newSelector.css({"display":"block","width":"100%"}))
-						.append(dropDown)
+						.append(dropDown
+							.css({"display":"block","width":"100%"})
+							)
 				)
 		)
 }
