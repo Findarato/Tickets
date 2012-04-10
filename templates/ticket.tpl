@@ -34,7 +34,7 @@
 	</div>
 	<div style="display:table;width:100%">
 		<!--Main Content -->
-		<div class="ticketSideRight ticket-divider colorWhite-1" style="vertical-align:top;width:300px">
+		<div class="ticketSideRight ticket-divider" style="vertical-align:top;width:300px">
 			<!-- Left Side ticket information -->
 			<div id="rightSideFloater">
 				<div style="display:none;" class="closedTicket" id="ticketClosedOn">
@@ -57,11 +57,6 @@
 						Project
 					</div>
 				</div>
-				<!--
-				<div class="fontMain2 " id="ticketCreatedBy" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
-				Created By
-				</div>
-				-->
 				<div id="assignedToBox" style="display:none;">
 					<div class="fontMain2" id="ticketAssignedTo" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Assigned To
@@ -127,9 +122,10 @@
 		</div>
 		<div class="ticketSideRight" style="padding:3px">
 			<!-- Right Side ticket body and Replies -->
-			<div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" class="border-all-B-1 WhitetoLightBlue">
+			<div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" class="mainBorder60">
 				<!-- Body of the ticket -->
-				<div style="display:table-row;width:100%">
+				<div class="" style="display:table-row;width:100%">
+					<div class="color1toWhite " style="display:table-cell; padding:0px; width:10px;vertical-align: top"></div>
 					<div style="display:table-cell; padding:6px; width:24px;vertical-align: top">
 						<div id="replyIcon" class="" style="width:32px;height:32px;"></div>
 					</div>
@@ -142,7 +138,7 @@
 					</div>
 				</div>
 			</div><!-- End Body of the ticket -->
-			<div class="colorWhite-1 " id="replyareabody" style=""></div>
+			<div class="" id="replyareabody" style=""></div>
 			<div style="width:100%;margin-top:10px" id="bottomReplyArea">
 				<div class="color2" style="width:auto;height:90px;position:relative;" title="Reply Box">
 					<div id="1replyareabody" style="padding:3px;">
