@@ -534,8 +534,8 @@ function createSelect(selector,callback){
 	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){return false;}
 	
 	
-	var dropDown = $("<ul/>",{id:"",css:{"background-color":"#ECECEC"},"class":"shadow  dropDown"});
-	var container = $("<div/>",{"class":"button ddBox",css:{"position":"relative"}});
+	var dropDown = $("<ul/>",{id:"","class":"downRightShadow dropDown roundAll8"});
+	var container = $("<div/>",{"class":"selectBox roundAll8",css:{"position":"relative"}});
 	var newSelector = selector.clone();
 	newSelector.click(function(){return false;})
 	selector.replaceWith(container);
@@ -557,7 +557,7 @@ function createSelect(selector,callback){
 							$.each(item,function(key2,item2){
 								ddData
 									.append(
-										$("<li/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable"})
+										$("<li/>",{html:item2,css:{"padding-left":"10px"},"class":"selectable fastAnimate"})
 										.click(function(){
 											selector.text(item2).val(key2);
 											if(callBackFn)callBackFn(key2);
@@ -569,7 +569,7 @@ function createSelect(selector,callback){
 				}else{// this is not an array
 					ddData
 						.append(
-							$("<li/>",{html:item,"class":"selectable"})
+							$("<li/>",{html:item,"class":"selectable fastAnimate"})
 								.click(function(){
 									selector.text(item).val(key);
 									if(callBackFn)callBackFn(key);
@@ -580,19 +580,15 @@ function createSelect(selector,callback){
 			})
 		return ddData.html();
 	})
+	var conPos = container.position();
 	container
+		.css({"display":"inline-block","width":"130px"})
 		.append(
 			$("<ul/>")
-				.append(
+				.html(
 					$("<li/>")
-						.html(newSelector)
-						.append(
-							function(){
-								alert(dropDown.width());
-								return dropDown;	
-							}
-							
-						)
+						.html(newSelector.css({"display":"block","width":"100%"}))
+						.append(dropDown)
 				)
 		)
 }
