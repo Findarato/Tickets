@@ -537,7 +537,7 @@ function createSelect(selector,callback){
 	var dropDown = $("<ul/>",{id:"","class":"downRightShadow dropDown"});
 	var container = $("<div/>",{"class":"selectBox ",css:{"position":"relative"}});
 	var newSelector = selector.clone();
-	newSelector.click(function(){return false;}).css({"padding":"5px"})
+	newSelector.click(function(){return false;}).css({"padding":"5px"}).attr({"tabindex":Math.floor(Math.random()*11)})
 	selector.replaceWith(container);
 
 	dropDown

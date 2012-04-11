@@ -39,7 +39,7 @@
 		<ul>
 			<li>
 				{if isset($firstname)} 
-				<a class="right fontMain" href="#" id="topperUserInfo" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname} <img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="vertical-align:middle;height:24px;width:24px;border:none;"> </a>
+				<a class="right fontMain" href="#" id="topperUserInfo" tabindex="0" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">{$firstname} {$lastname} <img id="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=identicon&r=g" style="vertical-align:middle;height:24px;width:24px;border:none;"> </a>
 				{else}
 				<a class="right fontMain" href="#login" id="topperSignIn" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
 				{/if}
