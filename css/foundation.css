@@ -67,8 +67,8 @@
 }
 
 /* fake dropdown menu*/
-.selectBox li button:active + ul.dropDown, 
-.selectBox li button:focus + ul.dropDown, 
+.selectBox li a:active + ul.dropDown, 
+.selectBox li a:focus + ul.dropDown,
 .selectBox li ul.dropDown:hover
 {
     left: 0;
