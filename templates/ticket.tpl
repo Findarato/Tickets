@@ -85,17 +85,6 @@
 				<!--		<span id="replyareaTitle" style="margin-left:10px;margin:5px;" title="Reply Title">Replies (0)</span> -->
 				<!-- Modification Buttons -->
 				<div class="" id="ticketFooterArea" style="height:37px;overflow:hidden; ">
-					<div class="smoothAnimate" id="reassignBox" style="overflow:hidden;width:100%;height:0px">
-						<div style="overflow:hidden;height:auto;padding:3px;">
-							<div class="textLeft" style='height:auto;'>
-								<span>Assign:</span>
-								<button style="width:150px;position:relative;" id="TicketAssign" name="TicketAssign" data-select-items='{json_encode($assign)}' class="selectButton">Select</button>
-								<button class="remove" id="ReAssignCancelButton" style="display:inline-block"></button>
-								<button class="check" id="reAssignAcceptButton" class="" style="display:inline-block"></button>
-							</div>
-						</div>
-					</div>
-					
 					<div id="buttonBox" style="">
 						<button class="openTicket button" id="reAssignButton" style="width:auto;">
 							<span class="">Reassign</span>
@@ -117,6 +106,18 @@
 						</button>
 					</div>
 				</div>
+					<div class="smoothAnimate" id="reassignBox" style="width:100%;height:30px">
+						<div style="height:auto;padding:3px;">
+							<div class="textLeft" style='height:auto;'>
+								<span>Assign:</span>
+								<a style="width:150px;position:relative;" id="TicketAssign" name="TicketAssign" data-select-items='{json_encode($assign)}' class="selectButton">Select</a>
+								<button class="remove" id="ReAssignCancelButton" style="display:inline-block"></button>
+								<button class="check" id="reAssignAcceptButton" class="" style="display:inline-block"></button>
+							</div>
+						</div>
+					</div>
+
+
 				<div id="pageAnator" style=""></div>
 			</div>
 		</div>

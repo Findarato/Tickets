@@ -525,64 +525,61 @@ var MD5 = function (string) {
 
         return temp.toLowerCase();
 }
-function createSelect(selector,callback){
+function createSelect(selector,callback,css){
 	
 	var callBackFn = "";
 	//alert(selector.html())
 	if(selector.html() == null){return false;}
 	callBackFn = callback ? callback : false;
 	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){return false;}
-	
+	selectorCss = css ? css : false;
 	
 	var dropDown = $("<ul/>",{id:"","class":"downRightShadow dropDown"});
 	var container = $("<div/>",{"class":"selectBox ",css:{"position":"relative"}});
 	var newSelector = selector.clone();
-	newSelector.click(function(){return false;}).css({"padding":"5px"}).attr({"tabindex":Math.floor(Math.random()*11)})
+	if(selectorCss){
+		container.css(selectorCss)
+	}
+	newSelector.click(function(){return false;}).attr({"tabindex":Math.floor(Math.random()*11)})
 	selector.replaceWith(container);
-
-	dropDown
-		.append(function(){
-			selectData = $.parseJSON(selector.attr('data-select-items'));
-			ddData = $("<div/>");
-			$.each(selectData,function(key,item){
-				if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
-					if(typeof key == 'string'){
-					ddData
-						.append(
-							$("<li/>",{html:key,"class":"categorySelect"})
-						)
-					}
-					ddData
-						.append(function(){
-							$.each(item,function(key2,item2){
-								ddData
-									.append(
-										$("<li/>",{html:item2,css:{"padding":"1px 1px 1px 1px"},"class":"selectable fastAnimate"})
-										.click(function(){
-											selector.text(item2).val(key2);
-											if(callBackFn)callBackFn(key2);
-											if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
-										})
-									)
-							});	
+	
+	
+	selectData = $.parseJSON(selector.attr('data-select-items'));
+	$.each(selectData,function(key,item){
+			if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
+			if(typeof key == 'string'){
+			dropDown
+				.append(
+					$("<li/>",{html:key,"class":"categorySelect"})
+				)
+			}
+			$.each(item,function(key2,item2){
+				dropDown
+					.append(
+						$("<li/>",{"data-item":item,html:item2,css:{"padding":"1px 1px 1px 10px"},"class":"selectable fastAnimate"})
+						.click(function(){
+							newSelector.text(item2);
+							$(this).attr("data-value",key2)
+							if(callBackFn)callBackFn(key2);
 						})
-				}else{// this is not an array
-					ddData
-						.append(
-							$("<li/>",{html:item,css:{"padding":"1px 1px 1px 1px"},"class":"selectable fastAnimate"})
-								.click(function(){
-									selector.text(item).val(key);
-									if(callBackFn)callBackFn(key);
-									if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();}
-								})
-						)
-				}
-			})
-		return ddData.html();
+					)
+			});	
+
+		}else{// this is not an array
+			dropDown
+				.append(
+					$("<li/>",{"data-item":item,html:item,css:{"padding":"1px 1px 1px 1px"},"class":"selectable fastAnimate"})
+						.click(function(){
+							if(callBackFn)callBackFn(key);
+							$(this).attr("data-value",key)
+							newSelector.text(item);
+							//alert($(this).attr("data-item"))
+						})
+				)
+		}
 	})
+
 	var conPos = container.position();
-	//alert(newSelector.width())
-	//alert(newSelector.outerWidth())
 	container
 		.css({"display":"inline-block"})
 		.append(
@@ -591,8 +588,9 @@ function createSelect(selector,callback){
 				.html(
 					$("<li/>")
 						.html(newSelector.css({"display":"block","width":"100%"}))
-						.append(dropDown
-							.css({"display":"block","width":"100%"})
+						.append(
+							dropDown
+								.css({"display":"block","width":"100%"})
 							)
 				)
 		)
