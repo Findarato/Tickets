@@ -175,9 +175,10 @@ h3 {
 	box-shadow: 0 0 1px 1px rgb(136, 136, 136);
 }
 .downRightShadow{
-	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+	-moz-box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.12);
+	-webkit-box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.12);
+	-ms-box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.12);
+	box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 .dropDown{

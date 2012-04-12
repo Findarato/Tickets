@@ -380,15 +380,18 @@ function loadTicketBody(inputData, container) {
   //
   // Reassign button 
   //	 
-   
+   	createSelect($("#TicketAssign"),function(id){})
+	 /*
 	 $('#reAssignButton').click(function(){
 	   $("#reassignBox").css("height","30px");
-	   createSelect($("#TicketAssign"),function(id){})
+	   
 	 });
 	 $("#ReAssignCancelButton").click(function(){
     $("#reassignBox").css({"height":"0px"});
     
    });
+   
+   */
   $('#reAssignAcceptButton').click(function () {
     var reassignVal = $("#TicketAssign").val();
     $("#reassignBox").css({"height":"0px"});
@@ -485,12 +488,12 @@ function loadTicketList(pageNumber,queryObj) {
 		displayTable = $("<div/>",{"id":"ticketListTable","class":" fontMain",css:{"width":"100%","position":"relative"}});
 		displayTable
 			.append(
-				$("<nav/>",{css:{"height":"20px;"}})
+				$("<nav/>",{css:{"height":"20px","position":"relative","margin-bottom":"5px"}})
 					.append(function(){
 						var selectValue = "Sort";
 						if(hash[2])
 							selectValue = hash[2];		
-						return $("<button/>",{html:selectValue,id:"tableSort","class":"selectButton pencil fontBold",css:{"width":"100px","right":"10px","position":"relative"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
+						return $("<a/>",{html:selectValue,id:"tableSort","class":"selectButton ",css:{"width":"120px"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
 					})
 					.append(
 						$("<div/>",{"id":"subAreaBar",css:{"display":"inline-block"}})
@@ -510,7 +513,7 @@ function loadTicketList(pageNumber,queryObj) {
 				}
 				setHash(newHash);
 				pageTracker._trackPageview(newHash);
-			});
+			},{"position":"absolute","right":"10px"});
 	}
 	Tlb.html(displayTable) // lets make sure something gets on the page
 	var tableBody = displayTable.find("#tableBody"); 
