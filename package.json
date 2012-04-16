@@ -1,0 +1,9 @@
+{
+	"name":"Tickets",
+	"description";"Ticket tracking software for trouble and but reporting",
+	"version":"3.9",
+	"dependencies":{
+		"jquery":"~1.7.2"
+	}
+
+}
