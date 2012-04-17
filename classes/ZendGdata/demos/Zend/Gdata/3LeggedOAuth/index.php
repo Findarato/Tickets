@@ -40,7 +40,8 @@ $APP_NAME = 'google-ZendGData3LOSample-1.0';
 $APP_URL = getAppURL();
 $scopes = array(
     'https://docs.google.com/feeds/',
-    'http://spreadsheets.google.com/feeds/'
+    'http://spreadsheets.google.com/feeds/',
+    'https://www.google.com/m8/feeds/contacts/'
 );
 
 // Setup OAuth consumer. Thes values should be replaced with your registered
