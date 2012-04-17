@@ -110,7 +110,7 @@
 						<div style="height:auto;padding:3px;">
 							<div class="textLeft" style='height:auto;'>
 								<span>Assign:</span>
-								<a style="width:150px;position:relative;" id="TicketAssign" name="TicketAssign" data-select-items='{json_encode($assign)}' class="selectButton">Select</a>
+								<a style="width:150px;position:relative;" id="ticketAssign" name="ticketAssign" data-value="-1" data-select-items='{json_encode($assign)}' class="selectButton">Select</a>
 								<button class="remove" id="ReAssignCancelButton" style="display:inline-block"></button>
 								<button class="check" id="reAssignAcceptButton" class="" style="display:inline-block"></button>
 							</div>

@@ -299,11 +299,10 @@ function loadTicketBody(inputData, container) {
         default:alert(this.tagName);break;
       }
     });
-    $.getJSON("/ajax/edit_ticket.php",values,function(data){
-      localStorage.removeItem("TicketId"+data.modifiedTicket);
-      loadResponsesBody(data.modifiedTicket, $("#replyareabody"), 0);
-     // ticketBodyBox.html(data.modifiedTicketBody);
-    });
+    	$.getJSON("/ajax/edit_ticket.php",values,function(data){
+			sessionStorage.removeItem("TicketId"+data.modifiedTicket);
+	      	loadResponsesBody(data.modifiedTicket, $("#replyareabody"), 0);
+	    });
 	});
   $("#modifyButton").click(function(){
     $(this).hide();
@@ -332,13 +331,6 @@ function loadTicketBody(inputData, container) {
       myParent.html(myParent.data("prevValue"));
     });    
   });
-  if (data.status.lock == 1) {
-		$("#Holdlink").hide();
-		$("#unHoldlink").show();
-	} else {
-		$("#Holdlink").show();
-		$("#unHoldlink").hide();
-	}
 	if (data.closed_on !== null) { //All closed tickets
 	    container
        .find("#ticketClosedOnDate")
@@ -380,7 +372,7 @@ function loadTicketBody(inputData, container) {
   //
   // Reassign button 
   //	 
-   	createSelect($("#TicketAssign"),function(id){})
+   	createSelect($("#ticketAssign"),function(id){})
 	 /*
 	 $('#reAssignButton').click(function(){
 	   $("#reassignBox").css("height","30px");
@@ -393,18 +385,18 @@ function loadTicketBody(inputData, container) {
    
    */
   $('#reAssignAcceptButton').click(function () {
-    var reassignVal = $("#TicketAssign").val();
-    $("#reassignBox").css({"height":"0px"});
+    //$("#reassignBox").css({"height":"0px"});
+    
     $.getJSON(uri + "ajax/tickets.php", {
       "type": "reassign",
-      "ticket_id": Params.TicketId,
-      "user_id": reassignVal
+      "ticket_id": sessionStorage.currentTicket,
+      "user_id": $("#ticketAssign").attr('data-value')
     }, function (data) {
       $("#ticketAssignedToDisplay").html($("#TicketAssign option:selected").text());
-      localStorage.removeItem("TicketId"+ticketId);
-      checkResponse(data);
+      sessionStorage.removeItem("TicketId"+ticketId);
+      //checkResponse(data);
       if (data.error.length > 1) {} else {
-        $("#imgReassigned").show();
+		$("#imgReassigned").show();
         loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
       }
     });

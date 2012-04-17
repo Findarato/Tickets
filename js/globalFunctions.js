@@ -536,7 +536,11 @@ function createSelect(selector,callback,css){
 	
 	var dropDown = $("<ul/>",{id:"","class":"downRightShadow dropDown"});
 	var container = $("<div/>",{"class":"selectBox ",css:{"position":"relative"}});
+	
 	var newSelector = selector.clone();
+	var selectData = $.parseJSON(newSelector.attr('data-select-items'));
+	newSelector.attr('data-select-items',"parsed");
+	
 	if(selectorCss){
 		container.css(selectorCss)
 	}
@@ -544,22 +548,22 @@ function createSelect(selector,callback,css){
 	selector.replaceWith(container);
 	
 	
-	selectData = $.parseJSON(selector.attr('data-select-items'));
+
 	$.each(selectData,function(key,item){
-			if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
-			if(typeof key == 'string'){
-			dropDown
-				.append(
-					$("<li/>",{html:key,"class":"categorySelect"})
-				)
-			}
+		if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
+			if(typeof key == 'string'){ // stick in the header
+				dropDown
+					.append(
+						$("<li/>",{html:key,"class":"categorySelect"})
+					)
+				}
 			$.each(item,function(key2,item2){
 				dropDown
 					.append(
 						$("<li/>",{"data-item":item,html:item2,css:{"padding":"1px 1px 1px 10px"},"class":"selectable fastAnimate"})
 						.click(function(){
 							newSelector.text(item2);
-							$(this).attr("data-value",key2)
+							newSelector.attr("data-value",key2)
 							if(callBackFn)callBackFn(key2);
 						})
 					)
@@ -571,9 +575,8 @@ function createSelect(selector,callback,css){
 					$("<li/>",{"data-item":item,html:item,css:{"padding":"1px 1px 1px 1px"},"class":"selectable fastAnimate"})
 						.click(function(){
 							if(callBackFn)callBackFn(key);
-							$(this).attr("data-value",key)
+							newSelector.attr("data-value",key)
 							newSelector.text(item);
-							//alert($(this).attr("data-item"))
 						})
 				)
 		}
