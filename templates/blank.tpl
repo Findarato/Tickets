@@ -2,7 +2,7 @@
 	<div class="" id="" >
       <div style="padding:5px;margin:5px; ; overflow:auto;position:relative;background-color:#FFF" class="roundAll4 border-all-A-1">
       <span style="font-size: 175%; line-height: normal;" id="newestVersion" title="Ticket Update Title">Ticket Update XXVI</span>
-      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.9.0.r900</span>
+      <span style="font-size: 90%; line-height: normal;" id="version" title="Ticket Update version number">v.3.9.0</span>
       <br><span style="font-size: 150%; line-height: normal;">Bug Fixes</span>
       <ol>
 		<li>Fixed a bug relating to the admin section not showing any options other than user edit</li>
@@ -12,6 +12,7 @@
 		<li>Tickets was not working very well at all with some small screen devices (Smart Phones) and this has been mostly resolved. This is something that will forever be tweeked as new features get added and the layout improves</li>
 		<li>The login page should now always show when you click the login link at the top of the page</li>
 		<li>When you log into tickets after first viewing a ticket it will now take you back to that ticket.  Barring you do not close the window between.</li>
+		<li>Fixed the bugs relating to the custon drop down boxes.  They now opperate properly.  This also includes the user dropdown.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>

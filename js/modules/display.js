@@ -373,17 +373,20 @@ function loadTicketBody(inputData, container) {
   // Reassign button 
   //	 
    	createSelect($("#ticketAssign"),function(id){})
-	 /*
-	 $('#reAssignButton').click(function(){
-	   $("#reassignBox").css("height","30px");
+	 
+	$('#reAssignButton').click(function(){
+		$("#reassignBox").css({"height":"30px","overflow":"visible"})
+		//.delay().show().css({"overflow":"visible"});
+		//$("#reassignBox").css({"overflow":"visible"});
+		
 	   
-	 });
-	 $("#ReAssignCancelButton").click(function(){
-    $("#reassignBox").css({"height":"0px"});
-    
-   });
+	});
+	$("#ReAssignCancelButton").click(function(){
+		$("#reassignBox").css({"height":"0px","overflow":"hidden"});
+
+	});
    
-   */
+   
   $('#reAssignAcceptButton').click(function () {
     //$("#reassignBox").css({"height":"0px"});
     

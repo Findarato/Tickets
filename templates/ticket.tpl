@@ -106,7 +106,7 @@
 						</button>
 					</div>
 				</div>
-					<div class="smoothAnimate" id="reassignBox" style="width:100%;height:30px">
+					<div class="" id="reassignBox" style="width:100%;height:0px;overflow:hidden;">
 						<div style="height:auto;padding:3px;">
 							<div class="textLeft" style='height:auto;'>
 								<span>Assign:</span>
