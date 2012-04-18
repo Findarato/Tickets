@@ -598,3 +598,7 @@ function createSelect(selector,callback,css){
 				)
 		)
 }
+
+function notice(){
+	
+}
