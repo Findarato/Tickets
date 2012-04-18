@@ -102,45 +102,44 @@ function displayStatus(jsonData, Selector) {
 }
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
-  
-  if($("#replyuserid").val()==""){
-  	$("#replyuserid").val(localStorage.userId);
-  }
-  $("#modifyButton").show();
-  $(".ticketData").remove();
-  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
-  $(".ticketModifyForm").each(function(f,frm){
-    me = $(frm);
-    myParent = me.parent();
-    myParent.html(myParent.data("prevValue"));
-  }); 
+	if($("#replyuserid").val()==""){
+		$("#replyuserid").val(localStorage.userId);
+	}
+	$("#modifyButton").show();
+	$(".ticketData").remove();
+	$("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
+	$(".ticketModifyForm").each(function(f,frm){
+		me = $(frm);
+		myParent = me.parent();
+		myParent.html(myParent.data("prevValue"));
+	}); 
 	//Basically figures out what kind of data is being send to the function and how to deal with it.
 	var data = {};
 	var bug = false;
 
 	if(typeof inputData == "string" || typeof inputData == "object"){
 		if(typeof inputData == "object"){ // this is JSON from loadTicket
-		  if (!localStorage.getItem("TicketId" + inputData.id)) { 
-        localStorage.setItem("TicketId" + inputData.id,JSON.stringify(inputData));
-      }
-      data = inputData;
+			if (!localStorage.getItem("TicketId" + inputData.id)) { 
+        		sessionStorage.setItem("TicketId" + inputData.id,JSON.stringify(inputData));
+      		}
+      		data = inputData;
 		}else{ // Something odd happened
-		  console.log("tried to parse out the inputData");
+			console.log("tried to parse out the inputData");
 			data = $.parseJSON(inputData);
 		}
 	}else{ // data is not a string or an object	
 	  notice("Error",inputData+"<br>Error: 100382B",true); 
 	}
-  if(typeof data != "object"){
-      if(data === null){ 
-        notice("Error","Data Null<br>Error: 100334B",true);
-        return false; 
-      }else{
-        notice("Error","Data not an Object<br>Error: 100337B",true);
-        return false;
-      }
-  } 
-  
+	if(typeof data != "object"){
+    	if(data === null){ 
+        	notice("Error","Data Null<br>Error: 100334B",true);
+        	return false; 
+		}else{
+			notice("Error","Data not an Object<br>Error: 100337B",true);
+			return false;
+		}
+  	} 
+
   	$("#replyTitleBox").val("RE:"+data.subject)
 	if(data.tickettype_id==2){bug=true;}
 
@@ -150,178 +149,135 @@ function loadTicketBody(inputData, container) {
 	Params.TicketJSON = data;
 		
 	bmClass = "bookmarkOff";
-  for(var a in Params.FavoriteObject){
-    if(Params.FavoriteObject[a]==data.id){
-      bmClass = "bookmark";
-    }
-  }
-   container.find("#replyIcon").attr({id: "icon" + data.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+data.mdEmail+"?s=32&d=identicon&r=g)"});
+	for(var a in Params.FavoriteObject){
+    	if(Params.FavoriteObject[a]==data.id){
+			bmClass = "bookmark";
+    	}
+	}
+	container.find("#replyIcon").attr({id: "icon" + data.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+data.mdEmail+"?s=32&d=identicon&r=g)"});
 	container
-	 .find("#ticketTitle").html(data.subject)
+		.find("#ticketTitle").html(data.subject)
 	
 	//alert(data.id)
 	container
 		.find("#ticketBookmark").addClass(bmClass)
 	   		.attr({"name":"bookmark"+data.id});
+	container
+		.find("#ticketDate")
+		.addClass("ilb")
+		.append(
+			$("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+				.html(
+					$("<div/>",{id:"ticketDateDisplay",html:data.created_on})
+				)
+   		);
+	
+	container.find("#categoryBox").show();
 	
 	container
-   .find("#ticketDate")
-   .addClass("ilb")
-   .append(
-     $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-       .html(
-         $("<div/>",{id:"ticketDateDisplay",html:data.created_on})
-       )
-   );
+    	.find("#ticketProject")
+     	.addClass("ilb")
+     	.append(
+			$("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+				.html(
+					$("<div/>",{id:"ticketProjectDisplay",html:data.project_name})
+				)
+     	);
 	
-	container.find("#ticketId").html("Bug ID:");
-	container.find("#projectBox").show()
-	container.find("#categoryBox").hide();
 	
-	container
-     .find("#ticketProject")
-     .addClass("ilb")
-     .append(
-       $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-         .html(
-           $("<div/>",{id:"ticketProjectDisplay",html:data.project_name})
-         )
-     );
-	
-	if(!bug){ //just ticket stuff
-		container.find("#projectBox").hide()
-		container.find("#categoryBox").show();
-		container.find("#ticketId").html("Ticket ID:");
-		container.find("#dueOnBox").show();
-		container.find("#assignedToBox").show();
-		container.find("#locationBox").show();
-		container.find("#ticketBox").show();
-    
-   container
-     .find("#ticketDueDate")
-     .addClass("ilb")
-     .append(
-       $("<div/>",{id:"ticketDueDateDisplay","class":"ilb ticketData contentEdit",css:{"font-weight":"normal","margin-left":"4px","width":"auto"},"html":data.due_on})
-     );
-  
-	container
-		.find("#ticketAssignedTo")
-			.addClass("ilb")
-				.append(
-					$("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-						.html(
-							$("<div/>",{id:"ticketAssignedToDisplay","class":"highLight",html:data.firstname + " " + data.lastname,data:data.assigned_id})
-						)
-				);				
-	container
-	  .find("#ticketLocation")
-	    .addClass("ilb")
-	    .append(
-	      $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"}})
-	        .html(
-	          $("<div/>",{id:"ticketlocationDisplay",html:data.locationName})
-	        )
-	    );
-	}
 	//Global stuff for bugs and tickets
 
 	container
-   .find("#ticketBody")
-   .addClass("ilb")
-   .append(
-     $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:data.description})
-   );
+		.find("#ticketBody")
+		.addClass("ilb")
+		.append(
+			$("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:data.description})
+		);
 
-  container
-   .find("#ticketCategory")
-   .addClass("ilb")
-   .append(
-     $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:data.category})
-   );
+	container
+		.find("#ticketCategory")
+		.addClass("ilb")
+		.append(
+			$("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:data.category})
+   		);
 
-  container
-   .find("#ticketCreatedBy")
-   .addClass("ilb")
-   .append(
-     $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-       .html(
-         $("<div/>",{id:"ticketAssignedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
-       )
-   );
+	container
+		.find("#ticketCreatedBy")
+		.addClass("ilb")
+		.append(
+			$("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+			.html(
+				$("<div/>",{id:"ticketAssignedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
+			)
+   		);
+	
 	container.find("#replyticketid").val(ticketId);
 	
 	container
-   .find("#ticketId")
-   .addClass("ilb")
-   .append(
-     $("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
-       .html(
-         $("<div/>",{id:"ticketIdDisplay",html:data.id})
-       )
-   );
+		.find("#ticketId")
+		.addClass("ilb")
+		.append(
+     		$("<div/>",{"class":"ilb ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
+       			.html(
+         			$("<div/>",{id:"ticketIdDisplay",html:data.id})
+       			)
+   		);
 	container
-	 .find("#ticketPriority")
-	 .addClass("ilb")
-	 .append(
-	   $("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:Params.Priority_string[data.priority].name})
-	 );
+		.find("#ticketPriority")
+	 	.addClass("ilb")
+	 	.append(
+	   		$("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px"},html:Params.Priority_string[data.priority].name})
+	 	);
 	 
 	//
 	// Adding edit controls to the page
 	//
 	$("#ticketModifySaveButton").click(function(){
-	  $("#modifyButton").show();
-	  $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
-	  values = {"edit":1,"ticketId":data.id};
-	  ticketBodyBox = {};
-	  $(".ticketModifyForm").each(function(f,frm){ 
-      me = $(frm);
-      myParent = me.parent();
-      switch(this.tagName){
-        case "SELECT":
-          values[this.name] = me.find(":selected").val();
-          myParent.html($(frm).find(":selected").text());
-        break;
-        case "TEXTAREA":
-          values[this.name] = me.val();
-          myParent.html($(frm).val());
-          ticketBodyBox = myParent;
-        break;
-        case "INPUT":
-          switch(this.type){
-            case "text":
-              values[this.name] = me.val();
-              myParent.html($(frm).val());
-            break;
-            default:break;  
-          }
-        break;
-        default:alert(this.tagName);break;
-      }
-    });
+		$("#modifyButton").show();
+		$("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
+		values = {"edit":1,"ticketId":data.id};
+		ticketBodyBox = {};
+		$(".ticketModifyForm").each(function(f,frm){ 
+			me = $(frm);
+			myParent = me.parent();
+			switch(this.tagName){
+				case "SELECT":
+					values[this.name] = me.find(":selected").val();
+					myParent.html($(frm).find(":selected").text());
+        		break;
+        		case "TEXTAREA":
+          			values[this.name] = me.val();
+          			myParent.html($(frm).val());
+          			ticketBodyBox = myParent;
+        		break;
+        		case "INPUT":
+          			switch(this.type){
+            			case "text":
+              				values[this.name] = me.val();
+              				myParent.html($(frm).val());
+            			break;
+            			default:break;  
+          			}
+        		break;
+        		default:alert(this.tagName);break;
+      		}
+    	});
     	$.getJSON("/ajax/edit_ticket.php",values,function(data){
 			sessionStorage.removeItem("TicketId"+data.modifiedTicket);
 	      	loadResponsesBody(data.modifiedTicket, $("#replyareabody"), 0);
 	    });
 	});
-  $("#modifyButton").click(function(){
-    $(this).hide();
-    $("#ticketModifySaveButton,#ticketModifyCancelButton").show();
-    
+	$("#modifyButton").click(function(){
+    	$(this).hide();
+    	$("#ticketModifySaveButton,#ticketModifyCancelButton").show();
     //category edit code
-    textAreaReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
+		textAreaReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
     //Global Boxes
-    selectBoxReplace(container.find("#ticketPriority").find(".contentEdit"),Params.Priority_string[Params.TicketJSON.priority].name,Params.Priority_string);
-    if(bug){//this is for the project
-      selectBoxReplace(container.find("#ticketProject").find(".contentEdit"),data.project_name,Params.Projects);
-    }else{
-      selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
-      selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
-      //dueOn = container.find("#ticketDueDate").find(".contentEdit");
-      textBoxReplace(container.find("#ticketDueDate").find(".contentEdit"),"","date");
-    }
-   //textBoxReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
-  });
+		selectBoxReplace(container.find("#ticketPriority").find(".contentEdit"),Params.Priority_string[Params.TicketJSON.priority].name,Params.Priority_string);
+        selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
+		selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
+		textBoxReplace(container.find("#ticketDueDate").find(".contentEdit"),"","date");
+  	});
   $("#ticketModifyCancelButton").click(function(){
     $("#modifyButton").show();
     $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
@@ -359,15 +315,14 @@ function loadTicketBody(inputData, container) {
 	//
 	//Reply Button
 	//
-  $("#replyButton").bind('click',function () {
-	if($("#newReplyForm").find("#replyDescription").val() != ""){
-		//$("#replyBox").css({"height":"0px"});
-		$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
-			loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
-			$(".Ticketform").attr({value: ""}); 
-		});
-	}else{}
-  });
+	$("#replyButton").bind('click',function () {
+		if($("#newReplyForm").find("#replyDescription").val() != ""){
+			$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
+				loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
+				$(".Ticketform").attr({value: ""}); 
+			});
+		}
+  	});
   
   //
   // Reassign button 
@@ -439,6 +394,7 @@ function loadTicketBody(inputData, container) {
     });
     me.toggleClass("bookmarkOff").toggleClass("bookmark");
 	});
+	
 }
 function loadTicket(ticketId,update) {
 	if(Params.LastArea != "ticket"){

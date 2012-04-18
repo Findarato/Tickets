@@ -9,12 +9,11 @@
 					<div id="ticketBookmark" class="ticketSprite fakelink"  name="bookmark"></div>
 				</div>
 				<div class="td">
-					<h1 class="fontMain" id="ticketTitle" style="width:auto;height:auto;font-size:15px" /><!-- Ticket Title area -->
+					<h1 class="fontMain" id="ticketTitle" style="width:auto;height:auto;font-size:15px"></h1><!-- Ticket Title area -->
 				</div>
-				
 			</div>
 			<div style="display:table-cell;width:50%;text-align:right;">
-				<div class="colorWhite" id="ticketStatusImage" style="height:15px;float:right;">
+				<div class="color1toWhite" id="ticketStatusImage" style="height:15px;float:right;">
 					<div style="width:auto;padding:2px;">
 						<div class="statusImage ticketLeft pencil" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
 						<div class="statusImage ticketLeft user" style="display:none;height:15px;" id="imgReassigned" title="Reassigned"></div>
@@ -42,7 +41,7 @@
 						Closed On
 					</div>
 				</div>
-				<div id="categoryBox" style="display:none;">
+				<div id="categoryBox">
 					<div class="fontMain2" id="ticketCategory" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Category
 					</div>
@@ -52,22 +51,17 @@
 						Priority
 					</div>
 				</div>
-				<div id="projectBox" style="">
-					<div class="fontMain2" id="ticketProject" style="font-weight:bold;padding-left:2px;padding-right:3px">
-						Project
-					</div>
-				</div>
-				<div id="assignedToBox" style="display:none;">
+				<div id="assignedToBox" >
 					<div class="fontMain2" id="ticketAssignedTo" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Assigned To
 					</div>
 				</div>
-				<div id="dueOnBox" style="display:none;">
+				<div id="dueOnBox" >
 					<div class="fontMain2" id="ticketDueDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >
 						Due On
 					</div>
 				</div>
-				<div id="locationBox" style="display:none;">
+				<div id="locationBox" >
 					<div class="fontMain2" id="ticketLocation" style="font-weight:bold;padding-left:2px;padding-right:3px;">
 						Location
 					</div>
@@ -123,10 +117,10 @@
 		</div>
 		<div class="ticketSideRight" style="padding:3px">
 			<!-- Right Side ticket body and Replies -->
-			<div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" class="mainBorder60">
+			<div style="display:table; width:100%; margin-bottom:2px;overflow:hidden;" class="mainBorder">
 				<!-- Body of the ticket -->
 				<div class="" style="display:table-row;width:100%">
-					<div class="color1toWhite " style="display:table-cell; padding:0px; width:10px;vertical-align: top"></div>
+					<div class="ticketHighLight color1toWhite linearAnimate" style="display:table-cell; padding:0px; width:0px;vertical-align: top"></div>
 					<div style="display:table-cell; padding:6px; width:24px;vertical-align: top">
 						<div id="replyIcon" class="" style="width:32px;height:32px;"></div>
 					</div>
@@ -146,10 +140,10 @@
 						<form name="newReplyForm" id="newReplyForm">
 							<div class="textLeft">
 								<span class="" title="Reply Title">Title:</span>
-								<input type="text" name="title" autocomplete="off" maxlength="100" id="replyTitleBox" class="Ticketform roundAll4 color4Border1 fontMain" style="padding:2px;width:400px;"/>
+								<input required="required" type="text" name="title" autocomplete="off" maxlength="100" id="replyTitleBox" class=" mainBorder Ticketform roundAll4 fontMain" style="padding:2px;width:400px;"/>
 								<br>
 								<div style="width:auto;border:none;margin:5px;padding-right:10px;height:100%">
-									<textarea name="description" id="replyDescriptionTextArea" autocomplete="off"  class="Ticketform roundAll4 color4Border1 fontMain" style="padding:2px;width:100%;height:100%"></textarea>
+									<textarea name="description" id="replyDescriptionTextArea" autocomplete="off"  required="required" class="mainBorder Ticketform roundAll4 fontMain" style="padding:2px;width:100%;height:100%"></textarea>
 								</div>
 								<INPUT type="hidden" id="replyuserid" name="user_id" value="{$user_id}">
 								<INPUT type="hidden" id="replyticketid" name="ticket_id"  value="{$ticket_id}" >

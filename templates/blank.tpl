@@ -26,6 +26,7 @@
 		</li>
 		<li>The top menu only shows categories which you have tickets in, if you do not have a ticket in by me it will not show up for you.</li>
 		<li>The tabs have been reworked to flow better with the layout.</li>
+		<li>Tickets now uses the less.js script to build CSS files</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">Known Issues</span>

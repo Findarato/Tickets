@@ -15,7 +15,6 @@
 @color5:rgb(95, 62, 18);
 @color560:rgba(95, 62, 18,.60);
 
-
 @colorDark: rgb(31,31,31);
 @colorDark60:rgba(31,31,31,.6);
 @colorLight: rgb(250,250,250);
@@ -73,7 +72,16 @@ a:hover{text-decoration: underline;}
 .color1TextGlow{
   text-shadow: @color1 0 0 2px;
 }
-
+.color1toWhite{
+  background: @color1; /* Old browsers */
+  background: -moz-linear-gradient(left, @color1 45%, @white 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(45%,@color1), color-stop(100%,@white)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, @color1 45%,@white 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, @color1 45%,@white 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, @color1 45%,@white 100%); /* IE10+ */
+  background: linear-gradient(left, @color1 45%,@white 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-8 */
+}
 /* Color 2 related items */
 .color2,.color260{
   background: @color2;
@@ -174,7 +182,7 @@ h3 {
 }
 
 .pageBranding a,.pageBranding a:hover{
-  color:rgb(255,255,255);
+  color:@white;
   height:14px;
   font-size: 12px;
   text-align:center;
