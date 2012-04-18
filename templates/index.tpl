@@ -8,19 +8,22 @@
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
         <title>Tickets - The tracking system</title>
         <link rel="stylesheet" href="/css/resetStyle.css?v=1">
-        
-        <link href='http://fonts.googleapis.com/css?family=Snippet|Stardos+Stencil|Open+Sans+Condensed:300|Inconsolata|Ubuntu|Droid+Sans|Droid+Sans+Mono|Droid+Serif&v2' rel='stylesheet' type='text/css'>
+		        
         <link href='http://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Buda:light' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Calligraffitti' rel='stylesheet' type='text/css' />
 		<link href='/css/WebSymbols-Font-Pack/stylesheet.css' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/js/jquery-ui/css/smoothness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
-        
-        <link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"/>
+
+       
+        <link rel="stylesheet/less" href="/css/themes/default/less/style.less">
         <link rel="stylesheet" media="screen" href="/css/foundation.css?v=1"  />
         <link rel="stylesheet" media="screen and (max-width: 1024px) " href="/css/handheld.css?v=1"  />
-        
-        
+         
+        {*<link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"/>*}
+        <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="/js/modernizr.custom.04865.js"></script>
+        <script src="/js/libs/less-1.3.0.min.js"></script>
         <link rel="shortcut icon" href="/bug.png">
         <link rel="apple-touch-icon" href="/bug.png">
         <link rel="icon" type="image/png" href="/bug.png" />
@@ -34,16 +37,6 @@
             var pageTracker = _gat._getTracker("UA-8067208-4");
             pageTracker._trackPageview();
         </script>
-        
-        <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
-        
-        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
-        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
-		<script type="text/javascript" src="/js/modernizr.custom.04865.js"></script>
-        <script src="/js/modules/display.js"></script>
-        <script src="/js/tickets.js"></script>
-        <script src="/js/modules/admin.js"></script>
-        <script src="/js/globalFunctions.js"></script>
       </head>
     <body >
    
@@ -89,5 +82,13 @@
         *}
         <div id="notifyArea" style="width:0px;" class="">
         </div>
+
+        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
+        <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
+		
+        <script src="/js/modules/display.js"></script>
+        <script src="/js/tickets.js"></script>
+        <script src="/js/modules/admin.js"></script>
+        <script src="/js/globalFunctions.js"></script>        
     </body>
 </html>

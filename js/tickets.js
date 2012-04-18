@@ -65,19 +65,19 @@ var newTicketTpl =
 					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 				)
 				.append( // Ticket Created On
-					$("<div/>",{"class":" color260 color4Border1 roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+					$("<div/>",{"class":" color260 mainBorder roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
 				)
 				.append( // Ticket Created By
-					$("<div/>",{"class":" color260 color4Border1 ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
+					$("<div/>",{"class":" color260 mainBorder ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
 				)
 				.append( // Ticket Category
-					$("<div/>",{"class":" color260 color4Border1 ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
+					$("<div/>",{"class":" color260 mainBorder ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
 				)
 				.append( // Ticket Location
-					$("<div/>",{"class":" color260 color4Border1 ticketLocationBox",id:"tickLocation"}).html("Cool Location")
+					$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickLocation"}).html("Cool Location")
 				)
 				.append( // Ticket Assign
-					$("<div/>",{"class":" color260 color4Border1 ticketAssignBox ticketItemBox",id:"tickAssign"}).html("To: John Doe")
+					$("<div/>",{"class":" color260 mainBorder ticketAssignBox ticketItemBox",id:"tickAssign"}).html("To: John Doe")
 				)
 		);
 function focusMe(id){
