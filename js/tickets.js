@@ -116,7 +116,6 @@ function checkHash() {
   			}
   			break;
 		case "#ticketList":
-			//alert("I tried to load the ticket list")
 			loadLocalStorage();
 			if(sessionStorage.userId >1){
 				changeArea("tickets");
@@ -129,7 +128,6 @@ function checkHash() {
 					break;
 				}
 			}else{
-				//alert("I failed and loaded the login page")
 				setHash("#login")					
 			}
         break;
@@ -157,9 +155,6 @@ function checkHash() {
 					setHash("#ticketList/all_tickets");	
 				}				
 			}
-
-			
-			//loadNew(Params.LastLogon);
 			break;
 		case "#userPage":
 			if(hash[1] == 0 || hash[1] == ""){ // There is some strange bug we need to fix, but lets just call it good for now
@@ -195,8 +190,6 @@ function checkHash() {
 					admin.loadFeatures();
 				break;
 			}
-			
-			
 		break;		
 		}
 	} else {
