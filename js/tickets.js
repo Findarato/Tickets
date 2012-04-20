@@ -148,11 +148,16 @@ function checkHash() {
 			loadBlank();
 			break;
 		default: case "#start":
-			if(sessionStorage.currentTicket >0){
-				setHash("#ticket/"+sessionStorage.currentTicket);
+			if(!sessionStorage.userId || sessionStorage.userId<100){
+				setHash("#login")
 			}else{
-				setHash("#ticketList/all_tickets");	
+				if(sessionStorage.currentTicket >0){
+					setHash("#ticket/"+sessionStorage.currentTicket);
+				}else{
+					setHash("#ticketList/all_tickets");	
+				}				
 			}
+
 			
 			//loadNew(Params.LastLogon);
 			break;
