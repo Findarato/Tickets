@@ -450,6 +450,9 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 
 	//alert(data.message);
 	loadLocalStorage(); // Lets make sure that we load up localStorage
+	if(sessionStorage.userId > 100){
+		setHash("#ticketList/all_tickets");
+	}
 	if (data.error.length > 0) {
 		checkResponse(data);
 	} else {
@@ -467,11 +470,10 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		checkResponse(data);
 		sessionStorage.userId = data.userid;
 	
-		$("#newTicketUser_id").val(Params.UserId);
+		$("#newTicketUser_id").val(sessionStorage.userId);
 		if (data.departmentname === "" || data.departmentname == "None!") {
 			setHash("#userPage/"+data.userid);
 		}else{
-			alert(sessionStorage.currentTicket);
 			if(sessionStorage.currentTicket >0){
 				setHash("#ticket/"+sessionStorage.currentTicket);
 			}else{
