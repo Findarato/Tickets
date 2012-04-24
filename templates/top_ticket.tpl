@@ -5,22 +5,22 @@
 		New
 	</button>
 	{if $count["open"]>0}
-	<button class="nolink user fontBold menuOpen" href="#ticketList/sOpen">
+	<button data-icon="U" class="nolink fontBold menuOpen" href="#ticketList/sOpen">
 		To Me
 	</button>
 	{/if}
 	{if $count["assigned"]>0}
-	<button class="nolink pencil fontBold menuAssigned" href="#ticketList/sAssigned">
+	<button data-icon="e" class="nolink fontBold menuAssigned" href="#ticketList/sAssigned">
 		By Me
 	</button>
 	{/if}
 	{if $count["myDept"]>0}
-	<button class="nolink group fontBold menuToMyDepartment" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept.">
+	<button data-icon="F" class="nolink fontBold menuToMyDepartment" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept.">
 		To My Dep.
 	</button>
 	{/if}
 	{if $count["byDept"]>0}
-	<button class="nolink group fontBold menuByMyDepartment" href="#ticketList/sAdepartment" id=byMyDepartment>
+	<button data-icon="F" class="nolink fontBold menuByMyDepartment" href="#ticketList/sAdepartment" id=byMyDepartment>
 		By My Dep.
 	</button>
 	{/if}

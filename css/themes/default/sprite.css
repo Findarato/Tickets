@@ -15,48 +15,35 @@
 .magnifier:before{
 	content:"L ";
 	font-family:"WebSymbolsRegular";
-
 }
 .warning:before{
 	content:"W ";
 	color:rgb(150,0,0);
 	font-family:"WebSymbolsRegular";
-
 }
 .globe:before{
 	content:"K ";
-	
 	font-family:"WebSymbolsRegular";
-
 }
 .pencil:before{
 	content:"e ";
-	
 	font-family:"WebSymbolsRegular";
-
 }
 .group:before{
 	content:"F ";
-	
 	font-family:"WebSymbolsRegular";
-
 }
 .gear:before{
 	content:"S ";
-	
 	font-family:"WebSymbolsRegular";
-
 }
 .user:before{
 	content:"U ";
-	
 	font-family:"WebSymbolsRegular";
 	text-shadow:0 0 1px rgba(0,0,0,.60);
-
 }
 .closed:before{
 	content:"Z ";
-	
 	font-family:"WebSymbolsRegular";
 }
 .chart:before{
