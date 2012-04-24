@@ -28,54 +28,46 @@
 	height:0;
 	overflow:hidden;
 }
-
+.idBox a{
+    background:transparent none;
+}
 .idBox li,.signInBox li{
 	cursor:pointer;
 	margin:0px;
 	padding:3px;
 	display:inline-block;
 	vertical-align:top;
+	background:none transparent;
 }
 .idBox li ul{
+    background:transparent none;
 	width:250px;
 	text-align:left;
-	background: white;
-	background: white;
 	border-radius:2px;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;
-
 }
 .idBox li ul li{
-	background:rgb(255,255,255);
 	padding:5px;
 	width:100%;
 	vertical-align:top;
 }
 .dropDown{
-	background:white;
 	position:absolute;
 	left:-9999px;
 }
 /* dropdown for the ID box*/
-.ddBox li a:active + ul.dropDown, 
-.ddBox li a:focus + ul.dropDown, 
-.ddBox li ul.dropDown:hover
-{
+.ddBox li a:active + ul.dropDown,.ddBox li a:focus + ul.dropDown,.ddBox li ul.dropDown:hover{
     left: -80px;
     background:rgb(255,255,255);
 }
 
 /* fake dropdown menu*/
-.selectBox li a:active + ul.dropDown, 
-.selectBox li a:focus + ul.dropDown,
-.selectBox li ul.dropDown:hover
-{
+.selectBox li a:active + ul.dropDown,.selectBox li a:focus + ul.dropDown,.selectBox li ul.dropDown:hover{
     left: 0;
     z-index:60;
     background:rgb(255,255,255);
 }
-
 
 .idBox .menuBottom{
 	vertical-align: top;
