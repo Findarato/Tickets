@@ -33,7 +33,7 @@
 						{if $features["Location"] eq 1}
 						<tr class="">
 							<td style="text-align:left;"><span class="font-X">Problem Location:</span></td>
-							<td style="text-align:left;"><select name="newTicketLocation" id="newTicketLocation" class=" Ticketform" maxlength="50" style="width:8em" value="test data" /><option value=""></option>{html_options options=$location}</select></td>
+							<td style="text-align:left;"><select name="newTicketLocation" id="newTicketLocation" class=" Ticketform" maxlength="50" style="width:8em" value="test data" ><option value=""></option>{html_options options=$location}</select></td>
 						</tr>
 						{/if}
 						<tr>
