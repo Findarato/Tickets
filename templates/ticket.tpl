@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<div style="display:table-cell;width:50%;text-align:right;">
-				<div class="color1toWhite" id="ticketStatusImage" style="height:15px;float:right;">
+				<div class="" id="ticketStatusImage" style="height:15px;float:right;">
 					<div style="width:auto;padding:2px;">
 						<div class="statusImage ticketLeft pencil" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
 						<div class="statusImage ticketLeft user" style="display:none;height:15px;" id="imgReassigned" title="Reassigned"></div>
