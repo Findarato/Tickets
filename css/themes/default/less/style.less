@@ -3,6 +3,7 @@
 /*  Start of theme related CSS 
  This is the css that will flow around all of the projects to keep them feeling like they are part of a larger collection
  * */
+@import url("../../../resetStyle.css");
 @import url("../sprite.css");
 @import url("theme.less");
 @import url("buttons.less");
@@ -11,6 +12,24 @@
 
 ::-moz-selection { background: @color1; color: @colorDark; text-shadow: none; }
 ::selection { background: @color1; color: @colorDark; text-shadow: none; }
+
+h1,h2,h3,h4{
+  margin:.1em;
+  color: @color5;
+  text-align: left;
+  .linearAnimate(400ms);
+}
+h1 { 
+  font-family: 'Buda' , arial, serif; 
+  font-size: 2.2em;
+} 
+h2,h3 {
+  font-family: 'Dancing Script' , sans-serif; 
+  font-size: 2em;
+}
+h3 {font-size: 1.8em;}
+h4 {font-size:1.6em;}
+
 
 .ticketBox{
 	background:#FFF;
@@ -49,29 +68,27 @@
 	/*border: 1px solid white;*/
 	height:16px;
 	width:13px;
+	.rounded-corners(3px);
 }
 .pLow{
 	background-color: #8cbf40;
-	/*border-color:#6a0;*/
 	width:25%;
+	.rounded-corners(3px);
 }
 .pMedium{
 	background-color:#bfbf4d;
-	/*border-color:#aa1;*/
 	width:50%;
+	.rounded-corners(3px);
 }
 .pHigh{
 	background-color:#e0c240;
-	/*border-color:#d6ae00;*/
 	width:75%;
+	.rounded-corners(3px);
 }
 .pMissionCritical{
 	background-color:#e6804d;
-	/*border-color:#d51;*/
 	width:100%;
-}
-#rightSideFloater div{
-	/*height:20px;*/
+	.rounded-corners(3px);
 }
 .selectButton{
 	text-align: left;
