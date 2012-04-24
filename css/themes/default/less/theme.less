@@ -11,6 +11,16 @@
   -moz-border-radius: @radius;
 }
 
+.shadowIn (@x: 0, @y: 0, @blur: 1px,@distance:1px, @color: #000) {
+  box-shadow:inset @arguments;
+  -moz-box-shadow:inset @arguments;
+  -webkit-box-shadow:inset @arguments;
+}
+.shadowOut (@x: 0, @y: 0, @blur: 1px,@distance:1px, @color: #000) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+}
 
 @white:rgb(255,255,255);
 
@@ -199,22 +209,20 @@ a:hover{text-decoration: underline;}
           transition: all @time linear;
 }
 .insideBoxShadow{
-  -moz-box-shadow: inset 0 0 1px 1px @shadow;
-  -webkit-box-shadow: inset 0 0 1px 1px @shadow;
-  box-shadow: inset 0 0 1px 1px @shadow;
+  .shadowIn(0, 0,1px,1px,@shadow);
+  
 }
+
 .outSideBoxShadow{
-  -moz-box-shadow: 0 0 1px 1px @shadow;
-  -webkit-box-shadow: 0 0 1px 1px @shadow;
-  box-shadow: 0 0 1px 1px @shadow;
+  .shadowOut(0, 0,1px,1px,@shadow);
 }
 .mainArea{
   padding-top:125px;
   padding-bottom:20px;
   background-color:@color4;
-    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
 }
 .mainBackground{
   background-color:@color4;
