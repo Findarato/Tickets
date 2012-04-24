@@ -7,28 +7,22 @@
         <meta name="author" content="Joseph Harry">
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
         <title>Tickets - The tracking system</title>
-        <link rel="stylesheet" href="/css/resetStyle.css?v=1">
-		        
         <link href='http://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Buda:light' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Calligraffitti' rel='stylesheet' type='text/css' />
 		<link href='/css/WebSymbols-Font-Pack/stylesheet.css' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/js/jquery-ui/css/smoothness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
 
-       
-        <link rel="stylesheet/less" href="/css/themes/default/less/style.less">
-        <link rel="stylesheet" media="screen" href="/css/foundation.css?v=1"  />
-        <link rel="stylesheet" media="screen and (max-width: 1024px) " href="/css/handheld.css?v=1"  />
-         
-        {*<link rel="stylesheet" id="themeCss" media="screen" href="/css/themes/default/style.css"/>*}
-        <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+        <link rel="stylesheet" media="screen" href="/css/foundation.css?v=2"/>
+        <link rel="stylesheet/less" id="themeCss" href="/css/themes/default/less/style.less"/>
+        <link rel="stylesheet" media="screen and (max-width: 1024px) " href="/css/handheld.css?v=2"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script type="text/javascript" src="/js/modernizr.custom.04865.js"></script>
+
         <script src="/js/libs/less-1.3.0.min.js"></script>
         <link rel="shortcut icon" href="/bug.png">
         <link rel="apple-touch-icon" href="/bug.png">
         <link rel="icon" type="image/png" href="/bug.png" />
-        <link id="rss1" href="ticketsrss.php?id={if isset($user_id)}{$user_id}){/if}" rel="alternate" title="Tickets involving you" type="application/rss+xml" />
-        <link id="rss2" href="ticketsrss.php?id={if isset($user_id)}{$user_id}){/if}&bookmark=1" rel="alternate" title="Your Bookmarked Tickets" type="application/rss+xml" />
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -38,10 +32,8 @@
             pageTracker._trackPageview();
         </script>
       </head>
-    <body >
-   
+    <body>
        {include file="header.tpl"}
-       
         <div class="" style="display:table;width:100%">
             <div id="mainArea1 insideBorder" class="roundAll4"  style="min-height:400px;text-align:left;padding:0 5px 0 5px;margin-right:5px">
                 <div style="width:100%;" class="roundBottom4" id="content">
