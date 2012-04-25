@@ -203,7 +203,7 @@ function loadTicketBody(inputData, container) {
 		.append(
 			$("<div/>",{"class":"ilb contentEdit ticketData",css:{"font-weight":"normal","margin-left":"4px","width":"auto"}})
 			.html(
-				$("<div/>",{id:"ticketAssignedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
+				$("<div/>",{id:"ticketAssignedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id,"title":data.username2})
 			)
    		);
 	
@@ -215,7 +215,7 @@ function loadTicketBody(inputData, container) {
 					$("<span/>",{"html":"Assigned To ",css:{"font-weight":"bold"}})
 				)
 				.append(
-					$("<div/>",{"html":data.firstname +" " + data.lastname,"class":"ilb"})
+					$("<div/>",{"html":data.firstname +" " + data.lastname,"class":"ilb","title":data.username})
 				)
 		)
 	container
@@ -642,7 +642,7 @@ function loadUserPage(userId){
 					$("<div>",
 						{
 							id:"userIconBox",
-							"class":"small-shadow-black-1 color-B-2 border-all-B-1 roundAll4",
+							"class":"insideBoxShadow color2 mainBorder roundAll4",
 							css:{
 								"overflow":"hidden","display":"block","height":"100px","width":"100px","margin":"5px","position":"relative"
 							}
@@ -667,12 +667,10 @@ function loadUserPage(userId){
 				.append( $("<div>",{id:"openTickets","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Tickets: "})	)
 				.append( $("<div>",{id:"avgTicketsTime","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Average Ticket Duration: "})	)
 				.append( $("<div>",{id:"totalResponses","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Total Responses: "})	)
-				.append( $("<div>",{id:"totalBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Bugs Filed: "})	)
-				.append( $("<div>",{id:"openBugs","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Open Bugs: "})	)
 		)
 		.append(
 			function(index,html){
-				if(!localUser){	alert("broke");return "";} // this is blocking the view of other user's page
+				if(!localUser){return "";} // this is blocking the view of other user's page
 				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"300px"}})
 					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
@@ -692,8 +690,6 @@ function loadUserPage(userId){
 						)
 					)
 					.append( $("<div>",{id:"ticketSpecificEmail","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Tickets Specific Email: <input id=\"userSecondaryEmail\" style=\"width:125px;\" type=\"email\" value=\"\"> "}) 	)
-					//.append( $("<div>",{id:"myTicketsRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"\" title=\"Tickets involving you\">My Tickets</a>"})	)
-					//.append( $("<div>",{id:"myBookmarksRSS","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"<a class=\"ticket_button ticketSprite feed\" id=rss1 href=\"ticketsrss.php?id="+Params.UserId+"&bookmark=1 \" title=\"Tickets involving you\">My Bookmarks</a>"})	)
 					.append(function(){
 						//openIdLinks
 						return $("<button>",{
@@ -735,22 +731,22 @@ function loadUserPage(userId){
 		infoBox.find("#ticketListbody").attr({id:"infoBoxBody"}).html($("<canvas width=\"730px\" height=\"300px\" id=\"graphDisplay\">Please use a browser that supports canvas</canvas>"));
 
 	if(userId == undefined){
-		//alert("test")
 		userId = sessionStorage.userId;
 	}
-	$.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
+	$.getJSON("ajax/get_userinfo.php",{"userId":userId},function(data){
 		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.mdEmail+"?s=100&d=identicon&r=g)"});
 		if(data.userInfo.tickets.departmentName == undefined){
 			data.userInfo.tickets.departmentName = "None!";
 		}		
 		Tlb
-			.find("#userDepartment").css("white-space","nowrap")
-			.append(
-				$("<a style='width:150px;' id='ticketDepartment' href='#' name='ticketDepartment' data-select-items='"+JSON.stringify(data.departments)+"' class='selectButton button'>"+data.userInfo.tickets.departmentName+"</a>")
-			)
-			.append(
-				$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
-			);
+			.find("#userDepartment")
+				.css("white-space","nowrap")
+				.append(
+					$("<a style='width:150px;' id='ticketDepartment' href='#' name='ticketDepartment' data-select-items='"+JSON.stringify(data.departments)+"' class='selectButton button'>"+data.userInfo.tickets.departmentName+"</a>")
+				)
+				.append(
+					$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
+				);
 			if(data.userInfo.tickets.departmentName == "None!"){
 				Tlb.find("#ticketDepartment").addClass("errorPulse");
 			}
@@ -775,8 +771,8 @@ function loadUserPage(userId){
 			function(){
 				var returnData = "";
 				$.each(data.userInfo.permissions,function(key,value){
-					returnData += "<a class='nolink' href='#permissions/"+value.permission_id+"'>"+value.display+"</a> ";
-				})
+					returnData += "<a class='nolink' href='#permissions/"+value.permission_id+"'>"+value.display+"</a> ";	
+				});
 				return returnData;
 			}
 		);
