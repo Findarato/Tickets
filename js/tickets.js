@@ -509,7 +509,10 @@ if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery
 }
 
 jQuery(document).ready(function () {
-	localStorage.clear();
+	if(document.location.toString().indexOf("devtickets")){ // Lets just keep the localStorage clear for development 
+		localStorage.clear();	
+	}
+	
 	//this should make the logout button in the drop down work.
 	$("#popUpLogout")
 		.attr({"href":"/ajax/login.php?logout&id="+localStorage.userId})
