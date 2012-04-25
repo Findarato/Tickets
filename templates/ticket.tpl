@@ -52,19 +52,13 @@
 					</div>
 				</div>
 				<div id="assignedToBox" >
-					<div class="fontMain2" id="ticketAssignedTo" style="font-weight:bold;padding-left:2px;padding-right:3px;">
-						Assigned To
-					</div>
+					<div class="fontMain2" id="ticketAssignedTo" style="padding-left:2px;padding-right:3px;"></div>
 				</div>
 				<div id="dueOnBox" >
-					<div class="fontMain2" id="ticketDueDate" style="font-weight:bold;padding-left:2px;padding-right:3px" >
-						Due On
-					</div>
+					<div class="fontMain2" id="ticketDueDate" style="padding-left:2px;padding-right:3px" ></div>
 				</div>
 				<div id="locationBox" >
-					<div class="fontMain2" id="ticketLocation" style="font-weight:bold;padding-left:2px;padding-right:3px;">
-						Location
-					</div>
+					<div class="fontMain2" id="ticketLocation" style="padding-left:2px;padding-right:3px;"></div>
 				</div>
 				<div id="" style="display:none;">
 					<div class="fontMain2" id="replyareaTitle" style="font-weight:bold;padding-left:2px;padding-right:3px;">
