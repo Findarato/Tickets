@@ -126,7 +126,7 @@ admin = {
 					userDisplay.find("#title").attr("id","UserName-"+data.id).html(
 						data.firstname + " " + data.lastname + " (" + data.username + " )"
 					);
-					userDisplay.find("#userPic").attr("id","userPic-"+data.id).css("background-image","url(http://www.gravatar.com/avatar/"+data.md5Email+"?s=32&d=identicon&r=g)");
+					userDisplay.find("#userPic").attr("id","userPic-"+data.id).css("background-image","url(http://www.gravatar.com/avatar/"+data.md5Email+"?s=32&d=monsterid&r=g)");
 					userDisplay.find("#body").attr("id","body-"+data.id).html(
 						data.email_address+"<br/>"+data.joined
 					);
