@@ -64,7 +64,7 @@ ON
 	(p.id=up.permission_id) 
 WHERE 
 	up.user_id=".$_GET["userId"]
-,false,"assoc");
+,false,"assoc_array");
 
 $json["userInfo"]["tickets"] = $db->Query("
 SELECT
