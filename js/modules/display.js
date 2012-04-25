@@ -183,10 +183,6 @@ function loadTicketBody(inputData, container) {
 					$("<div/>",{id:"ticketProjectDisplay",html:data.project_name})
 				)
      	);
-	
-	
-	//Global stuff for bugs and tickets
-
 	container
 		.find("#ticketBody")
 		.addClass("ilb")
@@ -210,6 +206,40 @@ function loadTicketBody(inputData, container) {
 				$("<div/>",{id:"ticketAssignedByDisplay",html:data.firstname2 + " " + data.lastname2,data:data.created_by_id})
 			)
    		);
+	
+	container
+		.find("#ticketAssignedTo")
+		.html(
+			$("<div/>")
+				.html(
+					$("<span/>",{"html":"Assigned To ",css:{"font-weight":"bold"}})
+				)
+				.append(
+					$("<div/>",{"html":data.firstname +" " + data.lastname,"class":"ilb"})
+				)
+		)
+	container
+		.find("#ticketDueDate")
+		.html(
+			$("<div/>")
+				.html(
+					$("<span/>",{"html":"Due On ",css:{"font-weight":"bold"}})
+				)
+				.append(
+					$("<div/>",{"html":data.due_on,"class":"ilb"})
+				)
+		)
+	container
+		.find("#ticketLocation")
+		.html(
+			$("<div/>")
+				.html(
+					$("<span/>",{"html":"Location ",css:{"font-weight":"bold"}})
+				)
+				.append(
+					$("<div/>",{"html":data.locationName,"class":"ilb"})
+				)
+		)		
 	
 	container.find("#replyticketid").val(ticketId);
 	
