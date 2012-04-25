@@ -66,7 +66,7 @@ function loadResponsesBody(ticketId, container, page) {
 	          id: "created" + item.id
 	        });
 	        $("#replyticketid").val(ticketId);
-	        resCont.find("#replyIcon").attr({id: "icon" + item.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+item.mdEmail+"?s=32&d=identicon&r=g)"});
+	        resCont.find("#replyIcon").attr({id: "icon" + item.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+item.mdEmail+"?s=32&d=monsterid&r=g)"});
 	        cnt++;
       });  
 		}
@@ -154,7 +154,7 @@ function loadTicketBody(inputData, container) {
 			bmClass = "bookmark";
     	}
 	}
-	container.find("#replyIcon").attr({id: "icon" + data.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+data.mdEmail+"?s=32&d=identicon&r=g)"});
+	container.find("#replyIcon").attr({id: "icon" + data.id}).css({"background-image":"url(http://www.gravatar.com/avatar/"+data.mdEmail+"?s=32&d=monsterid&r=g)"});
 	container
 		.find("#ticketTitle").html(data.subject)
 	
@@ -596,7 +596,7 @@ function loadTicketList(pageNumber,queryObj) {
 			smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
 			smallTicket.find("#tickCategory").attr("id","tickCategory-"+value.id).html(value.category);
 			smallTicket.find("#tickLocation").attr("id","tickLocation-"+value.id).html(value.locationName);
-			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
+			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=monsterid&r=g)");
 			tableBody.append(smallTicket);
 		});
 		$(".ticketCategoryBox").css({"display":"none"});
@@ -733,8 +733,9 @@ function loadUserPage(userId){
 	if(userId == undefined){
 		userId = sessionStorage.userId;
 	}
+	defaultImage = "http://tickets.lapcat.org/images/tree.png";
 	$.getJSON("ajax/get_userinfo.php",{"userId":userId},function(data){
-		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.mdEmail+"?s=100&d=identicon&r=g)"});
+		$("#userIconBox").css({"background-image":"url(http://www.gravatar.com/avatar/"+data.userInfo.mdEmail+"?s=100&d=monsterid&r=g)"});
 		if(data.userInfo.tickets.departmentName == undefined){
 			data.userInfo.tickets.departmentName = "None!";
 		}		
