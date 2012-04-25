@@ -19,6 +19,13 @@
 	transition: all 200ms ease;
 }
 
+#userPopup:target{
+    background:#3e3e3e;
+    margin:5000px;
+    padding:5000px;
+    color:#f00;
+}
+
 /* User info / sign in box code */
 .idBox,.signInBox{
 	text-align:right;
@@ -55,6 +62,7 @@
 .dropDown{
 	position:absolute;
 	left:-9999px;
+	background:rgb(255,255,255);
 }
 /* dropdown for the ID box*/
 .ddBox li a:active + ul.dropDown,.ddBox li a:focus + ul.dropDown,.ddBox li ul.dropDown:hover{
@@ -66,7 +74,7 @@
 .selectBox li a:active + ul.dropDown,.selectBox li a:focus + ul.dropDown,.selectBox li ul.dropDown:hover{
     left: 0;
     z-index:60;
-    background:rgb(255,255,255);
+    
 }
 
 .idBox .menuBottom{
@@ -194,11 +202,10 @@ ul li, ol li {
 	text-align: right;
 	list-style: none;
 	padding: 0;
-	line-height: 24px;
+	line-height: 2em;
 	height: 26px;
 	overflow: hidden;
-	font-size: 12px;
-	font-family: verdana;
+	font-size: 1em;
 	position: relative;
 }
 .tabrow li {
@@ -276,8 +283,12 @@ ul li, ol li {
 	box-shadow: 0 0 1px 1px #888;
 }
 
-
-
+.headerAvatar{
+    vertical-align:middle;
+    height:24px;
+    width:24px;
+    border:none;
+}
 
 #ticketLoginNewBox {
 	position: absolute;
