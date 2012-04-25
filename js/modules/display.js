@@ -596,7 +596,7 @@ function loadTicketList(pageNumber,queryObj) {
 			smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
 			smallTicket.find("#tickCategory").attr("id","tickCategory-"+value.id).html(value.category);
 			smallTicket.find("#tickLocation").attr("id","tickLocation-"+value.id).html(value.locationName);
-			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=monsterid&r=g)");
+			smallTicket.find("#userPic").attr("id","userPic-"+value.id).addClass("roundAll4 mainBorder").css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=monsterid&r=g)");
 			tableBody.append(smallTicket);
 		});
 		$(".ticketCategoryBox").css({"display":"none"});

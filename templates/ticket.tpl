@@ -1,7 +1,7 @@
 <div style="height:100%;position:relative">
 	<div class="color2" id="ticketTitlearea" style="width:100%;height:40px;">
 		<div style="display:table;width:100%;height:100%">
-			<div style="display:table-cell;width:50%;text-align:left;">
+			<div style="display:table-cell;width:95%;text-align:left;">
 				<div class="fontMain2" id="ticketId" style="font-weight:bold;padding-left:2px;padding-right:3px">
 					Ticket ID
 				</div>
@@ -9,7 +9,7 @@
 					<div id="ticketBookmark" class="ticketSprite fakelink"  name="bookmark"></div>
 				</div>
 				<div class="td">
-					<h1 class="fontMain" id="ticketTitle" style="width:auto;height:auto;font-size:15px"></h1><!-- Ticket Title area -->
+					<h4 class="fontMain" id="ticketTitle"></h4><!-- Ticket Title area -->
 				</div>
 			</div>
 			<div style="display:table-cell;width:50%;text-align:right;">
@@ -116,14 +116,14 @@
 				<div class="" style="display:table-row;width:100%">
 					<div class="ticketHighLight color1toWhite linearAnimate" style="display:table-cell; padding:0px; width:0px;vertical-align: top"></div>
 					<div style="display:table-cell; padding:6px; width:24px;vertical-align: top">
-						<div id="replyIcon" class="" style="width:32px;height:32px;"></div>
+						<div id="replyIcon" class="roundAll4 mainBorder" style="width:32px;height:32px;"></div>
 					</div>
 					<div style="display:table-cell; padding:6px; width:100px;vertical-align:top;">
-						<div class="font-X2" id="ticketCreatedBy" style="width:100px;vertical-align:top;"></div>
-						<div id="ticketDate" class="font-L font-bold" style="vertical-align:top;"></div>
+						<div class="fontColorDark" id="ticketCreatedBy" style="width:100px;vertical-align:top;"></div>
+						<div id="ticketDate" class="fontColorDark font-bold" style="vertical-align:top;"></div>
 					</div>
 					<div style="display:table-cell;vertical-align:top;padding:6px;">
-						<div class="font-X2" style="word-wrap:break-word;white-space: normal;vertical-align:top;" id="ticketBody"></div>
+						<div class="fontColorDark" style="word-wrap:break-word;white-space: normal;vertical-align:top;" id="ticketBody"></div>
 					</div>
 				</div>
 			</div><!-- End Body of the ticket -->
