@@ -521,11 +521,11 @@ jQuery(document).ready(function () {
 			localStorage.clear(); // Lets just clear the localStorage to clear out all of the data
 			return false;
 		});
-/*
+
 	$("li").click(function(e) {
 	  e.preventDefault();
 	});
-*/
+
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
 		yep : '',
@@ -728,12 +728,18 @@ jQuery(document).ready(function () {
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		switch(me.attr("id")){
 			case "topperUserInfo":
-				//alert("topperUserInfo");
-				$(".ddBox li a + ul.dropDown").click(function(){
-					$(this).css({"left":"-99999px"})
-				}).css({"left": "-80px","background":"white"})
-				
-				me.preventDefault();
+				pageTracker._trackPageview(me.attr("href"));
+				return false;
+				/* This is a start but it really just does not work properly
+				$("#topperUserInfo")
+					.focusout(function(){
+						$(".ddBox li a + ul.dropDown").css({"left":"-99999px","background":"white"})
+					})
+					.focusin(function(){
+						$(".ddBox li a + ul.dropDown").css({"left":"-80px","background":"white"})
+					})
+				*/
+				e.preventDefault();
 				
 			break;
 			default:

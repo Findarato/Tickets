@@ -8,17 +8,16 @@ h2{font-size:1.5em !important;height:1.5em;}
 h3{font-size:1.3em !important;height:1.3em;}
 h4{font-size:1.1em !important;height:1.1em;}
 
-menu .tabs{
-    position:relative !important;
-    top:auto !important;
-    right:auto !important;
-    width:auto !important;
-}
+
     button, a.button, .button,.selectButton{
         padding:.3em !important;
         font-size:1em !important;
     }
 @media only screen and (max-width: 570px) {
+menu .tabs{
+    width:auto !important;
+    top:37px !important;
+}    
     h1{font-size:1.4em !important;height:1.3em!important;width:80%;overflow:hidden;}
     h2{font-size:1.2em !important;height:1.2em;}
     h3{font-size:1.1em !important;height:1.1em;}

@@ -1,5 +1,5 @@
 <header class="topHeader" style="background-color:#FFF;margin:0;padding:0;">
-	<nav title="top Navagation" class="firstNav color1 " style="text-align: center;margin:0;margin-bottom:10px;top:0;left:0;">
+	<nav title="top Navagation" class="firstNav color1 " style="text-align: center;margin:0;margin-bottom:10px;top:0;left:0;height:79px">
 		<div class="topNav " style="text-align:center;margin:0 auto;">
 			<div class="td">
 				<a href="/"><img src="images/tree.png" alt="Lpcpls" width="68px" height="75px" border="0" style="display:inline-block"></a>
@@ -21,7 +21,7 @@
 		<ul>
 			<li>
 				{if isset($firstname)} 
-				<a class="right fontMain nolink" id="topperUserInfo" tabindex="0" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle"><span>{$firstname} {$lastname}</span> <img id="headerAvatar" class="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=monsterid&r=g"> </a>
+				<a class="right fontMain nolink" href="#userPage/" id="topperUserInfo" tabindex="0" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle"><span>{$firstname} {$lastname}</span> <img id="headerAvatar" class="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=monsterid&r=g"> </a>
 				{else}
 				<a class="right fontMain" href="#login" id="topperSignIn" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
 				{/if}
@@ -57,7 +57,7 @@
 		</ul>
 	</div>
 	</div> <!-- End of User info -->
-	<menu class="tabs" style="position:absolute;top:37px;right:0px;z-index:102;width:110%;">
+	<menu class="tabs" style="position:absolute;right:0px;z-index:102;width:110%;">
 		<ul class="tabrow">
 			<li id="ticketTab" class="selected">
 				<a class="ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;">Tickets</a>
