@@ -469,7 +469,7 @@ function loadTicketList(pageNumber,queryObj) {
 		displayTable = $("<div/>",{"id":"ticketListTable","class":" fontMain",css:{"width":"100%","position":"relative"}});
 		displayTable
 			.append(
-				$("<nav/>",{css:{"height":"20px","position":"relative","margin-bottom":"5px"}})
+				$("<nav/>",{css:{"position":"relative","margin-bottom":"10px"}})
 					.append(function(){
 						var selectValue = "Sort";
 						if(hash[2])
@@ -477,7 +477,7 @@ function loadTicketList(pageNumber,queryObj) {
 						return $("<a/>",{html:selectValue,id:"tableSort","class":"selectButton ",css:{"width":"120px"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
 					})
 					.append(
-						$("<div/>",{"id":"subAreaBar",css:{"display":"inline-block"}})
+						$("<div/>",{"id":"subAreaBar",css:{"display":"block"}})
 							.load("/ajax/subMenuRender.php?menu=tickets")
 					)
 					

@@ -521,12 +521,11 @@ jQuery(document).ready(function () {
 			localStorage.clear(); // Lets just clear the localStorage to clear out all of the data
 			return false;
 		});
+/*
 	$("li").click(function(e) {
 	  e.preventDefault();
-	  $("li").removeClass("selected");
-	  $(this).addClass("selected");
 	});
-
+*/
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
 		yep : '',
@@ -724,10 +723,19 @@ jQuery(document).ready(function () {
 	$("#showOldLoginButton").live("click",function(){
 		$("#oldLogin").css({"height":"50px"});
 	});
-	$(".ticket_link,.nolink,.bug_link").live("click", function () {
+	$(".ticket_link,.nolink,.bug_link").live("click", function (e) {
 		me = $(this);
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		switch(me.attr("id")){
+			case "topperUserInfo":
+				//alert("topperUserInfo");
+				$(".ddBox li a + ul.dropDown").click(function(){
+					$(this).css({"left":"-99999px"})
+				}).css({"left": "-80px","background":"white"})
+				
+				me.preventDefault();
+				
+			break;
 			default:
 				pageTracker._trackPageview(me.attr("href"));
 				setHash(me.attr("href"));
@@ -735,9 +743,10 @@ jQuery(document).ready(function () {
 		}
 
     	/*checkHash*/
+    	
+    	e.preventDefault();
 		return false; //to make sure the a isnt clicked
 	});
-	
 	// Last but not least after all the rest of the code is run lets make sure that something gets loaded
 	
 	checkHash();
