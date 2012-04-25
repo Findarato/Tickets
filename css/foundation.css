@@ -19,13 +19,6 @@
 	transition: all 200ms ease;
 }
 
-#userPopup:target{
-    background:#3e3e3e;
-    margin:5000px;
-    padding:5000px;
-    color:#f00;
-}
-
 /* User info / sign in box code */
 .idBox,.signInBox{
 	text-align:right;
@@ -271,7 +264,9 @@ ul li, ol li {
 .tabrow li.selected:after {
 	box-shadow: -2px 2px 0 #FFF;
 }
-
+menu.tabs{
+    top:40px;
+}
 .insideBoxShadow{
 	-moz-box-shadow: inset 0 0 1px 1px #888;
 	-webkit-box-shadow: inset 0 0 1px 1px#888;
