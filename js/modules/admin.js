@@ -4,7 +4,7 @@ var newUserTpl =
 		.html(
 			$("<div/>",{id:"userDisplay","class":"ticketItem"})
 				.append( // User Icon Box
-					$("<div/>",{"class":"ticketUserIconBox color260 color4Border1 roundAll4",id:"userPic"})
+					$("<div/>",{"class":"ticketUserIconBox color260 roundAll4 mainBorder",id:"userPic"})
 				)	
 				.append( // Ticket ID
 					$("<div/>",{"class":"ticketIdBox color260 color4Border1 roundAll2","html":"C0FFEE",id:"ticketId"})
