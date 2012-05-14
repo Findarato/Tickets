@@ -77,7 +77,7 @@ var newTicketTpl =
 					$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickLocation"}).html("Cool Location")
 				)
 				.append( // Ticket Assign
-					$("<div/>",{"class":" color260 mainBorder ticketAssignBox ticketItemBox",id:"tickAssign"}).html("To: John Doe")
+					$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickAssign"}).html("To: John Doe")
 				)
 		);
 function focusMe(id){

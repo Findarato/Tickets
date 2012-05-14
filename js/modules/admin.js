@@ -2,12 +2,12 @@ var pageTracker = _gat._getTracker('UA-8067208-4');
 var newUserTpl = 
 	$("<div/>",{"class":"ticketBox roundAll4  newTicketTpl insideBoxShadow"})
 		.html(
-			$("<div/>",{id:"userDisplay","class":"ticketItem"})
+			$("<div/>",{id:"userDisplay","class":"userItem"})
 				.append( // User Icon Box
 					$("<div/>",{"class":"ticketUserIconBox color260 roundAll4 mainBorder",id:"userPic"})
 				)	
 				.append( // Ticket ID
-					$("<div/>",{"class":"ticketIdBox color260 color4Border1 roundAll2","html":"C0FFEE",id:"ticketId"})
+					$("<div/>",{"class":"ticketIdBox color260 mainBorder roundAll2","html":"C0FFEE",id:"ticketId"})
 				)
 				.append( //Ticket Title
 					$("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
@@ -16,7 +16,7 @@ var newUserTpl =
 					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 				)
 		);
-var newPermissionTpl = $("<div/>",{"class":" color260 color4Border1 roundBottomRight4 ticketCategoryBox",id:"permInfo"}).html("On: Aug. 8, 1982")
+var newPermissionTpl = $("<div/>",{"class":" color260 mainBorder roundBottomRight4 ticketCategoryBox",id:"permInfo",css:{"width":"auto"}}).html("On: Aug. 8, 1982")
 
 var newFeature = $("<div/>")
 					.html(
@@ -134,6 +134,9 @@ admin = {
 					addPerm.css("width","20px").attr("id",data.id+"addPerm").removeClass("roundBottomRight4").addClass("roundBottomRight8").html(
 						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"font-size":"20px","cursor":"pointer","padding":"0px","width":"20px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.data.allPermissions)})
 					);
+
+          createSelect(addPerm.find("#permAdd"+data.id),function(){});
+					/*
 					createSelect(addPerm.find("#permAdd"+data.id),function(value){
 							var Tlb = Params.Content.find("#ticketListbody");
 							var paramName = Params.allPermissions[value];
@@ -162,6 +165,8 @@ admin = {
 							}
 						
 					},"+");
+					*/
+					
 					userDisplay.find("#userDisplay"+data.id).append(addPerm);
 					display.append(userDisplay);
 				}); // End of creating the user boxes

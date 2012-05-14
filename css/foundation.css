@@ -59,7 +59,7 @@
 }
 /* dropdown for the ID box*/
 .ddBox li a:active + ul.dropDown,.ddBox li a:focus + ul.dropDown,.ddBox li ul.dropDown:hover{
-    left: -80px;
+    left: -100px;
     background:rgb(255,255,255);
 }
 
@@ -67,6 +67,7 @@
 .selectBox li a:active + ul.dropDown,.selectBox li a:focus + ul.dropDown,.selectBox li ul.dropDown:hover{
     left: 0;
     z-index:60;
+    background:rgb(255,255,255)
     
 }
 
@@ -353,7 +354,6 @@ menu.tabs{
 	white-space: nowrap;
 	vertical-align: top;
 	line-height: 18px;
-	overflow: hidden;
 }
 .ticketCreatedByBox, .ticketCategoryBox, .ticketLocationBox,.ticketCreatedOnBox,.ticketItemBox {
 	border-right: none;
@@ -373,9 +373,12 @@ menu.tabs{
 	display: inline-block;
 	position: relative;
 }
-.ticketItem {
+.ticketItem ,.userItem{
 	width: 100%;
 	display: block;
 	height: 22px;
-	overflow: hidden;
+	overflow:hidden;
+}
+.userItem{
+  overflow:visible;
 }
