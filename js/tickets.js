@@ -166,9 +166,20 @@ function checkHash() {
 			}
 		break;
 		case "#login":
-			if(sessionStorage.userId >0){
-				setHash("#ticketList/all_tickets");
-			}else{loadLoginPage();}
+		  if("userId" in sessionStorage){ // there is a user id
+  		  if(sessionStorage.userId >0){
+          setHash("#ticketList/all_tickets");
+        }else{
+          if(sessionStorage.userId == "undefined"){//this comes from a broken login
+            loadLoginPage();
+          }else{
+            alert("There was an error accessing your user information, please report the following code to I.T.\n\n "+sessionStorage.userId+".174A")  
+          }
+        }
+		  }else{
+		    loadLoginPage();
+		  }
+			
 		break;
 		case "#tickets":// this triggers when the tab tickets is clicked
 			changeArea("tickets");
@@ -450,11 +461,13 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 
 	//alert(data.message);
 	loadLocalStorage(); // Lets make sure that we load up localStorage
+	localStorage.clear();
+	alert(sessionStorage.userId)
 	if(sessionStorage.userId > 100){
 		setHash("#ticketList/all_tickets");
 	}
 	if (data.error.length > 0) {
-		checkResponse(data);
+		alert(data.error);
 	} else {
 		Params.LastLogon = data.lastlogon;
 		$("#topperUserInfo")
@@ -467,9 +480,9 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 				$("<img/>").attr("src","http://www.gravatar.com/avatar/"+sessionStorage.mdEmail+"?s=24&d=identicon&r=g")
 			)	
 		}
-		checkResponse(data);
-		sessionStorage.userId = data.userid;
-	
+    checkResponse(data);
+    sessionStorage.userId = data.userid;
+    alert("yeah I get here +"+data.userid)
 		$("#newTicketUser_id").val(sessionStorage.userId);
 		if (data.departmentname === "" || data.departmentname == "None!") {
 			setHash("#userPage/"+data.userid);
