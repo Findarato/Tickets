@@ -5,9 +5,7 @@
  * 
  */
 include "../../small_header.php";
-include "adminHeader.php";
 
-checkAdminStatus();
 
 function getUser($id="all"){
 	$db = db::getInstance();
@@ -32,6 +30,7 @@ function getUser($id="all"){
 }
 
 function adjustPerms($toggle = 1,$userId = 0, $permId = 0){
+  
 	$db = db::getInstance();
 	if($toggle == 1){  //add permission
 		$res = $db->Query("INSERT INTO user_permissions (user_id,permission_id) VALUES (".$userId.",".$permId.");",false,"row");
@@ -52,28 +51,28 @@ function adjustPerms($toggle = 1,$userId = 0, $permId = 0){
 	}
 }
 if(count($_GET) > 0){
-	if($_GET["userId"] == $usr->getUserId()){
-		$response["message"] = "You can not modify your own permissions";
-		$response["error"] = "Permission Denied";
-		echo json_encode($response);
-		die();	
-	}
-	switch($_GET["type"]){
-		case "adjustPerms":
-			$response["data"] = adjustPerms($_GET["value"],$_GET["userId"],$_GET["perm"]);
-			$response["message"] = "The permssion was successfully adjusted!";			
-			break;
-		case "allUsers":
-			$response["data"] = getUser();		
-			break;
-		default:
-			$response["message"] = "You requested data that could not be found";
-			$response["error"] = "Format request error";
-		break;
-	}
-}else{
-
+  if(isset($_GET["userId"])){
+    if($_GET["userId"] == $usr->getUserId()){
+      $response["message"] = "You can not modify your own permissions";
+      $response["error"] = "Permission Denied";
+      echo json_encode($response);
+      die();  
+    }  
+  }
+  if(isset($_GET["type"])){
+    switch($_GET["type"]){
+      case "adjustPerms":
+        $response["data"] = adjustPerms($_GET["value"],$_GET["userId"],$_GET["perm"]);
+        $response["message"] = "The permssion was successfully adjusted!";      
+        break;
+      case "allUsers":
+        $response["data"] = getUser();    
+        break;
+      default:
+        $response["message"] = "You requested data that could not be found";
+        $response["error"] = "Format request error";
+      break;
+    }
+  }
 }
-
 echo json_encode($response);
-
