@@ -7,7 +7,7 @@
 include "../../small_header.php";
 include "adminHeader.php";
 
-
+checkAdminStatus();
 
 function getUser($id="all"){
 	$db = db::getInstance();
