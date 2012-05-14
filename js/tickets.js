@@ -170,7 +170,8 @@ function checkHash() {
   		  if(sessionStorage.userId >0){
           setHash("#ticketList/all_tickets");
         }else{
-          if(sessionStorage.userId == "undefined"){//this comes from a broken login
+          sessionStorage.userId = -1;
+          if(sessionStorage.userId == "undefined" || sessionStorage.userId == undefined || sessionStorage.userId == -1){//this comes from a broken login
             loadLoginPage();
           }else{
             alert("There was an error accessing your user information, please report the following code to I.T.\n\n "+sessionStorage.userId+".174A")  
@@ -216,8 +217,10 @@ function checkHash() {
 }
 function updateFavorites(){
 	$.getJSON("ajax/bookmark.php",{"list":"1"},function(data){
-		Params.FavoriteObject = data.favIds;
-		sessionStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
+	  if(data != "no user" && typeof data == "object"){
+	    Params.FavoriteObject = data.favIds;
+      sessionStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
+	  }
 	});
 }
 function checkResponse(json) {

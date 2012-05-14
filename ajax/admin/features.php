@@ -19,6 +19,7 @@ if(isset($_GET["features"])){
 	$response["features"] = getFeatures();	
 }
 if(isset($_GET["changeFeat"])){// lets change this feature around
+  checkAdminStatus();
 	$test = $db->Query("SELECT status FROM features WHERE id=".$_GET["changeFeat"],false,"row");
 	if($test == 1){
 		$db->Query("UPDATE features SET status=0 WHERE id=".$_GET["changeFeat"]." LIMIT 1");
