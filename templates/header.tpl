@@ -57,7 +57,7 @@
 		</ul>
 	</div>
 	</div> <!-- End of User info -->
-	<menu class="tabs" style="position:absolute;right:0px;z-index:102;width:110%;">
+	<menu class="tabs" style="position:absolute;right:0px;z-index:102;width:110%;top:41px;">
 		<ul class="tabrow">
 			<li id="ticketTab" class="selected">
 				<a class="ticket nolink fontMain" href="#ticketList/all_tickets" id="" style="padding-right:5px;width:auto;text-decoration:none;">Tickets</a>
