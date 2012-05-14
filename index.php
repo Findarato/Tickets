@@ -74,6 +74,7 @@
 		}
 	}
 	$projects = $db -> Query("SELECT id,name FROM tickets.projects",false,"assoc");
+	
 	$projTemp = array();
 	foreach($projects as $proj){
 		$projTemp[$proj["id"]]=$proj["name"];
