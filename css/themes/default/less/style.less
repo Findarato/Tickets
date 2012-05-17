@@ -92,8 +92,17 @@ h4 {font-size:1.15em;height:1em;}
 	width:100%;
 	.rounded-corners(3px);
 }
-.selectButton{
+.selectButton1{
 	text-align: left;
+	a:hover{
+	  text-decoration:none;
+	}
+}
+.selectBox{
+  a:hover{
+    text-decoration:none;
+    cursor:pointer;
+  }
 }
 ul{
 	margin:0px;
@@ -103,16 +112,14 @@ ul{
 ul li{
 	
 }
-.selectButton:after{
-	content:'';
-	width: 0; 
-	height: 0;
-	border-left: 6px solid transparent; 
-	border-right: 6px solid transparent; 
-	border-top: 10px solid rgba(0,0,0,.6);
-	position:absolute;
-	right:7px;
+
+.ddIcon{
+  position:absolute;
+  font-size:.8em;
+  right:7px;
+  top:.4em;
 }
+
 .headerBox{
 	padding:5px;
 	margin:3px;
@@ -124,6 +131,7 @@ ul li{
 .selectable{
 	padding-left:15px;
 	background-color:white;
+	white-space:nowrap;
 }
 .selectable:hover{
 	cursor: pointer;

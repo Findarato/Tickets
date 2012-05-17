@@ -15,8 +15,11 @@ var newUserTpl =
 				.append( // Ticket Body
 					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 				)
+        .append( // Ticket permissions
+          $("<div/>",{"class":"",id:"permissions",css:{"position":"absolute","bottom":"0","right":"0"}})
+        )
 		);
-var newPermissionTpl = $("<div/>",{"class":" color260 mainBorder roundBottomRight4 ticketCategoryBox",id:"permInfo",css:{"width":"auto"}}).html("On: Aug. 8, 1982")
+var newPermissionTpl = $("<div/>",{"class":" color260 mainBorder ticketCategoryBox",id:"permInfo",css:{"width":"auto"}}).html("On: Aug. 8, 1982")
 
 var newFeature = $("<div/>")
 					.html(
@@ -131,12 +134,9 @@ admin = {
 						data.email_address+"<br/>"+data.joined
 					);
 					addPerm = newPermissionTpl.clone();
-					addPerm.css("width","20px").attr("id",data.id+"addPerm").removeClass("roundBottomRight4").addClass("roundBottomRight8").html(
+					addPerm.css("width","20px").attr("id",data.id+"addPerm").addClass("roundBottomRight8").html(
 						$("<a/>",{"html":"+","id":"permAdd"+data.id,"class":"","css":{"font-size":"20px","cursor":"pointer","padding":"0px","width":"20px","position":"relative"},value:0,"data-select-items":JSON.stringify(json.data.allPermissions)})
 					);
-
-          createSelect(addPerm.find("#permAdd"+data.id),function(){});
-					/*
 					createSelect(addPerm.find("#permAdd"+data.id),function(value){
 							var Tlb = Params.Content.find("#ticketListbody");
 							var paramName = Params.allPermissions[value];
@@ -164,10 +164,9 @@ admin = {
 								Tlb.find("#userDisplay"+data.id).append(perm);
 							}
 						
-					},"+");
-					*/
-					
-					userDisplay.find("#userDisplay"+data.id).append(addPerm);
+					},"+",false);
+				
+					userDisplay.find("#userDisplay"+data.id+" #permissions").append(addPerm);
 					display.append(userDisplay);
 				}); // End of creating the user boxes
 				
@@ -187,7 +186,7 @@ admin = {
 								});
 							})
 					);
-					display.find("#userDisplay"+data.user_id).append(perm);
+					display.find("#userDisplay"+data.user_id +" #permissions").append(perm);
 				});// end of displaying the permissions
 				Tlb.append(display);	
 			});	

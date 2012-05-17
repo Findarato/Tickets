@@ -304,7 +304,7 @@ function loadTicketBody(inputData, container) {
 		textAreaReplace(container.find("#ticketBody").find(".contentEdit"),container.find("#ticketBody").find(".contentEdit").html());
     //Global Boxes
 		selectBoxReplace(container.find("#ticketPriority").find(".contentEdit"),Params.Priority_string[Params.TicketJSON.priority].name,Params.Priority_string);
-        selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
+    selectBoxReplace(container.find("#ticketCategory").find(".contentEdit"),Params.TicketJSON.category,Params.Categories);
 		selectBoxReplace(container.find("#ticketLocation").find(".contentEdit"),Params.TicketJSON.locationName,Params.Locations);
 		textBoxReplace(container.find("#ticketDueDate").find(".contentEdit"),"","date");
   	});
@@ -471,10 +471,10 @@ function loadTicketList(pageNumber,queryObj) {
 			.append(
 				$("<nav/>",{css:{"position":"relative","margin-bottom":"10px"}})
 					.append(function(){
-						var selectValue = "Sort";
+						var selectValue = "";
 						if(hash[2])
 							selectValue = hash[2];		
-						return $("<a/>",{html:selectValue,id:"tableSort","class":"selectButton ",css:{"width":"120px"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
+						return $("<a/>",{html:selectValue,id:"tableSort","class":"gear ddBox ",css:{"width":"80px","font-size":"1em"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
 					})
 					.append(
 						$("<div/>",{"id":"subAreaBar",css:{"display":"block"}})
@@ -672,7 +672,7 @@ function loadUserPage(userId){
 			function(index,html){
 				if(!localUser){return "";} // this is blocking the view of other user's page
 				 return $("<div>",{css:{"display":"table-cell","vertical-align":"top","width":"300px"}})
-					.append( $("<div>",{id:"userDepartment","class":"",css:{"display":"block","margin":"5px","width":"auto"},html:"Department: "})	)
+					.append( $("<div>",{id:"userDepartment","class":"",css:{},html:"<span>Department: </span>"})	)
 					.append( $("<div>",{id:"followDepartment","class":"",css:{"position":"relative","display":"block","margin":"5px","width":"auto"},html:"Follow Your Department? "})
 						.append(
 							$("<button>",{
@@ -741,9 +741,9 @@ function loadUserPage(userId){
 		}		
 		Tlb
 			.find("#userDepartment")
-				.css("white-space","nowrap")
+				.css({"height":"auto"})
 				.append(
-					$("<a style='width:150px;' id='ticketDepartment' href='#' name='ticketDepartment' data-select-items='"+JSON.stringify(data.departments)+"' class='selectButton button'>"+data.userInfo.tickets.departmentName+"</a>")
+					$("<a style='width:150px;position:relative' id='ticketDepartment' name='ticketDepartment' data-select-items='"+JSON.stringify(data.departments)+"' class='selectButton'>"+data.userInfo.tickets.departmentName+"</a>")
 				)
 				.append(
 					$("<div/>",{"id":"userDepartmentStatus","html":"temp data","class":"",css:{"display":"inline-block","padding-left":"5px"}}).hide()
