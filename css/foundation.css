@@ -40,7 +40,7 @@
 	background:none transparent;
 }
 .idBox li ul{
-    background:transparent none;
+  background:transparent none;
 	width:250px;
 	text-align:left;
 	border-radius:2px;
@@ -61,13 +61,17 @@
 .ddBox li a:active + ul.dropDown,.ddBox li a:focus + ul.dropDown,.ddBox li ul.dropDown:hover{
     left: -100px;
     background:rgb(255,255,255);
+    z-index: 600;
 }
 
 /* fake dropdown menu*/
-.selectBox li a:active + ul.dropDown,.selectBox li a:focus + ul.dropDown,.selectBox li ul.dropDown:hover{
-    left: 0;
-    z-index:60;
-    background:rgb(255,255,255)
+.selectBox li a:active + ul.dropDown,
+.selectBox li a:focus + ul.dropDown,
+.selectBox li ul.dropDown:hover{
+    right:0px;
+    left:auto;
+    z-index:600;
+    background:rgb(255,255,255);
     
 }
 
@@ -380,5 +384,7 @@ menu.tabs{
 	overflow:hidden;
 }
 .userItem{
+  height:auto;
+  padding-bottom:6px;
   overflow:visible;
 }

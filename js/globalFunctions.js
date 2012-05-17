@@ -536,11 +536,11 @@ function createSelect(selector,callback,css){
 	
 	var dropDown = $("<ul/>",{id:"","class":"downRightShadow dropDown"});
 	var container = $("<div/>",{"class":"selectBox ",css:{"position":"relative"}});
-	
+	var ddIcon = $("<div/>",{"class":"ddIcon","html":"&#9660;"});
 	var newSelector = selector.clone();
 	var selectData = $.parseJSON(newSelector.attr('data-select-items'));
 	newSelector.attr('data-select-items',"parsed");
-	
+  newSelector.append(ddIcon);	
 	if(selectorCss){
 		container.css(selectorCss)
 	}
@@ -560,9 +560,9 @@ function createSelect(selector,callback,css){
 			$.each(item,function(key2,item2){
 				dropDown
 					.append(
-						$("<li/>",{"data-item":item,html:item2,css:{"padding":"1px 1px 1px 10px"},"class":"selectable fastAnimate"})
+						$("<li/>",{"data-item":item2,html:item2,css:{"padding":"1px 1px 1px 10px"},"class":"selectable fastAnimate"})
 						.click(function(){
-							newSelector.text(item2);
+							newSelector.html(item2).append(ddIcon);  ;
 							newSelector.attr("data-value",key2)
 							if(callBackFn)callBackFn(key2);
 						})
@@ -576,7 +576,7 @@ function createSelect(selector,callback,css){
 						.click(function(){
 							if(callBackFn)callBackFn(key);
 							newSelector.attr("data-value",key)
-							newSelector.text(item);
+							newSelector.html(item).append(ddIcon); ;
 						})
 				)
 		}
@@ -593,7 +593,7 @@ function createSelect(selector,callback,css){
 						.html(newSelector.css({"display":"block","width":"100%"}))
 						.append(
 							dropDown
-								.css({"display":"block","width":"100%"})
+								.css({"display":"block","padding":"0 5px 0 5px"})
 							)
 				)
 		)
