@@ -9,6 +9,7 @@ Object.size = function(obj) {
  * Simple global variables that are needed everywhere
  */
 var UploadCnt = 0;
+var scrollTop = 0;
 //Setup the global variables for selectors
 var Tlb = "";
 var uri = window.location.toString();
@@ -743,34 +744,35 @@ jQuery(document).ready(function () {
 		me = $(this);
 		var pageTracker = _gat._getTracker('UA-8067208-4');
 		switch(me.attr("id")){
-			case "topperUserInfo":
-				pageTracker._trackPageview(me.attr("href"));
-				return false;
-				/* This is a start but it really just does not work properly
-				$("#topperUserInfo")
-					.focusout(function(){
-						$(".ddBox li a + ul.dropDown").css({"left":"-99999px","background":"white"})
-					})
-					.focusin(function(){
-						$(".ddBox li a + ul.dropDown").css({"left":"-80px","background":"white"})
-					})
-				*/
-				e.preventDefault();
-				
+      case "topperUserInfo":
+        pageTracker._trackPageview(me.attr("href"));
+        return false;
+        e.preventDefault();
 			break;
 			default:
-				pageTracker._trackPageview(me.attr("href"));
-				setHash(me.attr("href"));
-			break;
+        pageTracker._trackPageview(me.attr("href"));
+        setHash(me.attr("href"));
+      break;
 		}
-
-    	/*checkHash*/
-    	
-    	e.preventDefault();
-		return false; //to make sure the a isnt clicked
+    e.preventDefault();
+    return false; //to make sure the a isnt clicked
 	});
 	// Last but not least after all the rest of the code is run lets make sure that something gets loaded
 	
 	checkHash();
-	
+	Spinner(false)
+  
+  $(window).scroll(function() {
+    console.log($(window).scrollTop() + $(window).height() + " ? = ? "+$(document).height())
+    if($(window).scrollTop() + $(window).height() +1 >= $(document).height()) {
+      //console.log("near Bottom");
+      Spinner(true);
+      $.getJSON("ajax/bookmark.php",function(data){
+        loadTicketList(2,"",true)
+        Spinner(false)
+      });
+    }else{
+      Spinner(false);
+    }
+  });
 });

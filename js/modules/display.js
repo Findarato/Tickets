@@ -1,3 +1,20 @@
+spinner = false;
+spinnerTimeOut = false;
+function Spinner(run){
+  spinSel = $("#spinner");
+  if(run==true){
+    spinner = true; 
+    spinSel.show();
+   // console.log("start spinner")
+    var loaderSymbols = ['0', '1', '2', '3', '4', '5', '6', '7'], loaderRate = 100, loaderIndex = 0,loader = function() { spinSel.attr("data-icon",loaderSymbols[loaderIndex]); loaderIndex = loaderIndex  < loaderSymbols.length - 1 ? loaderIndex + 1 : 0; spinnerTimeOut = setTimeout(loader, loaderRate); }; loader(); 
+  }else{
+    if(spinnerTimeOut){
+      clearTimeout(spinnerTimeOut);
+    }
+    spinner = false;
+    spinSel.hide();
+  }
+}
 function changeArea(area){
 	var location = $("#subAreaBar");
 	if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
@@ -447,7 +464,8 @@ function loadTicket(ticketId,update) {
 		loadResponsesBody(ticketId, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
-function loadTicketList(pageNumber,queryObj) {
+function loadTicketList(pageNumber,queryObj,append) {
+  console.log("query: "+JSON.stringify(queryObj))
 	var html = "";
 	var bugs = false;
 	var ticketCount = 0;
@@ -455,7 +473,6 @@ function loadTicketList(pageNumber,queryObj) {
 	if (pageNumber < 0) {	pageNumber = 0;}
 	var hash = getHashArray();
 	if(Params.LastArea == "ticketList"){ // This is a new display of data, not a change of locations
-		//alert(Params.Content.html());
 		if($("#displayTable").html() == null){
 			Params.LastArea = ""; // this is a bug and needs to be reset to keep working;
 			loadTicketList(pageNumber,queryObj); // lets just take what was passed to this function and recall it 
@@ -480,11 +497,9 @@ function loadTicketList(pageNumber,queryObj) {
 						$("<div/>",{"id":"subAreaBar",css:{"display":"block"}})
 							.load("/ajax/subMenuRender.php?menu=tickets")
 					)
-					
 			)
-
 			.append($("<div/>",{id:"tableBody","class":"t",css:{"width":"100%","clear":"both"}}));
-			
+
 			createSelect(displayTable.find("#tableSort"),function(value){
 				var newHash = "";
 				if(hash[2]==value && hash[3]=="asc"){
@@ -498,29 +513,22 @@ function loadTicketList(pageNumber,queryObj) {
 	}
 	Tlb.html(displayTable) // lets make sure something gets on the page
 	var tableBody = displayTable.find("#tableBody"); 
-	if(queryObj){
+	if(queryObj && typeof queryObj == "object"){ // lets just make sure we are dealing with the correct information
 		O_search = queryObj;
 		O_search.type = "search";
 		O_search.page = pageNumber;	
-	    if(hash[0]=="#bugs"){
-	    	if(Params.NavArea!="bugs"){changeArea("bugs");Params.NavArea=="bugs";}
-	    }else{
-	    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
-	    }				
+   	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	}else{ //this happens when there is no query object being sent.  Also when the tabs are clicked, as a specific query is being used by the tabs
 		O_search = {
 			"page": pageNumber,
 			"search": {}
 		};
-		if (hash[1]) { //there is something other than #ticketlist
-			for (a = 1; a < hash.length; a++) { //we will now loop though search
-				if (a == hash.length) {alert("Something is broke :Error #775A2")
+    if (hash[1]) { //there is something other than #ticketlist
+      for (a = 1; a < hash.length; a++) { //we will now loop though search
+        if (a == hash.length) {
+          alert("Something is broke :Error #775A2")
 				} else {
-					/*
-					var holder = a + 1;
-					if (!hash[holder]) {hash[holder] = "1";	}
-					*/
-					switch (a){
+          switch (a){
 						case 1: //this should always be the category
 							O_search["area"] = hash[1]; 
 						break;
@@ -534,15 +542,14 @@ function loadTicketList(pageNumber,queryObj) {
 					}
 				}
 			} // end for loop
-			
-	    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
-	
+      if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 		}	
 	}
 	
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
-		pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
-		tableBody.empty();
+		//pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
+		if(!append){tableBody.empty();}
+		
 		$.each(data.tickets,function(index,value){
 			smallTicket = newTicketTpl.clone();
 			smallTicket.find("#ticketFavorite").addClass(function(){
@@ -865,3 +872,5 @@ function loadUserPage(userId){
 	}
 
 }
+
+
