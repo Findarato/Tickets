@@ -5,7 +5,7 @@
 				<a href="/"><img src="images/tree.png" alt="Lpcpls" width="68px" height="75px" border="0" style="display:inline-block"></a>
 			</div>
 			<div class="td" style="position:relative;">
-				<h1 style="overflow:hidden;"><a href="/" style="text-decoration: none;">La Porte County Public Library System</a></h1>
+				<h1 style="overflow:hidden;"><a href="/" style="text-decoration: none;" data-small="LPCPL" id="headerLink">La Porte County Public Library System</a></h1>
 				<h3>learn, enrich, enjoy</h3>
 			</div>
 		</div>
@@ -76,3 +76,4 @@
 		</ul>
 	</menu>	
 </header>
+<div id="spinner" style="position:fixed;bottom:5px;right:5px;z-index:9999;display:none;"></div>
