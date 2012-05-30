@@ -43,48 +43,7 @@ var Params = {
 	"Features":[]
 };
 var blankId = 9999999;
-var newTicketTpl = 
-	$("<div/>",{"class":"ticketBox insideBorder roundAll4 insideBoxShadow newTicketTpl"})
-		.html(
-			$("<div/>",{"class":"ticketItem"})
-				.append( // Ticket Bookmark
-					$("<div/>",{"class":"ticketBookmarkBox fake-link roundTopRight4 ticketSprite",id:"ticketFavorite"})
-				)
-				.append( // User Icon Box
-					$("<div/>",{"class":"ticketUserIconBox color260 insideBoxShadow roundAll4",id:"userPic"})
-				)	
-				.append( // Ticket ID
-					$("<div/>",{"class":"ticketIdBox color260 insideBoxShadow roundAll2","html":8888,id:"ticketId"})
-				)
-				.append( // Ticket Priority
-					$("<div/>",{"class":"ticketPriorityBox color260 insideBoxShadow roundAll2","html":"",id:"ticketPriority"})
-				)
-				.append( //Ticket Title
-					$("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
-				)
-				.append( // Ticket Body
-					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
-				)
-				.append( // Ticket Created On
-					$("<div/>",{"class":"roundBottomRight4",id:"ticketInfoContainer"})
-						.append( // Ticket Created On
-							$("<div/>",{"class":" color260 mainBorder roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
-						)
-						.append( // Ticket Created By
-							$("<div/>",{"class":" color260 mainBorder ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
-						)
-						.append( // Ticket Category
-							$("<div/>",{"class":" color260 mainBorder ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
-						)
-						.append( // Ticket Location
-							$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickLocation"}).html("Cool Location")
-						)
-						.append( // Ticket Assign
-							$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickAssign"}).html("To: John Doe")
-						)
-				)
 
-		);
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
@@ -383,37 +342,7 @@ function populateAllBugs(Area) {
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
-function loadLoginPage(){ 
-	var loginNewBox = Params.Content.find("#ticketLoginList");
-	if(loginNewBox.html()==null){
-		Params.Content.load("templates/login.tpl");
-		loginNewBox = Params.Content.find("#ticketLoginList");
-	}
-	loadLocalStorage(); // Lets make sure that we load up localStorage
-	var feat = $.parseJSON(sessionStorage.features);
-	$.each(feat,function(i,item){
-		if(item.name=="Local Login" && item.status==0){
-			$("#showOldLoginButton").hide();
-		}else if(item.name=="Local Login" && item.status==1){
-			$("#showOldLoginButton").show();
-		}
-	});
-	
-	$.getJSON(uri + "ajax/get_ticketList.php", {"area":"recent","login":1,"count":5}, function (data) {
-		loginNewBox.empty();
-		$.each(data.tickets.reverse(),function(index,value){
-			smallTicket = newTicketTpl.clone();
-			smallTicket.find("tickCreatedBy")
-			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
-			smallTicket.find("#title").attr("id","title-"+value.id).html(value.subject);
-			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
-			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
-			smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
-			smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
-			loginNewBox.append(smallTicket);
-		});
-	});
-}
+
 function loadLocalStorage(clear){
 
 	//Features Enabled
@@ -470,7 +399,6 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 	//alert(data.message);
 	loadLocalStorage(); // Lets make sure that we load up localStorage
 	localStorage.clear();
-	alert(sessionStorage.userId)
 	if(sessionStorage.userId > 100){
 		setHash("#ticketList/all_tickets");
 	}
@@ -500,7 +428,6 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 			}else{
 				setHash("#ticketList/all_tickets");	
 			}
-			
 		}
 		//alert(data.features);
 		sessionStorage.setItem("features",JSON.stringify(data.features));
@@ -513,9 +440,7 @@ function login(data){ //We need a json array, probably need to parse it, who kno
 		}else{
 			window.document.location="/";	
 		}
-		
 	}
-	
 }
 
 
@@ -543,9 +468,7 @@ jQuery(document).ready(function () {
 			return false;
 		});
 
-	$("li").click(function(e) {
-	  e.preventDefault();
-	});
+	$("li").click(function(e) {e.preventDefault();});
 
 	Modernizr.load({
 		test: Modernizr.inputtypes.date,
@@ -553,8 +476,6 @@ jQuery(document).ready(function () {
 		nope: '/js/jquery-ui/js/jquery-ui-1.8.18.custom.min.js'
 	});
 	
-
-	//localStorage.clear();
 	loadLocalStorage();
 
 	if(sessionStorage.userId > 0){ // Lets make sure that there is a user 
