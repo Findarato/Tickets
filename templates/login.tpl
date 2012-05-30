@@ -47,7 +47,7 @@
 			Local Ticket Login
 		</button>
 		
-		<button class="button" id="googleLogin" style="width:auto;">
+		<button class="button" id="googleLogin" style="width:auto;font-size: 1em">
 			<span class="google">Login with Google</span>
 		</button>
 		<div class="box_transition textMessages" style="opacity:0;color:#f00;font-weight:bold;display:inline-block;" id="requestSent">
