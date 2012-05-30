@@ -66,20 +66,24 @@ var newTicketTpl =
 					$("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
 				)
 				.append( // Ticket Created On
-					$("<div/>",{"class":" color260 mainBorder roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+					$("<div/>",{"class":"roundBottomRight4",id:"ticketInfoContainer"})
+						.append( // Ticket Created On
+							$("<div/>",{"class":" color260 mainBorder roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+						)
+						.append( // Ticket Created By
+							$("<div/>",{"class":" color260 mainBorder ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
+						)
+						.append( // Ticket Category
+							$("<div/>",{"class":" color260 mainBorder ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
+						)
+						.append( // Ticket Location
+							$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickLocation"}).html("Cool Location")
+						)
+						.append( // Ticket Assign
+							$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickAssign"}).html("To: John Doe")
+						)
 				)
-				.append( // Ticket Created By
-					$("<div/>",{"class":" color260 mainBorder ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
-				)
-				.append( // Ticket Category
-					$("<div/>",{"class":" color260 mainBorder ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
-				)
-				.append( // Ticket Location
-					$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickLocation"}).html("Cool Location")
-				)
-				.append( // Ticket Assign
-					$("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickAssign"}).html("To: John Doe")
-				)
+
 		);
 function focusMe(id){
 	window.scrollBy(0,5000);
@@ -380,7 +384,6 @@ function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
 function loadLoginPage(){ 
-	//alert("login local: "+sessionStorage.userId)
 	var loginNewBox = Params.Content.find("#ticketLoginList");
 	if(loginNewBox.html()==null){
 		Params.Content.load("templates/login.tpl");
@@ -394,12 +397,13 @@ function loadLoginPage(){
 		}else if(item.name=="Local Login" && item.status==1){
 			$("#showOldLoginButton").show();
 		}
-	})
+	});
 	
 	$.getJSON(uri + "ajax/get_ticketList.php", {"area":"recent","login":1,"count":5}, function (data) {
 		loginNewBox.empty();
 		$.each(data.tickets.reverse(),function(index,value){
 			smallTicket = newTicketTpl.clone();
+			smallTicket.find("tickCreatedBy")
 			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
 			smallTicket.find("#title").attr("id","title-"+value.id).html(value.subject);
 			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
