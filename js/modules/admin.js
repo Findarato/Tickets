@@ -161,7 +161,9 @@ admin = {
 								Tlb.find("#userDisplay"+data.id).append(perm);
 							}
 						
-					},"+",false);
+					},{"displayText":"+",showIcon:false,showSelected:false});
+					
+					
 				
 					userDisplay.find("#userDisplay"+data.id+" #permissions").append(addPerm);
 					display.append(userDisplay);

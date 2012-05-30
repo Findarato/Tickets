@@ -525,29 +525,33 @@ var MD5 = function (string) {
 
         return temp.toLowerCase();
 }
-function createSelect(selector,callback,css){
-	
+function createSelect(selector,callback,options){
+  var baseOptions={
+    showIcon      :true,
+    showSelected  :true,
+    css           :{},
+    displayText   :""
+  }
+  options = $.extend(baseOptions,options);
 	var callBackFn = "";
 	//alert(selector.html())
 	if(selector.html() == null){return false;}
 	callBackFn = callback ? callback : false;
 	if(selector.attr('data-select-items') == undefined || !selector.attr('data-select-items')){return false;}
-	selectorCss = css ? css : false;
-	
 	var dropDown = $("<ul/>",{id:"","class":"downRightShadow dropDown"});
 	var container = $("<div/>",{"class":"selectBox ",css:{"position":"relative"}});
 	var ddIcon = $("<div/>",{"class":"ddIcon","html":"&#9660;"});
 	var newSelector = selector.clone();
 	var selectData = $.parseJSON(newSelector.attr('data-select-items'));
 	newSelector.attr('data-select-items',"parsed");
-  newSelector.append(ddIcon);	
-	if(selectorCss){
-		container.css(selectorCss)
-	}
+  
+  if(options.showIcon)
+    newSelector.append(ddIcon);	
+
+	container.css(options.css)
+
 	newSelector.click(function(){return false;}).attr({"tabindex":Math.floor(Math.random()*11)})
 	selector.replaceWith(container);
-	
-	
 
 	$.each(selectData,function(key,item){
 		if(typeof item == "object" && Object.keys(item).length > 0){ // this is an array
@@ -562,7 +566,11 @@ function createSelect(selector,callback,css){
 					.append(
 						$("<li/>",{"data-item":item2,html:item2,css:{"padding":"1px 1px 1px 10px"},"class":"selectable fastAnimate"})
 						.click(function(){
-							newSelector.html(item2).append(ddIcon);  ;
+						  if(options.showSelected)
+						    newSelector.html(item2)
+							if(options.showIcon)
+							 newSelector.append(ddIcon)
+							 
 							newSelector.attr("data-value",key2)
 							if(callBackFn)callBackFn(key2);
 						})
@@ -575,12 +583,15 @@ function createSelect(selector,callback,css){
 					$("<li/>",{"data-item":item,html:item,css:{"padding":"1px 1px 1px 1px"},"class":"selectable fastAnimate"})
 						.click(function(){
 							if(callBackFn)callBackFn(key);
-							newSelector.attr("data-value",key)
-							newSelector.html(item).append(ddIcon); ;
+              newSelector.attr("data-value",key)
+              if(options.showSelected)
+                newSelector.html(item)
+              if(options.showIcon)
+               newSelector.append(ddIcon)
 						})
-				)
+				);
 		}
-	})
+	});
 
 	var conPos = container.position();
 	container

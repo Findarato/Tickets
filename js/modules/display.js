@@ -1,5 +1,47 @@
 spinner = false;
 spinnerTimeOut = false;
+var newTicketTpl = 
+  $("<div/>",{"class":"ticketBox insideBorder roundAll4 insideBoxShadow newTicketTpl"})
+    .html(
+      $("<div/>",{"class":"ticketItem"})
+        .append( // Ticket Bookmark
+          $("<div/>",{"class":"ticketBookmarkBox fake-link roundTopRight4 ticketSprite",id:"ticketFavorite"})
+        )
+        .append( // User Icon Box
+          $("<div/>",{"class":"ticketUserIconBox color260 insideBoxShadow roundAll4",id:"userPic"})
+        ) 
+        .append( // Ticket ID
+          $("<div/>",{"class":"ticketIdBox color260 insideBoxShadow roundAll2","html":8888,id:"ticketId"})
+        )
+        .append( // Ticket Priority
+          $("<div/>",{"class":"ticketPriorityBox color260 insideBoxShadow roundAll2","html":"",id:"ticketPriority"})
+        )
+        .append( //Ticket Title
+          $("<div/>",{"class":"ticketTitleBox ticketTitle",id:"title"}).html("Title of the ticket")
+        )
+        .append( // Ticket Body
+          $("<div/>",{"class":"ticketBodyBox ",id:"body"}).html("Body of the ticket asdf asdfasdf asd fsasdfasdf <br>stuff asddddddd<br>")
+        )
+        .append( // Ticket Created On
+          $("<div/>",{"class":"roundBottomRight4",id:"ticketInfoContainer",css:{"bottom":0,"right":0,"position":"absolute","width":"70%","overflow":"hidden","height":"20px"}})
+            .append( // Ticket Created On
+              $("<div/>",{"class":" color260 mainBorder roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
+            )
+            .append( // Ticket Created By
+              $("<div/>",{"class":" color260 mainBorder ticketCreatedByBox",id:"tickCreatedBy"}).html("By: John Doe")
+            )
+            .append( // Ticket Category
+              $("<div/>",{"class":" color260 mainBorder ticketCategoryBox",id:"tickCategory"}).html("Cool Category")
+            )
+            .append( // Ticket Location
+              $("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickLocation"}).html("Cool Location")
+            )
+            .append( // Ticket Assign
+              $("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickAssign"}).html("To: John Doe")
+            )
+        )
+
+    );
 function Spinner(run){
   spinSel = $("#spinner");
   if(run==true){
@@ -374,7 +416,7 @@ function loadTicketBody(inputData, container) {
   //
   // Reassign button 
   //	 
-   	createSelect($("#ticketAssign"),function(id){})
+   	createSelect($("#ticketAssign"),function(id){},{})
 	 
 	$('#reAssignButton').click(function(){
 		$("#reassignBox").css({"height":"30px","overflow":"visible"})
@@ -872,5 +914,35 @@ function loadUserPage(userId){
 	}
 
 }
-
+function loadLoginPage(){ 
+  var loginNewBox = Params.Content.find("#ticketLoginList");
+  if(loginNewBox.html()==null){
+    Params.Content.load("templates/login.tpl");
+    loginNewBox = Params.Content.find("#ticketLoginList");
+  }
+  loadLocalStorage(); // Lets make sure that we load up localStorage
+  var feat = $.parseJSON(sessionStorage.features);
+  $.each(feat,function(i,item){
+    if(item.name=="Local Login" && item.status==0){
+      $("#showOldLoginButton").hide();
+    }else if(item.name=="Local Login" && item.status==1){
+      $("#showOldLoginButton").show();
+    }
+  });
+  
+  $.getJSON(uri + "ajax/get_ticketList.php", {"area":"recent","login":1,"count":5}, function (data) {
+    loginNewBox.empty();
+    $.each(data.tickets.reverse(),function(index,value){
+      smallTicket = newTicketTpl.clone();
+      smallTicket.find("tickCreatedBy")
+      smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id.toString(16));
+      smallTicket.find("#title").attr("id","title-"+value.id).html(value.subject);
+      smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
+      smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
+      smallTicket.find("#tickCreatedOn").attr("id","tickCreatedOn-"+value.id).html("On: "+value.created_on);
+      smallTicket.find("#userPic").attr("id","userPic-"+value.id).css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=identicon&r=g)");
+      loginNewBox.append(smallTicket);
+    });
+  });
+}
 
