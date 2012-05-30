@@ -21,10 +21,7 @@ var newUserTpl =
 		);
 var newPermissionTpl = $("<div/>",{"class":" color260 mainBorder ticketCategoryBox",id:"permInfo",css:{"width":"auto"}}).html("On: Aug. 8, 1982")
 
-var newFeature = $("<div/>")
-					.html(
-						$("<button/>",{"classes":"ui-button ui-button-text-only ui-widget ui-state-default"})
-					);
+var newFeature = $("<div/>").html($("<button/>",{"classes":"ui-button ui-button-text-only ui-widget ui-state-default"}));
 
 var menu = $("<nav/>")
 	.html(
