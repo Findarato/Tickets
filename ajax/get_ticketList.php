@@ -24,12 +24,9 @@ $page = 0;
 // the default page to return incase one is not passed
 $sort = false;
 
-if (isset($_GET["count"])) { $count = $_GET["count"];
-}
-if (isset($_GET["page"])) { $page = $_GET["page"];
-}
-if (isset($_GET["sort"])) { $sort = $_GET["sort"];
-}
+if (isset($_GET["count"]))$count = $_GET["count"];
+if (isset($_GET["page"]))$page = $_GET["page"];
+if (isset($_GET["sort"]))$sort = $_GET["sort"];
 
 if ($page > 0) {
   $page = $page * $count + 1;
@@ -41,44 +38,6 @@ if ($page > 0) {
 
 if (isset($_GET["area"])) {
   switch($_GET["area"]) {
-    case "bugs_open" :
-      // Tickets assigned to the user {To Me}
-      $sql = "SELECT 
-      t.id
-      FROM tickets AS t 
-      WHERE (t.open=1
-      AND t.tickettype_id=2)
-      ";
-      $Ids = array_implode($db -> Query($sql, false, "row"));
-      $wc = "t.id IN(" . join(",", $Ids) . ")";
-      break;
-    case "bugs_closed" :
-      // Tickets assigned to the user {To Me}
-      $sql = "SELECT 
-      t.id
-      FROM tickets AS t 
-      WHERE (t.open=0
-      AND t.tickettype_id=2)
-      ";
-      $Ids = array_implode($db -> Query($sql, false, "row"));
-      $wc = "t.id IN(" . join(",", $Ids) . ")";
-      break;
-    case "all_bugs" :
-      // Tickets assigned to the user {To Me}
-      $sql = "SELECT 
-      t.id
-      FROM tickets AS t 
-      WHERE (t.open=1
-      AND t.tickettype_id=)
-      ";
-      $Ids = array_implode($db -> Query($sql, false, "row"));
-      $wc = "t.id IN(" . join(",", $Ids) . ")";
-      break;
-
-    /*
-     * Ticket area
-     *
-     */
     case "all_tickets" :
       // Tickets assigned to the user {To Me}
       $sql = "SELECT 
@@ -121,7 +80,7 @@ if (isset($_GET["area"])) {
       OR t.assigned_by_id=" . $usr -> User_id . "
       OR t.assigned_id=" . $usr -> User_id . ")
       AND (t.open=0
-      AND t.tickettype_id=1)
+      AND t.tickettype_id=1) ORDER BY t.created_on DESC
       ";
 
       $Ids = $db -> Query($sql, false, "row");
@@ -364,9 +323,8 @@ if (isset($_GET["area"])) {
     case 'id' :
       $sql .= "t.id " . $dir . ",t.priority DESC,t.due_on";
       break;
-
     default :
-      $sql .= "t.id,t.priority DESC,t.due_on";
+      $sql .= "t.id DESC ,t.priority DESC,t.due_on";
       break;
   }
 
