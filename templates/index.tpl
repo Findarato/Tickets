@@ -63,20 +63,9 @@
 
       {include file="blank.tpl"}
     </div>
-    {*
-    <div id="notifyTpl" style="position:absolute" class="ui-helper-hidden">
-      {include file="notify.tpl"}
-    </div>
-
-    <div id="statisticsTpl" style="position:absolute" class="ui-helper-hidden">
-      {include file="statistics.tpl"}
-    </div>
-    *}
     <div id="notifyArea" style="width:0px;" class=""></div>
-
     <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
     <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
-
     <script src="/js/modules/display.js?v=XX"></script>
     <script src="/js/tickets.js?v=XX"></script>
     <script src="/js/modules/admin.js?v=XX"></script>

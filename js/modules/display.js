@@ -44,17 +44,10 @@ var newTicketTpl =
     );
 function Spinner(run){
   spinSel = $("#spinner");
-  if(run==true){
-    spinner = true; 
-    spinSel.show();
-   // console.log("start spinner")
-    var loaderSymbols = ['0', '1', '2', '3', '4', '5', '6', '7'], loaderRate = 100, loaderIndex = 0,loader = function() { spinSel.attr("data-icon",loaderSymbols[loaderIndex]); loaderIndex = loaderIndex  < loaderSymbols.length - 1 ? loaderIndex + 1 : 0; spinnerTimeOut = setTimeout(loader, loaderRate); }; loader(); 
+  if(run){
+    spinSel.css("bottom","0");
   }else{
-    if(spinnerTimeOut){
-      clearTimeout(spinnerTimeOut);
-    }
-    spinner = false;
-    spinSel.hide();
+    spinSel.css("bottom","-2em");
   }
 }
 function changeArea(area){
@@ -486,9 +479,9 @@ function loadTicketBody(inputData, container) {
 	
 }
 function loadTicket(ticketId,update) {
-	if(Params.LastArea != "ticket"){
+	if(sessionStorage.lastArea != "ticket"){
 	  Params.Content.html($("#ticketTpl").html());
-	  Params.LastArea = "ticket";
+	  sessionStorage.lastArea = "ticket";
 	}
 	sessionStorage.setItem("currentTicket",ticketId);
 	if(data = $.parseJSON(sessionStorage.getItem("TicketId"+ticketId))){
@@ -506,25 +499,34 @@ function loadTicket(ticketId,update) {
 		loadResponsesBody(ticketId, $("#replyareabody"), 0);
 	} //load the responses page 0
 }
-function loadTicketList(pageNumber,queryObj,append) {
+function loadTicketList(pageNumber,queryObj,append,callback) {
+  callBackFn = function(){};
   console.log("query: "+JSON.stringify(queryObj))
+  append = append ? append : false;
+  callBackFn = callback ? callback : false;
 	var html = "";
 	var bugs = false;
 	var ticketCount = 0;
 	var feat = $.parseJSON(sessionStorage.features);
 	if (pageNumber < 0) {	pageNumber = 0;}
+	sessionStorage.currentPage = pageNumber;
 	var hash = getHashArray();
-	if(Params.LastArea == "ticketList"){ // This is a new display of data, not a change of locations
+	if(sessionStorage.lastArea == "ticketList"){ // This is a new display of data, not a change of locations
 		if($("#displayTable").html() == null){
-			Params.LastArea = ""; // this is a bug and needs to be reset to keep working;
+			sessionStorage.lastArea = ""; // this is a bug and needs to be reset to keep working;
 			loadTicketList(pageNumber,queryObj); // lets just take what was passed to this function and recall it 
 			return false; // lets get out of the function already
 		}
 		displayTable = $("#displayTable");
 	}else{ // this just needs to be repopulated with out replacing the headers
-		Params.LastArea = "ticketList";	
-		Params.Content.html($("#generic").html());
-		Tlb = $("#ticketListbody").empty();
+		sessionStorage.lastArea = "ticketList";	
+		if(append){
+		  Tlb = $("#ticketListbody");
+		}else{
+		  Params.Content.html($("#generic").html());
+		  Tlb = $("#ticketListbody").empty();  
+		}
+		
 		displayTable = $("<div/>",{"id":"ticketListTable","class":" fontMain",css:{"width":"100%","position":"relative"}});
 		displayTable
 			.append(
@@ -553,7 +555,10 @@ function loadTicketList(pageNumber,queryObj,append) {
 				pageTracker._trackPageview(newHash);
 			},{"position":"absolute","right":"10px"});
 	}
-	Tlb.html(displayTable) // lets make sure something gets on the page
+	if(!append){
+	  Tlb.html(displayTable) // lets make sure something gets on the page
+	}
+	
 	var tableBody = displayTable.find("#tableBody"); 
 	if(queryObj && typeof queryObj == "object"){ // lets just make sure we are dealing with the correct information
 		O_search = queryObj;
@@ -589,8 +594,9 @@ function loadTicketList(pageNumber,queryObj,append) {
 	}
 	
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
+	  if(typeof data.tickets == "string"){if(callBackFn)callBackFn();return true;};
 		//pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
-		if(!append){tableBody.empty();}
+		//if(!append){tableBody.empty();}else{alert("appending")}
 		
 		$.each(data.tickets,function(index,value){
 			smallTicket = newTicketTpl.clone();
@@ -611,7 +617,6 @@ function loadTicketList(pageNumber,queryObj,append) {
 					}
 				});
 			});
-			//alert(value.id)			
 			smallTicket.find("#ticketId").attr("id","ticketId-"+value.id).html(value.id);
 			smallTicket.find("#ticketPriority").attr("id","ticketPriority-"+value.id).html(
 	    		function(i,html){
@@ -621,7 +626,6 @@ function loadTicketList(pageNumber,queryObj,append) {
 	     			if(value.priority>0){
 	       				if(value.priority>5){value.priority = value.priority-5;}
 	       				if(value.priority == 5)value.priority --;
-	       				//result = Params.Priority_string[item.priority].name;
 	       				result = $("<div/>",{title:Params.Priority_string[value.priority].name}).addClass("pSquare p"+Params.Priority_string[value.priority].name.replace(" ",""));
 					}else{$("<div/>",{title:Params.Priority_string[value.priority].name}).addClass("pSquare p"+Params.Priority_string[value.priority].name.replace(" ",""));}
 					return result;
@@ -636,9 +640,8 @@ function loadTicketList(pageNumber,queryObj,append) {
 							returnValue = "<span style='font-size:.7em'>["+value.category+"]</span> "+value.subject;
 					});
 					return returnValue;
-				}
-				
-				).attr({"id": "subject" + value.id }));
+				})
+				.attr({"id": "subject" + value.id }));
 			smallTicket.find("#body").attr("id","body-"+value.id).html(value.description);
 			smallTicket.find("#tickCreatedBy").attr("id","tickCreatedBy-"+value.id).html("By: "+value.firstname2+ " " + value.lastname2 );
 			smallTicket.find("#tickAssign").attr("id","tickAssign-"+value.id).html("To: "+value.firstname+ " " + value.lastname );
@@ -648,9 +651,9 @@ function loadTicketList(pageNumber,queryObj,append) {
 			smallTicket.find("#userPic").attr("id","userPic-"+value.id).addClass("roundAll4 mainBorder").css("background-image","url(http://www.gravatar.com/avatar/"+value.md5Email+"?s=32&d=monsterid&r=g)");
 			tableBody.append(smallTicket);
 		});
+		if(callBackFn)callBackFn(); // this is now finished. Lets run the call back function if there is one
 		$(".ticketCategoryBox").css({"display":"none"});
 		$.each(feat,function(i,item){
-			
 			switch(item.name){
 				case "Categories":
 					if(item.status==0)
@@ -672,7 +675,6 @@ function loadTicketList(pageNumber,queryObj,append) {
 			}
 		});
 	});
-
 }
 function loadUserPage(userId){
 	//alert(userId)

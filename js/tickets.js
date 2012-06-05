@@ -152,9 +152,9 @@ function checkHash() {
 			loadTicketList(0,{"search":"","area":"all_tickets"});
 		break;
 		case "#admin": // this triggers when the tab tickets is clicked
-			if(Params.LastArea != "admin" || typeof admin == "undefined"){
+			if(sessionStorage.lastArea != "admin" || typeof admin == "undefined"){
 				changeArea("admin");
-				Params.LastArea = "admin";
+				sessionStorage.lastArea = "admin";
 				admin.startAdmin();
 			}
 			
@@ -196,7 +196,7 @@ function checkResponse(json) {
 	}
 }
 function loadBlank() {
-	Params.LastArea = "UpdateNotes";
+	sessionStorage.lastArea = "UpdateNotes";
 	Params.Content.load("ajax/updateNotes.php");
 }
 function loadLargeBarGraph(selectorId,data,lables) {
@@ -271,7 +271,7 @@ function loadLargeStats() {
 		padding: "2px"
 	}));
 
-	Params.LastArea = "largeStats";
+	sessionStorage.lastArea = "largeStats";
 	var title = "";
 	$.getJSON(uri + "ajax/stats.php", {
 		type: "1,2,3,4,5,6",
@@ -506,12 +506,11 @@ jQuery(document).ready(function () {
 	});
   
   	$("#topperNew").live("click",function(){
-	    Params.LastArea = "newTicket";
+	    sessionStorage.lastArea = "newTicket";
 	    Params.Content.html($("#newTicketdialog").html());
 	    Params.Content.find("#ticketAssignBox").show();
 	    Params.Content.find("#newTicketType").val("new");
 	    Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
-    
 	    try{
 	    	//$("input[type=date]").live(datepicker());
 	    	Params.Content.find("#newTicketDueDate").datepicker();
@@ -520,13 +519,6 @@ jQuery(document).ready(function () {
 	    }
     
   });
-  	$("#topperNewBug").live("click",function(){
-    Params.LastArea = "newBug";
-    Params.Content.html($("#newBugdialog").html());
-    Params.Content.find("#ticketAssignBox").show();
-    Params.Content.find("#newTicketType").val("new");
-    Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
-  });  
   	//Clicking login with google button
 	$("#googleLogin").live("click",function(){
 		window.location = "classes/lightopenid/google.php?login";
@@ -688,14 +680,15 @@ jQuery(document).ready(function () {
 	Spinner(false)
   
   $(window).scroll(function() {
-    console.log($(window).scrollTop() + $(window).height() + " ? = ? "+$(document).height())
+    //console.log($(window).scrollTop() + $(window).height() + " ? = ? "+$(document).height())
     if($(window).scrollTop() + $(window).height() +1 >= $(document).height()) {
       //console.log("near Bottom");
-      Spinner(true);
-      $.getJSON("ajax/bookmark.php",function(data){
-        loadTicketList(2,"",true)
-        Spinner(false)
-      });
+      if(sessionStorage.lastArea == "ticketList"){
+        Spinner(true);
+        loadTicketList(parseInt(sessionStorage.currentPage)+1,"",true,function(){Spinner(false)})
+      }else{
+        
+      }
     }else{
       Spinner(false);
     }

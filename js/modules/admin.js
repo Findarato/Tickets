@@ -112,9 +112,13 @@ admin = {
 		});
 		Tlb.append(display);
 	},
-	"loadAllUsers":function(){
-			Tlb.html(menu)
-			pageTracker._trackPageview("admin/loadAllUsers");
+  "loadAllUsers":function(){
+    if(!Tlb){
+      admin.startAdmin();
+    }else{
+      Tlb.html(menu) 
+    }
+		pageTracker._trackPageview("admin/loadAllUsers");
 			$.getJSON("ajax/admin/users.php",{"type":"allUsers"},function(json){
 				Params.allPermissions = json.data.allPermissions;
 				var display = $("<div/>");

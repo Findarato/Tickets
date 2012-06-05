@@ -76,4 +76,4 @@
 		</ul>
 	</menu>	
 </header>
-<div id="spinner" style="position:fixed;bottom:5px;right:5px;z-index:9999;display:none;"></div>
+<div class="color1 roundTop4 outSideBoxShadow smoothAnimate" id="spinner" style="position:fixed;bottom:0em;right:50%;z-index:9999;padding:.5em;height:2em;overflow:hidden;">Loading</div>
