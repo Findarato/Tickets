@@ -500,8 +500,8 @@ function loadTicket(ticketId,update) {
 	} //load the responses page 0
 }
 function loadTicketList(pageNumber,queryObj,append,callback) {
+  //Lets setup the variables
   callBackFn = function(){};
-  console.log("query: "+JSON.stringify(queryObj))
   append = append ? append : false;
   callBackFn = callback ? callback : false;
 	var html = "";
@@ -511,14 +511,15 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 	if (pageNumber < 0) {	pageNumber = 0;}
 	sessionStorage.currentPage = pageNumber;
 	var hash = getHashArray();
-	if(sessionStorage.lastArea == "ticketList"){ // This is a new display of data, not a change of locations
-		if($("#displayTable").html() == null){
+	//Lets start processing the variables
+	if(sessionStorage.lastArea == "ticketList"){ // this just needs to be rebuilt with out replacing the headers
+		if($("#ticketListTable").html() == null){
 			sessionStorage.lastArea = ""; // this is a bug and needs to be reset to keep working;
-			loadTicketList(pageNumber,queryObj); // lets just take what was passed to this function and recall it 
+			loadTicketList(pageNumber,queryObj,append,callback); // lets just take what was passed to this function and recall it 
 			return false; // lets get out of the function already
-		}
-		displayTable = $("#displayTable");
-	}else{ // this just needs to be repopulated with out replacing the headers
+		}else
+      displayTable = $("#ticketListTable");
+  }else{ // This is a new diplay
 		sessionStorage.lastArea = "ticketList";	
 		if(append){
 		  Tlb = $("#ticketListbody");
@@ -555,10 +556,7 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 				pageTracker._trackPageview(newHash);
 			},{"position":"absolute","right":"10px"});
 	}
-	if(!append){
-	  Tlb.html(displayTable) // lets make sure something gets on the page
-	}
-	
+	if(!append)Tlb.html(displayTable) // lets make sure something gets on the page
 	var tableBody = displayTable.find("#tableBody"); 
 	if(queryObj && typeof queryObj == "object"){ // lets just make sure we are dealing with the correct information
 		O_search = queryObj;
@@ -595,9 +593,7 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 	
 	$.getJSON(uri + "ajax/get_ticketList.php", O_search, function (data) {
 	  if(typeof data.tickets == "string"){if(callBackFn)callBackFn();return true;};
-		//pageAnator($("#tldPageAnator"), data.ticketCount, 30,pageNumber);
-		//if(!append){tableBody.empty();}else{alert("appending")}
-		
+		if(!append){tableBody.empty();}
 		$.each(data.tickets,function(index,value){
 			smallTicket = newTicketTpl.clone();
 			smallTicket.find("#ticketFavorite").addClass(function(){
