@@ -688,4 +688,5 @@ jQuery(document).ready(function () {
       Spinner(false);
     }
   });
+  if(jQuery.browser.mozilla || jQuery.browser.opera)checkHash(); // firefox does not fireoff a pop change on a reload like chrome does  
 });

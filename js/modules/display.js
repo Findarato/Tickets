@@ -520,7 +520,8 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 		}else
       displayTable = $("#ticketListTable");
   }else{ // This is a new diplay
-		sessionStorage.lastArea = "ticketList";	
+		sessionStorage.lastArea = "ticketList";
+		
 		if(append){
 		  Tlb = $("#ticketListbody");
 		}else{
@@ -530,7 +531,7 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 		
 		displayTable = $("<div/>",{"id":"ticketListTable","class":" fontMain",css:{"width":"100%","position":"relative"}});
 		displayTable
-			.append(
+      .append(
 				$("<nav/>",{css:{"position":"relative","margin-bottom":"10px"}})
 					.append(function(){
 						var selectValue = "";
@@ -556,6 +557,7 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 				pageTracker._trackPageview(newHash);
 			},{"position":"absolute","right":"10px"});
 	}
+	
 	if(!append)Tlb.html(displayTable) // lets make sure something gets on the page
 	var tableBody = displayTable.find("#tableBody"); 
 	if(queryObj && typeof queryObj == "object"){ // lets just make sure we are dealing with the correct information
