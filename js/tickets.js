@@ -60,6 +60,7 @@ function oc(a)
 function checkHash() {
 	var hash = getHashArray();
 	loadLocalStorage();
+	console.log("I am checking the hash");
 	if (window.location.hash.length > 1) {
 		//This checks for a url passed hash, otherwise its just going to go in there.
 		switch (hash[0]) {
@@ -458,6 +459,8 @@ jQuery(document).ready(function () {
 	if(document.location.toString().indexOf("devtickets")){ // Lets just keep the localStorage clear for development 
 		localStorage.clear();	
 	}
+	console.log("document is ready");
+	sessionStorage.lastArea = "";
 	
 	//this should make the logout button in the drop down work.
 	$("#popUpLogout")
@@ -580,10 +583,7 @@ jQuery(document).ready(function () {
 				}
 			}
 		}
-		//populateAllTickets();
 	});
-	//$("#topperStart").click(function(){	loadNew(0); setHash("#start");});
-	
 	$("#ticketSearchButton").live("click",function(){
 		loadTicketList(0,{"search":$("#ticketSearch").val(),"area":"all_tickets"});//			loadTicketList(0,{"search":"","area":"all_tickets"});
 	});
@@ -603,9 +603,7 @@ jQuery(document).ready(function () {
 	//Ticket display live items
 	$(".actionButtons").live("click", function () {
 		if(sessionStorage.userId == 0){
-			setHash("#login");
-    		/*checkHash*/
-    		return;
+			setHash("#login");return;
 		}
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
@@ -675,10 +673,7 @@ jQuery(document).ready(function () {
     return false; //to make sure the a isnt clicked
 	});
 	// Last but not least after all the rest of the code is run lets make sure that something gets loaded
-	
-	checkHash();
 	Spinner(false)
-  
   $(window).scroll(function() {
     //console.log($(window).scrollTop() + $(window).height() + " ? = ? "+$(document).height())
     if($(window).scrollTop() + $(window).height() +1 >= $(document).height()) {
