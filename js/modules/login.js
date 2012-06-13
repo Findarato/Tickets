@@ -5,7 +5,6 @@
 jQuery(document).ready(function () {
 	$("#yesLink").live("click",function(){
 		$.getJSON("/ajax/login.php",{"openId":"1","userId":"1"},function(data){
-			// Userid
 			if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 				$.getJSON("/ajax/login.php",{"userIdFetch":1},function(data){
 					localStorage.setItem("userId",data.user_id);
@@ -18,9 +17,8 @@ jQuery(document).ready(function () {
 	$("#noLink").live("click",function(){
 	  window.location = "/";
 	});
-	$("#newUser").live("click",function(){
+	$("#newUser").live("click",function(){ // Lets create a new user account
 		$.getJSON("/ajax/login.php",{"openId":"1","userId":"2"},function(data){
-			// Userid
 			if(!localStorage.userId || localStorage.userId == 0 || typeof localStorage.userId=="undefined" || typeof localStorage.userId=="string"){// something broke lets take care of it
 				$.getJSON("/ajax/login.php",{"userIdFetch":1},function(data){
 					localStorage.setItem("userId",data.user_id);
