@@ -56,37 +56,40 @@ ON
 WHERE 
 	id=".$userId
 ,false,"assoc");
-$json["userInfo"]["mdEmail"] = md5( strtolower( trim( $json["userInfo"]["email_address"] ) ) ); 
+if(isset($json["userInfo"])){ // we do not need to run this code if the above query fails
+  $json["userInfo"]["mdEmail"] = md5( strtolower( trim( $json["userInfo"]["email_address"] ) ) );
+  $json["userInfo"]["permissions"] = $db->Query("
+  SELECT
+    up.permission_id,
+    p.display,
+    p.permission
+  FROM 
+    tickets.user_permissions up  
+  JOIN
+    tickets.permissions AS p
+  ON 
+    (p.id=up.permission_id) 
+  WHERE 
+    up.user_id=".$userId
+  ,false,"assoc_array");
+  
+  $json["userInfo"]["tickets"] = $db->Query("
+  SELECT
+    dm.department_id AS id,
+    dm.notify,
+    d.name AS departmentName
+  FROM 
+    tickets.department_members AS dm 
+  JOIN
+    department AS d
+  ON 
+    (d.id=dm.department_id) 
+  WHERE 
+    user_id=".$userId
+  ,false,"assoc");
+}
+ 
 
-$json["userInfo"]["permissions"] = $db->Query("
-SELECT
-	up.permission_id,
-	p.display,
-	p.permission
-FROM 
-	tickets.user_permissions up  
-JOIN
-	tickets.permissions AS p
-ON 
-	(p.id=up.permission_id) 
-WHERE 
-	up.user_id=".$userId
-,false,"assoc_array");
-
-$json["userInfo"]["tickets"] = $db->Query("
-SELECT
-	dm.department_id AS id,
-	dm.notify,
-	d.name AS departmentName
-FROM 
-	tickets.department_members AS dm 
-JOIN
-	department AS d
-ON 
-	(d.id=dm.department_id) 
-WHERE 
-	user_id=".$userId
-,false,"assoc");
 
 $json["departments"] = $db->Query("
 SELECT

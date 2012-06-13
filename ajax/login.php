@@ -22,29 +22,35 @@
 				$response = login($_SESSION["openID"]["user_id"],$password,$response,true);
 				$response["features"] = getFeatures();
 					
-			}elseif($_GET["userId"] == 2){ // this will be a new user in tickets
+			}elseif($_GET["userId"] == 2 && $_GET["openId"] == 1){ // this will be a new user in tickets
 				$pass = md5(rand(88,881982)*time()); 
 				// Ok lets make a ticket user
 				$un = explode("@",$_SESSION["openID"]["email"]);
+				$response["session"] = $_SESSION;
 				$unTest = $db->Query("SELECT id FROM tickets.users WHERE email_address='".$_SESSION["openID"]["email"]."' LIMIT 1;",false,"row");
-				if($unTest == 0){  // lets just make sure some one is not spamming the button.  This kinda helps development as well
-					$res = $db->Query('INSERT INTO tickets.users (type,joined,firstname,lastname,username,password,email_address) VALUES (
+				if($unTest == 0){  // lets just make sure some one is not spaming the button.  This kinda helps development as well
+					$sql = 'INSERT INTO tickets.users (type,joined,firstname,lastname,username,password,email_address) VALUES (
 					1,
 					NOW(),
 					"'.$_SESSION["openID"]["first_name"].'",
 					"'.$_SESSION["openID"]["last_name"].'",
 					"'.$un[0].'",
 					MD5("'.$pass.'"),
-					"'.$_SESSION["openID"]["email"].'");'
-					,false,"row");
+					"'.$_SESSION["openID"]["email"].'");';
+					$res = $db->Query($sql,false,"row");
+          
+          
 					$response["newid"] = $res;
+          if($res > 0){// we are not going to add in permissions for broken stuff
+            $db->Query("INSERT INTO user_permissions VALUES(".$res.",6)",false);
+          }
+          
 				}else{
 				  $response["newid"] = $unTest;
 				}
         $db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$response["newid"].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
         
-        $response = login($res,$db->Query("SELECT password FROM tickets.users WHERE id=".$res,false,"row"),$response,true);
-        print_r($response);die();
+        $response = login($unTest,$pass,$response,true);
         $response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) );
         $response["features"] = getFeatures();
 			}

@@ -7,7 +7,6 @@ class User {
 	private $openID = "";
 	private $Permissions = array();
 	private $md5Email = "";
-	
 	function UserLogin($name,$pass){ // just a wrapper to make sure that older stuff works
 		$this->User($name,$pass); 
 	}
@@ -52,7 +51,7 @@ class User {
 				}
 		}
 		$rows = $db->Query($SQL,false,"assoc_array");
-		
+		$this->debug[] = $SQL;
 		if($db->Count_res()>0){
 			foreach($rows as $row){
 				$this->a_User['logged-in']=true;
@@ -75,7 +74,7 @@ class User {
 				}
 			}
 		}
-		return array('success'=>0);
+		return array('success'=>0,"sql"=>$SQL);
 	}
 	/* Function - Log User Out */
 	public function LogUserOut(){$this->User_id = -1;}
