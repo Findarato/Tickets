@@ -59,7 +59,6 @@ function oc(a)
 }
 function checkHash() {
 	var hash = getHashArray();
-	loadLocalStorage();
 	console.log("I am checking the hash");
 	if (window.location.hash.length > 1) {
 		//This checks for a url passed hash, otherwise its just going to go in there.
@@ -81,7 +80,6 @@ function checkHash() {
   			}
   			break;
 		case "#ticketList":
-			loadLocalStorage();
 			if(sessionStorage.userId >1){
 				changeArea("tickets");
 				switch (hash[2]) {
@@ -200,35 +198,7 @@ function loadBlank() {
 	sessionStorage.lastArea = "UpdateNotes";
 	Params.Content.load("ajax/updateNotes.php");
 }
-function loadLargeBarGraph(selectorId,data,lables) {
-	var Bar = new RGraph.Bar(selectorId, data);
-	RGraph.Clear(Bar.canvas); 
-    Bar.Set('chart.labels', lables);
-    Bar.Set('chart.gutter',45);
-    Bar.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
-    Bar.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
-	Bar.Set('chart.linewidth', 2);
-    Bar.Set('chart.ylabels.count', 3);
-    Bar.Set('chart.filled', true);
-    Bar.Set('chart.background.grid', true);
-    Bar.Set('chart.colors', ['rgba(0,0,0,.60)']);
-    Bar.Draw();
-}
-function loadLargeLineGraph(selectorId,data,lables) {
-	//RGraph.Clear(document.getElementById(selectorId));graphDisplay
-	RGraph.Clear(document.getElementById("graphDisplay"));
-    var line = new RGraph.Line(selectorId, data);
-    line.Set('chart.labels', lables);
-    line.Set('chart.gutter',45);
-    line.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
-    line.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
-    line.Set('chart.linewidth', 2);
-    line.Set('chart.ylabels.count', 3);
-    line.Set('chart.filled', true);
-    line.Set('chart.background.grid', true);
-    line.Set('chart.colors', ['rgba(0,0,0,.60)']);
-    line.Draw();
-}
+
 function checkNotify(dt) {
 	var display = "";
 	var disp = false;
@@ -343,9 +313,7 @@ function populateAllBugs(Area) {
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
-
-function loadLocalStorage(clear){
-
+function loadSessionStorage(clear){
 	//Features Enabled
 	if(!sessionStorage.features || sessionStorage.features == "undefined" ){
 		$.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
@@ -375,79 +343,18 @@ function loadLocalStorage(clear){
   	}else{
     	Params.Categories = $.parseJSON(sessionStorage.getItem("ticketsCategories"));
   	}
-	
-	//Projects for bugs
-  	if(!sessionStorage.getItem("ticketsProjects")){
-    	$.getJSON("ajax/get_projects.php",{},function(data){
-      		sessionStorage.setItem("ticketsProjects",JSON.stringify(data.projects));
-     	 	Params.Projects = data.projects;
-    	});
-  	}else{
-    	Params.Projects = $.parseJSON(sessionStorage.getItem("ticketsProjects"));
-  	}
 	//User info
-	if(!sessionStorage.userInfo && !sessionStorage.userInfo){
+	if(!sessionStorage.userInfo){
 		$.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
-			Params.userInfo = data.userInfo;
-		//	alert(JSON.stringify(data.userInfo))
 			sessionStorage.setItem("userInfo",JSON.stringify(data.userInfo));
 		});	
 	}
 
 }
-function login(data){ //We need a json array, probably need to parse it, who knows
-
-	//alert(data.message);
-	loadLocalStorage(); // Lets make sure that we load up localStorage
-	localStorage.clear();
-	if(sessionStorage.userId > 100){
-		setHash("#ticketList/all_tickets");
-	}
-	if (data.error.length > 0) {
-		alert(data.error);
-	} else {
-		Params.LastLogon = data.lastlogon;
-		$("#topperUserInfo")
-			.html(data.firstname + " " + data.lastname ).attr("href","#");
-		
-		if($("#headerAvatar").html() != null){
-			$("#headerAvatar").css("background-color","#F00").attr("src","http://www.gravatar.com/avatar/"+sessionStorage.mdEmail+"?s=24&d=identicon&r=g");	
-		}else{
-			$("#topperUserInfo").append(
-				$("<img/>").attr("src","http://www.gravatar.com/avatar/"+sessionStorage.mdEmail+"?s=24&d=identicon&r=g")
-			)	
-		}
-    checkResponse(data);
-    sessionStorage.userId = data.userid;
-    alert("yeah I get here +"+data.userid)
-		$("#newTicketUser_id").val(sessionStorage.userId);
-		if (data.departmentname === "" || data.departmentname == "None!") {
-			setHash("#userPage/"+data.userid);
-		}else{
-			if(sessionStorage.currentTicket >0){
-				setHash("#ticket/"+sessionStorage.currentTicket);
-			}else{
-				setHash("#ticketList/all_tickets");	
-			}
-		}
-		//alert(data.features);
-		sessionStorage.setItem("features",JSON.stringify(data.features));
-		$("#rss1").attr("href", "ticketsrss.php?id=" + Params.UserId);
-		$("#rss2").attr("href", "ticketsrss.php?id=" + Params.UserId + "&bookmark=1");
-
-		//alert(localStorage.mdEmail);
-		if(sessionStorage.currentTicket >0){
-			window.document.location = "/#ticket/"+sessionStorage.currentTicket
-		}else{
-			window.document.location="/";	
-		}
-	}
-}
 
 
 if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
-	  //alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
 	  checkHash(); 
 	  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 	};
@@ -456,11 +363,18 @@ if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery
 }
 
 jQuery(document).ready(function () {
+  Params.Content = $("#content"); //lets stop searching for it a hundred times
+  
 	if(document.location.toString().indexOf("devtickets")){ // Lets just keep the localStorage clear for development 
-		localStorage.clear();	
+		//sessionStorage.clear();
 	}
-	console.log("document is ready");
-	sessionStorage.lastArea = "";
+	if(localStorage.userId > 1){// we are just going to take the login information that was orgionaly passed though the login page and move it over to the session
+	  sessionStorage.setItem("userId",localStorage.userId);
+	  localStorage.userId = -1;
+	}
+	if(!$("html").hasClass("sessionstorage"))alert("Your browser does not support sessionStorage and can not use Tickets");
+	
+	//console.log("document is ready");
 	
 	//this should make the logout button in the drop down work.
 	$("#popUpLogout")
@@ -478,13 +392,8 @@ jQuery(document).ready(function () {
 		yep : '',
 		nope: '/js/jquery-ui/js/jquery-ui-1.8.18.custom.min.js'
 	});
-	
-	loadLocalStorage();
 
-	if(sessionStorage.userId > 0){ // Lets make sure that there is a user 
-		uI = $.parseJSON(sessionStorage.userInfo);
-	}
-	Params.Content = $("#content"); //lets stop searching for it a hundred times
+	loadSessionStorage();
 	
 	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
 	
@@ -688,5 +597,13 @@ jQuery(document).ready(function () {
       Spinner(false);
     }
   });
-  if(jQuery.browser.mozilla || jQuery.browser.opera)checkHash(); // firefox does not fireoff a pop change on a reload like chrome does  
+  if(jQuery.browser.mozilla || jQuery.browser.opera)checkHash(); // firefox does not fireoff a pop change on a reload like chrome does 
+  if(sessionStorage["userInfo"])
+  	if(sessionStorage.userInfo.indexOf("permissions"))
+  		Spinner(300,"page loaded");
+  	else{
+  		loadLocalStorage();
+  		Spinner(300,"page loaded");
+  	}
+  		
 });

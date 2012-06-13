@@ -60,7 +60,6 @@
       {include file="generic.tpl"}
     </div>
     <div id="blankTpl" class="ui-helper-hidden">
-
       {include file="blank.tpl"}
     </div>
     <div id="notifyArea" style="width:0px;" class=""></div>

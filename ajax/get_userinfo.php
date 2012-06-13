@@ -1,15 +1,17 @@
 <?Php
 
+
 include "../small_header.php";
+
 header('Content-type: application/json');
 
-$json = array();
+$json = $response;
 
 //print_r($usr);
-$_GET = $db->Clean($_GET,true);
-if(!isset($_GET["userId"])) die("no user id passed");
 
+if(!isset($_GET["userId"]) || $_GET["userId"] == "null") {$json["error"] = "no user id passed";echo json_encode($json);die();}
 
+$userId = intval($_GET["userId"]);
 function formatData($graphData,$monthData){
 	$displayData = array();
 	if(!isset($graphData[0])){
@@ -33,21 +35,26 @@ function formatData($graphData,$monthData){
 	return $displayData;
 }
 
-if(isset($_GET["allUsers"])){
-	die(json_encode($json));	
-}
+if(isset($_GET["allUsers"])){die(json_encode($json));}
+
 $json["userInfo"] = $db->Query("
 SELECT 
+  u.id,
 	u.firstname,
 	u.lastname,
 	u.username,
 	DATE_FORMAT(u.joined, '%M %e, %Y') AS joined,
 	u.email_address,
-	u.type 
+	u.type,
+	d.department_id
 FROM 
-	users AS u 
+	users AS u
+JOIN
+  department_members AS d
+ON
+  (d.user_id = u.id)
 WHERE 
-	id=".$_GET["userId"]
+	id=".$userId
 ,false,"assoc");
 $json["userInfo"]["mdEmail"] = md5( strtolower( trim( $json["userInfo"]["email_address"] ) ) ); 
 
@@ -63,7 +70,7 @@ JOIN
 ON 
 	(p.id=up.permission_id) 
 WHERE 
-	up.user_id=".$_GET["userId"]
+	up.user_id=".$userId
 ,false,"assoc_array");
 
 $json["userInfo"]["tickets"] = $db->Query("
@@ -78,7 +85,7 @@ JOIN
 ON 
 	(d.id=dm.department_id) 
 WHERE 
-	user_id=".$_GET["userId"]
+	user_id=".$userId
 ,false,"assoc");
 
 $json["departments"] = $db->Query("
@@ -99,6 +106,9 @@ $monthLables = array();
 for($a=1;$a<13;$a++){
 	$monthLables[] = date("M",mktime(0,0,0,$a,1,1982));
 }
+
+$json["features"] = $db->Query("SELECT id,name,status FROM features",false,"assoc_array");
+  
 $endMonths = array_slice($months,0,date("m"));
 $startMonths = array_slice($months,date("m"));
 $newMonths = array();
@@ -112,32 +122,23 @@ $newMonthsHold = array(1,2,3,4,5,6,7,8,9,10,11,12);
 $yearStart = date("Y-m-d",mktime(0,0,0,date("m")+1,1,date("Y")-1));
 $yearEnd = date("Y-m-d",mktime(0,0,0,date("m"),31,date("Y")));
 //Tickets
-$json["tickets"]["byMe"] = $db->Query("SELECT count(id) FROM tickets WHERE tickettype_id=1 AND created_by_id=".$_GET["userId"],false,"row");
-$json["tickets"]["toMe"] = $db->Query("SELECT count(id) FROM tickets WHERE tickettype_id=1 AND assigned_id=".$_GET["userId"]." AND open=1",false,"row");
-$graphData = $db->Query("SELECT MONTH(created_on) AS month,count(*) AS total,YEAR(created_on) AS year FROM tickets WHERE created_on BETWEEN '".$yearStart."' AND '".$yearEnd."' AND tickettype_id=1 AND created_by_id=".$_GET["userId"]." GROUP BY MONTH(created_on),YEAR(created_on) ORDER BY YEAR(created_on),MONTH(created_on)",false,"assoc");
+$json["tickets"]["byMe"] = $db->Query("SELECT count(id) FROM tickets WHERE tickettype_id=1 AND created_by_id=".$userId,false,"row");
+$json["tickets"]["toMe"] = $db->Query("SELECT count(id) FROM tickets WHERE tickettype_id=1 AND assigned_id=".$userId." AND open=1",false,"row");
+$graphData = $db->Query("SELECT MONTH(created_on) AS month,count(*) AS total,YEAR(created_on) AS year FROM tickets WHERE created_on BETWEEN '".$yearStart."' AND '".$yearEnd."' AND tickettype_id=1 AND created_by_id=".$userId." GROUP BY MONTH(created_on),YEAR(created_on) ORDER BY YEAR(created_on),MONTH(created_on)",false,"assoc");
 
 $json["tickets"]["graph"]["byMe"]["data"] = formatData($graphData,$newMonths);
 $json["tickets"]["graph"]["byMe"]["title"] = "Tickets Created";
 $json["tickets"]["graph"]["monthLables"] = $monthLables;
 
-//Bugs
-$json["bugs"]["byMeOpen"] = $db->Query("SELECT count(id) FROM tickets WHERE created_by_id=".$_GET["userId"]." AND open=1 AND tickettype_id=2",false,"row");
-$json["bugs"]["byMe"] = $db->Query("SELECT count(id) FROM tickets WHERE created_by_id=".$_GET["userId"]." AND tickettype_id=2",false,"row");
-$graphData = $db->Query("SELECT MONTH(created_on) AS month,count(*) AS total,YEAR(created_on) AS year FROM tickets WHERE created_on BETWEEN '".$yearStart."' AND '".$yearEnd."' AND tickettype_id=2 AND created_by_id=".$_GET["userId"]." GROUP BY MONTH(created_on),YEAR(created_on) ORDER BY YEAR(created_on),MONTH(created_on)",false,"assoc");
-$json["bugs"]["graph"]["byMe"]["data"] = formatData($graphData,$newMonths);
-$json["bugs"]["graph"]["byMe"]["title"] = "Bugs Filed";
-
 
 //Responses
-$json["responses"]["created"] = $db->Query("SELECT count(id) FROM responses WHERE user_id=".$_GET["userId"],false,"row");
-$graphData = $db->Query("SELECT MONTH(created_on) AS month,count(*) AS total,YEAR(created_on) AS year FROM responses WHERE created_on BETWEEN '".$yearStart."' AND '".$yearEnd."' AND user_id=".$_GET["userId"]." GROUP BY MONTH(created_on),YEAR(created_on) ORDER BY YEAR(created_on),MONTH(created_on)",false,"assoc");
+$json["responses"]["created"] = $db->Query("SELECT count(id) FROM responses WHERE user_id=".$userId,false,"row");
+$graphData = $db->Query("SELECT MONTH(created_on) AS month,count(*) AS total,YEAR(created_on) AS year FROM responses WHERE created_on BETWEEN '".$yearStart."' AND '".$yearEnd."' AND user_id=".$userId." GROUP BY MONTH(created_on),YEAR(created_on) ORDER BY YEAR(created_on),MONTH(created_on)",false,"assoc");
 $json["responses"]["graph"]["byMe"]["data"] = formatData($graphData,$newMonths);
 $json["responses"]["graph"]["byMe"]["title"] = "Responses Added";
 //echo indentJson(json_encode($json));
 
-
-
 // Lets get the linked google accounts to see if this account is linked to any google accounts
-$json["userInfo"]["openIdLinks"] = $db->Query("SELECT count(user_id) FROM tickets.openId_users WHERE user_id=".$_GET["userId"],false,"row"); 
+$json["userInfo"]["openIdLinks"] = $db->Query("SELECT count(user_id) FROM tickets.openId_users WHERE user_id=".$userId,false,"row"); 
 
 echo json_encode($json);

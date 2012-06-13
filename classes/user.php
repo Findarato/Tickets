@@ -1,11 +1,8 @@
 <?Php
 class User {
 	//Public Arrays
-	public $a_User=array('logged-in'=>false);
-	public $A_U = array();
 	public $User_id = -1;//adding compatability to Joe's coding style
 	public $debug = array();
-	public $gravatar = ""; // image link to gravatar image
 	//Private stuff
 	private $openID = "";
 	private $Permissions = array();
@@ -80,14 +77,8 @@ class User {
 		}
 		return array('success'=>0);
 	}
-	
-	
 	/* Function - Log User Out */
-	public function LogUserOut(){
-		$this->a_User['logged-in']=false;
-		$this->User_id = -1; //adding compatability to Joe's coding style
-		$this->A_U = array();
-	}
+	public function LogUserOut(){$this->User_id = -1;}
 	public function LoadPermissions(){ //Load the permissions into the object and return true on success and false on fail
 		$permissions = array();
 		$db = db::getInstance();

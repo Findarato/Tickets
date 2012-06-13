@@ -5,13 +5,13 @@
 		$db = db::getInstance();
 		return $db->Query("SELECT id,name,status FROM features",false,"assoc_array");
 	}
-	
+ 
 	$_POST = $db->Clean($_POST);//clean out the post before it can be used
-	if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ) {//there is not a valid session
+  if(!isset($_SESSION["user"]) || unserialize($_SESSION['user'])->User_id==-1 ) {//there is not a valid session
 		if(isset($_POST["un"]) && isset($_POST["pw"])){ //the user is trying to log on.
 			$response = login($db->Clean($_POST['un']),$db->Clean($_POST['pw']),$response);
 		}elseif(isset($_GET["openId"]) && isset($_GET["userId"])){// We are trying to login with an openID
-			if($_GET["userId"]==1){
+			if($_GET["userId"]==1){//this is a user just logging in with a proper link
 				$res = $db->Query("SELECT open_id FROM tickets.openId_users WHERE user_id=".$_SESSION["openID"]["user_id"]." LIMIT 1",false,"row");
 				if(count($res) == 0 || $res == 0){ // lets just make sure that we are not entering in a lot of values
 					$db->Query("INSERT INTO tickets.openId_users (user_id,open_id) VALUES (".$_SESSION["openID"]["user_id"].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
@@ -27,7 +27,6 @@
 				// Ok lets make a ticket user
 				$un = explode("@",$_SESSION["openID"]["email"]);
 				$unTest = $db->Query("SELECT id FROM tickets.users WHERE email_address='".$_SESSION["openID"]["email"]."' LIMIT 1;",false,"row");
-				
 				if($unTest == 0){  // lets just make sure some one is not spamming the button.  This kinda helps development as well
 					$res = $db->Query('INSERT INTO tickets.users (type,joined,firstname,lastname,username,password,email_address) VALUES (
 					1,
@@ -39,13 +38,15 @@
 					"'.$_SESSION["openID"]["email"].'");'
 					,false,"row");
 					$response["newid"] = $res;
-					$db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$res.",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
-					$password = $db->Query("SELECT password FROM tickets.users WHERE id=".$res,false,"row");
-					$response["pw"] = $password;
-					$response = login($res,$password,$response,true);
-					$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) );
-					$response["features"] = getFeatures();
+				}else{
+				  $response["newid"] = $unTest;
 				}
+        $db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$response["newid"].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
+        
+        $response = login($res,$db->Query("SELECT password FROM tickets.users WHERE id=".$res,false,"row"),$response,true);
+        print_r($response);die();
+        $response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) );
+        $response["features"] = getFeatures();
 			}
 			
 		}

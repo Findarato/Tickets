@@ -175,12 +175,12 @@
 		 * @param bool $force[optional]
 		 */
 		public function Format($type,$force = false,$idField = "id"){
-			$return = "";
+		  $return = "";
 			if(count($this -> Error) == 2){//there is an error
 				return "There was an error with the query"; 
 			}else{
 				switch(strtolower($type)){
-					case "assoc":
+				  case "assoc":
 						if($this -> Count_res() == 1 || $force === true)
 							$return = mysql_fetch_assoc($this -> Resid); 
 						else					
@@ -204,14 +204,13 @@
 							}
 					break;
 					case "assoc_array":
-						while($line = mysql_fetch_assoc($this -> Resid)){ 
+            while($line = mysql_fetch_assoc($this -> Resid)){ 
 							if(isset($line[$idField])){
 								$return[$line[$idField]] = $line;	
 							}else{
-								$return[] = $line;	
-							}
-						 
-						}
+                $return[] = $line;	
+              }
+            }
 					break;
 					case "row_array":
             if($this -> Count_res() == 0){
