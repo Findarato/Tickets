@@ -260,24 +260,6 @@ function createDayArray($returnDays,$fillData=false,$amount=0,$order="desc"){
 	}
 	return $days;
 }
-function createMonthArray($returnMonths,$fillData=false,$amount=0,$order="desc"){
-	if($fillData){
-		if($order=="desc"){
-			$cnt = $returnMonths;
-			for($a=0;$a<$returnMonths;$a++){
-				$cnt--;
-				$day = date("n",mktime(0,0,0,date("m")-$cnt,date("d"),date("y")));
-				$days[$day]=array($a,0);	
-			}
-		}else{
-			for($a=0;$a<$returnMonths;$a++){
-				$day = date("n",mktime(0,0,0,date("m")-$a,date("d"),date("y")));
-				$days[$day]=array($a,0);	
-			}
-		}
-	}
-	return $days;	
-}
 function quoteArray($array,$style="d"){
 	$tempArray = array();
 	foreach($array as $key=>$a){
@@ -391,45 +373,45 @@ function indentJson($json) {
  
     return $result;
 }
-
 function login($un,$pw,$response,$openid=false){
-	$db = db::getInstance();
-	if($openid){
-		$usr = new user($un,$pw,true,true);
-	}else{
-		$usr = new user($un,$pw);
-	}
-	if($usr->User_id==-1){
-		$response['error']="Invalid Username or Password";
-	}else{  
-		$_SESSION["user"] = serialize($usr);
-		$response["username"]=$usr->A_P['username'];
-		$response["firstname"]=$usr->A_U['first-name'];
-		$response["lastname"]=$usr->A_U['last-name'];
-		$response["userid"]=$usr->User_id;
-		$dep = getDepartment_by_userid($usr->User_id); 
-		$dep = array_implode($dep);
-		if(count($dep)!=2 || $dep===false){
-			$response["departmentid"]=-1; 
-			$response["departmentname"] = "None!";
-		}else{
-			$response["departmentid"] = $dep[0];
-			$response["departmentname"] = $dep[1];
-		}
-		$db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
-		$res = $db->Fetch("row");
-		$response["opt"] = $res;
-		$dt = date("U");
-		$response['message'] = "Login Successful";
-		$db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
-		$llo = $db->Fetch("row");
-		$response['lastlogon'] = $llo;
-		$_SESSION["lastlogon"] = $llo;
-		$db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
-		if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
-		$response["altEmail"] = $db->Query("SELECT email_address FROM tickets.users WHERE id=".$response["userid"],false,"row");
-		$response["mdEmail"] = md5( strtolower( trim( $response["altEmail"] ) ) ); 
-	}
-	return $response;
-} 
+    $db = db::getInstance();
+    if($openid){
+      $usr = new user($un,$pw,true,true);
+    }else{
+      $usr = new user($un,$pw);
+    }
+    $response["user"] = $usr;
+    if($usr->User_id==-1){
+      $response['error']="Invalid Username or Password";
+    }else{  
+      $_SESSION["user"] = serialize($usr);
+      $response["username"]=$usr->A_P['username'];
+      $response["firstname"]=$usr->A_U['first-name'];
+      $response["lastname"]=$usr->A_U['last-name'];
+      $response["userid"]=$usr->User_id;
+      $dep = getDepartment_by_userid($usr->User_id); 
+      $dep = array_implode($dep);
+      if(count($dep)!=2 || $dep===false){
+        $response["departmentid"]=-1; 
+        $response["departmentname"] = "None!";
+      }else{
+        $response["departmentid"] = $dep[0];
+        $response["departmentname"] = $dep[1];
+      }
+      $db->Query("SELECT notify FROM department_members WHERE user_id=".$usr->User_id);
+      $res = $db->Fetch("row");
+      $response["opt"] = $res;
+      $dt = date("U");
+      $response['message'] = "Login Successful";
+      $db->Query("SELECT dt FROM lastlogon WHERE user_id=".$response["userid"]);
+      $llo = $db->Fetch("row");
+      $response['lastlogon'] = $llo;
+      $_SESSION["lastlogon"] = $llo;
+      $db->Query("INSERT INTO lastlogon (user_id,dt) VALUES(".$response["userid"].",".$dt.");");
+      if(count($db->Error)==2){$db->Query("UPDATE lastlogon SET dt=".$dt." WHERE user_id=".$response["userid"].";");}
+      $response["altEmail"] = $db->Query("SELECT email_address FROM tickets.users WHERE id=".$response["userid"],false,"row");
+      $response["mdEmail"] = md5( strtolower( trim( $response["altEmail"] ) ) ); 
+  }
+  return $response;
+}
 ?>

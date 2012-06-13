@@ -1,10 +1,8 @@
-spinner = false;
-spinnerTimeOut = false;
 var newTicketTpl = 
   $("<div/>",{"class":"ticketBox insideBorder roundAll4 insideBoxShadow newTicketTpl"})
     .html(
       $("<div/>",{"class":"ticketItem"})
-        .append( // Ticket Bookmark
+        .html( // Ticket Bookmark
           $("<div/>",{"class":"ticketBookmarkBox fake-link roundTopRight4 ticketSprite",id:"ticketFavorite"})
         )
         .append( // User Icon Box
@@ -24,7 +22,7 @@ var newTicketTpl =
         )
         .append( // Ticket Created On
           $("<div/>",{"class":"roundBottomRight4",id:"ticketInfoContainer",css:{"bottom":0,"right":0,"position":"absolute","width":"70%","overflow":"hidden","height":"20px"}})
-            .append( // Ticket Created On
+            .html( // Ticket Created On
               $("<div/>",{"class":" color260 mainBorder roundBottomRight4 ticketCreatedOnBox",id:"tickCreatedOn"}).html("On: Aug. 8, 1982")
             )
             .append( // Ticket Created By
@@ -40,14 +38,20 @@ var newTicketTpl =
               $("<div/>",{"class":" color260 mainBorder ticketLocationBox",id:"tickAssign"}).html("To: John Doe")
             )
         )
-
     );
-function Spinner(run){
-  spinSel = $("#spinner");
+
+function Spinner(run,body){
+  notice = $("#notice");
+  if(body)notice.text(body);
   if(run){
-    spinSel.css("bottom","0");
+  	if(run>100){
+  		notice.css("bottom","0");
+  		//setTimeOut(run,function(){notice.css("bottom","-2em")});
+  	}else{
+  		notice.css("bottom","0");
+  	}
   }else{
-    spinSel.css("bottom","-2em");
+    notice.css("bottom","-2em");
   }
 }
 function changeArea(area){
@@ -766,7 +770,7 @@ function loadUserPage(userId){
 							html:"Reset Tickets",
 							click:function(){
 								localStorage.clear();
-								loadLocalStorage();
+								loadSessionStorage();
 								setHash("#ticketList/all_tickets");
 								/*checkHash*/
 							}							
@@ -920,7 +924,7 @@ function loadLoginPage(){
     Params.Content.load("templates/login.tpl");
     loginNewBox = Params.Content.find("#ticketLoginList");
   }
-  loadLocalStorage(); // Lets make sure that we load up localStorage
+  loadSessionStorage(); // Lets make sure that we load up localStorage
   var feat = $.parseJSON(sessionStorage.features);
   $.each(feat,function(i,item){
     if(item.name=="Local Login" && item.status==0){
@@ -946,3 +950,32 @@ function loadLoginPage(){
   });
 }
 
+function loadLargeBarGraph(selectorId,data,lables) {
+  var Bar = new RGraph.Bar(selectorId, data);
+  RGraph.Clear(Bar.canvas); 
+    Bar.Set('chart.labels', lables);
+    Bar.Set('chart.gutter',45);
+    Bar.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
+    Bar.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
+  Bar.Set('chart.linewidth', 2);
+    Bar.Set('chart.ylabels.count', 3);
+    Bar.Set('chart.filled', true);
+    Bar.Set('chart.background.grid', true);
+    Bar.Set('chart.colors', ['rgba(0,0,0,.60)']);
+    Bar.Draw();
+}
+function loadLargeLineGraph(selectorId,data,lables) {
+  //RGraph.Clear(document.getElementById(selectorId));graphDisplay
+  RGraph.Clear(document.getElementById("graphDisplay"));
+    var line = new RGraph.Line(selectorId, data);
+    line.Set('chart.labels', lables);
+    line.Set('chart.gutter',45);
+    line.Set('chart.background.barcolor1', 'rgba(255,255,255,1)');
+    line.Set('chart.background.barcolor2', 'rgba(255,255,255,1)');
+    line.Set('chart.linewidth', 2);
+    line.Set('chart.ylabels.count', 3);
+    line.Set('chart.filled', true);
+    line.Set('chart.background.grid', true);
+    line.Set('chart.colors', ['rgba(0,0,0,.60)']);
+    line.Draw();
+}
