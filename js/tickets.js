@@ -57,6 +57,15 @@ function oc(a)
   }
   return o;
 }
+function checkPermissions(){
+    var userInfo = $.parseJSON(sessionStorage.userInfo)
+      if(userInfo.permissions.indexOf("VIEW")){
+        Spinner(300,"This user has view only permissions");
+        alert("This user has view only permissions")
+       return false; 
+      }
+      return true;
+}
 function checkHash() {
 	var hash = getHashArray();
 	console.log("I am checking the hash");
@@ -344,10 +353,11 @@ function loadSessionStorage(clear){
     	Params.Categories = $.parseJSON(sessionStorage.getItem("ticketsCategories"));
   	}
 	//User info
-	if(!sessionStorage.userInfo){
+	if(!sessionStorage.userInfo || sessionStorage.userInfo == "undefined" || sessionStorage.userInfo == undefined || typeof sessionStorage.userInfo != "object"){
 		$.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
 			sessionStorage.setItem("userInfo",JSON.stringify(data.userInfo));
 		});	
+		console.log("your user info is broke I am fixing it");
 	}
 
 }
@@ -417,17 +427,20 @@ jQuery(document).ready(function () {
 	});
   
   	$("#topperNew").live("click",function(){
-	    sessionStorage.lastArea = "newTicket";
-	    Params.Content.html($("#newTicketdialog").html());
-	    Params.Content.find("#ticketAssignBox").show();
-	    Params.Content.find("#newTicketType").val("new");
-	    Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
-	    try{
-	    	//$("input[type=date]").live(datepicker());
-	    	Params.Content.find("#newTicketDueDate").datepicker();
-	    }catch(e){
-	    	alert(e);
-	    }
+  	  if(checkPermissions()){
+        sessionStorage.lastArea = "newTicket";
+        Params.Content.html($("#newTicketdialog").html());
+        Params.Content.find("#ticketAssignBox").show();
+        Params.Content.find("#newTicketType").val("new");
+        Params.Content.find("#newTicketTitle,#newTicketDescription").val("");
+        try{
+          //$("input[type=date]").live(datepicker());
+          Params.Content.find("#newTicketDueDate").datepicker();
+        }catch(e){
+          alert(e);
+        }  	    
+  	  }
+
     
   });
   	//Clicking login with google button
@@ -453,8 +466,10 @@ jQuery(document).ready(function () {
 			$("#btn_login").trigger('click')
 		}
 	});
-	$("#ticketAddButton,#bugAddButton").live("click",function () {
-		//alert("clicked");
+	$("#ticketAddButton").live("click",function () {
+    if(!checkPermissions()){
+      return false;
+    }	
 		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
 		var ticketDesc = $("#newTicketDescription");
@@ -513,6 +528,9 @@ jQuery(document).ready(function () {
 		if(sessionStorage.userId == 0){
 			setHash("#login");return;
 		}
+		if(!checkPermissions()){
+		  return false;
+		}
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
 		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
@@ -533,24 +551,7 @@ jQuery(document).ready(function () {
 			loadTicket(Params.TicketId);
 		});
 	});
-	$("#forgotPasswordButton").live("click",function(){
-		$("#forgotPasswordBox").css({"height":"125px"})
-		$("#requestSent").css({"opacity":"0"})
-	});
-	$("#forgotPasswordSubmitButton").live("click",function(){
-		jQuery.post(uri + "ajax/resetPassword.php", $("#frm_resetPassword").serialize(), function (data) {
-			data = $.parseJSON(data);
-			if(data.error != ""){
-				$("#loginErrorMessage").text(data.error).css({"opacity":"1"})
-			}else{
-				$("#requestSent").css({"opacity":"1"})
-				$("#forgotPasswordBox").css({"height":"0"})
-			}
-		});		
-	});
-	$("#frm_login").live("focus",function(){
-		$("#requestSent").css({"opacity":"0"})
-	})
+	
 	$("#createForButton").live("click",function(){
 		$("#ticketCreateForBox").show();
 	});
@@ -598,9 +599,13 @@ jQuery(document).ready(function () {
   });
   if(jQuery.browser.mozilla || jQuery.browser.opera)checkHash(); // firefox does not fireoff a pop change on a reload like chrome does 
   if(sessionStorage["userInfo"])
-  	if(sessionStorage.userInfo.indexOf("permissions"))
-  		Spinner(300,"page loaded");
-  	else{
+  	if(sessionStorage.userInfo.indexOf("permissions")){
+  	  var userInfo = $.parseJSON(sessionStorage.userInfo)
+      if(userInfo.permissions.indexOf("VIEW")){
+       Spinner(300,"This user has view only permissions"); 
+      }
+      
+  	}	else{
   		loadLocalStorage();
   		Spinner(300,"page loaded");
   	}

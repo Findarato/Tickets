@@ -319,6 +319,7 @@ function loadTicketBody(inputData, container) {
 	// Adding edit controls to the page
 	//
 	$("#ticketModifySaveButton").click(function(){
+    if(!checkPermissions()){return false;}
 		$("#modifyButton").show();
 		$("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
 		values = {"edit":1,"ticketId":data.id};
@@ -354,6 +355,7 @@ function loadTicketBody(inputData, container) {
 	    });
 	});
 	$("#modifyButton").click(function(){
+	  if(!checkPermissions()){return false;}
     	$(this).hide();
     	$("#ticketModifySaveButton,#ticketModifyCancelButton").show();
     //category edit code
@@ -365,6 +367,7 @@ function loadTicketBody(inputData, container) {
 		textBoxReplace(container.find("#ticketDueDate").find(".contentEdit"),"","date");
   	});
   $("#ticketModifyCancelButton").click(function(){
+    if(!checkPermissions()){return false;}
     $("#modifyButton").show();
     $("#ticketModifySaveButton,#ticketModifyCancelButton").hide();
     $(".ticketModifyForm").each(function(f,frm){
@@ -402,6 +405,7 @@ function loadTicketBody(inputData, container) {
 	//Reply Button
 	//
 	$("#replyButton").bind('click',function () {
+	  if(!checkPermissions()){return false;}
 		if($("#newReplyForm").find("#replyDescription").val() != ""){
 			$.post(uri + "/ajax/add_reply.php", $("#newReplyForm").serialize(),function(){
 				loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
@@ -416,6 +420,7 @@ function loadTicketBody(inputData, container) {
    	createSelect($("#ticketAssign"),function(id){},{})
 	 
 	$('#reAssignButton').click(function(){
+	  if(!checkPermissions()){return false;}
 		$("#reassignBox").css({"height":"30px","overflow":"visible"})
 		//.delay().show().css({"overflow":"visible"});
 		//$("#reassignBox").css({"overflow":"visible"});
@@ -423,12 +428,14 @@ function loadTicketBody(inputData, container) {
 	   
 	});
 	$("#ReAssignCancelButton").click(function(){
+	  if(!checkPermissions()){return false;}
 		$("#reassignBox").css({"height":"0px","overflow":"hidden"});
 
 	});
    
    
   $('#reAssignAcceptButton').click(function () {
+    if(!checkPermissions()){return false;}
     //$("#reassignBox").css({"height":"0px"});
     
     $.getJSON(uri + "ajax/tickets.php", {

@@ -74,16 +74,16 @@
 				<!-- Modification Buttons -->
 				<div class="" id="ticketFooterArea" style="height:37px;overflow:hidden; ">
 					<div id="buttonBox" style="">
-						<button class="openTicket button" id="reAssignButton" style="width:auto;">
+						<button class="openTicket button actionButtons" id="reAssignButton" style="width:auto;">
 							<span class="">Reassign</span>
 						</button>
-						<button class="openTicket button " id="modifyButton" style="width:auto;">
+						<button class="openTicket button actionButtons " id="modifyButton" style="width:auto;">
 							<span class="">Modify</span>
 						</button>
-						<button class="button " id="ticketModifySaveButton" style="width:auto;display:none;">
+						<button class="button actionButtons" id="ticketModifySaveButton" style="width:auto;display:none;">
 							<span class="">Save</span>
 						</button>
-						<button class="button negative " id="ticketModifyCancelButton" style="width:auto;display:none;">
+						<button class="button negative actionButtons" id="ticketModifyCancelButton" style="width:auto;display:none;">
 							<span class="">Cancel</span>
 						</button>
 						<button class="openTicket negative button actionButtons closeLink " id="closeButton" style="width:auto;">
