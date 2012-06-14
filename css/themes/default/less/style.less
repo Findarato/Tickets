@@ -7,7 +7,164 @@
 
 ::-moz-selection { background: @color1; color: @colorDark; text-shadow: none; }
 ::selection { background: @color1; color: @colorDark; text-shadow: none; }
+//End of the less
+body,html {
+  margin:0px;
+  padding:0px;
+  height:100%;
+  color:@colorDark;
+  background-color:@colorLight;
+}
+a,a:hover,a:visited,a:focus { color: @color5; text-decoration:none; font-weight:bold;}
+a:hover{text-decoration: underline;}
 
+//Color 1 related items
+.color1{
+  background: @color1;  
+}
+.color1TextGlow{
+  text-shadow: @color1 0 0 2px;
+}
+.color1toWhite{
+  background: @color1; // Old browsers 
+  background: -moz-linear-gradient(left, @color1 45%, @white 100%); // FF3.6+ 
+  background: -webkit-gradient(linear, left top, right top, color-stop(45%,@color1), color-stop(100%,@white)); // Chrome,Safari4+ 
+  background: -webkit-linear-gradient(left, @color1 45%,@white 100%); // Chrome10+,Safari5.1+ 
+  background: -o-linear-gradient(left, @color1 45%,@white 100%); // Opera 11.10+ 
+  background: -ms-linear-gradient(left, @color1 45%,@white 100%); // IE10+ 
+  background: linear-gradient(left, @color1 45%,@white 100%); // W3C 
+}
+//Color 2 related items
+.color2,.color260{
+  background: @color2;
+  a{
+   color: @colorLight;  
+  }
+}
+.color260{
+  background: @color260;
+}
+
+//Color 3 related items
+.color3{
+  background: @color3;
+  color: @colorLight;
+  a{
+    color: @colorLight;
+  }
+}
+
+.color3Circle{
+  border:2px solid @color360;
+  height:20px;
+  width:20px;
+  content:"?";
+  text-align:center;
+  .rounded-corners(10px);
+}
+//Color 4 related items
+.color4{
+  background:@color4;
+}
+.color4TextGlow{
+  text-shadow: @color4 0 0 2px;
+}
+.color4Border1{
+  border:1px solid @color4;
+}
+//Color 5 related items
+.color5{
+  color:@colorLight;
+  background:@color5;
+}
+.color5TextGlow{
+  text-shadow: @color5 0 0 2px;
+}
+.color560{
+  color:@colorLight;
+  background:@color5;
+  background:@color560;
+}
+.color560 a:hover,.color5 a:hover,.color560:hover,.color5:hover,.color560 a{
+  color:@colorLight;
+}
+.color5Soft{
+  .softColor(@color5);
+}
+.color5Ribbon{
+  .ribbon(@color5)
+  //http://www.colorzilla.com/gradient-editor/#261806+5,5f3e12+20,5f3e12+60,5f3e12+80,261806+95;Custom
+}
+.pageBranding{
+  position:absolute;
+  color:rgb(0,0,0);
+  top:14px;
+  left:-22px;
+  font-weight:bold;
+  height:18px;
+  width:90px;
+  text-shadow: @shadow 0px 1px 0px;
+}
+
+.pageBranding a,.pageBranding a:hover{
+  color:@white;
+  height:14px;
+  font-size: 12px;
+  text-align:center;
+  margin:2px;
+  display:block;
+  text-decoration:none;
+}
+
+.smoothAnimate{
+  -webkit-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+     -moz-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+      -ms-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+       -o-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+          transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220); // easeInQuart 
+  
+  -webkit-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+     -moz-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+      -ms-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+       -o-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+          transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220); // easeInQuart 
+}
+
+.insideBoxShadow{
+  -moz-box-shadow: inset 0 0 1px 1px @shadow;
+  -webkit-box-shadow: inset 0 0 1px 1px @shadow;
+  box-shadow: inset 0 0 1px 1px @shadow;
+}
+.outSideBoxShadow{
+  -moz-box-shadow: 0 0 1px 1px @shadow;
+  -webkit-box-shadow: 0 0 1px 1px @shadow;
+  box-shadow: 0 0 1px 1px @shadow;
+}
+.mainArea{
+  padding-top:125px;
+  padding-bottom:20px;
+  background-color:@color4;
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+.mainBackground{
+  background-color:@color4;
+}
+.mainBorder,.mainBorder60{
+  border: 1px solid @borderColor;
+}
+.mainBorder60{
+  border: 1px solid @borderColor60;
+}
+.ticket-divider{
+  border-right: 3px solid @borderColor;
+  border-right: 3px solid @borderColor60;
+}
+.dropDown{
+  border: 1px solid @shadow;
+}
 h1,h2,h3,h4{
   margin:.1em;
   color: @color5;
@@ -27,10 +184,6 @@ h2,h3 {
 h3 {font-size: 1.4em;height:1.2em;}
 h4 {font-size:1.15em;height:1em;}
 
-
-.ticketBox{
-	background:#FFF;
-}
 .tab {
 	padding-top:16px;
 	padding-left:5px;
@@ -44,9 +197,6 @@ h4 {font-size:1.15em;height:1em;}
 	border:1px solid hsl(212,43%,53%);
 	border-bottom:none;
 	bottom:-4px;
-}
-.highlight{
-	
 }
 .ticketListDueOn{
 	display:none;
@@ -134,9 +284,7 @@ ul{
 	padding:3px;
 }
 .shadow{
-	-moz-box-shadow: 5px 5px 2px #888;
-	-webkit-box-shadow: 5px 5px 2px #888;
-	box-shadow: 5px 5px 2px #888;
+  .downShadow(@shadow);
 }
 .shadowUp{
 	-moz-box-shadow: -0px -2px 2px #888;
@@ -149,14 +297,12 @@ ul{
 	-webkit-box-shadow: 0 1px 5px #ccc;
 }
 .replyBox{
-	 width:100%; 
-	 margin-bottom:2px;
-	 overflow:hidden;
-	 background-color:white;
-	 -moz-transition: all .5s ease-out;
-     -o-transition: all .5s ease-in;
-     -webkit-transition: all .5s ease-out;
-     position: relative;
+  width:100%; 
+	margin-bottom:2px;
+	overflow:hidden;
+	background-color:white;
+  position: relative;
+  .linearAnimate(400ms);
 }
 #replyControlls{
 	height:16px;
