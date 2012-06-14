@@ -946,7 +946,6 @@ function loadLoginPage(){
     });
   });
 }
-
 function loadLargeBarGraph(selectorId,data,lables) {
   var Bar = new RGraph.Bar(selectorId, data);
   RGraph.Clear(Bar.canvas); 
