@@ -490,26 +490,16 @@ function loadTicketBody(inputData, container) {
 	
 }
 function loadTicket(ticketId,update) {
+	Params.Content.html($("#ticketTpl").html());
 	if(sessionStorage.lastArea != "ticket"){
-	  Params.Content.html($("#ticketTpl").html());
-	  sessionStorage.lastArea = "ticket";
-	}
-	sessionStorage.setItem("currentTicket",ticketId);
-	if(data = $.parseJSON(sessionStorage.getItem("TicketId"+ticketId))){
-  		loadTicketBody(data,Params.Content);
-	}else{
-		$.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {
-  		loadTicketBody(data,Params.Content);
-  		sessionStorage.setItem("TicketId"+ticketId,JSON.stringify(data)); // lets stick it inside of the storage.  
-		});
-	}
-	var hash = getHashArray();
-	if (hash[2] == "page" && hash[3] > -1) {
-		loadResponsesBody(ticketId, $("#replyareabody"), hash[3]); //load the selected response page
-	} else {
-		loadResponsesBody(ticketId, $("#replyareabody"), 0);
-	} //load the responses page 0
+    sessionStorage.lastArea = "ticket";	  
+  }
+  sessionStorage.setItem("currentTicket",ticketId);
+  $.getJSON(uri + "ajax/get_ticket.php", {"ticket_id": ticketId}, function (data) {
+    loadTicketBody(data,Params.Content);
+  });
 }
+
 function loadTicketList(pageNumber,queryObj,append,callback) {
   //Lets setup the variables
   callBackFn = function(){};
