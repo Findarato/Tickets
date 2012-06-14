@@ -376,7 +376,7 @@ function indentJson($json) {
 function login($un,$pw,$response,$openid=false){
     $db = db::getInstance();
     if($openid){
-      $usr = new user($un,$pw,true,false);
+      $usr = new user($un,$pw,true,true);
     }else{
       $usr = new user($un,$pw);
     }
