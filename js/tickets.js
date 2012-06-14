@@ -59,33 +59,49 @@ function oc(a)
 }
 function checkPermissions(){
     var userInfo = $.parseJSON(sessionStorage.userInfo)
-      if(userInfo.permissions.indexOf("VIEW")){
-        Spinner(300,"This user has view only permissions");
-        alert("This user has view only permissions")
-       return false; 
+    var result = true;
+      for (item in userInfo.permissions){
+        var curPermission = userInfo.permissions[item];
+        if (curPermission.permission == "VIEW"){
+            Spinner(300,"This user has view only permissions");
+            alert("This user has view only permissions")
+            result = false;
+          } else if (curPermission.permission == "ADMIN"){
+            Spinner(300,"This user has Admin Permissions");
+            result = true;
+            break;
+          } else if (curPermission.permission == "STAFF"){
+            result = true;
+            break;
+          } else {
+            result = false;
+          }  
       }
-      return true;
+      return result;
 }
 function checkHash() {
 	var hash = getHashArray();
 	console.log("I am checking the hash");
 	if (window.location.hash.length > 1) {
 		//This checks for a url passed hash, otherwise its just going to go in there.
+		console.log(hash[0]);
 		switch (hash[0]) {
-		case "#ticket":
-			changeArea("tickets");
-			switch (hash[2]) {
-  			case "page": // ticket with a page number selected
-  				if ($("#ticketId").html().length < 1) {
-  					//This should fix the directly accessing a response page bug
-  				} else {
-  					loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
-  				}
+		  case "#ticket":
+        changeArea("tickets");
+        switch (hash[2]) {
+          case "page": // ticket with a page number selected
+  				  if ($("#ticketId").html().length < 1) {
+  					 //This should fix the directly accessing a response page bug
+  				  } else {
+              loadResponsesBody(hash[1], $("#replyareabody"), hash[3]);
+  				  }
   				break;
-  			default: // ticket with out a page
-	          loadTicket(hash[1]);
-	          loadResponsesBody(hash[1], $("#replyareabody"), 0);
-  			 break;
+          default: // ticket with out a page
+            console.log("I am starting to load the ticket")
+            loadTicket(hash[1]);
+            console.log("I am starting to load responses")
+            loadResponsesBody(hash[1], $("#replyareabody"), 0);
+  			   break;
   			}
   			break;
 		case "#ticketList":
@@ -528,6 +544,7 @@ jQuery(document).ready(function () {
 		if(sessionStorage.userId == 0){
 			setHash("#login");return;
 		}
+		alert(checkPermissions())
 		if(!checkPermissions()){
 		  return false;
 		}
@@ -597,17 +614,5 @@ jQuery(document).ready(function () {
       Spinner(false);
     }
   });
-  if(jQuery.browser.mozilla || jQuery.browser.opera)checkHash(); // firefox does not fireoff a pop change on a reload like chrome does 
-  if(sessionStorage["userInfo"])
-  	if(sessionStorage.userInfo.indexOf("permissions")){
-  	  var userInfo = $.parseJSON(sessionStorage.userInfo)
-      if(userInfo.permissions.indexOf("VIEW")){
-       Spinner(300,"This user has view only permissions"); 
-      }
-      
-  	}	else{
-  		loadLocalStorage();
-  		Spinner(300,"page loaded");
-  	}
-  		
+  checkHash(); // firefox does not fireoff a pop change on a reload like chrome does 
 });
