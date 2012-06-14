@@ -1,14 +1,27 @@
-/* Start of the less*/
-/* Standard CSS */
-
-@shadow:rgba(136, 136, 136,.6);
+@shadow:rgba(36, 36, 36,.3);
 @borderColor: rgb(170,170,170);
 @borderColor60: rgba(170,170,170,.6);
 
 .rounded-corners (@radius: 5px) {
   border-radius: @radius;
   -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
+}
+
+.downShadow(@color){
+  -webkit-box-shadow: 0 6px 7px -3px @color;
+  box-shadow: 0 6px 7px -3px @color;
+}
+.dropShadow(@color){
+  -webkit-box-shadow: -4px 7px 6px 0px @color;
+  box-shadow: -4px 7px 6px 0px @color;
+}
+
+.oneEdgeShadow(@color){
+  -webkit-box-shadow: 0 8px 6px -6px @color;
+  box-shadow: 0 8px 6px -6px @color;
+}
+.textShadowIndent(@color){
+  text-shadow: 0 1px 1px @color;
 }
 
 .shadowIn (@x: 0, @y: 0, @blur: 1px,@distance:1px, @color: #000) {
@@ -21,84 +34,76 @@
   -moz-box-shadow: @arguments;
   -webkit-box-shadow: @arguments;
 }
-
-
-.cubic(@time: 300ms){
-  -webkit-transition: all @time cubic-bezier(0.895, 0.030, 0.685, 0.220);
-     -moz-transition: all @time cubic-bezier(0.895, 0.030, 0.685, 0.220);
-      -ms-transition: all @time cubic-bezier(0.895, 0.030, 0.685, 0.220);
-       -o-transition: all @time cubic-bezier(0.895, 0.030, 0.685, 0.220);
-          transition: all @time cubic-bezier(0.895, 0.030, 0.685, 0.220); /* easeInQuart */
-  
-  -webkit-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
-     -moz-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
-      -ms-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
-       -o-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
-          transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220); /* easeInQuart */
+.linearAnimate(@time:300ms){
+  -webkit-transition: all @time linear;
+     -moz-transition: all @time linear;
+      -ms-transition: all @time linear;
+       -o-transition: all @time linear;
+          transition: all @time linear;
 }
 
-@white:rgb(255,255,255);
-
-@button:rgb(240,240,240);
-@buttonBorder:rgb(170,170,170);
-
+@white:rgb(255,255,255); 
 @color1:rgb(204,255,255);
-
-@color2:rgb(221, 238, 204);
-@color260:rgba(221, 238, 204,.60);
-
-@color3:rgb(85, 102, 68);
-@color360:rgba(85, 102, 68,.6);
-
+@color2:rgb(221,238,204);
+@color3:rgb(85,102,68); 
 @color4:rgb(231,242,230);
-@color460:rgba(231,242,230,.60);
-
-@color5:rgb(95, 62, 18);
-@color560:rgba(95, 62, 18,.60);
-
+@color5:rgb(95,62,18);
 @colorDark: rgb(31,31,31);
-@colorDark60:rgba(31,31,31,.6);
-
 @colorLight: rgb(250,250,250);
-@colorLight60: rgba(250,250,250,.6);
-
-/* Winter CSS */
-/*
+ 
+// Winter CSS 
 @color1:rgb(204,238,255);
-
 @color2:rgb(205,227,238);
-@color260:rgba(205,227,238,.60);
-
 @color3:rgb(68,91,102);
-@color360:rgba(68,91,102,.6);
-
-@color4:rgb(221,233,239);
-@color460:rgba(221,233,239,.60);
-
+@color4:rgb(221,233,239);  
 @color5:rgb(17,69,95);
-@color560:rgba(17,69,95,.60);
 
 
-@colorDark: rgb(31,31,31);
-@colorDark60:rgba(31,31,31,.6);
-@colorLight: rgb(250,250,250);
-@colorLight60: rgba(250,250,250,.6);
-*/
+//http://kuler.adobe.com/index.cfm#themeID/1855100 
+
+//@color1:rgb(196,109,59);
+//@color2:rgb(227,203,173);
+//@color3:rgb(156,153,133);
+//@color4:rgb(120,136,128);
+//@color5:rgb(50,70,84);
 
 
-/* End of the less*/
+//http://kuler.adobe.com/#themeID/1878614
+//@color1:rgb(214,194,116);
+//@color2:rgb(219,158,70);
+//@color3:rgb(37,112,107);
+//@color4:rgb(61,36,35);
+//@color5:rgb(171,54,46);
 
-body {
+
+//http://kuler.adobe.com/#themeID/1607986
+//@color1:rgb(188,0,25);
+//@color2:rgb(222,78,78);
+//@color3:rgb(0,0,90);
+//@color4:rgb(163,209,250);
+//@color5:rgb(94,147,229);
+
+
+//Global adjustments
+@color360:fadeout(@color3,60%);
+@color460:fadeout(@color4,60%);
+@color260:fadeout(@color2,60%);
+@color560:fadeout(@color5,60%);
+@colorDark60:fadeout(@colorDark,60%);
+@colorLight60: fadeout(@colorLight,60%);
+
+//End of the less
+body,html {
   margin:0px;
   padding:0px;
   height:100%;
   color:@colorDark;
   background-color:@colorLight;
-  font-size:.85em;
 }
 a,a:hover,a:visited,a:focus { color: @color5; text-decoration:none; font-weight:bold;}
 a:hover{text-decoration: underline;}
-/* Color 1 related items */
+
+//Color 1 related items
 .color1{
   background: @color1;  
 }
@@ -106,27 +111,26 @@ a:hover{text-decoration: underline;}
   text-shadow: @color1 0 0 2px;
 }
 .color1toWhite{
-  background: @color1; /* Old browsers */
-  background: -moz-linear-gradient(left, @color1 45%, @white 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(45%,@color1), color-stop(100%,@white)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, @color1 45%,@white 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, @color1 45%,@white 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, @color1 45%,@white 100%); /* IE10+ */
-  background: linear-gradient(left, @color1 45%,@white 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-8 */
+  background: @color1; // Old browsers 
+  background: -moz-linear-gradient(left, @color1 45%, @white 100%); // FF3.6+ 
+  background: -webkit-gradient(linear, left top, right top, color-stop(45%,@color1), color-stop(100%,@white)); // Chrome,Safari4+ 
+  background: -webkit-linear-gradient(left, @color1 45%,@white 100%); // Chrome10+,Safari5.1+ 
+  background: -o-linear-gradient(left, @color1 45%,@white 100%); // Opera 11.10+ 
+  background: -ms-linear-gradient(left, @color1 45%,@white 100%); // IE10+ 
+  background: linear-gradient(left, @color1 45%,@white 100%); // W3C 
 }
-/* Color 2 related items */
+//Color 2 related items
 .color2,.color260{
   background: @color2;
   a{
-   color: @colorDark;  
+   color: @colorLight;  
   }
 }
 .color260{
   background: @color260;
 }
 
-/* Color 3 related items */
+//Color 3 related items
 .color3{
   background: @color3;
   color: @colorLight;
@@ -143,7 +147,7 @@ a:hover{text-decoration: underline;}
   text-align:center;
   .rounded-corners(10px);
 }
-/* Color 4 related items */
+//Color 4 related items
 .color4{
   background:@color4;
 }
@@ -153,7 +157,7 @@ a:hover{text-decoration: underline;}
 .color4Border1{
   border:1px solid @color4;
 }
-/* Color 5 related items */
+//Color 5 related items
 .color5{
   color:@colorLight;
   background:@color5;
@@ -170,19 +174,33 @@ a:hover{text-decoration: underline;}
   color:@colorLight;
 }
 .color5Soft{
-  background: @color5; /* Old browsers */
-  background: -moz-linear-gradient(left,  darken(@color5,20%) 5%, @color5 20%, @color5 80%, darken(@color5,20%) 95%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(5%,darken(@color5,20%) ), color-stop(20%,@color5), color-stop(80%,@color5), color-stop(95%,darken(@color5,20%))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, darken(@color5,20%) 5%,@color5 20%,@color5 80%,@color5, darken(@color5,15%) 95%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left,  darken(@color5,20%) 5%,@color5 20%,@color5 80%,darken(@color5,20%) 95%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left,  darken(@color5,20%) 5%,@color5 20%,@color5 80%,darken(@color5,20%) 95%); /* IE10+ */
-  background: linear-gradient(left,  darken(@color5,20%) 5%,@color5 20%,@color5 80%,darken(@color5,20%) 95%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#261806', endColorstr='#261806',GradientType=1 ); /* IE6-9 */
-
-/* http://www.colorzilla.com/gradient-editor/#261806+5,5f3e12+20,5f3e12+60,5f3e12+80,261806+95;Custom */
+  .softColor(@color5);
 }
-.fontColorDark{
-  color:@colorDark;
+.color5Ribbon{
+  .ribbon(@color5)
+  //http://www.colorzilla.com/gradient-editor/#261806+5,5f3e12+20,5f3e12+60,5f3e12+80,261806+95;Custom
+}
+
+h1,h2,h3{
+  margin:2px;
+  color: @color5;
+  text-align: left;
+}
+h1 { 
+  font-family: 'Buda' , arial, serif; 
+  font-size: 2.5em;
+  font-weight: bold;
+  color:@color5;
+}
+h2 {
+  font-family: 'Dancing Script' , sans-serif; 
+  font-size: 2.2em;
+  color: @color5;
+}
+  
+h3 {
+  font-family: 'Dancing Script' , sans-serif;
+  font-size: 2em;
 }
 
 .pageBranding{
@@ -207,30 +225,36 @@ a:hover{text-decoration: underline;}
 }
 
 .smoothAnimate{
-  .cubic();
-}
-.linearAnimate(@time: 300ms){
-  -webkit-transition: all @time linear;
-     -moz-transition: all @time linear;
-      -ms-transition: all @time linear;
-       -o-transition: all @time linear;
-          transition: all @time linear;
-}
-.insideBoxShadow{
-  .shadowIn(0, 0,1px,1px,@shadow);
+  -webkit-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+     -moz-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+      -ms-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+       -o-transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220);
+          transition: all 300ms cubic-bezier(0.895, 0.030, 0.685, 0.220); // easeInQuart 
   
+  -webkit-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+     -moz-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+      -ms-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+       -o-transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220);
+          transition-timing-function: cubic-bezier(0.895, 0.030, 0.685, 0.220); // easeInQuart 
 }
 
+.insideBoxShadow{
+  -moz-box-shadow: inset 0 0 1px 1px @shadow;
+  -webkit-box-shadow: inset 0 0 1px 1px @shadow;
+  box-shadow: inset 0 0 1px 1px @shadow;
+}
 .outSideBoxShadow{
-  .shadowOut(0, 0,1px,1px,@shadow);
+  -moz-box-shadow: 0 0 1px 1px @shadow;
+  -webkit-box-shadow: 0 0 1px 1px @shadow;
+  box-shadow: 0 0 1px 1px @shadow;
 }
 .mainArea{
   padding-top:125px;
   padding-bottom:20px;
   background-color:@color4;
-  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
 }
 .mainBackground{
   background-color:@color4;
@@ -246,5 +270,5 @@ a:hover{text-decoration: underline;}
   border-right: 3px solid @borderColor60;
 }
 .dropDown{
-  border: 1px solid #AAA;
+  border: 1px solid @shadow;
 }
