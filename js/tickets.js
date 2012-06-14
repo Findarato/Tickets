@@ -364,7 +364,6 @@ if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery
 
 jQuery(document).ready(function () {
   Params.Content = $("#content"); //lets stop searching for it a hundred times
-  
 	if(document.location.toString().indexOf("devtickets")){ // Lets just keep the localStorage clear for development 
 		//sessionStorage.clear();
 	}

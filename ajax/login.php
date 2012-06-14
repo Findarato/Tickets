@@ -49,8 +49,9 @@
 				  $response["newid"] = $unTest;
 				}
         $db->Query("INSERT INTO openId_users (user_id,open_id) VALUES (".$response["newid"].",'".mysql_real_escape_string($_SESSION["openID"]["identity"])."')");
-        
-        $response = login($unTest,$pass,$response,true);
+        $response["userPWLI"]["PW"] = $pass;
+        $response["userPWLI"]["LI"] =  $response["newid"];
+        $response = login( $response["newid"],$pass,$response,true);
         $response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) );
         $response["features"] = getFeatures();
 			}
@@ -88,7 +89,9 @@
 		unset($_SESSION['user']);
 		$response["message"]="Successfully Logged out of Tickets";
 	}elseif(isset($_GET["userIdFetch"])){// Just give me the user id.  More of a problem has happened and I lost the user id
-		$usr = unserialize($_SESSION['user']);	
+		$response["session"] = $_SESSION;
+		$usr = unserialize($_SESSION['user']);
+    $response["user"] = $usr;
 		$response["user_id"] = $usr->getUserId();
 		$response["message"] = "Successfully Returned User ID";
 		$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) ); 
