@@ -18,8 +18,9 @@
     <link rel="stylesheet" media="screen and (max-width: 1024px) " href="/css/handheld.css?v=2"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="/js/modernizr.custom.04865.js"></script>
-
+<script type="text/javascript">less = { env: 'development' }; </script>
     <script src="/js/libs/less-1.3.0.min.js"></script>
+        
     <link rel="shortcut icon" href="/bug.png">
     <link rel="apple-touch-icon" href="/bug.png">
     <link rel="icon" type="image/png" href="/bug.png" />
