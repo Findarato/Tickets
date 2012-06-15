@@ -43,7 +43,6 @@ var Params = {
 	"Features":[]
 };
 var blankId = 9999999;
-
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
