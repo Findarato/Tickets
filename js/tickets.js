@@ -106,8 +106,9 @@ function oc(a)
 function checkPermissions(){
     var userInfo = $.parseJSON(sessionStorage.userInfo)
     if(userInfo == null || userInfo == undefined || userInfo == "undefined"){
-      loadStorage.UserInfo()
-      var userInfo = $.parseJSON(sessionStorage.userInfo)
+      loadStorage.UserInfo();
+      return checkPermissions();
+      //var userInfo = $.parseJSON(sessionStorage.userInfo)
     }
     var result = true;
       for (item in userInfo.permissions){
@@ -396,8 +397,6 @@ jQuery(document).ready(function () {
 	}
 	if(!$("html").hasClass("sessionstorage"))alert("Your browser does not support sessionStorage and can not use Tickets");
 	
-	//console.log("document is ready");
-	
 	//this should make the logout button in the drop down work.
 	$("#popUpLogout")
 		.attr({"href":"/ajax/login.php?logout&id="+localStorage.userId})
@@ -609,4 +608,6 @@ jQuery(document).ready(function () {
     }
   });
   checkHash(); // firefox does not fireoff a pop change on a reload like chrome does 
+  
+  loadStorage.UserInfo();
 });
