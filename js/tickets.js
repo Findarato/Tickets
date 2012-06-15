@@ -58,6 +58,10 @@ function oc(a)
 }
 function checkPermissions(){
     var userInfo = $.parseJSON(sessionStorage.userInfo)
+    if(userInfo == null || userInfo == undefined || userInfo == "undefined"){
+      loadSessionStorage();
+      var userInfo = $.parseJSON(sessionStorage.userInfo)
+    }
     var result = true;
       for (item in userInfo.permissions){
         var curPermission = userInfo.permissions[item];
@@ -222,7 +226,6 @@ function loadBlank() {
 	sessionStorage.lastArea = "UpdateNotes";
 	Params.Content.load("ajax/updateNotes.php");
 }
-
 function checkNotify(dt) {
 	var display = "";
 	var disp = false;
@@ -338,6 +341,14 @@ function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
 function loadSessionStorage(clear){
+  // Userid
+  if(!sessionStorage.userId || sessionStorage.userId == 0 || typeof sessionStorage.userId=="undefined" || typeof sessionStorage.userId=="string"){// something broke lets take care of it
+    console.log("your userid is missing, let me fix that");
+    $.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
+      sessionStorage.setItem("userId",data.user_id);
+    }); 
+  }
+
 	//Features Enabled
 	if(!sessionStorage.features || sessionStorage.features == "undefined" ){
 		$.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
@@ -345,13 +356,6 @@ function loadSessionStorage(clear){
 		});
 	}
 
-	// Userid
-	if(!sessionStorage.userId || sessionStorage.userId == 0 || typeof sessionStorage.userId=="undefined" || typeof sessionStorage.userId=="string"){// something broke lets take care of it
-		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
-			sessionStorage.setItem("userId",data.user_id);
-		});	
-	}
- 
 	// Favorites 
 	if(!sessionStorage.getItem("ticketsFavorite") || sessionStorage.getItem("ticketsFavorite") =="false" || sessionStorage.getItem("ticketsFavorite") == "undefined"){
 		updateFavorites(); //Update sessionStorage in a centeral way so that it can be done in other places
@@ -369,12 +373,10 @@ function loadSessionStorage(clear){
   	}
 	//User info
 	if(!sessionStorage.userInfo || sessionStorage.userInfo == "undefined" || sessionStorage.userInfo == undefined || typeof sessionStorage.userInfo != "object"){
-		$.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
-			sessionStorage.setItem("userInfo",JSON.stringify(data.userInfo));
-		});	
-		console.log("your user info is broke I am fixing it");
+		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
+      sessionStorage.setItem("userId",data.user_id);
+    });
 	}
-
 }
 
 
@@ -392,7 +394,8 @@ jQuery(document).ready(function () {
 	if(document.location.toString().indexOf("devtickets")){ // Lets just keep the localStorage clear for development 
 		//sessionStorage.clear();
 	}
-	if(localStorage.userId > 1){// we are just going to take the login information that was orgionaly passed though the login page and move it over to the session
+	if(localStorage.userId > 0){// we are just going to take the login information that was orgionaly passed though the login page and move it over to the session
+	  console.log("I need to transfer the localStorage over to sessionStorage")
 	  sessionStorage.setItem("userId",localStorage.userId);
 	  localStorage.userId = -1;
 	}
@@ -416,8 +419,6 @@ jQuery(document).ready(function () {
 		yep : '',
 		nope: '/js/jquery-ui/js/jquery-ui-1.8.18.custom.min.js'
 	});
-
-	loadSessionStorage();
 	
 	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
 	
@@ -525,7 +526,6 @@ jQuery(document).ready(function () {
 	$("#ticketSearchButton").live("click",function(){
 		loadTicketList(0,{"search":$("#ticketSearch").val(),"area":"all_tickets"});//			loadTicketList(0,{"search":"","area":"all_tickets"});
 	});
-
 	$(".tab").bind("click",function(){
 		$(".tab").removeClass("selectedTab shadowUp");
 		me = $(this);
@@ -543,7 +543,6 @@ jQuery(document).ready(function () {
 		if(sessionStorage.userId == 0){
 			setHash("#login");return;
 		}
-		alert(checkPermissions())
 		if(!checkPermissions()){
 		  return false;
 		}

@@ -499,7 +499,6 @@ function loadTicket(ticketId,update) {
     loadTicketBody(data,Params.Content);
   });
 }
-
 function loadTicketList(pageNumber,queryObj,append,callback) {
   //Lets setup the variables
   callBackFn = function(){};
