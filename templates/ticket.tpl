@@ -140,7 +140,7 @@
 									<textarea name="description" id="replyDescriptionTextArea" autocomplete="off"  required="required" class="mainBorder Ticketform roundAll4 fontMain" style="padding:2px;width:100%;height:100%"></textarea>
 								</div>
 								<INPUT type="hidden" id="replyuserid" name="user_id" value="{$user_id}">
-								<INPUT type="hidden" id="replyticketid" name="ticket_id"  value="{$ticket_id}" >
+								<INPUT type="hidden" id="replyticketid" name="ticket_id"  value="" >
 								<INPUT type="hidden" name="type" value="{$type}">
 							</div>
 						</form>

@@ -43,6 +43,53 @@ var Params = {
 	"Features":[]
 };
 var blankId = 9999999;
+
+loadStorage = {
+  "UserId" : function(){ // load user information
+    if(!sessionStorage.userId || sessionStorage.userId == 0 || typeof sessionStorage.userId=="undefined" ){// something broke lets take care of it
+      console.log("your userid is missing, let me fix that");
+      $.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
+        sessionStorage.setItem("userId",data.user_id);
+        console.log(data.user_id)
+        });
+    }
+  },
+  "Features":function(){    //Features Enabled
+      if(!sessionStorage.features || sessionStorage.features == "undefined" ){
+        $.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
+          sessionStorage.setItem("features",JSON.stringify(data.features))
+        });
+      }    
+    },
+    "Favorites" : function(){ //Update sessionStorage in a centeral way so that it can be done in other places
+      if(!sessionStorage.getItem("ticketsFavorite") || sessionStorage.getItem("ticketsFavorite") =="false" || sessionStorage.getItem("ticketsFavorite") == "undefined")
+        updateFavorites();
+      else
+        Params.FavoriteObject = $.parseJSON(sessionStorage.getItem("ticketsFavorite"));
+  },
+  "Categories":function(){
+    if(!sessionStorage.getItem("ticketsCategories")){
+      $.getJSON("ajax/get_categories.php",{},function(data){
+          sessionStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
+          Params.Categories = data.categories;
+      });
+    }else{
+      Params.Categories = $.parseJSON(sessionStorage.getItem("ticketsCategories"));
+    }    
+  },
+  "UserInfo":function(){
+    if(!sessionStorage.userInfo || sessionStorage.userInfo == "undefined" || sessionStorage.userInfo == undefined || typeof sessionStorage.userInfo != "object" || sessionStorage.userInfo == "[object Object]"){
+      $.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
+        sessionStorage.setItem("userInfo",JSON.stringify(data.userInfo));
+      });
+    }    
+  },
+  "All":function(){
+    loadStorage.UserId();loadStorage.Features();loadStorage.Favorites();loadStorage.Categories();loadStorage.UserInfo();    
+  }
+}
+
+
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
@@ -59,7 +106,7 @@ function oc(a)
 function checkPermissions(){
     var userInfo = $.parseJSON(sessionStorage.userInfo)
     if(userInfo == null || userInfo == undefined || userInfo == "undefined"){
-      loadSessionStorage();
+      loadStorage.UserInfo()
       var userInfo = $.parseJSON(sessionStorage.userInfo)
     }
     var result = true;
@@ -206,14 +253,7 @@ function checkHash() {
 	}
 	
 }
-function updateFavorites(){
-	$.getJSON("ajax/bookmark.php",{"list":"1"},function(data){
-	  if(data != "no user" && typeof data == "object"){
-	    Params.FavoriteObject = data.favIds;
-      sessionStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
-	  }
-	});
-}
+function updateFavorites(){loadStorage.Favorites();}
 function checkResponse(json) {
 	if (json.error !== null && json.error.length > 2) {
 		notice("Error", json.error, false);
@@ -330,59 +370,14 @@ function loadLargeStats() {
 		});
 	});
 }
-function populateAllBugs(Area) {
-	var cnt,html,Ttype;
-	$.getJSON(uri + "ajax/get_bugs.php", {"all": "1","small":"1"},function (data, text) {
-		$("#cBugsOpen").html(data.bugs.open);
-		$("#cBugsClosed").html(data.bugs.closed);
-	});
-}
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
-function loadSessionStorage(clear){
-  // Userid
-  if(!sessionStorage.userId || sessionStorage.userId == 0 || typeof sessionStorage.userId=="undefined" || typeof sessionStorage.userId=="string"){// something broke lets take care of it
-    console.log("your userid is missing, let me fix that");
-    $.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
-      sessionStorage.setItem("userId",data.user_id);
-    }); 
-  }
-
-	//Features Enabled
-	if(!sessionStorage.features || sessionStorage.features == "undefined" ){
-		$.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
-			sessionStorage.setItem("features",JSON.stringify(data.features))
-		});
-	}
-
-	// Favorites 
-	if(!sessionStorage.getItem("ticketsFavorite") || sessionStorage.getItem("ticketsFavorite") =="false" || sessionStorage.getItem("ticketsFavorite") == "undefined"){
-		updateFavorites(); //Update sessionStorage in a centeral way so that it can be done in other places
-	}else{
-    	Params.FavoriteObject = $.parseJSON(sessionStorage.getItem("ticketsFavorite"));
-	}
-  	//Categories
-	if(!sessionStorage.getItem("ticketsCategories")){
-    	$.getJSON("ajax/get_categories.php",{},function(data){
-      		sessionStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
-      		Params.Categories = data.categories;
-    	});
-  	}else{
-    	Params.Categories = $.parseJSON(sessionStorage.getItem("ticketsCategories"));
-  	}
-	//User info
-	if(!sessionStorage.userInfo || sessionStorage.userInfo == "undefined" || sessionStorage.userInfo == undefined || typeof sessionStorage.userInfo != "object"){
-		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
-      sessionStorage.setItem("userId",data.user_id);
-    });
-	}
-}
-
+function loadSessionStorage(clear){loadStorage.All();}
 
 if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
-	  checkHash(); 
+	  checkHash(); console.log("popstate hash");
 	  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 	};
 }else{
@@ -409,6 +404,7 @@ jQuery(document).ready(function () {
 		.click(function(){
 			$.getJSON(this.href,function(){ window.location = "/";})
 			localStorage.clear(); // Lets just clear the localStorage to clear out all of the data
+			sessionStorage.clear(); // need to clean up this as well
 			return false;
 		});
 

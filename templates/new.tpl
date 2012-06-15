@@ -43,8 +43,8 @@
 							<td>
 								<INPUT type="hidden" id="newTicketBugTrouble" name="newTicketBugTrouble" value="1" >
 								<INPUT type="hidden" id="newTicketUser_id" name="newTicketUser_id" value="{$user_id}" >
-								<INPUT type="hidden" id="newTicketTicket_id" name="newTicketTicket_id"  value="{$ticket_id}" >
-								<INPUT type="hidden" id="newTicketType" name="newTicketType" value="{$type}">
+								<INPUT type="hidden" id="newTicketTicket_id" name="newTicketTicket_id"  value="" >
+								<INPUT type="hidden" id="newTicketType" name="newTicketType" value="">
 							</td>
 						</tr>
 					</table>

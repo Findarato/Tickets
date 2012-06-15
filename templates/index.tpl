@@ -44,9 +44,6 @@
     <div id="newTicketdialogTpl" class="ui-helper-hidden" title="Create new ticket">
       {include file="new.tpl"}
     </div>
-    <div id="newBugdialogTpl" class="ui-helper-hidden" title="Create new ticket">
-      {include file="new_bug.tpl"}
-    </div>
     <div id="newsearchdialogTpl" class="ui-helper-hidden">
       {include file="search.tpl"}
     </div>
