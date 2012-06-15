@@ -63,9 +63,14 @@ loadStorage = {
     },
     "Favorites" : function(){ //Update sessionStorage in a centeral way so that it can be done in other places
       if(!sessionStorage.getItem("ticketsFavorite") || sessionStorage.getItem("ticketsFavorite") =="false" || sessionStorage.getItem("ticketsFavorite") == "undefined")
-        updateFavorites();
-      else
-        Params.FavoriteObject = $.parseJSON(sessionStorage.getItem("ticketsFavorite"));
+          $.getJSON("ajax/bookmark.php",{"list":"1"},function(data){
+            if(data != "no user" && typeof data == "object"){
+              Params.FavoriteObject = data.favIds;
+              sessionStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
+              } else
+              Params.FavoriteObject = $.parseJSON(sessionStorage.getItem("ticketsFavorite"));
+            });
+            
   },
   "Categories":function(){
     if(!sessionStorage.getItem("ticketsCategories")){
@@ -106,9 +111,8 @@ function oc(a)
 function checkPermissions(){
     var userInfo = $.parseJSON(sessionStorage.userInfo)
     if(userInfo == null || userInfo == undefined || userInfo == "undefined"){
-      loadStorage.UserInfo();
-      return checkPermissions();
-      //var userInfo = $.parseJSON(sessionStorage.userInfo)
+      loadStorage.UserInfo()
+      var userInfo = $.parseJSON(sessionStorage.userInfo)
     }
     var result = true;
       for (item in userInfo.permissions){
@@ -121,7 +125,7 @@ function checkPermissions(){
             Spinner(300,"This user has Admin Permissions");
             result = true;
             break;
-          } else if (curPermission.permission == "STAFF" || curPermissions.permissions == "USER"){
+          } else if (curPermission.permission == "STAFF" || curPermission.permissions == "USER"){
             result = true;
             break;
           } else {
@@ -254,7 +258,6 @@ function checkHash() {
 	}
 	
 }
-function updateFavorites(){loadStorage.Favorites();}
 function checkResponse(json) {
 	if (json.error !== null && json.error.length > 2) {
 		notice("Error", json.error, false);
@@ -376,6 +379,7 @@ function updateTickets() {
 }
 function loadSessionStorage(clear){loadStorage.All();}
 
+
 if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
 	  checkHash(); console.log("popstate hash");
@@ -396,6 +400,8 @@ jQuery(document).ready(function () {
 	  localStorage.userId = -1;
 	}
 	if(!$("html").hasClass("sessionstorage"))alert("Your browser does not support sessionStorage and can not use Tickets");
+	
+	//console.log("document is ready");
 	
 	//this should make the logout button in the drop down work.
 	$("#popUpLogout")
@@ -608,6 +614,6 @@ jQuery(document).ready(function () {
     }
   });
   checkHash(); // firefox does not fireoff a pop change on a reload like chrome does 
-  
+  loadStorage.Favorites();
   loadStorage.UserInfo();
 });
