@@ -91,12 +91,6 @@ function loadResponsesBody(ticketId, container, page) {
 	var params = {
 		"ticket_id": ticketId
 	};
-	if(page !== undefined){
-		if (page.length !== 0) {
-			params.page = page;
-		} // adds the page number to the request  
-	}
-	
 	$.getJSON(uri + "ajax/display_reply.php", params, function (data) {
 		var cnt = 0;
 		var resCont = $("<div id=\"responseContainer\" />");
