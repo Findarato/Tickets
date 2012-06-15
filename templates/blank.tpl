@@ -18,6 +18,8 @@
             <li>There was a small bug where if you clicked on the down arrow it would not fully trigger the dropdown effect.  This has been resolved.</li>
           </ol>
         </li>
+        <li>The login process shoudld be much smoother now, and feel much more like you are never actually outside of tickets.</li>
+        <li>View only accounts now only get to view tickets instead of create them, and there is a notification if you are a view only account.</li>
       </ol>
       <br>
       <span style="font-size: 150%; line-height: normal;">New Features</span>

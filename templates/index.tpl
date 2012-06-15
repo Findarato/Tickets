@@ -65,8 +65,8 @@
     <div id="notifyArea" style="width:0px;" class=""></div>
     <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.common.core.js" ></script>
     <script src="http://cdn1.lapcat.org/js/RGraph/libraries/RGraph.bar.js" ></script>
-    <script src="/js/modules/display.js?v=XX"></script>
-    <script src="/js/tickets.js?v=XX"></script>
+    <script src="/js/modules/display.js?v=XXVI"></script>
+    <script src="/js/tickets.js?v=XXVI"></script>
     <script src="/js/modules/admin.js?v=XX"></script>
     <script src="/js/globalFunctions.js"></script>
   </body>
