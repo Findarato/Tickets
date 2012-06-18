@@ -516,9 +516,6 @@ jQuery(document).ready(function () {
 		if(sessionStorage.userId == 0){
 			setHash("#login");return;
 		}
-		if(!checkPermissions()){
-		  return false;
-		}
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
 		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
@@ -526,7 +523,10 @@ jQuery(document).ready(function () {
 			queryObj = {type:"close",ticket_id: Params.TicketId};
 			var closeResponse = prompt("Why are you closing this ticket","");
 			if (closeResponse!=null && closeResponse!=""){
-				$.post(uri + "/ajax/add_reply.php", {"title":"Ticket Finished","description":closeResponse,"ticket_id":Params.TicketId,"type":"new","user_id":sessionStorage.userId},function(){});
+				$.post(uri + "/ajax/add_reply.php", {"title":"Ticket Finished","description":closeResponse+" #fin","ticket_id":sessionStorage.currentTicket,"type":"new","user_id":sessionStorage.userId},function(data){
+				  loadTicket(sessionStorage.currentTicket);
+          loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
+				});
 			}else{
 				return;
 			}	
@@ -534,9 +534,8 @@ jQuery(document).ready(function () {
 		if($(this).hasClass("openLink")){queryObj = {type:"open",ticket_id: Params.TicketId};}
 		$.getJSON(uri + "ajax/tickets.php", queryObj,
 		function (data) {
-			checkResponse(data);
-			sessionStorage.removeItem("TicketId"+Params.TicketId);
-			loadTicket(Params.TicketId);
+      loadTicket(sessionStorage.currentTicket);
+      loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
 		});
 	});
 	
