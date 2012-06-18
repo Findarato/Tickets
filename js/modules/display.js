@@ -411,35 +411,22 @@ function loadTicketBody(inputData, container) {
   //
   // Reassign button 
   //	 
-   	createSelect($("#ticketAssign"),function(id){},{})
+   	
 	 
 	$('#reAssignButton').click(function(){
-	  if(!checkPermissions()){return false;}
-		$("#reassignBox").css({"height":"30px","overflow":"visible"})
-		//.delay().show().css({"overflow":"visible"});
-		//$("#reassignBox").css({"overflow":"visible"});
-		
-	   
+	  createSelect($("#ticketAssign"),function(id){},{})
+    $("#reassignBox").css({"height":"30px","overflow":"visible"})
 	});
 	$("#ReAssignCancelButton").click(function(){
-	  if(!checkPermissions()){return false;}
 		$("#reassignBox").css({"height":"0px","overflow":"hidden"});
-
-	});
-   
-   
+  });
   $('#reAssignAcceptButton').click(function () {
-    if(!checkPermissions()){return false;}
-    //$("#reassignBox").css({"height":"0px"});
-    
     $.getJSON(uri + "ajax/tickets.php", {
       "type": "reassign",
       "ticket_id": sessionStorage.currentTicket,
       "user_id": $("#ticketAssign").attr('data-value')
     }, function (data) {
       $("#ticketAssignedToDisplay").html($("#TicketAssign option:selected").text());
-      sessionStorage.removeItem("TicketId"+ticketId);
-      //checkResponse(data);
       if (data.error.length > 1) {} else {
 		$("#imgReassigned").show();
         loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);

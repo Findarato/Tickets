@@ -74,7 +74,7 @@
 				<!-- Modification Buttons -->
 				<div class="" id="ticketFooterArea" style="height:37px;overflow:hidden; ">
 					<div id="buttonBox" style="">
-						<button class="openTicket button actionButtons" id="reAssignButton" style="width:auto;">
+						<button class="openTicket button" id="reAssignButton" style="width:auto;">
 							<span class="">Reassign</span>
 						</button>
 						<button class="openTicket button actionButtons " id="modifyButton" style="width:auto;">
