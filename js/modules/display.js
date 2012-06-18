@@ -178,14 +178,14 @@ function loadTicketBody(inputData, container) {
 			data = $.parseJSON(inputData);
 		}
 	}else{ // data is not a string or an object	
-	  notice("Error",inputData+"<br>Error: 100382B",true); 
+	   
 	}
 	if(typeof data != "object"){
     	if(data === null){ 
-        	notice("Error","Data Null<br>Error: 100334B",true);
+    
         	return false; 
 		}else{
-			notice("Error","Data not an Object<br>Error: 100337B",true);
+		
 			return false;
 		}
   	} 
