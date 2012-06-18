@@ -5,6 +5,7 @@
  * 
  */
 function checkAdminStatus(){
+  $usr = unserialize($_SESSION["user"]);
   if(!in_array("ADMIN",$usr->getPermissions())){
     if(in_array("NO_ACCESS", $usr->getPermissions())){
       $response["error"] = "Permission Denied";

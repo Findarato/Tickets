@@ -29,6 +29,8 @@
 							<td style="text-align:left;"><span class="font-X">Due Date:</span></td>
 							<td style="text-align:left;"><input type="date" name="newTicketDueDate" id="newTicketDueDate" required="required" class=" Ticketform" maxlength="50" style="width:8em" value="" /></td>
 						</tr>
+						{else}
+						
 						{/if}
 						{if $features["Location"] eq 1}
 						<tr class="">

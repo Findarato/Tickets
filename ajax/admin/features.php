@@ -13,7 +13,7 @@ function getFeatures(){
 
 
 
-$_GET = $db->Clean($_GET);
+$_GET = $_GET;
 
 if(isset($_GET["features"])){
 	$response["features"] = getFeatures();	

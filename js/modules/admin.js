@@ -68,9 +68,7 @@ admin = {
 		pageTracker._trackPageview("admin/loadFeatures");
 		Tlb.html(menu)
 		var display = $("<div/>");
-		if(sessionStorage.features == "undefined"){
-			loadLocalStorage();
-		}
+		if(sessionStorage.features == "undefined"){loadSessionStorage();}
 		var siteFeatures = $.parseJSON(sessionStorage.features);
 		$.each(siteFeatures,function(i,item){
 			display.append(

@@ -181,16 +181,13 @@ function loadTicketBody(inputData, container) {
 	   
 	}
 	if(typeof data != "object"){
-    	if(data === null){ 
-    
-        	return false; 
-		}else{
-		
+    if(data === null) 
+      return false; 
+		else
 			return false;
-		}
   	} 
 
-  	$("#replyTitleBox").val("RE:"+data.subject)
+  $("#replyTitleBox").val("RE:"+data.subject)
 	if(data.tickettype_id==2){bug=true;}
 
 	if(data.priority>5){data.priority = data.priority -5;} //normalize old data with new numbering scheme
