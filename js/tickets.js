@@ -55,7 +55,7 @@ loadStorage = {
     }
   },
   "Features":function(){    //Features Enabled
-      if(!sessionStorage.features || sessionStorage.features == "undefined" ){
+      if(!sessionStorage.features || sessionStorage.features == "undefined" || ! sessionStorage.indexOf("features")){
         $.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
           sessionStorage.setItem("features",JSON.stringify(data.features))
         });
@@ -433,53 +433,28 @@ jQuery(document).ready(function () {
     
   });
   	//Clicking login with google button
-	$("#googleLogin").live("click",function(){
-		window.location = "classes/lightopenid/google.php?login";
-	}); 
-	$("#loginButton").live("click",function () {
-		if ($("#un").val() === "" || $("#un").val() === null) {
-			
-			return;
-		} else if ($("#loginpassword").val() === "" || $("#loginpassword").val() === null) {
-			
-			return;
-		} else {
-			jQuery.post(uri + "ajax/login.php", $("#frm_login").serialize(), function (data) {
-				login(data);
-			}, "json");
-		}
-	});
+	$("#googleLogin").live("click",function(){window.location = "/classes/lightopenid/google.php?login";	}); 
+	
 	//Just a catch for hitten enter on the form
-	$("#loginpassword").keydown(function (event) {
-		if (event.keyCode == 13) {
-			$("#btn_login").trigger('click')
-		}
-	});
 	$("#ticketAddButton").live("click",function () {
     if(!checkPermissions()){
       return false;
     }	
-		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
 		var ticketDesc = $("#newTicketDescription");
 		if (ticketTitle.val() === "") {
 			ticketTitle.focus();
-			
 			return false;
 		} else {
 			if (ticketDesc.val() === "") {
 				ticketDesc.focus();
-				
 				return false;
 			} else { 
 				if ($("#newTicketLocation").val() === "" && this.id=="ticketAddButton") {
-					
 					return false;
 				}else if(($("#newTicketDueDate").val() === "" && this.id=="ticketAddButton")){
-					
 					return false;
 				}else if($("#newTicketAssign").val()==0 && this.id=="ticketAddButton"){
-          
           return false;
 				}else {
 					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
@@ -577,8 +552,6 @@ jQuery(document).ready(function () {
       if(sessionStorage.lastArea == "ticketList"){
         Spinner(true);
         loadTicketList(parseInt(sessionStorage.currentPage)+1,"",true,function(){Spinner(false)})
-      }else{
-        
       }
     }else{
       Spinner(false);
