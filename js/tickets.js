@@ -126,7 +126,7 @@ function checkPermissions(){
             Spinner(300,"This user has Admin Permissions");
             result = true;
             break;
-          } else if (curPermission.permission == "STAFF" || curPermission.permissions == "USER"){
+          } else if (curPermission.permission == "STAFF" || curPermission.permission == "USER"){
             result = true;
             break;
           } else {
