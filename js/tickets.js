@@ -113,6 +113,7 @@ function checkPermissions(){
     if(userInfo == null || userInfo == undefined || userInfo == "undefined"){
       loadStorage.UserInfo()
       var userInfo = $.parseJSON(sessionStorage.userInfo)
+      alert("there was an issue Loading your permissions. We will try again.")
     }
     var result = true;
       for (item in userInfo.permissions){
@@ -129,6 +130,7 @@ function checkPermissions(){
             result = true;
             break;
           } else {
+            alert("We are sorry, but you do not have permission to view this area.")
             result = false;
           }  
       }
@@ -259,41 +261,12 @@ function checkHash() {
 	
 }
 function checkResponse(json) {
-	if (json.error !== null && json.error.length > 2) {
-		notice("Error", json.error, false);
-	}
-	if (json.message !== null && json.message.length > 2) {
-		notice("Notice", json.message, false);
-	}
 }
 function loadBlank() {
 	sessionStorage.lastArea = "UpdateNotes";
 	Params.Content.load("ajax/updateNotes.php");
 }
-function checkNotify(dt) {
-	var display = "";
-	var disp = false;
-	$.getJSON(uri + "ajax/notify.php", {
-		dateTime: dt
-	}, function (data) {
-		$.each(data.tickets, function (i, item) {
-			if (item.id > 1) {
-				notice("New Ticket!", item.subject, true, item.id);
-			}
-		});
-		$.each(data.replies, function (i, item) {
-			if (item.ticket_id > 1) {
-				notice("New Response!", item.subject, true, item.ticket_id);
-			} 
-    });
-   if(data.status===0){
-     notice("Error","You have been logged out for inactivity",true);     
-   }
-	});
-	var dat = new Date();
-	var Lastcheck = Math.round(dat.getTime() / 1000.0); //set the global variable to now
-	
-}
+function checkNotify(dt) {}
 function loadLargeStats() {
 	Params.Content.empty();
 	Params.Content.html(
@@ -378,7 +351,6 @@ function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
 function loadSessionStorage(clear){loadStorage.All();}
-
 
 if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
@@ -466,10 +438,10 @@ jQuery(document).ready(function () {
 	}); 
 	$("#loginButton").live("click",function () {
 		if ($("#un").val() === "" || $("#un").val() === null) {
-			notice("Error", "Please enter a username", false);
+			
 			return;
 		} else if ($("#loginpassword").val() === "" || $("#loginpassword").val() === null) {
-			notice("Error", "Please enter a password", false);
+			
 			return;
 		} else {
 			jQuery.post(uri + "ajax/login.php", $("#frm_login").serialize(), function (data) {
@@ -492,22 +464,22 @@ jQuery(document).ready(function () {
 		var ticketDesc = $("#newTicketDescription");
 		if (ticketTitle.val() === "") {
 			ticketTitle.focus();
-			notice("Error", "You must enter a title", false);
+			
 			return false;
 		} else {
 			if (ticketDesc.val() === "") {
 				ticketDesc.focus();
-				notice("Error", "You must enter a description", false);
+				
 				return false;
 			} else { 
 				if ($("#newTicketLocation").val() === "" && this.id=="ticketAddButton") {
-					notice("Error", "You must select a Location", false);
+					
 					return false;
 				}else if(($("#newTicketDueDate").val() === "" && this.id=="ticketAddButton")){
-					notice("Error", "You must enter a Due date", false);
+					
 					return false;
 				}else if($("#newTicketAssign").val()==0 && this.id=="ticketAddButton"){
-          		notice("Error", "You must select a user!", false);
+          
           return false;
 				}else {
 					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
