@@ -8,7 +8,11 @@ header('Content-type: application/json');
 $json = $response;
 
 //print_r($usr);
-
+if(isset($_GET["getFeatures"])){
+   $json["features"] = $db->Query("SELECT name,feature,status FROM features",false,"assoc_array");
+   echo json_encode($json);
+   die();
+}
 if(!isset($_GET["userId"]) || $_GET["userId"] == "null") {$json["error"] = "no user id passed";echo json_encode($json);die();}
 
 $userId = intval($_GET["userId"]);
@@ -37,6 +41,9 @@ function formatData($graphData,$monthData){
 
 if(isset($_GET["allUsers"])){die(json_encode($json));}
 
+
+
+$json["features"] = $db->Query("SELECT name,feature,status FROM features",false,"assoc_array");
 $json["userInfo"] = $db->Query("
 SELECT 
   u.id,
@@ -110,7 +117,7 @@ for($a=1;$a<13;$a++){
 	$monthLables[] = date("M",mktime(0,0,0,$a,1,1982));
 }
 
-$json["features"] = $db->Query("SELECT name,feature,status FROM features",false,"assoc_array"); 
+ 
   
 $endMonths = array_slice($months,0,date("m"));
 $startMonths = array_slice($months,date("m"));
