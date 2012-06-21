@@ -105,7 +105,7 @@
 				}
 				$return = mysql_query($sql,$this -> linkid) or $return = FALSE;
 				$this -> Resid = $return;
-				$this -> Lastsql = $sql;
+				$this -> Lastsql = str_replace(array('\\n','\\t'),' ',$sql);
 				if(!$return){//set the error values
 					$this -> Error["Query"] = $this -> Lastsql;
 					$this -> Error["Error"] = mysql_error();

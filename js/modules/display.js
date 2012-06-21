@@ -152,6 +152,32 @@ function displayStatus(jsonData, Selector) {
 }
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
+  toggles = {due:true, category:true,assign:true,location:true};
+  features = $.parseJSON(sessionStorage.features); 
+  for(f in features){
+   console.log(features[f].feature+ "=" + features[f].status)
+   switch(features[f].feature){
+     case "DUEDATE":
+       if(features[f].status == 0){
+          console.log("due date is off")
+          toggles.due = false;
+        }
+     break;
+     case "LOCATION":
+       if(features[f].status == 0){
+          console.log("location is off")
+          toggles.location= false;
+        }
+     break;     
+     case "PRIORITY":
+       if(features[f].status == 0){
+          console.log("location is off")
+          toggles.location= false;
+        }
+     break;   
+   }
+    
+  }
 	if($("#replyuserid").val()==""){
 		$("#replyuserid").val(localStorage.userId);
 	}
@@ -265,28 +291,33 @@ function loadTicketBody(inputData, container) {
 					$("<div/>",{"html":data.firstname +" " + data.lastname,"class":"ilb","title":data.username})
 				)
 		)
-	container
-		.find("#ticketDueDate")
-		.html(
-			$("<div/>")
-				.html(
-					$("<span/>",{"html":"Due On ",css:{"font-weight":"bold"}})
-				)
-				.append(
-					$("<div/>",{"html":data.due_on,"class":"ilb"})
-				)
-		)
-	container
-		.find("#ticketLocation")
-		.html(
-			$("<div/>")
-				.html(
-					$("<span/>",{"html":"Location ",css:{"font-weight":"bold"}})
-				)
-				.append(
-					$("<div/>",{"html":data.locationName,"class":"ilb"})
-				)
-		)		
+		if(toggles.due){ // check to see if due dates are turned on.  If they are insert the code
+      container
+        .find("#ticketDueDate")
+        .html(
+          $("<div/>")
+            .html(
+              $("<span/>",{"html":"Due On ",css:{"font-weight":"bold"}})
+            )
+            .append(
+              $("<div/>",{"html":data.due_on,"class":"ilb"})
+            )
+        )		  
+		}
+  if(toggles.location){// turn off location if its not needed
+    container
+      .find("#ticketLocation")
+      .html(
+        $("<div/>")
+          .html(
+            $("<span/>",{"html":"Location ",css:{"font-weight":"bold"}})
+          )
+          .append(
+            $("<div/>",{"html":data.locationName,"class":"ilb"})
+          )
+      )  
+  }
+			
 	
 	container.find("#replyticketid").val(ticketId);
 	

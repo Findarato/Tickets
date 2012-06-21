@@ -38,13 +38,10 @@
 					MD5("'.$pass.'"),
 					"'.$_SESSION["openID"]["email"].'");';
 					$res = $db->Query($sql,false,"row");
-          
-          
 					$response["newid"] = $res;
           if($res > 0){// we are not going to add in permissions for broken stuff
             $db->Query("INSERT INTO user_permissions VALUES(".$res.",6)",false);
           }
-          
 				}else{
 				  $response["newid"] = $unTest;
 				}
@@ -55,7 +52,6 @@
         $response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) );
         $response["features"] = getFeatures();
 			}
-			
 		}
 	}elseif(isset($_GET["features"])){ 
 		$response["features"] = getFeatures($_GET["features"]);
