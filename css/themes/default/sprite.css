@@ -1,0 +1,109 @@
+/* .bookmarkOff,.bookmarkOn{ background-position: 0 0; width: 16px; height: 16px; opacity:.3} */
+
+.bookmarkOn{opacity:1;}
+
+.ticket:before,.bug:before{
+	content:", ";
+	font-family:"WebSymbolsRegular";	
+}
+.google:before{
+	content:"g ";
+	color:maroon;
+	font-family:"WebSymbolsRegular";
+}
+
+.magnifier:before{
+	content:"L ";
+	font-family:"WebSymbolsRegular";
+}
+.warning:before{
+	content:"W ";
+	color:rgb(150,0,0);
+	font-family:"WebSymbolsRegular";
+}
+.globe:before{
+	content:"K ";
+	font-family:"WebSymbolsRegular";
+}
+.pencil:before{
+	content:"e ";
+	font-family:"WebSymbolsRegular";
+}
+.group:before{
+	content:"F ";
+	font-family:"WebSymbolsRegular";
+}
+.gear:before{
+	content:"S ";
+	font-family:"WebSymbolsRegular";
+}
+.user:before{
+	content:"U ";
+	font-family:"WebSymbolsRegular";
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+}
+.closed:before{
+	content:"Z ";
+	font-family:"WebSymbolsRegular";
+}
+.chart:before{
+	content:"u ";
+	color:black;
+	font-family:"WebSymbolsRegular";
+}
+.bookmarkOn:before{
+	content:"R ";
+	color:rgb(255,255,0);
+	font-family:"WebSymbolsRegular";
+	text-shadow:0 0 1px rgba(180,0,0,.80);
+}
+.bookmarkOff:before{
+	content:"R ";
+	font-family:"WebSymbolsRegular";
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+}
+.closedTicketDisplay:after{
+	content:" .";
+	font-family:"WebSymbolsRegular";
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+    color:#00769E;
+}
+.remove{cursor:pointer;}
+
+.cancel:before{
+	font-family:"IconicFill";
+	cursor:pointer;
+	content:"✗";
+	padding:3px;
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	color:#000;
+}
+.check:before{
+	font-family:"IconicFill";
+	cursor:pointer;
+	content:"✓";
+	padding:3px;
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	color:#000;
+}
+
+.remove:before{
+	cursor:pointer;
+	content:"X";
+	padding-right:3px;
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	color:#000;
+}
+.remove:hover:before{
+	color:#00769E;
+}
+
+/* <a href="" data-icon="C">Cool Link</a> */
+
+[data-icon]:before {
+	font-family: 'WebSymbolsRegular';
+	content: attr(data-icon);
+	padding-right:3px;
+	text-shadow:0 0 1px rgba(0,0,0,.60);
+	color:#000;
+}

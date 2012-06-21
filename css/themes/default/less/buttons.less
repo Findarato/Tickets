@@ -1,0 +1,13 @@
+button, a.button, .button,.selectButton{
+	cursor:pointer;
+	padding:.3em;
+	white-space: nowrap;
+	z-index:5;
+	font-size:.8em;
+	border: 1px solid @buttonBorder;
+	background-color:@button;
+	.linearAnimate(300ms);
+}
+button:hover{
+ .shadowOut(0px,0px,.2em,.2em,@color1);
+}

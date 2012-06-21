@@ -1,0 +1,103 @@
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+.downShadow(@color){
+  -webkit-box-shadow: 0 6px 7px -3px @color;
+  box-shadow: 0 6px 7px -3px @color;
+}
+.dropShadow(@color){
+  -webkit-box-shadow: -4px 7px 6px 0px @color;
+  box-shadow: -4px 7px 6px 0px @color;
+}
+.oneEdgeShadow(@color){
+  -webkit-box-shadow: 0 8px 6px -6px @color;
+  box-shadow: 0 8px 6px -6px @color;
+}
+.textShadowIndent(@color){
+  text-shadow: 0 1px 1px @color;
+}
+.shadowIn (@x: 0, @y: 0, @blur: 1px,@distance:1px, @color: #000) {
+  box-shadow:inset @arguments;
+  -moz-box-shadow:inset @arguments;
+  -webkit-box-shadow:inset @arguments;
+}
+.shadowOut (@x: 0, @y: 0, @blur: 1px,@distance:1px, @color: #000) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+}
+.linearAnimate(@time:300ms){
+  -webkit-transition: all @time linear;
+     -moz-transition: all @time linear;
+      -ms-transition: all @time linear;
+       -o-transition: all @time linear;
+          transition: all @time linear;
+}
+
+.softColor(@color){
+  background: @color; /* Old browsers */
+  background: -moz-linear-gradient(top, @color 0%, darken(saturate(@color,16%),.6%) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@color), color-stop(100%,darken(saturate(@color,16%),.6%))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, @color 0%,darken(saturate(@color,16%),.6%) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, @color 0%,darken(saturate(@color,16%),.6%) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, @color 0%,darken(saturate(@color,16%),.6%) 100%); /* IE10+ */
+  background: linear-gradient(top, @color 0%,darken(saturate(@color,16%),.6%) 100%); /* W3C */
+}
+
+
+@white:rgb(255,255,255); 
+@color1:rgb(204,255,255);
+@color2:rgb(221,238,204);
+@color3:rgb(85,102,68); 
+@color4:rgb(231,242,230);
+@color5:rgb(95,62,18);
+@colorDark: rgb(31,31,31);
+@colorLight: rgb(250,250,250);
+@shadow:rgba(36, 36, 36,.3);
+@borderColor: rgb(170,170,170);
+@button:rgb(240,240,240);
+@buttonBorder:rgb(170,170,170);
+
+// Winter CSS 
+//@color1:rgb(204,238,255);
+//@color2:rgb(205,227,238);
+//@color3:rgb(68,91,102);
+//@color4:rgb(221,233,239);  
+//@color5:rgb(17,69,95);
+
+
+//http://kuler.adobe.com/index.cfm#themeID/1855100 
+
+//@color1:rgb(196,109,59);
+//@color2:rgb(227,203,173);
+//@color3:rgb(156,153,133);
+//@color4:rgb(120,136,128);
+//@color5:rgb(50,70,84);
+
+
+//http://kuler.adobe.com/#themeID/1878614
+//@color1:rgb(214,194,116);
+//@color2:rgb(219,158,70);
+//@color3:rgb(37,112,107);
+//@color4:rgb(61,36,35);
+//@color5:rgb(171,54,46);
+
+
+//http://kuler.adobe.com/#themeID/1607986
+//@color1:rgb(188,0,25);
+//@color2:rgb(222,78,78);
+//@color3:rgb(0,0,90);
+//@color4:rgb(163,209,250);
+//@color5:rgb(94,147,229);
+
+
+//Global adjustments
+@color160:fadeout(@color1,60%);
+@color260:fadeout(@color2,60%);
+@color360:fadeout(@color3,60%);
+@color460:fadeout(@color4,60%);
+@color560:fadeout(@color5,60%);
+@borderColor60: fadeout(@borderColor,60%);
+@colorDark60:fadeout(@colorDark,60%);
+@colorLight60: fadeout(@colorLight,60%);

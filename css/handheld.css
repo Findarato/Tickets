@@ -1,0 +1,215 @@
+/*
+ body{background-color:#0F0}
+ */
+
+h1 {
+  font-size: 1.6em !important;
+  height: 1.6em;
+}
+h2 {
+  font-size: 1.5em !important;
+  height: 1.5em;
+}
+h3 {
+  font-size: 1.3em !important;
+  height: 1.3em;
+}
+h4 {
+  font-size: 1.1em !important;
+  height: 1.1em;
+}
+
+button, a.button, .button, .selectButton {
+  padding: .3em !important;
+  font-size: 1em !important;
+}
+@media only screen and (max-width: 570px) {
+  menu .tabs {
+    width: auto !important;
+    top: 37px !important;
+  }
+  h1 {
+    font-size: 1.4em !important;
+    height: 1.3em !important;
+    width: 80%;
+    overflow: hidden;
+  }
+  h2 {
+    font-size: 1.2em !important;
+    height: 1.2em;
+  }
+  h3 {
+    font-size: 1.1em !important;
+    height: 1.1em;
+  }
+  h4 {
+    font-size: 1.0em !important;
+    height: 1.0em;
+  }
+  .headerAvatar {
+    height: 32px;
+    width: 32px;
+  }
+  .idBox ul li a span, .signInBox ul li a span {
+    opacity: 0;
+    width: 18px;
+    height: 1em;
+    overflow: hidden;
+  }
+  #statsTab, #searchTab, #adminTab, #subAreaBar button:not(#topperNew) {
+    display: none !important;
+  }
+  .tabrow {
+    text-align: right;
+    list-style: none;
+    padding: 0;
+    line-height: 2em;
+    height: 2em;
+    overflow: hidden;
+    font-size: 1em;
+    position: relative;
+  }
+  .tabrow li {
+    box-shadow: none;
+    text-shadow: 0 1px #FFF;
+    margin: 0 -5px;
+    padding: 0 5px;
+  }
+
+}
+
+.ticketSideLeft, .ticketSideRight {
+  display: block;
+  width: auto
+}
+.border-right-Main-4 {
+  border-right: 0px
+}
+.ticket-divider {
+  border-right: 0px;
+}
+
+.topMenuItem, .tab > a {
+  /*display:none;*/
+
+}
+.topMenuItem:hover {
+  width: auto;
+  text-align: left;
+}
+.tab > a {
+  width: 20px;
+}
+
+.mobile {
+  display: inline-block
+}
+#replyToggle, #topperStart, #sideArea, .topperText {
+  display: none
+}
+#mainArea {
+  margin-left: 5px
+}
+#headerPadding {
+  height: 50px
+}
+
+#sideArea {
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  width: 0px;
+}
+
+/*Lets make tickets actually look good now */
+
+#ticketLoginNewBox {
+  position: absolute;
+  top: 250px;
+  left: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 96%;
+  display: block;
+}
+.ticketBox {
+  max-height: 400px;
+  width: 98%;
+  padding: 5px 0 0 5px;
+  margin: 3px;
+  position: relative;
+  display: block;
+}
+.ticketUserIconBox {
+  height: 32px;
+  width: 32px;
+  background-image: url(http://www.gravatar.com/avatar/{hash}?s=32&d=monster&r=g);
+  display: block;
+}
+
+.ticketIdBox, .ticketPriorityBox {
+  height: 15px;
+  width: 32px;
+  margin-top: 4px;
+  text-align: center;
+  font-size: 11px;
+  padding-top: 2px;
+  display: block;
+}
+.ticketPriorityBox {
+  position: relative;
+  margin-left: 0;
+  padding: 0px;
+}
+.ticketTitleBox {
+  padding-left: 7px;
+  top: 4px;
+  left: 50px;
+  width: auto;
+  display: block;
+  position: absolute;
+}
+.ticketBodyBox {
+  max-width: 230px;
+  width: auto;
+  height: 75px;
+  overflow: hidden;
+  padding-left: 7px;
+  top: 20px;
+  left: 50px;
+  display: block;
+  position: absolute;
+}
+
+.ticketCreatedOnBox, .ticketCategoryBox, .ticketCreatedByBox, .ticketLocationBox {
+  text-align: left;
+  font-size: 11px;
+  padding: 1px 3px;
+  position: relative;
+  border-right: none;
+  border-bottom: none;
+  float: right;
+  display: inline-block;
+  height: 20px;
+  width: 100px;
+  margin-right: 0px;
+}
+.ticketBookmarkBox {
+  top: 0;
+  right: 6px;
+  padding: 1px;
+  overflow: hidden;
+  border-right: none;
+  border-top: none;
+  display: block;
+  position: absolute;
+}
+.ticketItem {
+  width: 100%;
+  display: block;
+  height: auto;
+  position: relative;
+}
+.menuDepartmentClosed, .menuByMyDepartment {
+  display: none;
+}
