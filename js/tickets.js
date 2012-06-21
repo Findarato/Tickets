@@ -341,8 +341,6 @@ function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
 function loadSessionStorage(){loadStorage.All();}
-  console.log("I am going to load features")
-  loadStorage.Features();
 if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
 	  checkHash(); console.log("popstate hash");
