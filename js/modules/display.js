@@ -153,6 +153,7 @@ function displayStatus(jsonData, Selector) {
 function loadTicketBody(inputData, container) {
   // lets make sure the previous tickets modifications are gone.
   toggles = {due:true, category:true,assign:true,location:true};
+  if(sessionStorage.features == "undefined")loadStorage.Features();
   features = $.parseJSON(sessionStorage.features); 
   for(f in features){
    console.log(features[f].feature+ "=" + features[f].status)

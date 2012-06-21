@@ -1,10 +1,3 @@
-Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
 /**
  * Simple global variables that are needed everywhere
  */
@@ -43,8 +36,7 @@ var Params = {
 	"Features":[]
 };
 var blankId = 9999999;
-
-loadStorage = {
+var loadStorage = {
   "UserId" : function(){ // load user information
     if(!sessionStorage.userId || sessionStorage.userId == 0 || typeof sessionStorage.userId=="undefined" ){// something broke lets take care of it
       console.log("your userid is missing, let me fix that");
@@ -55,13 +47,13 @@ loadStorage = {
     }
   },
   "Features":function(){    //Features Enabled
-      if(!sessionStorage.features || sessionStorage.features == "undefined" || ! sessionStorage.indexOf("features")){
+      if(!sessionStorage.features || sessionStorage.features == "undefined"){
         $.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
           sessionStorage.setItem("features",JSON.stringify(data.features))
         });
       }    
     },
-    "Favorites" : function(){ //Update sessionStorage in a centeral way so that it can be done in other places
+  "Favorites" : function(){ //Update sessionStorage in a centeral way so that it can be done in other places
       if(!sessionStorage.getItem("ticketsFavorite") || sessionStorage.getItem("ticketsFavorite") =="false" || sessionStorage.getItem("ticketsFavorite") == "undefined")
           $.getJSON("ajax/bookmark.php",{"list":"1"},function(data){
             if(data != "no user" && typeof data == "object"){
@@ -89,9 +81,7 @@ loadStorage = {
       });
     }    
   },
-  "All":function(){
-    loadStorage.UserId();loadStorage.Features();loadStorage.Favorites();loadStorage.Categories();loadStorage.UserInfo();    
-  }
+  "All":function(){loadStorage.UserId();loadStorage.Features();loadStorage.Favorites();loadStorage.Categories();loadStorage.UserInfo();}
 }
 
 
@@ -350,8 +340,9 @@ function loadLargeStats() {
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
-function loadSessionStorage(clear){loadStorage.All();}
-
+function loadSessionStorage(){loadStorage.All();}
+  console.log("I am going to load features")
+  loadStorage.Features();
 if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
 	  checkHash(); console.log("popstate hash");
