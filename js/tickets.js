@@ -48,7 +48,7 @@ var loadStorage = {
   },
   "Features":function(){    //Features Enabled
       if(!sessionStorage.features || sessionStorage.features == "undefined"){
-        $.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
+        $.getJSON("ajax/get_userinfo.php",{"getFeatures":"1"},function(data){
           sessionStorage.setItem("features",JSON.stringify(data.features))
         });
       }    
