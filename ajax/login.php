@@ -38,13 +38,10 @@
 					MD5("'.$pass.'"),
 					"'.$_SESSION["openID"]["email"].'");';
 					$res = $db->Query($sql,false,"row");
-          
-          
 					$response["newid"] = $res;
           if($res > 0){// we are not going to add in permissions for broken stuff
             $db->Query("INSERT INTO user_permissions VALUES(".$res.",6)",false);
           }
-          
 				}else{
 				  $response["newid"] = $unTest;
 				}
@@ -55,7 +52,6 @@
         $response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) );
         $response["features"] = getFeatures();
 			}
-			
 		}
 	}elseif(isset($_GET["features"])){ 
 		$response["features"] = getFeatures($_GET["features"]);
@@ -89,9 +85,7 @@
 		unset($_SESSION['user']);
 		$response["message"]="Successfully Logged out of Tickets";
 	}elseif(isset($_GET["userIdFetch"])){// Just give me the user id.  More of a problem has happened and I lost the user id
-		$response["session"] = $_SESSION;
 		$usr = unserialize($_SESSION['user']);
-    $response["user"] = $usr;
 		$response["user_id"] = $usr->getUserId();
 		$response["message"] = "Successfully Returned User ID";
 		$response["mdEmail"] = md5( strtolower( trim( id2Email($response["user_id"]) ) ) ); 

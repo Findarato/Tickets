@@ -43,6 +43,58 @@ var Params = {
 	"Features":[]
 };
 var blankId = 9999999;
+
+loadStorage = {
+  "UserId" : function(){ // load user information
+    if(!sessionStorage.userId || sessionStorage.userId == 0 || typeof sessionStorage.userId=="undefined" ){// something broke lets take care of it
+      console.log("your userid is missing, let me fix that");
+      $.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
+        sessionStorage.setItem("userId",data.user_id);
+        console.log(data.user_id)
+        });
+    }
+  },
+  "Features":function(){    //Features Enabled
+      if(!sessionStorage.features || sessionStorage.features == "undefined" || ! sessionStorage.indexOf("features")){
+        $.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
+          sessionStorage.setItem("features",JSON.stringify(data.features))
+        });
+      }    
+    },
+    "Favorites" : function(){ //Update sessionStorage in a centeral way so that it can be done in other places
+      if(!sessionStorage.getItem("ticketsFavorite") || sessionStorage.getItem("ticketsFavorite") =="false" || sessionStorage.getItem("ticketsFavorite") == "undefined")
+          $.getJSON("ajax/bookmark.php",{"list":"1"},function(data){
+            if(data != "no user" && typeof data == "object"){
+              Params.FavoriteObject = data.favIds;
+              sessionStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
+              } else
+              Params.FavoriteObject = $.parseJSON(sessionStorage.getItem("ticketsFavorite"));
+            });
+            
+  },
+  "Categories":function(){
+    if(!sessionStorage.getItem("ticketsCategories")){
+      $.getJSON("ajax/get_categories.php",{},function(data){
+          sessionStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
+          Params.Categories = data.categories;
+      });
+    }else{
+      Params.Categories = $.parseJSON(sessionStorage.getItem("ticketsCategories"));
+    }    
+  },
+  "UserInfo":function(){
+    if(!sessionStorage.userInfo || sessionStorage.userInfo == "undefined" || sessionStorage.userInfo == undefined || typeof sessionStorage.userInfo != "object" || sessionStorage.userInfo == "[object Object]"){
+      $.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
+        sessionStorage.setItem("userInfo",JSON.stringify(data.userInfo));
+      });
+    }    
+  },
+  "All":function(){
+    loadStorage.UserId();loadStorage.Features();loadStorage.Favorites();loadStorage.Categories();loadStorage.UserInfo();    
+  }
+}
+
+
 function focusMe(id){
 	window.scrollBy(0,5000);
 	$(id).focus();
@@ -58,6 +110,11 @@ function oc(a)
 }
 function checkPermissions(){
     var userInfo = $.parseJSON(sessionStorage.userInfo)
+    if(userInfo == null || userInfo == undefined || userInfo == "undefined"){
+      loadStorage.UserInfo()
+      var userInfo = $.parseJSON(sessionStorage.userInfo)
+      alert("there was an issue Loading your permissions. We will try again.")
+    }
     var result = true;
       for (item in userInfo.permissions){
         var curPermission = userInfo.permissions[item];
@@ -69,10 +126,11 @@ function checkPermissions(){
             Spinner(300,"This user has Admin Permissions");
             result = true;
             break;
-          } else if (curPermission.permission == "STAFF" || curPermissions.permissions == "USER"){
+          } else if (curPermission.permission == "STAFF" || curPermission.permission == "USER"){
             result = true;
             break;
           } else {
+            alert("We are sorry, but you do not have permission to view this area.")
             result = false;
           }  
       }
@@ -202,51 +260,13 @@ function checkHash() {
 	}
 	
 }
-function updateFavorites(){
-	$.getJSON("ajax/bookmark.php",{"list":"1"},function(data){
-	  if(data != "no user" && typeof data == "object"){
-	    Params.FavoriteObject = data.favIds;
-      sessionStorage.setItem("ticketsFavorite",JSON.stringify(Params.FavoriteObject));
-	  }
-	});
-}
 function checkResponse(json) {
-	if (json.error !== null && json.error.length > 2) {
-		notice("Error", json.error, false);
-	}
-	if (json.message !== null && json.message.length > 2) {
-		notice("Notice", json.message, false);
-	}
 }
 function loadBlank() {
 	sessionStorage.lastArea = "UpdateNotes";
 	Params.Content.load("ajax/updateNotes.php");
 }
-
-function checkNotify(dt) {
-	var display = "";
-	var disp = false;
-	$.getJSON(uri + "ajax/notify.php", {
-		dateTime: dt
-	}, function (data) {
-		$.each(data.tickets, function (i, item) {
-			if (item.id > 1) {
-				notice("New Ticket!", item.subject, true, item.id);
-			}
-		});
-		$.each(data.replies, function (i, item) {
-			if (item.ticket_id > 1) {
-				notice("New Response!", item.subject, true, item.ticket_id);
-			} 
-    });
-   if(data.status===0){
-     notice("Error","You have been logged out for inactivity",true);     
-   }
-	});
-	var dat = new Date();
-	var Lastcheck = Math.round(dat.getTime() / 1000.0); //set the global variable to now
-	
-}
+function checkNotify(dt) {}
 function loadLargeStats() {
 	Params.Content.empty();
 	Params.Content.html(
@@ -327,60 +347,14 @@ function loadLargeStats() {
 		});
 	});
 }
-function populateAllBugs(Area) {
-	var cnt,html,Ttype;
-	$.getJSON(uri + "ajax/get_bugs.php", {"all": "1","small":"1"},function (data, text) {
-		$("#cBugsOpen").html(data.bugs.open);
-		$("#cBugsClosed").html(data.bugs.closed);
-	});
-}
 function updateTickets() {
 	checkNotify(Params.LastLogon); //Use the last login time
 }
-function loadSessionStorage(clear){
-	//Features Enabled
-	if(!sessionStorage.features || sessionStorage.features == "undefined" ){
-		$.getJSON("ajax/admin/features.php",{"features":"all"},function(data){
-			sessionStorage.setItem("features",JSON.stringify(data.features))
-		});
-	}
-
-	// Userid
-	if(!sessionStorage.userId || sessionStorage.userId == 0 || typeof sessionStorage.userId=="undefined" || typeof sessionStorage.userId=="string"){// something broke lets take care of it
-		$.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
-			sessionStorage.setItem("userId",data.user_id);
-		});	
-	}
- 
-	// Favorites 
-	if(!sessionStorage.getItem("ticketsFavorite") || sessionStorage.getItem("ticketsFavorite") =="false" || sessionStorage.getItem("ticketsFavorite") == "undefined"){
-		updateFavorites(); //Update sessionStorage in a centeral way so that it can be done in other places
-	}else{
-    	Params.FavoriteObject = $.parseJSON(sessionStorage.getItem("ticketsFavorite"));
-	}
-  	//Categories
-	if(!sessionStorage.getItem("ticketsCategories")){
-    	$.getJSON("ajax/get_categories.php",{},function(data){
-      		sessionStorage.setItem("ticketsCategories",JSON.stringify(data.categories));
-      		Params.Categories = data.categories;
-    	});
-  	}else{
-    	Params.Categories = $.parseJSON(sessionStorage.getItem("ticketsCategories"));
-  	}
-	//User info
-	if(!sessionStorage.userInfo || sessionStorage.userInfo == "undefined" || sessionStorage.userInfo == undefined || typeof sessionStorage.userInfo != "object"){
-		$.getJSON("ajax/get_userinfo.php",{"userId":sessionStorage.userId},function(data){
-			sessionStorage.setItem("userInfo",JSON.stringify(data.userInfo));
-		});	
-		console.log("your user info is broke I am fixing it");
-	}
-
-}
-
+function loadSessionStorage(clear){loadStorage.All();}
 
 if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
-	  checkHash(); 
+	  checkHash(); console.log("popstate hash");
 	  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 	};
 }else{
@@ -392,7 +366,8 @@ jQuery(document).ready(function () {
 	if(document.location.toString().indexOf("devtickets")){ // Lets just keep the localStorage clear for development 
 		//sessionStorage.clear();
 	}
-	if(localStorage.userId > 1){// we are just going to take the login information that was orgionaly passed though the login page and move it over to the session
+	if(localStorage.userId > 0){// we are just going to take the login information that was orgionaly passed though the login page and move it over to the session
+	  console.log("I need to transfer the localStorage over to sessionStorage")
 	  sessionStorage.setItem("userId",localStorage.userId);
 	  localStorage.userId = -1;
 	}
@@ -406,6 +381,7 @@ jQuery(document).ready(function () {
 		.click(function(){
 			$.getJSON(this.href,function(){ window.location = "/";})
 			localStorage.clear(); // Lets just clear the localStorage to clear out all of the data
+			sessionStorage.clear(); // need to clean up this as well
 			return false;
 		});
 
@@ -416,8 +392,6 @@ jQuery(document).ready(function () {
 		yep : '',
 		nope: '/js/jquery-ui/js/jquery-ui-1.8.18.custom.min.js'
 	});
-
-	loadSessionStorage();
 	
 	$("#UpdateNotes").click(function(){setHash("#updateNotes");/*checkHash*/});
 	
@@ -459,53 +433,28 @@ jQuery(document).ready(function () {
     
   });
   	//Clicking login with google button
-	$("#googleLogin").live("click",function(){
-		window.location = "classes/lightopenid/google.php?login";
-	}); 
-	$("#loginButton").live("click",function () {
-		if ($("#un").val() === "" || $("#un").val() === null) {
-			notice("Error", "Please enter a username", false);
-			return;
-		} else if ($("#loginpassword").val() === "" || $("#loginpassword").val() === null) {
-			notice("Error", "Please enter a password", false);
-			return;
-		} else {
-			jQuery.post(uri + "ajax/login.php", $("#frm_login").serialize(), function (data) {
-				login(data);
-			}, "json");
-		}
-	});
+	$("#googleLogin").live("click",function(){window.location = "/classes/lightopenid/google.php?login";	}); 
+	
 	//Just a catch for hitten enter on the form
-	$("#loginpassword").keydown(function (event) {
-		if (event.keyCode == 13) {
-			$("#btn_login").trigger('click')
-		}
-	});
 	$("#ticketAddButton").live("click",function () {
     if(!checkPermissions()){
       return false;
     }	
-		var ticketBug = $("#newTicketBugTrouble");
 		var ticketTitle = $("#newTicketTitle");
 		var ticketDesc = $("#newTicketDescription");
 		if (ticketTitle.val() === "") {
 			ticketTitle.focus();
-			notice("Error", "You must enter a title", false);
 			return false;
 		} else {
 			if (ticketDesc.val() === "") {
 				ticketDesc.focus();
-				notice("Error", "You must enter a description", false);
 				return false;
 			} else { 
 				if ($("#newTicketLocation").val() === "" && this.id=="ticketAddButton") {
-					notice("Error", "You must select a Location", false);
 					return false;
 				}else if(($("#newTicketDueDate").val() === "" && this.id=="ticketAddButton")){
-					notice("Error", "You must enter a Due date", false);
 					return false;
 				}else if($("#newTicketAssign").val()==0 && this.id=="ticketAddButton"){
-          		notice("Error", "You must select a user!", false);
           return false;
 				}else {
 					$.getJSON(uri + "ajax/add_ticket.php", $("#newTicketForm").serialize(), function (data) {
@@ -525,7 +474,6 @@ jQuery(document).ready(function () {
 	$("#ticketSearchButton").live("click",function(){
 		loadTicketList(0,{"search":$("#ticketSearch").val(),"area":"all_tickets"});//			loadTicketList(0,{"search":"","area":"all_tickets"});
 	});
-
 	$(".tab").bind("click",function(){
 		$(".tab").removeClass("selectedTab shadowUp");
 		me = $(this);
@@ -543,10 +491,6 @@ jQuery(document).ready(function () {
 		if(sessionStorage.userId == 0){
 			setHash("#login");return;
 		}
-		alert(checkPermissions())
-		if(!checkPermissions()){
-		  return false;
-		}
 		var queryObj = {};
 		if($(this).hasClass("holdLink")){queryObj = {type:"hold",value: 1,ticket_id: Params.TicketJSON.id};}
 		if($(this).hasClass("unholdLink")){queryObj = {type:"hold",value: 0,ticket_id: Params.TicketJSON.id};}
@@ -554,7 +498,10 @@ jQuery(document).ready(function () {
 			queryObj = {type:"close",ticket_id: Params.TicketId};
 			var closeResponse = prompt("Why are you closing this ticket","");
 			if (closeResponse!=null && closeResponse!=""){
-				$.post(uri + "/ajax/add_reply.php", {"title":"Ticket Finished","description":closeResponse,"ticket_id":Params.TicketId,"type":"new","user_id":sessionStorage.userId},function(){});
+				$.post(uri + "/ajax/add_reply.php", {"title":"Ticket Finished","description":closeResponse+" #fin","ticket_id":sessionStorage.currentTicket,"type":"new","user_id":sessionStorage.userId},function(data){
+				  loadTicket(sessionStorage.currentTicket);
+          loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
+				});
 			}else{
 				return;
 			}	
@@ -562,9 +509,8 @@ jQuery(document).ready(function () {
 		if($(this).hasClass("openLink")){queryObj = {type:"open",ticket_id: Params.TicketId};}
 		$.getJSON(uri + "ajax/tickets.php", queryObj,
 		function (data) {
-			checkResponse(data);
-			sessionStorage.removeItem("TicketId"+Params.TicketId);
-			loadTicket(Params.TicketId);
+      loadTicket(sessionStorage.currentTicket);
+      loadResponsesBody(Params.TicketId, $("#replyareabody"), 0);
 		});
 	});
 	
@@ -606,12 +552,12 @@ jQuery(document).ready(function () {
       if(sessionStorage.lastArea == "ticketList"){
         Spinner(true);
         loadTicketList(parseInt(sessionStorage.currentPage)+1,"",true,function(){Spinner(false)})
-      }else{
-        
       }
     }else{
       Spinner(false);
     }
   });
   checkHash(); // firefox does not fireoff a pop change on a reload like chrome does 
+  loadStorage.Favorites();
+  loadStorage.UserInfo();
 });

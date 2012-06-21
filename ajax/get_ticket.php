@@ -65,8 +65,6 @@ if(isset($_GET['ticket_id'])){
 	t.id,
 	c.name AS category,
 	t.category_id,
-	t.project_id,
-	p.name AS project_name,
 	t.priority,
 	t.tickettype_id,
 	t.location AS location_id,
@@ -78,7 +76,6 @@ if(isset($_GET['ticket_id'])){
 		$sql .= "LEFT JOIN favorite AS f ON (t.id=f.ticket_id AND f.user_id=1)";
 	}
 	$sql.="JOIN category AS c ON (t.category_id=c.id)
-	LEFT JOIN projects AS p ON (p.id=t.project_id)
 	JOIN library_names AS l ON (t.location=l.id)
 	JOIN tickets.users AS u ON (t.assigned_id=u.id)
 	JOIN tickets.users AS u2 ON (t.created_by_id=u2.id)
@@ -88,6 +85,8 @@ if(isset($_GET['ticket_id'])){
 	
 	//die($db->Lastsql); 
 	$response = $db->Fetch("assoc");
+	$response["query"] = $db->Lastsql;
+	
 	if(count($db->Error)==2){$response['error']==$db->Error;}
 	if(@unserialize($response['status'])){$response['status'] = unserialize($response['status']);}
 	//if(@unserialize($response['attachment'])){$response['attachment'] = unserialize($response['attachment']);}
