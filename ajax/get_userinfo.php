@@ -110,7 +110,7 @@ for($a=1;$a<13;$a++){
 	$monthLables[] = date("M",mktime(0,0,0,$a,1,1982));
 }
 
-$json["features"] = $db->Query("SELECT id,name,status FROM features",false,"assoc_array");
+$json["features"] = $db->Query("SELECT name,feature,status FROM features",false,"assoc_array");
   
 $endMonths = array_slice($months,0,date("m"));
 $startMonths = array_slice($months,date("m"));
