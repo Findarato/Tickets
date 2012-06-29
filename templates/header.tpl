@@ -77,3 +77,35 @@
 	</menu>	
 </header>
 <div class="color1 roundTop4 outSideBoxShadow smoothAnimate" id="notice" style="position:fixed;bottom:0em;right:50%;z-index:9999;padding:.5em;height:2em;overflow:hidden;">Loading</div>
+
+
+<header style="width:100%;">
+  <div style="width:100%;display:table;"><!--Page Container-->
+    <div class="color4 sideLinks" style="display:table-cell;position:relative;overflow:hidden;"><!--Header Left Container-->
+      <a href="/"><img style="height:60px;width:auto;" src="images/tree.png" alt="Lpcpls" border="0" style="display:inline-block"></a>
+      <div class="pageBranding color5Soft rotate30n shadow">
+        <a href="#updateNotes" id="ticketsBrand" title="Tickets Version:">Tickets</a>
+        <div class="fontMain fakelink" style="width:auto;" id="updateNotesContainer" title="Update Notes">
+        <span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
+      </div>
+    </div>      
+    </div>
+    <div style="display:table-cell;width:100%;vertical-align: top;"><!--Header Right Container-->
+      <div class="color5Soft shadow" style="width:100%;height:20px;position:relative">
+        <div style="position:absolute;right:0;top:0">
+          {if isset($firstname)} 
+        <a class="color4 right fontMain nolink" href="#userPage/" id="topperUserInfo" tabindex="0" style="font-size:16px;text-decoration:none;"><span>{$firstname} {$lastname}</span></a>
+        {else}
+        <a class="right fontMain" href="#login" id="topperSignIn" style="font-size:16px;text-decoration:none;">No User (Please Log in) </a>
+        {/if}
+        </div>
+      </div>
+      <div class="color1" style="width:100%;">
+        <h1 style="overflow:hidden;"><a href="/" style="text-decoration: none;" data-small="LPCPL" id="headerLink">La Porte County Public Library System</a></h1>
+        <h3>learn, enrich, enjoy</h3>
+      </div>
+    </div>
+  </div>
+</header>
+  
+
