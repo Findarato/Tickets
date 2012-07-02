@@ -95,25 +95,14 @@ a:hover{text-decoration: underline;}
   .ribbon(@color5)
   //http://www.colorzilla.com/gradient-editor/#261806+5,5f3e12+20,5f3e12+60,5f3e12+80,261806+95;Custom
 }
-.pageBranding{
-  position:absolute;
-  color:rgb(0,0,0);
-  top:20px;
-  left:-14px;
-  font-weight:bold;
-  height:18px;
-  width:90px;
-  text-shadow: @shadow 0px 1px 0px;
-}
 
-.pageBranding a,.pageBranding a:hover{
-  color:@white;
-  height:14px;
-  font-size: 12px;
-  text-align:center;
-  margin:2px;
-  display:block;
-  text-decoration:none;
+.sideIcons{
+  font-family:"WebSymbolsRegular";  
+  opacity:.6;
+  .linearAnimate(300ms);  
+}
+.sideIcons:hover{
+  opacity:1;  
 }
 
 .smoothAnimate{

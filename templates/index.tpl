@@ -34,29 +34,19 @@
     {include file="header.tpl"}
     <div style="width:100%;height:100%;display:table;"><!--Page Container-->
     <div class="color4" style="display:table-cell;width:48px;"><!--BodyLeft Container-->
-      <div class="sideLinks ticket " title="Create New ticket"></div>
-      <div class="sideLinks "  title="My Tickets">U</div>
-      <div class="sideLinks ">e</div>
-      <div class="sideLinks ">F</div>
-      <div class="sideLinks ">F</div>
+      <div class="sideLinks ticket sideIcons" title="Create New ticket"></div>
+      <div class="sideLinks sideIcons" title="My Tickets">U</div>
+      <div class="sideLinks sideIcons" title="Department Tickets">e</div>
+      <div class="sideLinks sideIcons" title="Department Tickets">F</div>
+      <div class="sideLinks sideIcons" title="Department Tickets">F</div>
       
     </div>
     <div style="display:table-cell;width:100%;vertical-align: top;"><!--Body Right Container-->
-      
-    </div>
-  </div>
-    
-    
-    
-    
-    
-    <div class="" style="display:table;width:100%">
-      <div id="mainArea1 insideBorder" class="roundAll4"  style="min-height:400px;text-align:left;padding:0 5px 0 5px;margin-right:5px">
-        <div style="width:100%;" class="roundBottom4" id="content">
+      <div style="width:100%;" class="roundBottom4" id="content">
           {include file="$content"}
         </div>
-      </div>
     </div>
+  </div>
     <div id="newTicketdialogTpl" class="ui-helper-hidden" title="Create new ticket">
       {include file="new.tpl"}
     </div>

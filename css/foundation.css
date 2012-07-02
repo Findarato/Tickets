@@ -3,13 +3,15 @@
 .sideLinks{
   height:64px;
   width:64px;
-  font-size:40px;
+  font-size:25px;
   padding:5px;
   text-align:center;
   margin-bottom:20px;
   cursor:pointer;
   color:light-gray;
 }
+
+
 .transformTopLeft {
   transform-origin: 0 0;
   -moz-transform-origin: top left;
