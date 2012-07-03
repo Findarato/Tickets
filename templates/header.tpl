@@ -1,13 +1,12 @@
-<header style="width:100%;">
+<header style="width:100%;position:fixed;top:0px;left:0px;z-index:1000;">
   <div class="color5Soft shadow" style="width:100%;height:20px;position:absolute;top:0px;left:0px;z-index: 100;">
-    <div style="position:absolute;right:0;top:0">
-    </div>
+    <div style="position:absolute;right:0;top:0"></div>
     <a href="#updateNotes" id="ticketsBrand" title="Tickets Version:">Tickets</a>
     <div class="fontMain fakelink" style="width:auto;" id="updateNotesContainer" title="Update Notes">
       <span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
     </div>
   </div>
-  <div style="width:100%;display:table;margin-top:16px;">
+  <div style="width:100%;display:table;margin-top:16px;position: relative">
     <!--Page Container-->
     <div class="color4 sideLinks" style="display:table-cell;position:relative;overflow:hidden;">
       <!--Header Left Container-->
@@ -19,56 +18,54 @@
         <h1 style="overflow:hidden;"><a href="/" style="text-decoration: none;" data-small="LPCPL" id="headerLink">La Porte County Public Library System</a></h1>
         <h3>learn, enrich, enjoy</h3>
       </div>
-<div id="idBox" class="{if isset($firstname)}idBox ddBox{else}signInBox{/if}" style="display:block;width:auto;height:24px;vertical-algin:middle;z-index: 1000;position:absolute;top:3px;right:13px;padding-left:5px;">
-    <!-- Start of User info -->
-    <ul>
-      <li>
-        {if isset($firstname)}
-        <a class="right fontMain nolink" href="#userPage/" id="topperUserInfo" tabindex="0" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle"><span>{$firstname} {$lastname}</span> <img id="headerAvatar" class="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=monsterid&r=g"> </a>
-        {else}
-        <a class="right fontMain" href="#login" id="topperSignIn" style="font-size:13px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
-        {/if}
-        <!-- popup Userinfo box -->
-        <ul class="downRightShadow roundAll8 dropDown" id="userPopup" >
+      <div id="idBox" class="{if isset($firstname)}idBox ddBox{else}signInBox{/if}" style="display:block;width:auto;height:24px;vertical-algin:middle;z-index: 1000;position:absolute;bottom:40%;right:13px;padding-left:5px;">
+        <!-- Start of User info -->
+        <ul>
           <li>
-            <a class="ticket_button ticketSprite ticket fakelink" id=topperNew>New Ticket</a>
+            {if isset($firstname)}
+            <a class="right fontMain nolink" href="#userPage/" id="topperUserInfo" tabindex="0" style="font-size:16px;line-height:18px;text-decoration:none;vertical-align: middle"><span>{$firstname} {$lastname}</span> <img id="headerAvatar" class="headerAvatar" src="http://www.gravatar.com/avatar/{$gravatar}?s=24&d=monsterid&r=g"> </a>
+            {else}
+            <a class="right fontMain" href="#login" id="topperSignIn" style="font-size:13px;text-decoration:none;vertical-align: middle">No User (Please Log in) </a>
+            {/if}
+            <!-- popup Userinfo box -->
+            <ul class="downRightShadow roundAll8 dropDown" id="userPopup" >
+              <li>
+                <a class="ticket_button ticketSprite ticket fakelink" id=topperNew>New Ticket</a>
+              </li>
+              <li>
+                <a class="nolink ticket_button ticketSprite user fontBold" href="#ticketList/sOpen">To Me</a>
+              </li>
+              <li>
+                <a class="smallTicketL nolink ticket_button ticketSprite pencil fontBold" href="#ticketList/sAssigned">By Me</a>
+              </li>
+              <li>
+                <a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept.">To My Dep.</a>
+              </li>
+              <li>
+                <a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sAdepartment" id=byMyDepartment>By My Dep.</a>
+              </li>
+              <li>
+                <a class="smallTicketL nolink ticket_button ticketSprite bookmarkOff fontBold" href="#ticketList/sFavorite"  style="opacity:1;">Bookmarks</a>
+              </li>
+              <li class="menuBottom">
+                <div style="display:inline-block;text-align:left;width:50%;height:30px;">
+                  <a class="fakelink" id="popUpLogout" href="/">Log Out</a>
+                </div>
+                <div style="display:inline-block;text-align:right;width:50%height:30px;">
+                  <a class="nolink fontMain" href="#userPage/" >Account Info</a>
+                </div>
+              </li>
+            </ul>
           </li>
           <li>
-            <a class="nolink ticket_button ticketSprite user fontBold" href="#ticketList/sOpen">To Me</a>
-          </li>
-          <li>
-            <a class="smallTicketL nolink ticket_button ticketSprite pencil fontBold" href="#ticketList/sAssigned">By Me</a>
-          </li>
-          <li>
-            <a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sOdepartment" id=toMyDepartment title="To My Dept.">To My Dep.</a>
-          </li>
-          <li>
-            <a class="smallTicketL nolink ticket_button ticketSprite group fontBold" href="#ticketList/sAdepartment" id=byMyDepartment>By My Dep.</a>
-          </li>
-          <li>
-            <a class="smallTicketL nolink ticket_button ticketSprite bookmarkOff fontBold" href="#ticketList/sFavorite"  style="opacity:1;">Bookmarks</a>
-          </li>
-          <li class="menuBottom">
-            <div style="display:inline-block;text-align:left;width:50%;height:30px;">
-              <a class="fakelink" id="popUpLogout" href="/">Log Out</a>
-            </div>
-            <div style="display:inline-block;text-align:right;width:50%height:30px;">
-              <a class="nolink fontMain" href="#userPage/" >Account Info</a>
-            </div>
+            <span data-icon="L" title="Search" alt="Search" style="cursor: pointer"></span>
           </li>
         </ul>
-      </li>
-      <li>
-        <span data-icon="L" title="Search" alt="Search" style="cursor: pointer"></span>
-      </li>
-    </ul>
-  </div>
+      </div>
 
     </div>
   </div>
 </header>
-
-
 
 {*  old header code so I can reference it while I code
 

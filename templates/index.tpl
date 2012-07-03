@@ -17,36 +17,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="/js/modernizr.custom.04865.js"></script>
     <script src="/js/libs/less-1.3.0.min.js"></script>
-        
+
     <link rel="shortcut icon" href="/bug.png">
     <link rel="apple-touch-icon" href="/bug.png">
     <link rel="icon" type="image/png" href="/bug.png" />
     <script type="text/javascript">
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+					var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");
+					document.write(unescape("%3Cscript src='"+gaJsHost+"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
     </script>
     <script type="text/javascript">
-		var pageTracker = _gat._getTracker("UA-8067208-4");
-		pageTracker._trackPageview();
+					var pageTracker=_gat._getTracker("UA-8067208-4");
+					pageTracker._trackPageview();
     </script>
   </head>
   <body>
     {include file="header.tpl"}
-    <div style="width:100%;height:100%;display:table;"><!--Page Container-->
-    <div class="color4" style="display:table-cell;width:48px;"><!--BodyLeft Container-->
-      <div class="sideLinks ticket sideIcons" title="Create New ticket"></div>
-      <div class="sideLinks sideIcons" title="My Tickets">U</div>
-      <div class="sideLinks sideIcons" title="Department Tickets">e</div>
-      <div class="sideLinks sideIcons" title="Department Tickets">F</div>
-      <div class="sideLinks sideIcons" title="Department Tickets">F</div>
-      
+    <div class="color4" style="height:100%;width:48px;margin-top:85px;display:table;position:fixed;top:0;left:0">
+        <div class="sideLinks ticket sideIcons" title="Create New ticket"></div>
+        <div class="sideLinks sideIcons" title="My Tickets">U</div>
+        <div class="sideLinks sideIcons" title="Department Tickets">e</div>
+        <div class="sideLinks sideIcons" title="Department Tickets">F</div>
+        <div class="sideLinks sideIcons" title="Department Tickets">F</div>
     </div>
-    <div style="display:table-cell;width:100%;vertical-align: top;"><!--Body Right Container-->
-      <div style="width:100%;" class="roundBottom4" id="content">
+    <div style="width:100%;margin:90px 3px 0 68px;" class="" id="content">
           {include file="$content"}
-        </div>
-    </div>
-  </div>
+    </div>    
     <div id="newTicketdialogTpl" class="ui-helper-hidden" title="Create new ticket">
       {include file="new.tpl"}
     </div>
