@@ -352,9 +352,6 @@ if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery
 
 jQuery(document).ready(function () {
   Params.Content = $("#content"); //lets stop searching for it a hundred times
-	if(document.location.toString().indexOf("devtickets")){ // Lets just keep the localStorage clear for development 
-		//sessionStorage.clear();
-	}
 	if(localStorage.userId > 0){// we are just going to take the login information that was orgionaly passed though the login page and move it over to the session
 	  console.log("I need to transfer the localStorage over to sessionStorage")
 	  sessionStorage.setItem("userId",localStorage.userId);
@@ -418,8 +415,6 @@ jQuery(document).ready(function () {
           alert(e);
         }  	    
   	  }
-
-    
   });
   	//Clicking login with google button
 	$("#googleLogin").live("click",function(){window.location = "/classes/lightopenid/google.php?login";	}); 

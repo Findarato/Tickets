@@ -1,24 +1,19 @@
-<header style="width:100%;position:fixed;top:0px;left:0px;z-index:1000;">
-  <div class="color5Soft shadow" style="width:100%;height:20px;position:absolute;top:0px;left:0px;z-index: 100;">
-    <div style="position:absolute;right:0;top:0"></div>
-    <a href="#updateNotes" id="ticketsBrand" title="Tickets Version:">Tickets</a>
-    <div class="fontMain fakelink" style="width:auto;" id="updateNotesContainer" title="Update Notes">
-      <span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
-    </div>
-  </div>
-  <div style="width:100%;display:table;margin-top:16px;position: relative">
-    <!--Page Container-->
-    <div class="color4 sideLinks" style="display:table-cell;position:relative;overflow:hidden;">
-      <!--Header Left Container-->
-      <a href="/"><img style="height:60px;width:auto;" src="images/tree.png" alt="Lpcpls" border="0" style="display:inline-block"></a>
-    </div>
-    <div style="display:table-cell;width:100%;vertical-align: top;">
+<header class="shadow color4" style="width:100%;position:fixed;top:0px;left:0px;z-index:99;height:90px;">
+  <div style="width:100%;margin-top:16px;position: relative">
+    <div style="display:table;">
+      <div style="display:table-cell">
+        <a href="/" style="height:64px;width:auto;"><img style="height:64px;width:auto;" src="images/tree.png" alt="Lpcpls" border="0" style="display:inline-block"></a>
+      </div>
+      <div style="display:table-cell">
+        <div style="width:100%;vertical-align: top;">
       <!--Header Right Container-->
-      <div class="color1" style="width:100%;">
-        <h1 style="overflow:hidden;"><a href="/" style="text-decoration: none;" data-small="LPCPL" id="headerLink">La Porte County Public Library System</a></h1>
+      <div class="" style="width:100%;height:64px;">
+        <h1 style="overflow:hidden;">
+          <a href="/" style="text-decoration: none;" data-small="LPCPL" id="headerLink">La Porte County Public Library System</a>
+        </h1>
         <h3>learn, enrich, enjoy</h3>
       </div>
-      <div id="idBox" class="{if isset($firstname)}idBox ddBox{else}signInBox{/if}" style="display:block;width:auto;height:24px;vertical-algin:middle;z-index: 1000;position:absolute;bottom:40%;right:13px;padding-left:5px;">
+      <div id="idBox" class="{if isset($firstname)}idBox ddBox{else}signInBox{/if} " style="display:block;width:auto;height:24px;vertical-algin:middle;z-index: 1000;position:absolute;bottom:40%;right:13px;padding-left:5px;">
         <!-- Start of User info -->
         <ul>
           <li>
@@ -62,10 +57,38 @@
           </li>
         </ul>
       </div>
-
+    </div>
+      </div>
     </div>
   </div>
+
+  <div class="color5Soft " style="width:100%;height:20px;position:absolute;top:0px;left:0px;">
+    <a href="#updateNotes" id="ticketsBrand" title="Tickets Version:">Tickets</a>
+    <div class="fontMain fakelink" style="width:auto;" id="updateNotesContainer" title="Update Notes">
+      <span class="" id="UpdateNotes" style="display:none;"> <a class="fontMain fakelink " href="#updateNotes" > <span class="fontMain" id="Version">8.8.8.8</span> </a> </span>
+    </div>
+  </div>
+
 </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {*  old header code so I can reference it while I code
 

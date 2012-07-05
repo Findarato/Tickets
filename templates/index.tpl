@@ -32,14 +32,19 @@
   </head>
   <body>
     {include file="header.tpl"}
-    <div class="color4" style="height:100%;width:48px;margin-top:85px;display:table;position:fixed;top:0;left:0">
-        <div class="sideLinks ticket sideIcons" title="Create New ticket"></div>
-        <div class="sideLinks sideIcons" title="My Tickets">U</div>
-        <div class="sideLinks sideIcons" title="Department Tickets">e</div>
-        <div class="sideLinks sideIcons" title="Department Tickets">F</div>
-        <div class="sideLinks sideIcons" title="Department Tickets">F</div>
+    <div class="color4" style="height:100%;position:fixed;top:90px;left:0;z-index: 102">
+      <!--Header Left Container-->
+      <div class="sideLinks ticket sideIcons" title="Create New ticket"></div>
+      <div class="sideLinks sideIcons" title="My Tickets">U</div>
+      <div class="sideLinks sideIcons" title="My Created">e</div>
+      <div class="sideLinks sideIcons" title="Department Tickets">F</div>
+      <div class="sideLinks sideIcons" title="Department Tickets">F</div>
+      <div class="sideLinks sideIcons" title="Closed Tickets">Z</div>
+      <div class="sideLinks sideIcons" title="Department Closed">Z</div>
+      <div class="sideLinks sideIcons" title="Favorites">R</div>
+      <div class="sideLinks sideIcons" title="Search">L</div>
     </div>
-    <div style="width:100%;margin:90px 3px 0 68px;" class="" id="content">
+    <div style="margin:90px 0 0 65px;" class="" id="content">
           {include file="$content"}
     </div>    
     <div id="newTicketdialogTpl" class="ui-helper-hidden" title="Create new ticket">

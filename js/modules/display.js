@@ -55,20 +55,17 @@ function Spinner(run,body){
   }
 }
 function changeArea(area){
-	var location = $("#subAreaBar");
-	if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
-		switch(area){
-		case "tickets":
-			$("#ticketTab").trigger("click");
-			location.load("/ajax/subMenuRender.php?menu=tickets");
-			Params.NavArea="tickets";
-			$("#tldPageAnator").show();
-		break;
-		case "search":
-			$("#searchTab").trigger("click");	
-			location.load("/ajax/subMenuRender.php?menu=search");
-			$("#tldPageAnator").hide();
-		break;
+  var location = $("#subAreaBar");
+    switch(area){
+      case "tickets":
+  			Params.NavArea="tickets";
+		  break;
+		  case "search":
+        $("#searchTab").trigger("click");	
+        location.load("/ajax/subMenuRender.php?menu=search");
+        $("#tldPageAnator").hide();
+      break;
+      
 		case "stats":
 			$("#statsTab").trigger("click");	
 			location.html("");
@@ -576,6 +573,7 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 		O_search.page = pageNumber;	
    	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	}else{ //this happens when there is no query object being sent.  Also when the tabs are clicked, as a specific query is being used by the tabs
+    if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 		O_search = {
 			"page": pageNumber,
 			"search": {}
@@ -599,7 +597,6 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 					}
 				}
 			} // end for loop
-      if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 		}	
 	}
 	
