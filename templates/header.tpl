@@ -8,10 +8,10 @@
         <div style="width:100%;vertical-align: top;">
       <!--Header Right Container-->
       <div class="" style="width:100%;height:64px;">
-        <h1 style="overflow:hidden;">
+        <h1 style="display:block;">
           <a href="/" style="text-decoration: none;" data-small="LPCPL" id="headerLink">La Porte County Public Library System</a>
         </h1>
-        <h3>learn, enrich, enjoy</h3>
+        <h3  style="display:block;">learn, enrich, enjoy</h3>
       </div>
       <div id="idBox" class="{if isset($firstname)}idBox ddBox{else}signInBox{/if} " style="display:block;width:auto;height:24px;vertical-algin:middle;z-index: 1000;position:absolute;bottom:40%;right:13px;padding-left:5px;">
         <!-- Start of User info -->

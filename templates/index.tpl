@@ -6,7 +6,7 @@
     <meta name="description" content="La Porte County Public Library Ticket tracking system">
     <meta name="author" content="Joseph Harry">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-    <title>Tickets - The tracking system</title>
+    <title>Tickets </title>
     <link href='http://fonts.googleapis.com/css?family=Dancing+Script|Buda:300|Overlock' rel='stylesheet' type='text/css'>
     <link href='/css/WebSymbols-Font-Pack/stylesheet.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/js/jquery-ui/css/smoothness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />
@@ -34,14 +34,17 @@
     {include file="header.tpl"}
     <div class="color4" style="height:100%;position:fixed;top:90px;left:0;z-index: 102">
       <!--Header Left Container-->
-      <div class="sideLinks sideIcons" title="Create New ticket">,</div>
+      <div class="sideLinks " title="Create New ticket">
+        <a class="sideIcons" href="#new">,</a>
+        <div class="newCount fadeInOpacity" style="font-weight: bold;font-size:.9em">+</div>
+      </div>
       <div class="sideLinks myTickets" title="My Tickets">
         <a class="sideIcons" href="#ticketList/sOpen">U</a>
         <div class="circle color5 newCount fadeInOpacity" >5</div>
       </div>
       
       <div class="sideLinks createdTickets" title="My Created">
-        <span class="sideIcons">e</span>
+        <a class="sideIcons"  href="#ticketList/sAssigned">e</a>
         <div class="circle color5 newCount fadeInOpacity">10</div>
       </div>
       <div class="sideLinks departmentCreated" title="Department Created">

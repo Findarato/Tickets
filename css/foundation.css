@@ -9,7 +9,9 @@
   cursor:pointer;
   position: relative;
 }
-
+.sideIcons:hover{
+  text-decoration:none;
+}
 .circle{
   border-radius:50%;
   -webkit-border-radius:50%;
@@ -20,7 +22,7 @@
   width:16px;
   font-size:.5em;
   text-align:center;
-  vertical-align:center;
+  vertical-align:middle;
   position: absolute;
   top:3px;
   right:3px;
@@ -32,6 +34,7 @@
 .fadeInOpacity{
   -webkit-animation: fadeIn 1s 1;
   -moz-animation: fadeIn 1s 1;
+  animation: fadeIn 1s 1;
 }
 
 @-webkit-keyframes fadeIn {
@@ -42,19 +45,9 @@
      0% { opacity:0; }
     100% { opacity:1; }
 }
-.errorPulse {
-    -webkit-animation: error-fade 3s 1;
-    -moz-animation: error-fade 3s 1;
-}
-
-@-webkit-keyframes error-fade {
-     0% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,0); }
-    100% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
-}
-@-moz-keyframes error-fade {
-  
-     0% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,0) }
-    100% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
+@keyframes fadeIn {
+     0% { opacity:0; }
+    100% { opacity:1; }
 }
 
 /* New ticket styles */
