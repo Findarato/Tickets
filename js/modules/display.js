@@ -58,7 +58,7 @@ function changeArea(area){
   var location = $("#subAreaBar");
     switch(area){
       case "tickets":
-  			Params.NavArea="tickets";
+        sessionStorage.lastArea = area;
 		  break;
 		  case "search":
         $("#searchTab").trigger("click");	
@@ -546,10 +546,6 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 							selectValue = hash[2];		
 						return $("<a/>",{html:selectValue,id:"tableSort","class":"gear ddBox ",css:{"width":"80px","font-size":"1em"},value:selectValue}).attr("data-select-items",JSON.stringify({"id":"id","priority":"Priority","title":"Title","location":"Location","category":"Category","createdBy":"Created By","CreatedOn":"Created On"}));	
 					})
-					.append(
-						$("<div/>",{"id":"subAreaBar",css:{"display":"block"}})
-							.load("/ajax/subMenuRender.php?menu=tickets")
-					)
 			)
 			.append($("<div/>",{id:"tableBody","class":"t",css:{"width":"100%","clear":"both"}}));
 
@@ -566,14 +562,13 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 	}
 	
 	if(!append)Tlb.html(displayTable) // lets make sure something gets on the page
+	if(Params.NavArea!="tickets"){changeArea("tickets");}
 	var tableBody = displayTable.find("#tableBody"); 
 	if(queryObj && typeof queryObj == "object"){ // lets just make sure we are dealing with the correct information
 		O_search = queryObj;
 		O_search.type = "search";
 		O_search.page = pageNumber;	
-   	if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 	}else{ //this happens when there is no query object being sent.  Also when the tabs are clicked, as a specific query is being used by the tabs
-    if(Params.NavArea!="tickets"){changeArea("tickets");Params.NavArea=="tickets";}
 		O_search = {
 			"page": pageNumber,
 			"search": {}
@@ -604,7 +599,7 @@ function loadTicketList(pageNumber,queryObj,append,callback) {
 	  if(typeof data.tickets == "string"){if(callBackFn)callBackFn();return true;};
 		if(!append){tableBody.empty();}
 		$.each(data.tickets,function(index,value){
-			smallTicket = newTicketTpl.clone();
+			smallTicket = newTicketTpl.clone().addClass("fadeInOpacity");
 			smallTicket.find("#ticketFavorite").addClass(function(){
 				if($.inArray(value.id,Params.FavoriteObject) != -1){
 					return "bookmarkOn";

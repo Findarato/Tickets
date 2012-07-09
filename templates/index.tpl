@@ -34,15 +34,29 @@
     {include file="header.tpl"}
     <div class="color4" style="height:100%;position:fixed;top:90px;left:0;z-index: 102">
       <!--Header Left Container-->
-      <div class="sideLinks ticket sideIcons" title="Create New ticket"></div>
-      <div class="sideLinks sideIcons" title="My Tickets">U</div>
-      <div class="sideLinks sideIcons" title="My Created">e</div>
-      <div class="sideLinks sideIcons" title="Department Tickets">F</div>
-      <div class="sideLinks sideIcons" title="Department Tickets">F</div>
-      <div class="sideLinks sideIcons" title="Closed Tickets">Z</div>
-      <div class="sideLinks sideIcons" title="Department Closed">Z</div>
-      <div class="sideLinks sideIcons" title="Favorites">R</div>
+      <div class="sideLinks sideIcons" title="Create New ticket">,</div>
+      <div class="sideLinks myTickets" title="My Tickets">
+        <a class="sideIcons" href="#ticketList/sOpen">U</a>
+        <div class="circle color5 newCount fadeInOpacity" >5</div>
+      </div>
+      
+      <div class="sideLinks createdTickets" title="My Created">
+        <span class="sideIcons">e</span>
+        <div class="circle color5 newCount fadeInOpacity">10</div>
+      </div>
+      <div class="sideLinks departmentCreated" title="Department Created">
+        <span class="sideIcons">F</span>
+        <div class="circle color5 newCount fadeInOpacity">99</div>
+      </div>
+      <div class="sideLinks departmentAssigned" title="Department Assigned">
+        <span class="sideIcons">F</span>
+        <div class="circle color5 newCount fadeInOpacity">++</div>
+      </div>
+      <div class="sideLinks sideIcons closedTickets" title="Closed Tickets">Z</div>
+      <div class="sideLinks sideIcons departmentClosed" title="Department Closed">Z</div>
+      <div class="sideLinks sideIcons favoriteTickets" title="Favorites">R</div>
       <div class="sideLinks sideIcons" title="Search">L</div>
+      <div class="sideLinks sideIcons more" title="More">>></div>
     </div>
     <div style="margin:90px 0 0 65px;" class="" id="content">
           {include file="$content"}

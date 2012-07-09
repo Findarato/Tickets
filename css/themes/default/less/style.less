@@ -171,21 +171,6 @@ h2,h3 {
 }
 h3 {font-size: 1.4em;}
 h4 {font-size:1.15em;}
-
-.tab {
-	padding-top:16px;
-	padding-left:5px;
-	padding-right:5px;
-}
-.selectedTab {
-	padding-bottom:8px;
-	padding-top:12px;
-	position:relative;
-	background:#fff;
-	border:1px solid hsl(212,43%,53%);
-	border-bottom:none;
-	bottom:-4px;
-}
 .ticketListDueOn{
 	display:none;
 }
@@ -309,33 +294,6 @@ ul{
 	color:#00769E;
 }
 
-.flash {
-    -webkit-animation: target-fade 3s 1;
-    -moz-animation: target-fade 3s 1;
-}
-
-@-webkit-keyframes target-fade {
-     0% { color: rgba(0,0,0,1); }
-    100% { color: rgba(0,0,0,0); }
-}
-@-moz-keyframes target-fade {
-     0% { color: rgba(0,0,0,1); }
-    100% { color: rgba(0,0,0,0); }
-}
-.errorPulse {
-    -webkit-animation: error-fade 3s 1;
-    -moz-animation: error-fade 3s 1;
-}
-
-@-webkit-keyframes error-fade {
-     0% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,0); }
-    100% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
-}
-@-moz-keyframes error-fade {
-	
-     0% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,0) }
-    100% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
-}
 
 /** Full display  */
 .ticketSideLeft,.ticketSideRight{display:table-cell;width:auto;}
@@ -345,7 +303,3 @@ ul{
 	background:none;
 	font-weight: bold;
 }
-.tabrow li{
-  .linearAnimate(400ms);
-}
-

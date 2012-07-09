@@ -13,16 +13,6 @@
 				</div>
 			</div>
 			<div style="display:table-cell;width:50%;text-align:right;">
-				<div class="" id="ticketStatusImage" style="height:15px;float:right;">
-					<div style="width:auto;padding:2px;">
-						<div class="statusImage ticketLeft pencil" style="display:none;height:15px;" id="imgEdited" title="Edited"></div>
-						<div class="statusImage ticketLeft user" style="display:none;height:15px;" id="imgReassigned" title="Reassigned"></div>
-						<div class="statusImage ticketLeft closed" style="display:none;height:15px;" id="imgClosed" title="Closed"></div>
-						<div class="statusImage ticketLeft lock" style="display:none;height:15px;" id="imgLock" title="Locked"></div>
-						<div class="ticketLeft ticket" id="imgTicketTrouble" style="height:15px;display:none;" title="Trouble Ticket"></div>
-						<div class="ticketLeft bug" id="imgTicketBug" style="height:15px;display:none;" title="Bug Report"></div>
-					</div>
-				</div>
 				<div id="" style="display:block;height:16px;">
 					<div class="fontMain" id="backnext" style="font-weight:bold;padding-left:2px;padding-right:3px;height:16px;">
 						<!-- <--BACK NEXT-->

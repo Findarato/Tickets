@@ -7,10 +7,57 @@
   text-align:center;
   margin-bottom:20px;
   cursor:pointer;
+  position: relative;
 }
 
+.circle{
+  border-radius:50%;
+  -webkit-border-radius:50%;
+  overflow:hidden;
+}
+.newCount{
+  height:16px;
+  width:16px;
+  font-size:.5em;
+  text-align:center;
+  vertical-align:center;
+  position: absolute;
+  top:3px;
+  right:3px;
+}
+.flash {
+    -webkit-animation: target-fade 3s 1;
+    -moz-animation: target-fade 3s 1;
+}
+.fadeInOpacity{
+  -webkit-animation: fadeIn 1s 1;
+  -moz-animation: fadeIn 1s 1;
+}
 
+@-webkit-keyframes fadeIn {
+     0% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes fadeIn {
+     0% { opacity:0; }
+    100% { opacity:1; }
+}
+.errorPulse {
+    -webkit-animation: error-fade 3s 1;
+    -moz-animation: error-fade 3s 1;
+}
 
+@-webkit-keyframes error-fade {
+     0% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,0); }
+    100% { -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
+}
+@-moz-keyframes error-fade {
+  
+     0% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,0) }
+    100% { -moz-box-shadow: 0 0 5px 5px rgba(255,0,0,1); }
+}
+
+/* New ticket styles */
 
 .transformTopLeft {
   transform-origin: 0 0;
