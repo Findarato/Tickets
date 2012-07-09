@@ -1,4 +1,4 @@
-<header class="shadow color4" style="width:100%;position:fixed;top:0px;left:0px;z-index:99;height:90px;">
+<header class="color4" style="width:100%;position:fixed;top:0px;left:0px;z-index:99;height:90px;">
   <div style="width:100%;margin-top:16px;position: relative">
     <div style="display:table;">
       <div style="display:table-cell">

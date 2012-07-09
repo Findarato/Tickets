@@ -153,26 +153,19 @@ function loadTicketBody(inputData, container) {
   if(sessionStorage.features == "undefined")loadStorage.Features();
   features = $.parseJSON(sessionStorage.features); 
   for(f in features){
-   console.log(features[f].feature+ "=" + features[f].status)
    switch(features[f].feature){
      case "DUEDATE":
-       if(features[f].status == 0){
-          console.log("due date is off")
+       if(features[f].status == 0)
           toggles.due = false;
-        }
-     break;
+      break;
      case "LOCATION":
-       if(features[f].status == 0){
-          console.log("location is off")
+       if(features[f].status == 0)
           toggles.location= false;
-        }
-     break;     
+      break;     
      case "PRIORITY":
-       if(features[f].status == 0){
-          console.log("location is off")
+       if(features[f].status == 0)
           toggles.location= false;
-        }
-     break;   
+      break;   
    }
     
   }

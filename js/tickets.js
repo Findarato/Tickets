@@ -42,7 +42,6 @@ var loadStorage = {
       console.log("your userid is missing, let me fix that");
       $.getJSON("ajax/login.php",{"userIdFetch":1},function(data){
         sessionStorage.setItem("userId",data.user_id);
-        console.log(data.user_id)
         });
     }
   },
@@ -128,10 +127,8 @@ function checkPermissions(){
 }
 function checkHash() {
 	var hash = getHashArray();
-	console.log("I am checking the hash");
 	if (window.location.hash.length > 1) {
 		//This checks for a url passed hash, otherwise its just going to go in there.
-		console.log(hash[0]);
 		switch (hash[0]) {
 		  case "#ticket":
         changeArea("tickets");
@@ -144,9 +141,7 @@ function checkHash() {
   				  }
   				break;
           default: // ticket with out a page
-            console.log("I am starting to load the ticket")
             loadTicket(hash[1]);
-            console.log("I am starting to load responses")
             loadResponsesBody(hash[1], $("#replyareabody"), 0);
   			   break;
   			}
@@ -343,7 +338,7 @@ function updateTickets() {
 function loadSessionStorage(){loadStorage.All();}
 if(window.history && window.history.pushState && !jQuery.browser.opera && jQuery.browser.version > 534){
 	window.onpopstate = function(event) { 
-	  checkHash(); console.log("popstate hash");
+	  checkHash();
 	  if($(".fakeDropDown")){$(".fakeDropDown").replaceWith();} 
 	};
 }else{
@@ -530,7 +525,11 @@ jQuery(document).ready(function () {
 	// Last but not least after all the rest of the code is run lets make sure that something gets loaded
 	Spinner(false)
   $(window).scroll(function() {
-    //console.log($(window).scrollTop() + $(window).height() + " ? = ? "+$(document).height())
+    if($(window).scrollTop()>0)
+      $("header").addClass("shadow");
+    else
+      $("header").removeClass("shadow");
+    
     if($(window).scrollTop() + $(window).height() +1 >= $(document).height()) {
       //console.log("near Bottom");
       if(sessionStorage.lastArea == "ticketList"){
