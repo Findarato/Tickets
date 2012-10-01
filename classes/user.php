@@ -10,7 +10,6 @@ class User {
 	function UserLogin($name,$pass){ // just a wrapper to make sure that older stuff works
 		$this->User($name,$pass); 
 	}
-
 	function __construct($name,$pass,$openID=false,$md5Pass=false){
 		$db=db::getInstance();			
 		if(!$openID){//Not a openID login
